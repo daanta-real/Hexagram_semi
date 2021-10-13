@@ -1,4 +1,4 @@
-create table item(
+create table item (
 item_idx number(20) primary key,
 user_idx references user_idx,
 item_type char(9),
