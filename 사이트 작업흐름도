@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-10-13T14:44:17.278Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36" etag="iKTSozfDKmGMUEzC953S" version="15.5.2" type="github">
+<mxfile host="app.diagrams.net" modified="2021-10-13T14:50:00.573Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.71 Safari/537.36" etag="COZ1PUHdaPK24f3CybOa" version="15.5.2" type="github">
   <diagram id="Se9ri6CdTKtZrWhYEkDX" name="Page-1">
-    <mxGraphModel dx="2858" dy="1053" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2489" dy="771" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -66,6 +66,9 @@
         <mxCell id="WBrZeN4esP_25yr9FHhw-8" value="API 선정" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" parent="1" vertex="1">
           <mxGeometry x="610" y="497.5" width="120" height="40" as="geometry" />
         </mxCell>
+        <mxCell id="2g7q5PWkS4SdGYF4q1Lp-84" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=25;fontColor=#EA6B66;" edge="1" parent="1" source="WBrZeN4esP_25yr9FHhw-9" target="WBrZeN4esP_25yr9FHhw-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="WBrZeN4esP_25yr9FHhw-9" value="Dynamic Web&lt;br&gt;Project 제작" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" parent="1" vertex="1">
           <mxGeometry x="280" y="420" width="120" height="40" as="geometry" />
         </mxCell>
@@ -77,6 +80,9 @@
         </mxCell>
         <mxCell id="WBrZeN4esP_25yr9FHhw-11" value="API 사용법 실습&lt;br&gt;1. 관광정보 API&lt;br&gt;2. 카카오맵 API" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" parent="1" vertex="1">
           <mxGeometry x="610" y="567.5" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="2g7q5PWkS4SdGYF4q1Lp-85" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=25;fontColor=#EA6B66;" edge="1" parent="1" source="WBrZeN4esP_25yr9FHhw-12" target="WBrZeN4esP_25yr9FHhw-7">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="WBrZeN4esP_25yr9FHhw-12" value="웹사이트 레이아웃 선정" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" parent="1" vertex="1">
           <mxGeometry x="280" y="507.5" width="120" height="40" as="geometry" />
