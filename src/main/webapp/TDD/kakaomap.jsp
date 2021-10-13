@@ -9,7 +9,7 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=API.API_KEY_KAKAOMAP %>"></script>
 </head>
 <body>
-<div id="map" style="width:500px;height:400px;"></div>
+<div id="map" style="width:200px;height:200px;"></div>
 </body>
 <script type ='text/javascript'>
 var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
