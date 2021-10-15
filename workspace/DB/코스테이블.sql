@@ -15,4 +15,4 @@ insert into course(course_id, course_list, course_detail, course_locations, cour
     values(course_seq.nextval, '목록(홍대-신촌-아현)', '내용(상상마당,각종유흥)', '지역(서울)', '태그(#홍대,#젊음의거리)');
     
 -- 코스테이블 테스트 수정(update)
-update course set course_list='목록(홍대-신촌)', course_detail='내용(상상마당)', course_locations='지역(서울서울)', course_tags='태그(#홍대)';
+update course set course_list='목록(홍대-신촌)', course_detail='내용(상상마당)', course_locations='지역(서울서울)', course_tags='태그(#홍대)' where course_id = 2;
