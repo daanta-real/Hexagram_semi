@@ -1,3 +1,4 @@
+<%@page import="beans.APIDto"%>
 <%@page import="beans.APIDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.TestDto"%>
@@ -90,7 +91,7 @@ int sectionCount = 1;
 </form>
 
 <%
-List<TestDto> list = new ArrayList<>();
+List<APIDto> list = new ArrayList<>();
 boolean search = region != 0 && section != 0 && pages !=0;
 if(search){
 list = apiDao.getTourList(region, section, pages, number);

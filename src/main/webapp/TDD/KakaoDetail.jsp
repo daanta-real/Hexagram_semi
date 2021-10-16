@@ -1,3 +1,4 @@
+<%@page import="beans.APIDto"%>
 <%@page import="beans.APIDao"%>
 <%@page import="beans.TestDto"%>
 <%@page import="system.API"%>
@@ -14,8 +15,8 @@
     
 	APIDao apiDao = new APIDao();
 	
-	TestDto testDtoExplain = apiDao.getTourSegmentObject(contentid);
-	TestDto testDtoEtc = apiDao.getEtcInfo(contentid);        
+	APIDto aPIDtoExplain = apiDao.getTourSegmentObject(contentid);
+	APIDto aPIDtoEtc = apiDao.getEtcInfo(contentid);        
 
   %>
     
@@ -32,11 +33,11 @@
 <ul>
 	<li>주소 : <%=address%></li><br/>
 	<li>지명 : <%=title%></li><br/>
-	<li>설명 : <%=testDtoExplain.getOverview()%></li><br/>
-	<li>참조 홈페이지 : <%=testDtoExplain.getHomepage()%></li><br/>
-	<li>담당 부서 : <%=testDtoEtc.getInfocenter()%></li><br/>
-	<li>주차 여부 : <%=testDtoEtc.getParking()%></li><br/>
-	<li>운영 시간 : <%=testDtoEtc.getUsetime()%></li><br/>
+	<li>설명 : <%=aPIDtoExplain.getOverview()%></li><br/>
+	<li>참조 홈페이지 : <%=aPIDtoExplain.getHomepage()%></li><br/>
+	<li>담당 부서 : <%=aPIDtoEtc.getInfocenter()%></li><br/>
+	<li>주차 여부 : <%=aPIDtoEtc.getParking()%></li><br/>
+	<li>운영 시간 : <%=aPIDtoEtc.getUsetime()%></li><br/>
 	<li>관광지 사진</li>
 </ul>
 <img src="<%=img%>">
