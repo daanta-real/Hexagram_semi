@@ -17,21 +17,21 @@ public class UsersDto {
 	
 	//getter
 	public int getUsers_idx() {		return users_idx;		}
-	public String getUsers_id() {	  return users_id;    	}
-	public String getUsers_pw() { 	return users_pw;  	}
-	public String getUsers_nick() {   	return users_nick;		}
-	public String getUsers_email() {		return users_email;		}
+	public String getUsers_id() {		  return users_id;    	}
+	public String getUsers_pw() { 		return users_pw;  	}
+	public String getUsers_nick() {   	  return users_nick;		}
+	public String getUsers_email() {		   return users_email;		}
 	public String getUsers_phone() {		return users_phone;		}
 	public String getUsers_grade() {		return users_grade;		}
 
 	//setter
-	public void setUsers_idx(int users_idx) {	this.users_idx = users_idx;	}
-	public void setUsers_id(String users_id) {	this.users_id = users_id;	}	
-	public void setUsers_pw(String users_pw) {	this.users_pw = users_pw;	}	
-	public void setUsers_nick(String users_nick) { 	this.users_nick = users_nick;	}
-	public void setUsers_email(String users_email) {		this.users_email = users_email;		}
-	public void setUsers_phone(String users_phone) {	this.users_phone = users_phone;		}
-	public void setUsers_grade(String users_grade) {	this.users_grade = users_grade;	}
+	public void setUsers_idx(int users_idx) {		this.users_idx = users_idx;		}
+	public void setUsers_id(String users_id) {	  this.users_id = users_id;		}	
+	public void setUsers_pw(String users_pw) {		this.users_pw = users_pw;	 }	
+	public void setUsers_nick(String users_nick) { 		this.users_nick = users_nick;		}
+	public void setUsers_email(String users_email) {	   this.users_email = users_email;		}
+	public void setUsers_phone(String users_phone) {	  this.users_phone = users_phone;		}
+	public void setUsers_grade(String users_grade) {		this.users_grade = users_grade;		}
 	
 	
 }
