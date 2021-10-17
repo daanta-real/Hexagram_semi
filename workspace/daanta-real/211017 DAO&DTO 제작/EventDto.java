@@ -34,8 +34,7 @@ public class UserDto {
 	// 4. 메소드 - 오버라이드
 	@Override
 	public String toString() {
-		return "UserDto [idx=" + idx + ", id=" + id + ", pw=" + pw + ", nick=" + nick + ", email=" + email + ", grade="
-				+ grade + "]";
+		return "UserDto [idx=" + idx + ", id=" + id + ", pw=" + pw + ", nick=" + nick + ", email=" + email + ", grade=" + grade + "]";
 	}
 
 	// 5. 메소드 - 기타
