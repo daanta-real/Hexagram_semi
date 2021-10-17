@@ -23,7 +23,7 @@ public class UsersDao {
 		ResultSet rs = ps.executeQuery();
 		boolean isCheckId; 
 		if(rs.next()) isCheckId = true;		//아이디 조회결과가 있다면 중복
-		else return isCheckId = false;		//아이디 조회결과가 없다면 사용가능
+		else isCheckId = false;					//아이디 조회결과가 없다면 사용가능
 		
 		con.close();
 		return isCheckId;	//아이디 조회결과 반환	
