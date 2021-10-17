@@ -83,6 +83,6 @@ CREATE table    item_reply(
   item_reply_idx        NUMBER(20) PRIMARY KEY,
   item_idx              REFERENCES item(item_idx),
   users_idx             REFERENCES users(users_idx),
-  item_reply_detail     VARACHAR2(2000),
-  item_reply_target_idx REFERENCES item_idx
+  item_reply_target_idx REFERENCES item_idx,
+  item_reply_detail     VARACHAR2(2000)
 );
