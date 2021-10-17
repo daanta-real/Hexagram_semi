@@ -2,7 +2,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class UserDto {
+public class UsersDto {
 
 	// 1. 선언
 	private int    idx  ;
@@ -13,7 +13,7 @@ public class UserDto {
 	private String grade;
 
 	// 2. 생성자
-	public UserDto(int    idx , String id , String pw,  String  nick , String   email , String   grade) {
+	public UsersDto(int    idx , String id , String pw,  String  nick , String   email , String   grade) {
 		super();   setIdx(idx);  setId(id);  setPw(pw); setNick(nick); setEmail(email); setGrade(grade);
 	}
 
