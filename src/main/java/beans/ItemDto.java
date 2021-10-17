@@ -1,5 +1,5 @@
 package beans;
 
-public class TestDto {
+public class ItemDto {
 
 }
