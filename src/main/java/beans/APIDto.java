@@ -1,6 +1,6 @@
 package beans;
 
-public class TestDto {
+public class APIDto {
 	private String address;
 	private String title;
 	private String mapy;
@@ -99,7 +99,7 @@ public class TestDto {
 	public void setUsetime(String usetime) {
 		this.usetime = usetime;
 	}
-	public TestDto(String address, String title, String mapy, String mapx, String img, String contentid,
+	public APIDto(String address, String title, String mapy, String mapx, String img, String contentid,
 			String contenttypeid, String homepage, String overview, String tel, String infocenter, String parking,
 			String usetime) {
 		this.address = address;
@@ -116,7 +116,7 @@ public class TestDto {
 		this.parking = parking;
 		this.usetime = usetime;
 	}
-	public TestDto(String address, String title, String mapy, String mapx, String img, String contentid,
+	public APIDto(String address, String title, String mapy, String mapx, String img, String contentid,
 			String contenttypeid, String homepage, String overview, String tel) {
 		this.address = address;
 		this.title = title;
@@ -129,7 +129,7 @@ public class TestDto {
 		this.overview = overview;
 		this.tel = tel;
 	}
-	public TestDto(String address, String title, String mapy, String mapx, String img, String contentid,
+	public APIDto(String address, String title, String mapy, String mapx, String img, String contentid,
 			String contenttypeid) {
 		this.address = address;
 		this.title = title;
@@ -139,7 +139,7 @@ public class TestDto {
 		this.contentid = contentid;
 		this.contenttypeid = contenttypeid;
 	}
-	public TestDto() {
+	public APIDto() {
 	}
 	@Override
 	public String toString() {

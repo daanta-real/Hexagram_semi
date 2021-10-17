@@ -71,8 +71,8 @@ public class APIDao {
 		return buffer.toString();
 	}
 
-	public List<TestDto> getTourList(int region,int section,int rowNum,int number) throws Exception{
-		List<TestDto> listDto = new ArrayList<>();
+	public List<APIDto> getTourList(int region,int section,int rowNum,int number) throws Exception{
+		List<APIDto> listDto = new ArrayList<>();
 		String buffer_url = getTourListString(region,section,rowNum,number);
 		Document document = APIUtils.getDomCon(buffer_url);
 		Element root = document.getDocumentElement();
@@ -82,34 +82,34 @@ public class APIDao {
 		for(int i=0 ; i<list.getLength() ; i++) {
 				Node node = list.item(i);
 				NodeList item_childList = node.getChildNodes();
-				TestDto testDto = new TestDto();
+				APIDto aPIDto = new APIDto();
 				
 				for(int k = 0 ; k<item_childList.getLength() ; k++) {
 					Node item_child = item_childList.item(k);
 					
 					if(item_child.getNodeName().equals("addr1"))
-						testDto.setAddress(item_child.getTextContent());
+						aPIDto.setAddress(item_child.getTextContent());
 					if(item_child.getNodeName().equals("title"))
-						testDto.setTitle(item_child.getTextContent());
+						aPIDto.setTitle(item_child.getTextContent());
 					if(item_child.getNodeName().equals("mapy"))
-						testDto.setMapy(item_child.getTextContent());
+						aPIDto.setMapy(item_child.getTextContent());
 					if(item_child.getNodeName().equals("mapx"))
-						testDto.setMapx(item_child.getTextContent());
+						aPIDto.setMapx(item_child.getTextContent());
 					if(item_child.getNodeName().equals("contenttypeid"))
-						testDto.setContenttypeid(item_child.getTextContent());
+						aPIDto.setContenttypeid(item_child.getTextContent());
 					if(item_child.getNodeName().equals("firstimage"))
-						testDto.setImg(item_child.getTextContent());
+						aPIDto.setImg(item_child.getTextContent());
 					if(item_child.getNodeName().equals("contentid"))
-						testDto.setContentid(item_child.getTextContent());
+						aPIDto.setContentid(item_child.getTextContent());
 					
 					}
-				listDto.add(testDto);
+				listDto.add(aPIDto);
 		}
 		return listDto;
 	}
 	
 	
-	public TestDto getTourObject(TestDto testDto,String contentid) throws Exception{
+	public APIDto getTourObject(APIDto aPIDto,String contentid) throws Exception{
 		String buffer_url = getTourDetailExaminationString(contentid);
 		
 		Document document = APIUtils.getDomCon(buffer_url);
@@ -125,18 +125,18 @@ public class APIDao {
 				Node item_child = item_childList.item(k);
 				
 				if(item_child.getNodeName().equals("homepage"))
-					testDto.setHomepage(item_child.getTextContent());
+					aPIDto.setHomepage(item_child.getTextContent());
 				if(item_child.getNodeName().equals("overview"))
-					testDto.setOverview(item_child.getTextContent());
+					aPIDto.setOverview(item_child.getTextContent());
 				}
 	}
 		
-		return testDto;
+		return aPIDto;
 	}
 	
-	public TestDto getTourSegmentObject(String contentid) throws Exception{
+	public APIDto getTourSegmentObject(String contentid) throws Exception{
 		String buffer_url = getTourDetailExaminationString(contentid);
-		TestDto testDto = new TestDto();
+		APIDto aPIDto = new APIDto();
 		
 		Document document = APIUtils.getDomCon(buffer_url);
 		Element root = document.getDocumentElement();
@@ -151,13 +151,13 @@ public class APIDao {
 				Node item_child = item_childList.item(k);
 				
 				if(item_child.getNodeName().equals("homepage"))
-					testDto.setHomepage(item_child.getTextContent());
+					aPIDto.setHomepage(item_child.getTextContent());
 				if(item_child.getNodeName().equals("overview"))
-					testDto.setOverview(item_child.getTextContent());
+					aPIDto.setOverview(item_child.getTextContent());
 				}
 	}
 		
-		return testDto;
+		return aPIDto;
 	}
 	
 	public List<String> getReionName() throws Exception{
@@ -210,9 +210,9 @@ public class APIDao {
 		return strList;
 	}
 	
-	public TestDto getEtcInfo(String contentid) throws Exception{
+	public APIDto getEtcInfo(String contentid) throws Exception{
 		String buffer_url = getEtcString(contentid);
-		TestDto testDto = new TestDto();
+		APIDto aPIDto = new APIDto();
 		
 		Document document = APIUtils.getDomCon(buffer_url);
 		Element root = document.getDocumentElement();
@@ -227,16 +227,16 @@ public class APIDao {
 				Node item_child = item_childList.item(k);
 				
 				if(item_child.getNodeName().equals("infocenter"))
-					testDto.setInfocenter(item_child.getTextContent());
+					aPIDto.setInfocenter(item_child.getTextContent());
 				if(item_child.getNodeName().equals("parking"))
-					testDto.setParking(item_child.getTextContent());
+					aPIDto.setParking(item_child.getTextContent());
 				if(item_child.getNodeName().equals("usetime"))
-					testDto.setUsetime(item_child.getTextContent());
+					aPIDto.setUsetime(item_child.getTextContent());
 
 				}
 	}
 		
-		return testDto;
+		return aPIDto;
 	}
 	
 }
