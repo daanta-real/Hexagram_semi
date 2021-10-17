@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	곧 실행할 Join Test
+<!-- 	곧 실행할 Join Test -->
 </body>
 </html>
