@@ -1,5 +1,5 @@
 package servlet;
 
-public class Test {
+public class Test01 {
 
 }
