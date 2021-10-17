@@ -76,13 +76,13 @@ SELECT * FROM item;
 
 
 테이블 댓글-관광지 생성구문
-DROP   TABLE    reply_item;
-DROP   SEQUENCE reply_item_seq;
-CREATE SEQUENCE reply_item_seq;
-CREATE table    reply_item( 
-  reply_item_idx        NUMBER(20) PRIMARY KEY,
+DROP   TABLE    item_reply;
+DROP   SEQUENCE item_reply_seq;
+CREATE SEQUENCE item_reply_seq;
+CREATE table    item_reply( 
+  item_reply_idx        NUMBER(20) PRIMARY KEY,
   item_idx              REFERENCES item(item_idx),
   users_idx             REFERENCES users(users_idx),
-  reply_item_detail     VARACHAR2(2000),
-  reply_item_target_idx REFERENCES item_idx
+  item_reply_detail     VARACHAR2(2000),
+  item_reply_target_idx REFERENCES item_idx
 );
