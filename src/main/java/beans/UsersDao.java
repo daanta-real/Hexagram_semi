@@ -61,32 +61,34 @@ public class UsersDao {
 		return isLogin;
 	}
 	
-	//회원정보수정:닉네임, 이메일, 폰번 - 아이디 비밀번호 확인
+	//회원정보수정:닉네임, 이메일, 폰번 - 비밀번호 확인
+	//로그인 상태에서 변경시 비밀번호만 입력
+	//로그인 상태가 아니라면 로그인 페이지로 이동시켜야 함
 	public boolean updateUsers(UsersDto usersDto) throws Exception{
 		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
 		
-		String sql = "update users set users_nick=?, users_email=?, users_phone=? where users_id=? and users_pw=?";
+		String sql = "update users set users_nick=?, users_email=?, users_phone=? where users_pw=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, usersDto.getUsers_nick());
 		ps.setString(2, usersDto.getUsers_email());
 		ps.setString(3, usersDto.getUsers_phone());
-		ps.setString(4, usersDto.getUsers_id());
-		ps.setString(5, usersDto.getUsers_pw());
+		ps.setString(4, usersDto.getUsers_pw());
 		int result = ps.executeUpdate();	
 		con.close();
 		return result>0;
 	}
 	
 	
-	//비밀번호 변경 - 아이디 비밀번호 확인
+	//비밀번호 변경 - 현재 비밀번호 확인
+	//로그인 상태에서 변경시 비밀번호만 입력
+	//로그인 상태가 아니라면 로그인 페이지로 이동시켜야 함 
 	public boolean updatePw(UsersDto usersDto, String pwUpdate) throws Exception{
 		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
 		
-		String sql = "update users set users_pw=? where users_id=? and users_pw=?";
+		String sql = "update users set users_pw=? where users_pw=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, pwUpdate);					//변경할 비번
-		ps.setString(2, usersDto.getUsers_id());	//아이디
-		ps.setString(3, usersDto.getUsers_pw());	//현재 비번
+		ps.setString(2, usersDto.getUsers_pw());	//현재 비번
 		int result = ps.executeUpdate();
 		con.close();
 		return result>0;
