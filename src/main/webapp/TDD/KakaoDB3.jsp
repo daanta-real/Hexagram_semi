@@ -1,7 +1,6 @@
+<%@page import="beans.APIDto"%>
 <%@page import="beans.APIDao"%>
-<%@page import="ConAPI.OpenAPI"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="beans.TestDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -151,7 +150,7 @@ if(region == 0){
 
 <%
 APIDao apiDao = new APIDao();
-List<TestDto> list = new ArrayList<>();
+List<APIDto> list = new ArrayList<>();
 boolean search = region != 0 && section != 0 && pages !=0;
 if(search){
 list = apiDao.getTourList(region, section, pages, number);
