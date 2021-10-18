@@ -9,6 +9,7 @@ public class CourseReplyDto {
 	public String detail   ;
 
 	// 2. 생성자
+	public CourseReplyDto() { super(); }
 	public CourseReplyDto(int idx ,          int courseIdx ,         int usersIdx ,          int targetIdx ,    String detail) {
 		super();       setIdx(idx); setCourseIdx(courseIdx); setUsersIdx(usersIdx); setTargetIdx(targetIdx); setDetail(detail);
 	}

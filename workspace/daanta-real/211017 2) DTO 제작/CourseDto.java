@@ -11,6 +11,7 @@ public class CourseDto {
 	public String tags     ;
 
 	// 2. 생성자
+	public CourseDto() { super(); }
 	public CourseDto(int    idx,          int usersIdx,      String subject,   String list,        String locations,     String detail,   String tags) {
 		super();     setIdx(idx); setUsersIdx(usersIdx); setSubject(subject); setList(list); setLocations(locations); setDetail(detail); setTags(tags);
 	}
