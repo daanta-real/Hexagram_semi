@@ -13,7 +13,6 @@ public class UsersDao {
 	// 3. boolean        insert   (UsersDto dto      ): 회원 추가
 	// 4. boolean        delete   (String   id       ): 회원 삭제
 	// 5. boolean        update   (UsersDto dto      ): 회원 수정
-	// 6. boolean        idPwMatch(UsersDto dto_input): 아디&비번 일치여부 리턴
 
 	// READ: 모든 회원의 정보를 조회
 	public List<UsersDto> select() throws ClassNotFoundException, SQLException {
