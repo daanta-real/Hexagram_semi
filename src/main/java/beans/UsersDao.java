@@ -11,6 +11,7 @@ import Jdbc.Util.JdbcUtils;
 public class UsersDao {
 	
 	//jdbc driver 아이디 패스워드 성진님이 만들어 두신걸로 사용했어요
+	//이걸로 쓰려면 DB에 hexa계정 생성하셔야 됩니당 아니면 kh로 바꿔 쓰세영
 	public static final String USERNAME = "hexa", PASSWORD="hexa";
 	
 	//회원가입시 아이디 중복검사
@@ -33,8 +34,8 @@ public class UsersDao {
 	//users_idx는 시퀀스자동생성
 	public void joinUsers(UsersDto usersDto) throws Exception{
 		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
-		String sql = "insert into users(users_id, users_pw, users_nick, users_email, users_phone) "
-						+ "values( ?, ?, ?, ?, ?)";
+		String sql = "insert into users(users_idx, users_id, users_pw, users_nick, users_email, users_phone) "
+						+ "values(users_seq.nextval, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, usersDto.getUsers_id());
 		ps.setString(2, usersDto.getUsers_pw());
