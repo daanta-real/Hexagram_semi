@@ -1,7 +1,6 @@
 <%@page import="beans.APIDto"%>
 <%@page import="beans.APIDao"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="beans.TestDto"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -157,7 +156,7 @@ list = apiDao.getTourList(region, section, pages, number);
 <a href="./KakaoDB.jsp?region=<%=region%>&section=<%=section%>&pages=<%=pages%>&number=<%=number-1%>">이전 페이지</a> / 
 <a href="./KakaoDB.jsp?region=<%=region%>&section=<%=section%>&pages=<%=pages%>&number=<%=number+1%>">다음 페이지</a>
 <%} else{%>
-<h2>더이상 항목이 없네요.</h2>
+<h2>더이상 항목이 없네요..</h2>
 <%} %>
 <%} else{%>
 <h2>검색하세요.</h2>
