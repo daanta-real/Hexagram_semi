@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Jdbc.Util.JdbcUtils;
+import home.beans.MemberDto;
 
 public class UsersDao {
 	
@@ -46,19 +47,29 @@ public class UsersDao {
 	}
 	
 	//로그인
-	public boolean login(String users_id, String users_pw) throws Exception{
+	public UsersDto login(String users_id, String users_pw) throws Exception{
 		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
 		
-		String sql = "select * from users where users_id=?, users_pw=?";
+		String sql = "select * from users where users_id=? and users_pw=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, users_id);
 		ps.setString(2, users_pw);
 		ResultSet rs = ps.executeQuery();
-		boolean isLogin;
-		if(rs.next()) isLogin = true;	//입력한 아이디, 비밀번호와 일치하는 정보가 있다면
-		else isLogin = false;				//입력한 아이디, 비밀번호와 일치하는 정보가 없다면
+		UsersDto usersDto;
+		if(rs.next()) {
+			//데이터가 있다면 rs를 DTO에 복사저장
+			usersDto = new UsersDto();
+			usersDto.setUsers_idx(rs.getInt("users_idx"));
+			usersDto.setUsers_id(rs.getString("users_id"));
+			usersDto.setUsers_pw(rs.getString("users_pw"));
+			usersDto.setUsers_nick(rs.getString("users_nick"));
+			usersDto.setUsers_email(rs.getString("users_email"));
+			usersDto.setUsers_phone(rs.getString("users_phone"));
+		}
+		else {  usersDto = null;  }
+		
 		con.close();
-		return isLogin;
+		return usersDto;
 	}
 	
 	//회원정보수정:닉네임, 이메일, 폰번 - 비밀번호 확인
