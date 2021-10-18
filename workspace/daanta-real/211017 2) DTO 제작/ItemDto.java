@@ -12,6 +12,7 @@ public class itemDto {
 	private String periods ;
 
 	// 2. 생성자
+	public itemDto() { super(); } 
 	public itemDto( int idx ,         int usersIdx ,  String type ,  String name ,    String detail ,  String tags ,  String date ,     String periods) {
 		super(); setIdx(idx); setUsersIdx(usersIdx); setType(type); setName(name); setDetail(detail); setTags(tags); setDate(date); setPeriods(periods);
 	}

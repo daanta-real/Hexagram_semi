@@ -8,6 +8,7 @@ public class EventDto {
 	public String periods ;
 
 	// 2. 생성자
+	public EventDto() { super(); }
 	public EventDto( int idx ,         int usersIdx ,      String subject ,     String detail ,      String periods) {
 		super(); setIdx (idx); setUsersIdx(usersIdx); setSubject (subject); setDetail (detail); setperiods (periods);
 	}

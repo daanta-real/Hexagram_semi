@@ -9,6 +9,7 @@ public class itemReplyDto {
 	private String deatil   ;
 
 	// 2. 생성자
+	public itemReplyDto() { super(); }
 	public itemReplyDto(int idx ,        int itemIdx ,         int usersIdx ,          int targetIdx ,    String deatil) {
 		super();     setIdx(idx); setItemIdx(itemIdx); setUsersIdx(usersIdx); setTargetIdx(targetIdx); setDeatil(deatil);
 	}

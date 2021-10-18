@@ -8,7 +8,7 @@ CREATE TABLE    users (
   users_pw    VARCHAR2(20) NOT NULL,
   users_nick  VARCHAR2(30) NOT NULL UNIQUE,
   users_email VARCHAR2(30),
-  users_grade VARCHAR2(12) NOT NULL CHECK(users_grade in('준회원', '정회원', '관리자'))
+  users_grade CHAR(9) NOT NULL CHECK(users_grade in('준회원', '정회원', '관리자'))
 );
 SELECT * FROM users;
 
