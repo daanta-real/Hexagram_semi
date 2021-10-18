@@ -6,8 +6,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.UsersDto;
-
 @SuppressWarnings("serial")
 @WebServlet("/usersModify")
 public class ServletUsersModify extends HttpServlet {
@@ -26,11 +24,11 @@ public class ServletUsersModify extends HttpServlet {
 			String email = req.getParameter("email");
 			String grade = req.getParameter("grade");
 
-			// 1. 입력값 검사: id는 무조건 있어야 되고, 추가로 
+			// 1. 입력값 검사: id는 무조건 있어야 되고, 추가로
 			System.out.print("1. 입력값 존재여부 검사..");
 			// id는 무조건 있어야 되고
-			boolean filledReqs = Library.isExists(id); 
-			// pw/nick/email/grade 넷중 하나 이상도 있어야 됨 
+			boolean filledReqs = Library.isExists(id);
+			// pw/nick/email/grade 넷중 하나 이상도 있어야 됨
 			filledReqs = filledReqs && (Library.isExists(pw) || Library.isExists(nick) || Library.isExists(email) || Library.isExists(grade));
 			if(!filledReqs) throw new Exception();
 			System.out.println("필요 입력값 모두 존재.");
@@ -50,9 +48,8 @@ public class ServletUsersModify extends HttpServlet {
 			System.out.print("3. 권한 확인..");
 			// 수정 자체의 권한 확인
 			boolean isGranted = UsersUtils.chkIsGranted(req, dao, id);
-			// grade를 수정하는 경우, 추가로 관리자 권한인지 확인 필요함
-			UsersDto userGrade = dao.get(id).getUsers_grade();
-			isGranted = isGranted && userGrade.equals("관리자");
+			// grade를 수정하는 경우, 세션이 관리자 유저 세션인지 추가로 확인 필요함
+			if(grade != null) isGranted = isGranted && UsersUtils.chkIsAdmin(req, dao);
 			if(!isGranted) throw new Exception();
 			System.out.println("권한 확인 완료.");
 

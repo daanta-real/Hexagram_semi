@@ -51,4 +51,14 @@ public class UsersUtils {
 		return true;
 
 	}
+
+	// 세션 ID의 회원이 관리자 등급인지 여부를 리턴
+	protected static boolean chkIsAdmin(HttpServletRequest req              ) throws ClassNotFoundException, SQLException {
+		return chkIsAdmin(req, new UsersDao()); // DAO 안들어왔을경우 생성하는 과정임
+	}
+	protected static boolean chkIsAdmin(HttpServletRequest req, UsersDao dao) throws ClassNotFoundException, SQLException {
+		String sessionId = (String)req.getSession().getAttribute("id");
+		String userGrade = dao.get(sessionId).getGrade();
+		return userGrade.equals("관리자");
+	}
 }
