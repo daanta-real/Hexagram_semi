@@ -1,6 +1,5 @@
 <%@page import="beans.APIDto"%>
 <%@page import="beans.APIDao"%>
-<%@page import="beans.TestDto"%>
 <%@page import="system.API"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -58,7 +57,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 var map = new kakao.maps.Map(mapContainer, mapOption);
 
 //마커가 표시될 위치입니다 
-var markerPosition  = new kakao.maps.LatLng('<%=mapy%>', '<%=mapx%>'); 
+var markerPosition  = new kakao.maps.LatLng('<%=mapy%>', '<%=mapx%>');
 
 // 마커를 생성합니다
 var marker = new kakao.maps.Marker({
@@ -72,7 +71,7 @@ const str = ''.concat('<div style="padding:5px;">Hello World! <br><a href="https
 const str1 = str.concat('<%=mapy%>,<%=mapx%>" ');
 const str2 = str1.concat('style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,');
 const str3 = str2.concat('<%=mapy%>,<%=mapx%>" ');
-const str4 = str3.concat('style="color:blue" target="_blank">길찾기</a></div>')
+const str4 = str3.concat('style="color:blue" target="_blank">길찾기</a></div>');
 var iwContent = str4;
 iwPosition = new kakao.maps.LatLng('<%=mapy%>', '<%=mapx%>'); //인포윈도우 표시 위치입니다
 
@@ -82,5 +81,5 @@ position : iwPosition,
 content : iwContent 
 });
 </script>
-카카오 지도 표시
+카카오 지도 표시!
 </html>
