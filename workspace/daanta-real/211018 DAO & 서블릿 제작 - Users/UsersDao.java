@@ -7,6 +7,14 @@ import java.util.List;
 
 public class UsersDao {
 
+	// 기능 목록
+	// 1. List<UsersDto> select   (                  ): 모든 회원 목록 조회
+	// 2. UsersDto       get      (String   id       ): 회원 정보 조회
+	// 3. boolean        insert   (UsersDto dto      ): 회원 추가
+	// 4. boolean        delete   (String   id       ): 회원 삭제
+	// 5. boolean        update   (UsersDto dto      ): 회원 수정
+	// 6. boolean        idPwMatch(UsersDto dto_input): 아디&비번 일치여부 리턴
+
 	// READ: 모든 회원의 정보를 조회
 	public List<UsersDto> select() throws ClassNotFoundException, SQLException {
 
@@ -33,7 +41,7 @@ public class UsersDao {
 		return list;
 	}
 
-	// ONE: 딱 한 명의 회원의 정보를 조회
+	// READ: 딱 한 명의 회원의 정보를 조회
 	public UsersDto get(String id) throws ClassNotFoundException, SQLException {
 
 		// 준비
@@ -133,6 +141,7 @@ public class UsersDao {
 	}
 
 	// 입력한 아이디 비번이 맞는지 확인
+	// 아디와 비번을 담은 dto vs DB측 dto 비교하는 것임.
 	public boolean idPwMatch(UsersDto dto_input) throws ClassNotFoundException, SQLException {
 		String id = dto_input.getId();
 		UsersDto dto_org = new UsersDao().get(id);
