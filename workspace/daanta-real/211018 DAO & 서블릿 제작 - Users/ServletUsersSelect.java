@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
 @WebServlet("/usersList")
-public class ServletUserSelect extends HttpServlet {
+public class ServletUsersSelect extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { try {
 

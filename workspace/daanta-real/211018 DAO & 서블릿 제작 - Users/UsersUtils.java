@@ -1,7 +1,23 @@
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class UsersUtils {
+
+	// 입력한 아이디 비번이 맞는지 확인
+	// 아디와 비번을 담은 dto vs DB측 dto 비교하는 것임.
+	protected static boolean idPwMatch(UsersDto dto_input) throws ClassNotFoundException, SQLException {
+		String id = dto_input.getId();
+		UsersDto dto_org = new UsersDao().get(id);
+
+		int hash_org   =   dto_org.getHash();
+		int hash_input = dto_input.getHash();
+
+		System.out.println("　　1) 입력값: " + dto_input.getId() + " / " + dto_input.getPw() + " / " + hash_input);
+		System.out.println("　　2) DB값 : " +   dto_org.getId() + " / " +   dto_org.getPw() + " / " + hash_org  );
+		return hash_org == hash_input;
+	}
 
 	// 데이터 조작 권한이 있는지 확인하여 t/f로 리턴해 줌.
 	// true가 나오려면, 요청자가 관리자이거나, 아니면 요청대상 ID가 본인의 ID여야 함.
