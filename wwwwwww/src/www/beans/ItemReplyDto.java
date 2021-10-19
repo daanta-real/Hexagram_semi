@@ -4,7 +4,7 @@ public class ItemReplyDto {
 	
 	private int itemReplyIdx;
 	private int itemIdx;
-	private int userIdx;
+	private int usersIdx;
 	private int itemReplyTargetIdx;
 	private String itemReplyDetail;
 	
@@ -20,11 +20,11 @@ public class ItemReplyDto {
 	public void setItemIdx(int itemIdx) {
 		this.itemIdx = itemIdx;
 	}
-	public int getUserIdx() {
-		return userIdx;
+	public int getUsersIdx() {
+		return usersIdx;
 	}
-	public void setUserIdx(int userIdx) {
-		this.userIdx = userIdx;
+	public void setUsersIdx(int usersIdx) {
+		this.usersIdx = usersIdx;
 	}
 	public int getItemReplyTargetIdx() {
 		return itemReplyTargetIdx;
@@ -41,9 +41,10 @@ public class ItemReplyDto {
 	
 	@Override
 	public String toString() {
-		return "ReplyitemDto [itemReplyIdx=" + itemReplyIdx + ", itemIdx=" + itemIdx + ", userIdx=" + userIdx
+		return "ItemReplyDto [itemReplyIdx=" + itemReplyIdx + ", itemIdx=" + itemIdx + ", usersIdx=" + usersIdx
 				+ ", itemReplyTargetIdx=" + itemReplyTargetIdx + ", itemReplyDetail=" + itemReplyDetail + "]";
 	}
+	
 	
 	
 	

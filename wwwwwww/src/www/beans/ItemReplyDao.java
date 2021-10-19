@@ -29,7 +29,7 @@ public class ItemReplyDao {
 			
 			String sql = "update itemreply set usersIdx=?, itemReplyTargetIdx=?, itemReplyDetail=?, where itemReplyIdx=?";
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, replyitemDto.getUserIdx());
+			ps.setInt(1, replyitemDto.getUsersIdx());
 			ps.setInt(2, replyitemDto.getItemReplyTargetIdx());
 			ps.setString(3, replyitemDto.getItemReplyDetail());
 			ps.setInt(4, replyitemDto.getItemReplyIdx());
@@ -69,9 +69,9 @@ public class ItemReplyDao {
 				ItemReplyDto itemReplyDto = new ItemReplyDto();
 				itemReplyDto.setItemReplyIdx(rs.getInt("itemReplyIdx"));
 				itemReplyDto.setItemIdx(rs.getInt("itemIdx"));
-				itemReplyDto.setUsersIdx(rs.getString("eventSubject"));
-				itemReplyDto.setEventDetail(rs.getString("eventDetail"));
-				itemReplyDto.setEventAbles(rs.getString("eventAbles"));
+				itemReplyDto.setUsersIdx(rs.getInt("usersIdx"));
+				itemReplyDto.setItemReplyTargetIdx(rs.getInt("itemReplyTargetIdx"));
+				itemReplyDto.setItemReplyDetail(rs.getString("itemReplyDeatil"));
 				
 				list.add(itemReplyDto);
 			}
@@ -81,94 +81,4 @@ public class ItemReplyDao {
 			return list;
 		}
 		
-		//[6] 제목 검색 메소드
-		public List<EventDto> selectByEventSubject(String eventSubject) throws Exception {
-			Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
-			
-			String sql = "select * from event "
-							+ "where eventSubject = ? "
-							+ "order by examIdx asc";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, eventSubject);
-			ResultSet rs = ps.executeQuery();
-			
-			List<EventDto> list = new ArrayList<>();
-			
-			while(rs.next()) {
-				EventDto eventDto = new EventDto();
-				eventDto.setEventIdx(rs.getInt("eventIdx"));
-				eventDto.setUserIdx(rs.getInt("userIdx"));
-				eventDto.setEventSubject(rs.getString("eventSubject"));
-				eventDto.setEventDetail(rs.getString("eventDetail"));
-				eventDto.setEventAbles(rs.getString("eventAbles"));
-				
-				list.add(eventDto);
-			}
-			
-			con.close();
-			
-			return list;
-		}
-		
-		//[7] column, keyword를 이용한 검색 메소드
-
-		public List<EventDto> select(String column, String keyword) throws Exception {
-			Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
-			
-			String sql = "select * from event where instr(#1, ?) > 0 order by #1 asc";
-
-			sql = sql.replace("#1", column);
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, keyword);
-			ResultSet rs = ps.executeQuery();
-			
-			List<EventDto> list = new ArrayList<>();
-			
-			while(rs.next()) {
-				EventDto eventDto = new EventDto();
-				eventDto.setEventIdx(rs.getInt("eventIdx"));
-				eventDto.setUserIdx(rs.getInt("userIdx"));
-				eventDto.setEventSubject(rs.getString("eventSubject"));
-				eventDto.setEventDetail(rs.getString("eventDetail"));
-				eventDto.setEventAbles(rs.getString("eventAbles"));
-				
-				list.add(eventDto);
-			}
-			
-			con.close();
-			
-			return list;
-		}
-		
-		
-		//[8] 단일조회 메소드
-		public EventDto select(int eventIdx) throws Exception {
-			Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
-			
-			String sql = "select * from event where eventIdx = ?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, eventIdx);
-			ResultSet rs = ps.executeQuery();
-			
-			EventDto eventDto;
-			
-			if(rs.next()) {
-				eventDto = new EventDto();				
-				eventDto.setEventIdx(rs.getInt("eventIdx"));
-				eventDto.setUserIdx(rs.getInt("userIdx"));
-				eventDto.setEventSubject(rs.getString("eventSubject"));
-				eventDto.setEventDetail(rs.getString("eventDetail"));
-				eventDto.setEventAbles(rs.getString("eventAbles"));
-			}
-			else {
-				eventDto = null;
-			}
-			
-			con.close();
-			
-			return eventDto;
-		}
-	}
-
-
-
+}
