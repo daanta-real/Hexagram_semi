@@ -16,6 +16,7 @@ insert into users(users_idx, users_id, users_pw, users_nick, users_email, users_
     values(users_seq.nextval, 'test11111', 'test11111', '테스트1111', 'test@test.com', '010-1111-1111', '일반회원');
 insert into users(users_idx, users_id, users_pw, users_nick, users_email, users_phone, users_grade)
     values(users_seq.nextval, 'testtest', 'testtest', '테스트테스트', 'testtest@test.com', '010-2222-1111', '관리자');
+insert into users(users_id, users_pw, users_nick, users_email, users_phone) values( 'testuser1', 'testuser1', '테스트유저1', 'testuser1@test.com', '010-1212-1212');
 
 --users_nick, users_email, users_phone은 회원가입시 필요할 것으로 예상되는 컬럼이라고 생각되서 추가함
 
