@@ -45,7 +45,7 @@ public class CourseDao {
 		ps.setString(2, courseDto.getCourse_detail());
 		ps.setString(3, courseDto.getCourse_locations());
 		ps.setString(4, courseDto.getCourse_tags());
-		ps.setInt(5, courseDto.getCourse_id());
+		ps.setInt(5, courseDto.getCourse_idx());
 	
 		int result = ps.executeUpdate();
 		
