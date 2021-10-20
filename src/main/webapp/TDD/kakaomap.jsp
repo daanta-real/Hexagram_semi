@@ -1,4 +1,4 @@
-<%@page import="system.API"%>
+<%@ page import="system.Settings"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>카카오맵</title>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=API.API_KEY_KAKAOMAP %>"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=system.Settings.API_KEY_KAKAOMAP %>"></script>
 </head>
 <body>
 <div id="map" style="width:200px;height:200px;"></div>
