@@ -1,3 +1,4 @@
+
 package beans;
 
 import java.sql.Connection;
@@ -11,3 +12,4 @@ public class JdbcUtils {
 		return con;
 	}
 }
+
