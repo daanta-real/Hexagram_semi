@@ -11,7 +11,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
 // 모든 JSP 파일, 모든 서블릿 파일 대상. (각종 설정파일 등 제외)
-@WebFilter( urlPatterns = {"*.jsp", "*.nogari", "/error/*"} )
+@WebFilter( urlPatterns = {"*.jsp", "*.nogari"} )
 public class EncodingFilter implements Filter {
 
 	@Override
