@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-10-19T12:41:06.454Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36" etag="p8D1X9J8IvxjyXnD01Tt" version="15.5.2" type="github">
+<mxfile host="app.diagrams.net" modified="2021-10-20T00:43:45.050Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36" etag="7_XqDRkkGNvcGGsDDY1g" version="15.5.2" type="github">
   <diagram id="LKAplenjJ5uR3z4QHYQ-" name="페이지-1">
-    <mxGraphModel dx="2858" dy="2303" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1301" dy="1434" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -406,6 +406,9 @@
             <mxPoint x="290" y="795" as="sourcePoint" />
             <mxPoint x="290" y="900" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="eZSYwbR7m7RFS-tzi52k-27" value="+세션삭제" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=0;fontColor=#806C33;" vertex="1" parent="1">
+          <mxGeometry x="414" y="905" width="60" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
