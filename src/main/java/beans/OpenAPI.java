@@ -19,23 +19,24 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class OpenAPI {
-	
-	
+
+
 	public static void main(String[] args) {
-		
-		
+
+
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		List<String[]> strList = new ArrayList<>();
 		try {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			int total = 0;
 			int pageNo = 1;
-			
+
+			@SuppressWarnings("unused")
 			String urlString = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList"
 					+ "?ServiceKey=8449nJCdkPtXHEe5cmeJbx9PwaXdOWgXRrm%2BL7ooFLzFw%2FQHA8kMJA57Q%2FvGXRb59Ih7utDWjQqkYPBFKungEQ%3D%3D"
 					+ "&contentTypeId=12&areaCode=1&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y"
 					+ "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo="+pageNo+"";
-			
+
 			String input = "대구";
 			String type = "UTF-8";
 			while(true) {
@@ -49,29 +50,29 @@ public class OpenAPI {
 			buffer_url.append("&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo=");
 			buffer_url.append(pageNo);
 					pageNo++;
-			
+
 			URL url = new URL(buffer_url.toString());
 			System.out.println(url.openStream());
-			
+
 			BufferedInputStream xmldata = new BufferedInputStream(url.openStream());
-			
+
 			Document document = builder.parse(xmldata);
-			
+
 			Element root = document.getDocumentElement();
-			
+
 			NodeList list = root.getElementsByTagName("item");
-			
+
 			total += list.getLength();
 			if(list.getLength() == 0) break;
-			
+
 			for(int i=0 ; i<list.getLength() ; i++) {
 					Node node = list.item(i);
 					NodeList item_childList = node.getChildNodes();
 					String strArray[] = new String[3];
-					
+
 					for(int k = 0 ; k<item_childList.getLength() ; k++) {
 						Node item_child = item_childList.item(k);
-						
+
 						if(k==0) {
 							if(!item_child.getTextContent().contains(input)) {
 								total--;
@@ -79,19 +80,19 @@ public class OpenAPI {
 							break;
 							}
 						}
-						
+
 						strArray[0] = item_childList.item(0).getTextContent();
-						
+
 						if(item_child.getNodeName().equals("mapy"))
 							strArray[1] = item_child.getTextContent();
-						
+
 						if(item_child.getNodeName().equals("mapx"))
 							strArray[2] = item_child.getTextContent();
-						
-						
+
+
 						System.out.println(item_child.getNodeName()+":"+item_child.getTextContent());
 						}
-					
+
 					if(strArray != null) {
 					strList.add(strArray);
 					}
@@ -106,7 +107,7 @@ public class OpenAPI {
 			}
 			System.out.println(strList.size());
 
-			
+
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -116,6 +117,6 @@ public class OpenAPI {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 }

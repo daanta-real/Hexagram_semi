@@ -1,6 +1,6 @@
 <%@page import="beans.APIDto"%>
 <%@page import="beans.APIDao"%>
-<%@page import="system.API"%>
+<%@page import="system.Settings"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -25,24 +25,25 @@
 <head>
 <meta charset="UTF-8">
 <title>내가 만든 상세조회</title>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=API.API_KEY_KAKAOMAP %>"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=system.Settings.API_KEY_KAKAOMAP %>"></script>
 </head>
 <body>
 <h1>관광지 상세 설명</h1>
 <ul>
-	<li>주소 : <%=address%></li><br>
-	<li>지명 : <%=title%></li><br>
-	<li>설명 : <%=aPIDtoExplain.getOverview()%></li><br>
-	<li>참조 홈페이지 : <%=aPIDtoExplain.getHomepage()%></li><br>
-	<li>담당 부서 : <%=aPIDtoEtc.getInfocenter()%></li><br>
-	<li>주차 여부 : <%=aPIDtoEtc.getParking()%></li><br>
-	<li>운영 시간 : <%=aPIDtoEtc.getUsetime()%></li><br>
+	<li>주소 : <%=address%></li>
+	<li>지명 : <%=title%></li>
+	<li>설명 : <%=aPIDtoExplain.getOverview()%></li>
+	<li>참조 홈페이지 : <%=aPIDtoExplain.getHomepage()%></li>
+	<li>담당 부서 : <%=aPIDtoEtc.getInfocenter()%></li>
+	<li>주차 여부 : <%=aPIDtoEtc.getParking()%></li>
+	<li>운영 시간 : <%=aPIDtoEtc.getUsetime()%></li>
 	<li>관광지 사진</li>
 </ul>
 <img src="<%=img%>">
 
 
 <div id="map" style="width:600px;height:600px;"></div>
+카카오 지도 표시!
 
 </body>
 
@@ -81,5 +82,4 @@ position : iwPosition,
 content : iwContent 
 });
 </script>
-카카오 지도 표시!
 </html>
