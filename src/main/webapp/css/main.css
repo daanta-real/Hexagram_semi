@@ -4,7 +4,7 @@
 * { padding:0.2rem; margin:0.2rem; }
 
 /* 일반 공통 속성 */
-a:hover, a:link, a:visited, a:active { color:none; text-decoration:none; }
+a:hover, a:link, a:visited, a:active { color:inherit; text-decoration:none; }
 
 /* 대골격 */
 
@@ -12,7 +12,7 @@ a:hover, a:link, a:visited, a:active { color:none; text-decoration:none; }
 BODY {
 	display: flex;
     flex-direction: column;
-    max-width: 75rem;
+    max-width: 55rem;
     margin: 2rem auto 7rem auto;
 	border:0.2rem solid red;
 }
@@ -38,6 +38,12 @@ HEADER #logoContainer {
 	flex-direction: row;
 	justify-content:center;
 	align-items:center;
+}
+HEADER #logoContainer a {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 HEADER #logoContainer span {
 	font-size:2rem;

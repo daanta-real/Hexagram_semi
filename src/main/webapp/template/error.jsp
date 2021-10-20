@@ -1,28 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%String pageTitle = "&#x2708;노가리투어ㅡ" + "에러";%>
-<%String root = request.getContextPath(); %>
 <jsp:include page="/template/header.jsp">
-	<jsp:param name="pageTitle" value="<%=pageTitle%>" />
+	<jsp:param name="pageTitle" value="에러" />
 </jsp:include>
 <!-- 페이지 내용 시작 -->
 
+<%String root = request.getContextPath();%>
+
 <style type='text/css'>
 BODY { min-width:max-content; }
-CONTENT { min-width:900px; }
+CONTENT, fieldset { min-width:55rem; }
 div.container {
 	display:flex; flex-direction:column; justify-content:center; align-items:center;
 }
+:root { --errBoxScale:5; }
 div.errBox {
-    width: 860px; height: 500px;
+    width: calc(8.6rem * var(--errBoxScale));
+    height: calc(5rem * var(--errBoxScale));
+    /*width: 860px; height: 500px;*/
 	background-image:url("<%=request.getContextPath()%>/resource/image/error.jpg");
+    background-size: cover;
     padding: 50px;
 }
 div.errBox > p {
-	font-size:25px;
-	color:burlywood;
+	font-size:1.5rem;
+	color:mistyrose;
+	line-height:170%;
 }
 div.errBox > p.error {
-	font-size:80px;
+	font-size:6rem;
 	color:darksalmon;
 }
 </style>
@@ -31,7 +36,7 @@ div.errBox > p.error {
 
 	<div class=errBox>
 		<p class=error>ERROR</p>
-		<p>여행을 좋아하면 <font color="">일류</font></p>
+		<p>여행을 가면 <font color="">일류</font></p>
 		<p>여행을 못 가면 <font color="">이류</font></p>
 		<p>여행을 즐기는 것을 <font color="">풍류</font></p>
 		<p>페이지 오류가 나는 것을 <font color="">오류</font>라고 합니다.</p>
@@ -44,6 +49,8 @@ div.errBox > p.error {
 	</div>
 	
 </div>
+
+<script type='text/javascript'>document.title = "노가리투어ㅡ에러";</script>
 
 <!-- 페이지 내용 끝. -->
 <jsp:include page="/template/footer.jsp"></jsp:include>
