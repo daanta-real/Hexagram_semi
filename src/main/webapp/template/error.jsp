@@ -50,5 +50,7 @@ div.errBox > p.error {
 	
 </div>
 
+<script type='text/javascript'>document.title = "노가리투어ㅡ에러";</script>
+
 <!-- 페이지 내용 끝. -->
 <jsp:include page="/template/footer.jsp"></jsp:include>

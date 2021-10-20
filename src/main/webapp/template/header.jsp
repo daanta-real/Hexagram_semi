@@ -2,9 +2,8 @@
     pageEncoding="UTF-8"%>
 <%
 // 환경설정
-request.setCharacterEncoding("UTF-8");
 String title = "노가리투어ㅡ" + request.getParameter("pageTitle");
-System.out.println(title);
+System.out.println("header.jsp 요청 감지: " + request.getRequestURL().toString() + "(" + title + ")");
 String root  = request.getContextPath();
 %>
 <!DOCTYPE html>
