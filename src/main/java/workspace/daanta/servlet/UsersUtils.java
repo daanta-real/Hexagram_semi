@@ -1,21 +1,23 @@
-import java.sql.SQLException;
-
+package workspace.daanta.servlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import workspace.daanta.beans.UsersDao;
+import workspace.daanta.beans.UsersDto;
 
 public class UsersUtils {
 
 	// 입력한 아이디 비번이 맞는지 확인
 	// 아디와 비번을 담은 dto vs DB측 dto 비교하는 것임.
-	protected static boolean idPwMatch(UsersDto dto_input) throws ClassNotFoundException, SQLException {
-		String id = dto_input.getId();
+	protected static boolean idPwMatch(UsersDto dto_input) throws Exception {
+		String id = dto_input.getUsersId();
 		UsersDto dto_org = new UsersDao().get(id);
 
 		int hash_org   =   dto_org.getHash();
 		int hash_input = dto_input.getHash();
 
-		System.out.println("　　1) 입력값: " + dto_input.getId() + " / " + dto_input.getPw() + " / " + hash_input);
-		System.out.println("　　2) DB값 : " +   dto_org.getId() + " / " +   dto_org.getPw() + " / " + hash_org  );
+		System.out.println("　　1) 입력값: " + dto_input.getUsersId() + " / " + dto_input.getUsersPw() + " / " + hash_input);
+		System.out.println("　　2) DB값 : " +   dto_org.getUsersId() + " / " +   dto_org.getUsersPw() + " / " + hash_org  );
 		return hash_org == hash_input;
 	}
 
@@ -34,7 +36,7 @@ public class UsersUtils {
 		// 세션 id에 따른 권한여부를 검사함.
 		// 2. 요청자가 관리자인 경우, 프리패스. 4 생략하고 바로 5로 간다.
 		System.out.println("[권한확인] 2. 관리자 여부 검사");
-		boolean isAdmin = dao.get(workerId).getGrade().equals("관리자");
+		boolean isAdmin = dao.get(workerId).getUsersGrade().equals("관리자");
 		if(isAdmin) System.out.println("관리자입니다.");
 
 		// 3. 요청자가 관리자가 아닌, 경우 본인에 대한 요청인지 확인
@@ -53,12 +55,12 @@ public class UsersUtils {
 	}
 
 	// 세션 ID의 회원이 관리자 등급인지 여부를 리턴
-	protected static boolean chkIsAdmin(HttpServletRequest req              ) throws ClassNotFoundException, SQLException {
+	protected static boolean chkIsAdmin(HttpServletRequest req              ) throws Exception {
 		return chkIsAdmin(req, new UsersDao()); // DAO 안들어왔을경우 생성하는 과정임
 	}
-	protected static boolean chkIsAdmin(HttpServletRequest req, UsersDao dao) throws ClassNotFoundException, SQLException {
+	protected static boolean chkIsAdmin(HttpServletRequest req, UsersDao dao) throws Exception {
 		String sessionId = (String)req.getSession().getAttribute("id");
-		String userGrade = dao.get(sessionId).getGrade();
+		String userGrade = dao.get(sessionId).getUsersGrade();
 		return userGrade.equals("관리자");
 	}
 }

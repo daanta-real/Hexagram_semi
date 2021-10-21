@@ -1,3 +1,4 @@
+package workspace.daanta.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -6,9 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import workspace.daanta.beans.UsersDao;
+import workspace.daanta.beans.UsersDto;
+
 @SuppressWarnings("serial")
 @WebServlet("/usersModify")
-public class ServletUsersModify extends HttpServlet {
+public class UsersModifyServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,11 +40,11 @@ public class ServletUsersModify extends HttpServlet {
 			// 2. DTO 제작 및 DAO 선언
 			System.out.print("2. DTO 내용: ");
 			UsersDto dto = new UsersDto();
-			if(id    != null) dto.setId   (id   );
-			if(pw    != null) dto.setPw   (pw   );
-			if(nick  != null) dto.setNick (nick );
-			if(email != null) dto.setEmail(email);
-			if(grade != null) dto.setGrade(grade);
+			if(id    != null) dto.setUsersId   (id   );
+			if(pw    != null) dto.setUsersPw   (pw   );
+			if(nick  != null) dto.setUsersNick (nick );
+			if(email != null) dto.setUsersEmail(email);
+			if(grade != null) dto.setUsersGrade(grade);
 			UsersDao dao = new UsersDao();
 			System.out.println(dto);
 

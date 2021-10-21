@@ -1,3 +1,4 @@
+package workspace.daanta.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -6,9 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import workspace.daanta.beans.UsersDao;
+import workspace.daanta.beans.UsersDto;
+
 @SuppressWarnings("serial")
 @WebServlet("/usersLogin")
-public class ServletUsersLogin extends HttpServlet {
+public class UsersLoginServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -31,8 +35,8 @@ public class ServletUsersLogin extends HttpServlet {
 			// 2. DTO/DAO 제작
 			System.out.println("2. DTO/DAO 설정..");
 			UsersDto dto = new UsersDto();
-			dto.setId(id);
-			dto.setPw(pw);
+			dto.setUsersId(id);
+			dto.setUsersPw(pw);
 			UsersDao dao = new UsersDao();
 			System.out.println("　　DTO: " + dto);
 			System.out.println("　　DAO: " + dao);

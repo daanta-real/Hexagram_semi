@@ -1,5 +1,6 @@
+package workspace.daanta.beans;
 
-public class itemReplyDto {
+public class ItemReplyDto {
 
 	// 1. Declarations
 	private Integer itemReplyIdx;
@@ -9,7 +10,11 @@ public class itemReplyDto {
 	private String itemReplyDeatil;
 
 	// 2. Constructors
-	public itemReplyDto(int itemReplyIdx, int itemIdx, int usersIdx, int itemReplyTargetIdx, String itemReplyDeatil) {
+	public ItemReplyDto() {
+		super();
+	}
+
+	public ItemReplyDto(int itemReplyIdx, int itemIdx, int usersIdx, int itemReplyTargetIdx, String itemReplyDeatil) {
 		super();
 		setItemReplyIdx(itemReplyIdx);
 		setItemIdx(itemIdx);
@@ -19,34 +24,43 @@ public class itemReplyDto {
 	}
 
 	// 3. Getters/Setters
-	private final int getItemReplyIdx() {
+	public Integer getItemReplyIdx() {
 		return itemReplyIdx;
 	}
-	private final void setItemReplyIdx(int itemReplyIdx) {
+
+	public void setItemReplyIdx(Integer itemReplyIdx) {
 		this.itemReplyIdx = itemReplyIdx;
 	}
-	private final int getItemIdx() {
+
+	public Integer getItemIdx() {
 		return itemIdx;
 	}
-	private final void setItemIdx(int itemIdx) {
+
+	public void setItemIdx(Integer itemIdx) {
 		this.itemIdx = itemIdx;
 	}
-	private final int getUsersIdx() {
+
+	public Integer getUsersIdx() {
 		return usersIdx;
 	}
-	private final void setUsersIdx(int usersIdx) {
+
+	public void setUsersIdx(Integer usersIdx) {
 		this.usersIdx = usersIdx;
 	}
-	private final int getItemReplyTargetIdx() {
+
+	public Integer getItemReplyTargetIdx() {
 		return itemReplyTargetIdx;
 	}
-	private final void setItemReplyTargetIdx(int itemReplyTargetIdx) {
+
+	public void setItemReplyTargetIdx(Integer itemReplyTargetIdx) {
 		this.itemReplyTargetIdx = itemReplyTargetIdx;
 	}
-	private final String getItemReplyDeatil() {
+
+	public String getItemReplyDeatil() {
 		return itemReplyDeatil;
 	}
-	private final void setItemReplyDeatil(String itemReplyDeatil) {
+
+	public void setItemReplyDeatil(String itemReplyDeatil) {
 		this.itemReplyDeatil = itemReplyDeatil;
 	}
 

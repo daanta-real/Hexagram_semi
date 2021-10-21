@@ -1,3 +1,4 @@
+package workspace.daanta.servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 @SuppressWarnings("serial")
 @WebServlet("/usersLogout")
-public class ServletUsersLogout extends HttpServlet {
+public class UsersLogoutServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

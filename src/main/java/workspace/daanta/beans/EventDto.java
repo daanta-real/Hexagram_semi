@@ -1,13 +1,19 @@
+package workspace.daanta.beans;
+
 public class EventDto {
 
 	// 1. Declarations
-	public int eventIdx;
-	public int usersIdx;
-	public String eventSubject;
-	public String eventDetail;
-	public String eventPeriods;
+	private Integer eventIdx;
+	private Integer usersIdx;
+	private String eventSubject;
+	private String eventDetail;
+	private String eventPeriods;
 
 	// 2. Constructors
+	public EventDto() {
+		super();
+	}
+
 	public EventDto(int eventIdx, int usersIdx, String eventSubject, String eventDetail, String eventPeriods) {
 		super();
 		setEventIdx(eventIdx);
@@ -18,43 +24,43 @@ public class EventDto {
 	}
 
 	// 3. Getters/Setters
-	private final int getEventIdx() {
+	public Integer getEventIdx() {
 		return eventIdx;
 	}
 
-	private final void setEventIdx(int eventIdx) {
+	public void setEventIdx(Integer eventIdx) {
 		this.eventIdx = eventIdx;
 	}
 
-	private final int getUsersIdx() {
+	public Integer getUsersIdx() {
 		return usersIdx;
 	}
 
-	private final void setUsersIdx(int usersIdx) {
+	public void setUsersIdx(Integer usersIdx) {
 		this.usersIdx = usersIdx;
 	}
 
-	private final String getEventSubject() {
+	public String getEventSubject() {
 		return eventSubject;
 	}
 
-	private final void setEventSubject(String eventSubject) {
+	public void setEventSubject(String eventSubject) {
 		this.eventSubject = eventSubject;
 	}
 
-	private final String getEventDetail() {
+	public String getEventDetail() {
 		return eventDetail;
 	}
 
-	private final void setEventDetail(String eventDetail) {
+	public void setEventDetail(String eventDetail) {
 		this.eventDetail = eventDetail;
 	}
 
-	private final String getEventPeriods() {
+	public String getEventPeriods() {
 		return eventPeriods;
 	}
 
-	private final void setEventPeriods(String eventPeriods) {
+	public void setEventPeriods(String eventPeriods) {
 		this.eventPeriods = eventPeriods;
 	}
 

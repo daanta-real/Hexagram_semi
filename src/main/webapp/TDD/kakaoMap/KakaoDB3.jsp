@@ -129,6 +129,7 @@ if(region == 0){
 	%>
 		<select name="pages">
 		<option value="0">검색 개수 선택</option>
+		</select>
 		<%
 		} else{
 		%>
@@ -139,10 +140,10 @@ if(region == 0){
 		<option value="3">3</option>
 		<option value="4">4</option>
 		<option value="5">5</option>
+		</select>
 		<%
 		}
 		%>
-	</select>
 &nbsp;
 
 	<input type="submit" value="검 색">
@@ -163,7 +164,7 @@ list = apiDao.getTourList(region, section, pages, number);
 
 <%if(search) {%>
 	<%if(list.size() !=0) {%>
-<table border="1" width="800">
+<table border="1" style="width:800px;">
 	<thead>
 		<tr>
 		<th>순 서</th>

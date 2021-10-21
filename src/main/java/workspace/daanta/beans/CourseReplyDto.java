@@ -1,14 +1,19 @@
+package workspace.daanta.beans;
 
 public class CourseReplyDto {
 
 	// 1. Declarations
-	public Integer courseReplyIdx;
-	public Integer courseIdx;
-	public Integer courseReplyUsersIdx;
-	public Integer courseReplyTargetIdx;
-	public String courseReplyDetail;
+	private Integer courseReplyIdx;
+	private Integer courseIdx;
+	private Integer courseReplyUsersIdx;
+	private Integer courseReplyTargetIdx;
+	private String courseReplyDetail;
 
 	// 2. Constructors
+	public CourseReplyDto() {
+		super();
+	}
+
 	public CourseReplyDto(Integer courseReplyIdx, Integer courseIdx, Integer courseReplyUsersIdx,
 			Integer courseReplyTargetIdx, String courseReplyDetail) {
 		super();
@@ -20,43 +25,43 @@ public class CourseReplyDto {
 	}
 
 	// 3. Getters/Setters
-	private final Integer getCourseReplyIdx() {
+	public Integer getCourseReplyIdx() {
 		return courseReplyIdx;
 	}
 
-	private final void setCourseReplyIdx(Integer courseReplyIdx) {
+	public void setCourseReplyIdx(Integer courseReplyIdx) {
 		this.courseReplyIdx = courseReplyIdx;
 	}
 
-	private final Integer getCourseIdx() {
+	public Integer getCourseIdx() {
 		return courseIdx;
 	}
 
-	private final void setCourseIdx(Integer courseIdx) {
+	public void setCourseIdx(Integer courseIdx) {
 		this.courseIdx = courseIdx;
 	}
 
-	private final Integer getCourseReplyUsersIdx() {
+	public Integer getCourseReplyUsersIdx() {
 		return courseReplyUsersIdx;
 	}
 
-	private final void setCourseReplyUsersIdx(Integer courseReplyUsersIdx) {
+	public void setCourseReplyUsersIdx(Integer courseReplyUsersIdx) {
 		this.courseReplyUsersIdx = courseReplyUsersIdx;
 	}
 
-	private final Integer getCourseReplyTargetIdx() {
+	public Integer getCourseReplyTargetIdx() {
 		return courseReplyTargetIdx;
 	}
 
-	private final void setCourseReplyTargetIdx(Integer courseReplyTargetIdx) {
+	public void setCourseReplyTargetIdx(Integer courseReplyTargetIdx) {
 		this.courseReplyTargetIdx = courseReplyTargetIdx;
 	}
 
-	private final String getCourseReplyDetail() {
+	public String getCourseReplyDetail() {
 		return courseReplyDetail;
 	}
 
-	private final void setCourseReplyDetail(String courseReplyDetail) {
+	public void setCourseReplyDetail(String courseReplyDetail) {
 		this.courseReplyDetail = courseReplyDetail;
 	}
 

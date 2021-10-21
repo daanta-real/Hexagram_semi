@@ -1,5 +1,5 @@
+package workspace.daanta.servlet;
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,9 +7,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import workspace.daanta.beans.UsersDao;
+import workspace.daanta.beans.UsersDto;
+
 @SuppressWarnings("serial")
 @WebServlet("/usersJoin")
-public class ServletUsersCreate extends HttpServlet {
+public class UsersCreateServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { try {
 
@@ -27,15 +30,15 @@ public class ServletUsersCreate extends HttpServlet {
 
 		// 삽입할 DTO 준비
 		UsersDto dto = new UsersDto();
-		dto.setId(id);
-		dto.setPw(pw);
-		dto.setNick(nick);
-		dto.setEmail(email);
-		dto.setGrade(grade);
+		dto.setUsersId(id);
+		dto.setUsersPw(pw);
+		dto.setUsersNick(nick);
+		dto.setUsersEmail(email);
+		dto.setUsersGrade(grade);
 
 		// 전송
 		System.out.println("회원가입 요청: " + dto);
 		System.out.println("회원가입 결과: " + new UsersDao().insert(dto));
 
-	} catch (ClassNotFoundException | SQLException e) { e.printStackTrace(); } }
+	} catch (Exception e) { e.printStackTrace(); } }
 }

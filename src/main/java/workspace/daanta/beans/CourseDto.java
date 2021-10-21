@@ -1,16 +1,20 @@
+package workspace.daanta.beans;
 
 public class CourseDto {
 
 	// 1. Declarations
-	public Integer courseIdx;
-	public Integer usersIdx;
-	public String courseSubject;
-	public String courseList;
-	public String courseLocations;
-	public String courseDetail;
-	public String courseTags;
+	private Integer courseIdx;
+	private Integer usersIdx;
+	private String courseSubject;
+	private String courseList;
+	private String courseLocations;
+	private String courseDetail;
+	private String courseTags;
 
 	// 2. Constructors
+	public CourseDto() {
+		super();
+	}
 	public CourseDto(Integer courseIdx, Integer usersIdx, String courseSubject, String courseList,
 			String courseLocations, String courseDetail, String courseTags) {
 		super();
@@ -24,59 +28,59 @@ public class CourseDto {
 	}
 
 	// 3. Getters/Setters
-	private final Integer getCourseIdx() {
+	public Integer getCourseIdx() {
 		return courseIdx;
 	}
 
-	private final void setCourseIdx(Integer courseIdx) {
+	public void setCourseIdx(Integer courseIdx) {
 		this.courseIdx = courseIdx;
 	}
 
-	private final Integer getUsersIdx() {
+	public Integer getUsersIdx() {
 		return usersIdx;
 	}
 
-	private final void setUsersIdx(Integer usersIdx) {
+	public void setUsersIdx(Integer usersIdx) {
 		this.usersIdx = usersIdx;
 	}
 
-	private final String getCourseSubject() {
+	public String getCourseSubject() {
 		return courseSubject;
 	}
 
-	private final void setCourseSubject(String courseSubject) {
+	public void setCourseSubject(String courseSubject) {
 		this.courseSubject = courseSubject;
 	}
 
-	private final String getCourseList() {
+	public String getCourseList() {
 		return courseList;
 	}
 
-	private final void setCourseList(String courseList) {
+	public void setCourseList(String courseList) {
 		this.courseList = courseList;
 	}
 
-	private final String getCourseLocations() {
+	public String getCourseLocations() {
 		return courseLocations;
 	}
 
-	private final void setCourseLocations(String courseLocations) {
+	public void setCourseLocations(String courseLocations) {
 		this.courseLocations = courseLocations;
 	}
 
-	private final String getCourseDetail() {
+	public String getCourseDetail() {
 		return courseDetail;
 	}
 
-	private final void setCourseDetail(String courseDetail) {
+	public void setCourseDetail(String courseDetail) {
 		this.courseDetail = courseDetail;
 	}
 
-	private final String getCourseTags() {
+	public String getCourseTags() {
 		return courseTags;
 	}
 
-	private final void setCourseTags(String courseTags) {
+	public void setCourseTags(String courseTags) {
 		this.courseTags = courseTags;
 	}
 

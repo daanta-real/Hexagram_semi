@@ -1,3 +1,4 @@
+package workspace.daanta.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -8,9 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import workspace.daanta.beans.UsersDao;
+import workspace.daanta.beans.UsersDto;
+
 @SuppressWarnings("serial")
 @WebServlet("/usersList")
-public class ServletUsersSelect extends HttpServlet {
+public class UsersSelectServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {

@@ -1,5 +1,6 @@
+package workspace.daanta.beans;
 
-public class itemDto {
+public class ItemDto {
 
 	// 1. Declarations
 	private Integer itemIdx;
@@ -12,7 +13,11 @@ public class itemDto {
 	private String itemPeriods;
 
 	// 2. Constructors
-	public itemDto(Integer itemIdx, Integer usersIdx, String itemType, String itemName, String itemDetail,
+	public ItemDto() {
+		super();
+	}
+
+	public ItemDto(Integer itemIdx, Integer usersIdx, String itemType, String itemName, String itemDetail,
 			String itemTags, String itemDate, String itemPeriods) {
 		super();
 		setItemIdx(itemIdx);
@@ -26,52 +31,67 @@ public class itemDto {
 	}
 
 	// 3. Getters/Setters
-	private final Integer getItemIdx() {
+	public Integer getItemIdx() {
 		return itemIdx;
 	}
-	private final void setItemIdx(Integer itemIdx) {
+
+	public void setItemIdx(Integer itemIdx) {
 		this.itemIdx = itemIdx;
 	}
-	private final Integer getUsersIdx() {
+
+	public Integer getUsersIdx() {
 		return usersIdx;
 	}
-	private final void setUsersIdx(Integer usersIdx) {
+
+	public void setUsersIdx(Integer usersIdx) {
 		this.usersIdx = usersIdx;
 	}
-	private final String getItemType() {
+
+	public String getItemType() {
 		return itemType;
 	}
-	private final void setItemType(String itemType) {
+
+	public void setItemType(String itemType) {
 		this.itemType = itemType;
 	}
-	private final String getItemName() {
+
+	public String getItemName() {
 		return itemName;
 	}
-	private final void setItemName(String itemName) {
+
+	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	private final String getItemDetail() {
+
+	public String getItemDetail() {
 		return itemDetail;
 	}
-	private final void setItemDetail(String itemDetail) {
+
+	public void setItemDetail(String itemDetail) {
 		this.itemDetail = itemDetail;
 	}
-	private final String getItemTags() {
+
+	public String getItemTags() {
 		return itemTags;
 	}
-	private final void setItemTags(String itemTags) {
+
+	public void setItemTags(String itemTags) {
 		this.itemTags = itemTags;
 	}
-	private final String getItemDate() {
+
+	public String getItemDate() {
 		return itemDate;
 	}
-	private final void setItemDate(String itemDate) {
+
+	public void setItemDate(String itemDate) {
 		this.itemDate = itemDate;
 	}
-	private final String getItemPeriods() {
+
+	public String getItemPeriods() {
 		return itemPeriods;
 	}
-	private final void setItemPeriods(String itemPeriods) {
+
+	public void setItemPeriods(String itemPeriods) {
 		this.itemPeriods = itemPeriods;
 	}
 
