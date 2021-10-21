@@ -11,11 +11,11 @@ import beans.JdbcUtils;
 public class UsersDao {
 
 	// 기능 목록
-	// 1. List<UsersDto> select ( ): 모든 회원 목록 조회
-	// 2. UsersDto get (String id ): 회원 정보 조회
-	// 3. boolean insert (UsersDto dto ): 회원 추가
-	// 4. boolean delete (String id ): 회원 삭제
-	// 5. boolean update (UsersDto dto ): 회원 수정
+	// 1. List<UsersDto> select (            ): 모든 회원 목록 조회
+	// 2. UsersDto       get    (String   id ): 회원 정보 조회
+	// 3. boolean        insert (UsersDto dto): 회원 추가
+	// 4. boolean        delete (String   id ): 회원 삭제
+	// 5. boolean        update (UsersDto dto): 회원 수정
 
 	// 1. READ: 모든 회원의 정보를 조회
 	public List<UsersDto> select() throws Exception {
@@ -83,12 +83,13 @@ public class UsersDao {
 		ps.setString(4, dto.getUsersEmail());
 		ps.setString(5, dto.getUsersGrade());
 
-		// 보내고 결과 받아오기
-		int isSucceed = ps.executeUpdate();
+		// 완성된 SQL문 보내고 결과 받아오기
+		int rs = ps.executeUpdate();
+		boolean isSucceed = rs == 1;
 
 		// 마무리
 		conn.close();
-		return isSucceed == 1;
+		return isSucceed;
 	}
 
 	// 4. DELETE: 회원 삭제
@@ -100,12 +101,13 @@ public class UsersDao {
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, id);
 
-		// 보내고 결과 받아오기
-		int isSucceed = ps.executeUpdate();
+		// 완성된 SQL문 보내고 결과 받아오기
+		int rs = ps.executeUpdate();
+		boolean isSucceed = rs == 1;
 
 		// 마무리
 		conn.close();
-		return isSucceed == 1;
+		return isSucceed;
 	}
 
 	// 5. UPDATE: 회원 수정
@@ -115,14 +117,10 @@ public class UsersDao {
 		// SQL문 준비
 		int count = 0;
 		StringBuilder sb = new StringBuilder("UPDATE users SET");
-		if (dto.getUsersPw() != null)
-			sb.append((count++ == 0 ? "" : ",") + " users_pw = ?");
-		if (dto.getUsersNick() != null)
-			sb.append((count++ == 0 ? "" : ",") + " users_nick = ?");
-		if (dto.getUsersEmail() != null)
-			sb.append((count++ == 0 ? "" : ",") + " users_email = ?");
-		if (dto.getUsersGrade() != null)
-			sb.append((count++ == 0 ? "" : ",") + " users_grade = ?");
+		if (dto.getUsersPw   () != null) sb.append((count++ == 0 ? "" : ",") + " users_pw = ?");
+		if (dto.getUsersNick () != null) sb.append((count++ == 0 ? "" : ",") + " users_nick = ?");
+		if (dto.getUsersEmail() != null) sb.append((count++ == 0 ? "" : ",") + " users_email = ?");
+		if (dto.getUsersGrade() != null) sb.append((count++ == 0 ? "" : ",") + " users_grade = ?");
 		sb.append(" WHERE users_id = ?");
 		String sql = sb.toString();
 		System.out.println("　　SQL문 준비됨: " + sql);
@@ -131,14 +129,10 @@ public class UsersDao {
 		Connection conn = JdbcUtils.connect();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		count = 1;
-		if (dto.getUsersPw() != null)
-			ps.setString(count++, dto.getUsersPw());
-		if (dto.getUsersNick() != null)
-			ps.setString(count++, dto.getUsersNick());
-		if (dto.getUsersEmail() != null)
-			ps.setString(count++, dto.getUsersEmail());
-		if (dto.getUsersGrade() != null)
-			ps.setString(count++, dto.getUsersGrade());
+		if (dto.getUsersPw   () != null) ps.setString(count++, dto.getUsersPw   ());
+		if (dto.getUsersNick () != null) ps.setString(count++, dto.getUsersNick ());
+		if (dto.getUsersEmail() != null) ps.setString(count++, dto.getUsersEmail());
+		if (dto.getUsersGrade() != null) ps.setString(count++, dto.getUsersGrade());
 		ps.setString(count, dto.getUsersId());
 		System.out.println("　　?항목 치환한 개수(id 포함): " + count);
 

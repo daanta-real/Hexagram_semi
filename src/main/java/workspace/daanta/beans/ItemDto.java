@@ -3,9 +3,10 @@ package workspace.daanta.beans;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
-// itemPeriods의 사용에 주의해야 한다. 하기 관련 메소드 설명 참조 이용 바람.
+// itemPeriods 필드의 사용에 주의해야 한다. 사용법은 하기 관련 메소드 설명 참조 바람.
 // 1. itemPeriods 자료형은 List<String> 즉 ["Date1", "Date2", "Date3", ...] 이런 형태이다.
 //    안에 들어가는 날짜들은, 값이 추가되든 삭제되든 알아서 오름차순 정렬된다.
 // 2. 관련 메소드
@@ -26,26 +27,15 @@ public class ItemDto {
 	private String itemType;
 	private String itemName;
 	private String itemDetail;
-	private String itemTags;
-	private String itemDate; // Date형태로 입력되지만 마찬가지로 String으로 넣고 뺄 것
+	private List<String> itemTags; // ["부산", "멋진곳", "휴양지", ...]
+	private Date itemDate;
 	private List<String> itemPeriods; // ["Date1", "Date2", "Date3", ...]
 
 	// 2. Constructors
+	// 변수값들을 한 번에 다 받는 생성자는 itemTags와 itemPeriods의 자료형별로 오버로딩해줘야 해서 총 네 개를 만들어야 된다.
+	// 이건 만드는 것도 문제고 다루기도 골치아프므로 일부러 안 만듦.
 	public ItemDto() {
 		super();
-	}
-
-	public ItemDto(Integer itemIdx, Integer usersIdx, String itemType, String itemName, String itemDetail,
-			String itemTags, String itemDate, List<String> itemPeriods) {
-		super();
-		setItemIdx(itemIdx);
-		setUsersIdx(usersIdx);
-		setItemType(itemType);
-		setItemName(itemName);
-		setItemDetail(itemDetail);
-		setItemTags(itemTags);
-		setItemDate(itemDate);
-		setItemPeriods(itemPeriods);
 	}
 
 	// 3. Getters/Setters
@@ -89,19 +79,33 @@ public class ItemDto {
 		this.itemDetail = itemDetail;
 	}
 
-	public String getItemTags() {
+	public List<String> getItemTags() {
 		return itemTags;
 	}
 
-	public void setItemTags(String itemTags) {
-		this.itemTags = itemTags;
+	// String형으로 다 join해서 리턴
+	public String getItemTagsStr() {
+		return String.join(",", itemTags);
 	}
 
-	public String getItemDate() {
+	// tagsPeriods 저장 메소드들. 1) String을 넣어도 되고 2) List<String>을 넣어도 된다.
+	// 1) String으로 들어왔을 경우, 뜯어서 List로 split한 다음 넘겨줌
+	public void setItemTags(String tagsStr) {
+		String[] splitted = tagsStr.split(",");
+		List<String> list = new ArrayList<>(Arrays.asList(splitted));
+		setItemTags(list);
+	}
+	// 2) List로 들어왔을 경우, 정렬만 하고 바로 저장
+	public void setItemTags(List<String> tagsList) {
+		Collections.sort(tagsList);
+		this.itemTags = tagsList;
+	}
+
+	public Date getItemDate() {
 		return itemDate;
 	}
 
-	public void setItemDate(String itemDate) {
+	public void setItemDate(Date itemDate) {
 		this.itemDate = itemDate;
 	}
 
@@ -109,14 +113,19 @@ public class ItemDto {
 		return itemPeriods;
 	}
 
-	// itemPeriods 저장 메소드들. String을 넣어도 되고 List<String>을 넣어도 된다.
-	// String으로 들어왔을 경우, 뜯어서 List로 split한 다음 넘겨줌
+	// String형으로 다 join해서 리턴
+	public String getItemPeriodsStr() {
+		return String.join(",", itemPeriods);
+	}
+
+	// itemPeriods 저장 메소드들. 1) String을 넣어도 되고 2) List<String>을 넣어도 된다.
+	// 1) String으로 들어왔을 경우, 뜯어서 List로 split한 다음 넘겨줌
 	public void setItemPeriods(String periodsStr) {
 		String[] splitted = periodsStr.split(",");
 		List<String> list = new ArrayList<>(Arrays.asList(splitted));
 		setItemPeriods(list);
 	}
-	// List로 들어왔을 경우, 정렬만 하고 바로 저장
+	// 2) List로 들어왔을 경우, 정렬만 하고 바로 저장
 	public void setItemPeriods(List<String> periodsList) {
 		Collections.sort(periodsList);
 		this.itemPeriods = periodsList;

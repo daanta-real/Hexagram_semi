@@ -11,11 +11,11 @@ import beans.JdbcUtils;
 public class EventDao {
 
 	// 기능 목록
-	// 1. List<EventDto> select ( ): 모든 이벤트 목록 조회
-	// 2. EventDto get (String eventIdx): 이벤트 정보 조회
-	// 3. boolean insert (EventDto dto ): 이벤트 추가
-	// 4. boolean delete (String eventIdx): 이벤트 삭제
-	// 5. boolean update (EventDto dto ): 이벤트 수정
+	// 1. List<EventDto> select(                 ): 모든 이벤트 목록 조회
+	// 2. EventDto       get   (String   eventIdx): 이벤트 정보 조회
+	// 3. boolean        insert(EventDto dto     ): 이벤트 추가
+	// 4. boolean        delete(String   eventIdx): 이벤트 삭제
+	// 5. boolean        update(EventDto dto     ): 이벤트 수정
 
 	// READ: 모든 이벤트의 정보를 조회
 	public List<EventDto> select() throws Exception {
