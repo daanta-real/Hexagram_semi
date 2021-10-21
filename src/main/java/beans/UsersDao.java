@@ -8,13 +8,9 @@ import java.util.List;
 
 public class UsersDao {
 
-	//jdbc driver 아이디 패스워드 성진님이 만들어 두신걸로 사용했어요
-	//이걸로 쓰려면 DB에 hexa계정 생성하셔야 됩니당 아니면 kh로 바꿔 쓰세영
-	public static final String USERNAME = "hexa", PASSWORD="hexa";
-
 	//회원가입시 아이디 중복검사
 	public boolean checkId(String users_id) throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect();
 
 		String sql = "select users_id from users where users_id=?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -31,7 +27,7 @@ public class UsersDao {
 	//회원등록-등급 제약조건 추가 기본값 일반회원으로 설정
 	//users_idx는 시퀀스자동생성
 	public void joinUsers(UsersDto usersDto) throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect();
 		String sql = "insert into users(users_idx, users_id, users_pw, users_nick, users_email, users_phone) "
 						+ "values(users_seq.nextval, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -46,7 +42,7 @@ public class UsersDao {
 
 	//로그인
 	public UsersDto login(String users_id, String users_pw) throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect();
 
 		String sql = "select * from users where users_id=? and users_pw=?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -74,7 +70,7 @@ public class UsersDao {
 	//로그인 상태에서 변경시 비밀번호만 입력
 	//로그인 상태가 아니라면 로그인 페이지로 이동시켜야 함
 	public boolean updateUsers(UsersDto usersDto) throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect();
 
 		String sql = "update users set users_nick=?, users_email=?, users_phone=? where users_pw=?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -92,7 +88,7 @@ public class UsersDao {
 	//로그인 상태에서 변경시 비밀번호만 입력
 	//로그인 상태가 아니라면 로그인 페이지로 이동시켜야 함
 	public boolean updatePw(UsersDto usersDto, String pwUpdate) throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect();
 
 		String sql = "update users set users_pw=? where users_id and users_pw=?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -106,7 +102,7 @@ public class UsersDao {
 
 	//회원탈퇴 - 아이디 비밀번호 확인
 	public boolean usersDelete(UsersDto usersDto) throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect();
 
 		String sql = "delete users where users_id=? and users_pw=?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -120,7 +116,7 @@ public class UsersDao {
 
 	//등급수정 - 관리자가 회원등급 수정. 회원번호입력
 	public  boolean updateGrade(UsersDto usersDto) throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect();
 
 		String sql = "update users set users_grade=? where users_idx=?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -134,7 +130,7 @@ public class UsersDao {
 
 	//회원전체목록조회 - 관리자만 회원조회가능
 	public List<UsersDto> usersList() throws Exception{
-		Connection con = JdbcUtils.connect(USERNAME, PASSWORD);
+		Connection con = JdbcUtils.connect();
 
 		String sql = "select * from users";
 		PreparedStatement ps = con.prepareStatement(sql);

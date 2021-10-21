@@ -1,42 +1,91 @@
 
 public class CourseDto {
 
-	// 1. 선언
-	public int    idx      ;
-	public int    usersIdx ;
-	public String subject  ;
-	public String list     ;
-	public String locations;
-	public String detail   ;
-	public String tags     ;
+	// 1. Declarations
+	public Integer courseIdx;
+	public Integer usersIdx;
+	public String courseSubject;
+	public String courseList;
+	public String courseLocations;
+	public String courseDetail;
+	public String courseTags;
 
-	// 2. 생성자
-	public CourseDto() { super(); }
-	public CourseDto(int    idx,          int usersIdx,      String subject,   String list,        String locations,     String detail,   String tags) {
-		super();     setIdx(idx); setUsersIdx(usersIdx); setSubject(subject); setList(list); setLocations(locations); setDetail(detail); setTags(tags);
+	// 2. Constructors
+	public CourseDto(Integer courseIdx, Integer usersIdx, String courseSubject, String courseList,
+			String courseLocations, String courseDetail, String courseTags) {
+		super();
+		setCourseIdx(courseIdx);
+		setUsersIdx(usersIdx);
+		setCourseSubject(courseSubject);
+		setCourseList(courseList);
+		setCourseLocations(courseLocations);
+		setCourseDetail(courseDetail);
+		setCourseTags(courseTags);
 	}
 
 	// 3. Getters/Setters
-	public int    getIdx      () { return idx      ; }
-	public int    getUsersIdx () { return usersIdx ; }
-	public String getSubject  () { return subject  ; }
-	public String getList     () { return list     ; }
-	public String getLocations() { return locations; }
-	public String getDetail   () { return detail   ; }
-	public String getTags     () { return tags     ; }
-	public void   setIdx      (int    idx      ) { this.idx       = idx      ; }
-	public void   setUsersIdx (int    usersIdx ) { this.usersIdx  = usersIdx ; }
-	public void   setSubject  (String subject  ) { this.subject   = subject  ; }
-	public void   setList     (String list     ) { this.list      = list     ; }
-	public void   setLocations(String locations) { this.locations = locations; }
-	public void   setDetail   (String detail   ) { this.detail    = detail   ; }
-	public void   setTags     (String tags     ) { this.tags      = tags     ; }
+	private final Integer getCourseIdx() {
+		return courseIdx;
+	}
 
-	// 4. 메소드 - 오버라이드
+	private final void setCourseIdx(Integer courseIdx) {
+		this.courseIdx = courseIdx;
+	}
+
+	private final Integer getUsersIdx() {
+		return usersIdx;
+	}
+
+	private final void setUsersIdx(Integer usersIdx) {
+		this.usersIdx = usersIdx;
+	}
+
+	private final String getCourseSubject() {
+		return courseSubject;
+	}
+
+	private final void setCourseSubject(String courseSubject) {
+		this.courseSubject = courseSubject;
+	}
+
+	private final String getCourseList() {
+		return courseList;
+	}
+
+	private final void setCourseList(String courseList) {
+		this.courseList = courseList;
+	}
+
+	private final String getCourseLocations() {
+		return courseLocations;
+	}
+
+	private final void setCourseLocations(String courseLocations) {
+		this.courseLocations = courseLocations;
+	}
+
+	private final String getCourseDetail() {
+		return courseDetail;
+	}
+
+	private final void setCourseDetail(String courseDetail) {
+		this.courseDetail = courseDetail;
+	}
+
+	private final String getCourseTags() {
+		return courseTags;
+	}
+
+	private final void setCourseTags(String courseTags) {
+		this.courseTags = courseTags;
+	}
+
+	// 4. Methods - Overrided
 	@Override
 	public String toString() {
-		return "CourseDto [idx=" + idx + ", usersIdx=" + usersIdx + ", subject=" + subject + ", list=" + list
-				+ ", locations=" + locations + ", detail=" + detail + ", tags=" + tags + "]";
+		return "CourseDto [courseIdx=" + courseIdx + ", usersIdx=" + usersIdx + ", courseSubject=" + courseSubject
+				+ ", courseList=" + courseList + ", courseLocations=" + courseLocations + ", courseDetail="
+				+ courseDetail + ", courseTags=" + courseTags + "]";
 	}
 
 }

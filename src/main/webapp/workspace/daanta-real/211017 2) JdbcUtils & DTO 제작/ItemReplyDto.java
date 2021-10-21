@@ -1,35 +1,60 @@
 
 public class itemReplyDto {
 
-	// 1. 선언
-	private int    idx      ;
-	private int    itemIdx  ;
-	private int    usersIdx ;
-	private int    targetIdx;
-	private String deatil   ;
+	// 1. Declarations
+	private Integer itemReplyIdx;
+	private Integer itemIdx;
+	private Integer usersIdx;
+	private Integer itemReplyTargetIdx;
+	private String itemReplyDeatil;
 
-	// 2. 생성자
-	public itemReplyDto() { super(); }
-	public itemReplyDto(int idx ,        int itemIdx ,         int usersIdx ,          int targetIdx ,    String deatil) {
-		super();     setIdx(idx); setItemIdx(itemIdx); setUsersIdx(usersIdx); setTargetIdx(targetIdx); setDeatil(deatil);
+	// 2. Constructors
+	public itemReplyDto(int itemReplyIdx, int itemIdx, int usersIdx, int itemReplyTargetIdx, String itemReplyDeatil) {
+		super();
+		setItemReplyIdx(itemReplyIdx);
+		setItemIdx(itemIdx);
+		setUsersIdx(usersIdx);
+		setItemReplyTargetIdx(itemReplyTargetIdx);
+		setItemReplyDeatil(itemReplyDeatil);
 	}
 
 	// 3. Getters/Setters
-	public int    getIdx      () { return idx      ; }
-	public int    getItemIdx  () { return itemIdx  ; }
-	public int    getUsersIdx () { return usersIdx ; }
-	public int    getTargetIdx() { return targetIdx; }
-	public String getDeatil   () { return deatil   ; }
-	public void   setIdx      (int    idx      ) { this.idx       = idx      ; }
-	public void   setItemIdx  (int    itemIdx  ) { this.itemIdx   = itemIdx  ; }
-	public void   setUsersIdx (int    usersIdx ) { this.usersIdx  = usersIdx ; }
-	public void   setTargetIdx(int    targetIdx) { this.targetIdx = targetIdx; }
-	public void   setDeatil   (String deatil   ) { this.deatil    = deatil   ; }
+	private final int getItemReplyIdx() {
+		return itemReplyIdx;
+	}
+	private final void setItemReplyIdx(int itemReplyIdx) {
+		this.itemReplyIdx = itemReplyIdx;
+	}
+	private final int getItemIdx() {
+		return itemIdx;
+	}
+	private final void setItemIdx(int itemIdx) {
+		this.itemIdx = itemIdx;
+	}
+	private final int getUsersIdx() {
+		return usersIdx;
+	}
+	private final void setUsersIdx(int usersIdx) {
+		this.usersIdx = usersIdx;
+	}
+	private final int getItemReplyTargetIdx() {
+		return itemReplyTargetIdx;
+	}
+	private final void setItemReplyTargetIdx(int itemReplyTargetIdx) {
+		this.itemReplyTargetIdx = itemReplyTargetIdx;
+	}
+	private final String getItemReplyDeatil() {
+		return itemReplyDeatil;
+	}
+	private final void setItemReplyDeatil(String itemReplyDeatil) {
+		this.itemReplyDeatil = itemReplyDeatil;
+	}
 
-	// 4. 메소드 - 오버라이드
+	// 4. Methods - Overrided
 	@Override
 	public String toString() {
-		return "itemReplyDto [idx=" + idx + ", itemIdx=" + itemIdx + ", usersIdx=" + usersIdx + ", targetIdx=" + targetIdx + ", deatil=" + deatil + "]";
+		return "itemReplyDto [itemReplyIdx=" + itemReplyIdx + ", itemIdx=" + itemIdx + ", usersIdx=" + usersIdx
+				+ ", itemReplyTargetIdx=" + itemReplyTargetIdx + ", itemReplyDeatil=" + itemReplyDeatil + "]";
 	}
 
 }

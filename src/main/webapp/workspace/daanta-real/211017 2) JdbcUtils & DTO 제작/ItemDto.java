@@ -1,45 +1,86 @@
 
 public class itemDto {
 
-	// 1. 선언
-	private int    idx     ;
-	private int    usersIdx;
-	private String type    ;
-	private String name    ;
-	private String detail  ;
-	private String tags    ;
-	private String date    ; // String으로만 저장함. DATE 자료형 관련된 핸들링은 DAO에서 할 것
-	private String periods ;
+	// 1. Declarations
+	private Integer itemIdx;
+	private Integer usersIdx;
+	private String itemType;
+	private String itemName;
+	private String itemDetail;
+	private String itemTags;
+	private String itemDate; // String으로만 저장함. DATE 자료형 관련된 핸들링은 DAO에서 할 것
+	private String itemPeriods;
 
-	// 2. 생성자
-	public itemDto() { super(); } 
-	public itemDto( int idx ,         int usersIdx ,  String type ,  String name ,    String detail ,  String tags ,  String date ,     String periods) {
-		super(); setIdx(idx); setUsersIdx(usersIdx); setType(type); setName(name); setDetail(detail); setTags(tags); setDate(date); setPeriods(periods);
+	// 2. Constructors
+	public itemDto(Integer itemIdx, Integer usersIdx, String itemType, String itemName, String itemDetail,
+			String itemTags, String itemDate, String itemPeriods) {
+		super();
+		setItemIdx(itemIdx);
+		setUsersIdx(usersIdx);
+		setItemType(itemType);
+		setItemName(itemName);
+		setItemDetail(itemDetail);
+		setItemTags(itemTags);
+		setItemDate(itemDate);
+		setItemPeriods(itemPeriods);
 	}
 
 	// 3. Getters/Setters
-	public int    getIdx     () { return idx     ; }
-	public int    getUsersIdx() { return usersIdx; }
-	public String getType    () { return type    ; }
-	public String getName    () { return name    ; }
-	public String getDetail  () { return detail  ; }
-	public String getTags    () { return tags    ; }
-	public String getDate    () { return date    ; }
-	public String getPeriods () { return periods ; }
-	public void   setIdx     (int    idx     ) { this.idx      = idx     ; }
-	public void   setUsersIdx(int    usersIdx) { this.usersIdx = usersIdx; }
-	public void   setType    (String type    ) { this.type     = type    ; }
-	public void   setName    (String name    ) { this.name     = name    ; }
-	public void   setDetail  (String detail  ) { this.detail   = detail  ; }
-	public void   setTags    (String tags    ) { this.tags     = tags    ; }
-	public void   setDate    (String date    ) { this.date     = date    ; }
-	public void   setPeriods (String periods ) { this.periods  = periods ; }
+	private final Integer getItemIdx() {
+		return itemIdx;
+	}
+	private final void setItemIdx(Integer itemIdx) {
+		this.itemIdx = itemIdx;
+	}
+	private final Integer getUsersIdx() {
+		return usersIdx;
+	}
+	private final void setUsersIdx(Integer usersIdx) {
+		this.usersIdx = usersIdx;
+	}
+	private final String getItemType() {
+		return itemType;
+	}
+	private final void setItemType(String itemType) {
+		this.itemType = itemType;
+	}
+	private final String getItemName() {
+		return itemName;
+	}
+	private final void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	private final String getItemDetail() {
+		return itemDetail;
+	}
+	private final void setItemDetail(String itemDetail) {
+		this.itemDetail = itemDetail;
+	}
+	private final String getItemTags() {
+		return itemTags;
+	}
+	private final void setItemTags(String itemTags) {
+		this.itemTags = itemTags;
+	}
+	private final String getItemDate() {
+		return itemDate;
+	}
+	private final void setItemDate(String itemDate) {
+		this.itemDate = itemDate;
+	}
+	private final String getItemPeriods() {
+		return itemPeriods;
+	}
+	private final void setItemPeriods(String itemPeriods) {
+		this.itemPeriods = itemPeriods;
+	}
 
-	// 4. 메소드 - 오버라이드
+	// 4. Methods - Overrided
 	@Override
 	public String toString() {
-		return "itemDto [idx=" + idx + ", usersIdx=" + usersIdx + ", type=" + type + ", name=" + name + ", detail="
-				+ detail + ", tags=" + tags + ", date=" + date + ", periods=" + periods + "]";
+		return "itemDto [itemIdx=" + itemIdx + ", usersIdx=" + usersIdx + ", itemType=" + itemType + ", itemName="
+				+ itemName + ", itemDetail=" + itemDetail + ", itemTags=" + itemTags + ", itemDate=" + itemDate
+				+ ", itemPeriods=" + itemPeriods + "]";
 	}
 
 }

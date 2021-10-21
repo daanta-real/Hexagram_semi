@@ -8,9 +8,13 @@ import system.Settings;
 
 public class JdbcUtils {
 
-	public static Connection connect(String username, String password) throws Exception {
+	// 변수
+	private static String ID = system.Settings.DBMS_ID;
+	private static String PW = system.Settings.DBMS_PW;
+
+	public static Connection connect() throws Exception {
 		Class.forName("oracle.jdbc.OracleDriver");
-		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@" + Settings.DBMS_ADDR + ":xe", username, password);
+		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@" + Settings.DBMS_ADDR + ":xe", ID, PW);
 		return con;
 	}
 }
