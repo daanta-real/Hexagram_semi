@@ -1,4 +1,4 @@
-package beans;
+package util;
 
 import java.io.BufferedInputStream;
 import java.net.URL;

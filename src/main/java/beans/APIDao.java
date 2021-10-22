@@ -8,6 +8,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import util.APIUtils;
+
 public class APIDao {
 	
 	public String getEtcString(String contentid) {

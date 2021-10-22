@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.JdbcUtils;
+
 public class UsersDao {
 
 	//회원가입시 아이디 중복검사

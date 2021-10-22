@@ -1,4 +1,4 @@
-package workspace.daanta.servlet;
+package util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,7 +9,7 @@ public class UsersUtils {
 
 	// 입력한 아이디 비번이 맞는지 확인
 	// 아디와 비번을 담은 dto vs DB측 dto 비교하는 것임.
-	protected static boolean idPwMatch(UsersDto dto_input) throws Exception {
+	public static boolean idPwMatch(UsersDto dto_input) throws Exception {
 		String id = dto_input.getUsersId();
 		UsersDto dto_org = new UsersDao().get(id);
 
@@ -23,7 +23,7 @@ public class UsersUtils {
 
 	// 데이터 조작 권한이 있는지 확인하여 t/f로 리턴해 줌.
 	// true가 나오려면, 요청자가 관리자이거나, 아니면 요청대상 ID가 본인의 ID여야 함.
-	protected static boolean chkIsGranted(HttpServletRequest req, UsersDao dao, String id) throws Exception {
+	public static boolean chkIsGranted(HttpServletRequest req, UsersDao dao, String id) throws Exception {
 
 		// 1. 세션 검사: 누가 요청했든 간에, 일단 요청자의 세션이 있어야 됨 즉 로그인된 사람이 요청해야 됨
 		System.out.print("[권한확인] 1. 세션 검사..");
@@ -55,10 +55,10 @@ public class UsersUtils {
 	}
 
 	// 세션 ID의 회원이 관리자 등급인지 여부를 리턴
-	protected static boolean chkIsAdmin(HttpServletRequest req              ) throws Exception {
+	protected static boolean chkIsAdmin(HttpServletRequest req) throws Exception {
 		return chkIsAdmin(req, new UsersDao()); // DAO 안들어왔을경우 생성하는 과정임
 	}
-	protected static boolean chkIsAdmin(HttpServletRequest req, UsersDao dao) throws Exception {
+	public static boolean chkIsAdmin(HttpServletRequest req, UsersDao dao) throws Exception {
 		String sessionId = (String)req.getSession().getAttribute("id");
 		String userGrade = dao.get(sessionId).getUsersGrade();
 		return userGrade.equals("관리자");

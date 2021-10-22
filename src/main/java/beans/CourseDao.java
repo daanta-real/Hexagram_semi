@@ -3,6 +3,8 @@ package beans;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
+import util.JdbcUtils;
+
 public class CourseDao {
 
 	//jdbc driver 아이디 패스워드

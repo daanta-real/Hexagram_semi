@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import beans.JdbcUtils;
+import util.JdbcUtils;
 
 public class ItemDao {
 
