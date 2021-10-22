@@ -1,4 +1,4 @@
-package workspace.daanta.beans;
+package workspace.daanta.util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public class DaoUtils {
+
+	// 아직 미완성임
 
 	//String sqlStart,
 	//String sqlEnd,

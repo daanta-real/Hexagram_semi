@@ -1,4 +1,4 @@
-package workspace.daanta.servlet;
+package workspace.daanta.util;
 
 public class Library {
 
