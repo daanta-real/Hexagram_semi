@@ -72,15 +72,15 @@ String title = search ? "검색" : "관광지 목록";
 	<tbody>
 		<%for(ItemDto itemDto : list){ %>
 		<tr>
-			<td align ="center"><%=itemDto.getItem_type() %></td>
+			<td align ="center"><%=itemDto.getItemType() %></td>
 			<td align ="center">
-			<a href="<%=root%>/jsp/item/count.nogari?item_idx=<%=itemDto.getItem_idx()%>">
+			<a href="<%=root%>/jsp/item/count.nogari?item_idx=<%=itemDto.getItemIdx()%>">
 <!-- 			클릭시 단 한번의 조회를 위해서 Count서블릿으로 item_idx을 넘겨줌 -->
-			<%=itemDto.getItem_name()%>
+			<%=itemDto.getItemName()%>
 			</a>
 			</td>
-			<td><%=itemDto.getItem_detail().substring(0, 1) %>....</td>
-			<td align ="center"><%=itemDto.getItem_count()%></td>
+			<td><%=itemDto.getItemDetail().substring(0, 1) %>....</td>
+			<td align ="center"><%=itemDto.getItemCount()%></td>
 		</tr>
 		<%} %>
 	</tbody>	

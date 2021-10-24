@@ -1,13 +1,17 @@
 <%@page import="beans.ItemDao"%>
 <%@page import="beans.ItemDto"%>
+<%@page import="beans.UsersDto"%>
+<%@page import="beans.UsersDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <% 
- int usersIdx = (int)request.getSession().getAttribute("usersId");
- String usersGrade = (String)session.getAttribute("usersGrade");
- String root = request.getContextPath();
- //관리자 권한으로 게시글 생성.=> 일반회원 X
- %>
+<% 
+String usersId = (String)request.getSession().getAttribute("usersId");
+UsersDto dto = new UsersDao().get(usersId);
+int usersIdx = dto.getUsersIdx();
+String usersGrade = (String)session.getAttribute("usersGrade");
+String root = request.getContextPath();
+//관리자 권한으로 게시글 생성.=> 일반회원 X
+%>
  
 <jsp:include page="/template/header.jsp">
 	<jsp:param name="pageTitle" value="메인" />

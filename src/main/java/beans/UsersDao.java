@@ -11,12 +11,12 @@ import util.JdbcUtils;
 public class UsersDao {
 
 	//회원가입시 아이디 중복검사
-	public boolean checkId(String users_id) throws Exception{
+	public boolean checkId(String usersId) throws Exception{
 		Connection con = JdbcUtils.connect();
 
 		String sql = "select users_id from users where users_id=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, users_id);
+		ps.setString(1, usersId);
 		ResultSet rs = ps.executeQuery();
 		boolean isCheckId;
 		if(rs.next()) isCheckId = true;		//아이디 조회결과가 있다면 중복
@@ -43,13 +43,13 @@ public class UsersDao {
 	}
 
 	//로그인
-	public UsersDto login(String users_id, String users_pw) throws Exception{
+	public UsersDto login(String usersId, String usersPw) throws Exception{
 		Connection con = JdbcUtils.connect();
 
 		String sql = "select * from users where users_id=? and users_pw=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, users_id);
-		ps.setString(2, users_pw);
+		ps.setString(1, usersId);
+		ps.setString(2, usersPw);
 		ResultSet rs = ps.executeQuery();
 		UsersDto usersDto;
 		if(rs.next()) {
@@ -152,12 +152,12 @@ public class UsersDao {
 	}
 
 	//회원단일 조회
-	public UsersDto get(int users_idx) throws Exception{
+	public UsersDto get(String usersId) throws Exception{
 		Connection con = JdbcUtils.connect();
 
-		String sql = "select * from users where users_idx=?";
+		String sql = "select * from users where users_id=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, users_idx);
+		ps.setString(1, usersId);
 		ResultSet rs = ps.executeQuery();
 		UsersDto usersDto = new UsersDto();
 		if(rs.next()) {

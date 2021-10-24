@@ -13,7 +13,7 @@
  String root = request.getContextPath();
  int itemIdx = Integer.parseInt(request.getParameter("itemIdx"));
  
- String users_grade = (String)request.getSession().getAttribute("usersGrade");
+ String usersGrade = (String)request.getSession().getAttribute("usersGrade");
  
  ItemDao itemDao = new ItemDao();
  ItemDto itemDto = itemDao.get(itemIdx);
@@ -41,7 +41,7 @@
 </h3>
 
 <!-- 관리자가 보는 경우 수정 / 삭제가 가능하도록 설정 -->
-<%if(request.getSession().getAttribute("users_grade") != null && users_grade.equals("관리자")){%>
+<%if(request.getSession().getAttribute("users_grade") != null && usersGrade.equals("관리자")){%>
 <a href="<%=root%>/jsp/item/edit.jsp?item_idx=<%=itemIdx%>">수정</a>
 <a href="<%=root%>/jsp/item/delete.jsp?item_idx=<%=itemIdx%>">삭제</a>
 <%}%>
