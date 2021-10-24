@@ -15,4 +15,4 @@ item_parking varchar2(100),
 item_count number default 0 not null
 );
 
-insert into item (item_idx,users_idx,item_type,item_name,item_address,item_detail,item_tags,item_date,item_period,item_time,item_homepage,item_parking,item_count) 
+insert into item(item_idx,users_idx,item_type,item_name,item_address,item_detail,item_tags,item_date,item_period,item_time,item_homepage,item_parking,item_count) 

@@ -18,6 +18,7 @@ public class ItemTemporaryLoginServlet extends HttpServlet{
 		try {
 			UsersDao usersDao = new UsersDao();
 			UsersDto usersDto = usersDao.login(req.getParameter("users_id"),req.getParameter("users_pw"));
+
 			
 			if(usersDto != null) {
 				req.getSession().setAttribute("users_key", usersDto.getUsers_idx());
