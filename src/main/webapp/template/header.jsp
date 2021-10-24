@@ -6,7 +6,7 @@
 <%
 // 환경설정
 String title = "노가리투어ㅡ" + request.getParameter("pageTitle");
-System.out.println("[헤더 출력] from " + request.getRequestURL().toString() + "(" + title + ")");
+System.out.println("<헤더 출력> from " + request.getRequestURL().toString() + "(" + title + ")");
 String root  = request.getContextPath();
 
 //세션id를 확인하여 로그인 여부를 검사
@@ -41,8 +41,9 @@ if(isLogin) {
 	UsersDao dao = new UsersDao();
 	UsersDto dto = dao.get(sessionId);
 	String usersId = dto.getUsersId();
-	String usersNick = dto.getUsersNick();%>
-	<h5><%=usersNick%>(<%=usersId%>)님</h5>
+	String usersNick = dto.getUsersNick();
+	String usersGrade = dto.getUsersGrade();%>
+	<h5><%=usersNick%>(<%=usersId%>)님 (등급: <%=usersGrade%>)</h5>
 	<a href='<%=root%>/users/logout.nogari'><button>로그아웃</button></a>
 <%}
 // 로그인이 되지 않았을 경우

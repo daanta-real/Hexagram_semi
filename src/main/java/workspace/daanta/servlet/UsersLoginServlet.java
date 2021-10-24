@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import util.UsersUtils;
 import workspace.daanta.beans.UsersDao;
@@ -56,8 +57,11 @@ public class UsersLoginServlet extends HttpServlet {
 			// 4. 최종 처리: 세션 부여
 			else {
 				System.out.print("[회원 로그인] 4. 모든 확인 완료. 세션 부여..");
-				req.getSession().setAttribute("usersId", usersId);
-				System.out.println("세션 부여 완료. (usersId = " + req.getSession().getAttribute("usersId") + ")");
+				HttpSession session = req.getSession();
+				String usersGrade = dao.get(usersId).getUsersGrade();
+				session.setAttribute("usersId", usersId);
+				session.setAttribute("usersGrade", usersGrade);
+				System.out.println("세션 부여 완료. usersId = '" + session.getAttribute("usersId") + "', usersGrade = '" + usersGrade + "'");
 				resp.sendRedirect(req.getContextPath());
 			}
 		}
