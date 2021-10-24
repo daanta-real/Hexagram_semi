@@ -11,12 +11,11 @@ public class ItemDto {
 	private String item_detail;
 	private String item_tags;
 	private Date item_date;
-	private String item_period;
+	private String item_periods;
 	private String item_time;
 	private String item_homepage;
 	private String item_parking;
 	private int item_count;
-	
 	public int getItem_idx() {
 		return item_idx;
 	}
@@ -65,11 +64,11 @@ public class ItemDto {
 	public void setItem_date(Date item_date) {
 		this.item_date = item_date;
 	}
-	public String getItem_period() {
-		return item_period;
+	public String getItem_periods() {
+		return item_periods;
 	}
-	public void setItem_period(String item_period) {
-		this.item_period = item_period;
+	public void setItem_periods(String item_periods) {
+		this.item_periods = item_periods;
 	}
 	public String getItem_time() {
 		return item_time;
@@ -95,9 +94,8 @@ public class ItemDto {
 	public void setItem_count(int item_count) {
 		this.item_count = item_count;
 	}
-	
 	public ItemDto(int item_idx, int users_idx, String item_type, String item_name, String item_address,
-			String item_detail, String item_tags, Date item_date, String item_period, String item_time,
+			String item_detail, String item_tags, Date item_date, String item_periods, String item_time,
 			String item_homepage, String item_parking, int item_count) {
 		super();
 		this.item_idx = item_idx;
@@ -108,15 +106,14 @@ public class ItemDto {
 		this.item_detail = item_detail;
 		this.item_tags = item_tags;
 		this.item_date = item_date;
-		this.item_period = item_period;
+		this.item_periods = item_periods;
 		this.item_time = item_time;
 		this.item_homepage = item_homepage;
 		this.item_parking = item_parking;
 		this.item_count = item_count;
 	}
-	
 	public ItemDto() {
 		super();
 	}
-
+	
 }
