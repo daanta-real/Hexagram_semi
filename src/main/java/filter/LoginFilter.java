@@ -20,7 +20,7 @@ public class LoginFilter implements Filter {
 
 		// 준비
 		HttpServletRequest req = (HttpServletRequest)request;
-		System.out.println("[필터 작동 - 로그인 검사] 해당 page: " + req.getRequestURL().toString());
+		System.out.println("[필터 작동 - 로그인 검사] from " + req.getRequestURL().toString());
 
 		// 세션 검사
 		String sessionId = (String) req.getSession().getAttribute("id");

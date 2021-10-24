@@ -3,7 +3,7 @@
 <%
 // 환경설정
 String title = "노가리투어ㅡ" + request.getParameter("pageTitle");
-System.out.println("[header.jsp 출력] from " + request.getRequestURL().toString() + "(" + title + ")");
+System.out.println("[헤더 출력] from " + request.getRequestURL().toString() + "(" + title + ")");
 String root  = request.getContextPath();
 %>
 <!DOCTYPE html>
