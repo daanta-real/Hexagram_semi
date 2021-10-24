@@ -20,7 +20,7 @@ ItemDto itemDto = itemDao.get(item_idx);
 
 </head>
 <body>
-	<div id="map" style="width: 100%; height: 350px;"></div>
+	<div id="map" style="width: 100%; height: 300px;"></div>
 
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=system.Settings.API_KEY_KAKAOMAP %>"></script>

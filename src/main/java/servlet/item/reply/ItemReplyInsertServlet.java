@@ -33,8 +33,7 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 			
 			itemReplyDao.insert(itemReplyDto);
 			
-			//새로고침 시에 조회수 추가 방지용 count 파라미터를 전달한다.
-			resp.sendRedirect(req.getContextPath()+"/jsp/item/detail.jsp?count=0&item_idx="+Integer.parseInt(req.getParameter("item_idx")));
+			resp.sendRedirect(req.getContextPath()+"/jsp/item/detail.jsp?item_idx="+Integer.parseInt(req.getParameter("item_idx")));
 			
 		}catch (Exception e) {
 			e.printStackTrace();

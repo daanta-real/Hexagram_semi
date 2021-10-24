@@ -73,7 +73,16 @@ String title = search ? "검색" : "관광지 목록";
 		<%for(ItemDto itemDto : list){ %>
 		<tr>
 			<td align ="center"><%=itemDto.getItem_type() %></td>
-			<td align ="center"><a href="<%=root%>/jsp/item/detail.jsp?item_idx=<%=itemDto.getItem_idx()%>"><%=itemDto.getItem_name() %></a></td>
+			<td align ="center">
+			<a href="<%=root%>/jsp/item/detail.jsp?item_idx=<%=itemDto.getItem_idx()%>">
+			<%=itemDto.getItem_name() %>
+			<%
+			itemDto.setItem_count(itemDto.getItem_count()+1);
+ 			itemDao.updateCount(itemDto);
+ 			//클릭하는 순간 조획수가 올라감.
+ 			 %> 
+			</a>
+			</td>
 			<td><%=itemDto.getItem_detail().substring(0, 1) %>....</td>
 			<td align ="center"><%=itemDto.getItem_count()%></td>
 		</tr>

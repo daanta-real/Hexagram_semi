@@ -5,7 +5,9 @@
 <%@page import="beans.ItemReplyDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	
+<jsp:include page="/template/header.jsp">
+	<jsp:param name="pageTitle" value="메인" />
+</jsp:include>
  <% 
  
  String root = request.getContextPath();
@@ -15,11 +17,6 @@
  
  ItemDao itemDao = new ItemDao();
  ItemDto itemDto = itemDao.get(item_idx);
- 
- if(request.getParameter("count") == null){
- itemDto.setItem_count(itemDto.getItem_count()+1);
- itemDao.updateCount(itemDto);
- }	//조회수를 늘리는데, count 파라미터를 통해서댓글을 추가하거나 새로고침 해서는 조회수가 늘리지 않게 하기 위함.
  
  %>
  <!-- **기본정보 표시  -->
@@ -32,20 +29,19 @@
 
 <!-- 기간 표시(축제 경우에 한해서임) -->
 <%if(itemDto.getItem_type().equals("축제")) {%>
-<h5><%=itemDto.getItem_periods()%></h5>
+<h3 align="center"><%=itemDto.getItem_periods()%></h3>
 <%}%>
 
+<h3 align="center">
 <br>
-<!-- Tab키 두번,, -->
-&nbsp;&nbsp;
 좋아요 표시(예정)
 <!-- 조회수 표시 -->
 / 조회수 : [ <%=itemDto.getItem_count()%> ]
 
-
+</h3>
 
 <!-- 관리자가 보는 경우 수정 / 삭제가 가능하도록 설정 -->
-<%if(users_grade != null && users_grade.equals("관리자")){%>
+<%if(request.getSession().getAttribute("users_grade") != null && users_grade.equals("관리자")){%>
 <a href="<%=root%>/jsp/item/edit.jsp?item_idx=<%=item_idx%>">수정</a>
 <a href="<%=root%>/jsp/item/delete.jsp?item_idx=<%=item_idx%>">삭제</a>
 <%}%>
@@ -116,4 +112,4 @@
 <jsp:include page="/jsp/item_reply/insert.jsp">
 	<jsp:param value="<%=item_idx%>" name="item_idx"/>
 </jsp:include>
-
+<jsp:include page="/template/footer.jsp"></jsp:include>
