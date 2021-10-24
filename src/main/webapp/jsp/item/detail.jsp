@@ -24,7 +24,7 @@
 
 <!-- 기간 표시(축제 경우에 한해서임) -->
 <%if(itemDto.getItem_type().equals("축제")) {%>
-<h5><%=itemDto.getItem_period()%></h5>
+<h5><%=itemDto.getItem_periods()%></h5>
 <%}%>
 
 <br>
