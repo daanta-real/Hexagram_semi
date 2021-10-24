@@ -17,14 +17,14 @@ public class ItemTemporaryLoginServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			UsersDao usersDao = new UsersDao();
-			UsersDto usersDto = usersDao.login(req.getParameter("usersId"),req.getParameter("usersPw"));
+			UsersDto usersDto = usersDao.login(req.getParameter("users_idx"),req.getParameter("users_pw"));
 			
 			if(usersDto != null) {
-				req.getSession().setAttribute("usersKey", usersDto.getUsers_idx());
-				req.getSession().setAttribute("usersGrade", usersDto.getUsers_grade());
-				resp.sendRedirect(req.getContextPath()+"/jsp/item/main.jsp?");
+				req.getSession().setAttribute("users_key", usersDto.getUsers_idx());
+				req.getSession().setAttribute("users_grade", usersDto.getUsers_grade());
+				resp.sendRedirect(req.getContextPath()+"/jsp/item/main.jsp");
 			}else {
-				resp.sendRedirect(req.getContextPath()+"/jsp/item/main_before.jsp?");
+				resp.sendRedirect(req.getContextPath()+"/jsp/item/main_before.jsp?error");
 			}
 				
 			
