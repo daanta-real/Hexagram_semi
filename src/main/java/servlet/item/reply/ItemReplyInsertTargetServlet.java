@@ -11,33 +11,34 @@ import javax.servlet.http.HttpServletResponse;
 import beans.ItemReplyDao;
 import beans.ItemReplyDto;
 
+@SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/jsp/item_reply/insert_target.nogari")
 public class ItemReplyInsertTargetServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			try {
 				//댓글 내용 받기
-				String item_reply_detail = req.getParameter("item_reply_detail");
+				String itemReplyDetail = req.getParameter("itemReplyDetail");
 				//게시글 번호 받기
-				int item_idx = Integer.parseInt(req.getParameter("item_idx"));
+				int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
 				//회원 번호 받기
-				int users_idx = Integer.parseInt(req.getParameter("users_idx"));
+				int usersIdx = Integer.parseInt(req.getParameter("usersIdx"));
 				//대댓글 대상 댓글 번호 받기.
-				int item_reply_target_idx = Integer.parseInt(req.getParameter("item_reply_target_idx"));
-				
+				int itemReplyTargetIdx = Integer.parseInt(req.getParameter("itemReplyTargetIdx"));
+
 				ItemReplyDao itemReplyDao = new ItemReplyDao();
 				ItemReplyDto itemReplyDto = new ItemReplyDto();
-				
-				itemReplyDto.setItem_idx(item_idx);
-				itemReplyDto.setUsers_idx(users_idx);
-				itemReplyDto.setItem_reply_detail(item_reply_detail);
-				itemReplyDto.setItem_reply_target_idx(item_reply_target_idx);
+
+				itemReplyDto.setItemIdx(itemIdx);
+				itemReplyDto.setUsersIdx(usersIdx);
+				itemReplyDto.setItemReplyDetail(itemReplyDetail);
+				itemReplyDto.setItemReplyTargetIdx(itemReplyTargetIdx);
 				//Dto에 4가지의 정보를 담아서 대댓글 추가 작업 시행.
-				
+
 				itemReplyDao.insertTarget(itemReplyDto);
-				
-				resp.sendRedirect(req.getContextPath()+"/jsp/item/detail.jsp?item_idx="+Integer.parseInt(req.getParameter("item_idx")));
-				
+
+				resp.sendRedirect(req.getContextPath()+"/jsp/item/detail.jsp?itemIdx="+Integer.parseInt(req.getParameter("itemIdx")));
+
 			}catch (Exception e) {
 				e.printStackTrace();
 				resp.sendError(500);

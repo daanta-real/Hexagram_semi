@@ -3,8 +3,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <% 
- int users_idx = (int)request.getSession().getAttribute("users_key");
- String users_grade = (String)session.getAttribute("users_grade");
+ int usersIdx = (int)request.getSession().getAttribute("usersId");
+ String usersGrade = (String)session.getAttribute("usersGrade");
  String root = request.getContextPath();
  //관리자 권한으로 게시글 생성.=> 일반회원 X
  %>
@@ -22,14 +22,14 @@
 			<tr>
 				<td>작성자</td>
 				<td>
-				<input type="hidden" name="users_idx" value="<%=users_idx %>" required>
-				<%=users_idx %>
+				<input type="hidden" name="usersIdx" value="<%=usersIdx %>" required>
+				<%=usersIdx %>
 				</td>
 			</tr>
 			<tr>
 				<td>카테고리</td>
 				<td>
-					<select name="item_type">
+					<select name="itemType">
 						<option>관광지</option>
 						<option>축제</option>
 					</select>
@@ -38,40 +38,40 @@
 			<tr>
 				<td>관광지명</td>
 				<td>
-				<input type="text" name="item_name" placeholder="관광지명 입력" required>
+				<input type="text" name="itemName" placeholder="관광지명 입력" required>
 				</td>
 			</tr>
 			<tr>
 				<td>주소</td>
 				<td>
-				<textarea name="item_address" rows="1" cols="50" placeholder="입력하세요"></textarea>
+				<textarea name="itemAddress" rows="1" cols="50" placeholder="입력하세요"></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>내용</td>
 				<td>
-				<textarea name="item_detail" rows="20" cols="50"></textarea>
+				<textarea name="itemDetail" rows="20" cols="50"></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>태그</td>
-				<td><input type="text" name="item_tag" placeholder="태그 입력"></td>
+				<td><input type="text" name="itemTag" placeholder="태그 입력"></td>
 			</tr>
 			<tr>
 				<td>기간</td>
-				<td><input type="text" name="item_periods" placeholder="기간 입력"></td>
+				<td><input type="text" name="itemPperiods" placeholder="기간 입력"></td>
 			</tr>
 			<tr>
 				<td>운영시간</td>
-				<td><input type="text" name="item_time" placeholder="운영시간 입력"></td>
+				<td><input type="text" name="itemTime" placeholder="운영시간 입력"></td>
 			</tr>
 			<tr>
 				<td>홈페이지</td>
-				<td><input type="url" name="item_homepage" placeholder="홈페이지 입력"></td>
+				<td><input type="url" name="itemHomepage" placeholder="홈페이지 입력"></td>
 			</tr>
 			<tr>
 				<td>주차</td>
-				<td><input type="text" name="item_parking" placeholder="주차가능여부 입력"></td>
+				<td><input type="text" name="itemParking" placeholder="주차가능여부 입력"></td>
 			</tr>
 		</tbody>
 		<tfoot>

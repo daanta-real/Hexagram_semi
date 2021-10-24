@@ -33,20 +33,20 @@ String title = search ? "검색" : "관광지 목록";
 
 <form action="<%=root%>/jsp/item/list.jsp" method="get">
 <select name="column">
-		<%if(column != null && column.equals("item_type")) {%>
-		<option value="item_type" selected>카테고리</option>
+		<%if(column != null && column.equals("itemType")) {%>
+		<option value="itemType" selected>카테고리</option>
 		<%}else{ %>
-		<option value="item_type">카테고리</option>
+		<option value="itemType">카테고리</option>
 		<%} %>
-		<%if(column != null && column.equals("item_name")) {%>
-		<option value="item_name" selected>관광지명</option>
+		<%if(column != null && column.equals("itemName")) {%>
+		<option value="itemName" selected>관광지명</option>
 		<%}else{ %>
-		<option value="item_name">관광지명</option>
+		<option value="itemName">관광지명</option>
 		<%} %>
-		<%if(column!=null && column.equals("item_detail")) {%>
-		<option value="item_detail" selected>내용</option>
+		<%if(column!=null && column.equals("itemDetail")) {%>
+		<option value="itemDetail" selected>내용</option>
 		<%}else{ %>
-		<option value="item_detail">내용</option>
+		<option value="itemDetail">내용</option>
 		<%} %>
 	</select>
 	<%if(keyword == null){ %>
