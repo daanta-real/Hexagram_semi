@@ -27,7 +27,7 @@ public class itemInsertServlet extends HttpServlet{
 			itemDto.setItem_address(req.getParameter("item_address"));
 			itemDto.setItem_detail(req.getParameter("item_detail"));
 			itemDto.setItem_tags(req.getParameter("item_tags"));
-			itemDto.setItem_period(req.getParameter("item_period"));
+			itemDto.setItem_periods(req.getParameter("item_period"));
 			itemDto.setItem_time(req.getParameter("item_time"));
 			itemDto.setItem_homepage(req.getParameter("item_homepage"));
 			itemDto.setItem_parking(req.getParameter("item_parking"));
