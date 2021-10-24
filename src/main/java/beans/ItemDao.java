@@ -205,17 +205,17 @@ public class ItemDao {
 				+ " VALUES(item_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
 		Connection con = JdbcUtils.connect();
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, itemDto.getItem_idx());
-		ps.setInt(2, itemDto.getUsers_idx());
-		ps.setString(3, itemDto.getItem_type());
-		ps.setString(4, itemDto.getItem_name());
-		ps.setString(5, itemDto.getItem_address());
-		ps.setString(6, itemDto.getItem_detail());
-		ps.setString(7, itemDto.getItem_tags());
-		ps.setString(8, itemDto.getItem_periods());
-		ps.setString(9, itemDto.getItem_time());
-		ps.setString(10, itemDto.getItem_homepage());
-		ps.setString(11, itemDto.getItem_parking());
+		
+		ps.setInt(1, itemDto.getUsers_idx());
+		ps.setString(2, itemDto.getItem_type());
+		ps.setString(3, itemDto.getItem_name());
+		ps.setString(4, itemDto.getItem_address());
+		ps.setString(5, itemDto.getItem_detail());
+		ps.setString(6, itemDto.getItem_tags());
+		ps.setString(7, itemDto.getItem_periods());
+		ps.setString(8, itemDto.getItem_time());
+		ps.setString(9, itemDto.getItem_homepage());
+		ps.setString(10, itemDto.getItem_parking());
 
 		int result = ps.executeUpdate();
 

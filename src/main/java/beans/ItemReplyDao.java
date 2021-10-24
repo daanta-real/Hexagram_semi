@@ -45,7 +45,7 @@ public class ItemReplyDao {
 	public List<ItemReplyDto> list(int item_idx) throws Exception {
 		Connection con = JdbcUtils.connect();
 		String sql = "select IR.* from item_reply IR"
-				+ " join item I on IR.item_idx = I.item_idx where IR.item_idx=? and IR.item_reply_target_idx=0";
+				+ " join item I on IR.item_idx = I.item_idx where IR.item_idx=?";
 		//조회시에 item_reply_target_idx는 없어야한다(대댓글이 아닌 댓글임)
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, item_idx);
@@ -71,7 +71,7 @@ public class ItemReplyDao {
 	//대 댓글 조회
 	public List<ItemReplyDto> listTarget(int item_reply_idx) throws Exception {
 		Connection con = JdbcUtils.connect();
-		String sql = "select child.item_reply_idx,child.item_idx,child.users_idx,child.item_reply_detail,child.item_reply_time from item_reply parent"
+		String sql = "select child.item_reply_idx,child.item_idx,child.users_idx,child.item_reply_detail,child.item_reply_time,child.item_reply_target_idx from item_reply parent"
 				+ " join item_reply child on parent.item_reply_idx = child.item_reply_target_idx"
 				+ " where child.item_reply_target_idx=?";//자식의 타겟 번호가 부모의 댓글 idx 번호인 경우
 		

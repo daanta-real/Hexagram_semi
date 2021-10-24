@@ -44,15 +44,13 @@
 			<tr>
 				<td>주소</td>
 				<td>
-				<textarea name="item_address" rows="1" cols="20" placeholder="주소 입력">
-				</textarea>
+				<textarea name="item_address" rows="1" cols="50" placeholder="입력하세요"></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>내용</td>
 				<td>
-				<textarea name="item_detail" rows="20" cols="50" placeholder="내용 입력" wrap="virtual">
-				</textarea>
+				<textarea name="item_detail" rows="20" cols="50"></textarea>
 				</td>
 			</tr>
 			<tr>

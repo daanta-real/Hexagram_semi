@@ -17,8 +17,8 @@ int number = 1;
 //댓글 순서 번호 부여
 %>
 
-<h3>댓글 목록</h3>
-<table border="1" width="900">
+<h3 align="center">[댓글 목록]</h3>
+<table align="center" border="1" width="1400">
 	<thead>
 		<th>댓글 번호</th>
 		<th>작성자 아이디</th>
@@ -30,22 +30,25 @@ int number = 1;
 
 	<tbody>
 		<%for (ItemReplyDto itemReplyDto : list) {%>
-		<tr>
 		
+			<%int reply = itemReplyDto.getItem_reply_idx();%>
+			
+			<%if(itemReplyDto.getItem_reply_target_idx()==0){ %>
+		<tr>
 			<td><%=number++%></td>
 			<td><%=itemReplyDto.getUsers_idx() == 0 ? "탈퇴한 회원" : itemReplyDto.getUsers_idx()%></td>
 			<td><%=itemReplyDto.getItem_reply_time()%></td>
 			<td><%=itemReplyDto.getItem_reply_detail()%></td>
-			
 			<td>
 			<%
-			List<ItemReplyDto> listTarget = itemReplyDao.listTarget(itemReplyDto.getItem_idx());
+			List<ItemReplyDto> listTarget = itemReplyDao.listTarget(reply);
 			%>
 			<%if(listTarget.isEmpty()){%>
 			대댓글이 없습니다.
 			<%}else{ %>
+					
 					<%for (ItemReplyDto itemReplyTargetDto : listTarget) {%>
-						<table border="1" width="400">
+						<table border="1" width="300">
 								<thead>
 									<tr>
 										<th>작성자 아이디</th>
@@ -71,7 +74,7 @@ int number = 1;
 					<!--    	대댓글 내용 전송 -->
 					<table>
 						<tbody>
-							<tr width="400">
+							<tr width="500">
 								<th>대댓글 입력</th>
 								<td><textarea name="item_reply_detail" align="center"
 										placeholder="대댓글 입력" required rows="2" cols="50"></textarea></td>
@@ -91,9 +94,10 @@ int number = 1;
 					<%} %>
 				</form>
 			</td>
-			
+
 		</tr>
 		
+		<%}%>
 		<%}%>
 	</tbody>
 </table>
