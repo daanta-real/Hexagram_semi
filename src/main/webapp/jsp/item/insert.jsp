@@ -61,7 +61,7 @@
 			</tr>
 			<tr>
 				<td>기간</td>
-				<td><input type="text" name="item_period" placeholder="기간 입력"></td>
+				<td><input type="text" name="item_periods" placeholder="기간 입력"></td>
 			</tr>
 			<tr>
 				<td>운영시간</td>
