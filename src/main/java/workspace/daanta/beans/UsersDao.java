@@ -44,7 +44,7 @@ public class UsersDao {
 
 	}
 
-	// 2. READ: 딱 한 명의 회원의 정보를 조회
+	// 2. READ: 딱 한 명의 회원의 정보를 조회 (※ id 기준; idx 아님)
 	public UsersDto get(String id) throws Exception {
 
 		// SQL 준비
