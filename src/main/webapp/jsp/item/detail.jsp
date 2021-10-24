@@ -17,7 +17,7 @@
  
  ItemDao itemDao = new ItemDao();
  ItemDto itemDto = itemDao.get(item_idx);
- 
+
  %>
  <!-- **기본정보 표시  -->
  
