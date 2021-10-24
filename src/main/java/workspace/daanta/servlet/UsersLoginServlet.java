@@ -58,10 +58,17 @@ public class UsersLoginServlet extends HttpServlet {
 			else {
 				System.out.print("[회원 로그인] 4. 모든 확인 완료. 세션 부여..");
 				HttpSession session = req.getSession();
-				String usersGrade = dao.get(usersId).getUsersGrade();
+				UsersDto loggedInDto = dao.get(usersId);
+				int usersIdx = loggedInDto.getUsersIdx();
+				String usersGrade = loggedInDto.getUsersGrade();
 				session.setAttribute("usersId", usersId);
 				session.setAttribute("usersGrade", usersGrade);
-				System.out.println("세션 부여 완료. usersId = '" + session.getAttribute("usersId") + "', usersGrade = '" + usersGrade + "'");
+				session.setAttribute("usersIdx", usersIdx);
+				System.out.println("세션 부여 완료. "
+					+ "usersId = '" + session.getAttribute("usersId") + "'"
+					+ ", usersGrade = '" + usersGrade + "'"
+					+ ", usersIdx = '" + usersIdx + "'"
+				);
 				resp.sendRedirect(req.getContextPath());
 			}
 		}

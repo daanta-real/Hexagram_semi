@@ -30,14 +30,14 @@ public class UsersDao {
 	//users_idx는 시퀀스자동생성
 	public void joinUsers(UsersDto usersDto) throws Exception{
 		Connection con = JdbcUtils.connect();
-		String sql = "insert into users(users_idx, users_id, users_pw, users_nick, users_email, users_phone) "
+		String sql = "insert into users(users_idx, users_id, users_pw, users_nick, users_email"/*, users_phone*/ + ") "
 						+ "values(users_seq.nextval, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, usersDto.getUsersId());
 		ps.setString(2, usersDto.getUsersPw());
 		ps.setString(3, usersDto.getUsersNick());
 		ps.setString(4, usersDto.getUsersEmail());
-		ps.setString(5, usersDto.getUsersPhone());
+//		ps.setString(5, usersDto.getUsersPhone());
 		ps.execute();
 		con.close();
 	}
@@ -60,7 +60,7 @@ public class UsersDao {
 			usersDto.setUsersPw(rs.getString("users_pw"));
 			usersDto.setUsersNick(rs.getString("users_nick"));
 			usersDto.setUsersEmail(rs.getString("users_email"));
-			usersDto.setUsersPhone(rs.getString("users_phone"));
+//			usersDto.setUsersPhone(rs.getString("users_phone"));
 		}
 		else {  usersDto = null;  }
 
@@ -74,11 +74,11 @@ public class UsersDao {
 	public boolean updateUsers(UsersDto usersDto) throws Exception{
 		Connection con = JdbcUtils.connect();
 
-		String sql = "update users set users_nick=?, users_email=?, users_phone=? where users_pw=?";
+		String sql = "update users set users_nick=?, users_email=?" + /*, users_phone=?*/ " where users_pw=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, usersDto.getUsersNick());
 		ps.setString(2, usersDto.getUsersEmail());
-		ps.setString(3, usersDto.getUsersPhone());
+//		ps.setString(3, usersDto.getUsersPhone());
 		ps.setString(4, usersDto.getUsersPw());
 		int result = ps.executeUpdate();
 		con.close();
@@ -143,7 +143,7 @@ public class UsersDao {
 			usersDto.setUsersId(rs.getString("users_id"));
 			usersDto.setUsersNick(rs.getString("users_nick"));
 			usersDto.setUsersEmail(rs.getString("users_email"));
-			usersDto.setUsersPhone(rs.getString("users_phone"));
+//			usersDto.setUsersPhone(rs.getString("users_phone"));
 			usersDto.setUsersGrade(rs.getString("users_grade"));
 			list.add(usersDto);
 		}
@@ -165,7 +165,7 @@ public class UsersDao {
 			usersDto.setUsersId(rs.getString("users_id"));
 			usersDto.setUsersNick(rs.getString("users_nick"));
 			usersDto.setUsersEmail(rs.getString("users_email"));
-			usersDto.setUsersPhone(rs.getString("users_phone"));
+//			usersDto.setUsersPhone(rs.getString("users_phone"));
 			usersDto.setUsersGrade(rs.getString("users_grade"));
 
 		}

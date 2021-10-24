@@ -2,12 +2,13 @@
 <%@page import="beans.ItemDto"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="beans.UsersDao"%>
+<%@page import="workspace.daanta.util.HexaLibrary" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
 String usersId = (String)request.getSession().getAttribute("usersId");
 UsersDto dto = new UsersDao().get(usersId);
-int usersIdx = dto.getUsersIdx();
+int usersIdx = dto != null ? dto.getUsersIdx() : null;
 String usersGrade = (String)session.getAttribute("usersGrade");
 String root = request.getContextPath();
 //관리자 권한으로 게시글 생성.=> 일반회원 X
