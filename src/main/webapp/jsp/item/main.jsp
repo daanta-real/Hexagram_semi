@@ -5,7 +5,7 @@
 </jsp:include>
     
  <% 
- String users_id = (String)request.getSession().getAttribute("users_idx");
+ String users_id = (String)request.getSession().getAttribute("users_id");
  String root = request.getContextPath();
  %>
  <h2><a href="<%=root%>/jsp/item/list.jsp?<%=users_id%>">게시판</a></h2>
