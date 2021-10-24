@@ -259,7 +259,7 @@ public class ItemDao {
 		return result > 0;
 	}
 
-	public boolean updateVisit(ItemDto itemDto) throws Exception {
+	public void updateCount(ItemDto itemDto) throws Exception {
 
 		Connection con = JdbcUtils.connect();
 		String sql = "update item set item_count=? where item_idx = ?";
@@ -268,8 +268,7 @@ public class ItemDao {
 		ps.setInt(1, itemDto.getItem_count());
 		ps.setInt(2, itemDto.getItem_idx());
 
-		int result = ps.executeUpdate();
+		ps.execute();
 		con.close();
-		return result > 0;
 	}
 }

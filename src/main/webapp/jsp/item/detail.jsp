@@ -7,12 +7,19 @@
 </jsp:include>
     
  <% 
+ 
  String root = request.getContextPath();
  int item_idx = Integer.parseInt(request.getParameter("item_idx"));
  String users_grade = (String)request.getSession().getAttribute("users_grade");
  
  ItemDao itemDao = new ItemDao();
  ItemDto itemDto = itemDao.get(item_idx);
+ 
+ if(request.getParameter("count") == null){
+ itemDto.setItem_count(itemDto.getItem_count()+1);
+ itemDao.updateCount(itemDto);
+ }	//조회수를 늘리는데, count 파라미터를 통해서댓글을 추가하거나 새로고침 해서는 조회수가 늘리지 않게 하기 위함.
+ 
  %>
  <!-- **기본정보 표시 -->
  
@@ -96,20 +103,15 @@
 </table>
 
 
-<!-- **댓글 표시(끌고올 예정) -->
-<table border="1" width="1000">
-	<thead>
-		<tr>
-			<th>댓글</th>
-		</tr>
-	</thead>
-	
-	<tbody>
-		<tr>
-			<td>댓글</td>
-		</tr>
-	</tbody>
-</table>
+<!-- **댓글 표시(끌고옴) -->
+<!-- 댓글 리스트 -->
+<jsp:include page="/jsp/item_reply/list.jsp">
+	<jsp:param value="<%=item_idx%>" name="item_idx"/>
+</jsp:include>
+<!-- 쓰기 -->
+<jsp:include page="/jsp/item_reply/insert.jsp">
+	<jsp:param value="<%=item_idx%>" name="item_idx"/>
+</jsp:include>
 
  
  <jsp:include page="/template/footer.jsp"></jsp:include>
