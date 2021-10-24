@@ -13,7 +13,9 @@ String root = request.getContextPath();
 		<tbody>
 			<tr>
 				<th>아이디 입력</th>
+
 				<td><input type="text" name="users_id" placeholder="아이디 입력" required autocomplete="off"></td>
+
 			</tr>
 			<tr>
 				<th>비밀번호 입력</th>
@@ -25,6 +27,10 @@ String root = request.getContextPath();
 		</tbody>
 	</table>
 </form>
+
+<%if(request.getParameter("error") != null) {%>
+<font color="red">잘못된 정보입니다. 다시 입력해주세요.</font>
+<%} %>
 
 
 <!-- 페이지 내용 끝. -->
