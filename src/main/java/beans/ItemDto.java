@@ -3,117 +3,117 @@ package beans;
 import java.sql.Date;
 
 public class ItemDto {
-	private int item_idx;
-	private int users_idx;
-	private String item_type;
-	private String item_name;
-	private String item_address;
-	private String item_detail;
-	private String item_tags;
-	private Date item_date;
-	private String item_periods;
-	private String item_time;
-	private String item_homepage;
-	private String item_parking;
-	private int item_count;
-	public int getItem_idx() {
-		return item_idx;
+	private int itemIdx;
+	private int usersIdx;
+	private String itemType;
+	private String itemName;
+	private String itemAddress;
+	private String itemDetail;
+	private String itemTags;
+	private Date itemDate;
+	private String itemPeriods;
+	private String itemTime;
+	private String itemHomepage;
+	private String itemParking;
+	private int itemCount;
+	public int getItemIdx() {
+		return itemIdx;
 	}
-	public void setItem_idx(int item_idx) {
-		this.item_idx = item_idx;
+	public void setItemIdx(int itemIdx) {
+		this.itemIdx = itemIdx;
 	}
-	public int getUsers_idx() {
-		return users_idx;
+	public int getUsersIdx() {
+		return usersIdx;
 	}
-	public void setUsers_idx(int users_idx) {
-		this.users_idx = users_idx;
+	public void setUsersIdx(int usersIdx) {
+		this.usersIdx = usersIdx;
 	}
-	public String getItem_type() {
-		return item_type;
+	public String getItemType() {
+		return itemType;
 	}
-	public void setItem_type(String item_type) {
-		this.item_type = item_type;
+	public void setItemType(String itemType) {
+		this.itemType = itemType;
 	}
-	public String getItem_name() {
-		return item_name;
+	public String getItemName() {
+		return itemName;
 	}
-	public void setItem_name(String item_name) {
-		this.item_name = item_name;
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
 	}
-	public String getItem_address() {
-		return item_address;
+	public String getItemAddress() {
+		return itemAddress;
 	}
-	public void setItem_address(String item_address) {
-		this.item_address = item_address;
+	public void setItemAddress(String itemAddress) {
+		this.itemAddress = itemAddress;
 	}
-	public String getItem_detail() {
-		return item_detail;
+	public String getItemDetail() {
+		return itemDetail;
 	}
-	public void setItem_detail(String item_detail) {
-		this.item_detail = item_detail;
+	public void setItemDetail(String itemDetail) {
+		this.itemDetail = itemDetail;
 	}
-	public String getItem_tags() {
-		return item_tags;
+	public String getItemTags() {
+		return itemTags;
 	}
-	public void setItem_tags(String item_tags) {
-		this.item_tags = item_tags;
+	public void setItemTags(String itemTags) {
+		this.itemTags = itemTags;
 	}
-	public Date getItem_date() {
-		return item_date;
+	public Date getItemDate() {
+		return itemDate;
 	}
-	public void setItem_date(Date item_date) {
-		this.item_date = item_date;
+	public void setItemDate(Date itemDate) {
+		this.itemDate = itemDate;
 	}
-	public String getItem_periods() {
-		return item_periods;
+	public String getItemPeriods() {
+		return itemPeriods;
 	}
-	public void setItem_periods(String item_periods) {
-		this.item_periods = item_periods;
+	public void setItemPeriods(String itemPeriods) {
+		this.itemPeriods = itemPeriods;
 	}
-	public String getItem_time() {
-		return item_time;
+	public String getItemTime() {
+		return itemTime;
 	}
-	public void setItem_time(String item_time) {
-		this.item_time = item_time;
+	public void setItemTime(String itemTime) {
+		this.itemTime = itemTime;
 	}
-	public String getItem_homepage() {
-		return item_homepage;
+	public String getItemHomepage() {
+		return itemHomepage;
 	}
-	public void setItem_homepage(String item_homepage) {
-		this.item_homepage = item_homepage;
+	public void setItemHomepage(String itemHomepage) {
+		this.itemHomepage = itemHomepage;
 	}
-	public String getItem_parking() {
-		return item_parking;
+	public String getItemParking() {
+		return itemParking;
 	}
-	public void setItem_parking(String item_parking) {
-		this.item_parking = item_parking;
+	public void setItemParking(String itemParking) {
+		this.itemParking = itemParking;
 	}
-	public int getItem_count() {
-		return item_count;
+	public int getItemCount() {
+		return itemCount;
 	}
-	public void setItem_count(int item_count) {
-		this.item_count = item_count;
+	public void setItemCount(int itemCount) {
+		this.itemCount = itemCount;
 	}
-	public ItemDto(int item_idx, int users_idx, String item_type, String item_name, String item_address,
-			String item_detail, String item_tags, Date item_date, String item_periods, String item_time,
-			String item_homepage, String item_parking, int item_count) {
+	public ItemDto(int itemIdx, int usersIdx, String itemType, String itemName, String itemAddress,
+			String itemDetail, String itemTags, Date itemDate, String itemPeriods, String itemTime,
+			String itemHomepage, String itemParking, int itemCount) {
 		super();
-		this.item_idx = item_idx;
-		this.users_idx = users_idx;
-		this.item_type = item_type;
-		this.item_name = item_name;
-		this.item_address = item_address;
-		this.item_detail = item_detail;
-		this.item_tags = item_tags;
-		this.item_date = item_date;
-		this.item_periods = item_periods;
-		this.item_time = item_time;
-		this.item_homepage = item_homepage;
-		this.item_parking = item_parking;
-		this.item_count = item_count;
+		this.itemIdx = itemIdx;
+		this.usersIdx = usersIdx;
+		this.itemType = itemType;
+		this.itemName = itemName;
+		this.itemAddress = itemAddress;
+		this.itemDetail = itemDetail;
+		this.itemTags = itemTags;
+		this.itemDate = itemDate;
+		this.itemPeriods = itemPeriods;
+		this.itemTime = itemTime;
+		this.itemHomepage = itemHomepage;
+		this.itemParking = itemParking;
+		this.itemCount = itemCount;
 	}
 	public ItemDto() {
 		super();
 	}
-	
+
 }

@@ -46,17 +46,16 @@ public class HexaLibrary {
 
 	// JDBC를 이용해 DB를 조작하기 위해서는 PreparedStatement 준비를 위해 두 가지 절차가 필요하다.
 	// 1. SQL구문을 준비
-	// 2. ?부분을 특정 값으로 바꾸기
+	// 2. ?부분을 특정 값으로 바꾸기: 검색(SELECT)/수정(MODIFY)
+	// 이걸 하려면 1번도 2번도 다 수동으로 코드를 작성해줘야 되는 게 몹시 불편했다.
 	//
-	// 이걸 하려면 1번도 2번도 다 수동으로 코드를 작성해줘야 되는게 몹시 불편했다.
 	// 본 메소드는 이것을 자동화시켜보기 위해 만들었다.
 	// 정확히는 ?를 많이 쓰는 SELECT와 UPDATE를 편하게 쓰기 위해 만들었다.
 	// ex1) SELECT a, b, c FROM table WHERE a=? b=? 등의 구문
     // ex2) UPDATE table SET a=? b=? WHERE item_idx =? 등의 구문
 	//
-	// List 안의 String[]은 아래 구조로 되어 있다.
-	// 이 메소드는 for문을 돌려, 아래 String[] 정보에 따라 첫째로 SQL 구문을 채우고, 둘째로 ?부분을 치환해준다.
-	// String[] str = {sql(구문), type(값종류), val(값), cont(콤마찍기)};
+	// 이 메소드는 List<String[]>에 대해 각 원소 String[]의 for문을 돌리는 구조로 되어 있다.
+	// 아래 String[] 정보에 따라 첫째로 SQL 구문을 채우고, 둘째로 ?부분을 치환해준다.
 	// sql : 넣을 SQL 구문
 	// type: ?의 치환 여부 및 치환할 자료형
 	// val : 이를 치환할 값

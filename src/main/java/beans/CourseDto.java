@@ -1,57 +1,57 @@
 package beans;
 
 public class CourseDto {
-	
-	private int course_idx; //코스번호
-	private int user_idx; //회원번호(작성자)
-	private String course_subject; //코스제목
-	private String course_list; //코스목록
-	private String course_locations; //코스지역
-	private String course_detail; //코스내용
-	private String course_tags; //코스태그
-	public int getCourse_idx() {
-		return course_idx;
+
+	private int courseIdx; //코스번호
+	private int usersIdx; //회원번호(작성자)
+	private String courseSubject; //코스제목
+	private String courseList; //코스목록
+	private String courseLocations; //코스지역
+	private String courseDetail; //코스내용
+	private String courseTags; //코스태그
+	public int getCourseIdx() {
+		return courseIdx;
 	}
-	public void setCourse_idx(int course_idx) {
-		this.course_idx = course_idx;
+	public void setCourseIdx(int courseIdx) {
+		this.courseIdx = courseIdx;
 	}
-	public int getUser_idx() {
-		return user_idx;
+	public int getusersIdx() {
+		return usersIdx;
 	}
-	public void setUser_idx(int user_idx) {
-		this.user_idx = user_idx;
+	public void setusersIdx(int usersIdx) {
+		this.usersIdx = usersIdx;
 	}
-	public String getCourse_subject() {
-		return course_subject;
+	public String getCourseSubject() {
+		return courseSubject;
 	}
-	public void setCourse_subject(String course_subject) {
-		this.course_subject = course_subject;
+	public void setCourseSubject(String courseSubject) {
+		this.courseSubject = courseSubject;
 	}
-	public String getCourse_list() {
-		return course_list;
+	public String getCourseList() {
+		return courseList;
 	}
-	public void setCourse_list(String course_list) {
-		this.course_list = course_list;
+	public void setCourseList(String courseList) {
+		this.courseList = courseList;
 	}
-	public String getCourse_locations() {
-		return course_locations;
+	public String getCourseLocations() {
+		return courseLocations;
 	}
-	public void setCourse_locations(String course_locations) {
-		this.course_locations = course_locations;
+	public void setCourseLocations(String courseLocations) {
+		this.courseLocations = courseLocations;
 	}
-	public String getCourse_detail() {
-		return course_detail;
+	public String getCourseDetail() {
+		return courseDetail;
 	}
-	public void setCourse_detail(String course_detail) {
-		this.course_detail = course_detail;
+	public void setCourseDetail(String courseDetail) {
+		this.courseDetail = courseDetail;
 	}
-	public String getCourse_tags() {
-		return course_tags;
+	public String getCourseTags() {
+		return courseTags;
 	}
-	public void setCourse_tags(String course_tags) {
-		this.course_tags = course_tags;
+	public void setCourseTags(String courseTags) {
+		this.courseTags = courseTags;
 	}
 
-	
+
 
 }
