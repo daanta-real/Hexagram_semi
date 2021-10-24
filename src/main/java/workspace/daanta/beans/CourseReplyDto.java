@@ -5,7 +5,7 @@ public class CourseReplyDto {
 	// 1. Declarations
 	private Integer courseReplyIdx;
 	private Integer courseIdx;
-	private Integer courseReplyUsersIdx;
+	private Integer usersIdx;
 	private Integer courseReplyTargetIdx;
 	private String courseReplyDetail;
 
@@ -14,12 +14,12 @@ public class CourseReplyDto {
 		super();
 	}
 
-	public CourseReplyDto(Integer courseReplyIdx, Integer courseIdx, Integer courseReplyUsersIdx,
+	public CourseReplyDto(Integer courseReplyIdx, Integer courseIdx, Integer usersIdx,
 			Integer courseReplyTargetIdx, String courseReplyDetail) {
 		super();
 		this.setCourseReplyIdx(courseReplyIdx);
 		this.setCourseIdx(courseIdx);
-		this.setCourseReplyUsersIdx(courseReplyUsersIdx);
+		this.setUsersIdx(usersIdx);
 		this.setCourseReplyTargetIdx(courseReplyTargetIdx);
 		this.setCourseReplyDetail(courseReplyDetail);
 	}
@@ -41,12 +41,12 @@ public class CourseReplyDto {
 		this.courseIdx = courseIdx;
 	}
 
-	public Integer getCourseReplyUsersIdx() {
-		return courseReplyUsersIdx;
+	public Integer getUsersIdx() {
+		return usersIdx;
 	}
 
-	public void setCourseReplyUsersIdx(Integer courseReplyUsersIdx) {
-		this.courseReplyUsersIdx = courseReplyUsersIdx;
+	public void setUsersIdx(Integer usersIdx) {
+		this.usersIdx = usersIdx;
 	}
 
 	public Integer getCourseReplyTargetIdx() {
@@ -69,7 +69,7 @@ public class CourseReplyDto {
 	@Override
 	public String toString() {
 		return "CourseReplyDto [courseReplyIdx=" + courseReplyIdx + ", courseIdx=" + courseIdx
-				+ ", courseReplyUsersIdx=" + courseReplyUsersIdx + ", courseReplyTargetIdx=" + courseReplyTargetIdx
+				+ ", usersIdx=" + usersIdx + ", courseReplyTargetIdx=" + courseReplyTargetIdx
 				+ ", courseReplyDetail=" + courseReplyDetail + "]";
 	}
 
