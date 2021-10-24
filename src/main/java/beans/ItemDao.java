@@ -29,7 +29,7 @@ public class ItemDao {
 			itemDto.setItem_detail(rs.getString(6));
 			itemDto.setItem_tags(rs.getString(7));
 			itemDto.setItem_date(rs.getDate(8));
-			itemDto.setItem_period(rs.getString(9));
+			itemDto.setItem_periods(rs.getString(9));
 			itemDto.setItem_time(rs.getString(10));
 			itemDto.setItem_homepage(rs.getString(11));
 			itemDto.setItem_parking(rs.getString(12));
@@ -60,7 +60,7 @@ public class ItemDao {
 			itemDto.setItem_detail(rs.getString(6));
 			itemDto.setItem_tags(rs.getString(7));
 			itemDto.setItem_date(rs.getDate(8));
-			itemDto.setItem_period(rs.getString(9));
+			itemDto.setItem_periods(rs.getString(9));
 			itemDto.setItem_time(rs.getString(10));
 			itemDto.setItem_homepage(rs.getString(11));
 			itemDto.setItem_parking(rs.getString(12));
@@ -91,7 +91,7 @@ public class ItemDao {
 			itemDto.setItem_detail(rs.getString(6));
 			itemDto.setItem_tags(rs.getString(7));
 			itemDto.setItem_date(rs.getDate(8));
-			itemDto.setItem_period(rs.getString(9));
+			itemDto.setItem_periods(rs.getString(9));
 			itemDto.setItem_time(rs.getString(10));
 			itemDto.setItem_homepage(rs.getString(11));
 			itemDto.setItem_parking(rs.getString(12));
@@ -110,7 +110,7 @@ public class ItemDao {
 
 		Connection con = JdbcUtils.connect();
 	
-		String sql = "select item_idx,users_idx,item_type,item_name,item_address,item_detail,item_tags,item_date,item_period,item_time,item_homepage,item_parking,item_count from("
+		String sql = "select item_idx,users_idx,item_type,item_name,item_address,item_detail,item_tags,item_date,item_periods,item_time,item_homepage,item_parking,item_count from("
 				+ "select rownum rn,tmp.* from("
 				+ "(select * from item order by item_idx)"
 				+ "tmp)) where rn between #2 and #3";
@@ -137,7 +137,7 @@ public class ItemDao {
 			itemDto.setItem_detail(rs.getString(6));
 			itemDto.setItem_tags(rs.getString(7));
 			itemDto.setItem_date(rs.getDate(8));
-			itemDto.setItem_period(rs.getString(9));
+			itemDto.setItem_periods(rs.getString(9));
 			itemDto.setItem_time(rs.getString(10));
 			itemDto.setItem_homepage(rs.getString(11));
 			itemDto.setItem_parking(rs.getString(12));
@@ -156,7 +156,7 @@ public class ItemDao {
 
 		Connection con = JdbcUtils.connect();
 		
-		String sql = "select item_idx,users_idx,item_type,item_name,item_address,item_detail,item_tags,item_date,item_period,item_time,item_homepage,item_parking,item_count from("
+		String sql = "select item_idx,users_idx,item_type,item_name,item_address,item_detail,item_tags,item_date,item_periods,item_time,item_homepage,item_parking,item_count from("
 				+ "select rownum rn,tmp.* from("
 				+ "select * from item where instr(#1,?)>0 order by item_idx) tmp)"
 				+ "where rn between #2 and #3";
@@ -185,7 +185,7 @@ public class ItemDao {
 			itemDto.setItem_detail(rs.getString(6));
 			itemDto.setItem_tags(rs.getString(7));
 			itemDto.setItem_date(rs.getDate(8));
-			itemDto.setItem_period(rs.getString(9));
+			itemDto.setItem_periods(rs.getString(9));
 			itemDto.setItem_time(rs.getString(10));
 			itemDto.setItem_homepage(rs.getString(11));
 			itemDto.setItem_parking(rs.getString(12));
@@ -201,7 +201,7 @@ public class ItemDao {
 
 	// 관광지 추가(축제인지 관광지인지는 나중에 생각)
 	public boolean insert(ItemDto itemDto) throws Exception {
-		String sql = "INSERT INTO item (item_idx,users_idx,item_type,item_name,item_address,item_detail,item_tags,item_period,item_time,item_homepage,item_parking)"
+		String sql = "INSERT INTO item (item_idx,users_idx,item_type,item_name,item_address,item_detail,item_tags,item_periods,item_time,item_homepage,item_parking)"
 				+ " VALUES(item_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?,?)";
 		Connection con = JdbcUtils.connect();
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -212,7 +212,7 @@ public class ItemDao {
 		ps.setString(5, itemDto.getItem_address());
 		ps.setString(6, itemDto.getItem_detail());
 		ps.setString(7, itemDto.getItem_tags());
-		ps.setString(8, itemDto.getItem_period());
+		ps.setString(8, itemDto.getItem_periods());
 		ps.setString(9, itemDto.getItem_time());
 		ps.setString(10, itemDto.getItem_homepage());
 		ps.setString(11, itemDto.getItem_parking());
@@ -238,7 +238,7 @@ public class ItemDao {
 
 	// 관광지 수정
 	public boolean update(ItemDto itemDto) throws Exception {
-		String sql = "UPDATE INTO item set item_type=?,item_name=?,item_address=?,item_detail=?,item_tags=?,item_period=?,item_time=?,item_homepage=?,item_parking=?)"
+		String sql = "UPDATE INTO item set item_type=?,item_name=?,item_address=?,item_detail=?,item_tags=?,item_periods=?,item_time=?,item_homepage=?,item_parking=?)"
 				+ " where item_idx=?";
 		Connection con = JdbcUtils.connect();
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -247,7 +247,7 @@ public class ItemDao {
 		ps.setString(3, itemDto.getItem_address());
 		ps.setString(4, itemDto.getItem_detail());
 		ps.setString(5, itemDto.getItem_tags());
-		ps.setString(6, itemDto.getItem_period());
+		ps.setString(6, itemDto.getItem_periods());
 		ps.setString(7, itemDto.getItem_time());
 		ps.setString(8, itemDto.getItem_homepage());
 		ps.setString(9, itemDto.getItem_parking());
