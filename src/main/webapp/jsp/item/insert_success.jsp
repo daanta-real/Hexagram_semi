@@ -5,7 +5,7 @@
 </jsp:include>
     
  <% 
- Integer users_idx = (Integer)request.getSession().getAttribute("users_key");
+ int users_idx = (int)request.getSession().getAttribute("users_key");
  String root = request.getContextPath();
  //관리자 권한으로 게시글 생성.=> 일반회원 X
  %>
