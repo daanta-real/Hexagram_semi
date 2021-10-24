@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import util.UsersUtils;
 import workspace.daanta.beans.UsersDao;
 import workspace.daanta.beans.UsersDto;
-import workspace.daanta.util.Library;
+import workspace.daanta.util.HexaLibrary;
 
 @SuppressWarnings("serial")
 @WebServlet("/usersLogin")
@@ -30,7 +30,7 @@ public class UsersLoginServlet extends HttpServlet {
 
 			// 1. 입력값 존재여부 검사
 			System.out.print("1. 입력값 존재여부 검사..");
-			boolean filledReqs = Library.isExists(id) && Library.isExists(pw);
+			boolean filledReqs = HexaLibrary.isExists(id) && HexaLibrary.isExists(pw);
 			if(!filledReqs) throw new Exception();
 			System.out.println("정상.");
 

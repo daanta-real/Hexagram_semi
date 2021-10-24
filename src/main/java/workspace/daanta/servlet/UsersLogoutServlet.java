@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import workspace.daanta.util.Library;
+import workspace.daanta.util.HexaLibrary;
 
 @SuppressWarnings("serial")
 @WebServlet("/usersLogout")
@@ -26,7 +26,7 @@ public class UsersLogoutServlet extends HttpServlet {
 
 			// 1. 기 로그아웃 검사: 이미 로그아웃되어 session의 id가 없으면 에러처리
 			System.out.print("1. 로그아웃 검사(이미 로그아웃 되어있는지 검사)..");
-			if (!Library.isExists(sessionId)) throw new Exception();
+			if (!HexaLibrary.isExists(sessionId)) throw new Exception();
 			System.out.println("로그아웃되어 있지 않습니다.");
 
 			// 2. 로그아웃 처리

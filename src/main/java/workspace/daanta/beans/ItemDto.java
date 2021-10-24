@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import workspace.daanta.util.DaoUtils;
+import workspace.daanta.util.HexaLibrary;
 
 public class ItemDto {
 
@@ -28,7 +28,7 @@ public class ItemDto {
 	// <서브 생성자> 태그rk 문자일 때
 	public ItemDto(Integer itemIdx, Integer usersIdx, String itemType, String itemName, String itemDetail,
 			String itemTagsStr, java.util.Date itemDate, String itemPeriod) {
-		this(itemIdx, usersIdx, itemType, itemName, itemDetail, DaoUtils.strToList(itemTagsStr), itemDate, itemPeriod);
+		this(itemIdx, usersIdx, itemType, itemName, itemDetail, HexaLibrary.strToList(itemTagsStr), itemDate, itemPeriod);
 	}
 	// <서브 생성자> 태그는 list, 기간은 문자열일 때
 	public ItemDto(Integer itemIdx, Integer usersIdx, String itemType, String itemName, String itemDetail,
@@ -98,7 +98,7 @@ public class ItemDto {
 	// tags Setters
 	// 1) String으로 들어왔을 경우, 뜯어서 List형으로 만든 다음 넘겨줌
 	public void setItemTags(String tagsStr) {
-		setItemTags(DaoUtils.strToList(tagsStr));
+		setItemTags(HexaLibrary.strToList(tagsStr));
 	}
 	// 2) List로 들어왔을 경우, 정렬만 하고 바로 저장
 	public void setItemTags(List<String> tagsList) {

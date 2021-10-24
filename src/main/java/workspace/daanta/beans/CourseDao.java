@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import util.JdbcUtils;
-import workspace.daanta.util.DaoUtils;
+import workspace.daanta.util.HexaLibrary;
 
 public class CourseDao {
 
@@ -138,7 +138,7 @@ public class CourseDao {
 
 		// SQL문 만들어 보내고 결과 받아오기
 		Connection conn = JdbcUtils.connect();
-		PreparedStatement ps = DaoUtils.sqlBuilder(conn, info);
+		PreparedStatement ps = HexaLibrary.sqlBuilder(conn, info);
 		int result = ps.executeUpdate();
 		boolean isSucceed = result == 1;
 

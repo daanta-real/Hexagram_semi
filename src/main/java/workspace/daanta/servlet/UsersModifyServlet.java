@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import util.UsersUtils;
 import workspace.daanta.beans.UsersDao;
 import workspace.daanta.beans.UsersDto;
-import workspace.daanta.util.Library;
+import workspace.daanta.util.HexaLibrary;
 
 @SuppressWarnings("serial")
 @WebServlet("/usersModify")
@@ -33,9 +33,9 @@ public class UsersModifyServlet extends HttpServlet {
 			// 1. 입력값 검사: id는 무조건 있어야 되고, 추가로
 			System.out.print("1. 입력값 존재여부 검사..");
 			// id는 무조건 있어야 되고
-			boolean filledReqs = Library.isExists(id);
+			boolean filledReqs = HexaLibrary.isExists(id);
 			// pw/nick/email/grade 넷중 하나 이상도 있어야 됨
-			filledReqs = filledReqs && (Library.isExists(pw) || Library.isExists(nick) || Library.isExists(email) || Library.isExists(grade));
+			filledReqs = filledReqs && (HexaLibrary.isExists(pw) || HexaLibrary.isExists(nick) || HexaLibrary.isExists(email) || HexaLibrary.isExists(grade));
 			if(!filledReqs) throw new Exception();
 			System.out.println("필요 입력값 모두 존재.");
 
