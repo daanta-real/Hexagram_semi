@@ -7,20 +7,20 @@ public class EventDto {
 	private Integer usersIdx;
 	private String eventSubject;
 	private String eventDetail;
-	private String eventPeriods;
+	private String eventPeriod;
 
 	// 2. Constructors
 	public EventDto() {
 		super();
 	}
 
-	public EventDto(int eventIdx, int usersIdx, String eventSubject, String eventDetail, String eventPeriods) {
+	public EventDto(Integer eventIdx, Integer usersIdx, String eventSubject, String eventDetail, String eventPeriod) {
 		super();
 		setEventIdx(eventIdx);
 		setUsersIdx(usersIdx);
 		setEventSubject(eventSubject);
 		setEventDetail(eventDetail);
-		setEventPeriods(eventPeriods);
+		setEventPeriod(eventPeriod);
 	}
 
 	// 3. Getters/Setters
@@ -56,19 +56,19 @@ public class EventDto {
 		this.eventDetail = eventDetail;
 	}
 
-	public String getEventPeriods() {
-		return eventPeriods;
+	public String getEventPeriod() {
+		return eventPeriod;
 	}
 
-	public void setEventPeriods(String eventPeriods) {
-		this.eventPeriods = eventPeriods;
+	public void setEventPeriod(String eventPeriod) {
+		this.eventPeriod = eventPeriod;
 	}
 
 	// 4. Methods - Overrided
 	@Override
 	public String toString() {
 		return "EventDto [eventIdx=" + eventIdx + ", usersIdx=" + usersIdx + ", eventSubject=" + eventSubject
-				+ ", eventDetail=" + eventDetail + ", eventPeriods=" + eventPeriods + "]";
+				+ ", eventDetail=" + eventDetail + ", eventPeriod=" + eventPeriod + "]";
 	}
 
 }
