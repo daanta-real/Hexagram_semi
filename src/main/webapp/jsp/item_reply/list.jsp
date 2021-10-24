@@ -1,3 +1,5 @@
+<%@page import="beans.UsersDto"%>
+<%@page import="beans.UsersDao"%>
 <%@page import="beans.ItemReplyDao"%>
 <%@page import="java.util.List"%>
 <%@page import="beans.ItemReplyDto"%>
@@ -9,9 +11,14 @@ String root = request.getContextPath();
 int item_idx = Integer.parseInt(request.getParameter("item_idx"));// 해당 인덱스 글에 댓글을 보여주겠다.
 int users_idx = (int)request.getSession().getAttribute("users_key");//해당 접속 회원이 대댓글을 쓰겠다.(동일 인물이라면 작성자 처리!!!)
 
+
 //해당 인덱스 글 번호의 ,, 댓글 목록을 불러온다
 ItemReplyDao itemReplyDao = new ItemReplyDao();
 List<ItemReplyDto> list = itemReplyDao.list(item_idx);
+
+//이 댓글을 단 회원의 아이디를 가져오기 위해 단일조회를 한다.
+UsersDao usersDao = new UsersDao();
+
 
 int number = 1;
 //댓글 순서 번호 부여
@@ -31,12 +38,15 @@ int number = 1;
 	<tbody>
 		<%for (ItemReplyDto itemReplyDto : list) {%>
 		
-			<%int reply = itemReplyDto.getItem_reply_idx();%>
+			<%
+			int reply = itemReplyDto.getItem_reply_idx();
+			UsersDto usersDto = usersDao.get(itemReplyDto.getUsers_idx());
+			%>
 			
 			<%if(itemReplyDto.getItem_reply_target_idx()==0){ %>
 		<tr>
 			<td><%=number++%></td>
-			<td><%=itemReplyDto.getUsers_idx() == 0 ? "탈퇴한 회원" : itemReplyDto.getUsers_idx()%></td>
+			<td><%=itemReplyDto.getUsers_idx() == 0 ? "탈퇴한 회원" : usersDto.getUsers_id()%></td>
 			<td><%=itemReplyDto.getItem_reply_time()%></td>
 			<td><%=itemReplyDto.getItem_reply_detail()%></td>
 			<td>
@@ -48,6 +58,9 @@ int number = 1;
 			<%}else{ %>
 					
 					<%for (ItemReplyDto itemReplyTargetDto : listTarget) {%>
+										<%
+										UsersDto usersDtoTarget = usersDao.get(itemReplyTargetDto.getUsers_idx());
+										%>
 						<table border="1" width="300">
 								<thead>
 									<tr>
@@ -58,7 +71,7 @@ int number = 1;
 							</thead>
 							<tbody>
 									<tr>
-										<td><%=itemReplyTargetDto.getUsers_idx() == 0 ? "탈퇴한 회원" : itemReplyDto.getUsers_idx()%></td>
+										<td><%=itemReplyTargetDto.getUsers_idx() == 0 ? "탈퇴한 회원" : usersDtoTarget.getUsers_id()%></td>
 										<td><%=itemReplyTargetDto.getItem_reply_time()%></td>
 										<td><%=itemReplyTargetDto.getItem_reply_detail()%></td>
 									</tr>

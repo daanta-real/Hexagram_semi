@@ -150,6 +150,27 @@ public class UsersDao {
 		con.close();
 		return list;
 	}
+	
+	//회원단일 조회
+	public UsersDto get(int users_idx) throws Exception{
+		Connection con = JdbcUtils.connect();
 
+		String sql = "select * from users where users_idx=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, users_idx);
+		ResultSet rs = ps.executeQuery();
+		UsersDto usersDto = new UsersDto();
+		if(rs.next()) {
+			
+			usersDto.setUsers_id(rs.getString("users_id"));
+			usersDto.setUsers_nick(rs.getString("users_nick"));
+			usersDto.setUsers_email(rs.getString("users_email"));
+			usersDto.setUsers_phone(rs.getString("users_phone"));
+			usersDto.setUsers_grade(rs.getString("users_grade"));
+
+		}
+		con.close();
+		return usersDto;
+	}
 
 }
