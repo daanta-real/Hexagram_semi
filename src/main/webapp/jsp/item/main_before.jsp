@@ -13,7 +13,7 @@ String root = request.getContextPath();
 		<tbody>
 			<tr>
 				<th>아이디 입력</th>
-				<td><input type="text" name="users_idx" placeholder="아이디 입력" required autocomplete="off"></td>
+				<td><input type="text" name="users_id" placeholder="아이디 입력" required autocomplete="off"></td>
 			</tr>
 			<tr>
 				<th>비밀번호 입력</th>
