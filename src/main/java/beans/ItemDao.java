@@ -13,7 +13,7 @@ public class ItemDao {
 
 	// 전체 조회
 	public List<ItemDto> list() throws Exception {
-		String sql = "SELECT * FROM item";
+		String sql = "SELECT * FROM item order by item_idx desc";
 		Connection con = JdbcUtils.connect();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
@@ -203,20 +203,20 @@ public class ItemDao {
 	public boolean insert(ItemDto itemDto) throws Exception {
 		String sql = "INSERT INTO item (item_idx,users_idx,item_type,item_name,item_address,item_detail,"
 				+ "item_tags,item_periods,item_time,item_homepage,item_parking)"
-				+ " VALUES(item_seq.NEXTVAL,?,?,?,?,?,?,?,?,?,?)";
+				+ " VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 		Connection con = JdbcUtils.connect();
 		PreparedStatement ps = con.prepareStatement(sql);
-
-		ps.setInt(1, itemDto.getUsersIdx());
-		ps.setString(2, itemDto.getItemType());
-		ps.setString(3, itemDto.getItemName());
-		ps.setString(4, itemDto.getItemAddress());
-		ps.setString(5, itemDto.getItemDetail());
-		ps.setString(6, itemDto.getItemTags());
-		ps.setString(7, itemDto.getItemPeriods());
-		ps.setString(8, itemDto.getItemTime());
-		ps.setString(9, itemDto.getItemHomepage());
-		ps.setString(10, itemDto.getItemParking());
+		ps.setInt(1, itemDto.getItemIdx());
+		ps.setInt(2, itemDto.getUsersIdx());
+		ps.setString(3, itemDto.getItemType());
+		ps.setString(4, itemDto.getItemName());
+		ps.setString(5, itemDto.getItemAddress());
+		ps.setString(6, itemDto.getItemDetail());
+		ps.setString(7, itemDto.getItemTags());
+		ps.setString(8, itemDto.getItemPeriods());
+		ps.setString(9, itemDto.getItemTime());
+		ps.setString(10, itemDto.getItemHomepage());
+		ps.setString(11, itemDto.getItemParking());
 
 		int result = ps.executeUpdate();
 
@@ -271,5 +271,22 @@ public class ItemDao {
 
 		ps.execute();
 		con.close();
+	}
+	
+	public int getSequenceNo() throws Exception{
+		Connection con = JdbcUtils.connect();
+		String sql = "select item_seq.nextval from dual";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		int sequenceNo = 0;
+		if(rs.next()) {
+			sequenceNo = rs.getInt(1);
+		}
+		
+		con.close();
+		
+		return sequenceNo;
 	}
 }
