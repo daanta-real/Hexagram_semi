@@ -9,7 +9,7 @@
 <%
 String root = request.getContextPath();
 int itemIdx = Integer.parseInt(request.getParameter("itemIdx"));// 해당 인덱스 글에 댓글을 보여주겠다.
-int usersIdx = (int)request.getSession().getAttribute("usersId");//해당 접속 회원이 대댓글을 쓰겠다.(동일 인물이라면 작성자 처리!!!)
+int usersIdx = (int)request.getSession().getAttribute("usersIdx");//해당 접속 회원이 대댓글을 쓰겠다.(동일 인물이라면 작성자 처리!!!)
 
 
 //해당 인덱스 글 번호의 ,, 댓글 목록을 불러온다

@@ -22,8 +22,8 @@ public class ItemTemporaryLoginServlet extends HttpServlet{
 
 
 			if(usersDto != null) {
-				req.getSession().setAttribute("users_key", usersDto.getUsersIdx());
-				req.getSession().setAttribute("users_grade", usersDto.getUsersGrade());
+				req.getSession().setAttribute("usersIdx", usersDto.getUsersIdx());
+				req.getSession().setAttribute("usersGrade", usersDto.getUsersGrade());
 
 				resp.sendRedirect(req.getContextPath()+"/jsp/item/main.jsp");
 			}else {
