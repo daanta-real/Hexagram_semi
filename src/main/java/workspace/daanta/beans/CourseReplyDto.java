@@ -4,9 +4,9 @@ public class CourseReplyDto {
 
 	// 1. Declarations
 	private Integer courseReplyIdx;
+	private Integer courseReplyTargetIdx;
 	private Integer courseIdx;
 	private Integer usersIdx;
-	private Integer courseReplyTargetIdx;
 	private String courseReplyDetail;
 
 	// 2. Constructors
@@ -33,6 +33,14 @@ public class CourseReplyDto {
 		this.courseReplyIdx = courseReplyIdx;
 	}
 
+	public Integer getCourseReplyTargetIdx() {
+		return courseReplyTargetIdx;
+	}
+
+	public void setCourseReplyTargetIdx(Integer courseReplyTargetIdx) {
+		this.courseReplyTargetIdx = courseReplyTargetIdx;
+	}
+
 	public Integer getCourseIdx() {
 		return courseIdx;
 	}
@@ -47,14 +55,6 @@ public class CourseReplyDto {
 
 	public void setUsersIdx(Integer usersIdx) {
 		this.usersIdx = usersIdx;
-	}
-
-	public Integer getCourseReplyTargetIdx() {
-		return courseReplyTargetIdx;
-	}
-
-	public void setCourseReplyTargetIdx(Integer courseReplyTargetIdx) {
-		this.courseReplyTargetIdx = courseReplyTargetIdx;
 	}
 
 	public String getCourseReplyDetail() {
