@@ -71,7 +71,7 @@ public class HexaLibrary {
 	// 1) null: 아무 처리도하지 않는다. ,로 구분될 필요가 없는 구문이다.
 	// 2) ",": 쉼표를 알아서 붙여준된다.
 	// ","옵션을 원소마다 연속적으로 넣지 않는다면, 카운터는 초기화된다.
-	public PreparedStatement sqlBuilder(Connection conn, List<String[]> info) throws Exception {
+	public static PreparedStatement sqlBuilder(Connection conn, List<String[]> info) throws Exception {
 
 		// 1. SQL 구문 만들기
 		StringBuffer sb = new StringBuffer();
