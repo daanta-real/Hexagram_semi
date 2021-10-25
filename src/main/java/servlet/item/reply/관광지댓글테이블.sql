@@ -10,3 +10,4 @@ item_reply_target_idx NUMBER default 0
 create sequence item_reply_seq;
 
 
+
