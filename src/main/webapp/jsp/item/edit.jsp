@@ -52,13 +52,13 @@
 			<tr>
 				<td>주소</td>
 				<td>
-				<textarea name="itemAddress" rows="1" cols="50" placeholder="주소를 입력하세요"></textarea>
+				<textarea name="itemAddress" rows="1" cols="50" placeholder="주소를 입력하세요"><%=itemDto.getItemAddress() %></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>내용</td>
 				<td>
-				<textarea name="itemDetail" rows="20" cols="50" placeholder="내용을 입력하세요"></textarea>
+				<textarea name="itemDetail" rows="20" cols="50" placeholder="내용을 입력하세요"><%=itemDto.getItemDetail() %></textarea>
 				</td>
 			</tr>
 			<tr>
