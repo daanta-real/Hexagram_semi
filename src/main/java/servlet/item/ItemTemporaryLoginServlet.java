@@ -22,6 +22,7 @@ public class ItemTemporaryLoginServlet extends HttpServlet{
 
 
 			if(usersDto != null) {
+				req.getSession().setAttribute("usersID", usersDto.getUsersId());
 				req.getSession().setAttribute("usersIdx", usersDto.getUsersIdx());
 				req.getSession().setAttribute("usersGrade", usersDto.getUsersGrade());
 
