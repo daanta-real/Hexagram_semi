@@ -7,20 +7,20 @@ public class ItemReplyDto {
 	private Integer itemIdx;
 	private Integer usersIdx;
 	private Integer itemReplyTargetIdx;
-	private String itemReplyDeatil;
+	private String itemReplyDetail;
 
 	// 2. Constructors
 	public ItemReplyDto() {
 		super();
 	}
 
-	public ItemReplyDto(int itemReplyIdx, int itemIdx, int usersIdx, int itemReplyTargetIdx, String itemReplyDeatil) {
+	public ItemReplyDto(int itemReplyIdx, int itemIdx, int usersIdx, int itemReplyTargetIdx, String itemReplyDetail) {
 		super();
 		setItemReplyIdx(itemReplyIdx);
 		setItemIdx(itemIdx);
 		setUsersIdx(usersIdx);
 		setItemReplyTargetIdx(itemReplyTargetIdx);
-		setItemReplyDeatil(itemReplyDeatil);
+		setItemReplyDetail(itemReplyDetail);
 	}
 
 	// 3. Getters/Setters
@@ -56,19 +56,19 @@ public class ItemReplyDto {
 		this.itemReplyTargetIdx = itemReplyTargetIdx;
 	}
 
-	public String getItemReplyDeatil() {
-		return itemReplyDeatil;
+	public String getItemReplyDetail() {
+		return itemReplyDetail;
 	}
 
-	public void setItemReplyDeatil(String itemReplyDeatil) {
-		this.itemReplyDeatil = itemReplyDeatil;
+	public void setItemReplyDetail(String itemReplyDetail) {
+		this.itemReplyDetail = itemReplyDetail;
 	}
 
 	// 4. Methods - Overrided
 	@Override
 	public String toString() {
 		return "itemReplyDto [itemReplyIdx=" + itemReplyIdx + ", itemIdx=" + itemIdx + ", usersIdx=" + usersIdx
-				+ ", itemReplyTargetIdx=" + itemReplyTargetIdx + ", itemReplyDeatil=" + itemReplyDeatil + "]";
+				+ ", itemReplyTargetIdx=" + itemReplyTargetIdx + ", itemReplyDetail=" + itemReplyDetail + "]";
 	}
 
 }

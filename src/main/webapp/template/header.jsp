@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="workspace.daanta.util.HexaLibrary" %>
+<%@ page import="workspace.daanta.beans.UsersDao" %>
+<%@ page import="workspace.daanta.beans.UsersDto" %>
 <%
 // 환경설정
 String title = "노가리투어ㅡ" + request.getParameter("pageTitle");
-System.out.println("header.jsp 요청 감지: " + request.getRequestURL().toString() + "(" + title + ")");
+System.out.println("<헤더 출력> from " + request.getRequestURL().toString() + "(" + title + ")");
 String root  = request.getContextPath();
+
+//세션id를 확인하여 로그인 여부를 검사
+String sessionId = (String) request.getSession().getAttribute("usersId");
+boolean isLogin = HexaLibrary.isExists(sessionId);
 %>
 <!DOCTYPE html>
 <HTML>
@@ -26,7 +33,24 @@ String root  = request.getContextPath();
 <BODY>
 
 <HEADER>
-<DIV ID="userContainer">횐갑</DIV>
+<DIV ID="userContainer">
+<%
+
+// 로그인이 되었을 경우
+if(isLogin) {
+	UsersDao dao = new UsersDao();
+	UsersDto dto = dao.get(sessionId);
+	String usersId = dto.getUsersId();
+	String usersNick = dto.getUsersNick();
+	String usersGrade = dto.getUsersGrade();%>
+	<h5><%=usersNick%>(<%=usersId%>)님 (등급: <%=usersGrade%>)</h5>
+	<a href='<%=root%>/users/logout.nogari'><button>로그아웃</button></a>
+<%}
+// 로그인이 되지 않았을 경우
+else {%>
+	<a href='<%=root%>/jsp/users/login.jsp'><button>로그인</button></a>
+<%}%>
+</DIV>
 <DIV ID="logoContainer"><A HREF="<%=root%>">
 	<SPAN>노가리</SPAN>
 	<IMG ID="logo" SRC="<%=root%>/resource/image/logo.png" ALT="로고"/>
