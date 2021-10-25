@@ -151,13 +151,35 @@ public class UsersDao {
 		return list;
 	}
 
-	//회원단일 조회
+	//회원단일 조회 - id
 	public UsersDto get(String usersId) throws Exception{
 		Connection con = JdbcUtils.connect();
 
 		String sql = "select * from users where users_id=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, usersId);
+		ResultSet rs = ps.executeQuery();
+		UsersDto usersDto = new UsersDto();
+		if(rs.next()) {
+
+			usersDto.setUsersId(rs.getString("users_id"));
+			usersDto.setUsersNick(rs.getString("users_nick"));
+			usersDto.setUsersEmail(rs.getString("users_email"));
+//			usersDto.setUsersPhone(rs.getString("users_phone"));
+			usersDto.setUsersGrade(rs.getString("users_grade"));
+
+		}
+		con.close();
+		return usersDto;
+	}
+
+	//회원단일 조회 - idx
+	public UsersDto get(int usersIdx) throws Exception{
+		Connection con = JdbcUtils.connect();
+
+		String sql = "select * from users where users_idx=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, usersIdx);
 		ResultSet rs = ps.executeQuery();
 		UsersDto usersDto = new UsersDto();
 		if(rs.next()) {
