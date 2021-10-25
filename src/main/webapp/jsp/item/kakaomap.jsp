@@ -9,7 +9,6 @@ int itemIdx = Integer.parseInt(request.getParameter("itemIdx"));
 
 ItemDao itemDao = new ItemDao();
 ItemDto itemDto = itemDao.get(itemIdx);
-
 %>
 
 <!DOCTYPE html>
