@@ -239,7 +239,7 @@ public class ItemDao {
 
 	// 관광지 수정
 	public boolean update(ItemDto itemDto) throws Exception {
-		String sql = "UPDATE INTO item set item_type=?,item_name=?,item_address=?,item_detail=?,item_tags=?,item_periods=?,item_time=?,item_homepage=?,item_parking=?)"
+		String sql = "UPDATE item set item_type=?,item_name=?,item_address=?,item_detail=?,item_tags=?,item_periods=?,item_time=?,item_homepage=?,item_parking=?"
 				+ " where item_idx=?";
 		Connection con = JdbcUtils.connect();
 		PreparedStatement ps = con.prepareStatement(sql);

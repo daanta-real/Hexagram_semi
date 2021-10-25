@@ -42,8 +42,8 @@
 
 <!-- 관리자가 보는 경우 수정 / 삭제가 가능하도록 설정 -->
 <%-- <%if(request.getSession().getAttribute("users_grade") != null && usersGrade.equals("관리자")){%> --%>
-<a href="<%=root%>/jsp/item/edit.jsp?item_idx=<%=itemIdx%>">수정</a>
-<a href="<%=root%>/jsp/item/delete.jsp?item_idx=<%=itemIdx%>">삭제</a>
+<a href="<%=root%>/jsp/item/edit.jsp?itemIdx=<%=itemIdx%>">수정</a>
+<a href="<%=root%>/jsp/item/delete.jsp?itemIdx=<%=itemIdx%>">삭제</a>
 <%-- <%}%> --%>
 
 <!-- **사진 표시(DB테이블 만들어서 resource 파일정보를 불러올 예정(idea) -->

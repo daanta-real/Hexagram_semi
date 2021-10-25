@@ -20,6 +20,7 @@ public class ItemEditServlet extends HttpServlet{
 		try {
 			
 			ItemDto itemDto = new ItemDto();
+			itemDto.setItemIdx(Integer.parseInt(req.getParameter("itemIdx")));
 			itemDto.setItemType(req.getParameter("itemType"));
 			itemDto.setItemName(req.getParameter("itemName"));
 			itemDto.setItemAddress(req.getParameter("itemAddress"));
@@ -29,7 +30,6 @@ public class ItemEditServlet extends HttpServlet{
 			itemDto.setItemTime(req.getParameter("itemTime"));
 			itemDto.setItemHomepage(req.getParameter("itemHompage"));
 			itemDto.setItemParking(req.getParameter("itemParking"));
-			itemDto.setItemIdx(Integer.parseInt(req.getParameter("itemIdx")));
 			
 			ItemDao itemDao = new ItemDao();
 			itemDao.update(itemDto);
