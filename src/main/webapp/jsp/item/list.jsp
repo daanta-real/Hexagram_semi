@@ -1,3 +1,4 @@
+<%@page import="beans.UsersDto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.ItemDto"%>
 <%@page import="java.util.List"%>
@@ -9,6 +10,14 @@
 	<jsp:param name="pageTitle" value="메인" />
 </jsp:include>
 
+<%-- 관리자만 글쓰기위한 세션 받기 --%>
+<%
+	int usersIdx = (int)request.getSession().getAttribute("usersIdx");
+	String usersGrade = (String)request.getSession().getAttribute("usersGrade");
+		
+	//세션 값이 관리자라면
+	boolean admin = usersGrade != null && usersGrade.equals("관리자");
+%>
 
 <%
 String column = request.getParameter("column");
@@ -30,6 +39,7 @@ String title = search ? "검색" : "관광지 목록";
 %>
 
 <h2><%=title %></h2>
+<h5>(usersIdx = <%=usersIdx %>, grade=<%=usersGrade %>)</h5>
 
 <form action="<%=root%>/jsp/item/list.jsp" method="get">
 <select name="column">
@@ -74,7 +84,7 @@ String title = search ? "검색" : "관광지 목록";
 		<tr>
 			<td align ="center"><%=itemDto.getItemType() %></td>
 			<td align ="center">
-			<a href="<%=root%>/jsp/item/count.nogari?item_idx=<%=itemDto.getItemIdx()%>">
+			<a href="<%=root%>/jsp/item/count.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
 <!-- 			클릭시 단 한번의 조회를 위해서 Count서블릿으로 item_idx을 넘겨줌 -->
 			<%=itemDto.getItemName()%>
 			</a>
@@ -90,9 +100,15 @@ String title = search ? "검색" : "관광지 목록";
 <%} %>
 
 
+<form action="insert.jsp"> 
+	<input type="submit" value="글쓰기"> 
+</form> 
+
 <%-- 관리자만 글쓰기 가능 --%>
-<form action="insert.jsp">
-	<input type="submit" value="글쓰기">
-</form>
+<%-- <%if(admin){ %> --%>
+<!-- <form action="insert.jsp"> -->
+<!-- 	<input type="submit" value="글쓰기"> -->
+<!-- </form> -->
+<%-- <%} %> --%>
  
  <jsp:include page="/template/footer.jsp"></jsp:include>
