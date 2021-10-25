@@ -1,0 +1,45 @@
+package servlet.item;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import beans.ItemDao;
+import beans.ItemDto;
+
+@WebServlet(urlPatterns = "/jsp/item/edit.nogari")
+public class ItemEditServlet extends HttpServlet{
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		try {
+			
+			ItemDto itemDto = new ItemDto();
+			itemDto.setItemType(req.getParameter("itemType"));
+			itemDto.setItemName(req.getParameter("itemName"));
+			itemDto.setItemAddress(req.getParameter("itemAddress"));
+			itemDto.setItemDetail(req.getParameter("itemDteail"));
+			itemDto.setItemTags(req.getParameter("itemTages"));
+			itemDto.setItemPeriods(req.getParameter("itemPeriods"));
+			itemDto.setItemTime(req.getParameter("itemTime"));
+			itemDto.setItemHomepage(req.getParameter("itemHompage"));
+			itemDto.setItemParking(req.getParameter("itemParking"));
+			itemDto.setItemIdx(Integer.parseInt(req.getParameter("itemIdx")));
+			
+			ItemDao itemDao = new ItemDao();
+			itemDao.update(itemDto);
+			
+			resp.sendRedirect(req.getContextPath() + "/jsp/item/detail.jsp?itemIdx="+itemDto.getItemIdx());
+			
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			resp.sendError(500);
+		}
+	}
+}

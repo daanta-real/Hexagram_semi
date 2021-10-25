@@ -4,7 +4,7 @@
    <%
    String root = request.getContextPath();
    String itemIdx = request.getParameter("itemIdx"); // 해당 인덱스 글에 댓글을 쓰겠다.
-   int usersIdx = (int)request.getSession().getAttribute("usersId");//해당 접속 회원이 댓글을 쓰겠다.
+   int usersIdx = (int)request.getSession().getAttribute("usersIdx");//해당 접속 회원이 댓글을 쓰겠다.
    
    %>
     <h4 align="center">[댓글 작성]</h4>

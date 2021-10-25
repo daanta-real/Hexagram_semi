@@ -12,6 +12,7 @@
 
 <%-- 관리자만 글쓰기위한 세션 받기 --%>
 <%
+	String usersId = (String)request.getSession().getAttribute("usersId");
 	int usersIdx = (int)request.getSession().getAttribute("usersIdx");
 	String usersGrade = (String)request.getSession().getAttribute("usersGrade");
 		
@@ -39,7 +40,7 @@ String title = search ? "검색" : "관광지 목록";
 %>
 
 <h2><%=title %></h2>
-<h5>(usersIdx = <%=usersIdx %>, grade=<%=usersGrade %>)</h5>
+<h5>(usersId = <%=usersId %>, usersIdx = <%=usersIdx %>, grade=<%=usersGrade %>)</h5>
 
 <form action="<%=root%>/jsp/item/list.jsp" method="get">
 <select name="column">
