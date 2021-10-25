@@ -15,9 +15,9 @@ insert into course(course_idx, course_list, course_detail, course_locations, cou
     values(course_seq.nextval, '목록(홍대-신촌-아현)', '내용(상상마당,각종유흥)', '지역(서울)', '태그(#홍대,#젊음의거리)');
     
 -- 코스테이블 테스트 수정(update)
--- 코스번호(course_id)로 입력받고 수정해야될까? 회원번호(user_idx)를 입력받고 수정해야될까?
+-- 코스번호(course_id)로 입력받고 수정해야될까? 회원번호(users_idx)를 입력받고 수정해야될까?
 update course set course_list='목록(홍대-신촌)', course_detail='내용(상상마당)', course_locations='지역(서울서울)', course_tags='태그(#홍대)' where course_idx = 2;
 
 -- 코스테이블 테스트 삭제(delete)
--- 코스번호(course_id)로 입력받고 삭제해야할까? 회원번호(user_idx)를 입력받고 삭제해야할까?
+-- 코스번호(course_id)로 입력받고 삭제해야할까? 회원번호(users_idx)를 입력받고 삭제해야할까?
 delete course where course_idx = 1;

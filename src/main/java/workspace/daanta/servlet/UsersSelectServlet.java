@@ -14,7 +14,7 @@ import workspace.daanta.beans.UsersDao;
 import workspace.daanta.beans.UsersDto;
 
 @SuppressWarnings("serial")
-@WebServlet("/usersList")
+@WebServlet("/users/list.nogari")
 public class UsersSelectServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,13 +27,13 @@ public class UsersSelectServlet extends HttpServlet {
 			UsersDao dao = new UsersDao();
 
 			// 1. 목록을 조회할 수 있는 사람은 관리자뿐임. 따라서 세션id가 관리자등급 id인지 확인
-			System.out.print("1. 권한 확인..");
+			System.out.print("[회원 목록] 1. 권한 확인..");
 			boolean isGranted = UsersUtils.chkIsAdmin(req, dao);
 			if (!isGranted) throw new Exception();
 			System.out.println("정상 권한 확인.");
 
 			// 2. 목록 출력
-			System.out.print("2. 목록 출력..");
+			System.out.print("[회원 목록] 2. 목록 출력..");
 			List<UsersDto> usersDto = new UsersDao().select();
 			PrintWriter out = resp.getWriter();
 			for (UsersDto dto_one : usersDto) {
@@ -42,9 +42,11 @@ public class UsersSelectServlet extends HttpServlet {
 			}
 			System.out.println("목록 출력 완료.");
 
-		} catch (Exception e) {
-			System.out.println("에러");
+		}
+		catch(Exception e) {
+			System.out.println("\n[회원 목록] 에러가 발생했습니다.");
 			e.printStackTrace();
+			resp.sendError(500);
 		}
 	}
 }

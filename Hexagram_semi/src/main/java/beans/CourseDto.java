@@ -2,24 +2,24 @@ package beans;
 
 public class CourseDto {
 	
-	private int course_idx; //코스번호
-	private int user_idx; //회원번호(작성자)
+	private int courseIdx; //코스번호
+	private int usersIdx; //회원번호(작성자)
 	private String course_subject; //코스제목
 	private String course_list; //코스목록
 	private String course_locations; //코스지역
 	private String course_detail; //코스내용
 	private String course_tags; //코스태그
-	public int getCourse_idx() {
-		return course_idx;
+	public int getcourseIdx() {
+		return courseIdx;
 	}
-	public void setCourse_idx(int course_idx) {
-		this.course_idx = course_idx;
+	public void setcourseIdx(int courseIdx) {
+		this.courseIdx = courseIdx;
 	}
-	public int getUser_idx() {
-		return user_idx;
+	public int getusersIdx() {
+		return usersIdx;
 	}
-	public void setUser_idx(int user_idx) {
-		this.user_idx = user_idx;
+	public void setusersIdx(int usersIdx) {
+		this.usersIdx = usersIdx;
 	}
 	public String getCourse_subject() {
 		return course_subject;

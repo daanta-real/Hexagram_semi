@@ -5,10 +5,10 @@
 	pageEncoding="UTF-8"%>
 
 <%
-int item_idx = Integer.parseInt(request.getParameter("item_idx"));
+int itemIdx = Integer.parseInt(request.getParameter("itemIdx"));
 
 ItemDao itemDao = new ItemDao();
-ItemDto itemDto = itemDao.get(item_idx);
+ItemDto itemDto = itemDao.get(itemIdx);
 
 %>
 
@@ -28,8 +28,7 @@ ItemDto itemDto = itemDao.get(item_idx);
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
 			center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-			level : 3
-		// 지도의 확대 레벨
+			level : 3 // 지도의 확대 레벨
 		};
 
 		// 지도를 생성합니다    
@@ -41,14 +40,13 @@ ItemDto itemDto = itemDao.get(item_idx);
 		// 주소로 좌표를 검색합니다
 		geocoder
 				.addressSearch(
-						'<%=itemDto.getItem_address()%>',
+						'<%=itemDto.getItemAddress()%>',
 						function(result, status) {
 
 							// 정상적으로 검색이 완료됐으면 
 							if (status === kakao.maps.services.Status.OK) {
 
-								var coords = new kakao.maps.LatLng(result[0].y,
-										result[0].x);
+								var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
 								// 결과값으로 받은 위치를 마커로 표시합니다
 								var marker = new kakao.maps.Marker({
@@ -57,10 +55,9 @@ ItemDto itemDto = itemDao.get(item_idx);
 								});
 
 								// 인포윈도우로 장소에 대한 설명을 표시합니다
-								var infowindow = new kakao.maps.InfoWindow(
-										{
-											content : '<div style="width:150px;text-align:center;padding:6px 0;"><%=itemDto.getItem_name()%></div>'
-										});
+								var infowindow = new kakao.maps.InfoWindow({
+									content : '<div style="width:150px;text-align:center;padding:6px 0;"><%=itemDto.getItemName()%></div>'
+								});
 								infowindow.open(map, marker);
 
 								// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다

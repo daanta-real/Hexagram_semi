@@ -44,7 +44,7 @@ public class UsersDao {
 
 	}
 
-	// 2. READ: 딱 한 명의 회원의 정보를 조회
+	// 2. READ: 딱 한 명의 회원의 정보를 조회 (※ id 기준; idx 아님)
 	public UsersDto get(String id) throws Exception {
 
 		// SQL 준비
@@ -73,18 +73,18 @@ public class UsersDao {
 	}
 
 	// 3. CREATE: 회원 추가
+	// 기본 준회원
 	public boolean insert(UsersDto dto) throws Exception {
 
 		// SQL 준비
 		String sql = "INSERT INTO users (users_idx, users_id, users_pw, users_nick, users_email, users_grade)"
-				+ " VALUES(users_seq.NEXTVAL, ?, ?, ?, ?, ?)";
+			+ " VALUES(users_seq.NEXTVAL, ?, ?, ?, ?, '준회원')";
 		Connection conn = JdbcUtils.connect();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, dto.getUsersId());
 		ps.setString(2, dto.getUsersPw());
 		ps.setString(3, dto.getUsersNick());
 		ps.setString(4, dto.getUsersEmail());
-		ps.setString(5, dto.getUsersGrade());
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		int result = ps.executeUpdate();

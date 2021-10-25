@@ -8,13 +8,13 @@
 
 <%
 String root = request.getContextPath();
-int item_idx = Integer.parseInt(request.getParameter("item_idx"));// 해당 인덱스 글에 댓글을 보여주겠다.
-int users_idx = (int)request.getSession().getAttribute("users_key");//해당 접속 회원이 대댓글을 쓰겠다.(동일 인물이라면 작성자 처리!!!)
+int itemIdx = Integer.parseInt(request.getParameter("itemIdx"));// 해당 인덱스 글에 댓글을 보여주겠다.
+int usersIdx = (int)request.getSession().getAttribute("usersId");//해당 접속 회원이 대댓글을 쓰겠다.(동일 인물이라면 작성자 처리!!!)
 
 
 //해당 인덱스 글 번호의 ,, 댓글 목록을 불러온다
 ItemReplyDao itemReplyDao = new ItemReplyDao();
-List<ItemReplyDto> list = itemReplyDao.list(item_idx);
+List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 
 //이 댓글을 단 회원의 아이디를 가져오기 위해 단일조회를 한다.
 UsersDao usersDao = new UsersDao();
@@ -26,29 +26,29 @@ int number = 1;
 
 <h3 align="center">[댓글 목록]</h3>
 <table align="center" border="1" width="1400">
-	<thead>
+	<thead><tr>
 		<th>댓글 번호</th>
 		<th>작성자 아이디</th>
 		<th>작성 시간</th>
 		<th>내 용</th>
 		<th>대 댓글 목록</th>
 		<th>대 댓글 달기</th>
-	</thead>
+	</tr></thead>
 
 	<tbody>
 		<%for (ItemReplyDto itemReplyDto : list) {%>
 		
 			<%
-			int reply = itemReplyDto.getItem_reply_idx();
-			UsersDto usersDto = usersDao.get(itemReplyDto.getUsers_idx());
+			int reply = itemReplyDto.getItemReplyIdx();
+			UsersDto usersDto = usersDao.get(itemReplyDto.getUsersIdx());
 			%>
 			
-			<%if(itemReplyDto.getItem_reply_target_idx()==0){ %>
+			<%if(itemReplyDto.getItemReplyTargetIdx()==0){ %>
 		<tr>
 			<td><%=number++%></td>
-			<td><%=itemReplyDto.getUsers_idx() == 0 ? "탈퇴한 회원" : usersDto.getUsers_id()%></td>
-			<td><%=itemReplyDto.getItem_reply_time()%></td>
-			<td><%=itemReplyDto.getItem_reply_detail()%></td>
+			<td><%=itemReplyDto.getUsersIdx() == 0 ? "탈퇴한 회원" : usersDto.getUsersId()%></td>
+			<td><%=itemReplyDto.getItemReplyTime()%></td>
+			<td><%=itemReplyDto.getItemReplyDetail()%></td>
 			<td>
 			<%
 			List<ItemReplyDto> listTarget = itemReplyDao.listTarget(reply);
@@ -59,7 +59,7 @@ int number = 1;
 					
 					<%for (ItemReplyDto itemReplyTargetDto : listTarget) {%>
 										<%
-										UsersDto usersDtoTarget = usersDao.get(itemReplyTargetDto.getUsers_idx());
+										UsersDto usersDtoTarget = usersDao.get(itemReplyTargetDto.getUsersIdx());
 										%>
 						<table border="1" width="300">
 								<thead>
@@ -71,9 +71,9 @@ int number = 1;
 							</thead>
 							<tbody>
 									<tr>
-										<td><%=itemReplyTargetDto.getUsers_idx() == 0 ? "탈퇴한 회원" : usersDtoTarget.getUsers_id()%></td>
-										<td><%=itemReplyTargetDto.getItem_reply_time()%></td>
-										<td><%=itemReplyTargetDto.getItem_reply_detail()%></td>
+										<td><%=itemReplyTargetDto.getUsersIdx() == 0 ? "탈퇴한 회원" : usersDtoTarget.getUsersId()%></td>
+										<td><%=itemReplyTargetDto.getItemReplyTime()%></td>
+										<td><%=itemReplyTargetDto.getItemReplyDetail()%></td>
 									</tr>
 							</tbody>
 						</table>
@@ -95,11 +95,11 @@ int number = 1;
 						</tbody>
 					</table>
 					<!--    	관광지 idx 전송 -->
-					<input type="hidden" name="item_idx" value="<%=item_idx%>">
+					<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
 					<!--    	대댓글 쓸 유저 idx 전송 -->
-					<input type="hidden" name="users_idx" value="<%=users_idx%>">
+					<input type="hidden" name="usersIdx" value="<%=usersIdx%>">
 					<!-- 		리스트로 보여줄때 해당 댓글에 대한 번호정보가 필요하므로, 현재 댓글 idx 번호를 전송한다. -->
-					<input type="hidden" name="item_reply_target_idx" value="<%=itemReplyDto.getItem_reply_idx()%>">
+					<input type="hidden" name="item_reply_targetIdx" value="<%=itemReplyDto.getItemReplyIdx()%>">
 	
 					<!-- 회원이 로그인 되어 있을 경우에만 댓글 작성가능 // 로그인 후 작성이란 멘트는 대댓글이라서 빼버림-->
 					<%if (request.getSession().getAttribute("users_key") != null) {%>

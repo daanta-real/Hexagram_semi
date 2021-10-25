@@ -18,10 +18,11 @@ public class EncodingFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest req = (HttpServletRequest)request;
-		System.out.println("필터 작동 - 인코딩. 해당page: " + req.getRequestURL().toString());
+		System.out.println("[필터 작동 - 인코딩] 해당 page: " + req.getRequestURL().toString());
 
 		// 인코딩을 UTF-8로 강제
 		request.setCharacterEncoding("UTF-8");
+		System.out.println("[필터] 인코딩 설정을 완료하였습니다. 인코딩 필터 통과.");
 
 		// 다음 필터로 넘김
 		chain.doFilter(request, response);

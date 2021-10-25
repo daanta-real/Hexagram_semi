@@ -82,9 +82,10 @@ public class UsersDto {
 	// 4. Methods - Overrided
 	@Override
 	public String toString() {
-		return "UsersDto [userIdx=" + usersIdx + ", userId=" + usersId + ", userPw=" + usersPw + ", userNick="
-				+ usersNick + ", userEmail=" + usersEmail + ", userGrade=" + usersGrade + "]";
+		return "UsersDto [usersIdx=" + usersIdx + ", usersId=" + usersId + ", usersPw=" + usersPw + ", usersNick="
+				+ usersNick + ", usersEmail=" + usersEmail + ", usersGrade=" + usersGrade + "]";
 	}
+
 
 	// 5. Methods - Common
 	// 아이디와 비번 문자열을 이용해, 로그인 검증용 해쉬를 만들어 줌

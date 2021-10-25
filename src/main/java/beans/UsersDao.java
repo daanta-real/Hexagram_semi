@@ -11,12 +11,12 @@ import util.JdbcUtils;
 public class UsersDao {
 
 	//회원가입시 아이디 중복검사
-	public boolean checkId(String users_id) throws Exception{
+	public boolean checkId(String usersId) throws Exception{
 		Connection con = JdbcUtils.connect();
 
 		String sql = "select users_id from users where users_id=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, users_id);
+		ps.setString(1, usersId);
 		ResultSet rs = ps.executeQuery();
 		boolean isCheckId;
 		if(rs.next()) isCheckId = true;		//아이디 조회결과가 있다면 중복
@@ -30,37 +30,37 @@ public class UsersDao {
 	//users_idx는 시퀀스자동생성
 	public void joinUsers(UsersDto usersDto) throws Exception{
 		Connection con = JdbcUtils.connect();
-		String sql = "insert into users(users_idx, users_id, users_pw, users_nick, users_email, users_phone) "
+		String sql = "insert into users(users_idx, users_id, users_pw, users_nick, users_email"/*, users_phone*/ + ") "
 						+ "values(users_seq.nextval, ?, ?, ?, ?, ?)";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, usersDto.getUsers_id());
-		ps.setString(2, usersDto.getUsers_pw());
-		ps.setString(3, usersDto.getUsers_nick());
-		ps.setString(4, usersDto.getUsers_email());
-		ps.setString(5, usersDto.getUsers_phone());
+		ps.setString(1, usersDto.getUsersId());
+		ps.setString(2, usersDto.getUsersPw());
+		ps.setString(3, usersDto.getUsersNick());
+		ps.setString(4, usersDto.getUsersEmail());
+//		ps.setString(5, usersDto.getUsersPhone());
 		ps.execute();
 		con.close();
 	}
 
 	//로그인
-	public UsersDto login(String users_id, String users_pw) throws Exception{
+	public UsersDto login(String usersId, String usersPw) throws Exception{
 		Connection con = JdbcUtils.connect();
 
 		String sql = "select * from users where users_id=? and users_pw=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, users_id);
-		ps.setString(2, users_pw);
+		ps.setString(1, usersId);
+		ps.setString(2, usersPw);
 		ResultSet rs = ps.executeQuery();
 		UsersDto usersDto;
 		if(rs.next()) {
 			//데이터가 있다면 rs를 DTO에 복사저장
 			usersDto = new UsersDto();
-			usersDto.setUsers_idx(rs.getInt("users_idx"));
-			usersDto.setUsers_id(rs.getString("users_id"));
-			usersDto.setUsers_pw(rs.getString("users_pw"));
-			usersDto.setUsers_nick(rs.getString("users_nick"));
-			usersDto.setUsers_email(rs.getString("users_email"));
-			usersDto.setUsers_phone(rs.getString("users_phone"));
+			usersDto.setUsersIdx(rs.getInt("users_idx"));
+			usersDto.setUsersId(rs.getString("users_id"));
+			usersDto.setUsersPw(rs.getString("users_pw"));
+			usersDto.setUsersNick(rs.getString("users_nick"));
+			usersDto.setUsersEmail(rs.getString("users_email"));
+//			usersDto.setUsersPhone(rs.getString("users_phone"));
 		}
 		else {  usersDto = null;  }
 
@@ -74,12 +74,12 @@ public class UsersDao {
 	public boolean updateUsers(UsersDto usersDto) throws Exception{
 		Connection con = JdbcUtils.connect();
 
-		String sql = "update users set users_nick=?, users_email=?, users_phone=? where users_pw=?";
+		String sql = "update users set users_nick=?, users_email=?" + /*, users_phone=?*/ " where users_pw=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, usersDto.getUsers_nick());
-		ps.setString(2, usersDto.getUsers_email());
-		ps.setString(3, usersDto.getUsers_phone());
-		ps.setString(4, usersDto.getUsers_pw());
+		ps.setString(1, usersDto.getUsersNick());
+		ps.setString(2, usersDto.getUsersEmail());
+//		ps.setString(3, usersDto.getUsersPhone());
+		ps.setString(4, usersDto.getUsersPw());
 		int result = ps.executeUpdate();
 		con.close();
 		return result>0;
@@ -95,7 +95,7 @@ public class UsersDao {
 		String sql = "update users set users_pw=? where users_id and users_pw=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, pwUpdate);					//변경할 비번
-		ps.setString(2, usersDto.getUsers_pw());	//현재 비번
+		ps.setString(2, usersDto.getUsersPw());	//현재 비번
 		int result = ps.executeUpdate();
 		con.close();
 		return result>0;
@@ -108,8 +108,8 @@ public class UsersDao {
 
 		String sql = "delete users where users_id=? and users_pw=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, usersDto.getUsers_id());
-		ps.setString(2, usersDto.getUsers_pw());
+		ps.setString(1, usersDto.getUsersId());
+		ps.setString(2, usersDto.getUsersPw());
 		int result = ps.executeUpdate();
 		con.close();
 		return result>0;
@@ -122,8 +122,8 @@ public class UsersDao {
 
 		String sql = "update users set users_grade=? where users_idx=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, usersDto.getUsers_grade());
-		ps.setInt(2, usersDto.getUsers_idx());
+		ps.setString(1, usersDto.getUsersGrade());
+		ps.setInt(2, usersDto.getUsersIdx());
 		int result = ps.executeUpdate();
 		con.close();
 		return result>0;
@@ -140,33 +140,55 @@ public class UsersDao {
 		List<UsersDto> list = new ArrayList<>();
 		while(rs.next()) {
 			UsersDto usersDto = new UsersDto();
-			usersDto.setUsers_id(rs.getString("users_id"));
-			usersDto.setUsers_nick(rs.getString("users_nick"));
-			usersDto.setUsers_email(rs.getString("users_email"));
-			usersDto.setUsers_phone(rs.getString("users_phone"));
-			usersDto.setUsers_grade(rs.getString("users_grade"));
+			usersDto.setUsersId(rs.getString("users_id"));
+			usersDto.setUsersNick(rs.getString("users_nick"));
+			usersDto.setUsersEmail(rs.getString("users_email"));
+//			usersDto.setUsersPhone(rs.getString("users_phone"));
+			usersDto.setUsersGrade(rs.getString("users_grade"));
 			list.add(usersDto);
 		}
 		con.close();
 		return list;
 	}
-	
-	//회원단일 조회
-	public UsersDto get(int users_idx) throws Exception{
+
+	//회원단일 조회 - id
+	public UsersDto get(String usersId) throws Exception{
+		Connection con = JdbcUtils.connect();
+
+		String sql = "select * from users where users_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, usersId);
+		ResultSet rs = ps.executeQuery();
+		UsersDto usersDto = new UsersDto();
+		if(rs.next()) {
+
+			usersDto.setUsersId(rs.getString("users_id"));
+			usersDto.setUsersNick(rs.getString("users_nick"));
+			usersDto.setUsersEmail(rs.getString("users_email"));
+//			usersDto.setUsersPhone(rs.getString("users_phone"));
+			usersDto.setUsersGrade(rs.getString("users_grade"));
+
+		}
+		con.close();
+		return usersDto;
+	}
+
+	//회원단일 조회 - idx
+	public UsersDto get(int usersIdx) throws Exception{
 		Connection con = JdbcUtils.connect();
 
 		String sql = "select * from users where users_idx=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, users_idx);
+		ps.setInt(1, usersIdx);
 		ResultSet rs = ps.executeQuery();
 		UsersDto usersDto = new UsersDto();
 		if(rs.next()) {
-			
-			usersDto.setUsers_id(rs.getString("users_id"));
-			usersDto.setUsers_nick(rs.getString("users_nick"));
-			usersDto.setUsers_email(rs.getString("users_email"));
-			usersDto.setUsers_phone(rs.getString("users_phone"));
-			usersDto.setUsers_grade(rs.getString("users_grade"));
+
+			usersDto.setUsersId(rs.getString("users_id"));
+			usersDto.setUsersNick(rs.getString("users_nick"));
+			usersDto.setUsersEmail(rs.getString("users_email"));
+//			usersDto.setUsersPhone(rs.getString("users_phone"));
+			usersDto.setUsersGrade(rs.getString("users_grade"));
 
 		}
 		con.close();

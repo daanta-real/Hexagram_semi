@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import util.JdbcUtils;
-import workspace.daanta.util.DaoUtils;
+import workspace.daanta.util.HexaLibrary;
 
 public class ItemDao {
 
@@ -134,15 +134,15 @@ public class ItemDao {
 			new String[] {"users_idx = ?", "int", String.valueOf(dto.getUsersIdx()), ","},
 			new String[] {"item_type = ?", "String", dto.getItemType(), ","},
 			new String[] {"item_detail = ?", "String", dto.getItemDetail(), ","},
-			new String[] {"item_tags = ?", "String", DaoUtils.listToStr(dto.getItemTags()), ","},
-			new String[] {"item_date = DATE('yyyy-MM-dd hh:mm:ss', ?)", "Date", DaoUtils.dateToStr(dto.getItemDate()), ","},
+			new String[] {"item_tags = ?", "String", HexaLibrary.listToStr(dto.getItemTags()), ","},
+			new String[] {"item_date = DATE('yyyy-MM-dd hh:mm:ss', ?)", "Date", HexaLibrary.dateToStr(dto.getItemDate()), ","},
 			new String[] {"item_period = ?", "String", dto.getItemPeriod(), ","},
 			new String[] {" WHERE item_idx = ?", "int", String.valueOf(dto.getItemIdx()), ","}
 		));
 
 		// SQL문 만들어 보내고 결과 받아오기
 		Connection conn = JdbcUtils.connect();
-		PreparedStatement ps = DaoUtils.sqlBuilder(conn, list);
+		PreparedStatement ps = HexaLibrary.sqlBuilder(conn, list);
 		int result = ps.executeUpdate();
 		boolean isSucceed = result == 1;
 

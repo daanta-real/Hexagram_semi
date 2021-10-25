@@ -3,62 +3,62 @@ package beans;
 import java.sql.Date;
 
 public class ItemReplyDto {
-	private int item_reply_idx;
-	private int item_idx;
-	private int users_idx;
-	private String item_reply_detail;
-	private Date item_reply_time;
-	private int item_reply_target_idx;
-	
-	public int getItem_reply_idx() {
-		return item_reply_idx;
+	private int itemReplyIdx;
+	private int itemIdx;
+	private int usersIdx;
+	private String itemReplyDetail;
+	private Date itemReplyTime;
+	private int itemReplyTargetIdx;
+
+	public int getItemReplyIdx() {
+		return itemReplyIdx;
 	}
-	public void setItem_reply_idx(int item_reply_idx) {
-		this.item_reply_idx = item_reply_idx;
+	public void setItemReplyIdx(int itemReplyIdx) {
+		this.itemReplyIdx = itemReplyIdx;
 	}
-	public int getItem_idx() {
-		return item_idx;
+	public int getItemIdx() {
+		return itemIdx;
 	}
-	public void setItem_idx(int item_idx) {
-		this.item_idx = item_idx;
+	public void setItemIdx(int itemIdx) {
+		this.itemIdx = itemIdx;
 	}
-	public int getUsers_idx() {
-		return users_idx;
+	public int getUsersIdx() {
+		return usersIdx;
 	}
-	public void setUsers_idx(int users_idx) {
-		this.users_idx = users_idx;
+	public void setUsersIdx(int usersIdx) {
+		this.usersIdx = usersIdx;
 	}
-	public String getItem_reply_detail() {
-		return item_reply_detail;
+	public String getItemReplyDetail() {
+		return itemReplyDetail;
 	}
-	public void setItem_reply_detail(String item_reply_detail) {
-		this.item_reply_detail = item_reply_detail;
+	public void setItemReplyDetail(String itemReplyDetail) {
+		this.itemReplyDetail = itemReplyDetail;
 	}
-	public Date getItem_reply_time() {
-		return item_reply_time;
+	public Date getItemReplyTime() {
+		return itemReplyTime;
 	}
-	public void setItem_reply_time(Date item_reply_time) {
-		this.item_reply_time = item_reply_time;
+	public void setItemReplyTime(Date itemReplyTime) {
+		this.itemReplyTime = itemReplyTime;
 	}
-	public int getItem_reply_target_idx() {
-		return item_reply_target_idx;
+	public int getItemReplyTargetIdx() {
+		return itemReplyTargetIdx;
 	}
-	public void setItem_reply_target_idx(int item_reply_target_idx) {
-		this.item_reply_target_idx = item_reply_target_idx;
+	public void setItemReplyTargetIdx(int itemReplyRargetIdx) {
+		this.itemReplyTargetIdx = itemReplyRargetIdx;
 	}
-	public ItemReplyDto(int item_reply_idx, int item_idx, int users_idx, String item_reply_detail, Date item_reply_time,
-			int item_reply_target_idx) {
+	public ItemReplyDto(int itemReplyIdx, int itemIdx, int usersIdx, String itemReplyDetail, Date itemReplyTime,
+			int itemReplyRargetIdx) {
 		super();
-		this.item_reply_idx = item_reply_idx;
-		this.item_idx = item_idx;
-		this.users_idx = users_idx;
-		this.item_reply_detail = item_reply_detail;
-		this.item_reply_time = item_reply_time;
-		this.item_reply_target_idx = item_reply_target_idx;
+		this.itemReplyIdx = itemReplyIdx;
+		this.itemIdx = itemIdx;
+		this.usersIdx = usersIdx;
+		this.itemReplyDetail = itemReplyDetail;
+		this.itemReplyTime = itemReplyTime;
+		this.itemReplyTargetIdx = itemReplyRargetIdx;
 	}
 	public ItemReplyDto() {
 		super();
 	}
-	
+
 
 }
