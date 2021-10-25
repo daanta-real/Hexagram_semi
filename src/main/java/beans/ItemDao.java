@@ -43,11 +43,11 @@ public class ItemDao {
 	}
 
 	// 단일 조회
-	public ItemDto get(int item_idx) throws Exception {
+	public ItemDto get(int itemIdx) throws Exception {
 		String sql = "SELECT * FROM item WHERE item_idx = ?";
 		Connection con = JdbcUtils.connect();
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, item_idx);
+		ps.setInt(1, itemIdx);
 		ResultSet rs = ps.executeQuery();
 
 		ItemDto itemDto = new ItemDto();
