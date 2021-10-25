@@ -71,38 +71,59 @@ public class HexaLibrary {
 	// 1) null: 아무 처리도하지 않는다. ,로 구분될 필요가 없는 구문이다.
 	// 2) ",": 쉼표를 알아서 붙여준된다.
 	// ","옵션을 원소마다 연속적으로 넣지 않는다면, 카운터는 초기화된다.
-	public static PreparedStatement sqlBuilder(Connection conn, List<String[]> info) throws Exception {
+	public PreparedStatement sqlBuilder(Connection conn, List<String[]> info) throws Exception {
 
 		// 1. SQL 구문 만들기
 		StringBuffer sb = new StringBuffer();
 		int commaCount = 0;
 		for(String[] inf: info) {
-			String sql = inf[0], cont = inf[3]; // 1-0. 변수준비
-			if(cont.equals(",") && commaCount++ > 0) sb.append(", "); // 1-1. cont 적용
-			sb.append(sql); // 1-2. sql 적용
+
+			// 1-0. 변수준비
+			String sql = inf[0], type = inf[1], val = inf[2], cont = inf[3];
+
+			// 1-1. ?이 들어간 문자열로 지정됐는데도, 값이 안 들어가 있으면 스킵한다.
+			boolean typeIsNull = type == null || type.equals("null") || type.equals("");
+			boolean valIsNull  = val  == null || val.equals("null")  || val.equals("");
+			boolean isTarget = typeIsNull || (!typeIsNull && !valIsNull);
+			if(!isTarget) continue; // 판정식 통과 못하면 패스
+			System.out.println("inf: " + Arrays.toString(inf));
+
+			// 1-2. SQL 실제 구문 작성
+			boolean needComma = cont != null && cont.equals(",") && commaCount++ > 0;
+			if(needComma) sb.append(", "); // cont 판단후 콤마 적용
+			sb.append(sql); // sql 적용
+
 		}
 		String builtSql = sb.toString();
-		System.out.println("SQL 구문 준비: " + builtSql);
 
 		// 2. ? 치환하기
 		PreparedStatement ps = conn.prepareStatement(builtSql);
 		String debugSql = sb.toString();
 		commaCount = 0;
 		for(String[] inf: info) {
-			String type = inf[1], val = inf[2]; // 2-0. 변수준비
-			if(type == null) continue;
+
+			// 2-0. 변수준비
+			String type = inf[1], val = inf[2];
+
+			// 2-1. 값 검사
+			boolean typeIsNull = type == null || type.equals("null") || type.equals("");
+			if(typeIsNull) continue;
+			boolean valIsNull  = val  == null || val.equals("null")  || val.equals("");
+			if(valIsNull) continue;
+
+			// 2-2. ? 치환 실시
 			switch(type) {
 				case "String":
 					ps.setString(++commaCount, val);
-					debugSql.replaceFirst("?", "'" + val + "'");
+					debugSql = debugSql.replaceFirst("\\?", "'" + val + "'");
 					break;
 				case "int":
 					ps.setInt(++commaCount, Integer.parseInt(val));
-					debugSql.replaceFirst("?", "'" + val + "'");
+					debugSql = debugSql.replaceFirst("\\?", val);
 					break;
 				case "Date":
 					ps.setDate(++commaCount, java.sql.Date.valueOf(val));
-					debugSql.replaceFirst("?", "'" + val + "'");
+					debugSql = debugSql.replaceFirst("\\?", "'" + val + "'");
 					break;
 				default: throw new Exception();
 			}
