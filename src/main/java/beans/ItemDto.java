@@ -47,12 +47,16 @@ public class ItemDto {
 		this.itemAddress = itemAddress;
 	}
 	public String getItemDetail() {
+		if(itemDetail==null)
+			return "";
 		return itemDetail;
 	}
 	public void setItemDetail(String itemDetail) {
 		this.itemDetail = itemDetail;
 	}
 	public String getItemTags() {
+		if(itemTags==null)
+			return "";
 		return itemTags;
 	}
 	public void setItemTags(String itemTags) {
@@ -65,24 +69,32 @@ public class ItemDto {
 		this.itemDate = itemDate;
 	}
 	public String getItemPeriods() {
+		if(itemPeriods==null)
+			return "";
 		return itemPeriods;
 	}
 	public void setItemPeriods(String itemPeriods) {
 		this.itemPeriods = itemPeriods;
 	}
 	public String getItemTime() {
+		if(itemTime==null)
+			return "";
 		return itemTime;
 	}
 	public void setItemTime(String itemTime) {
 		this.itemTime = itemTime;
 	}
 	public String getItemHomepage() {
+		if(itemHomepage==null)
+			return "";
 		return itemHomepage;
 	}
 	public void setItemHomepage(String itemHomepage) {
 		this.itemHomepage = itemHomepage;
 	}
 	public String getItemParking() {
+		if(itemParking==null)
+			return "";
 		return itemParking;
 	}
 	public void setItemParking(String itemParking) {

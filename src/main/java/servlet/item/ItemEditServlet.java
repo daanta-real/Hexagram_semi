@@ -24,7 +24,7 @@ public class ItemEditServlet extends HttpServlet{
 			itemDto.setItemType(req.getParameter("itemType"));
 			itemDto.setItemName(req.getParameter("itemName"));
 			itemDto.setItemAddress(req.getParameter("itemAddress"));
-			itemDto.setItemDetail(req.getParameter("itemDteail"));
+			itemDto.setItemDetail(req.getParameter("itemDetail"));
 			itemDto.setItemTags(req.getParameter("itemTages"));
 			itemDto.setItemPeriods(req.getParameter("itemPeriods"));
 			itemDto.setItemTime(req.getParameter("itemTime"));
