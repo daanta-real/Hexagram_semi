@@ -1,11 +1,11 @@
 create table users(
 users_idx NUMBER(20) primary key,
 users_id VARCHAR2(20) not null check(regexp_like(users_id, '^[a-z][a-z0-9-_]{4,19}$')),
-users_pw VARCHAR2(20) not null check(regexp_like(users_pw, '^[a-zA-Z0-9-_!@#$]{8,20}$')),
+users_pw VARCHAR2(20) not null check(regexp_like(users_pw, '^[a-zA-Z0-9-_!@#$]{6,20}$')),
 users_nick VARCHAR2(30) not null,
 users_email VARCHAR2(30),
 users_phone char(13) check(regexp_like(users_phone, '^010-[0-9]{4}-[0-9]{4}$')),
-users_grade VARCHAR2(12) default '일반회원' check(users_grade in ('일반회원', '관리자'))
+users_grade VARCHAR2(12) default '일반회원' check(users_grade in ('일반회원', '서포터즈', '관리자'))
 );
 
 -- 시퀀스? 협의 필요
@@ -17,6 +17,10 @@ insert into users(users_idx, users_id, users_pw, users_nick, users_email, users_
 insert into users(users_idx, users_id, users_pw, users_nick, users_email, users_phone, users_grade)
     values(users_seq.nextval, 'testtest', 'testtest', '테스트테스트', 'testtest@test.com', '010-2222-1111', '관리자');
 
+insert into users(users_idx, users_id, users_pw, users_nick, users_email, users_phone, users_grade)
+    values(users_seq.nextval, 'testuser4', 'testuser4', '테스트유저4', 'testuser4@test.com', '010-4433-3344', '일반회원');
+ insert into users(users_idx, users_id, users_pw, users_nick, users_email, users_phone, users_grade) 
+    values(users_seq.nextval, 'testuser2', 'testuser2', '테스트유저2', 'testuser2@test.com', '010-2233-3322', '서포터즈');
 --users_nick, users_email, users_phone은 회원가입시 필요할 것으로 예상되는 컬럼이라고 생각되서 추가함
 
 --<제약조건>
@@ -29,3 +33,7 @@ select * from users;
 
 drop table users;
 drop sequence users_seq;
+
+delete users where users_idx='9';
+
+commit;

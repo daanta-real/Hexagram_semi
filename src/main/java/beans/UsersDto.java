@@ -23,6 +23,14 @@ public class UsersDto {
 	public String getUsersEmail() {		   return usersEmail;		}
 	public String getUsersPhone() {		return usersPhone;		}
 	public String getUsersGrade() {		return usersGrade;		}
+	public String getUsersEmailNull() {
+		if(usersEmail == null) return "미입력";
+		else return usersEmail;
+	}
+	public String getUsersPhoneNull() {
+		if(usersPhone == null) return "미입력";
+		else return usersPhone;
+	}
 
 	//setter
 	public void setUsersIdx(int usersIdx) {		this.usersIdx = usersIdx;		}

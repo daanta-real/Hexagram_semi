@@ -10,7 +10,7 @@ import util.JdbcUtils;
 
 public class UsersDao {
 
-	//회원가입시 아이디 중복검사
+	//회원가입시 아이디 중복검사...맘처럼 구현이 안되서 일단 이 친구는 쓰지 않겠습니다..
 	public boolean checkId(String usersId) throws Exception{
 		Connection con = JdbcUtils.connect();
 
@@ -26,7 +26,7 @@ public class UsersDao {
 		return isCheckId;	//아이디 조회결과 반환
 	}
 
-	//회원등록-등급 제약조건 추가 기본값 일반회원으로 설정
+	//회원가입-등급 제약조건 추가 기본값 일반회원으로 설정
 	//users_idx는 시퀀스자동생성
 	public void joinUsers(UsersDto usersDto) throws Exception{
 		Connection con = JdbcUtils.connect();
@@ -42,7 +42,7 @@ public class UsersDao {
 		con.close();
 	}
 
-	//로그인
+	//로그인 : 반환형-UsersDto, 매개변수 : usersId, usersPw
 	public UsersDto login(String usersId, String usersPw) throws Exception{
 		Connection con = JdbcUtils.connect();
 
