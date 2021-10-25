@@ -21,7 +21,7 @@ public class UsersDao {
 		boolean isCheckId;
 		if(rs.next()) isCheckId = true;		//아이디 조회결과가 있다면 중복
 		else isCheckId = false;					//아이디 조회결과가 없다면 사용가능
-
+  
 		con.close();
 		return isCheckId;	//아이디 조회결과 반환
 	}
@@ -103,13 +103,25 @@ public class UsersDao {
 
 
 	//회원탈퇴 - 아이디 비밀번호 확인
-	public boolean usersDelete(UsersDto usersDto) throws Exception{
+	public boolean usersDelete(String usersId, String usersPw) throws Exception{
 		Connection con = JdbcUtils.connect();
 
 		String sql = "delete users where users_id=? and users_pw=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, usersDto.getUsersId());
-		ps.setString(2, usersDto.getUsersPw());
+		ps.setString(1, usersId);
+		ps.setString(2, usersPw);
+		int result = ps.executeUpdate();
+		con.close();
+		return result>0;
+	}
+	
+	//회원탈퇴 - 관리자가 회원 탈퇴 처리할떄
+	public boolean adminDelete(String usersId) throws Exception{
+		Connection con = JdbcUtils.connect();
+		
+		String sql = "delete users where users_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, usersId);
 		int result = ps.executeUpdate();
 		con.close();
 		return result>0;
@@ -159,16 +171,16 @@ public class UsersDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, usersId);
 		ResultSet rs = ps.executeQuery();
-		UsersDto usersDto = new UsersDto();
+		UsersDto usersDto;
 		if(rs.next()) {
-
+			usersDto = new UsersDto();
 			usersDto.setUsersId(rs.getString("users_id"));
 			usersDto.setUsersNick(rs.getString("users_nick"));
 			usersDto.setUsersEmail(rs.getString("users_email"));
 //			usersDto.setUsersPhone(rs.getString("users_phone"));
 			usersDto.setUsersGrade(rs.getString("users_grade"));
-
-		}
+		}else usersDto = null;
+		
 		con.close();
 		return usersDto;
 	}
@@ -181,16 +193,15 @@ public class UsersDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, usersIdx);
 		ResultSet rs = ps.executeQuery();
-		UsersDto usersDto = new UsersDto();
+		UsersDto usersDto;
 		if(rs.next()) {
-
+			usersDto = new UsersDto();
 			usersDto.setUsersId(rs.getString("users_id"));
 			usersDto.setUsersNick(rs.getString("users_nick"));
 			usersDto.setUsersEmail(rs.getString("users_email"));
 //			usersDto.setUsersPhone(rs.getString("users_phone"));
 			usersDto.setUsersGrade(rs.getString("users_grade"));
-
-		}
+		}else usersDto = null;
 		con.close();
 		return usersDto;
 	}
