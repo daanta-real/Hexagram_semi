@@ -11,11 +11,14 @@ import util.JdbcUtils;
 public class UsersDao {
 
 	// 기능 목록
-	// 1. List<UsersDto> select (            ): 모든 회원 목록 조회
-	// 2. UsersDto       get    (String   id ): 회원 정보 조회
-	// 3. boolean        insert (UsersDto dto): 회원 추가
-	// 4. boolean        delete (String   id ): 회원 삭제
-	// 5. boolean        update (UsersDto dto): 회원 수정
+	// 1. List<UsersDto> select   (                 ): 모든 회원 목록 조회
+	// 2. UsersDto       get      (String   usersIdx): 회원 정보 조회
+	//    UsersDto       get      (String   usersId ): 회원 정보 조회
+	// 3. boolean        insert   (UsersDto dto     ): 회원 추가
+	// 4. boolean        delete   (String   usersId ): 회원 삭제
+	// 5. boolean        update   (UsersDto dto     ): 회원 수정
+	// 6. boolean        updatePw (UsersDto dto, String pwUpdate): 회원 비번 수정
+
 
 	// 1. READ: 모든 회원의 정보를 조회
 	public List<UsersDto> select() throws Exception {
@@ -34,6 +37,7 @@ public class UsersDao {
 			dto.setUsersId(rs.getString("users_id"));
 			dto.setUsersNick(rs.getString("users_nick"));
 			dto.setUsersEmail(rs.getString("users_email"));
+			dto.setUsersPhone(rs.getString("users_phone"));
 			dto.setUsersGrade(rs.getString("users_grade"));
 			list.add(dto);
 		}
@@ -44,25 +48,54 @@ public class UsersDao {
 
 	}
 
-	// 2. READ: 딱 한 명의 회원의 정보를 조회 (※ id 기준; idx 아님)
-	public UsersDto get(String id) throws Exception {
+	// 2. READ: 딱 한 명의 회원의 정보를 조회
+	// 1) idx 기준
+	public UsersDto get(int usersIdx) throws Exception{
+
+		// SQL 준비
+		Connection con = JdbcUtils.connect();
+
+		String sql = "select * from users where users_idx=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, usersIdx);
+
+		// 완성된 SQL문 보내고 결과 받아오기
+		ResultSet rs = ps.executeQuery();
+		UsersDto dto = null;
+		if(rs.next()) {
+			dto = new UsersDto();
+			dto.setUsersId(rs.getString("users_id"));
+			dto.setUsersNick(rs.getString("users_nick"));
+			dto.setUsersEmail(rs.getString("users_email"));
+			dto.setUsersPhone(rs.getString("users_phone"));
+			dto.setUsersGrade(rs.getString("users_grade"));
+		}
+
+		// 마무리
+		con.close();
+		return dto;
+	}
+
+	// 2) id 기준
+	public UsersDto get(String usersId) throws Exception {
 
 		// SQL 준비
 		String sql = "SELECT * FROM users WHERE users_id = ?";
 		Connection conn = JdbcUtils.connect();
 		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setString(1, id);
+		ps.setString(1, usersId);
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
 		UsersDto dto = null;
-		if (rs.next()) {
+		if(rs.next()) {
 			dto = new UsersDto();
 			dto.setUsersIdx(rs.getInt("users_idx"));
 			dto.setUsersId(rs.getString("users_id"));
 			dto.setUsersPw(rs.getString("users_pw"));
 			dto.setUsersNick(rs.getString("users_nick"));
 			dto.setUsersEmail(rs.getString("users_email"));
+			dto.setUsersPhone(rs.getString("users_phone"));
 			dto.setUsersGrade(rs.getString("users_grade"));
 		}
 
@@ -77,8 +110,8 @@ public class UsersDao {
 	public boolean insert(UsersDto dto) throws Exception {
 
 		// SQL 준비
-		String sql = "INSERT INTO users (users_idx, users_id, users_pw, users_nick, users_email, users_grade)"
-			+ " VALUES(users_seq.NEXTVAL, ?, ?, ?, ?, '준회원')";
+		String sql = "INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email)"
+			+ " VALUES(users_seq.NEXTVAL, ?, ?, ?, ?)";
 		Connection conn = JdbcUtils.connect();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, dto.getUsersId());
@@ -97,13 +130,13 @@ public class UsersDao {
 	}
 
 	// 4. DELETE: 회원 삭제
-	public boolean delete(String id) throws Exception {
+	public boolean delete(String usersId) throws Exception {
 
 		// SQL 준비
 		String sql = "DELETE FROM users WHERE users_id = ?";
 		Connection conn = JdbcUtils.connect();
 		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setString(1, id);
+		ps.setString(1, usersId);
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		int result = ps.executeUpdate();
@@ -122,9 +155,10 @@ public class UsersDao {
 		// SQL 준비
 		int count = 0;
 		StringBuilder sb = new StringBuilder("UPDATE users SET");
-		if (dto.getUsersPw   () != null) sb.append((count++ == 0 ? "" : ",") + " users_pw = ?");
-		if (dto.getUsersNick () != null) sb.append((count++ == 0 ? "" : ",") + " users_nick = ?");
+		if (dto.getUsersPw   () != null) sb.append((count++ == 0 ? "" : ",") + " users_pw = ?"   );
+		if (dto.getUsersNick () != null) sb.append((count++ == 0 ? "" : ",") + " users_nick = ?" );
 		if (dto.getUsersEmail() != null) sb.append((count++ == 0 ? "" : ",") + " users_email = ?");
+		if (dto.getUsersPhone() != null) sb.append((count++ == 0 ? "" : ",") + " users_phone = ?");
 		if (dto.getUsersGrade() != null) sb.append((count++ == 0 ? "" : ",") + " users_grade = ?");
 		sb.append(" WHERE users_id = ?");
 		String sql = sb.toString();
@@ -137,9 +171,33 @@ public class UsersDao {
 		if (dto.getUsersPw   () != null) ps.setString(count++, dto.getUsersPw   ());
 		if (dto.getUsersNick () != null) ps.setString(count++, dto.getUsersNick ());
 		if (dto.getUsersEmail() != null) ps.setString(count++, dto.getUsersEmail());
+		if (dto.getUsersPhone() != null) ps.setString(count++, dto.getUsersPhone());
 		if (dto.getUsersGrade() != null) ps.setString(count++, dto.getUsersGrade());
 		ps.setString(count, dto.getUsersId());
 		System.out.println("　　?항목 치환한 개수(id 포함): " + count);
+
+		// 완성된 SQL문 보내고 결과 받아오기
+		int result = ps.executeUpdate();
+		boolean isSucceed = result == 1;
+
+		// 마무리
+		conn.close();
+		return isSucceed;
+
+	}
+
+	// 비밀번호 변경 - 현재 비밀번호 확인
+	// 로그인 상태에서 변경시 비밀번호만 입력
+	// 로그인 상태가 아니라면 로그인 페이지로 이동시켜야 함
+	public boolean updatePw(UsersDto dto, String pwUpdate) throws Exception {
+
+		// SQL 준비
+		String sql = "UPDATE users SET users_pw = ? WHERE users_id = ? AND users_pw = ?";
+		Connection conn = JdbcUtils.connect();
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, pwUpdate);		   // 변경할 비번
+		ps.setString(2, dto.getUsersId());
+		ps.setString(3, dto.getUsersPw()); // 현재 비번
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		int result = ps.executeUpdate();

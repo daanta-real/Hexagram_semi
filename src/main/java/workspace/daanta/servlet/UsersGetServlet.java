@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import workspace.daanta.beans.UsersDao;
-import workspace.daanta.beans.UsersDto;
+import beans.UsersDao;
+import beans.UsersDto;
 
 @SuppressWarnings("serial")
 @WebServlet("/usersDetail")

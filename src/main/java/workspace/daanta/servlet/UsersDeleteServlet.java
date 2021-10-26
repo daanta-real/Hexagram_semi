@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.UsersDao;
 import util.UsersUtils;
-import workspace.daanta.beans.UsersDao;
 import workspace.daanta.util.HexaLibrary;
 
 @SuppressWarnings("serial")

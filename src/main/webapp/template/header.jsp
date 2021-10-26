@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="workspace.daanta.util.HexaLibrary" %>
-<%@ page import="workspace.daanta.beans.UsersDao" %>
-<%@ page import="workspace.daanta.beans.UsersDto" %>
+<%@ page import="beans.UsersDao" %>
+<%@ page import="beans.UsersDto" %>
 <%
 // 환경설정
 String title = "노가리투어ㅡ" + request.getParameter("pageTitle");
