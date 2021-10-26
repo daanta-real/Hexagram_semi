@@ -13,24 +13,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import util.HexaLibrary;
 
-// 모든 JSP 파일, 모든 서블릿 파일 대상. (각종 설정파일 등 제외)
+// 관리자 페이지 대상.
 @WebFilter( urlPatterns = {
-	"/jsp/users/join_success.jsp",
-	"/jsp/items/insert.jsp"
+	"/users/list.nogari"
 } )
-public class LoginFilter implements Filter {
+public class AdminFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		// 준비
 		HttpServletRequest req = (HttpServletRequest)request;
-		System.out.println("[필터 작동 - 로그인 검사] from " + req.getRequestURL().toString());
+		System.out.println("[필터 작동 - 관리자 검사] from " + req.getRequestURL().toString());
 
-		// 세션 검사
-		String sessionId = (String) req.getSession().getAttribute("usersId");
-		if(!HexaLibrary.isExists(sessionId)) {
-			System.out.println("[필터] 로그인되지 않아 로그인 검사 필터를 통과하지 못했습니다. (세션ID:'" + sessionId + "') 로그인 필터 통과 실패.");
+		// 세션 검사 - grade가 정확히 관리자여야만 함.
+		String sessionGrade = (String) req.getSession().getAttribute("usersGrade");
+		if(!HexaLibrary.isExists(sessionGrade) && sessionGrade.equals("관리자")) {
+			System.out.println("[필터] 관리자가 아닙니다. (등급: '" + sessionGrade + "') 관리자 필터 통과 실패.");
 			((HttpServletResponse) response).sendError(401); // 로그인페이지로 이동
 		}
 

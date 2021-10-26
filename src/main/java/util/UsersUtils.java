@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 public class UsersUtils {
 
 	// 로그인 검사: 로그인 아디/비번 일치 여부 체크 결과를 true/false로 반환
-	public boolean isValid(String usersId, String usersPw) throws Exception {
+	public static boolean isValid(String usersId, String usersPw) throws Exception {
 
 		// SQL 준비
 		String sql = "select * from users where users_id=? and users_pw=?";
@@ -25,10 +25,21 @@ public class UsersUtils {
 
 	}
 
+	// 권한검사: 내가 나에 대해서 요청한 것이거나, 아니면 내가 관리자여야만 true를 반환함
+	// 글 수정/삭제, 회원정보 수정/탈퇴 등에 사용
+	public static boolean isGranted(String sessionId, String sessionGrade, String targetId) {
+		return (
+			// 내가 관리자거나
+			(HexaLibrary.isExists(sessionGrade) && sessionGrade.equals("관리자"))
+			// 내가 나에 대해 요청한거거나
+			|| (HexaLibrary.isExists(sessionId) && sessionId.equals(targetId))
+		);
+	}
+
 	// 중복검사: 회원 가입 시 미사용 아이디가 맞는지 확인한 결과를 리턴
 	// 테이블에 해당 usersId로 검색했을 때 결과가 아예 안 나와야 된다.
 	// 사용할 수 있는 usersId일 경우에만 true를 반환한다.
-	public boolean isUnusedId(String usersId) throws Exception{
+	public static boolean isUnusedId(String usersId) throws Exception{
 
 		// SQL 준비
 		String sql = "select count(*) from users where users_id = ?";

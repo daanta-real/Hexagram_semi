@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="workspace.daanta.util.HexaLibrary" %>
+<%@ page import="util.HexaLibrary" %>
 <%@ page import="beans.UsersDao" %>
 <%@ page import="beans.UsersDto" %>
 <%

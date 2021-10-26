@@ -10,8 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import beans.UsersDao;
 import beans.UsersDto;
+import util.HexaLibrary;
 import util.UsersUtils;
-import workspace.daanta.util.HexaLibrary;
 
 @SuppressWarnings("serial")
 @WebServlet("/jsp/users/login.nogari")
@@ -47,27 +47,28 @@ public class UsersLoginServlet extends HttpServlet {
 
 			// 3. id/pw 일치하는 값 있는지 검사
 			System.out.println("[회원 로그인] 3. ID/PW 일치 검사..");
-			boolean isMatched = UsersUtils.idPwMatch(dto);
+			boolean isMatched = false;
+			try { isMatched = UsersUtils.isValid(usersId, usersPw); }
+			catch (Exception e) { isMatched = false; }
 			System.out.println("　　▷ 확인 결과: " + isMatched);
+			// 4. 최종 처리: 세션 부여
+
 			if(!isMatched) {
 				System.out.println("　　▷ 로그인 실패. usersId 혹은 usersPw가 맞지 않습니다. 로그인 페이지로 돌아갑니다.");
 				resp.sendRedirect(req.getContextPath() + "/jsp/users/login.jsp?error"); // 로그인페이지로 이동
-			}
-
-			// 4. 최종 처리: 세션 부여
-			else {
+			} else {
 				System.out.print("[회원 로그인] 4. 모든 확인 완료. 세션 부여..");
 				HttpSession session = req.getSession();
 				UsersDto loggedInDto = dao.get(usersId);
 				int usersIdx = loggedInDto.getUsersIdx();
 				String usersGrade = loggedInDto.getUsersGrade();
-				session.setAttribute("usersId", usersId);
+				session.setAttribute("usersIdx"  , usersIdx  );
+				session.setAttribute("usersId"   , usersId   );
 				session.setAttribute("usersGrade", usersGrade);
-				session.setAttribute("usersIdx", usersIdx);
-				System.out.println("세션 부여 완료. "
-					+ "usersId = '" + session.getAttribute("usersId") + "'"
-					+ ", usersGrade = '" + usersGrade + "'"
-					+ ", usersIdx = '" + usersIdx + "'"
+				System.out.println("세션 부여 완료. \n"
+					+ "　　usersId = '"    + session.getAttribute("usersId"   ) + "', "
+					+ "　　usersGrade = '" + session.getAttribute("usersGrade") + "', "
+					+ "　　usersIdx = '"   + session.getAttribute("usersIdx"  ) + "'"
 				);
 				resp.sendRedirect(req.getContextPath());
 			}

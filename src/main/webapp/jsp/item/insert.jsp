@@ -2,7 +2,7 @@
 <%@page import="beans.ItemDto"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="beans.UsersDao"%>
-<%@page import="workspace.daanta.util.HexaLibrary" %>
+<%@page import="util.HexaLibrary" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 

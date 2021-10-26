@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
-import workspace.daanta.util.HexaLibrary;
+import util.HexaLibrary;
 
 public class ItemDto {
 

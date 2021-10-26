@@ -1,4 +1,4 @@
-package workspace.daanta.util;
+package util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +9,16 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 public class HexaLibrary {
+
+	// 세션 청소
+	public static void removeSession(HttpSession session) {
+		session.removeAttribute("usersIdx");
+		session.removeAttribute("usersId");
+		session.removeAttribute("usersGrade");
+	}
 
 	// 빈값검사기. 빈값이 아닐 경우에만 true를 회신, 빈값이면 false를 회신
 	public static boolean isExists(String str) {

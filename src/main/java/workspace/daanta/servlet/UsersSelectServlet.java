@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.UsersDao;
 import beans.UsersDto;
-import util.UsersUtils;
 
 @SuppressWarnings("serial")
 @WebServlet("/users/list.nogari")
@@ -24,13 +23,9 @@ public class UsersSelectServlet extends HttpServlet {
 			req.setCharacterEncoding("UTF-8");
 			resp.setContentType("text/plain;charset=utf-8");
 			System.out.println("[회원 목록]");
-			UsersDao dao = new UsersDao();
 
-			// 1. 목록을 조회할 수 있는 사람은 관리자뿐임. 따라서 세션id가 관리자등급 id인지 확인
-			System.out.print("[회원 목록] 1. 권한 확인..");
-			boolean isGranted = UsersUtils.chkIsAdmin(req, dao);
-			if (!isGranted) throw new Exception();
-			System.out.println("정상 권한 확인.");
+			// 1. 권한 확인 여기선 하지 않음.
+			// 권한에 따라 기능이 갈리는 페이지가 아니므로, 관리자필터에서 접근 가능여부를 판정함.
 
 			// 2. 목록 출력
 			System.out.print("[회원 목록] 2. 목록 출력..");

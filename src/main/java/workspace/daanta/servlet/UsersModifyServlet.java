@@ -6,11 +6,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.UsersDao;
 import beans.UsersDto;
+import util.HexaLibrary;
 import util.UsersUtils;
-import workspace.daanta.util.HexaLibrary;
 
 @SuppressWarnings("serial")
 @WebServlet("/usersModify")
@@ -23,7 +24,10 @@ public class UsersModifyServlet extends HttpServlet {
 			// 0. 설정
 			req.setCharacterEncoding("UTF-8");
 			resp.setContentType("text/html;charset=utf-8");
-			System.out.print("[회원 수정]");
+			HttpSession session = req.getSession();
+			String sessionId    = (String) session.getAttribute("usersId"   );
+			String sessionGrade = (String) session.getAttribute("usersGrade");
+			System.out.print("[회원 수정] ");
 			String usersId    = req.getParameter("id"   );
 			String usersPw    = req.getParameter("pw"   );
 			String usersNick  = req.getParameter("nick" );
@@ -61,9 +65,11 @@ public class UsersModifyServlet extends HttpServlet {
 			// 3. 권한 검사: 해당 ID를 조작할 권한이 있는 상황인지 확인
 			System.out.print("[회원 수정] 3. 권한 확인..");
 			// 수정 자체의 권한 확인
-			boolean isGranted = UsersUtils.chkIsGranted(req, dao, usersId);
+			boolean isGranted = UsersUtils.isGranted(sessionId, sessionGrade, usersId);
 			// grade를 수정하는 경우, 세션이 관리자 유저 세션인지 추가로 확인 필요함
-			if(usersGrade != null) isGranted = isGranted && UsersUtils.chkIsAdmin(req, dao);
+			if(usersGrade != null) isGranted = isGranted
+				&& (sessionGrade != null && sessionGrade.equals("관리자")
+			);
 			if(!isGranted) throw new Exception();
 			System.out.println("권한 확인 완료.");
 
