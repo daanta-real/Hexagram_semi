@@ -34,6 +34,7 @@ public class AdminFilter implements Filter {
 		}
 
 		// 다음 필터로 넘김
+		System.out.println("[필터] 관리자가 맞습니다. 관리자 필터 통과.");
 		chain.doFilter(request, response);
 
 	}

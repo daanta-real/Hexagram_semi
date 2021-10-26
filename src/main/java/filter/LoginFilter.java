@@ -35,6 +35,7 @@ public class LoginFilter implements Filter {
 		}
 
 		// 다음 필터로 넘김
+		System.out.println("[필터] 로그인 확인됨. 로그인 필터 통과.");
 		chain.doFilter(request, response);
 
 	}
