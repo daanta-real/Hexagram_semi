@@ -42,13 +42,13 @@ public class ItemReplyDao {
 	}
 
 	//댓글 조회
-	public List<ItemReplyDto> list(int item_idx) throws Exception {
+	public List<ItemReplyDto> list(int itemIdx) throws Exception {
 		Connection con = JdbcUtils.connect();
 		String sql = "select IR.* from item_reply IR"
 				+ " join item I on IR.item_idx = I.item_idx where IR.item_idx=?";
 		//조회시에 item_reply_target_idx는 없어야한다(대댓글이 아닌 댓글임)
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, item_idx);
+		ps.setInt(1, itemIdx);
 		ResultSet rs = ps.executeQuery();
 
 		List<ItemReplyDto> list = new ArrayList<>();

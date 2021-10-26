@@ -10,6 +10,7 @@ import util.JdbcUtils;
 
 public class UsersDao {
 
+<<<<<<< HEAD
 	// 기능 목록
 	// 1. List<UsersDto> select   (                 ): 모든 회원 목록 조회
 	// 2. UsersDto       get      (String   usersIdx): 회원 정보 조회
@@ -18,6 +19,82 @@ public class UsersDao {
 	// 4. boolean        delete   (String   usersId ): 회원 삭제
 	// 5. boolean        update   (UsersDto dto     ): 회원 수정
 	// 6. boolean        updatePw (UsersDto dto, String pwUpdate): 회원 비번 수정
+=======
+	//회원가입시 아이디 중복검사...맘처럼 구현이 안되서 일단 이 친구는 쓰지 않겠습니다..
+	public boolean checkId(String usersId) throws Exception{
+		Connection con = JdbcUtils.connect();
+
+		String sql = "select users_id from users where users_id=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, usersId);
+		ResultSet rs = ps.executeQuery();
+		boolean isCheckId;
+		if(rs.next()) isCheckId = true;		//아이디 조회결과가 있다면 중복
+		else isCheckId = false;					//아이디 조회결과가 없다면 사용가능
+  
+		con.close();
+		return isCheckId;	//아이디 조회결과 반환
+	}
+
+	//회원가입-등급 제약조건 추가 기본값 일반회원으로 설정
+	//users_idx는 시퀀스자동생성
+	public void joinUsers(UsersDto usersDto) throws Exception{
+		Connection con = JdbcUtils.connect();
+		String sql = "insert into users(users_idx, users_id, users_pw, users_nick, users_email"/*, users_phone*/ + ") "
+						+ "values(users_seq.nextval, ?, ?, ?, ?, ?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, usersDto.getUsersId());
+		ps.setString(2, usersDto.getUsersPw());
+		ps.setString(3, usersDto.getUsersNick());
+		ps.setString(4, usersDto.getUsersEmail());
+//		ps.setString(5, usersDto.getUsersPhone());
+		ps.execute();
+		con.close();
+	}
+
+	//로그인 : 반환형-UsersDto, 매개변수 : usersId, usersPw
+	public UsersDto login(String usersId, String usersPw) throws Exception{
+		Connection con = JdbcUtils.connect();
+
+		String sql = "select * from users where users_id=? and users_pw=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, usersId);
+		ps.setString(2, usersPw);
+		ResultSet rs = ps.executeQuery();
+		UsersDto usersDto;
+		if(rs.next()) {
+			//데이터가 있다면 rs를 DTO에 복사저장
+			usersDto = new UsersDto();
+			usersDto.setUsersIdx(rs.getInt("users_idx"));
+			usersDto.setUsersId(rs.getString("users_id"));
+			usersDto.setUsersPw(rs.getString("users_pw"));
+			usersDto.setUsersNick(rs.getString("users_nick"));
+			usersDto.setUsersEmail(rs.getString("users_email"));
+//			usersDto.setUsersPhone(rs.getString("users_phone"));
+		}
+		else {  usersDto = null;  }
+
+		con.close();
+		return usersDto;
+	}
+
+	//회원정보수정:닉네임, 이메일, 폰번 - 비밀번호 확인
+	//로그인 상태에서 변경시 비밀번호만 입력
+	//로그인 상태가 아니라면 로그인 페이지로 이동시켜야 함
+	public boolean updateUsers(UsersDto usersDto) throws Exception{
+		Connection con = JdbcUtils.connect();
+
+		String sql = "update users set users_nick=?, users_email=?" + /*, users_phone=?*/ " where users_pw=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, usersDto.getUsersNick());
+		ps.setString(2, usersDto.getUsersEmail());
+//		ps.setString(3, usersDto.getUsersPhone());
+		ps.setString(4, usersDto.getUsersPw());
+		int result = ps.executeUpdate();
+		con.close();
+		return result>0;
+	}
+>>>>>>> branch 'main' of https://github.com/daanta-real/Hexagram_semi
 
 
 	// 1. READ: 모든 회원의 정보를 조회
