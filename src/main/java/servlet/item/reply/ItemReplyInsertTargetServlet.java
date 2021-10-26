@@ -12,7 +12,7 @@ import beans.ItemReplyDao;
 import beans.ItemReplyDto;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/jsp/item_reply/insert_target.nogari")
+@WebServlet(urlPatterns = "/jsp/item_reply/target_insert.nogari")
 public class ItemReplyInsertTargetServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
