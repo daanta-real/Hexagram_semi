@@ -12,7 +12,7 @@ import beans.ItemDao;
 import beans.ItemDto;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/jsp/item/count.nogari")
+@WebServlet(urlPatterns = "/item/count.nogari")
 public class ItemCountServlet extends HttpServlet{
 @Override
 protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,7 +27,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 		itemDao.updateCount(itemDto);
 		//조회수 1증가 시킴.
 
-		resp.sendRedirect(req.getContextPath()+"/jsp/item/detail.jsp?itemIdx="+itemIdx);
+		resp.sendRedirect(req.getContextPath()+"/item/detail.jsp?itemIdx="+itemIdx);
 
 	}catch (Exception e) {
 		e.printStackTrace();

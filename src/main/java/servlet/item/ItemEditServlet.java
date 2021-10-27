@@ -11,14 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import beans.ItemDao;
 import beans.ItemDto;
 
-@WebServlet(urlPatterns = "/jsp/item/edit.nogari")
+@SuppressWarnings("serial")
+@WebServlet(urlPatterns = "/item/edit.nogari")
 public class ItemEditServlet extends HttpServlet{
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		try {
-			
+
 			ItemDto itemDto = new ItemDto();
 			itemDto.setItemIdx(Integer.parseInt(req.getParameter("itemIdx")));
 			itemDto.setItemType(req.getParameter("itemType"));
@@ -30,12 +31,12 @@ public class ItemEditServlet extends HttpServlet{
 			itemDto.setItemTime(req.getParameter("itemTime"));
 			itemDto.setItemHomepage(req.getParameter("itemHompage"));
 			itemDto.setItemParking(req.getParameter("itemParking"));
-			
+
 			ItemDao itemDao = new ItemDao();
 			itemDao.update(itemDto);
-			
-			resp.sendRedirect(req.getContextPath() + "/jsp/item/detail.jsp?itemIdx="+itemDto.getItemIdx());
-			
+
+			resp.sendRedirect(req.getContextPath() + "/item/detail.jsp?itemIdx="+itemDto.getItemIdx());
+
 		}
 		catch(Exception e) {
 			e.printStackTrace();
