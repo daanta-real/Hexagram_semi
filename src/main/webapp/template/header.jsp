@@ -20,8 +20,8 @@ boolean isLogin = HexaLibrary.isExists(sessionId);
 <HEAD>
 <META CHARSET="UTF-8">
 <TITLE><%=title%></TITLE>
-<SCRIPT TYPE="TEXT/JAVASCRIPT" SRC="<%=root%>/js/main.js"></SCRIPT> <!-- 라이브러리 로드 -->
-<LINK REL="STYLESHEET" HREF="<%=root%>/css/main.css" />             <!-- CSS 로드 -->
+<SCRIPT TYPE="TEXT/JAVASCRIPT" SRC="<%=root%>/resource/js/main.js"></SCRIPT> <!-- 라이브러리 로드 -->
+<LINK REL="STYLESHEET" HREF="<%=root%>/resource/css/main.css" />             <!-- CSS 로드 -->
 <!-- 파비콘 로드 -->
 <link rel="apple-touch-icon" sizes="180x180" href="<%=root%>/resource/image/fabicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="<%=root%>/resource/image/fabicon/favicon-32x32.png">
