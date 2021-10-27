@@ -5,10 +5,15 @@
 <%@page import="beans.ItemReplyDao"%>
 <%@page import="java.util.List"%>
 <%@page import="beans.ItemReplyDto"%>
-<jsp:include page="/resource/template/header.jsp">
-	<jsp:param name="pageTitle" value="메인" />
-</jsp:include>
-<SECTION CLASS="flexCenter flexCol">
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+<TITLE>메인</TITLE>
+<jsp:include page="/resource/template/header_head.jsp"></jsp:include>
+</HEAD>
+<BODY>
+<jsp:include page="/resource/template/header_body.jsp"></jsp:include>
+<SECTION>
 <!-- 페이지 내용 시작 -->
 
 <%
@@ -123,3 +128,5 @@ int number = 1;
 <!-- 페이지 내용 끝. -->
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>
+</BODY>
+</HTML>

@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="/resource/template/header.jsp">
-	<jsp:param name="pageTitle" value="메인" />
-</jsp:include>
-<SECTION CLASS="flexCenter flexCol">
-<!-- 페이지 내용 시작 -->
-
-<%String root = request.getContextPath();%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+<TITLE>메인</TITLE>
+<jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 <style type='text/css'>
 BODY { min-width:max-content; }
 CONTENT, fieldset { min-width:55rem; }
@@ -32,6 +30,13 @@ div.errBox > p.error {
 	color:darksalmon;
 }
 </style>
+</HEAD>
+<BODY>
+<jsp:include page="/resource/template/header_body.jsp"></jsp:include>
+<SECTION>
+<!-- 페이지 내용 시작 -->
+
+<%String root = request.getContextPath();%>
 
 <div class=container>
 
@@ -56,3 +61,5 @@ div.errBox > p.error {
 <!-- 페이지 내용 끝. -->
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>
+</BODY>
+</HTML>
