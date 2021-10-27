@@ -24,7 +24,7 @@
     --color_bg:hsl(34, 5%, 95%);
 }
 a:hover, a:link, a:visited, a:active {color:inherit;text-decoration:none;/* text-indent: 1rem; */}
-.flexCenter { display:flex; justify-content:center; align-items:center; }
+.flexCenter { display:flex; justify-SECTION:center; align-items:center; }
 .flexRow { flex-direction:row; }
 .flexCol { flex-direction:column; }
 .textCenter { text-align:center; vertical-align:middle; }
@@ -44,7 +44,7 @@ BODY {
     background: var(--color_bg);
     box-shadow: 0 0 1rem 0 #8884;
 }
-HEADER, CONTENT, FOOTER {
+HEADER, SECTION, FOOTER {
 	min-width:100%; max-width:100%;
 }
 HEADER, FOOTER {
@@ -54,7 +54,7 @@ HEADER {
 	position:relative;
 	border-top-left-radius: 1rem; border-top-right-radius: 1rem;
 }
-CONTENT {
+SECTION {
 	min-height:15rem;
 	margin:2.5rem auto 2.5rem auto;
 }
