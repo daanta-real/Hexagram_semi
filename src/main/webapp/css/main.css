@@ -1,64 +1,132 @@
 @charset "UTF-8";
+@font-face {
+    font-family: 'mainFont';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SDMiSaeng.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
-/* DEBUG용 공통 속성 */
-* { padding:0.2rem; margin:0.2rem; }
+/* DEBUG용 공통 속성 
+* { padding:0.2rem; margin:0.2rem; }*/
 
 /* 일반 공통 속성 */
-a:hover, a:link, a:visited, a:active { color:inherit; text-decoration:none; }
+:root {
+    --color1:hsl(34, 93%, 67%);
+    --color2:hsl(33, 75%, 55%);
+    --color3:hsl(44, 100%, 75%);
+    --color4:hsl(38, 84%, 50%);
+    --color5:hsl(41, 93%, 57%);
+    --color6:hsl(123, 72%, 35%);
+    --color7:hsl(40, 5%, 89%);
+    --color8:hsl(0, 64%, 19%);
+    --color9:hsl(43, 100%, 90%);
+    --color10:hsl(34, 93%, 67%);
+    --color_bg:hsl(34, 5%, 95%);
+}
+a:hover, a:link, a:visited, a:active {color:inherit;text-decoration:none;/* text-indent: 1rem; */}
+.flexCenter { display:flex; justify-content:center; align-items:center; }
+.flexRow { flex-direction:row; }
+.flexCol { flex-direction:column; }
+.textCenter { text-align:center; vertical-align:middle; }
 
 /* 대골격 */
 
 /* 전체 골격 */
+HTML {
+    font-family: 'mainFont'; font-weight:400; font-size: 1.4rem;
+}
 BODY {
-	display: flex;
-    flex-direction: column;
-    max-width: 55rem;
+    max-width: 45rem;
+
     margin: 2rem auto 7rem auto;
-	border:0.2rem solid red;
+    border-radius: 1rem;
+
+    background: var(--color_bg);
+    box-shadow: 0 0 1rem 0 #8884;
+}
+HEADER, CONTENT, FOOTER {
+	min-width:100%; max-width:100%;
+}
+HEADER, FOOTER {
+	background: var(--color9);
 }
 HEADER {
-	position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center;
-	border:0.2rem solid green;
+	position:relative;
+	border-top-left-radius: 1rem; border-top-right-radius: 1rem;
 }
-CONTENT, BODY > fieldset {
-	border:0.2rem solid yellow;
-	display:flex;
-	flex-direction:column;
-	justify-content: center;
-	align-items: center;
+CONTENT {
+	min-height:15rem;
+	margin:2.5rem auto 2.5rem auto;
 }
 FOOTER {
-	padding:1rem 2rem;
-	border:0.2rem solid gray;
+    border-bottom-left-radius: 1rem; border-bottom-right-radius: 1rem;
+    font-size:1.15rem;
+    line-height:0.7rem;
 }
 
 /* HEADER */
 HEADER #logoContainer {
-	display:flex;
-	flex-direction: row;
-	justify-content:center;
-	align-items:center;
+	margin: 3rem auto 1rem auto;
 }
-HEADER #logoContainer a {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+HEADER #logoContainer :is(a, span) {
+	letter-spacing:0.3rem;
 }
 HEADER #logoContainer span {
-	font-size:2rem;
+	font-size:3rem; color: var(--color8);
 }
 HEADER #logo {
 	object-fit:cover;
 	width:7rem;
 	/*image-rendering: -webkit-optimize-contrast;*/
 }
-HEADER #searchContainer {
-	width:20rem;
-	border:0.2rem solid brown;
-	text-align:center; vertical-align:middle;
+HEADER #searcherContainer {
+	position:relative;
+	margin:0.5rem auto 1.5rem auto;
+}
+HEADER #searcherContainer input.searcher {
+	width:17rem; height:1.5rem;
+	
+	border:0.4rem solid var(--color8);
+	padding:0.2rem;
+	
+	background:white;
+    font-family:'mainFont'; font-size:2.2rem; line-height:1.6rem; text-align:left;
+}
+HEADER #searcherContainer span.magnifier {
+	position:absolute; top:0.4rem; right:0.6rem;
+	font-size:1.3rem; line-height:2rem;
 }
 HEADER #userContainer {
-	position:absolute; top:0; right:0;
-	border:0.2rem solid lime;
+	position:absolute; top:0; right:0; height:1rem;
+	padding:1rem;
+	font-size:1.1rem;
+}
+HEADER #userContainer > * {
+    font-weight:500;
+}
+HEADER #userContainer .userInfoTxt {
+	padding:0 0.5rem;
+}
+HEADER #userContainer .userButton {
+	background: var(--color1);
+    border-radius: 0.5rem;
+    padding: 0.2rem 1rem;
+    box-shadow: 0 0 1rem #8884;
+}
+HEADER #menuContainer {
+	width:100%;
+	background:var(--color4);
+	font-size:1.4rem; color:var(--color8);
+	box-shadow: 0 0 1rem #8885;
+}
+HEADER #menuContainer a {
+	margin:0.5rem 2rem;
+	padding:0rem 2rem;
+}
+
+/* FOOTER */
+FOOTER .footerContainer {
+	padding:.5rem 2rem;
+	color:#4448; line-height:1.5rem;
+	list-style-type:none;
 }

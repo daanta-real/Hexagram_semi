@@ -5,7 +5,7 @@
 <%String root = request.getContextPath();%>
 <!-- 페이지 내용 시작 -->
 
-<h1>회원 가입</h1>
+<h1>회원 로그인</h1>
 <form method='post' action='<%=root%>/jsp/users/login.nogari'>
 <table border=1>
 <tbody>

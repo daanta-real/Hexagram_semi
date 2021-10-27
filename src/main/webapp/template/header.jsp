@@ -7,7 +7,9 @@
 // 환경설정
 String title = "노가리투어ㅡ" + request.getParameter("pageTitle");
 System.out.println("<헤더 출력> from " + request.getRequestURL().toString() + "(" + title + ")");
-String root  = request.getContextPath();
+String root = request.getContextPath();
+String searcher = request.getParameter("searchKeyword");
+if(searcher == null) searcher = "";
 
 //세션id를 확인하여 로그인 여부를 검사
 String sessionId = (String) request.getSession().getAttribute("usersId");
@@ -30,10 +32,10 @@ boolean isLogin = HexaLibrary.isExists(sessionId);
 <meta name="theme-color" content="#ffffff">
 </HEAD>
 
-<BODY>
+<BODY CLASS="flexCenter flexCol">
 
-<HEADER>
-<DIV ID="userContainer">
+<HEADER CLASS="flexCenter flexCol">
+<DIV ID="userContainer" CLASS="flexCenter flexRow">
 <%
 
 // 로그인이 되었을 경우
@@ -43,21 +45,31 @@ if(isLogin) {
 	String usersId = dto.getUsersId();
 	String usersNick = dto.getUsersNick();
 	String usersGrade = dto.getUsersGrade();%>
-	<h5><%=usersNick%>(<%=usersId%>)님 (등급: <%=usersGrade%>)</h5>
-	<a href='<%=root%>/users/logout.nogari'><button>로그아웃</button></a>
+	<H4 CLASS="userInfoTxt"><%=usersNick%>(<%=usersId%>)님 <SPAN>등급: <%=usersGrade%></SPAN></H4>
+	<A CLASS='userButton' HREF='<%=root%>/users/logout.nogari'>로그아웃</A>
 <%}
 // 로그인이 되지 않았을 경우
 else {%>
-	<a href='<%=root%>/jsp/users/login.jsp'><button>로그인</button></a>
+	<A CLASS='userButton' HREF='<%=root%>/jsp/users/login.jsp'>로그인</A>
 <%}%>
 </DIV>
-<DIV ID="logoContainer"><A HREF="<%=root%>">
+<DIV ID="logoContainer" CLASS="flexCenter flexRow"><A CLASS="flexCenter flexRow" HREF="<%=root%>">
 	<SPAN>노가리</SPAN>
 	<IMG ID="logo" SRC="<%=root%>/resource/image/logo.png" ALT="로고"/>
-	<SPAN>투어</SPAN>
+	<SPAN>&nbsp;투어</SPAN>
 </A></DIV>
-<DIV ID="searchContainer">검색박스</DIV>
+<FORM ID='searcherContainer' METHOD='GET' ACTION=searchAll.jsp>
+	<INPUT CLASS="searcher textCenter" value="<%=searcher%>" placeholder="검색" ALT="검색창" />
+	<SPAN CLASS="magnifier">🔍</SPAN>
+</FORM>
+<DIV ID='menuContainer' CLASS="flexCenter flexRow">
+	<A HREF="/jsp/item/list.jsp">관광지 정보</A>
+	<span>|</span>
+	<A HREF="/jsp/course/list.jsp">코스 정보</A>
+	<span>|</span>
+	<A HREF="/jsp/event/list.jsp">이벤트 정보</A>
+</DIV>
 </HEADER>
 
-<fieldset><legend>페이지 내용</legend>
+<CONTENT CLASS="flexCenter flexCol">
 <!-- <CONTENT> -->
