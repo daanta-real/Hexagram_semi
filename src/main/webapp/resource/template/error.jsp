@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
-<TITLE>메인</TITLE>
+<TITLE>노가리투어 - 오류</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 <style type='text/css'>
 BODY { min-width:max-content; }
@@ -40,7 +40,7 @@ div.errBox > p.error {
 
 <div class=container>
 
-	<div class=errBox>
+	<div class=errBox title="에러 설명 박스">
 		<p class=error>ERROR</p>
 		<p>여행을 가면 <font color="">일류</font></p>
 		<p>여행을 못 가면 <font color="">이류</font></p>

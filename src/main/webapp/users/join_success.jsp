@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
-<TITLE>메인</TITLE>
+<TITLE>노가리투어 - 회원 가입 성공</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
 <BODY>

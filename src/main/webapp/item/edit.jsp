@@ -7,7 +7,7 @@
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
-<TITLE>메인</TITLE>
+<TITLE>노가리투어 - 관광지 수정</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
 <BODY>

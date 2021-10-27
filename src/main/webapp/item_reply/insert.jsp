@@ -3,7 +3,7 @@
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
-<TITLE>메인</TITLE>
+<TITLE>노가리투어 - 댓글 쓰기</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
 <BODY>
