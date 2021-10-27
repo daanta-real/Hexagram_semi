@@ -30,7 +30,7 @@ int number = 1;
 %>
 
 <h3 align="center">[댓글 목록]</h3>
-<table align="center" border="1" width="1400">
+<table style="align:center; width:1400px;" border="1">
 	<thead><tr>
 		<th>댓글 번호</th>
 		<th>작성자 아이디</th>
@@ -54,19 +54,18 @@ int number = 1;
 			<td><%=itemReplyDto.getUsersIdx() == 0 ? "탈퇴한 회원" : usersDto.getUsersId()%></td>
 			<td><%=itemReplyDto.getItemReplyTime()%></td>
 			<td><%=itemReplyDto.getItemReplyDetail()%></td>
-			<td>
 			<%
 			List<ItemReplyDto> listTarget = itemReplyDao.listTarget(reply);
 			%>
 			<%if(listTarget.isEmpty()){%>
-			대댓글이 없습니다.
+			<td>대댓글이 없습니다.</td>
 			<%}else{ %>
-					
+			<td>
 					<%for (ItemReplyDto itemReplyTargetDto : listTarget) {%>
 										<%
 										UsersDto usersDtoTarget = usersDao.get(itemReplyTargetDto.getUsersIdx());
 										%>
-						<table border="1" width="300">
+						<table border="1" style="width:300px;">
 								<thead>
 									<tr>
 										<th>작성자 아이디</th>

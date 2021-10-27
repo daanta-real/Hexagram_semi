@@ -27,10 +27,7 @@ int index = 1;
 %>
 
 <%if(!list.isEmpty()){%>
-				<tr>
-						<td colspan="4">
-						
-<table align="center" width="800">
+<table style="text-align:center; width:800px;">
 	<thead>
 		<tr>
 			<th>순 서</th>
@@ -61,9 +58,6 @@ int index = 1;
 		<%}%>
 	</tbody>
 </table>
-	
-	</td>
-					</tr>
 <%} %>
 
 <!-- 페이지 내용 끝. -->

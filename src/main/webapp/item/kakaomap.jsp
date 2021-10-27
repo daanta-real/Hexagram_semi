@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <jsp:include page="/resource/template/header.jsp">
-	<jsp:param name="pageTitle" value="메인" />
+	<jsp:param name="pageTitle" value="주소로 장소 표시하기" />
 </jsp:include>
 <SECTION CLASS="flexCenter flexCol">
 <!-- 페이지 내용 시작 -->
@@ -16,14 +16,6 @@ ItemDao itemDao = new ItemDao();
 ItemDto itemDto = itemDao.get(itemIdx);
 %>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>주소로 장소 표시하기</title>
-
-</head>
-<body>
 	<div id="map" style="width: 100%; height: 300px;"></div>
 
 	<script type="text/javascript"
@@ -69,8 +61,6 @@ ItemDto itemDto = itemDao.get(itemIdx);
 							}
 						});
 	</script>
-</body>
-</html>
 
 <!-- 페이지 내용 끝. -->
 </SECTION>

@@ -15,7 +15,7 @@
     <h4 align="center">[댓글 작성]</h4>
  <form action="<%=request.getContextPath()%>/item_reply/insert.nogari" method="post">  
    <!--    	댓글 내용 전송 -->
-   <table align="center">
+   <table style="align:center;">
    	 <tbody>
    	 	<tr width="1100">
    	 		<th>댓글 입력</th>

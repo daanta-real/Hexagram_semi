@@ -72,7 +72,7 @@ String title = search ? "검색" : "관광지 목록";
 
 <%if(list.size() != 0){%>
 <%-- 전체 목록 조회 --%>
-<table border="1" width="700">
+<table border="1" style="width:700px;">
 	<thead>
 		<tr>
 			<th>카테고리</th>

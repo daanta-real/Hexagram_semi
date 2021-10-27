@@ -29,7 +29,7 @@ String root = request.getContextPath();
  <h2>관광지 등록</h2>
 
 <form action="insert.nogari" method="post">
-	<table border="1" width="500">
+	<table border="1" style="width:500px;">
 		<tbody>
 			<tr>
 				<td>작성자</td>

@@ -53,14 +53,22 @@ else {%>
 	<A CLASS='userButton' HREF='<%=root%>/users/login.jsp'>로그인</A>
 <%}%>
 </DIV>
-<DIV ID="logoContainer" CLASS="flexCenter flexRow"><A CLASS="flexCenter flexRow" HREF="<%=root%>">
-	<SPAN>노가리</SPAN>
-	<IMG ID="logo" SRC="<%=root%>/resource/image/logo.png" ALT="로고"/>
-	<SPAN>&nbsp;투어</SPAN>
-</A></DIV>
-<FORM ID='searcherContainer' METHOD='GET' ACTION=searchAll.jsp>
-	<INPUT CLASS="searcher textCenter" value="<%=searcher%>" placeholder="검색" ALT="검색창" />
-	<SPAN CLASS="magnifier">🔍</SPAN>
+<DIV ID="logoContainer" CLASS="flexCenter flexCol">
+	<DIV ID="logoBox">
+		<A CLASS="flexCenter flexRow" HREF="<%=root%>">
+			<SPAN>노가리</SPAN>
+			<IMG ID="logo" SRC="<%=root%>/resource/image/logo.png" ALT="로고"/>
+			<SPAN>&nbsp;투어</SPAN>
+		</A>
+	</DIV>
+</DIV>
+<FORM ID='searcherContainer' CLASS="flexCenter flexCol" METHOD='GET' ACTION=searchAll.jsp>
+	<DIV ID='searcherBox'>
+		<INPUT CLASS="searcher textCenter" value="<%=searcher%>" placeholder="검색" ALT="검색창" />
+		<SPAN CLASS="magnifier">🔍</SPAN>
+	</DIV>
+	<SPAN ONCLICK='document.getElementById("mainDetailSearcher").style.visibility = "visible;"'>상세검색 ▼</SPAN>
+	<DIV ID="mainDetailSearcher">상세검색이다 우와아아앙</DIV>
 </FORM>
 <DIV ID='menuContainer' CLASS="flexCenter flexRow">
 	<A HREF="<%=root%>/item/list.jsp">관광지 정보</A>

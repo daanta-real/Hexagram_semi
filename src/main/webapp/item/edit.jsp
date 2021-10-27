@@ -26,7 +26,7 @@
  <h3>게시글 수정(관리자 페이지)</h3>
  
  <form action="edit.nogari" method="post">
-	<table border="1" width="500">
+	<table border="1" style="width:500px;">
 		<tbody>
 			<tr>
 				<td>작성자</td>
