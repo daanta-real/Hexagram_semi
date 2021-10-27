@@ -12,7 +12,7 @@ import beans.ItemDao;
 import beans.ItemDto;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/jsp/item/edit.nogari")
+@WebServlet(urlPatterns = "/item/edit.nogari")
 public class ItemEditServlet extends HttpServlet{
 
 	@Override
@@ -35,7 +35,7 @@ public class ItemEditServlet extends HttpServlet{
 			ItemDao itemDao = new ItemDao();
 			itemDao.update(itemDto);
 
-			resp.sendRedirect(req.getContextPath() + "/jsp/item/detail.jsp?itemIdx="+itemDto.getItemIdx());
+			resp.sendRedirect(req.getContextPath() + "/item/detail.jsp?itemIdx="+itemDto.getItemIdx());
 
 		}
 		catch(Exception e) {

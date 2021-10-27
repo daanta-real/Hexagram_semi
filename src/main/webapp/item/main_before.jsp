@@ -8,7 +8,7 @@ String root = request.getContextPath();
 %>
 
 <h1>Test 전 로그인 Page</h1>
-<form action="<%=root%>/jsp/item/login.nogari" method="post">
+<form action="<%=root%>/item/login.nogari" method="post">
 	<table>
 		<tbody>
 			<tr>

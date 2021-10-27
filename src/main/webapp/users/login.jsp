@@ -6,7 +6,7 @@
 <!-- 페이지 내용 시작 -->
 
 <h1>회원 로그인</h1>
-<form method='post' action='<%=root%>/jsp/users/login.nogari'>
+<form method='post' action='<%=root%>/users/login.nogari'>
 <table border=1>
 <tbody>
 	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'></td></tr>

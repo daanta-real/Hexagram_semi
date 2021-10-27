@@ -14,7 +14,7 @@ import util.HexaLibrary;
 import util.UsersUtils;
 
 @SuppressWarnings("serial")
-@WebServlet("/jsp/users/login.nogari")
+@WebServlet("/users/login.nogari")
 public class UsersLoginServlet extends HttpServlet {
 
 	@Override
@@ -55,7 +55,7 @@ public class UsersLoginServlet extends HttpServlet {
 
 			if(!isMatched) {
 				System.out.println("　　▷ 로그인 실패. usersId 혹은 usersPw가 맞지 않습니다. 로그인 페이지로 돌아갑니다.");
-				resp.sendRedirect(req.getContextPath() + "/jsp/users/login.jsp?error"); // 로그인페이지로 이동
+				resp.sendRedirect(req.getContextPath() + "/users/login.jsp?error"); // 로그인페이지로 이동
 			} else {
 				System.out.print("[회원 로그인] 4. 모든 확인 완료. 세션 부여..");
 				HttpSession session = req.getSession();

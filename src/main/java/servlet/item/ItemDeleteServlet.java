@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import beans.ItemDao;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/jsp/item/delete.nogari")
+@WebServlet(urlPatterns = "/item/delete.nogari")
 public class ItemDeleteServlet extends HttpServlet{
 
 	@Override
@@ -25,7 +25,7 @@ public class ItemDeleteServlet extends HttpServlet{
 
 			itemDao.delete(itemIdx);
 
-			resp.sendRedirect(req.getContextPath() + "/jsp/item/list.jsp");
+			resp.sendRedirect(req.getContextPath() + "/item/list.jsp");
 		}
 		catch(Exception e) {
 			e.printStackTrace();

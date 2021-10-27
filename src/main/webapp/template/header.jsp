@@ -50,7 +50,7 @@ if(isLogin) {
 <%}
 // 로그인이 되지 않았을 경우
 else {%>
-	<A CLASS='userButton' HREF='<%=root%>/jsp/users/login.jsp'>로그인</A>
+	<A CLASS='userButton' HREF='<%=root%>/users/login.jsp'>로그인</A>
 <%}%>
 </DIV>
 <DIV ID="logoContainer" CLASS="flexCenter flexRow"><A CLASS="flexCenter flexRow" HREF="<%=root%>">
@@ -63,11 +63,11 @@ else {%>
 	<SPAN CLASS="magnifier">🔍</SPAN>
 </FORM>
 <DIV ID='menuContainer' CLASS="flexCenter flexRow">
-	<A HREF="/jsp/item/list.jsp">관광지 정보</A>
+	<A HREF="/item/list.jsp">관광지 정보</A>
 	<span>|</span>
-	<A HREF="/jsp/course/list.jsp">코스 정보</A>
+	<A HREF="/course/list.jsp">코스 정보</A>
 	<span>|</span>
-	<A HREF="/jsp/event/list.jsp">이벤트 정보</A>
+	<A HREF="/event/list.jsp">이벤트 정보</A>
 </DIV>
 </HEADER>
 

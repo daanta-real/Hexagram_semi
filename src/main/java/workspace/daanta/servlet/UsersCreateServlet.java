@@ -45,7 +45,7 @@ public class UsersCreateServlet extends HttpServlet {
 				System.out.println("[회원 가입] 가입에 성공했습니다.");
 				// 세션 부여하고 가입성공 페이지로 보냄
 				req.getSession().setAttribute("id", usersId);
-				resp.sendRedirect(req.getContextPath() + "/jsp/users/join_success.jsp");
+				resp.sendRedirect(req.getContextPath() + "/users/join_success.jsp");
 			}
 			else throw new Exception();
 

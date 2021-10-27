@@ -12,7 +12,7 @@ import beans.UsersDao;
 import beans.UsersDto;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/jsp/item/login.nogari")
+@WebServlet(urlPatterns = "/item/login.nogari")
 public class ItemTemporaryLoginServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,9 +26,9 @@ public class ItemTemporaryLoginServlet extends HttpServlet{
 				req.getSession().setAttribute("usersIdx", usersDto.getUsersIdx());
 				req.getSession().setAttribute("usersGrade", usersDto.getUsersGrade());
 
-				resp.sendRedirect(req.getContextPath()+"/jsp/item/main.jsp");
+				resp.sendRedirect(req.getContextPath()+"/item/main.jsp");
 			}else {
-				resp.sendRedirect(req.getContextPath()+"/jsp/item/main_before.jsp?error");
+				resp.sendRedirect(req.getContextPath()+"/item/main_before.jsp?error");
 			}
 
 

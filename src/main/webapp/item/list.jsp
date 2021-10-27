@@ -42,7 +42,7 @@ String title = search ? "검색" : "관광지 목록";
 <h2><%=title %></h2>
 <h5>(usersId = <%=usersId %>, usersIdx = <%=usersIdx %>, grade=<%=usersGrade %>)</h5>
 
-<form action="<%=root%>/jsp/item/list.jsp" method="get">
+<form action="<%=root%>/item/list.jsp" method="get">
 <select name="column">
 		<%if(column != null && column.equals("itemType")) {%>
 		<option value="itemType" selected>카테고리</option>
@@ -85,7 +85,7 @@ String title = search ? "검색" : "관광지 목록";
 		<tr>
 			<td align ="center"><%=itemDto.getItemType() %></td>
 			<td align ="center">
-			<a href="<%=root%>/jsp/item/count.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
+			<a href="<%=root%>/item/count.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
 <!-- 			클릭시 단 한번의 조회를 위해서 Count서블릿으로 item_idx을 넘겨줌 -->
 			<%=itemDto.getItemName()%>
 			</a>

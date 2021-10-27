@@ -12,21 +12,21 @@ import beans.ItemDao;
 import beans.ItemDto;
 
 @SuppressWarnings("serial")
-@WebServlet (urlPatterns = "/jsp/item/insert.nogari")
+@WebServlet (urlPatterns = "/item/insert.nogari")
 public class itemInsertServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			
-			
-			
+
+
+
 			//입력
 			ItemDto itemDto = new ItemDto();
 			ItemDao itemDao = new ItemDao();
 			int getSequenceNo = itemDao.getSequenceNo();
-			
+
 			itemDto.setItemIdx(getSequenceNo);
 			itemDto.setUsersIdx((int)req.getSession().getAttribute("usersIdx"));
 			itemDto.setItemType(req.getParameter("itemType"));
@@ -40,12 +40,12 @@ public class itemInsertServlet extends HttpServlet{
 			itemDto.setItemParking(req.getParameter("itemParking"));
 
 			//처리
-			
+
 			boolean success = itemDao.insert(itemDto);
 
 			if(success) {
 				//등록 성공이라면
-				resp.sendRedirect(req.getContextPath() + "/jsp/item/detail.jsp?itemIdx=" + getSequenceNo);
+				resp.sendRedirect(req.getContextPath() + "/item/detail.jsp?itemIdx=" + getSequenceNo);
 			}
 			else {
 				//실패라면

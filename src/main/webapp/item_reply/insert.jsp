@@ -8,7 +8,7 @@
    
    %>
     <h4 align="center">[댓글 작성]</h4>
- <form action="<%=request.getContextPath()%>/jsp/item_reply/insert.nogari" method="post">  
+ <form action="<%=request.getContextPath()%>/item_reply/insert.nogari" method="post">  
    <!--    	댓글 내용 전송 -->
    <table align="center">
    	 <tbody>

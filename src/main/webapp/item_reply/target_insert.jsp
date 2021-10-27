@@ -9,7 +9,7 @@
    %>
 
    
- <form action="<%=request.getContextPath()%>/jsp/item_reply/target_insert.nogari" method="post">  
+ <form action="<%=request.getContextPath()%>/item_reply/target_insert.nogari" method="post">  
    <!--    	대댓글 내용 전송 -->
    				<textarea name="itemReplyDetail" align="center" placeholder="대댓글 입력" required rows="3" cols="110"></textarea>
 				

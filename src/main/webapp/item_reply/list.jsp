@@ -83,7 +83,7 @@ int number = 1;
 			
 			<td>
 				<form
-					action="<%=request.getContextPath()%>/jsp/item_reply/insert_target.nogari" method="post">
+					action="<%=request.getContextPath()%>/item_reply/insert_target.nogari" method="post">
 					<!--    	대댓글 내용 전송 -->
 					<table>
 						<tbody>
