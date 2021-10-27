@@ -1,4 +1,4 @@
-package workspace.daanta.servlet;
+package servlet.users;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -47,21 +47,23 @@ public class UsersLoginServlet extends HttpServlet {
 
 			// 3. id/pw 일치하는 값 있는지 검사
 			System.out.println("[회원 로그인] 3. ID/PW 일치 검사..");
-			boolean isMatched = false;
-			try { isMatched = UsersUtils.isValid(usersId, usersPw); }
-			catch (Exception e) { isMatched = false; }
-			System.out.println("　　▷ 확인 결과: " + isMatched);
-			// 4. 최종 처리: 세션 부여
+			UsersDto foundDto = UsersUtils.getValidDto(usersId, usersPw);
+			boolean isLoginValid = foundDto != null ? true : false;
+			System.out.print("　　▷ 확인 결과: " + isLoginValid);
+			if(isLoginValid) System.out.print(" → 찾았습니다. 상세: " + foundDto);
 
-			if(!isMatched) {
+			// 4. 최종 처리: 세션 부여
+			// 로그인 실패 시
+			if(!isLoginValid) {
 				System.out.println("　　▷ 로그인 실패. usersId 혹은 usersPw가 맞지 않습니다. 로그인 페이지로 돌아갑니다.");
 				resp.sendRedirect(req.getContextPath() + "/users/login.jsp?error"); // 로그인페이지로 이동
-			} else {
+			}
+			// 로그인 성공 시
+			else {
 				System.out.print("[회원 로그인] 4. 모든 확인 완료. 세션 부여..");
 				HttpSession session = req.getSession();
-				UsersDto loggedInDto = dao.get(usersId);
-				int usersIdx = loggedInDto.getUsersIdx();
-				String usersGrade = loggedInDto.getUsersGrade();
+				int usersIdx = foundDto.getUsersIdx();
+				String usersGrade = foundDto.getUsersGrade();
 				session.setAttribute("usersIdx"  , usersIdx  );
 				session.setAttribute("usersId"   , usersId   );
 				session.setAttribute("usersGrade", usersGrade);

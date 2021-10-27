@@ -1,4 +1,4 @@
-package workspace.daanta.servlet;
+package servlet.users;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

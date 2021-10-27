@@ -1,4 +1,4 @@
-package servlet.item;
+package test.itemTemporaryLogin;
 
 import java.io.IOException;
 
@@ -8,16 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.UsersDao;
-import beans.UsersDto;
-
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/item/login.nogari")
 public class ItemTemporaryLoginServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			UsersDao usersDao = new UsersDao();
+			/*UsersDao usersDao = new UsersDao();
 			UsersDto usersDto = usersDao.login(req.getParameter("usersId"),req.getParameter("usersPw"));
 
 
@@ -29,7 +26,7 @@ public class ItemTemporaryLoginServlet extends HttpServlet{
 				resp.sendRedirect(req.getContextPath()+"/item/main.jsp");
 			}else {
 				resp.sendRedirect(req.getContextPath()+"/item/main_before.jsp?error");
-			}
+			}*/
 
 
 		}catch (Exception e) {

@@ -63,11 +63,11 @@ else {%>
 	<SPAN CLASS="magnifier">🔍</SPAN>
 </FORM>
 <DIV ID='menuContainer' CLASS="flexCenter flexRow">
-	<A HREF="/item/list.jsp">관광지 정보</A>
+	<A HREF="<%=root%>/item/list.jsp">관광지 정보</A>
 	<span>|</span>
-	<A HREF="/course/list.jsp">코스 정보</A>
+	<A HREF="<%=root%>/course/list.jsp">코스 정보</A>
 	<span>|</span>
-	<A HREF="/event/list.jsp">이벤트 정보</A>
+	<A HREF="<%=root%>/event/list.jsp">이벤트 정보</A>
 </DIV>
 </HEADER>
 

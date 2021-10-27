@@ -1,4 +1,4 @@
-package workspace.daanta.beans;
+package test.준성.beans;
 
 public class EventDto {
 
