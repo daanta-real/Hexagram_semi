@@ -5,9 +5,11 @@
 <%@page import="beans.ItemReplyDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="/template/header.jsp">
+<jsp:include page="/resource/template/header.jsp">
 	<jsp:param name="pageTitle" value="메인" />
 </jsp:include>
+<SECTION CLASS="flexCenter flexCol">
+<!-- 페이지 내용 시작 -->
  <% 
  
  String root = request.getContextPath();
@@ -112,4 +114,7 @@
 <jsp:include page="/item_reply/insert.jsp">
 	<jsp:param value="<%=itemIdx%>" name="itemIdx"/>
 </jsp:include>
-<jsp:include page="/template/footer.jsp"></jsp:include>
+
+<!-- 페이지 내용 끝. -->
+</SECTION>
+<jsp:include page="/resource/template/footer.jsp"></jsp:include>

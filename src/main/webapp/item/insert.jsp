@@ -5,6 +5,11 @@
 <%@page import="util.HexaLibrary" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<jsp:include page="/resource/template/header.jsp">
+	<jsp:param name="pageTitle" value="메인" />
+</jsp:include>
+<SECTION CLASS="flexCenter flexCol">
+<!-- 페이지 내용 시작 -->
 <% 
 int usersIdx = (int)request.getSession().getAttribute("usersIdx");
 UsersDto dto = new UsersDao().get(usersIdx);
@@ -16,7 +21,7 @@ String root = request.getContextPath();
 //관리자 권한으로 게시글 생성.=> 일반회원 X
 %>
  
-<jsp:include page="/template/header.jsp">
+<jsp:include page="/resource/template/header.jsp">
 	<jsp:param name="pageTitle" value="메인" />
 </jsp:include>
     
@@ -90,6 +95,7 @@ String root = request.getContextPath();
 		</tfoot>
 	</table>
 </form>
-
  
- <jsp:include page="/template/footer.jsp"></jsp:include>
+<!-- 페이지 내용 끝. -->
+</SECTION>
+<jsp:include page="/resource/template/footer.jsp"></jsp:include>

@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<jsp:include page="/resource/template/header.jsp">
+	<jsp:param name="pageTitle" value="메인" />
+</jsp:include>
+<SECTION CLASS="flexCenter flexCol">
+<!-- 페이지 내용 시작 -->
+
    <%
    String root = request.getContextPath();
    String itemIdx = request.getParameter("itemIdx"); // 해당 인덱스 글에 댓글을 쓰겠다.
@@ -38,4 +43,7 @@
 	<input type="hidden" name="users_idx" value="<%=usersIdx%>">
 <br>
 	
- </form> 
+ </form>
+<!-- 페이지 내용 끝. -->
+</SECTION>
+<jsp:include page="/resource/template/footer.jsp"></jsp:include>

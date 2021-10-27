@@ -71,5 +71,4 @@ else {%>
 </DIV>
 </HEADER>
 
-<CONTENT CLASS="flexCenter flexCol">
-<!-- <CONTENT> -->
+<!-- <SECTION> -->

@@ -2,8 +2,7 @@
 <%
 System.out.println("<풋터 출력> from " + request.getRequestURL().toString());
 %>
-</CONTENT>
-<!-- </CONTENT> -->
+<!-- </SECTION> -->
 
 <FOOTER><UL CLASS='footerContainer'>
 	<LI>
