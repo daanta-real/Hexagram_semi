@@ -55,7 +55,7 @@
 <%-- <%}%> --%>
 
 <!-- **사진 표시(DB테이블 만들어서 resource 파일정보를 불러올 예정(idea) -->
-<table border="1" align="center" width="1500">
+<table border="1" style="text-align:center; width:1500px;">
 	<thead>
 		<tr>
 			<th>사진</th>
@@ -73,7 +73,7 @@
 
 
 <!-- **상세정보 표시 -->
-<table align="center"  border="1" width="1500">
+<table style="text-align:center; border-width:1px; width:1500px">
 
 	<tbody>
 		<tr height="100">
