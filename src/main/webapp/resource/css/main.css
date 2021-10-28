@@ -6,8 +6,9 @@
     font-style: normal;
 }
 
-/* DEBUG용 공통 속성 
-* { padding:0.2rem; margin:0.2rem; }*/
+/* DEBUG용 공통 속성 */
+#debugContainer { position:fixed; z-index:9999999999999999999999; left:0; bottom:0; min-width:50vw; max-width:50vw;}
+#debugContainer * { font-size:1rem; min-width:50vw; max-width:50vw;}
 
 /* 일반 공통 속성 */
 :root {
@@ -27,7 +28,10 @@
     --main_border:0.01rem;
 }
 
-a:hover, a:link, a:visited, a:active {color:inherit;text-decoration:none;/* text-indent: 1rem; */}
+a:hover, a:link, a:visited, a:active {
+	color:inherit; text-decoration:none; /* 링크 밑줄 및 변색 차단 */ 
+	-webkit-tap-highlight-color: transparent; /* iOS 클릭시 깜박임 방지 */
+}
 
 .fullWidth { width:100%; }
 .flexCenter { display:flex; justify-content:center; align-items:center; }
@@ -98,7 +102,7 @@ FOOTER {
 
 /* HEADER - LOGO */
 HEADER #logoContainer {
-	width:100%; height:7rem;
+	width:100%; height:6rem;
 
     border-bottom:0;
 }
@@ -110,7 +114,7 @@ HEADER #logoContainer span {
 }
 HEADER #logoBox {
     position: relative;
-    top: 50px;
+    top: 2rem;
 	margin: 0 auto 1rem auto;
 }
 HEADER #logo {
@@ -122,7 +126,6 @@ HEADER #logo {
 HEADER #searcherContainer {
 	position:relative; width:100%; height:5rem;
 	margin:0;
-	padding:0.5rem auto 1.5rem auto;
 	border-top:0; border-bottom:0;
 }
 HEADER #searcherBox {
@@ -134,10 +137,6 @@ HEADER #searcherBox {
 	
 	background:white;
     font-family:'mainFont'; font-size:2.2rem; line-height:1.6rem; text-align:left;
-}
-HEADER #searcherContainer span.magnifier {
-	position:absolute; top:0.07rem; right:0.2rem;
-	font-size:1.3rem; line-height:2rem; position: absolute;
 }
 HEADER #searcherContainer .searcher {
     position: relative;
@@ -162,6 +161,7 @@ HEADER #userContainer > * {
     font-weight:500;
 }
 HEADER #userContainer .userInfoTxt {
+	color:var(--color6);
 	padding:0 0.5rem;
 }
 HEADER #userContainer .userButton {
@@ -169,6 +169,12 @@ HEADER #userContainer .userButton {
     border-radius: 0.5rem;
     padding: 0.2rem 1rem;
     box-shadow: 0 0 1rem #8884;
+}
+HEADER #userContainer span {
+	border-radius:20px;
+}
+HEADER #userContainer span.admin:after {
+	background:var(--color9);
 }
 
 /* HEADER - MENU */
@@ -182,6 +188,7 @@ HEADER #menuContainer {
 HEADER #menuContainer a {
 	margin:0.5rem 2rem;
 	padding:0rem 2rem;
+	transition: all 0.2s;
 }
 HEADER #menuContainer a:hover {
 	background:var(--color1);

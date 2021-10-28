@@ -1,0 +1,155 @@
+:root {
+	--hamburger-width: 3rem;
+    --hamburger-height: 2.8rem;
+    --hamburger-thickness: 0.25rem;
+    --hamburger-padding: 0.7rem;
+}
+
+/* 레이아웃 전체 */
+input {
+	-webkit-appearance: none;
+	border-radius:0;
+	-webkit-border-radius: 0; /* 아이폰 전용 입력창레이아웃 제거 */
+}
+BODY, HEADER, CONTENT, FOOTER, #logoContainer {
+	min-width:100%; max-width:100%;
+	margin:0; border-radius:0;
+}
+FOOTER .footerContainer {
+	padding: 2vw;
+    font-size: 5vw;
+	line-height: 5vw;
+	margin-bottom: 20vw;
+}
+
+/* 레이아웃 - 헤더 */
+HEADER #logoContainer { height:18vw; }
+HEADER #logoContainer span { font-size:11vw; }
+HEADER #logoBox { top:5vw; }
+HEADER #logo { width:24vw; }
+HEADER #menuContainer a { margin:0.5vw 0.8vw; padding:0 1vw; }
+HEADER #userContainer { padding:0.5vw; }
+HEADER #userContainer a { display:none; }
+
+/* 레이아웃 - 섹션 */
+SECTION {
+    min-height: 50vw;
+    padding: 2vw;
+}
+
+/* 모바일 메뉴 최상위 레이어 (Lv1) */
+#mobileMenuLayer { z-index:9999999; position:fixed; top:0; left:0; }
+
+/* 모바일 메뉴 차상위 레이어 (Lv2) - 햄버거로 꺼내는 메뉴는 여기임 */
+#mobileMenuContainer {
+	z-index:9999999999999999999999999999999999;
+	position:fixed; top:0; left:0;
+	width:calc(60vw - 2vw); height:100vh;
+	
+	background:var(--color7);
+	
+	transform:translateX(-60vw); transition:all 0.3s;
+}
+#mobileMenuHamburgerInput:checked ~ #mobileMenuLayer {
+	width:100vw;
+}
+#mobileMenuHamburgerInput:checked ~ #mobileMenuContainer  {
+	transform:translateX(0);
+}
+
+/* 햄버거 - 레이아웃 */
+#mobileMenuLayer .hamburgerBox {
+	position:fixed;
+	width:var(--hamburger-width); height:var(--hamburger-height);
+	bottom:0; right:0;
+}
+#mobileMenuHamburgerInput { display:none; }
+#mobileMenuHamburgerInput + .hamburgerBox > label {
+    position:relative; display:block;
+	width:100%; height:100%;
+	cursor:pointer;
+}
+#mobileMenuHamburgerInput + .hamburgerBox > label span {
+	position:absolute;
+	width:calc(100% - var(--hamburger-padding) * 2); margin-left:var(--hamburger-padding);
+	height:var(--hamburger-thickness);
+	border-radius:9999px;
+	background:gray;
+	transition-property:all;
+	transition-timing-function: ease-out;
+}
+
+/* 햄버거 - 짝대기들 */
+#mobileMenuHamburgerInput + .hamburgerBox > label span:nth-child(1) {
+	transition-duration: 0.15s; top:var(--hamburger-padding);
+}
+#mobileMenuHamburgerInput + .hamburgerBox > label span:nth-child(2) {
+	transition-duration: 0.20s; top:50%;
+	transform:translateY(-50%);
+}
+#mobileMenuHamburgerInput + .hamburgerBox > label span:nth-child(3) {
+	transition-duration: 0.15s; bottom:var(--hamburger-padding);
+}
+
+/* 햄버거 - 짝대기들 - 클릭시 */
+#mobileMenuHamburgerInput:checked + .hamburgerBox > label span:nth-child(1) { top:50%; transform:translateY(-50%) rotate(45deg); }
+#mobileMenuHamburgerInput:checked + .hamburgerBox > label span:nth-child(2) { opacity:0; }
+#mobileMenuHamburgerInput:checked + .hamburgerBox > label span:nth-child(3) { bottom:50%; transform:translateY(50%) rotate(-45deg); }
+
+/* 모바일 전용 로그인 메뉴 레이아웃 */
+#mobileMenuLoginContainer {
+	width:100%;
+}
+#mobileMenuLoginContainer input:focus, button:focus {
+	outline:none; /* 입력란 외곽선 표시 제거 */
+	-webkit-tap-highlight-color: rgba(0,0,0,0); /* 입력란 하이라이트 제거 */
+}
+
+/* 아디 비번 입력창 */
+#mobileMenuLoginContainer input {
+	width:45vw; margin:3vw 0;
+	font-size:5.5vw;
+}
+#mobileMenuLoginContainer input:first-child {
+	margin-bottom:0;
+}
+
+/* 모든 동작버튼들 */
+#mobileMenuLoginContainer .actionButtons {
+	min-width:20vw; max-width:20vw;
+	border:none; border-radius:3.5vw; padding:1vw;
+	font-size:6vw;
+}
+#mobileMenuLoginContainer > *, .loginButtonBox > * { margin:0.2rem auto; }
+
+/* 모바일 전용 로그인 메뉴 - 버튼관련만 */
+#mobileMenuLoginContainer .loginButtonBox {
+	justify-content:space-evenly;
+	width:100%;
+}
+#mobileMenuLoginContainer .loginoutButton  {
+	background-color: var(--color6);
+}
+#mobileMenuLoginContainer .joinButton {
+    background-color: var(--color5);
+}
+
+/* 레이아웃 - 검색창 */
+HEADER #searcherBox {
+	position: relative; width: 100vw; height: 15vw;
+
+	box-sizing: border-box;
+    border: 2.5vw solid var(--color8);
+}
+HEADER #searcherBox .searcher,
+HEADER #searcherBox .magnifier {
+	position: absolute; top: 50% !important; transform: translateY(-50%);
+	font-size:8vw; line-height:8vw;
+	background:none;
+}
+HEADER #searcherBox .searcher {
+	height: 15vw; 
+}
+HEADER #searcherBox .magnifier {
+	right:0;
+}

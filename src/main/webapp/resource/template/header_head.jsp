@@ -8,11 +8,16 @@
 <!-- 인코딩 설정 -->
 <META CHARSET="UTF-8">
 
+<!-- 뷰포트 설정 -->
+<META NAME="viewport" CONTENT="width=device-width, initial-scale=1.0">
+
 <!-- 라이브러리 로드 -->
 <SCRIPT TYPE="TEXT/JAVASCRIPT" SRC="<%=root%>/resource/js/main.js"></SCRIPT>
 
 <!-- CSS 로드 -->
 <LINK REL="STYLESHEET" HREF="<%=root%>/resource/css/main.css" />
+<LINK REL="STYLESHEET" MEDIA="(min-width:769px)" HREF="<%=root%>/resource/css/main_pc.css" />
+<LINK REL="STYLESHEET" MEDIA="(max-width:768px)" HREF="<%=root%>/resource/css/main_mobile.css" />
 
 <!-- 파비콘 로드 -->
 <link rel="apple-touch-icon" sizes="180x180" href="<%=root%>/resource/image/fabicon/apple-touch-icon.png">
