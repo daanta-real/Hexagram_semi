@@ -44,8 +44,8 @@ if(isLogin) {
 <DIV ID='mobileMenuLayer'>
 	
 	<!-- 모바일 메뉴 - 햄버거 버튼 -->
-	<INPUT ID='mobileMenuHamburgerInput' TYPE='checkbox'>
-	<DIV CLASS="hamburgerBox">
+	<!-- <INPUT ID='mobileMenuHamburgerInput' TYPE='hidden'> -->
+	<DIV ID="hamburgerBox">
 		<LABEL FOR='mobileMenuHamburgerInput'>
 			<SPAN></SPAN>
 			<SPAN></SPAN>

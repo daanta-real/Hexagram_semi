@@ -1,8 +1,5 @@
 // 엘리먼트 획득
-function getEl(id) {
-    if(document.all) return document.all(id);
-    if(document.getElementById) return document.getElementById(id);
-}
+var getEl = (id) => document.getElementById(id);
 
 // GET 파라미터 가져오기 - 없으면 '' 회신
 function getParam(name) {
@@ -30,3 +27,8 @@ const debug_rainbowQueryRun = () => {
 	console.log('"' + query + '"의 쿼리에 해당하는 레이어 레인보우화 실행됨');
 	rainbow(query, { padding:"0.3rem", margin:"0.2rem" });
 };
+
+/*
+document.getElementById("mobileMenuContainer").addEventListener("onload", () => {
+	this.style.tranform = "translateX(-80vw)";
+});*/

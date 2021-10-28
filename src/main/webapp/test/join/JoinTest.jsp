@@ -9,6 +9,7 @@
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
+<% String root = request.getContextPath(); %>
 <!-- 페이지 내용 시작 -->
 
 <!-- 	곧 실행할 Join Test -->
@@ -16,5 +17,6 @@
 <!-- 페이지 내용 끝. -->
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>
+<SCRIPT TYPE="TEXT/JAVASCRIPT" SRC="<%=root%>/resource/js/footer.js"></SCRIPT>
 </BODY>
 </HTML>

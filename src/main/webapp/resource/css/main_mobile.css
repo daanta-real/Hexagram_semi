@@ -48,28 +48,28 @@ SECTION {
 	
 	background:var(--color7);
 	
-	transform:translateX(-60vw); transition:all 0.3s;
-}
-#mobileMenuHamburgerInput:checked ~ #mobileMenuLayer {
-	width:100vw;
+	transform:translateX(-60vw);
+	transition:transform 0.3s ease-in 0;
 }
 #mobileMenuHamburgerInput:checked ~ #mobileMenuContainer  {
 	transform:translateX(0);
 }
 
 /* 햄버거 - 레이아웃 */
-#mobileMenuLayer .hamburgerBox {
+#mobileMenuLayer #hamburgerBox {
 	position:fixed;
 	width:var(--hamburger-width); height:var(--hamburger-height);
 	bottom:0; right:0;
 }
 #mobileMenuHamburgerInput { display:none; }
-#mobileMenuHamburgerInput + .hamburgerBox > label {
+#mobileMenuHamburgerInput + #hamburgerBox > label {
     position:relative; display:block;
 	width:100%; height:100%;
 	cursor:pointer;
 }
-#mobileMenuHamburgerInput + .hamburgerBox > label span {
+
+/* 햄버거 - 짝대기들 */
+#mobileMenuHamburgerInput + #hamburgerBox > label span {
 	position:absolute;
 	width:calc(100% - var(--hamburger-padding) * 2); margin-left:var(--hamburger-padding);
 	height:var(--hamburger-thickness);
@@ -79,22 +79,22 @@ SECTION {
 	transition-timing-function: ease-out;
 }
 
-/* 햄버거 - 짝대기들 */
-#mobileMenuHamburgerInput + .hamburgerBox > label span:nth-child(1) {
+/* 햄버거 - 짝대기들 상세 */
+#mobileMenuHamburgerInput + #hamburgerBox > label span:nth-child(1) {
 	transition-duration: 0.15s; top:var(--hamburger-padding);
 }
-#mobileMenuHamburgerInput + .hamburgerBox > label span:nth-child(2) {
+#mobileMenuHamburgerInput + #hamburgerBox > label span:nth-child(2) {
 	transition-duration: 0.20s; top:50%;
 	transform:translateY(-50%);
 }
-#mobileMenuHamburgerInput + .hamburgerBox > label span:nth-child(3) {
+#mobileMenuHamburgerInput + #hamburgerBox > label span:nth-child(3) {
 	transition-duration: 0.15s; bottom:var(--hamburger-padding);
 }
 
-/* 햄버거 - 짝대기들 - 클릭시 */
-#mobileMenuHamburgerInput:checked + .hamburgerBox > label span:nth-child(1) { top:50%; transform:translateY(-50%) rotate(45deg); }
-#mobileMenuHamburgerInput:checked + .hamburgerBox > label span:nth-child(2) { opacity:0; }
-#mobileMenuHamburgerInput:checked + .hamburgerBox > label span:nth-child(3) { bottom:50%; transform:translateY(50%) rotate(-45deg); }
+/* 햄버거 - 짝대기들 - INPUT 체크 ON 시 */
+#mobileMenuHamburgerInput:checked + #hamburgerBox > label span:nth-child(1) { top:50%; transform:translateY(-50%) rotate(45deg); }
+#mobileMenuHamburgerInput:checked + #hamburgerBox > label span:nth-child(2) { opacity:0; }
+#mobileMenuHamburgerInput:checked + #hamburgerBox > label span:nth-child(3) { bottom:50%; transform:translateY(50%) rotate(-45deg); }
 
 /* 모바일 전용 로그인 메뉴 레이아웃 */
 #mobileMenuLoginContainer {

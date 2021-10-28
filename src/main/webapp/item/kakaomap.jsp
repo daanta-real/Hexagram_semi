@@ -15,6 +15,9 @@
 <!-- 페이지 내용 시작 -->
 
 <%
+
+String root = request.getContextPath();
+
 int itemIdx = Integer.parseInt(request.getParameter("itemIdx"));
 
 ItemDao itemDao = new ItemDao();
@@ -70,5 +73,6 @@ ItemDto itemDto = itemDao.get(itemIdx);
 <!-- 페이지 내용 끝. -->
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>
+<SCRIPT TYPE="TEXT/JAVASCRIPT" SRC="<%=root%>/resource/js/footer.js"></SCRIPT>
 </BODY>
 </HTML>

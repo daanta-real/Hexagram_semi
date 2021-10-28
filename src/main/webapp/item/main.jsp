@@ -24,5 +24,6 @@
 <!-- 페이지 내용 끝. -->
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>
+<SCRIPT TYPE="TEXT/JAVASCRIPT" SRC="<%=root%>/resource/js/footer.js"></SCRIPT>
 </BODY>
 </HTML>
