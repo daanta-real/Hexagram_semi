@@ -55,7 +55,7 @@ BODY {
     border-radius:var(--main_border_radius);
 
     background: var(--color_bg);
-    box-shadow: 0 0 1rem 0 #8884;
+    box-shadow: 0 0 1rem 0 #8883;
 }
 
 /* 외곽선 */
