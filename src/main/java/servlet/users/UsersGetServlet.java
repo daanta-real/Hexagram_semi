@@ -18,7 +18,7 @@ public class UsersGetServlet extends HttpServlet {
 
 		System.out.println("[회원 상세]");
 
-		UsersDto dto = new UsersDao().get(req.getParameter("id"));
+		UsersDto dto = new UsersDao().get(req.getParameter("usersId"));
 		System.out.println(dto);
 
 	} catch (Exception e) { e.printStackTrace(); } }
