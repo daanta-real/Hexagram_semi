@@ -32,7 +32,7 @@ public class ItemReplyInsertTargetServlet extends HttpServlet{
 				itemReplyDto.setItemIdx(itemIdx);
 				itemReplyDto.setUsersIdx(usersIdx);
 				itemReplyDto.setItemReplyDetail(itemReplyDetail);
-				itemReplyDto.setItemReplyTargetIdx(itemReplyTargetIdx);
+				//itemReplyDto.setItemReplyTargetIdx(itemReplyTargetIdx);
 				//Dto에 4가지의 정보를 담아서 대댓글 추가 작업 시행.
 
 				itemReplyDao.insertTarget(itemReplyDto);
