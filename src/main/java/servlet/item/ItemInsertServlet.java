@@ -12,7 +12,7 @@ import beans.ItemDao;
 import beans.ItemDto;
 
 @SuppressWarnings("serial")
-@WebServlet (urlPatterns = "/jsp/item/insert.nogari")
+@WebServlet (urlPatterns = "/item/insert.nogari")
 public class ItemInsertServlet extends HttpServlet{
 
 	@Override
