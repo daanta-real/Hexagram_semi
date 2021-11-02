@@ -77,7 +77,7 @@ String title = search ? "검색" : "관광지 목록";
 			<th>카테고리</th>
 			<th>관광지명</th>
 			<th>관광지 소개</th>
-			<th>조회수</th>
+
 		</tr>
 	</thead>
 	<tbody>
@@ -91,7 +91,7 @@ String title = search ? "검색" : "관광지 목록";
 			</a>
 			</td>
 			<td><%=itemDto.getItemDetail().substring(0, 1) %>....</td>
-			<td align ="center"><%=itemDto.getItemCount()%></td>
+
 		</tr>
 		<%} %>
 	</tbody>	

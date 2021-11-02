@@ -39,14 +39,14 @@ UsersDao usersDao = new UsersDao();
 
 <!-- 기간 표시(축제 경우에 한해서임) -->
 <%if(itemDto.getItemType().equals("축제")) {%>
-<h3 align="center"><%=itemDto.getItemPeriods()%></h3>
+<h3 align="center"><%=itemDto.getItemPeriod()%></h3>
 <%}%>
 
 <h3 align="center">
 <br>
 좋아요 표시(예정)
 <!-- 조회수 표시 -->
-/ 조회수 : [ <%=itemDto.getItemCount()%> ]
+
 
 </h3>
 
