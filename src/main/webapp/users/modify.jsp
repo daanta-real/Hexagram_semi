@@ -12,18 +12,17 @@
 <SECTION>
 <% String root = request.getContextPath(); %>
 <!--세션에 저장된 아이디 -->
-<%String usersId = (String)session.getAttribute("usersId"); %>	
+<%String sessionId = (String)session.getAttribute("usersId"); %>	
 
 <!-- 회원상세정보 불러와서 원래 정보 보여주기 -->
 <%
 UsersDao usersDao = new UsersDao();
-UsersDto usersDto = usersDao.get(usersId);
+UsersDto usersDto = usersDao.get(sessionId);
 %>
 <!-- 페이지 내용 시작 -->
-<form action="users/modify.nogari" method="post">
+<form action="<%=root %>/users/modify.nogari" method="post">
 <input type="hidden" name="usersId" value="<%=usersDto.getUsersId()%>">
 <input type="hidden" name="usersPw" value="<%=usersDto.getUsersPw()%>">
-<input type="hidden" name="usersGrade" value="<%=usersDto.getUsersGrade()%>">	
 	<table border="0">
 		<thead>
 			<tr>
@@ -79,6 +78,14 @@ UsersDto usersDto = usersDao.get(usersId);
 		</tfoot>
 	</table>	
 </form>
+
+<!-- 변경실패시 fail파라미터 확인하고 메세지 보여주기-->
+<%if(request.getParameter("fail") != null) {%>
+	<h5>
+		<font color="red">회원정보 변경에 실패하였습니다. 입력정보를 다시 확인해 주세요</font>
+	</h5>
+<%} %>
+
 <!-- 페이지 내용 끝. -->
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>
