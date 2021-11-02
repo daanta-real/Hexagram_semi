@@ -7,8 +7,8 @@
 }
 
 /* DEBUG용 공통 속성 */
-#debugContainer { position:fixed; z-index:9999999999999999999999; left:0; bottom:0; min-width:50vw; max-width:50vw;}
-#debugContainer * { font-size:1rem; min-width:50vw; max-width:50vw;}
+#debugContainer { position:fixed; z-index:9999999999999999999999; left:0; bottom:0; min-width:50vw; max-width:50vw; }
+#debugContainer * { font-size:1rem; min-width:50vw; max-width:50vw; }
 
 /* 일반 공통 속성 */
 :root {
@@ -55,7 +55,7 @@ BODY {
     border-radius:var(--main_border_radius);
 
     background: var(--color_bg);
-    box-shadow: 0 0 1rem 0 #8883;
+    box-shadow: 0 0 1rem 0 #8882;
 }
 
 /* 외곽선 */
@@ -65,7 +65,7 @@ HEADER #menuContainer,
 SECTION,
 FOOTER {
     box-sizing:border-box;
-    border:var(--main_border) solid #8884;
+    border:var(--main_border) solid #8882;
 }
 
 /* 전체 모서리 */
@@ -125,8 +125,7 @@ HEADER #logo {
 /* HEADER - SEARCH */
 HEADER #searcherContainer {
 	position:relative; width:100%; height:5rem;
-	margin:0;
-	border-top:0; border-bottom:0;
+	margin:0; border-top:0; border-bottom:0;
 }
 HEADER #searcherBox {
 	position:relative;
@@ -150,6 +149,25 @@ HEADER #searcherContainer .searcher {
 HEADER #searcherContainer .searcher:focus {
 	border:none; outline:none;
 }
+HEADER #searcherContainer .magnifier {
+	cursor:pointer;
+}
+
+/* 상세검색 버튼을 누름에 따른 레이어 변화 설정 */
+
+#searcherDetailArrow {
+	display:inline; font-size:0; transition:all 0.3s;
+}
+#searcherDetailBtn:checked ~ #searcherDetailArrow {
+	font-size:inherit; transform:rotate(90deg);
+}
+
+#mainDetailSearcher {
+	display:none; height:0; transition:all 0.3s;	
+}
+#searcherDetailBtn:checked ~ #mainDetailSearcher {
+	display:block; height:auto;
+}
 
 /* HEADER - USER */
 HEADER #userContainer {
@@ -168,7 +186,7 @@ HEADER #userContainer .userButton {
 	background: var(--color1);
     border-radius: 0.5rem;
     padding: 0.2rem 1rem;
-    box-shadow: 0 0 1rem #8884;
+    box-shadow: 0 0 1rem #8882;
 }
 HEADER #userContainer span {
 	border-radius:20px;
@@ -183,7 +201,7 @@ HEADER #menuContainer {
 
 	background:var(--color4);
 	font-size:1.4rem; color:var(--color8);
-	box-shadow: 0 0 1rem #8885;
+	box-shadow: 0 0 1rem #8882;
 }
 HEADER #menuContainer a {
 	margin:0.5rem 2rem;
