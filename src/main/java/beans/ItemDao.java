@@ -11,10 +11,16 @@ import util.JdbcUtils;
 public class ItemDao {
 
 	// 전체 조회
-	public List<ItemDto> list() throws Exception {
-		String sql = "SELECT * FROM item order by item_idx desc";
+	public List<ItemDto> list(int begin, int end) throws Exception {
+		String sql = "select * from (" 
+						+ "select rownum rn,TMP.*from("
+							+ "SELECT * FROM item order by item_idx desc" 
+						+ ")TMP"
+					+ ")where rn between ? and ?"; 
 		Connection con = JdbcUtils.connect();
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, begin);
+		ps.setInt(2, end);
 		ResultSet rs = ps.executeQuery();
 
 		List<ItemDto> list = new ArrayList<>();
