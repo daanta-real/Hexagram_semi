@@ -105,7 +105,7 @@ if(isLogin) {
 	<FORM ID='searcherContainer' CLASS="flexCenter flexCol" METHOD='GET' ACTION=searchAll.jsp>
 		<DIV ID='searcherBox'>
 			<INPUT CLASS="searcher textCenter" value="<%=searcher%>" placeholder="검색" ALT="검색창" />
-			<SPAN CLASS="magnifier">🔍</SPAN>
+			<DIV CLASS="magnifier">🔍</DIV>
 		</DIV>
 	</FORM>
 	

@@ -123,50 +123,32 @@ HEADER #logo {
 }
 
 /* HEADER - SEARCH */
-HEADER #searcherContainer {
+#searcherContainer {
 	position:relative; width:100%; height:5rem;
-	margin:0; border-top:0; border-bottom:0;
+	margin:0; border-top:0 !important; border-bottom:0 !important;
 }
-HEADER #searcherBox {
+#searcherBox {
 	position:relative;
-	width:17rem; height:1.5rem;
-	
-	border:0.4rem solid var(--color8);
+	width:17rem; height:2.8rem;
+}
+#searcherBox .searcher {
+    position:absolute; left:0; top:0; width:100%; height:100%;
+
+	box-sizing:border-box; border:0.4rem solid var(--color8);
 	padding:0.2rem;
 	
 	background:white;
     font-family:'mainFont'; font-size:2.2rem; line-height:1.6rem; text-align:left;
-}
-HEADER #searcherContainer .searcher {
-    position: relative;
-    top: -.2rem;
-    width: 14.8rem;
-    height: 1.7rem;
-    border:0;
-    text-align: left;
-    font-size: 2rem;
-}
-HEADER #searcherContainer .searcher:focus {
-	border:none; outline:none;
-}
-HEADER #searcherContainer .magnifier {
-	cursor:pointer;
-}
 
-/* 상세검색 버튼을 누름에 따른 레이어 변화 설정 */
-
-#searcherDetailArrow {
-	display:inline; font-size:0; transition:all 0.3s;
 }
-#searcherDetailBtn:checked ~ #searcherDetailArrow {
-	font-size:inherit; transform:rotate(90deg);
+#searcherBox .searcher:focus {
+	outline:none;
 }
-
-#mainDetailSearcher {
-	display:none; height:0; transition:all 0.3s;	
-}
-#searcherDetailBtn:checked ~ #mainDetailSearcher {
-	display:block; height:auto;
+#searcherBox .magnifier {
+    position: absolute;
+    top: 50%; transform: translateY(-50%); right: 0.6rem;
+    font-size: 1.4rem; line-height: 100%;
+    cursor: pointer;
 }
 
 /* HEADER - USER */
@@ -207,6 +189,7 @@ HEADER #menuContainer a {
 	margin:0.5rem 2rem;
 	padding:0rem 2rem;
 	transition:background 0.2s linear 0;
+	transition:background-color 0.3s;????????????
 }
 HEADER #menuContainer a:hover {
 	background:var(--color1);

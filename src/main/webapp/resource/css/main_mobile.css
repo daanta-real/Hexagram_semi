@@ -140,21 +140,11 @@ SECTION {
 }
 
 /* 레이아웃 - 검색창 */
-HEADER #searcherBox {
-	position: relative; width: 100vw; height: 15vw;
-
-	box-sizing: border-box;
-    border: 2.5vw solid var(--color8);
-}
-HEADER #searcherBox .searcher,
-HEADER #searcherBox .magnifier {
+#searcherContainer { height:fit-content; }
+#searcherBox { width: 100vw; height: 15vw; }
+#searcherBox .searcher, #searcherBox .magnifier {
 	position: absolute; top: 50% !important; transform: translateY(-50%);
 	font-size:8vw; line-height:8vw;
-	background:none;
 }
-HEADER #searcherBox .searcher {
-	height: 15vw; 
-}
-HEADER #searcherBox .magnifier {
-	right:0;
-}
+#searcherBox .searcher { height: 15vw; padding:0; }
+#searcherBox .magnifier { right:3vw; font-size:6.5vw; background:none; }
