@@ -8,6 +8,7 @@ import beans.UsersDto;
 public class UsersUtils {
 
 	// 로그인 검사: 로그인 아디/비번 일치 여부 체크 결과를 반환.
+	// 회원탈퇴 검사도 가능 입력한 아이디/비밀번호에 해장하는 정보가 있는지 확인
 	// 성공시 해당 유저의 UsersDto 반환
 	// 실패시 null 반환
 	public static UsersDto getValidDto(String usersId, String usersPw) throws Exception {
