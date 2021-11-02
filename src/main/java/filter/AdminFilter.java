@@ -11,8 +11,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import util.HexaLibrary;
-
 // 관리자 페이지 대상.
 @WebFilter( urlPatterns = {
 	"/users/list.nogari"
@@ -30,7 +28,7 @@ public class AdminFilter implements Filter {
 
 			// 세션 검사 - grade가 정확히 관리자여야만 함.
 			String sessionGrade = (String) req.getSession().getAttribute("usersGrade");
-			if(!HexaLibrary.isExists(sessionGrade) && sessionGrade.equals("관리자")) {
+			if(sessionGrade != null && sessionGrade.equals("관리자")) {
 				System.out.println("[필터] 관리자가 아닙니다. (등급: '" + sessionGrade + "') 관리자 필터 통과 실패.");
 				((HttpServletResponse) response).sendError(401); // 로그인페이지로 이동
 			}

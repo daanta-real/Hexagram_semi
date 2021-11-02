@@ -11,8 +11,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import util.HexaLibrary;
-
 // 모든 JSP 파일, 모든 서블릿 파일 대상. (각종 설정파일 등 제외)
 @WebFilter( urlPatterns = {
 	"/users/join_success.jsp",
@@ -30,7 +28,7 @@ public class LoginFilter implements Filter {
 
 			// 세션 검사
 			String sessionId = (String) req.getSession().getAttribute("usersId");
-			if(!HexaLibrary.isExists(sessionId)) {
+			if(sessionId == null || sessionId.equals("")) {
 				System.out.println("[필터] 로그인되지 않아 로그인 검사 필터를 통과하지 못했습니다. (세션ID:'" + sessionId + "') 로그인 필터 통과 실패.");
 				((HttpServletResponse) response).sendError(401); // 로그인페이지로 이동
 			}

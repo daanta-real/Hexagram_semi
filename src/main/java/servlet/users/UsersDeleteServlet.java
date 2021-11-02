@@ -31,7 +31,7 @@ public class UsersDeleteServlet extends HttpServlet {
 
 			// 1. 입력값 검사: 지울 id값이 들어와 있어야 됨
 			System.out.print("[회원 탈퇴] 1. id 빈값 여부 확인..");
-			if(!HexaLibrary.isExists(sessionId)) throw new Exception();
+			if(sessionId == null || sessionId.equals("")) throw new Exception();
 			System.out.println("id가 빈값이 아닌 것을 확인했습니다. 계속 진행합니다.");
 
 			// 2. 권한 검사: 해당 ID를 조작할 권한이 있는 상황인지 확인

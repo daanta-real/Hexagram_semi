@@ -20,11 +20,6 @@ public class HexaLibrary {
 		session.removeAttribute("usersGrade");
 	}
 
-	// 빈값검사기. 빈값이 아닐 경우에만 true를 회신, 빈값이면 false를 회신
-	public static boolean isExists(String str) {
-		return str != null && str.trim().length() > 0;
-	}
-
 	// ,로 분리된 문자열 → List<>
 	public static List<String> strToList(String str) {
 		String[] splitted = str.split(",");
