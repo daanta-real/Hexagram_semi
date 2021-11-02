@@ -13,7 +13,7 @@
 
 <h1>회원 로그인</h1>
 <form method='post' action='<%=root%>/users/login.nogari'>
-<table border=1>
+<table border="1">
 <tbody>
 	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'></td></tr>
 	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'></td></tr>
