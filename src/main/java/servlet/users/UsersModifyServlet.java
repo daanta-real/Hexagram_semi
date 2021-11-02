@@ -14,7 +14,7 @@ import util.HexaLibrary;
 import util.UsersUtils;
 
 @SuppressWarnings("serial")
-@WebServlet("/usersModify")
+@WebServlet("/users/modify.nogari")
 public class UsersModifyServlet extends HttpServlet {
 
 	@Override
