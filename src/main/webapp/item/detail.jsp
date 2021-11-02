@@ -71,9 +71,9 @@ request.getSession().setAttribute("boardCountView", boardCountView);
 <!-- 관리자 또는 글 작성자가 보는 경우 글작성 / 수정 / 삭제가 가능하도록 설정 : 수정 삭제의 경우 필터에서도 처리가능하도록 해야함.-->
 <%if(isManager || isMyboard){%>
 <h4 align="center">
-<a href="<%=root%>/jsp/item/insert.jsp">새 글작성</a>
-<a href="<%=root%>/jsp/item/edit.jsp?itemIdx=<%=itemIdx%>">수정</a>
-<a href="<%=root%>/jsp/item/delete.nogari?itemIdx=<%=itemIdx%>">삭제</a>
+<a href="<%=root%>/item/insert.jsp">새 글작성</a>
+<a href="<%=root%>/item/edit.jsp?itemIdx=<%=itemIdx%>">수정</a>
+<a href="<%=root%>/item/delete.nogari?itemIdx=<%=itemIdx%>">삭제</a>
 </h4>
 <%}%>
 
