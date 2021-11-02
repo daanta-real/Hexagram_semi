@@ -14,7 +14,7 @@ import util.HexaLibrary;
 import util.UsersUtils;
 
 @SuppressWarnings("serial")
-@WebServlet("/users/modify.nogari")
+@WebServlet(urlPatterns="/users/modify.nogari")
 public class UsersModifyServlet extends HttpServlet {
 
 	@Override
@@ -28,14 +28,15 @@ public class UsersModifyServlet extends HttpServlet {
 			String sessionId    = (String) session.getAttribute("usersId"   );
 			String sessionGrade = (String) session.getAttribute("usersGrade");
 			System.out.print("[회원 수정] ");
-			String usersId    = req.getParameter("id"   );
-			String usersPw    = req.getParameter("pw"   );
-			String usersNick  = req.getParameter("nick" );
-			String usersEmail = req.getParameter("email");
-			String usersGrade = req.getParameter("grade");
+			String usersId    = req.getParameter("usersId"   );
+			String usersPw    = req.getParameter("usersPw"   );
+			String usersNick  = req.getParameter("usersNick" );
+			String usersEmail = req.getParameter("usersEmail");
+			String usersPhone = req.getParameter("usersPhone");
+			String usersGrade = req.getParameter("usersGrade");
 			System.out.println("usersId = '" + usersId + "', usersPw = '" + usersPw
 				+ "', usersNick = '" + usersNick + "', usersEmail = '" + usersEmail
-				+ "', usersGrade = '" + usersGrade + "'");
+				+ "', usersPhone = '" + usersPhone + "', usersGrade = '" + usersGrade + "' '");
 
 			// 1. 입력값 검사: id는 무조건 있어야 되고, 추가로
 			System.out.print("[회원 수정] 1. 입력값 존재여부 검사..");
@@ -82,6 +83,7 @@ public class UsersModifyServlet extends HttpServlet {
 			System.out.print("[회원 수정] 5. 최종 결과: ");
 			if(isSucceed) {
 				System.out.println("수정 성공.");
+				resp.sendRedirect(req.getContextPath()+"/users/modify_success.jsp");
 			} else {
 				System.out.println("수정 실패.");
 				throw new Exception();
