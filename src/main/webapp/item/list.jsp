@@ -76,6 +76,7 @@ startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>
 	String title = search ? "검색" : "관광지 목록";
 %>
 
+
 <h2><%=title %></h2>
 <h5>(usersId = <%=usersId %>, usersIdx = <%=usersIdx %>, grade=<%=usersGrade %>)</h5>
 
@@ -105,10 +106,11 @@ startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>
 	<input type="submit" value="검색">
 </form>
 
-
+<br>
 <%if(!list.isEmpty()){%>
 <%-- 전체 목록 조회 --%>
-<table border="1" width="700">
+
+<table border="1" width="500">
 	<thead>
 		<tr>
 			<th>카테고리</th>
@@ -137,14 +139,14 @@ startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>
 <h2>결과가 없습니다.</h2>
 <%} %>
 <br><br>
-
 [이전] 
+
 
 <%for(int i = startBlock; i<=finishBlock; i++) {%>
 	<%if(search){ %>
-		<a href="#?column=<%=column %>&keyword<%=keyword %>&p=<%=i %>"><%=i %></a>
+		<a href="list.jsp?column=<%=column %>&keyword<%=keyword %>&p=<%=i %>"><%=i %></a>
 	<%}else{ %>
-		<a href="#?p=<%=i %>"><%=i %></a>
+		<a href="list.jsp?p=<%=i %>"><%=i %></a>
 	<%} %>
 <%} %>
 
@@ -156,11 +158,8 @@ startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>
 <form action="insert.jsp">
 	<input type="submit" value="글쓰기">
 </form>
-<%}else{%>
-<form action="insert.jsp"> 
-	<input type="submit" value="글쓰기"> 
-</form> 
 <%} %>
+
  
 <!-- 페이지 내용 끝. -->
 </SECTION>
