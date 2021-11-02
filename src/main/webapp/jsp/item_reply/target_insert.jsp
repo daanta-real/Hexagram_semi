@@ -11,13 +11,16 @@
    
  <form action="<%=request.getContextPath()%>/jsp/item_reply/target_insert.nogari" method="post">  
    <!--    	대댓글 내용 전송 -->
-   				<textarea name="itemReplyDetail" align="center" placeholder="대댓글 입력" required rows="3" cols="110"></textarea>
+   <tr>
+   	<td colspan="4">
+   				<textarea name="itemReplyDetail" align="center" placeholder="대댓글 입력" required rows="3" cols="70"></textarea>
 				
 				<input type="hidden" name="usersIdx" value="<%=usersIdx%>">
 				<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
 				<input type="hidden" name="itemReplyTargetIdx" value="<%=itemReplyTargetIdx%>">
 				
 				<input type="submit" value="대댓글 작성 완료">
-	
+		</td>
+	</tr>
  </form>
 	
