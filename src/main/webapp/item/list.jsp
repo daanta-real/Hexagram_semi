@@ -26,49 +26,54 @@
 	boolean admin = usersGrade != null && usersGrade.equals("관리자");
 %>
 
-<%-- 페이지 네이션 --%>
+<%-- 페이지네이션 --%>
 <%
-	//이 페이지에 글을 10개씩 보여줄것이다.
 	int psize = 10;
 	int p;
-
+	
 	try{
-		//p라는 파라미터에서 전달되는 값을 숫자로 대입
 		p = Integer.parseInt(request.getParameter("p"));
-		//강제 예외 : p가 0이하라면 문제가 발생한것으로 간주
-		if(p<=0){
-			throw new Exception(); 
+		
+		if(p <= 0){
+			throw new Exception();
 		}
 	}
 	catch(Exception e){
-		//문제가 발생하면 페이지를 1로 설정
 		p = 1;
 	}
 	
-	int end = p*psize ;
-	int begin = end-(psize-1);
-	
+	int end = p * psize;
+	int begin = end - (psize - 1);
 %>
-p = <%=p %>, begin = <%=begin %>, end=<%=end %>
+p = <%=p %>, begin = <%=begin %>, end = <%=end %>
 
+<%-- 네이게이터 --%>
+<%
+	int bsize = 10;
+
+	int startBlock = (p-1) / bsize * bsize + 1;
+	int finishBlock = startBlock + (bsize - 1);
+%> 
+<br>
+startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>
 <%-- 검색 및 목록 처리 --%>
 <%
-String column = request.getParameter("column");
-String keyword = request.getParameter("keyword");
-String root = request.getContextPath();
+	String column = request.getParameter("column");
+	String keyword = request.getParameter("keyword");
+	String root = request.getContextPath();
 
-boolean search = column != null && keyword != null && !keyword.equals("") && !column.equals("");
+	boolean search = column != null && keyword != null && !keyword.equals("") && !column.equals("");
 
-ItemDao itemDao = new ItemDao();
-List<ItemDto> list = new ArrayList<>();
+	ItemDao itemDao = new ItemDao();
+	List<ItemDto> list;
 
-if(search){
-	list = itemDao.searchList(column, keyword, begin, end);
-}else{
-	list = itemDao.list(begin, end);
-}
+	if(search){
+		list = itemDao.searchList(column, keyword);
+	}else{
+		list = itemDao.list(begin, end);
+	}
 
-String title = search ? keyword + "검색" : "관광지 목록";
+	String title = search ? "검색" : "관광지 목록";
 %>
 
 <h2><%=title %></h2>
@@ -76,20 +81,20 @@ String title = search ? keyword + "검색" : "관광지 목록";
 
 <form action="<%=root%>/item/list.jsp" method="get">
 <select name="column">
-		<%if(column != null && column.equals("itemType")) {%>
-		<option value="itemType" selected>카테고리</option>
+		<%if(column != null && column.equals("item_type")) {%>
+		<option value="item_type" selected>카테고리</option>
 		<%}else{ %>
-		<option value="itemType">카테고리</option>
+		<option value="item_type">카테고리</option>
 		<%} %>
-		<%if(column != null && column.equals("itemName")) {%>
-		<option value="itemName" selected>관광지명</option>
+		<%if(column != null && column.equals("item_name")) {%>
+		<option value="item_name" selected>관광지명</option>
 		<%}else{ %>
-		<option value="itemName">관광지명</option>
+		<option value="item_name">관광지명</option>
 		<%} %>
-		<%if(column!=null && column.equals("itemDetail")) {%>
-		<option value="itemDetail" selected>내용</option>
+		<%if(column!=null && column.equals("item_detail")) {%>
+		<option value="item_detail" selected>내용</option>
 		<%}else{ %>
-		<option value="itemDetail">내용</option>
+		<option value="item_detail">내용</option>
 		<%} %>
 	</select>
 	<%if(keyword == null){ %>
@@ -101,7 +106,7 @@ String title = search ? keyword + "검색" : "관광지 목록";
 </form>
 
 
-<%if(list.size() != 0){%>
+<%if(!list.isEmpty()){%>
 <%-- 전체 목록 조회 --%>
 <table border="1" style="width:700px;">
 	<thead>
@@ -132,7 +137,19 @@ String title = search ? keyword + "검색" : "관광지 목록";
 <h2>결과가 없습니다.</h2>
 <%} %>
 <br><br>
-[이전] 1 2 3 4 5 6 7 8 9 [다음]
+
+[이전] 
+
+<%for(int i = startBlock; i<=finishBlock; i++) {%>
+	<%if(search){ %>
+		<a href="#?column=<%=column %>&keyword<%=keyword %>&p=<%=i %>"><%=i %></a>
+	<%}else{ %>
+		<a href="#?p=<%=i %>"><%=i %></a>
+	<%} %>
+<%} %>
+
+[다음]
+
 <br><br>
 <%-- 관리자만 글쓰기 가능 --%>
 <%if(admin){ %>
