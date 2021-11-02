@@ -23,20 +23,28 @@ public class LoginFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-		// 준비
-		HttpServletRequest req = (HttpServletRequest)request;
-		System.out.println("[필터 작동 - 로그인 검사] from " + req.getRequestURL().toString());
+		try {
+			// 준비
+			HttpServletRequest req = (HttpServletRequest)request;
+			System.out.println("[필터 작동 - 로그인 검사] from " + req.getRequestURL().toString());
 
-		// 세션 검사
-		String sessionId = (String) req.getSession().getAttribute("usersId");
-		if(!HexaLibrary.isExists(sessionId)) {
-			System.out.println("[필터] 로그인되지 않아 로그인 검사 필터를 통과하지 못했습니다. (세션ID:'" + sessionId + "') 로그인 필터 통과 실패.");
-			((HttpServletResponse) response).sendError(401); // 로그인페이지로 이동
+			// 세션 검사
+			String sessionId = (String) req.getSession().getAttribute("usersId");
+			if(!HexaLibrary.isExists(sessionId)) {
+				System.out.println("[필터] 로그인되지 않아 로그인 검사 필터를 통과하지 못했습니다. (세션ID:'" + sessionId + "') 로그인 필터 통과 실패.");
+				((HttpServletResponse) response).sendError(401); // 로그인페이지로 이동
+			}
+
+			// 다음 필터로 넘김
+			System.out.println("[필터] 로그인 확인됨. 로그인 필터 통과.");
+			chain.doFilter(request, response);
+
+		} catch(Exception e) {
+
+			System.out.println("[필터] 처리 중에 에러 발생");
+			e.printStackTrace();
+
 		}
-
-		// 다음 필터로 넘김
-		System.out.println("[필터] 로그인 확인됨. 로그인 필터 통과.");
-		chain.doFilter(request, response);
 
 	}
 
