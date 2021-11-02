@@ -30,6 +30,8 @@ public class UsersUtils {
 			dto.setUsersEmail(rs.getString("users_email"));
 			dto.setUsersPhone(rs.getString("users_phone"));
 			dto.setUsersGrade(rs.getString("users_grade"));
+			dto.setUsersJoin(rs.getDate("users_join"));
+			dto.setUsersPoint(rs.getInt("users_point"));
 		}
 
 		// 마무리
