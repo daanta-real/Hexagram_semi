@@ -7,15 +7,17 @@ public class ItemDto {
 	private int usersIdx;
 	private String itemType;
 	private String itemName;
-	private String itemAddress;
 	private String itemDetail;
-	private String itemTags;
-	private Date itemDate;
-	private String itemPeriods;
+	private String itemPeriod;
 	private String itemTime;
 	private String itemHomepage;
 	private String itemParking;
-	private int itemCount;
+	private String itemAddress;
+	private Date itemDate;
+	private int itemCountView;
+	private int itemCountReply;
+	
+	
 	public int getItemIdx() {
 		return itemIdx;
 	}
@@ -40,27 +42,41 @@ public class ItemDto {
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
-	public String getItemAddress() {
-		return itemAddress;
-	}
-	public void setItemAddress(String itemAddress) {
-		this.itemAddress = itemAddress;
-	}
 	public String getItemDetail() {
-		if(itemDetail==null)
-			return "";
 		return itemDetail;
 	}
 	public void setItemDetail(String itemDetail) {
 		this.itemDetail = itemDetail;
 	}
-	public String getItemTags() {
-		if(itemTags==null)
-			return "";
-		return itemTags;
+	public String getItemPeriod() {
+		return itemPeriod;
 	}
-	public void setItemTags(String itemTags) {
-		this.itemTags = itemTags;
+	public void setItemPeriod(String itemPeriod) {
+		this.itemPeriod = itemPeriod;
+	}
+	public String getItemTime() {
+		return itemTime;
+	}
+	public void setItemTime(String itemTime) {
+		this.itemTime = itemTime;
+	}
+	public String getItemHomepage() {
+		return itemHomepage;
+	}
+	public void setItemHomepage(String itemHomepage) {
+		this.itemHomepage = itemHomepage;
+	}
+	public String getItemParking() {
+		return itemParking;
+	}
+	public void setItemParking(String itemParking) {
+		this.itemParking = itemParking;
+	}
+	public String getItemAddress() {
+		return itemAddress;
+	}
+	public void setItemAddress(String itemAddress) {
+		this.itemAddress = itemAddress;
 	}
 	public Date getItemDate() {
 		return itemDate;
@@ -68,62 +84,20 @@ public class ItemDto {
 	public void setItemDate(Date itemDate) {
 		this.itemDate = itemDate;
 	}
-	public String getItemPeriods() {
-		if(itemPeriods==null)
-			return "";
-		return itemPeriods;
+	public int getItemCountView() {
+		return itemCountView;
 	}
-	public void setItemPeriods(String itemPeriods) {
-		this.itemPeriods = itemPeriods;
+	public void setItemCountView(int itemCountView) {
+		this.itemCountView = itemCountView;
 	}
-	public String getItemTime() {
-		if(itemTime==null)
-			return "";
-		return itemTime;
+	public int getItemCountReply() {
+		return itemCountReply;
 	}
-	public void setItemTime(String itemTime) {
-		this.itemTime = itemTime;
+	public void setItemCountReply(int itemCountReply) {
+		this.itemCountReply = itemCountReply;
 	}
-	public String getItemHomepage() {
-		if(itemHomepage==null)
-			return "";
-		return itemHomepage;
-	}
-	public void setItemHomepage(String itemHomepage) {
-		this.itemHomepage = itemHomepage;
-	}
-	public String getItemParking() {
-		if(itemParking==null)
-			return "";
-		return itemParking;
-	}
-	public void setItemParking(String itemParking) {
-		this.itemParking = itemParking;
-	}
-	public int getItemCount() {
-		return itemCount;
-	}
-	public void setItemCount(int itemCount) {
-		this.itemCount = itemCount;
-	}
-	public ItemDto(int itemIdx, int usersIdx, String itemType, String itemName, String itemAddress,
-			String itemDetail, String itemTags, Date itemDate, String itemPeriods, String itemTime,
-			String itemHomepage, String itemParking, int itemCount) {
-		super();
-		this.itemIdx = itemIdx;
-		this.usersIdx = usersIdx;
-		this.itemType = itemType;
-		this.itemName = itemName;
-		this.itemAddress = itemAddress;
-		this.itemDetail = itemDetail;
-		this.itemTags = itemTags;
-		this.itemDate = itemDate;
-		this.itemPeriods = itemPeriods;
-		this.itemTime = itemTime;
-		this.itemHomepage = itemHomepage;
-		this.itemParking = itemParking;
-		this.itemCount = itemCount;
-	}
+	
+	
 	public ItemDto() {
 		super();
 	}

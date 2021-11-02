@@ -4,17 +4,8 @@
 <%@page import="beans.ItemDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
-<HTML>
-<HEAD>
-<TITLE>노가리투어 - 관광지 수정</TITLE>
-<jsp:include page="/resource/template/header_head.jsp"></jsp:include>
-</HEAD>
-<BODY>
-<jsp:include page="/resource/template/header_body.jsp"></jsp:include>
-<SECTION>
-<!-- 페이지 내용 시작 -->
 
+    
  <% 
  int usersIdx = (int)request.getSession().getAttribute("usersIdx");
  String usersId = (String)request.getSession().getAttribute("usersId");
@@ -32,7 +23,7 @@
  <h3>게시글 수정(관리자 페이지)</h3>
  
  <form action="edit.nogari" method="post">
-	<table border="1" style="width:500px;">
+	<table border="1" width="500">
 		<tbody>
 			<tr>
 				<td>작성자</td>
@@ -68,7 +59,6 @@
 				<textarea name="itemDetail" rows="20" cols="50" placeholder="내용을 입력하세요"><%=itemDto.getItemDetail() %></textarea>
 				</td>
 			</tr>
-			
 			<tr>
 				<td>기간</td>
 				<td><input type="text" name="itemPeriods" placeholder="기간 입력" value="<%=itemDto.getItemPeriod()%>"></td>
@@ -96,9 +86,4 @@
 	</table>
 </form>
 
-<!-- 페이지 내용 끝. -->
-</SECTION>
-<jsp:include page="/resource/template/footer.jsp"></jsp:include>
-<SCRIPT TYPE="TEXT/JAVASCRIPT" SRC="<%=root%>/resource/js/footer.js"></SCRIPT>
-</BODY>
-</HTML>
+ 
