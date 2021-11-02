@@ -20,22 +20,9 @@ public class ItemEditServlet extends HttpServlet{
 
 		try {
 
-			ItemDto itemDto = new ItemDto();
-			itemDto.setItemIdx(Integer.parseInt(req.getParameter("itemIdx")));
-			itemDto.setItemType(req.getParameter("itemType"));
-			itemDto.setItemName(req.getParameter("itemName"));
-			itemDto.setItemAddress(req.getParameter("itemAddress"));
-			itemDto.setItemDetail(req.getParameter("itemDetail"));
-			itemDto.setItemTags(req.getParameter("itemTages"));
-			itemDto.setItemPeriods(req.getParameter("itemPeriods"));
-			itemDto.setItemTime(req.getParameter("itemTime"));
-			itemDto.setItemHomepage(req.getParameter("itemHompage"));
-			itemDto.setItemParking(req.getParameter("itemParking"));
-
-			ItemDao itemDao = new ItemDao();
-			itemDao.update(itemDto);
-
-			resp.sendRedirect(req.getContextPath() + "/item/detail.jsp?itemIdx="+itemDto.getItemIdx());
+			
+			//수정 서블릿
+			
 
 		}
 		catch(Exception e) {

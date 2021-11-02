@@ -95,6 +95,20 @@ public class ItemReplyDao {
 		con.close();
 		return list;
 	}
+
+	public void delete(int itemReplyIdx) throws Exception {
+		Connection con = JdbcUtils.connect();
+		String sql = "delete khboard_reply where khboard_reply_no=?";
+
+		//조회시에 item_reply_target_idx는 없어야한다(대댓글이 아닌 댓글임)
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setInt(1, itemReplyIdx);
+		ps.executeUpdate();
+
+		con.close();
+		
+	}
 }
 
 
