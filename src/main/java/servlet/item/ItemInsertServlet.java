@@ -12,47 +12,37 @@ import beans.ItemDao;
 import beans.ItemDto;
 
 @SuppressWarnings("serial")
-@WebServlet (urlPatterns = "/item/insert.nogari")
-public class itemInsertServlet extends HttpServlet{
+@WebServlet (urlPatterns = "/jsp/item/insert.nogari")
+public class ItemInsertServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
 		try {
-
-
-
-			//입력
-			ItemDto itemDto = new ItemDto();
+			//현재 회원이 작성
+			int usersIdx = (int)req.getSession().getAttribute("usersIdx");
+			
 			ItemDao itemDao = new ItemDao();
-			int getSequenceNo = itemDao.getSequenceNo();
-
-			itemDto.setItemIdx(getSequenceNo);
-			itemDto.setUsersIdx((int)req.getSession().getAttribute("usersIdx"));
+			ItemDto itemDto = new ItemDto();
+			
+			//itemIdx 번호 생성
+			int sequnceNo = itemDao.getSequence();
+			
+			itemDto.setItemIdx(sequnceNo);
+			itemDto.setUsersIdx(usersIdx);
 			itemDto.setItemType(req.getParameter("itemType"));
 			itemDto.setItemName(req.getParameter("itemName"));
-			itemDto.setItemAddress(req.getParameter("itemAddress"));
 			itemDto.setItemDetail(req.getParameter("itemDetail"));
-			itemDto.setItemTags(req.getParameter("itemTags"));
-			itemDto.setItemPeriods(req.getParameter("itemPeriod"));
+			itemDto.setItemPeriod(req.getParameter("itemPeriod"));
 			itemDto.setItemTime(req.getParameter("itemTime"));
 			itemDto.setItemHomepage(req.getParameter("itemHomepage"));
 			itemDto.setItemParking(req.getParameter("itemParking"));
-
-			//처리
-
-			boolean success = itemDao.insert(itemDto);
-
-			if(success) {
-				//등록 성공이라면
-				resp.sendRedirect(req.getContextPath() + "/item/detail.jsp?itemIdx=" + getSequenceNo);
-			}
-			else {
-				//실패라면
-				resp.sendRedirect("insert.jsp?error");
-			}
-
-
+			itemDto.setItemAddress(req.getParameter("itemAddress"));
+			
+			//글 등록.
+			itemDao.insertWithSequence(itemDto);
+			
+			resp.sendRedirect("detail.jsp?itemIdx="+sequnceNo);
+			
 		}
 		catch(Exception e){
 			e.printStackTrace();

@@ -68,13 +68,10 @@
 				<textarea name="itemDetail" rows="20" cols="50" placeholder="내용을 입력하세요"><%=itemDto.getItemDetail() %></textarea>
 				</td>
 			</tr>
-			<tr>
-				<td>태그</td>
-				<td><input type="text" name="itemTag" placeholder="태그 입력" value="<%=itemDto.getItemTags()%>"></td>
-			</tr>
+			
 			<tr>
 				<td>기간</td>
-				<td><input type="text" name="itemPeriods" placeholder="기간 입력" value="<%=itemDto.getItemPeriods()%>"></td>
+				<td><input type="text" name="itemPeriods" placeholder="기간 입력" value="<%=itemDto.getItemPeriod()%>"></td>
 			</tr>
 			<tr>
 				<td>운영시간</td>

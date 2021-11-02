@@ -18,16 +18,9 @@ public class ItemCountServlet extends HttpServlet{
 protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	try{
 
-		int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
 
-		ItemDao itemDao = new ItemDao();
-		ItemDto itemDto = itemDao.get(itemIdx);
+		//조회수 증가 서블릿
 
-		itemDto.setItemCount(itemDto.getItemCount()+1);
-		itemDao.updateCount(itemDto);
-		//조회수 1증가 시킴.
-
-		resp.sendRedirect(req.getContextPath()+"/item/detail.jsp?itemIdx="+itemIdx);
 
 	}catch (Exception e) {
 		e.printStackTrace();

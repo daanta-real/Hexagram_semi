@@ -25,15 +25,15 @@ public class ItemDao {
 			itemDto.setUsersIdx(rs.getInt(2));
 			itemDto.setItemType(rs.getString(3));
 			itemDto.setItemName(rs.getString(4));
-			itemDto.setItemAddress(rs.getString(5));
-			itemDto.setItemDetail(rs.getString(6));
-			itemDto.setItemTags(rs.getString(7));
-			itemDto.setItemDate(rs.getDate(8));
-			itemDto.setItemPeriods(rs.getString(9));
-			itemDto.setItemTime(rs.getString(10));
-			itemDto.setItemHomepage(rs.getString(11));
-			itemDto.setItemParking(rs.getString(12));
-			itemDto.setItemCount(rs.getInt(13));
+			itemDto.setItemDetail(rs.getString(5));
+			itemDto.setItemPeriod(rs.getString(6));
+			itemDto.setItemTime(rs.getString(7));
+			itemDto.setItemHomepage(rs.getString(8));
+			itemDto.setItemParking(rs.getString(9));
+			itemDto.setItemAddress(rs.getString(10));
+			itemDto.setItemDate(rs.getDate(11));
+			itemDto.setItemCountView(rs.getInt(12));
+			itemDto.setItemCountReply(rs.getInt(13));
 
 			list.add(itemDto);
 		}
@@ -56,29 +56,35 @@ public class ItemDao {
 			itemDto.setUsersIdx(rs.getInt(2));
 			itemDto.setItemType(rs.getString(3));
 			itemDto.setItemName(rs.getString(4));
-			itemDto.setItemAddress(rs.getString(5));
-			itemDto.setItemDetail(rs.getString(6));
-			itemDto.setItemTags(rs.getString(7));
-			itemDto.setItemDate(rs.getDate(8));
-			itemDto.setItemPeriods(rs.getString(9));
-			itemDto.setItemTime(rs.getString(10));
-			itemDto.setItemHomepage(rs.getString(11));
-			itemDto.setItemParking(rs.getString(12));
-			itemDto.setItemCount(rs.getInt(13));
+			itemDto.setItemDetail(rs.getString(5));
+			itemDto.setItemPeriod(rs.getString(6));
+			itemDto.setItemTime(rs.getString(7));
+			itemDto.setItemHomepage(rs.getString(8));
+			itemDto.setItemParking(rs.getString(9));
+			itemDto.setItemAddress(rs.getString(10));
+			itemDto.setItemDate(rs.getDate(11));
+			itemDto.setItemCountView(rs.getInt(12));
+			itemDto.setItemCountReply(rs.getInt(13));
 		}
 
 		con.close();
 		return itemDto;
 	}
 
-	//키워드 조회
-	public List<ItemDto> searchList(String column, String keyword) throws Exception {
+	//키워드 조회 및 페이징 조회
+	public List<ItemDto> searchList(String column, String keyword, int begin, int end) throws Exception {
 
 		Connection con = JdbcUtils.connect();
-		String sql = "select * from item where instr(#1,?)>0";
+		String sql = "select * from ("
+						+ "select rownum rn,TMP.*from("
+							+ "select * from item where instr(#1, ?) > 0 order by item_idx desc"
+						+ ")TMP"
+					+ ")where rn between ? and ?";
 		sql = sql.replace("#1", column);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
+		ps.setInt(2, begin);
+		ps.setInt(3, end);
 		ResultSet rs = ps.executeQuery();
 		List<ItemDto> list = new ArrayList<>();
 		while (rs.next()) {
@@ -87,15 +93,15 @@ public class ItemDao {
 			itemDto.setUsersIdx(rs.getInt(2));
 			itemDto.setItemType(rs.getString(3));
 			itemDto.setItemName(rs.getString(4));
-			itemDto.setItemAddress(rs.getString(5));
-			itemDto.setItemDetail(rs.getString(6));
-			itemDto.setItemTags(rs.getString(7));
-			itemDto.setItemDate(rs.getDate(8));
-			itemDto.setItemPeriods(rs.getString(9));
-			itemDto.setItemTime(rs.getString(10));
-			itemDto.setItemHomepage(rs.getString(11));
-			itemDto.setItemParking(rs.getString(12));
-			itemDto.setItemCount(rs.getInt(13));
+			itemDto.setItemDetail(rs.getString(5));
+			itemDto.setItemPeriod(rs.getString(6));
+			itemDto.setItemTime(rs.getString(7));
+			itemDto.setItemHomepage(rs.getString(8));
+			itemDto.setItemParking(rs.getString(9));
+			itemDto.setItemAddress(rs.getString(10));
+			itemDto.setItemDate(rs.getDate(11));
+			itemDto.setItemCountView(rs.getInt(12));
+			itemDto.setItemCountReply(rs.getInt(13));
 
 			list.add(itemDto);
 		}
@@ -105,118 +111,48 @@ public class ItemDao {
 		return list;
 	}
 
-	//전체 페이징 조회
-	public List<ItemDto> searchPaging(int pages) throws Exception {
-
-		Connection con = JdbcUtils.connect();
-
-		String sql = "select item_idx,users_idx,item_type,item_name,item_address,item_detail,item_tags,item_date,item_periods,item_time,item_homepage,item_parking,item_count from("
-				+ "select rownum rn,tmp.* from("
-				+ "(select * from item order by item_idx)"
-				+ "tmp)) where rn between #2 and #3";
-
-		int start = 1 + (pages - 1) * 10;
-		String startPages = String.valueOf(start);
-		int end = (pages) * 10;
-		String endPages = String.valueOf(end);
-
-		sql = sql.replace("#2", startPages);
-		sql = sql.replace("#3", endPages);
-
-		PreparedStatement ps = con.prepareStatement(sql);
-		ResultSet rs = ps.executeQuery();
-		List<ItemDto> list = new ArrayList<>();
-
-		while (rs.next()) {
-			ItemDto itemDto = new ItemDto();
-			itemDto.setItemIdx(rs.getInt(1));
-			itemDto.setUsersIdx(rs.getInt(2));
-			itemDto.setItemType(rs.getString(3));
-			itemDto.setItemName(rs.getString(4));
-			itemDto.setItemAddress(rs.getString(5));
-			itemDto.setItemDetail(rs.getString(6));
-			itemDto.setItemTags(rs.getString(7));
-			itemDto.setItemDate(rs.getDate(8));
-			itemDto.setItemPeriods(rs.getString(9));
-			itemDto.setItemTime(rs.getString(10));
-			itemDto.setItemHomepage(rs.getString(11));
-			itemDto.setItemParking(rs.getString(12));
-			itemDto.setItemCount(rs.getInt(13));
-
-			list.add(itemDto);
-		}
-
-		con.close();
-
-		return list;
-	}
-
-	//키워드 페이징 조회
-	public List<ItemDto> searchKeywordPaging(String column, String keyword, int pages) throws Exception {
-
-		Connection con = JdbcUtils.connect();
-
-		String sql = "select item_idx,users_idx,item_type,item_name,item_address,item_detail,item_tags,item_date,item_periods,item_time,item_homepage,item_parking,item_count from("
-				+ "select rownum rn,tmp.* from("
-				+ "select * from item where instr(#1,?)>0 order by item_idx) tmp)"
-				+ "where rn between #2 and #3";
-
-		int start = 1 + (pages - 1) * 10;
-		String startPages = String.valueOf(start);
-		int end = (pages) * 10;
-		String endPages = String.valueOf(end);
-
-		sql = sql.replace("#2", startPages);
-		sql = sql.replace("#3", endPages);
-		sql = sql.replace("#1", column);
-
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, keyword);
-		ResultSet rs = ps.executeQuery();
-		List<ItemDto> list = new ArrayList<>();
-
-		while (rs.next()) {
-			ItemDto itemDto = new ItemDto();
-			itemDto.setItemIdx(rs.getInt(1));
-			itemDto.setUsersIdx(rs.getInt(2));
-			itemDto.setItemType(rs.getString(3));
-			itemDto.setItemName(rs.getString(4));
-			itemDto.setItemAddress(rs.getString(5));
-			itemDto.setItemDetail(rs.getString(6));
-			itemDto.setItemTags(rs.getString(7));
-			itemDto.setItemDate(rs.getDate(8));
-			itemDto.setItemPeriods(rs.getString(9));
-			itemDto.setItemTime(rs.getString(10));
-			itemDto.setItemHomepage(rs.getString(11));
-			itemDto.setItemParking(rs.getString(12));
-			itemDto.setItemCount(rs.getInt(13));
-
-			list.add(itemDto);
-		}
-
-		con.close();
-
-		return list;
-	}
 
 	// 관광지 추가(축제인지 관광지인지는 나중에 생각)
 	public boolean insert(ItemDto itemDto) throws Exception {
-		String sql = "INSERT INTO item (item_idx,users_idx,item_type,item_name,item_address,item_detail,"
-				+ "item_tags,item_periods,item_time,item_homepage,item_parking)"
-				+ " VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO item (item_idx,users_idx,item_type,item_name,item_detail,item_period,"
+				+ "item_time,item_homepage,item_parking,item_address,item_date,item_count_view,item_count_reply)"
+				+ " VALUES(item_idx_seq.nextval,?,?,?,?,?,?,?,?,?,sysdate,0,0)";
 		Connection con = JdbcUtils.connect();
 		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setInt(1, itemDto.getUsersIdx());
+		ps.setString(2, itemDto.getItemType());
+		ps.setString(3, itemDto.getItemName());
+		ps.setString(4, itemDto.getItemDetail());
+		ps.setString(5, itemDto.getItemPeriod());
+		ps.setString(6, itemDto.getItemTime());
+		ps.setString(7, itemDto.getItemHomepage());
+		ps.setString(8, itemDto.getItemParking());
+		ps.setString(9, itemDto.getItemAddress());
+
+		int result = ps.executeUpdate();
+
+		con.close();
+		return result > 0;
+	}
+	
+	public boolean insertWithSequence(ItemDto itemDto) throws Exception {
+		String sql = "INSERT INTO item (item_idx,users_idx,item_type,item_name,item_detail,item_period,"
+				+ "item_time,item_homepage,item_parking,item_address,item_date,item_count_view,item_count_reply)"
+				+ " VALUES(?,?,?,?,?,?,?,?,?,?,sysdate,0,0)";
+		Connection con = JdbcUtils.connect();
+		PreparedStatement ps = con.prepareStatement(sql);
+		
 		ps.setInt(1, itemDto.getItemIdx());
 		ps.setInt(2, itemDto.getUsersIdx());
 		ps.setString(3, itemDto.getItemType());
 		ps.setString(4, itemDto.getItemName());
-		ps.setString(5, itemDto.getItemAddress());
-		ps.setString(6, itemDto.getItemDetail());
-		ps.setString(7, itemDto.getItemTags());
-		ps.setString(8, itemDto.getItemPeriods());
-		ps.setString(9, itemDto.getItemTime());
-		ps.setString(10, itemDto.getItemHomepage());
-		ps.setString(11, itemDto.getItemParking());
+		ps.setString(5, itemDto.getItemDetail());
+		ps.setString(6, itemDto.getItemPeriod());
+		ps.setString(7, itemDto.getItemTime());
+		ps.setString(8, itemDto.getItemHomepage());
+		ps.setString(9, itemDto.getItemParking());
+		ps.setString(10, itemDto.getItemAddress());
 
 		int result = ps.executeUpdate();
 
@@ -239,19 +175,20 @@ public class ItemDao {
 
 	// 관광지 수정
 	public boolean update(ItemDto itemDto) throws Exception {
-		String sql = "UPDATE item set item_type=?,item_name=?,item_address=?,item_detail=?,item_tags=?,item_periods=?,item_time=?,item_homepage=?,item_parking=?"
+		String sql = "UPDATE item set users_idx=?,item_type=?,item_name=?,item_detail=?,item_period=?,item_time=?,item_homepage=?,item_parking=?,item_address=?"
 				+ " where item_idx=?";
 		Connection con = JdbcUtils.connect();
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, itemDto.getItemType());
-		ps.setString(2, itemDto.getItemName());
-		ps.setString(3, itemDto.getItemAddress());
+		
+		ps.setInt(1, itemDto.getUsersIdx());
+		ps.setString(2, itemDto.getItemType());
+		ps.setString(3, itemDto.getItemName());
 		ps.setString(4, itemDto.getItemDetail());
-		ps.setString(5, itemDto.getItemTags());
-		ps.setString(6, itemDto.getItemPeriods());
-		ps.setString(7, itemDto.getItemTime());
-		ps.setString(8, itemDto.getItemHomepage());
-		ps.setString(9, itemDto.getItemParking());
+		ps.setString(5, itemDto.getItemPeriod());
+		ps.setString(6, itemDto.getItemTime());
+		ps.setString(7, itemDto.getItemHomepage());
+		ps.setString(8, itemDto.getItemParking());
+		ps.setString(9, itemDto.getItemAddress());
 		ps.setInt(10, itemDto.getItemIdx());
 
 		int result = ps.executeUpdate();
@@ -260,33 +197,33 @@ public class ItemDao {
 		return result > 0;
 	}
 
-	public void updateCount(ItemDto itemDto) throws Exception {
-
+	public boolean readUp(int itemIdx,int usersIdx) throws Exception {
+		String sql = "UPDATE item set item_count_view=item_count_view+1"
+				+ " where item_idx=? and users_idx != ?";
 		Connection con = JdbcUtils.connect();
-		String sql = "update item set item_count=? where item_idx = ?";
-
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, itemDto.getItemCount());
-		ps.setInt(2, itemDto.getItemIdx());
+		
+		ps.setInt(1, itemIdx);
+		ps.setInt(2, usersIdx);
 
-		ps.execute();
+		int result = ps.executeUpdate();
+
 		con.close();
+		return result > 0;
 	}
 	
-	public int getSequenceNo() throws Exception{
-		Connection con = JdbcUtils.connect();
+	public int getSequence() throws Exception {
 		String sql = "select item_seq.nextval from dual";
-		
+		Connection con = JdbcUtils.connect();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
-		
-		int sequenceNo = 0;
-		if(rs.next()) {
-			sequenceNo = rs.getInt(1);
-		}
+
+		rs.next();
+		int result = rs.getInt(1);
 		
 		con.close();
-		
-		return sequenceNo;
+		return result;
 	}
+	
+
 }
