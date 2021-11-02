@@ -26,6 +26,32 @@
 	boolean admin = usersGrade != null && usersGrade.equals("관리자");
 %>
 
+<%-- 페이지 네이션 --%>
+<%
+	//이 페이지에 글을 10개씩 보여줄것이다.
+	int psize = 10;
+	int p;
+
+	try{
+		//p라는 파라미터에서 전달되는 값을 숫자로 대입
+		p = Integer.parseInt(request.getParameter("p"));
+		//강제 예외 : p가 0이하라면 문제가 발생한것으로 간주
+		if(p<=0){
+			throw new Exception(); 
+		}
+	}
+	catch(Exception e){
+		//문제가 발생하면 페이지를 1로 설정
+		p = 1;
+	}
+	
+	int end = p*psize ;
+	int begin = end-(psize-1);
+	
+%>
+p = <%=p %>, begin = <%=begin %>, end=<%=end %>
+
+<%-- 검색 및 목록 처리 --%>
 <%
 String column = request.getParameter("column");
 String keyword = request.getParameter("keyword");
@@ -37,12 +63,12 @@ ItemDao itemDao = new ItemDao();
 List<ItemDto> list = new ArrayList<>();
 
 if(search){
-	list = itemDao.searchList(column, keyword);
+	list = itemDao.searchList(column, keyword, begin, end);
 }else{
-	list = itemDao.list();
+	list = itemDao.list(begin, end);
 }
 
-String title = search ? "검색" : "관광지 목록";
+String title = search ? keyword + "검색" : "관광지 목록";
 %>
 
 <h2><%=title %></h2>
@@ -105,18 +131,19 @@ String title = search ? "검색" : "관광지 목록";
 <%}else{ %>
 <h2>결과가 없습니다.</h2>
 <%} %>
-
-
+<br><br>
+[이전] 1 2 3 4 5 6 7 8 9 [다음]
+<br><br>
+<%-- 관리자만 글쓰기 가능 --%>
+<%if(admin){ %>
+<form action="insert.jsp">
+	<input type="submit" value="글쓰기">
+</form>
+<%}else{%>
 <form action="insert.jsp"> 
 	<input type="submit" value="글쓰기"> 
 </form> 
-
-<%-- 관리자만 글쓰기 가능 --%>
-<%-- <%if(admin){ %> --%>
-<!-- <form action="insert.jsp"> -->
-<!-- 	<input type="submit" value="글쓰기"> -->
-<!-- </form> -->
-<%-- <%} %> --%>
+<%} %>
  
 <!-- 페이지 내용 끝. -->
 </SECTION>
