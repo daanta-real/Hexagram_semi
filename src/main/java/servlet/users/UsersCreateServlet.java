@@ -24,6 +24,7 @@ public class UsersCreateServlet extends HttpServlet {
 			String usersPw = req.getParameter("usersPw");
 			String usersNick = req.getParameter("usersNick");
 			String usersEmail = req.getParameter("usersEmail");
+			String usersPhone = req.getParameter("usersPhone");
 
 			// 값 검사: 양식에 맞지 않는 값은 쳐내기
 			// 작성 예정
@@ -34,6 +35,7 @@ public class UsersCreateServlet extends HttpServlet {
 			dto.setUsersPw(usersPw);
 			dto.setUsersNick(usersNick);
 			dto.setUsersEmail(usersEmail);
+			dto.setUsersPhone(usersPhone);
 
 			// 전송
 			System.out.println("[회원 가입] 회원가입 요청: " + dto);
