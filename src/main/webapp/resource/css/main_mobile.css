@@ -128,16 +128,9 @@ SECTION {
 #mobileMenuLoginContainer > *, .loginButtonBox > * { margin:0.2rem auto; }
 
 /* 모바일 전용 로그인 메뉴 - 버튼관련만 */
-#mobileMenuLoginContainer .loginButtonBox {
-	justify-content:space-evenly;
-	width:100%;
-}
-#mobileMenuLoginContainer .loginoutButton  {
-	background-color: var(--color6);
-}
-#mobileMenuLoginContainer .joinButton {
-    background-color: var(--color5);
-}
+#mobileMenuLoginContainer .loginButtonBox { justify-content:space-evenly; width:100%; }
+#mobileMenuLoginContainer .loginoutButton  { background-color: var(--color6); }
+#mobileMenuLoginContainer .joinButton { background-color: var(--color5); }
 
 /* 레이아웃 - 검색창 */
 #searcherContainer { height:fit-content; }
@@ -146,5 +139,5 @@ SECTION {
 	position: absolute; top: 50% !important; transform: translateY(-50%);
 	font-size:8vw; line-height:8vw;
 }
-#searcherBox .searcher { height: 15vw; padding:0; }
+#searcherBox .searcher { height: 15vw; padding:0 0 0 0.5rem; }
 #searcherBox .magnifier { right:3vw; font-size:6.5vw; background:none; }
