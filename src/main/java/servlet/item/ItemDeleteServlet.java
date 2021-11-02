@@ -10,21 +10,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.ItemDao;
 
-@WebServlet(urlPatterns = "/jsp/item/delete.nogari")
+@SuppressWarnings("serial")
+@WebServlet(urlPatterns = "/item/delete.nogari")
 public class ItemDeleteServlet extends HttpServlet{
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		try {
-			
+
 			int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
-			
+
 			ItemDao itemDao = new ItemDao();
-			
+
 			itemDao.delete(itemIdx);
-			
-			resp.sendRedirect(req.getContextPath() + "/jsp/item/list.jsp");
+
+			resp.sendRedirect(req.getContextPath() + "/item/list.jsp");
 		}
 		catch(Exception e) {
 			e.printStackTrace();

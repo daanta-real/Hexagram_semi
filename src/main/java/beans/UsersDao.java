@@ -29,6 +29,8 @@ public class UsersDao {
 			dto.setUsersEmail(rs.getString("users_email"));
 			dto.setUsersPhone(rs.getString("users_phone"));
 			dto.setUsersGrade(rs.getString("users_grade"));
+			dto.setUsersJoin(rs.getDate("users_join"));
+			dto.setUsersPoint(rs.getInt("users_point"));
 			list.add(dto);
 		}
 
@@ -54,11 +56,14 @@ public class UsersDao {
 		UsersDto dto = null;
 		if(rs.next()) {
 			dto = new UsersDto();
+			dto.setUsersIdx(rs.getInt("users_idx"));
 			dto.setUsersId(rs.getString("users_id"));
 			dto.setUsersNick(rs.getString("users_nick"));
 			dto.setUsersEmail(rs.getString("users_email"));
 			dto.setUsersPhone(rs.getString("users_phone"));
 			dto.setUsersGrade(rs.getString("users_grade"));
+			dto.setUsersJoin(rs.getDate("users_join"));
+			dto.setUsersPoint(rs.getInt("users_point"));
 		}
 
 		// 마무리
@@ -87,6 +92,8 @@ public class UsersDao {
 			dto.setUsersEmail(rs.getString("users_email"));
 			dto.setUsersPhone(rs.getString("users_phone"));
 			dto.setUsersGrade(rs.getString("users_grade"));
+			dto.setUsersJoin(rs.getDate("users_join"));
+			dto.setUsersPoint(rs.getInt("users_point"));
 		}
 
 		// 마무리
@@ -96,18 +103,19 @@ public class UsersDao {
 	}
 
 	// 3. CREATE: 회원 추가
-	// 기본 준회원
+	// 기본값 - 등급: 준회원, 가입일: sysdate, 포인트: 0
 	public boolean insert(UsersDto dto) throws Exception {
 
 		// SQL 준비
-		String sql = "INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email)"
-			+ " VALUES(users_seq.NEXTVAL, ?, ?, ?, ?)";
+		String sql = "INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email, users_phone)"
+			+ " VALUES(users_seq.NEXTVAL, ?, ?, ?, ?, ?)";
 		Connection conn = JdbcUtils.connect();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, dto.getUsersId());
 		ps.setString(2, dto.getUsersPw());
 		ps.setString(3, dto.getUsersNick());
 		ps.setString(4, dto.getUsersEmail());
+		ps.setString(5, dto.getUsersPhone());
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		int result = ps.executeUpdate();

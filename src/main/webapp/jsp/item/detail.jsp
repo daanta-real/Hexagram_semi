@@ -7,9 +7,7 @@
 <%@page import="beans.ItemReplyDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<jsp:include page="/template/header.jsp">
-	<jsp:param name="pageTitle" value="메인" />
-</jsp:include>
+
  <% 
  
  String root = request.getContextPath();
@@ -86,9 +84,7 @@ UsersDao usersDao = new UsersDao();
 		<tr>
 			<th>지도표시</th>
 			<td>
-			<jsp:include page="/jsp/item/kakaomap.jsp">
-				<jsp:param value="<%=itemIdx%>" name="item_idx"/>
-			</jsp:include>
+				카카오 활용 예정.
 			</td>
 		</tr>
 		<tr>
@@ -176,4 +172,3 @@ UsersDao usersDao = new UsersDao();
 <jsp:include page="/jsp/item_reply/insert.jsp">
 	<jsp:param value="<%=itemIdx%>" name="itemIdx"/>
 </jsp:include>
-<jsp:include page="/template/footer.jsp"></jsp:include>

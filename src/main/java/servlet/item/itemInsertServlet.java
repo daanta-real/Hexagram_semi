@@ -12,15 +12,17 @@ import beans.ItemDao;
 import beans.ItemDto;
 
 @SuppressWarnings("serial")
-@WebServlet (urlPatterns = "/jsp/item/insert.nogari")
+@WebServlet (urlPatterns = "/item/insert.nogari")
 public class itemInsertServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
+
 			
 			//등록 서블릿.
+
 
 
 		}

@@ -11,16 +11,19 @@ import javax.servlet.http.HttpServletResponse;
 import beans.ItemDao;
 import beans.ItemDto;
 
-@WebServlet(urlPatterns = "/jsp/item/edit.nogari")
+@SuppressWarnings("serial")
+@WebServlet(urlPatterns = "/item/edit.nogari")
 public class ItemEditServlet extends HttpServlet{
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		try {
+
 			
 			//수정 서블릿
 			
+
 		}
 		catch(Exception e) {
 			e.printStackTrace();

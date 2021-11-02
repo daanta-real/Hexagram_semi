@@ -1,0 +1,221 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'mainFont';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SDMiSaeng.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* DEBUG용 공통 속성 */
+#debugContainer { position:fixed; z-index:9999999999999999999999; left:0; bottom:0; min-width:50vw; max-width:50vw; }
+#debugContainer * { font-size:1rem; min-width:50vw; max-width:50vw; }
+
+/* 일반 공통 속성 */
+:root {
+    --color1:hsl(34, 93%, 67%);
+    --color2:hsl(33, 75%, 55%);
+    --color3:hsl(44, 100%, 75%);
+    --color4:hsl(38, 84%, 50%);
+    --color5:hsl(41, 93%, 57%);
+    --color6:hsl(123, 72%, 35%);
+    --color7:hsl(40, 5%, 89%);
+    --color8:hsl(0, 64%, 19%);
+    --color9:hsl(43, 100%, 90%);
+    --color10:hsl(34, 93%, 67%);
+    --color_bg:hsl(34, 5%, 95%);
+
+    --main_border_radius: 1rem;
+    --main_border:0.01rem;
+}
+
+a:hover, a:link, a:visited, a:active {
+	color:inherit; text-decoration:none; /* 링크 밑줄 및 변색 차단 */ 
+	-webkit-tap-highlight-color: transparent; /* iOS 클릭시 깜박임 방지 */
+}
+
+.fullWidth { width:100%; }
+.flexCenter { display:flex; justify-content:center; align-items:center; }
+.flexRow { flex-direction:row; }
+.flexCol { flex-direction:column; }
+.textCenter { text-align:center; vertical-align:middle; }
+
+/* 대골격 */
+
+/* 전체 골격 */
+HTML, button, input {
+    font-family: 'mainFont' !important; font-weight:400; font-size: 1.4rem;
+}
+BODY, SECTION {
+	display:flex; justify-content:center; align-items:center; flex-direction:column;
+}
+BODY {
+    max-width: 45rem;
+
+    margin: 2rem auto 7rem auto;
+    border-radius:var(--main_border_radius);
+
+    background: var(--color_bg);
+    box-shadow: 0 0 1rem 0 #8882;
+}
+
+/* 외곽선 */
+HEADER #logoContainer,
+HEADER #searcherContainer,
+HEADER #menuContainer,
+SECTION,
+FOOTER {
+    box-sizing:border-box;
+    border:var(--main_border) solid #8882;
+}
+
+/* 전체 모서리 */
+HEADER, #logoContainer { 
+	border-top-left-radius:var(--main_border_radius);
+	border-top-right-radius:var(--main_border_radius);
+}
+FOOTER { 
+	border-bottom-left-radius:var(--main_border_radius);
+	border-bottom-right-radius:var(--main_border_radius);
+}
+
+HEADER, SECTION, FOOTER {
+	min-width:100%; max-width:100%;
+}
+HEADER, FOOTER {
+	background: var(--color9);
+}
+HEADER {
+	position:relative;
+}
+SECTION {
+	min-height:15rem;
+
+	margin:auto;
+	padding:2.5rem 1rem 2.5rem 1rem;
+	border-top:0; border-bottom:0;
+}
+FOOTER {
+    font-size:1.15rem; line-height:0.7rem;
+}
+
+/* HEADER */
+
+/* HEADER - LOGO */
+HEADER #logoContainer {
+	width:100%; height:6rem;
+
+    border-bottom:0;
+}
+HEADER #logoContainer :is(a, span) {
+	letter-spacing:0.3rem;
+}
+HEADER #logoContainer span {
+	font-size:3rem; color: var(--color8);
+}
+HEADER #logoBox {
+    position: relative;
+    top: 2rem;
+	margin: 0 auto 1rem auto;
+}
+HEADER #logo {
+	object-fit:cover;
+	width:7rem;
+}
+
+/* HEADER - SEARCH */
+HEADER #searcherContainer {
+	position:relative; width:100%; height:5rem;
+	margin:0; border-top:0; border-bottom:0;
+}
+HEADER #searcherBox {
+	position:relative;
+	width:17rem; height:1.5rem;
+	
+	border:0.4rem solid var(--color8);
+	padding:0.2rem;
+	
+	background:white;
+    font-family:'mainFont'; font-size:2.2rem; line-height:1.6rem; text-align:left;
+}
+HEADER #searcherContainer .searcher {
+    position: relative;
+    top: -.2rem;
+    width: 14.8rem;
+    height: 1.7rem;
+    border:0;
+    text-align: left;
+    font-size: 2rem;
+}
+HEADER #searcherContainer .searcher:focus {
+	border:none; outline:none;
+}
+HEADER #searcherContainer .magnifier {
+	cursor:pointer;
+}
+
+/* 상세검색 버튼을 누름에 따른 레이어 변화 설정 */
+
+#searcherDetailArrow {
+	display:inline; font-size:0; transition:all 0.3s;
+}
+#searcherDetailBtn:checked ~ #searcherDetailArrow {
+	font-size:inherit; transform:rotate(90deg);
+}
+
+#mainDetailSearcher {
+	display:none; height:0; transition:all 0.3s;	
+}
+#searcherDetailBtn:checked ~ #mainDetailSearcher {
+	display:block; height:auto;
+}
+
+/* HEADER - USER */
+HEADER #userContainer {
+	position:absolute; top:0; right:0; height:1rem;
+	padding:1rem;
+	font-size:1.1rem;
+}
+HEADER #userContainer > * {
+    font-weight:500;
+}
+HEADER #userContainer .userInfoTxt {
+	color:var(--color6);
+	padding:0 0.5rem;
+}
+HEADER #userContainer .userButton {
+	background: var(--color1);
+    border-radius: 0.5rem;
+    padding: 0.2rem 1rem;
+    box-shadow: 0 0 1rem #8882;
+}
+HEADER #userContainer span {
+	border-radius:20px;
+}
+HEADER #userContainer span.admin:after {
+	background:var(--color9);
+}
+
+/* HEADER - MENU */
+HEADER #menuContainer {
+	width:100%;
+
+	background:var(--color4);
+	font-size:1.4rem; color:var(--color8);
+	box-shadow: 0 0 1rem #8882;
+}
+HEADER #menuContainer a {
+	margin:0.5rem 2rem;
+	padding:0rem 2rem;
+	transition:background 0.2s linear 0;
+}
+HEADER #menuContainer a:hover {
+	background:var(--color1);
+	border-radius:0.5rem;
+}
+
+/* FOOTER */
+FOOTER .footerContainer {
+	padding:.5rem 2rem;
+	color:#4448; line-height:1.5rem;
+	list-style-type:none;
+}

@@ -15,8 +15,8 @@ import util.HexaLibrary;
 
 // 모든 JSP 파일, 모든 서블릿 파일 대상. (각종 설정파일 등 제외)
 @WebFilter( urlPatterns = {
-	"/jsp/users/join_success.jsp",
-	"/jsp/items/insert.jsp"
+	"/users/join_success.jsp",
+	"/items/insert.jsp"
 } )
 public class LoginFilter implements Filter {
 

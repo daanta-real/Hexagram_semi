@@ -3,10 +3,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import beans.UsersDto;
+
 public class UsersUtils {
 
-	// 로그인 검사: 로그인 아디/비번 일치 여부 체크 결과를 true/false로 반환
-	public static boolean isValid(String usersId, String usersPw) throws Exception {
+	// 로그인 검사: 로그인 아디/비번 일치 여부 체크 결과를 반환.
+	// 성공시 해당 유저의 UsersDto 반환
+	// 실패시 null 반환
+	public static UsersDto getValidDto(String usersId, String usersPw) throws Exception {
 
 		// SQL 준비
 		String sql = "select * from users where users_id=? and users_pw=?";
@@ -17,11 +21,22 @@ public class UsersUtils {
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
-		boolean valid = rs.next() ? true : false;
+		UsersDto dto = null;
+		if(rs.next()) {
+			dto = new UsersDto();
+			dto.setUsersIdx(rs.getInt("users_idx"));
+			dto.setUsersId(rs.getString("users_id"));
+			dto.setUsersNick(rs.getString("users_nick"));
+			dto.setUsersEmail(rs.getString("users_email"));
+			dto.setUsersPhone(rs.getString("users_phone"));
+			dto.setUsersGrade(rs.getString("users_grade"));
+			dto.setUsersJoin(rs.getDate("users_join"));
+			dto.setUsersPoint(rs.getInt("users_point"));
+		}
 
 		// 마무리
 		con.close();
-		return valid;
+		return dto;
 
 	}
 

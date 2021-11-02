@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+/* 모바일용 메뉴 숨기기 */
+#mobileMenuLayer {
+	display:none;
+}
+
+/* 돋보기 전용 설정 */
+HEADER #searcherContainer span.magnifier {
+	position:absolute; top:0.07rem; right:0.2rem;
+	font-size:1.3rem; line-height:2rem; position: absolute;
+}

@@ -12,7 +12,7 @@ import beans.ItemReplyDao;
 import beans.ItemReplyDto;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/jsp/item_reply/insert.nogari")
+@WebServlet(urlPatterns = "/item_reply/insert.nogari")
 public class ItemReplyInsertServlet extends HttpServlet {
 @Override
 protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,7 +34,7 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 
 			itemReplyDao.insert(itemReplyDto);
 
-			resp.sendRedirect(req.getContextPath()+"/jsp/item/detail.jsp?itemIdx="+Integer.parseInt(req.getParameter("itemIdx")));
+			resp.sendRedirect(req.getContextPath()+"/item/detail.jsp?itemIdx="+Integer.parseInt(req.getParameter("itemIdx")));
 
 		}catch (Exception e) {
 			e.printStackTrace();

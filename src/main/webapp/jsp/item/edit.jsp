@@ -4,9 +4,7 @@
 <%@page import="beans.ItemDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<jsp:include page="/template/header.jsp">
-	<jsp:param name="pageTitle" value="메인" />
-</jsp:include>
+
     
  <% 
  int usersIdx = (int)request.getSession().getAttribute("usersIdx");
@@ -89,4 +87,3 @@
 </form>
 
  
- <jsp:include page="/template/footer.jsp"></jsp:include>

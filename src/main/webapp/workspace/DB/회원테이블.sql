@@ -29,6 +29,7 @@ insert into users(users_idx, users_id, users_pw, users_nick, users_email, users_
 --users_grade : 등급미입력시 기본값 일반회원으로 설정
 
 select * from users;
+commit;
 
 drop table users;
 drop sequence users_seq;
