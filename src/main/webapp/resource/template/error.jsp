@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%String root = request.getContextPath();%>
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
@@ -16,16 +16,16 @@ div.errBox {
     width: calc(8.6rem * var(--errBoxScale));
     height: calc(5rem * var(--errBoxScale));
     /*width: 860px; height: 500px;*/
-	background-image:url("<%=request.getContextPath()%>/resource/image/error.jpg");
+	background-image:url("<%=root%>/resource/image/error.jpg");
     background-size: cover;
     padding: 50px;
 }
-div.errBox > p {
+div.errBox > div {
 	font-size:1.5rem;
 	color:mistyrose;
 	line-height:170%;
 }
-div.errBox > p.error {
+div.errBox > div.error {
 	font-size:6rem;
 	color:darksalmon;
 }
@@ -36,16 +36,15 @@ div.errBox > p.error {
 <SECTION>
 <!-- 페이지 내용 시작 -->
 
-<%String root = request.getContextPath();%>
 
 <div class=container>
 
 	<div class=errBox title="에러 설명 박스">
-		<p class=error>ERROR</p>
-		<p>여행을 가면 <font color="">일류</font></p>
-		<p>여행을 못 가면 <font color="">이류</font></p>
-		<p>여행을 즐기는 것을 <font color="">풍류</font></p>
-		<p>페이지 오류가 나는 것을 <font color="">오류</font>라고 합니다.</p>
+		<div class=error>ERROR</div>
+		<div>여행을 가면 <font color="">일류</font></div>
+		<div>여행을 못 가면 <font color="">이류</font></div>
+		<div>여행을 즐기는 것을 <font color="">풍류</font></div>
+		<div>페이지 오류가 나는 것을 <font color="">오류</font>라고 합니다.</div>
 	</div>
 	
 	<div class=to>
