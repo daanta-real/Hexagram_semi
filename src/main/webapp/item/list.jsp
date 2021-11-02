@@ -108,7 +108,7 @@ startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>
 
 <%if(!list.isEmpty()){%>
 <%-- 전체 목록 조회 --%>
-<table border="1" style="width:700px;">
+<table border="1" width="700">
 	<thead>
 		<tr>
 			<th>카테고리</th>
