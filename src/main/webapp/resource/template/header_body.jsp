@@ -107,8 +107,6 @@ if(isLogin) {
 			<INPUT CLASS="searcher textCenter" value="<%=searcher%>" placeholder="검색" ALT="검색창" />
 			<SPAN CLASS="magnifier">🔍</SPAN>
 		</DIV>
-		<SPAN ONCLICK='document.getElementById("mainDetailSearcher").style.visibility = "visible;"'>상세검색 ▼</SPAN>
-		<DIV ID="mainDetailSearcher">상세검색이다 우와아아앙</DIV>
 	</FORM>
 	
 	<!-- 상단메뉴 - 주 메뉴 영역 -->
