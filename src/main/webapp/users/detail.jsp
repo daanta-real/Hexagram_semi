@@ -24,7 +24,7 @@ UsersDto usersDto = usersDao.get(usersId);
 
 <!-- 페이지 내용 시작 -->
 
-<table border="0">
+<table width="300">
 	<tbody>
 		<tr>
 			<th>아이디</th>
@@ -32,7 +32,7 @@ UsersDto usersDto = usersDao.get(usersId);
 		</tr>
 		<tr>
 			<th>비밀번호</th>
-			<th>
+			<th align="left">
 				<a href="<%=root%>/users/modifyPassword.jsp">
 					비밀번호 변경하기(클릭..!)
 				</a>
@@ -63,9 +63,16 @@ UsersDto usersDto = usersDao.get(usersId);
 			<td><%=usersDto.getUsersPoint() %> point</td>
 		</tr>
 		<tr>
-			<th colspan="2" align="left">
+			<th colspan="2" align="center">
 				<a href="<%=root%>/users/modify.jsp">
 					내 정보 변경하기(click!)
+				</a>
+			</th>
+		</tr>
+		<tr>
+			<th colspan="2" align="center">
+				<a href="<%=root%>/users/unregister.jsp">
+					회원탈퇴하기(ㅠㅠclick!)
 				</a>
 			</th>
 		</tr>
