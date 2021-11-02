@@ -28,7 +28,7 @@ public class UsersLogoutServlet extends HttpServlet {
 
 			// 1. 기 로그아웃 검사: 이미 로그아웃되어 session의 id가 없으면 에러처리
 			System.out.print("[회원 로그아웃] 1. 로그아웃 검사(이미 로그아웃 되어있는지 검사)..");
-			if (!HexaLibrary.isExists(sessionId)) throw new Exception();
+			if (sessionId == null || sessionId.equals("")) throw new Exception();
 			System.out.println("아직 로그아웃되어 있지 않은 게 확인되었습니다.");
 
 			// 2. 로그아웃 처리

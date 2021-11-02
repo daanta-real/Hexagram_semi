@@ -17,15 +17,25 @@ public class EncodingFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-		HttpServletRequest req = (HttpServletRequest)request;
-		System.out.println("[필터 작동 - 인코딩] 해당 page: " + req.getRequestURL().toString());
+		try {
 
-		// 인코딩을 UTF-8로 강제
-		request.setCharacterEncoding("UTF-8");
-		System.out.println("[필터] 인코딩 설정을 완료하였습니다. 인코딩 필터 통과.");
+			HttpServletRequest req = (HttpServletRequest)request;
+			System.out.println("[필터 작동 - 인코딩] 해당 page: " + req.getRequestURL().toString());
 
-		// 다음 필터로 넘김
-		chain.doFilter(request, response);
+			// 인코딩을 UTF-8로 강제
+			request.setCharacterEncoding("UTF-8");
+			System.out.println("[필터] 인코딩 설정을 완료하였습니다. 인코딩 필터 통과.");
+
+			// 다음 필터로 넘김
+			chain.doFilter(request, response);
+
+		} catch(Exception e) {
+
+			System.out.println("[필터] 처리 중에 에러 발생");
+			e.printStackTrace();
+
+		}
+
 	}
 
 }

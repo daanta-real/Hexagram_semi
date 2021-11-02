@@ -46,9 +46,9 @@ public class UsersUtils {
 	public static boolean isGranted(String sessionId, String sessionGrade, String targetId) {
 		return (
 			// 내가 관리자거나
-			(HexaLibrary.isExists(sessionGrade) && sessionGrade.equals("관리자"))
+			(sessionGrade != null && sessionGrade.equals("관리자"))
 			// 내가 나에 대해 요청한거거나
-			|| (HexaLibrary.isExists(sessionId) && sessionId.equals(targetId))
+			|| (sessionId != null && sessionId.equals(targetId))
 		);
 	}
 
@@ -73,7 +73,7 @@ public class UsersUtils {
 		return isUnique;
 
 	}
-	
+
 
 	/*
 	// 5. Methods - Common

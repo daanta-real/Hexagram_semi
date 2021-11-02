@@ -15,7 +15,7 @@ if(searcher == null) searcher = "";
 
 // 세션id를 확인하여 로그인 여부를 검사
 String sessionId = (String) request.getSession().getAttribute("usersId");
-boolean isLogin = HexaLibrary.isExists(sessionId);
+boolean isLogin = sessionId != null && !sessionId.equals("");
 
 // 로그인 검사결과에 따른 변수준비
 String usersId = "", usersNick = "", usersGrade = "", gradeStr = "";

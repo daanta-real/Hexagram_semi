@@ -109,7 +109,6 @@ startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>
 <br>
 <%if(!list.isEmpty()){%>
 <%-- 전체 목록 조회 --%>
-
 <table border="1" width="500">
 	<thead>
 		<tr>
@@ -139,8 +138,9 @@ startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>
 <h2>결과가 없습니다.</h2>
 <%} %>
 <br><br>
-[이전] 
 
+<div>
+[이전] 
 
 <%for(int i = startBlock; i<=finishBlock; i++) {%>
 	<%if(search){ %>
@@ -151,6 +151,7 @@ startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>
 <%} %>
 
 [다음]
+</div>
 
 <br><br>
 <%-- 관리자만 글쓰기 가능 --%>

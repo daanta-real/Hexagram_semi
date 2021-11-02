@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import beans.UsersDao;
 import beans.UsersDto;
-import util.HexaLibrary;
 import util.UsersUtils;
 
 @SuppressWarnings("serial")
@@ -41,14 +40,14 @@ public class UsersModifyServlet extends HttpServlet {
 			// 1. 입력값 검사: id는 무조건 있어야 되고, 추가로
 			System.out.print("[회원 수정] 1. 입력값 존재여부 검사..");
 			// id는 무조건 있어야 되고
-			boolean filledReqs = HexaLibrary.isExists(usersId);
+			boolean filledReqs = usersId != null && !usersId.equals("");
 			// pw/nick/email/grade/phone 다섯중 하나 이상도 있어야 됨
 			filledReqs = filledReqs && (
-				HexaLibrary.isExists(usersPw)
-				|| HexaLibrary.isExists(usersNick)
-				|| HexaLibrary.isExists(usersEmail)
-				|| HexaLibrary.isExists(usersGrade)
-				|| HexaLibrary.isExists(usersPhone)
+				   usersPw    != null && !usersPw.equals("")
+				|| usersNick  != null && !usersNick.equals("")
+				|| usersEmail != null && !usersEmail.equals("")
+				|| usersGrade != null && !usersGrade.equals("")
+				|| usersPhone != null && !usersPhone.equals("")
 			);
 			if(!filledReqs) throw new Exception();
 			System.out.println("필요 입력값 모두 존재.");

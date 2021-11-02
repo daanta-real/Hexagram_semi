@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import beans.UsersDao;
 import beans.UsersDto;
-import util.HexaLibrary;
 import util.UsersUtils;
 
 @SuppressWarnings("serial")
@@ -32,7 +31,10 @@ public class UsersLoginServlet extends HttpServlet {
 
 			// 1. 입력값 존재여부 검사
 			System.out.print("[회원 로그인] 1. 입력값 존재여부 검사..");
-			boolean filledReqs = HexaLibrary.isExists(usersId) && HexaLibrary.isExists(usersPw);
+			boolean filledReqs =
+				usersId != null && !usersId.equals("")
+					&&
+				usersPw != null && !usersPw.equals("");
 			if(!filledReqs) throw new Exception();
 			System.out.println("정상.");
 
