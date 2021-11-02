@@ -42,12 +42,13 @@ public class UsersModifyServlet extends HttpServlet {
 			System.out.print("[회원 수정] 1. 입력값 존재여부 검사..");
 			// id는 무조건 있어야 되고
 			boolean filledReqs = HexaLibrary.isExists(usersId);
-			// pw/nick/email/grade 넷중 하나 이상도 있어야 됨
+			// pw/nick/email/grade/phone 다섯중 하나 이상도 있어야 됨
 			filledReqs = filledReqs && (
 				HexaLibrary.isExists(usersPw)
 				|| HexaLibrary.isExists(usersNick)
 				|| HexaLibrary.isExists(usersEmail)
 				|| HexaLibrary.isExists(usersGrade)
+				|| HexaLibrary.isExists(usersPhone)
 			);
 			if(!filledReqs) throw new Exception();
 			System.out.println("필요 입력값 모두 존재.");
@@ -60,6 +61,7 @@ public class UsersModifyServlet extends HttpServlet {
 			if(usersNick  != null) dto.setUsersNick (usersNick );
 			if(usersEmail != null) dto.setUsersEmail(usersEmail);
 			if(usersGrade != null) dto.setUsersGrade(usersGrade);
+			if(usersPhone != null) dto.setUsersPhone(usersPhone);
 			UsersDao dao = new UsersDao();
 			System.out.println(dto);
 
@@ -86,7 +88,8 @@ public class UsersModifyServlet extends HttpServlet {
 				resp.sendRedirect(req.getContextPath()+"/users/modify_success.jsp");
 			} else {
 				System.out.println("수정 실패.");
-				throw new Exception();
+				//변경 실패시 다시 변경 페이지로 이동
+				resp.sendRedirect(req.getContextPath()+"/users/modify.jsp?fail");
 			}
 
 		}
