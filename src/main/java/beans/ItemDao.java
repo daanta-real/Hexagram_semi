@@ -108,7 +108,7 @@ public class ItemDao {
 
 	// 관광지 추가(축제인지 관광지인지는 나중에 생각)
 	public boolean insert(ItemDto itemDto) throws Exception {
-		String sql = "INSERT INTO item (item_idx,users_idx,item_type,item_name,item_detail,item_period"
+		String sql = "INSERT INTO item (item_idx,users_idx,item_type,item_name,item_detail,item_period,"
 				+ "item_time,item_homepage,item_parking,item_address,item_date,item_count_view,item_count_reply)"
 				+ " VALUES(item_idx_seq.nextval,?,?,?,?,?,?,?,?,?,sysdate,0,0)";
 		Connection con = JdbcUtils.connect();
@@ -123,6 +123,30 @@ public class ItemDao {
 		ps.setString(7, itemDto.getItemHomepage());
 		ps.setString(8, itemDto.getItemParking());
 		ps.setString(9, itemDto.getItemAddress());
+
+		int result = ps.executeUpdate();
+
+		con.close();
+		return result > 0;
+	}
+	
+	public boolean insertWithSequence(ItemDto itemDto) throws Exception {
+		String sql = "INSERT INTO item (item_idx,users_idx,item_type,item_name,item_detail,item_period,"
+				+ "item_time,item_homepage,item_parking,item_address,item_date,item_count_view,item_count_reply)"
+				+ " VALUES(?,?,?,?,?,?,?,?,?,?,sysdate,0,0)";
+		Connection con = JdbcUtils.connect();
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, itemDto.getItemIdx());
+		ps.setInt(2, itemDto.getUsersIdx());
+		ps.setString(3, itemDto.getItemType());
+		ps.setString(4, itemDto.getItemName());
+		ps.setString(5, itemDto.getItemDetail());
+		ps.setString(6, itemDto.getItemPeriod());
+		ps.setString(7, itemDto.getItemTime());
+		ps.setString(8, itemDto.getItemHomepage());
+		ps.setString(9, itemDto.getItemParking());
+		ps.setString(10, itemDto.getItemAddress());
 
 		int result = ps.executeUpdate();
 
@@ -167,5 +191,33 @@ public class ItemDao {
 		return result > 0;
 	}
 
+	public boolean readUp(int itemIdx,int usersIdx) throws Exception {
+		String sql = "UPDATE item set item_count_view=item_count_view+1"
+				+ " where item_idx=? and users_idx != ?";
+		Connection con = JdbcUtils.connect();
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, itemIdx);
+		ps.setInt(2, usersIdx);
+
+		int result = ps.executeUpdate();
+
+		con.close();
+		return result > 0;
+	}
+	
+	public int getSequence() throws Exception {
+		String sql = "select item_seq.nextval from dual";
+		Connection con = JdbcUtils.connect();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+
+		rs.next();
+		int result = rs.getInt(1);
+		
+		con.close();
+		return result;
+	}
+	
 
 }

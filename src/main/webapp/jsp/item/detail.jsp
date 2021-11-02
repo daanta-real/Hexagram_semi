@@ -1,3 +1,5 @@
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Set"%>
 <%@page import="beans.UsersDao"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="beans.ItemDto"%>
@@ -9,15 +11,34 @@
 	pageEncoding="UTF-8"%>
 
  <% 
- 
  String root = request.getContextPath();
  int itemIdx = Integer.parseInt(request.getParameter("itemIdx"));
-
- 
- String usersGrade = (String)request.getSession().getAttribute("usersGrade");
- 
  ItemDao itemDao = new ItemDao();
  ItemDto itemDto = itemDao.get(itemIdx);
+
+ 
+ int usersIdx = (int)request.getSession().getAttribute("usersIdx");
+ //자신이 쓴글인지?
+boolean isMyboard = request.getSession().getAttribute("usersIdx") != null && itemDto.getUsersIdx() == usersIdx;
+ 
+ 
+ String usersGrade = (String)request.getSession().getAttribute("usersGrade");
+//  관리자인지?
+ boolean isManager = request.getSession().getAttribute("users_grade") != null && usersGrade.equals("관리자");
+ 
+
+
+//조회수 산정하기.
+Set<Integer> boardCountView = (Set<Integer>)request.getSession().getAttribute("boardCountView");
+
+if(boardCountView==null){
+	boardCountView = new HashSet<Integer>();
+}
+if(boardCountView.add(itemIdx)){
+	itemDao.readUp(itemIdx,usersIdx); //조회수를 늘려준다.
+}
+request.getSession().setAttribute("boardCountView", boardCountView);
+
 
 //해당 인덱스 글 번호의 ,, 댓글 목록을 불러온다
 ItemReplyDao itemReplyDao = new ItemReplyDao();
@@ -43,16 +64,18 @@ UsersDao usersDao = new UsersDao();
 <h3 align="center">
 <br>
 좋아요 표시(예정)
-<!-- 조회수 표시 -->
-
-
 </h3>
 
-<!-- 관리자가 보는 경우 수정 / 삭제가 가능하도록 설정 -->
-<%-- <%if(request.getSession().getAttribute("users_grade") != null && usersGrade.equals("관리자")){%> --%>
+
+<!-- 관리자 또는 글 작성자가 보는 경우 글작성 / 수정 / 삭제가 가능하도록 설정 : 수정 삭제의 경우 필터에서도 처리가능하도록 해야함.-->
+<%if(isManager || isMyboard){%>
+<h4 align="center">
+<a href="<%=root%>/jsp/item/insert.jsp">새 글작성</a>
 <a href="<%=root%>/jsp/item/edit.jsp?itemIdx=<%=itemIdx%>">수정</a>
 <a href="<%=root%>/jsp/item/delete.nogari?itemIdx=<%=itemIdx%>">삭제</a>
-<%-- <%}%> --%>
+</h4>
+<%}%>
+
 
 <!-- **사진 표시(DB테이블 만들어서 resource 파일정보를 불러올 예정(idea) -->
 <table border="1" align="center" width="700">
@@ -76,7 +99,11 @@ UsersDao usersDao = new UsersDao();
 <table align="center"  border="1" width="700">
 
 	<tbody>
-		<tr height="100">
+		<tr>
+			<th>조회수</th>
+			<td><%=itemDto.getItemCountView()%></td>
+		</tr>
+		<tr height="200">
 			<th>상세정보</th>
 			<td><%=itemDto.getItemDetail()%></td>
 		</tr>
