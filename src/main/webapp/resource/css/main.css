@@ -186,15 +186,10 @@ HEADER #menuContainer {
 	box-shadow: 0 0 1rem #8882;
 }
 HEADER #menuContainer a {
-	margin:0.5rem 2rem;
-	padding:0rem 2rem;
-	transition:background 0.2s linear 0;
-	transition:background-color 0.3s;????????????
+	margin:0.5rem 2rem; padding:0rem 2rem; border-radius:0.5rem;
+	transition:background 0.1s linear;
 }
-HEADER #menuContainer a:hover {
-	background:var(--color1);
-	border-radius:0.5rem;
-}
+HEADER #menuContainer a:hover { background:var(--color1); }
 
 /* FOOTER */
 FOOTER .footerContainer {
