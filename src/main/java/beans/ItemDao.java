@@ -71,14 +71,20 @@ public class ItemDao {
 		return itemDto;
 	}
 
-	//키워드 조회
-	public List<ItemDto> searchList(String column, String keyword) throws Exception {
+	//키워드 조회 및 페이징 조회
+	public List<ItemDto> searchList(String column, String keyword, int begin, int end) throws Exception {
 
 		Connection con = JdbcUtils.connect();
-		String sql = "select * from item where instr(#1,?)>0";
+		String sql = "select * from ("
+						+ "select rownum rn,TMP.*from("
+							+ "select * from item where instr(#1, ?) > 0 order by item_idx desc"
+						+ ")TMP"
+					+ ")where rn between ? and ?";
 		sql = sql.replace("#1", column);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
+		ps.setInt(2, begin);
+		ps.setInt(3, end);
 		ResultSet rs = ps.executeQuery();
 		List<ItemDto> list = new ArrayList<>();
 		while (rs.next()) {
