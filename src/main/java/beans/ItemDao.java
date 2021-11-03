@@ -186,8 +186,8 @@ public class ItemDao {
 		return list;
 	}
 
-	// 페이징 마지막 블록을 구하기 위하여 게시글 개수를 구하는 기능(목록 / 검색)
-	public int count() throws Exception {
+	// 페이징 마지막 블록을 구하기 위하여 게시글 개수를 구하는 기능(목록)
+	public int countLastList() throws Exception {
 		Connection con = JdbcUtils.connect3();
 
 		String sql = "select count(*) from item";
@@ -202,6 +202,28 @@ public class ItemDao {
 
 		return count;
 	}
+	
+	// 페이징 마지막 블록을 구하기 위하여 게시글 개수를 구하는 기능(검색)
+	public int countLastSearch(String column, String keyword) throws Exception {
+		Connection con = JdbcUtils.connect3();
+		
+		String sql = "select count(*) from item where instr(#1, ?) > 0";
+		sql = sql.replace("#1", column);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ResultSet rs = ps.executeQuery();
+		
+		rs.next();
+		
+		int count = rs.getInt(1);
+		
+		con.close();
+		
+		return count;
+	}
+
+	
+	
 
 	// 관광지 추가(축제인지 관광지인지는 나중에 생각)
 	public boolean insert(ItemDto itemDto) throws Exception {
