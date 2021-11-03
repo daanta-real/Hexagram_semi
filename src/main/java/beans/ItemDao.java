@@ -10,11 +10,11 @@ import util.JdbcUtils;
 
 public class ItemDao {
 
-	
+
 	// 전체 조회
 		public List<ItemDto> list() throws Exception {
 			String sql = "SELECT * FROM item order by item_idx desc";
-			Connection con = JdbcUtils.connect();
+			Connection con = JdbcUtils.connect3();
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 
@@ -42,15 +42,15 @@ public class ItemDao {
 			con.close();
 			return list;
 		}
-		
+
 	// 전체 조회(페이징)
 	public List<ItemDto> list(int begin, int end) throws Exception {
-		String sql = "select * from (" 
+		String sql = "select * from ("
 						+ "select rownum rn,TMP.*from("
-							+ "SELECT * FROM item order by item_idx desc" 
+							+ "SELECT * FROM item order by item_idx desc"
 						+ ")TMP"
-					+ ")where rn between ? and ?"; 
-		Connection con = JdbcUtils.connect();
+					+ ")where rn between ? and ?";
+		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, begin);
 		ps.setInt(2, end);
@@ -83,7 +83,7 @@ public class ItemDao {
 	// 단일 조회
 	public ItemDto get(int itemIdx) throws Exception {
 		String sql = "SELECT * FROM item WHERE item_idx = ?";
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, itemIdx);
 		ResultSet rs = ps.executeQuery();
@@ -113,7 +113,7 @@ public class ItemDao {
 	// 키워드 조회
 		public List<ItemDto> searchList(String column, String keyword) throws Exception {
 
-			Connection con = JdbcUtils.connect();
+			Connection con = JdbcUtils.connect3();
 			String sql = "select * from item where instr(#1, ?) > 0 order by item_idx desc";
 			sql = sql.replace("#1", column);
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -144,12 +144,12 @@ public class ItemDao {
 
 			return list;
 		}
-		
+
 	// 키워드 조회 및 페이징 조회
 	public List<ItemDto> searchList(String column, String keyword, int begin, int end) throws Exception {
 
-		Connection con = JdbcUtils.connect();
-		String sql = "select * from (" 
+		Connection con = JdbcUtils.connect3();
+		String sql = "select * from ("
 						+ "select rownum rn,TMP.*from("
 							+ "select * from item where instr(#1, ?) > 0 order by item_idx desc"
 						+ ")TMP"
@@ -188,7 +188,7 @@ public class ItemDao {
 
 	// 페이징 마지막 블록을 구하기 위하여 게시글 개수를 구하는 기능(목록 / 검색)
 	public int count() throws Exception {
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 
 		String sql = "select count(*) from item";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -208,7 +208,7 @@ public class ItemDao {
 		String sql = "INSERT INTO item (item_idx,users_idx,item_type,item_name,item_detail,item_period,"
 				+ "item_time,item_homepage,item_parking,item_address,item_date,item_count_view,item_count_reply)"
 				+ " VALUES(item_idx_seq.nextval,?,?,?,?,?,?,?,?,?,sysdate,0,0)";
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 
 		ps.setInt(1, itemDto.getUsersIdx());
@@ -231,7 +231,7 @@ public class ItemDao {
 		String sql = "INSERT INTO item (item_idx,users_idx,item_type,item_name,item_detail,item_period,"
 				+ "item_time,item_homepage,item_parking,item_address,item_date,item_count_view,item_count_reply)"
 				+ " VALUES(?,?,?,?,?,?,?,?,?,?,sysdate,0,0)";
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 
 		ps.setInt(1, itemDto.getItemIdx());
@@ -254,7 +254,7 @@ public class ItemDao {
 	// 관광지 삭제
 	public boolean delete(int itemIdx) throws Exception {
 		String sql = "DELETE FROM item WHERE item_idx = ?";
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, itemIdx);
 
@@ -268,7 +268,7 @@ public class ItemDao {
 	public boolean update(ItemDto itemDto) throws Exception {
 		String sql = "UPDATE item set users_idx=?,item_type=?,item_name=?,item_detail=?,item_period=?,item_time=?,item_homepage=?,item_parking=?,item_address=?"
 				+ " where item_idx=?";
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 
 		ps.setInt(1, itemDto.getUsersIdx());
@@ -290,7 +290,7 @@ public class ItemDao {
 
 	public boolean readUp(int itemIdx, int usersIdx) throws Exception {
 		String sql = "UPDATE item set item_count_view=item_count_view+1" + " where item_idx=? and users_idx != ?";
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 
 		ps.setInt(1, itemIdx);
@@ -304,7 +304,7 @@ public class ItemDao {
 
 	public int getSequence() throws Exception {
 		String sql = "select item_seq.nextval from dual";
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
 

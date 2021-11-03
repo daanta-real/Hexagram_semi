@@ -24,7 +24,7 @@ public class ItemDao {
 
 		// SQL 준비
 		String sql = "SELECT * FROM item";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		// 완성된 SQL문 보내고 결과 받아오기
@@ -54,7 +54,7 @@ public class ItemDao {
 
 		// SQL 준비
 		String sql = "SELECT * FROM item WHERE item_idx = ?";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, itemIdx);
 
@@ -85,7 +85,7 @@ public class ItemDao {
 		// SQL 준비
 		String sql = "INSERT INTO item (item_idx, users_idx, item_type, item_name, item_detail, item_tags, item_date, item_period)"
 				+ " VALUES(item_seq.NEXTVAL, ?, ?, ?, ?, ?, SYSDATE, ?)";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt   (1, dto.getUsersIdx());
 		ps.setString(2, dto.getItemType());
@@ -109,7 +109,7 @@ public class ItemDao {
 
 		// SQL 준비
 		String sql = "DELETE FROM item WHERE item_idx = ?";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, itemIdx);
 
@@ -141,7 +141,7 @@ public class ItemDao {
 		));
 
 		// SQL문 만들어 보내고 결과 받아오기
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = HexaLibrary.sqlBuilder(conn, list);
 		int result = ps.executeUpdate();
 		boolean isSucceed = result == 1;

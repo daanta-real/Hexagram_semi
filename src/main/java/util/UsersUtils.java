@@ -15,7 +15,7 @@ public class UsersUtils {
 
 		// SQL 준비
 		String sql = "select * from users where users_id=? and users_pw=?";
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, usersId);
 		ps.setString(2, usersPw);
@@ -59,7 +59,7 @@ public class UsersUtils {
 
 		// SQL 준비
 		String sql = "select count(*) from users where users_id = ?";
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, usersId);
 

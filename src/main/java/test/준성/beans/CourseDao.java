@@ -24,7 +24,7 @@ public class CourseDao {
 
 		// SQL 준비
 		String sql = "SELECT * FROM course";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		// 완성된 SQL문 보내고 결과 받아오기
@@ -52,7 +52,7 @@ public class CourseDao {
 
 		// SQL 준비
 		String sql = "SELECT * FROM course WHERE course_idx = ?";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, courseIdx);
 
@@ -82,7 +82,7 @@ public class CourseDao {
 		// SQL 준비
 		String sql = "INSERT INTO course (course_idx, users_idx, course_subject, course_list, course_locations, course_detail, course_tags)"
 				+ " VALUES(course_seq.NEXTVAL, ?, ?, ?, ?, ?, ?)";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt   (1, dto.getUsersIdx());
 		ps.setString(2, dto.getCourseSubject());
@@ -106,7 +106,7 @@ public class CourseDao {
 
 		// SQL 준비
 		String sql = "DELETE FROM course WHERE course_idx = ?";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, courseIdx);
 
@@ -137,7 +137,7 @@ public class CourseDao {
 		));
 
 		// SQL문 만들어 보내고 결과 받아오기
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = HexaLibrary.sqlBuilder(conn, info);
 		int result = ps.executeUpdate();
 		boolean isSucceed = result == 1;

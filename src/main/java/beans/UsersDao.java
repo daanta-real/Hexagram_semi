@@ -15,7 +15,7 @@ public class UsersDao {
 
 		// SQL 준비
 		String sql = "SELECT * FROM users";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		// 완성된 SQL문 보내고 결과 받아오기
@@ -45,7 +45,7 @@ public class UsersDao {
 	public UsersDto get(int usersIdx) throws Exception{
 
 		// SQL 준비
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 
 		String sql = "SELECT * FROM users WHERE users_idx = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -76,7 +76,7 @@ public class UsersDao {
 
 		// SQL 준비
 		String sql = "SELECT * FROM users WHERE users_id = ?";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, usersId);
 
@@ -109,7 +109,7 @@ public class UsersDao {
 		// SQL 준비
 		String sql = "INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email, users_phone)"
 			+ " VALUES(users_seq.NEXTVAL, ?, ?, ?, ?, ?)";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, dto.getUsersId());
 		ps.setString(2, dto.getUsersPw());
@@ -132,7 +132,7 @@ public class UsersDao {
 
 		// SQL 준비
 		String sql = "DELETE FROM users WHERE users_id = ?";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, usersId);
 
@@ -163,7 +163,7 @@ public class UsersDao {
 		System.out.println("　　SQL문 준비됨: " + sql);
 
 		// SQL ?부분 완성
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		count = 1;
 		if (dto.getUsersPw   () != null) ps.setString(count++, dto.getUsersPw   ());
@@ -191,7 +191,7 @@ public class UsersDao {
 
 		// SQL 준비
 		String sql = "UPDATE users SET users_pw = ? WHERE users_id = ? AND users_pw = ?";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, pwUpdate);		   // 변경할 비번
 		ps.setString(2, dto.getUsersId());

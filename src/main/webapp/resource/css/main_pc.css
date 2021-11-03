@@ -10,3 +10,9 @@ HEADER #searcherContainer span.magnifier {
 	position:absolute; top:0.07rem; right:0.2rem;
 	font-size:1.3rem; line-height:2rem; position: absolute;
 }
+
+/* 디버그(debug) 전용 설정 */
+#debugContainer * {
+    min-width: 300px !important;
+	max-width: 300px !important;
+}
