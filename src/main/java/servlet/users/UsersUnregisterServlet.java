@@ -27,12 +27,13 @@ public class UsersUnregisterServlet extends HttpServlet{
 		//입력한 아이디와 비밀번호가 일치하는 회원인지 확인
 		UsersDto usersDto;
 		usersDto = UsersUtils.getValidDto(sessionId, usersPw);
+		boolean canUnregister = usersDto.getUsersPw().equals(usersPw);
 		
 		//회원삭제 기능 
 		UsersDao usersDao = new UsersDao();
 		boolean unregister = usersDao.delete(sessionId);
 		
-		if(usersDto != null) {
+		if(usersDto != null && canUnregister) {
 			System.out.println("[회원탈퇴] 가능. 세션 삭제");
 			//아이디,비번이 일치하는 회원이 맞다면 탈퇴
 			unregister = true;
@@ -43,6 +44,12 @@ public class UsersUnregisterServlet extends HttpServlet{
 			//탈퇴 완료 페이지로 이동
 			resp.sendRedirect(req.getContextPath()+"/users/unregister_success.jsp");
 			System.out.println("[회원탈퇴] 완료");
+		}
+		else if(usersDto != null && !canUnregister) {
+			//회원탈퇴실패시 회원탈퇴입력 페이지로 다시 이동
+			unregister = false;
+			System.out.println("[회원탈퇴] 실패");
+			resp.sendRedirect(req.getContextPath()+"/users/unregister.jsp?fail");
 		}
 		else {
 			//회원탈퇴실패시 회원탈퇴입력 페이지로 다시 이동
