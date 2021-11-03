@@ -14,7 +14,7 @@ public class CourseDao {
 	public void insert(CourseDto courseDto)	throws Exception{
 
 		//jdbcDriver 연결
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 
 		//외래키는 등록하지 않음
 		String sql = "insert into course(course_idx, course_subject, course_list, course_detail, course_locations, course_tags)"
@@ -36,7 +36,7 @@ public class CourseDao {
 	public boolean update(CourseDto courseDto) throws Exception{
 
 		//jdbcDriver 연결
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 
 		//수정할수 있는 컬럼(목록, 내용, 지역, 태그)을 예상하여 기능 생성
 		String sql = "update course set course_subject=?, course_list= ?, course_detail= ?, course_locations = ?, course_tags = ? where course_idx = ?";
@@ -57,7 +57,7 @@ public class CourseDao {
 
 	//3. 삭제(delete)
 	public boolean delete(int courseIdx) throws Exception{
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 
 		String sql = "delete course where course_idx = ?";
 		PreparedStatement ps = con.prepareStatement(sql);

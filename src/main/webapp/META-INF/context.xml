@@ -9,8 +9,8 @@
 		
 		driverClassName="oracle.jdbc.OracleDriver"
 		url="jdbc:oracle:thin:@localhost:1521:xe"
-		username="hexa"
-		password="hexa"
+		username="hexagram_semi"
+		password="hexagram"
 		
 		maxTotal="20"
 		minIdle="0"

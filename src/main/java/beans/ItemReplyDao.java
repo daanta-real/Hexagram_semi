@@ -12,11 +12,11 @@ public class ItemReplyDao {
 
 	//댓글 추가 기능
 	public void insert(ItemReplyDto itemReplyDto) throws Exception {
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		String sql = "INSERT INTO item_reply (item_reply_idx,users_idx,item_idx,item_reply_detail,item_reply_date,item_reply_superno,item_reply_groupno,item_reply_depth)"
 				+ " VALUES(?,?,?,?,sysdate,null,?,0)";
 		PreparedStatement ps = con.prepareStatement(sql);
-		
+
 		ps.setInt(1, itemReplyDto.getItemReplyIdx());
 		ps.setInt(2, itemReplyDto.getUsersIdx());
 		ps.setInt(3, itemReplyDto.getItemIdx());
@@ -26,10 +26,10 @@ public class ItemReplyDao {
 		ps.execute();
 		con.close();
 	}
-	
+
 	//시퀀스 번호 생성.
 	public int getSequenceNo() throws Exception {
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		String sql = "select item_reply_seq.nextval from dual";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ResultSet rs = ps.executeQuery();
@@ -43,7 +43,7 @@ public class ItemReplyDao {
 
 	//대댓글 추가 기능
 	public void insertTarget(ItemReplyDto itemReplyDto) throws Exception {
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		String sql = "INSERT INTO item_reply (item_reply_idx,users_idx,item_idx,item_reply_detail,item_reply_date,item_reply_superno,item_reply_groupno,item_reply_depth)"
 				+ " VALUES(?,?,?,?,sysdate,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -55,14 +55,14 @@ public class ItemReplyDao {
 		ps.setInt(5, itemReplyDto.getItemReplySuperno());
 		ps.setInt(6, itemReplyDto.getItemReplyIdx());
 		ps.setInt(7, itemReplyDto.getItemReplyDepth());
-		
+
 		ps.execute();
 		con.close();
 	}
 
 	//댓글 조회
 	public List<ItemReplyDto> list(int itemIdx) throws Exception {
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		String sql = "select * from item_reply where item_idx=? "
 				+ "connect by prior item_reply_no = item_reply_superno "
 				+ "start with item_reply_superno is null "
@@ -75,7 +75,7 @@ public class ItemReplyDao {
 		List<ItemReplyDto> list = new ArrayList<>();
 		while(rs.next()) {
 			ItemReplyDto itemReplyDto = new ItemReplyDto();
-			
+
 			itemReplyDto.setItemReplyIdx(rs.getInt(1));
 			itemReplyDto.setUsersIdx(rs.getInt(2));
 			itemReplyDto.setItemIdx(rs.getInt(3));
@@ -84,7 +84,7 @@ public class ItemReplyDao {
 			itemReplyDto.setItemReplySuperno(rs.getInt(6));
 			itemReplyDto.setItemReplyGroupno(rs.getInt(7));
 			itemReplyDto.setItemReplyDepth(rs.getInt(8));
-			
+
 			list.add(itemReplyDto);
 		}
 
@@ -92,9 +92,9 @@ public class ItemReplyDao {
 		return list;
 	}
 
-	
+
 	public boolean update(int itemReplyIdx) throws Exception {
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		String sql = "update item_reply set item_reply_detail where item_reply_idx=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, itemReplyIdx);
@@ -105,7 +105,7 @@ public class ItemReplyDao {
 	}
 
 	public boolean delete(int itemReplyIdx) throws Exception {
-		Connection con = JdbcUtils.connect();
+		Connection con = JdbcUtils.connect3();
 		String sql = "delete item_reply where item_reply_idx=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, itemReplyIdx);
@@ -114,10 +114,10 @@ public class ItemReplyDao {
 		con.close();
 		return result>0;
 	}
-	
-	
-	
-	
+
+
+
+
 }
 
 

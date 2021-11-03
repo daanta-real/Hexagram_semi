@@ -24,7 +24,7 @@ public class ItemReplyDao {
 
 		// SQL 준비
 		String sql = "SELECT * FROM item_reply";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		// 완성된 SQL문 보내고 결과 받아오기
@@ -51,7 +51,7 @@ public class ItemReplyDao {
 
 		// SQL 준비
 		String sql = "SELECT * FROM item_reply WHERE item_reply_idx = ?";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, itemReplyIdx);
 
@@ -79,7 +79,7 @@ public class ItemReplyDao {
 		// SQL 준비
 		String sql = "INSERT INTO item_reply (item_reply_idx, item_idx, users_idx, item_reply_target_idx, item_reply_detail)"
 			+ " VALUES(item_reply.NEXTVAL, ?, ?, ?, ?)";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, dto.getItemIdx());
 		ps.setInt(2, dto.getUsersIdx());
@@ -101,7 +101,7 @@ public class ItemReplyDao {
 
 		// SQL 준비
 		String sql = "DELETE FROM item_reply WHERE item_reply_idx = ?";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, itemReplyIdx);
 
@@ -128,7 +128,7 @@ public class ItemReplyDao {
 			new String[] {"item_reply_detail = ?"    , "String", dto.getItemReplyDetail()                   , "," },
 			new String[] {" WHERE item_reply_idx = ?", "int"   , String.valueOf(dto.getItemIdx())           , null}
 		));
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = HexaLibrary.sqlBuilder(conn, info);
 
 		// SQL문 만들어 보내고 결과 받아오기

@@ -24,7 +24,7 @@ public class EventDao {
 
 		// SQL 준비
 		String sql = "SELECT * FROM event";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 
 		// 완성된 SQL문 보내고 결과 받아오기
@@ -51,7 +51,7 @@ public class EventDao {
 
 		// SQL 준비
 		String sql = "SELECT * FROM event WHERE event_idx = ?";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, eventIdx);
 
@@ -79,7 +79,7 @@ public class EventDao {
 		// SQL 준비
 		String sql = "INSERT INTO event (event_idx, users_idx, event_subject, event_detail, event_period)"
 				+ " VALUES(event_seq.NEXTVAL, ?, ?, ?, ?)";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, dto.getUsersIdx());
 		ps.setString(2, dto.getEventSubject());
@@ -101,7 +101,7 @@ public class EventDao {
 
 		// SQL 준비
 		String sql = "DELETE FROM event WHERE event_idx = ?";
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, eventIdx);
 
@@ -130,7 +130,7 @@ public class EventDao {
 		));
 
 		// SQL문 만들어 보내고 결과 받아오기
-		Connection conn = JdbcUtils.connect();
+		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = HexaLibrary.sqlBuilder(conn, info);
 		int result = ps.executeUpdate();
 		boolean isSucceed = result == 1;
