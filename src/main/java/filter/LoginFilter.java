@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 // 모든 JSP 파일, 모든 서블릿 파일 대상. (각종 설정파일 등 제외)
 @WebFilter( urlPatterns = {
+	"/users/tableInitializer.jsp",
 	"/users/join_success.jsp",
 	"/items/insert.jsp"
 } )
@@ -29,17 +30,17 @@ public class LoginFilter implements Filter {
 			// 세션 검사
 			String sessionId = (String) req.getSession().getAttribute("usersId");
 			if(sessionId == null || sessionId.equals("")) {
-				System.out.println("[필터] 로그인되지 않아 로그인 검사 필터를 통과하지 못했습니다. (세션ID:'" + sessionId + "') 로그인 필터 통과 실패.");
+				System.out.println("[필터 작동 - 로그인 검사] 로그인되지 않아 로그인 검사 필터를 통과하지 못했습니다. (세션ID:'" + sessionId + "') 로그인 필터 통과 실패.");
 				((HttpServletResponse) response).sendError(401); // 로그인페이지로 이동
 			}
 
 			// 다음 필터로 넘김
-			System.out.println("[필터] 로그인 확인됨. 로그인 필터 통과.");
+			System.out.println("[필터 작동 - 로그인 검사] 로그인 확인됨. 로그인 필터 통과.");
 			chain.doFilter(request, response);
 
 		} catch(Exception e) {
 
-			System.out.println("[필터] 처리 중에 에러 발생");
+			System.out.println("[필터 작동 - 로그인 검사] 처리 중에 에러 발생");
 			e.printStackTrace();
 
 		}

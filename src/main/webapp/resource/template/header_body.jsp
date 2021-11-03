@@ -7,8 +7,7 @@
 <!-- ↓ HEADER_BODY -->
 <%
 // 환경설정
-String title = "노가리투어ㅡ" + request.getParameter("pageTitle");
-System.out.println("<헤더 출력> from " + request.getRequestURL().toString() + "(" + title + ")");
+System.out.println("[헤더 출력] from " + request.getRequestURL().toString());
 String root = request.getContextPath();
 String searcher = request.getParameter("searchKeyword");
 if(searcher == null) searcher = "";
@@ -37,7 +36,8 @@ if(isLogin) {
 
 <!-- 디버그용 -->
 <DIV ID="debugContainer">
-	<INPUT ID='debug_query' TYPE=text /><BUTTON ONCLICK='debug_rainbowQueryRun();'>레이어 해체보기</BUTTON>
+	<BUTTON ONCLICK='location.href="<%=root%>/users/tableInitializer.jsp";'>DB 초기화</BUTTON>
+	<form onsubmit="return false;"><INPUT ID='debug_query' TYPE=text /><BUTTON ONCLICK='debug_rainbowQueryRun();'>레이어 해체보기</BUTTON></form>
 </DIV>
 
 <!-- 모바일 메뉴 콘테이너 -->
