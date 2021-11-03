@@ -31,7 +31,7 @@ public class UsersUnregisterServlet extends HttpServlet{
 		
 		//회원삭제 기능 
 		UsersDao usersDao = new UsersDao();
-		boolean unregister = usersDao.delete(sessionId);
+		boolean unregister = usersDao.delete(sessionId);  
 		
 		if(usersDto != null && canUnregister) {
 			System.out.println("[회원탈퇴] 가능. 세션 삭제");
