@@ -22,11 +22,10 @@ public class UsersUnregisterServlet extends HttpServlet{
 		//입력값: 아이디(세션), 비밀번호(파라미터)
 		String sessionId = (String)req.getSession().getAttribute("usersId");
 		String usersPw = req.getParameter("usersPw");
-		System.out.println("usersId = '" + sessionId + "', usersPw = '" + usersPw);
+		System.out.println("usersId = '" + sessionId + "', usersPw = '" + usersPw +"'");
 		
 		//입력한 아이디와 비밀번호가 일치하는 회원인지 확인
-		UsersDto usersDto;
-		usersDto = UsersUtils.getValidDto(sessionId, usersPw);
+		UsersDto usersDto = UsersUtils.getValidDto(sessionId, usersPw);
 		boolean canUnregister = usersDto.getUsersPw().equals(usersPw);
 		
 		//회원삭제 기능 
