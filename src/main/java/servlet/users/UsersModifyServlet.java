@@ -70,7 +70,7 @@ public class UsersModifyServlet extends HttpServlet {
 			boolean isGranted = UsersUtils.isGranted(sessionId, sessionGrade, usersId);
 			// grade를 수정하는 경우, 세션이 관리자 유저 세션인지 추가로 확인 필요함
 			if(usersGrade != null) isGranted = isGranted
-				&& (sessionGrade != null && sessionGrade.equals("관리자")
+				&& (sessionGrade != null && sessionGrade.equals(UsersUtils.GRADE_ADMIN)
 			);
 			if(!isGranted) throw new Exception();
 			System.out.println("권한 확인 완료.");

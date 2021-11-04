@@ -67,7 +67,7 @@ if(isLogin) {
 				<INPUT TYPE='password' NAME='usersPw' VALUE="<% %>" PLACEHOLDER="입력하세요"/>
 				<DIV CLASS="loginButtonBox flexCenter flexRow">
 					<BUTTON CLASS='actionButtons loginoutButton' TYPE='submit'>로그인</BUTTON>
-					<BUTTON CLASS='actionButtons joinButton'>회원가입</BUTTON>
+					<INPUT CLASS='actionButtons joinButton' TYPE='button' VALUE="회원가입" />
 				</DIV>
 			</FORM>
 			<%}%>

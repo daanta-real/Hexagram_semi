@@ -7,7 +7,7 @@
 </welcome-file-list>
 
 <session-config>
-  <session-timeout>30</session-timeout>
+  <session-timeout>30000</session-timeout>
 </session-config>
 
 <error-page><error-code>200</error-code><location>/resource/template/error.jsp</location></error-page>

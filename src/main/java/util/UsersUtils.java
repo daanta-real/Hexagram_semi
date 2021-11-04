@@ -7,6 +7,12 @@ import beans.UsersDto;
 
 public class UsersUtils {
 
+	// 기본
+	// 권한 관련 문자가 변경될 상황을 대비하여 미리 관련변수를 지정해 두는 바임.
+	public static final String GRADE_ADMIN     = "관리자";
+	public static final String GRADE_REGULAR   = "정회원";
+	public static final String GRADE_ASSOCIATE = "준회원";
+
 	// 로그인 검사: 로그인 아디/비번 일치 여부 체크 결과를 반환.
 	// 회원탈퇴 검사도 가능 입력한 아이디/비밀번호에 해장하는 정보가 있는지 확인
 	// 성공시 해당 유저의 UsersDto 반환
@@ -46,7 +52,7 @@ public class UsersUtils {
 	public static boolean isGranted(String sessionId, String sessionGrade, String targetId) {
 		return (
 			// 내가 관리자거나
-			(sessionGrade != null && sessionGrade.equals("관리자"))
+			(sessionGrade != null && sessionGrade.equals(GRADE_ADMIN))
 			// 내가 나에 대해 요청한거거나
 			|| (sessionId != null && sessionId.equals(targetId))
 		);
@@ -73,7 +79,6 @@ public class UsersUtils {
 		return isUnique;
 
 	}
-
 
 	/*
 	// 5. Methods - Common

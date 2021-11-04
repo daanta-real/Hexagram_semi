@@ -44,9 +44,14 @@ public class UsersCreateServlet extends HttpServlet {
 
 			// 후처리
 			if(isSucceed) {
-				System.out.println("[회원 가입] 가입에 성공했습니다.");
+				System.out.println("[회원 가입] 가입에 성공했습니다.");/*
+
+				회원가입과 동시에 세션 부여해보려 했으나, 시퀀스 넘버 획득방법 없어 추가 실패함. 나중에 DAO 작업하면 다시 시도하겠음
 				// 세션 부여하고 가입성공 페이지로 보냄
-				req.getSession().setAttribute("id", usersId);
+				HttpSession session = req.getSession();
+				session.setAttribute("id", usersId);
+				session.setAttribute("usersId"   , usersId);
+				session.setAttribute("usersGrade", "준회원");*/
 				resp.sendRedirect(req.getContextPath() + "/users/join_success.jsp");
 			}
 			else throw new Exception();
