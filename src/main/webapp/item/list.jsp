@@ -53,7 +53,6 @@
 		list = itemDao.list
 		(itemPagination.getBegin(), itemPagination.getEnd());
 	}
-
 	String title = itemPagination.isSearch() ? "["+itemPagination.getKeyword()+"]" + " 검색" : "관광지 목록";
 %>
 
