@@ -13,6 +13,7 @@
 <!-- 페이지 내용 시작 -->
 <h3>회원 탈퇴 비번 확인</h3>
 <form action="<%=root %>/users/unregister.nogari" method="post">
+<input type="hidden" name="targetId" value="<%=sessionId%>">
 	<table width="500">
 		<tbody>
 			<tr>
