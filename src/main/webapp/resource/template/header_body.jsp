@@ -86,6 +86,9 @@ if(isLogin) {
 		<H4 CLASS="userInfoTxt"><%=usersNick%>(<%=usersId%>)님 <SPAN class="<%=gradeStr%>"><%=usersGrade%></SPAN></H4>
 		<A CLASS='userButton' HREF='<%=root%>/users/detail.jsp'>내 정보</A>
 		<A CLASS='userButton' HREF='<%=root%>/users/logout.nogari'>로그아웃</A>
+		<%if( usersGrade.equals("관리자")) {%>
+			<A CLASS='userButton' HREF='<%=root%>/admin/main.jsp'>관리</A>
+		<%} %>
 	<%} else { /* 로그인이 되지 않았을 경우 */ %>
 		<H4 CLASS="userInfoTxt">로그인하세요.</H4><A CLASS='userButton' HREF='<%=root%>/users/login.jsp'>로그인</A>
 		<H4 CLASS="userInfoTxt">회원가입 페이지</H4><A CLASS='userButton' HREF='<%=root%>/users/join.jsp'>회원가입</A>
