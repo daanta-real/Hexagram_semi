@@ -47,6 +47,7 @@
 %>
 p = <%=p %>, begin = <%=begin %>, end = <%=end %>
 
+
 <%-- 네이게이터 --%>
 <%
 	int bsize = 10;
@@ -54,8 +55,12 @@ p = <%=p %>, begin = <%=begin %>, end = <%=end %>
 	int startBlock = (p-1) / bsize * bsize + 1;
 	int finishBlock = startBlock + (bsize - 1);
 %> 
+
+
 <br>
 startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>
+
+
 <%-- 검색 및 목록 처리 --%>
 <%
 	String column = request.getParameter("column");
@@ -81,35 +86,40 @@ startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>
 <h5>(usersId = <%=usersId %>, usersIdx = <%=usersIdx %>, grade=<%=usersGrade %>)</h5>
 
 <form action="<%=root%>/item/list.jsp" method="get">
-<select name="column">
-		<%if(column != null && column.equals("item_type")) {%>
-		<option value="item_type" selected>카테고리</option>
-		<%}else{ %>
-		<option value="item_type">카테고리</option>
-		<%} %>
-		<%if(column != null && column.equals("item_name")) {%>
-		<option value="item_name" selected>관광지명</option>
-		<%}else{ %>
-		<option value="item_name">관광지명</option>
-		<%} %>
-		<%if(column!=null && column.equals("item_detail")) {%>
-		<option value="item_detail" selected>내용</option>
-		<%}else{ %>
-		<option value="item_detail">내용</option>
-		<%} %>
+
+	<select name="column">
+			<%if(column != null && column.equals("item_type")) {%>
+			<option value="item_type" selected>카테고리</option>
+			<%}else{ %>
+			<option value="item_type">카테고리</option>
+			<%} %>
+			<%if(column != null && column.equals("item_name")) {%>
+			<option value="item_name" selected>관광지명</option>
+			<%}else{ %>
+			<option value="item_name">관광지명</option>
+			<%} %>
+			<%if(column!=null && column.equals("item_detail")) {%>
+			<option value="item_detail" selected>내용</option>
+			<%}else{ %>
+			<option value="item_detail">내용</option>
+			<%} %>
 	</select>
+	
 	<%if(keyword == null){ %>
-	<input type="search" name="keyword" placeholder="검색어 입력" required>
+		<input type="search" name="keyword" placeholder="검색어 입력" required>
 	<%}else{ %>
-	<input type="search" name="keyword" placeholder="검색어 입력" required value="<%=keyword%>">
+		<input type="search" name="keyword" placeholder="검색어 입력" required value="<%=keyword%>">
 	<%} %>
-	<input type="submit" value="검색">
+	
+		<input type="submit" value="검색">
+	
 </form>
 
 <br>
 <%if(!list.isEmpty()){%>
 <%-- 전체 목록 조회 --%>
 <table border="1" width="500">
+
 	<thead>
 		<tr>
 			<th>카테고리</th>
@@ -118,37 +128,36 @@ startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>
 
 		</tr>
 	</thead>
+	
 	<tbody>
 		<%for(ItemDto itemDto : list){ %>
 		<tr>
 			<td align ="center"><%=itemDto.getItemType() %></td>
+			
 			<td align ="center">
-			<a href="<%=root%>/item/count.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
-<!-- 			클릭시 단 한번의 조회를 위해서 Count서블릿으로 item_idx을 넘겨줌 -->
+			<a href="<%=root%>/item/detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>">
 			<%=itemDto.getItemName()%>
 			</a>
 			</td>
-			<td><%=itemDto.getItemDetail().substring(0, 1) %>....</td>
-
+			
+			<td><%=itemDto.getItemDetail().substring(0, 3) %>....</td>
 		</tr>
 		<%} %>
-	</tbody>	
+	</tbody>
 </table>
 <%}else{ %>
 <h2>결과가 없습니다.</h2>
 <%} %>
 <br><br>
+
 [이전] 
-
-
 <%for(int i = startBlock; i<=finishBlock; i++) {%>
 	<%if(search){ %>
-		<a href="list.jsp?column=<%=column %>&keyword<%=keyword %>&p=<%=i %>"><%=i %></a>
+		<a href="list.jsp?column=<%=column %>&keyword<%=keyword %>&p=<%=i%>"><%=i%></a>
 	<%}else{ %>
-		<a href="list.jsp?p=<%=i %>"><%=i %></a>
+		<a href="list.jsp?p=<%=i%>"><%=i%></a>
 	<%} %>
 <%} %>
-
 [다음]
 
 <br><br>
