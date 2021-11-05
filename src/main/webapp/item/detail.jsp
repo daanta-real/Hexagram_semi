@@ -76,7 +76,7 @@
 
  
  int usersIdx = (int)request.getSession().getAttribute("usersIdx");
- //자신이 쓴글인지?
+ //자신이 쓴글인지(현재 접속자 = 게시물 작성자)?
 boolean isMyboard = request.getSession().getAttribute("usersIdx") != null && itemDto.getUsersIdx() == usersIdx;
  
  
@@ -161,7 +161,9 @@ request.getSession().setAttribute("boardCountView", boardCountView);
 		<tr>
 			<th>지도표시</th>
 			<td>
-				카카오 활용 예정.
+				<jsp:include page="kakaomap.jsp">
+					<jsp:param value="<%=itemDto.getItemIdx()%>" name="itemIdx"/>
+				</jsp:include>
 			</td>
 		</tr>
 		<tr>
@@ -193,11 +195,8 @@ request.getSession().setAttribute("boardCountView", boardCountView);
 ItemReplyDao itemReplyDao = new ItemReplyDao();
 List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 
-//이 글을 쓴사람 불러오기.
 
-//댓글을 쓴사람(게시물과 같은 사람 표시)
-//댓글을 쓴사람만이 게시글 수정과 삭제가 가능하게 하기
-//게시물 수정 삭제와 같은 것과 마찬가지로 필터가 필요함(주소에서 침범하는것 방지.)
+//게시물 수정 삭제와 같은 것과 마찬가지로 필터가 필요함(주소에서 침범하는것 방지.)!!!!!!!!!
 %>
 
 <!-- 댓글 리스트 -->
@@ -229,6 +228,11 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 						//이 글을 쓴사람의 아이디를 알기 위해서 user의 정보를 불러와야 한다.
 						UsersDao usersDao = new UsersDao();
 						UsersDto usersDto = usersDao.get(itemReplyDto.getUsersIdx());
+						
+						// 게시물의 작성자가 댓글 작성자인가?
+						boolean isSameItemReply = itemDto.getUsersIdx() == itemReplyDto.getUsersIdx();
+						//현재 접속한 유저가 이 댓글 작성한 사람인가?
+						boolean isUsersReplyWriter = usersIdx == itemReplyDto.getUsersIdx();
 						%>
 						
 						<tr>
@@ -237,21 +241,38 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 	
 							<%if(itemReplyDto.getItemReplyDepth() != 0){ %>
 								<%for(int i = 0 ; i < itemReplyDto.getItemReplyDepth() ; i++){ %>
-									&nbsp;&nbsp;
+									&nbsp;&nbsp;&nbsp;&nbsp;
 								<%} %>
+								<img src="<%=root%>/resource/image/reply.png" width="20px">
 							<%} %>
 
-							<%=usersDto.getUsersId()==null?"아이디 지정 안함":usersDto.getUsersId()%>(<%=itemReplyDto.getItemReplyDate()%>)
+							<%=usersDto.getUsersId()==null?"아이디 지정 안함":usersDto.getUsersId()%>
+							
+<!-- 							게시물의 작성자가 댓글 작성자 -->
+							<%if(isSameItemReply) {%>
+							(글쓴이)
+							<%} %>
+							
+							(<%=itemReplyDto.getItemReplyTotalDate()%>)
 							&nbsp;
 							<%=itemReplyDto.getItemReplyDetail()%>
 							&nbsp;
-								<a>수정</a>
-								<a>삭제</a>
 							
+<!-- 							댓글 작성자이거나 관리자의 경우 수정 삭제가 가능하다. -->
+							<%if(isManager || isUsersReplyWriter) {%>
+								<a>대댓글</a>
+								<a>수정</a>
+								<a href="<%=root%>/item_reply/delete.nogari?itemIdx=<%=itemIdx%>&itemReplyIdx=<%=itemReplyDto.getItemReplyIdx()%>">삭제</a>
+							<%} %>
 	
 							</td>
-							<td>
+							
+						</tr>
+						
 <!-- 							자바스크립트를 배우고 나서 이부분을 수정한다. -->
+<!-- 대댓글 창 -->
+						<tr>
+							<td>
 								<form action="<%=root%>/item_reply/target_insert.nogari" method="post">
 											<textarea name="itemReplyDetail" rows="2" cols="20" placeholder="댓글 입력" required></textarea>
 											<input type="submit" value="대댓글">
@@ -260,8 +281,27 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 								</form>
 							
 							</td>
-							
+						</tr>	
+						
+<!-- 						각 댓글마다 수정 칸을 숨겨준다. -->
+<!-- 							자바스크립트를 배우고 나서 이부분을 수정한다. -->
+
+<!-- 							수정 창 -->
+<!-- 							댓글 작성자이거나 관리자의 경우 수정 입력이 가능하다. -->
+<%if(isManager || isUsersReplyWriter) {%>
+							<td>
+								<form action="<%=root%>/item_reply/update.nogari" method="post">
+											<textarea name="itemReplyDetail" rows="2" cols="20" placeholder="수정" required></textarea>
+											<input type="submit" value="수정">
+											<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
+											<input type="hidden" name="itemReplyIdx" value="<%=itemReplyDto.getItemReplyIdx()%>">
+								</form>
+							</td>
+						<%} %>	
+						<tr>
+								
 						</tr>
+						
 				</tbody>
 			</table>
 		<%}%>
@@ -272,12 +312,19 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 <!-- 댓글 작성란 추가(수정란까지 포함해서) -->
 <!-- 댓글작성자 및 수정 삭제 권한 추가 -->
 <!-- 댓글 있을때 없을떄 구분해서 추가하기 -->
-
-<!-- 리스트에 댓글 수 표시. -->
-
 <!-- 수정 및 삭제 a태그 추가하기. -->
-
-<!-- 게시글 수정하기 추가 -->
+<!-- 디자인 -->
+<!-- 이미지 파일 연동 -->
+<!-- 대댓글 추가 표시 / 구분이 되도록 div또는 테이블로 구성 -->
+<!-- 플로우차트 그리기 -->
+<!-- 디자인 구현하기. -->
+<!-- 파일 사진 올리기. 구현 -->
+<!-- 대딧글 수정 눌렀을떄 구현되게 하는 자바스크립트 구현 -->
+<!-- 새글작성 수정 삭제 버튼으로 만들기  / 댓글 레이아웃-->
+<!-- 비주얼로 테스트 해보고 시행하기. -->
+<!-- 이전글 다음글 -->
+<!-- 수정 삭제 새글 리모컨 픽스 추가 -->
+<!-- 작성일 작성시간 몇분전 몇일 전 표시하기. -->
 
 
 <!-- 페이지 내용 끝. -->
