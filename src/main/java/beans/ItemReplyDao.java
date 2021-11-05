@@ -64,9 +64,9 @@ public class ItemReplyDao {
 	public List<ItemReplyDto> list(int itemIdx) throws Exception {
 		Connection con = JdbcUtils.connect3();
 		String sql = "select * from item_reply where item_idx=? "
-				+ "connect by prior item_reply_no = item_reply_superno "
+				+ "connect by prior item_reply_idx = item_reply_superno "
 				+ "start with item_reply_superno is null "
-				+ "order by siblings by item_reply_groupno desc, item_reply_no asc";
+				+ "order siblings by item_reply_groupno desc, item_reply_idx asc";
 		//조회시에 item_reply_target_idx는 없어야한다(대댓글이 아닌 댓글임)
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, itemIdx);

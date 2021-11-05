@@ -20,7 +20,20 @@
 <%-- 관리자만 글쓰기위한 세션 받기 --%>
 <%
 	String usersId = (String)request.getSession().getAttribute("usersId");
-	int usersIdx = (int)request.getSession().getAttribute("usersIdx");
+	
+
+// 	list.jsp에서 확인 후 필요없으면 삭제(회원 번호)
+	int usersIdx;
+	try{
+		
+		usersIdx = (int)request.getSession().getAttribute("usersIdx");
+		
+	}catch(Exception e){
+		e.printStackTrace();
+		usersIdx = 0;
+	}
+	
+	
 	String usersGrade = (String)request.getSession().getAttribute("usersGrade");
 	//세션 Grade값이 관리자라면
 	boolean admin = usersGrade != null && usersGrade.equals("관리자");
@@ -99,7 +112,7 @@
 			<td align ="center"><%=itemDto.getItemType() %></td>
 			<td align ="center">
 			<%--  클릭시 단 한번의 조회를 위해서 Count서블릿으로 item_idx을 넘겨줌 --%>
-			<a href="<%=root%>/item/count.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
+			<a href="detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>">
 			<%=itemDto.getItemName()%>
 			</a>
 			</td>

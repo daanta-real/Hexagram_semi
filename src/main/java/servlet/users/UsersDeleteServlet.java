@@ -13,7 +13,7 @@ import util.HexaLibrary;
 import util.UsersUtils;
 
 @SuppressWarnings("serial")
-@WebServlet("usersUnregister")
+@WebServlet("/usersUnregister")
 public class UsersDeleteServlet extends HttpServlet {
 
 	@Override

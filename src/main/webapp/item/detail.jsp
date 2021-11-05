@@ -19,7 +19,43 @@
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
 <!-- 페이지 내용 시작 -->
-
+<style>
+	.container-500{width: 500px;}
+	.container-center{margin-left: auto; margin-right: auto;}
+	.row{margin-top: 10px; margin-bottom: 10px;}
+	.center{text-align: center;}
+		*{
+			box-sizing: border-box;
+		}
+		
+        textarea {
+            resize:none;
+        }
+        
+/*      .flex-container{ */
+/*      	display: flex; */
+/*      	flex-direction: row; */
+/*      } */
+     
+/*      .flex-item-textarea, .flex-item-btn{ */
+/*      	font-size: 25px; */
+/*      	padding: 0.5rem; */
+/*      } */
+     
+/*      .flex-item-textarea{ */
+/*      width: 75%; */
+/*      border: 1px solid black; */
+/*      } */
+     
+/*      .flex-item-btn{ */
+/*      width: 25%; */
+/*      border : none; */
+/*      background-color: blue; */
+/*      color: white; */
+/*      } */
+     
+     
+</style>
  
  <% 
  String root = request.getContextPath();
@@ -136,6 +172,7 @@ request.getSession().setAttribute("boardCountView", boardCountView);
 	</tbody>
 </table>
 
+
 <!-- 구분선표시 -->
 <hr>
 
@@ -154,32 +191,56 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 
 <!-- 댓글 리스트 -->
 <h3 align="center">[댓글 목록]</h3>
-<table align="center" border="1" width="700">
+	
+	<form action="<%=root%>/item_reply/insert.nogari" method="post">
+		<div class="container-500 container-center">
 
-	<tbody>
+				<div class="row">
+					<textarea name="itemReplyDetail" rows="3" cols="70" placeholder="댓글 입력" class="flex-item-textarea"></textarea>
+				</div>
+				<div class="row">
+					<input type="submit" value="댓글 작성" class="flex-item-btn">
+				</div>
+					<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
+
+		</div>
+	</form>
+
+	<%if(!list.isEmpty()) {%>
 		<%for (ItemReplyDto itemReplyDto : list) {%>
-			<%
-			//이 글을 쓴사람의 아이디를 알기 위해서 user의 정보를 불러와야 한다.
-			UsersDao usersDao = new UsersDao();
-			UsersDto usersDto = usersDao.get(itemReplyDto.getUsersIdx());
-			%>
-			<tr>
-				<td><%=usersDto.getUsersId()==null?"아이디 지정 안함":usersDto.getUsersId()%>(<%=itemReplyDto.getItemReplyDate()%>)</td>
-				<td><%=itemReplyDto.getItemReplyDetail()%></td>
-				<td>
-					<a>수정</a>
-					<a>삭제</a>
-				</td>
-			</tr>
+			<table align="center" border="1" width="700">
 			
+				<tbody>
+						<%
+						//이 글을 쓴사람의 아이디를 알기 위해서 user의 정보를 불러와야 한다.
+						UsersDao usersDao = new UsersDao();
+						UsersDto usersDto = usersDao.get(itemReplyDto.getUsersIdx());
+						%>
+						<tr>
+							<td>
+							<%=usersDto.getUsersId()==null?"아이디 지정 안함":usersDto.getUsersId()%>(<%=itemReplyDto.getItemReplyDate()%>)
+							</td>
+							<td><%=itemReplyDto.getItemReplyDetail()%></td>
+							<td>
+								<a>수정</a>
+								<a>삭제</a>
+							</td>
+						</tr>
+						
+				</tbody>
+			</table>
 		<%}%>
-	</tbody>
-</table>
-
+	<%}else{%>
+<h3 align="center">댓글이 없습니다.</h3>
+	<%} %>
+	
 <!-- 댓글 작성란 추가(수정란까지 포함해서) -->
 <!-- 댓글작성자 및 수정 삭제 권한 추가 -->
 <!-- 댓글 있을때 없을떄 구분해서 추가하기 -->
+<!-- 리스트에 댓글 수 표시. -->
 <!-- 수정 및 삭제 a태그 추가하기. -->
+<!-- 게시글 수정하기 추가 -->
+
 
 <!-- 페이지 내용 끝. -->
 </SECTION>
