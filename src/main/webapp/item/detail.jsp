@@ -1,3 +1,5 @@
+<%@page import="beans.UsersDto"%>
+<%@page import="beans.UsersDao"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Set"%>
 <%@page import="beans.ItemDto"%>
@@ -153,24 +155,31 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 <!-- 댓글 리스트 -->
 <h3 align="center">[댓글 목록]</h3>
 <table align="center" border="1" width="700">
-	<thead>
-		<tr>
-			<th>작성자 아이디</th>
-			<th>작성 시간</th>
-			<th>내 용</th>
-			<th>관리</th>
-		</tr>
-	</thead>
 
 	<tbody>
 		<%for (ItemReplyDto itemReplyDto : list) {%>
-		
-			
+			<%
+			//이 글을 쓴사람의 아이디를 알기 위해서 user의 정보를 불러와야 한다.
+			UsersDao usersDao = new UsersDao();
+			UsersDto usersDto = usersDao.get(itemReplyDto.getUsersIdx());
+			%>
+			<tr>
+				<td><%=usersDto.getUsersId()==null?"아이디 지정 안함":usersDto.getUsersId()%>(<%=itemReplyDto.getItemReplyDate()%>)</td>
+				<td><%=itemReplyDto.getItemReplyDetail()%></td>
+				<td>
+					<a>수정</a>
+					<a>삭제</a>
+				</td>
+			</tr>
 			
 		<%}%>
 	</tbody>
 </table>
 
+<!-- 댓글 작성란 추가(수정란까지 포함해서) -->
+<!-- 댓글작성자 및 수정 삭제 권한 추가 -->
+<!-- 댓글 있을때 없을떄 구분해서 추가하기 -->
+<!-- 수정 및 삭제 a태그 추가하기. -->
 
 <!-- 페이지 내용 끝. -->
 </SECTION>
