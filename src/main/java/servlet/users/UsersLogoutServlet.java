@@ -37,7 +37,7 @@ public class UsersLogoutServlet extends HttpServlet {
 			System.out.print("완료. 현재 session: usersId = '" + session.getAttribute("usersId") + "'");
 			System.out.print(", usersGrade= '" + session.getAttribute("usersId")  + "'");
 			System.out.print(", usersIdx= '"   + session.getAttribute("usersIdx") + "'");
-			resp.sendRedirect(req.getContextPath());
+			resp.sendRedirect(req.getContextPath()+"/index.jsp");
 
 		}
 		catch(Exception e) {
