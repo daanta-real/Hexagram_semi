@@ -229,7 +229,7 @@ public class ItemDao {
 	public boolean insert(ItemDto itemDto) throws Exception {
 		String sql = "INSERT INTO item (item_idx,users_idx,item_type,item_name,item_detail,item_period,"
 				+ "item_time,item_homepage,item_parking,item_address,item_date,item_count_view,item_count_reply)"
-				+ " VALUES(item_idx_seq.nextval,?,?,?,?,?,?,?,?,?,sysdate,0,0)";
+				+ " VALUES(item_seq.nextval,?,?,?,?,?,?,?,?,?,sysdate,0,0)";
 		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -288,21 +288,19 @@ public class ItemDao {
 
 	// 관광지 수정
 	public boolean update(ItemDto itemDto) throws Exception {
-		String sql = "UPDATE item set users_idx=?,item_type=?,item_name=?,item_detail=?,item_period=?,item_time=?,item_homepage=?,item_parking=?,item_address=?"
+		String sql = "UPDATE item set item_type=?,item_name=?,item_detail=?,item_period=?,item_time=?,item_homepage=?,item_parking=?,item_address=?"
 				+ " where item_idx=?";
 		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
-
-		ps.setInt(1, itemDto.getUsersIdx());
-		ps.setString(2, itemDto.getItemType());
-		ps.setString(3, itemDto.getItemName());
-		ps.setString(4, itemDto.getItemDetail());
-		ps.setString(5, itemDto.getItemPeriod());
-		ps.setString(6, itemDto.getItemTime());
-		ps.setString(7, itemDto.getItemHomepage());
-		ps.setString(8, itemDto.getItemParking());
-		ps.setString(9, itemDto.getItemAddress());
-		ps.setInt(10, itemDto.getItemIdx());
+		ps.setString(1, itemDto.getItemType());
+		ps.setString(2, itemDto.getItemName());
+		ps.setString(3, itemDto.getItemDetail());
+		ps.setString(4, itemDto.getItemPeriod());
+		ps.setString(5, itemDto.getItemTime());
+		ps.setString(6, itemDto.getItemHomepage());
+		ps.setString(7, itemDto.getItemParking());
+		ps.setString(8, itemDto.getItemAddress());
+		ps.setInt(9, itemDto.getItemIdx());
 
 		int result = ps.executeUpdate();
 
@@ -335,6 +333,24 @@ public class ItemDao {
 
 		con.close();
 		return result;
+	}
+	
+	//목록에서 댓글수 보여주기위한 댓글 갱신 메소드
+	public boolean countReply(int itemIdx) throws Exception{
+		Connection con = JdbcUtils.connect3();
+		
+		String sql = "update item set item_count_reply="
+					+ "(select count(*) from item_reply where item_idx = ?) "
+					+ "where item_idx = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, itemIdx);
+		ps.setInt(2, itemIdx);
+		
+		int result = ps.executeUpdate();
+		
+		con.close();
+		
+		return result > 0;
 	}
 
 }

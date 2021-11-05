@@ -42,6 +42,12 @@
 				</td>
 			</tr>
 			<tr>
+				<td>주소</td>
+				<td>
+				<textarea name="itemAddress" rows="1" cols="50" placeholder="주소를 입력하세요"></textarea>
+				</td>
+			</tr>
+			<tr>
 				<td>내용</td>
 				<td>
 				<textarea name="itemDetail" rows="20" cols="50" placeholder="내용을 입력하세요"></textarea>
@@ -63,12 +69,7 @@
 				<td>주차</td>
 				<td><input type="text" name="itemParking" placeholder="주차가능여부 입력"></td>
 			</tr>
-			<tr>
-				<td>주소</td>
-				<td>
-				<textarea name="itemAddress" rows="1" cols="50" placeholder="주소를 입력하세요"></textarea>
-				</td>
-			</tr>
+			
 		</tbody>
 		
 		<tfoot>

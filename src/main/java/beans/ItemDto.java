@@ -49,25 +49,37 @@ public class ItemDto {
 		this.itemDetail = itemDetail;
 	}
 	public String getItemPeriod() {
-		return itemPeriod;
+		if(itemPeriod == null) 
+			return "";
+		else		
+			return itemPeriod;
 	}
 	public void setItemPeriod(String itemPeriod) {
 		this.itemPeriod = itemPeriod;
 	}
 	public String getItemTime() {
-		return itemTime;
+		if(itemTime == null)
+			return "";
+		else
+			return itemTime;
 	}
 	public void setItemTime(String itemTime) {
 		this.itemTime = itemTime;
 	}
 	public String getItemHomepage() {
-		return itemHomepage;
+		if(itemHomepage == null)
+			return "";
+		else
+			return itemHomepage;
 	}
 	public void setItemHomepage(String itemHomepage) {
 		this.itemHomepage = itemHomepage;
 	}
 	public String getItemParking() {
-		return itemParking;
+		if(itemParking == null)
+			return "";
+		else
+			return itemParking;
 	}
 	public void setItemParking(String itemParking) {
 		this.itemParking = itemParking;
@@ -95,6 +107,11 @@ public class ItemDto {
 	}
 	public void setItemCountReply(int itemCountReply) {
 		this.itemCountReply = itemCountReply;
+	}
+	
+	//댓글 수 갱신 기능
+	public boolean isCountReply() {
+		return this.itemCountReply > 0;
 	}
 	
 	
