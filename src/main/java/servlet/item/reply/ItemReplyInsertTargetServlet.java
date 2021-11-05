@@ -22,16 +22,23 @@ public class ItemReplyInsertTargetServlet extends HttpServlet{
 				//게시글 번호 받기
 				int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
 				//회원 번호 받기
-				int usersIdx = Integer.parseInt(req.getParameter("usersIdx"));
+				int usersIdx = (int)req.getSession().getAttribute("usersIdx");
 				//대댓글 대상 댓글 번호 받기.
 				int itemReplyTargetIdx = Integer.parseInt(req.getParameter("itemReplyTargetIdx"));
-
+				
 				ItemReplyDao itemReplyDao = new ItemReplyDao();
+				ItemReplyDto itemReplyParent = itemReplyDao.get(itemReplyTargetIdx);
 				ItemReplyDto itemReplyDto = new ItemReplyDto();
-
-				itemReplyDto.setItemIdx(itemIdx);
+	
+				int itemReplyIdx = itemReplyDao.getSequenceNo();
+				
+				itemReplyDto.setItemReplyIdx(itemReplyIdx);
 				itemReplyDto.setUsersIdx(usersIdx);
+				itemReplyDto.setItemIdx(itemIdx);
 				itemReplyDto.setItemReplyDetail(itemReplyDetail);
+				itemReplyDto.setItemReplySuperno(itemReplyTargetIdx);
+				itemReplyDto.setItemReplyGroupno(itemReplyParent.getItemReplyGroupno());
+				itemReplyDto.setItemReplyDepth(itemReplyParent.getItemReplyDepth()+1);
 				//itemReplyDto.setItemReplyTargetIdx(itemReplyTargetIdx);
 				//Dto에 4가지의 정보를 담아서 대댓글 추가 작업 시행.
 
