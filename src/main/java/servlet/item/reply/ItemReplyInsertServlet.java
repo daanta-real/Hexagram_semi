@@ -22,11 +22,14 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 			//게시글 번호 받기
 			int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
 			//회원 번호 받기
-			int usersIdx = Integer.parseInt(req.getParameter("usersIdx"));
+			int usersIdx = (int)req.getSession().getAttribute("usersIdx");
 
 			ItemReplyDao itemReplyDao = new ItemReplyDao();
 			ItemReplyDto itemReplyDto = new ItemReplyDto();
-
+			
+			int itemReplyIdx = itemReplyDao.getSequenceNo();
+			
+			itemReplyDto.setItemReplyIdx(itemReplyIdx);
 			itemReplyDto.setItemIdx(itemIdx);
 			itemReplyDto.setUsersIdx(usersIdx);
 			itemReplyDto.setItemReplyDetail(itemReplyDetail);

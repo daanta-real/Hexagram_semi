@@ -13,7 +13,7 @@
     
     
  <% 
- request.getSession().setAttribute("usersIdx", 2);
+ request.getSession().setAttribute("usersIdx", 1);
 request.getSession().setAttribute("usersGrade", "관리자");
 			//테스트 세션 생성 => 각자의 DB정보에 따라 입력.
 
