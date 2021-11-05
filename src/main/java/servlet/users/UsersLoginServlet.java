@@ -75,7 +75,7 @@ public class UsersLoginServlet extends HttpServlet {
 					+ "　　usersGrade = '" + session.getAttribute("usersGrade") + "', "
 					+ "　　usersIdx = '"   + session.getAttribute("usersIdx"  ) + "'"
 				);
-				resp.sendRedirect(req.getContextPath());
+				resp.sendRedirect(req.getContextPath()+"/index.jsp");
 			}
 		}
 		catch(Exception e) {
