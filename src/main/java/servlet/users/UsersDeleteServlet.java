@@ -9,11 +9,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.UsersDao;
+import beans.UsersDto;
 import util.HexaLibrary;
 import util.UsersUtils;
 
 @SuppressWarnings("serial")
-@WebServlet("usersUnregister")
+@WebServlet("/users/unregister.nogari")
 public class UsersDeleteServlet extends HttpServlet {
 
 	@Override
@@ -41,10 +42,16 @@ public class UsersDeleteServlet extends HttpServlet {
 			boolean isGranted = UsersUtils.isGranted(sessionId, sessionGrade, targetId);
 			if(!isGranted) throw new Exception();
 			System.out.println("권한 확인 완료.");
+			
 
 			// 3. 전송
+			//추가. 비밀번호 일치여부 검사
+			//targetId 로 조회한 dto의 getUsersPw와 입력한 pw(파라미터 usersPw)일치여부 검사
+			UsersDto dto = dao.get(targetId);
+			String inputPw = req.getParameter("usersPw");
 			System.out.print("[회원 탈퇴] 3. 탈퇴 실행..(" + targetId + ")");
-			boolean isSucceed = dao.delete(targetId);
+			//입력한 비밀번호(inputPw)와 dto의 getUsersPw가 서로 일치하고 탈퇴되는게 성공
+			boolean isSucceed = 	dto.getUsersPw().equals(inputPw) && dao.delete(targetId);
 			System.out.println("　　▷ 탈퇴 요청 실시함.");
 
 			// 4. 결과를 세션에 반영
@@ -52,9 +59,10 @@ public class UsersDeleteServlet extends HttpServlet {
 			if(isSucceed) {
 				HexaLibrary.removeSession(session);
 				System.out.println("탈퇴 성공.");
+				resp.sendRedirect(req.getContextPath()+"/users/unregister_success.jsp");
 			} else {
 				System.out.println("탈퇴 실패.");
-				throw new Exception();		
+				resp.sendRedirect(req.getContextPath()+"/users/unregister.jsp?fail");	
 			
 			}
 
