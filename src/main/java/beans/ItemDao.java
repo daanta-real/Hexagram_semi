@@ -334,5 +334,23 @@ public class ItemDao {
 		con.close();
 		return result;
 	}
+	
+	//목록에서 댓글수 보여주기위한 댓글 갱신 메소드
+	public boolean countReply(int itemIdx) throws Exception{
+		Connection con = JdbcUtils.connect3();
+		
+		String sql = "update item set item_count_reply="
+					+ "(select count(*) from item_reply where item_idx = ?) "
+					+ "where item_idx = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, itemIdx);
+		ps.setInt(2, itemIdx);
+		
+		int result = ps.executeUpdate();
+		
+		con.close();
+		
+		return result > 0;
+	}
 
 }
