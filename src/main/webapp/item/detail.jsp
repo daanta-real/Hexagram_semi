@@ -22,7 +22,7 @@
 <style>
 	.container-500{width: 500px;}
 	.container-center{margin-left: auto; margin-right: auto;}
-	.row{margin-top: 10px; margin-bottom: 10px;}
+	.row{margin-top: 5px; margin-bottom: 5px;}
 	.center{text-align: center;}
 		*{
 			box-sizing: border-box;
@@ -31,30 +31,41 @@
         textarea {
             resize:none;
         }
-        
-/*      .flex-container{ */
-/*      	display: flex; */
-/*      	flex-direction: row; */
-/*      } */
+        .form-input,
+		.form-btn {
+		    width: 100%;
+		    font-size: 20px;
+		    padding: 10px;
+		}
+		        
+		.form-input {
+		    border: 1px solid rgb(43, 48, 90);
+		}
+		
+		.form-btn {
+		    color: white;
+		    background-color: rgb(43, 48, 90);
+		    font-weight: bold;
+		    height: 90%;
+		}
+		
+		.form-block {
+		    display: block;
+		}
+		
+		.form-inline {
+		    width: auto;
+		}
+		
+		.form-in {
+		   display: inline;
+		}
      
-/*      .flex-item-textarea, .flex-item-btn{ */
-/*      	font-size: 25px; */
-/*      	padding: 0.5rem; */
-/*      } */
-     
-/*      .flex-item-textarea{ */
-/*      width: 75%; */
-/*      border: 1px solid black; */
-/*      } */
-     
-/*      .flex-item-btn{ */
-/*      width: 25%; */
-/*      border : none; */
-/*      background-color: blue; */
-/*      color: white; */
-/*      } */
-     
-     
+     	.flex-container{
+     		display: flex;
+     	}
+     	
+     	
 </style>
  
  <% 
@@ -117,7 +128,7 @@ request.getSession().setAttribute("boardCountView", boardCountView);
 
 
 <!-- **사진 표시(DB테이블 만들어서 resource 파일정보를 불러올 예정(idea) -->
-<table border="1" align="center" width="700">
+<table border="1" align="center" width="950">
 	<thead>
 		<tr>
 			<th>사진</th>
@@ -135,7 +146,7 @@ request.getSession().setAttribute("boardCountView", boardCountView);
 
 
 <!-- **상세정보 표시 -->
-<table align="center"  border="1" width="700">
+<table align="center"  border="1" width="950">
 
 	<tbody>
 		<tr>
@@ -192,41 +203,65 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 <!-- 댓글 리스트 -->
 <h3 align="center">[댓글 목록]</h3>
 	
-	<form action="<%=root%>/item_reply/insert.nogari" method="post">
+<!-- 	댓글작성란 -->
+
+		<form action="<%=root%>/item_reply/insert.nogari" method="post">
 		<div class="container-500 container-center">
-
-				<div class="row">
-					<textarea name="itemReplyDetail" rows="3" cols="70" placeholder="댓글 입력" class="flex-item-textarea"></textarea>
-				</div>
-				<div class="row">
-					<input type="submit" value="댓글 작성" class="flex-item-btn">
-				</div>
+				<div class="flex-container">
+					<div class="row center">
+					<textarea name="itemReplyDetail" rows="2" cols="30" placeholder="댓글 입력" required class="form-input form-inline"></textarea>
+					</div>
+					<div class="row center">
+					<input type="submit" value="댓글 작성" class="form-btn form-inline">
+					</div>
 					<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
-
+				</div>
 		</div>
 	</form>
 
 	<%if(!list.isEmpty()) {%>
 		<%for (ItemReplyDto itemReplyDto : list) {%>
-			<table align="center" border="1" width="700">
+			<table align="center" border="1" width="950">
 			
 				<tbody>
+				
 						<%
 						//이 글을 쓴사람의 아이디를 알기 위해서 user의 정보를 불러와야 한다.
 						UsersDao usersDao = new UsersDao();
 						UsersDto usersDto = usersDao.get(itemReplyDto.getUsersIdx());
 						%>
+						
 						<tr>
+
 							<td>
+	
+							<%if(itemReplyDto.getItemReplyDepth() != 0){ %>
+								<%for(int i = 0 ; i < itemReplyDto.getItemReplyDepth() ; i++){ %>
+									&nbsp;&nbsp;
+								<%} %>
+							<%} %>
+
 							<%=usersDto.getUsersId()==null?"아이디 지정 안함":usersDto.getUsersId()%>(<%=itemReplyDto.getItemReplyDate()%>)
-							</td>
-							<td><%=itemReplyDto.getItemReplyDetail()%></td>
-							<td>
+							&nbsp;
+							<%=itemReplyDto.getItemReplyDetail()%>
+							&nbsp;
 								<a>수정</a>
 								<a>삭제</a>
+							
+	
 							</td>
+							<td>
+<!-- 							자바스크립트를 배우고 나서 이부분을 수정한다. -->
+								<form action="<%=root%>/item_reply/target_insert.nogari" method="post">
+											<textarea name="itemReplyDetail" rows="2" cols="20" placeholder="댓글 입력" required></textarea>
+											<input type="submit" value="대댓글">
+											<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
+											<input type="hidden" name="itemReplyTargetIdx" value="<%=itemReplyDto.getItemReplyIdx()%>">
+								</form>
+							
+							</td>
+							
 						</tr>
-						
 				</tbody>
 			</table>
 		<%}%>
@@ -237,8 +272,11 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 <!-- 댓글 작성란 추가(수정란까지 포함해서) -->
 <!-- 댓글작성자 및 수정 삭제 권한 추가 -->
 <!-- 댓글 있을때 없을떄 구분해서 추가하기 -->
+
 <!-- 리스트에 댓글 수 표시. -->
+
 <!-- 수정 및 삭제 a태그 추가하기. -->
+
 <!-- 게시글 수정하기 추가 -->
 
 

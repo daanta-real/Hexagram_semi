@@ -40,6 +40,30 @@ public class ItemReplyDao {
 		con.close();
 		return result;
 	}
+	
+	public ItemReplyDto get(int itemReplyIdx) throws Exception {
+		Connection con = JdbcUtils.connect3();
+		String sql = "select * from item_reply where item_reply_idx=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, itemReplyIdx);
+		ResultSet rs = ps.executeQuery();
+		
+		ItemReplyDto itemReplyDto = new ItemReplyDto();
+		
+		if(rs.next()) {
+			itemReplyDto.setItemReplyIdx(rs.getInt(1));
+			itemReplyDto.setUsersIdx(rs.getInt(2));
+			itemReplyDto.setItemIdx(rs.getInt(3));
+			itemReplyDto.setItemReplyDetail(rs.getString(4));
+			itemReplyDto.setItemReplyDate(rs.getDate(5));
+			itemReplyDto.setItemReplySuperno(rs.getInt(6));
+			itemReplyDto.setItemReplyGroupno(rs.getInt(7));
+			itemReplyDto.setItemReplyDepth(rs.getInt(8));
+		}
+	
+		con.close();
+		return itemReplyDto;
+	}
 
 	//대댓글 추가 기능
 	public void insertTarget(ItemReplyDto itemReplyDto) throws Exception {
@@ -53,7 +77,7 @@ public class ItemReplyDao {
 		ps.setInt(3, itemReplyDto.getItemIdx());
 		ps.setString(4, itemReplyDto.getItemReplyDetail());
 		ps.setInt(5, itemReplyDto.getItemReplySuperno());
-		ps.setInt(6, itemReplyDto.getItemReplyIdx());
+		ps.setInt(6, itemReplyDto.getItemReplyGroupno());
 		ps.setInt(7, itemReplyDto.getItemReplyDepth());
 
 		ps.execute();
