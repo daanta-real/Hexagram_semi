@@ -13,7 +13,7 @@ import util.HexaLibrary;
 import util.UsersUtils;
 
 @SuppressWarnings("serial")
-@WebServlet("/usersUnregister")
+@WebServlet("usersUnregister")
 public class UsersDeleteServlet extends HttpServlet {
 
 	@Override
@@ -54,7 +54,8 @@ public class UsersDeleteServlet extends HttpServlet {
 				System.out.println("탈퇴 성공.");
 			} else {
 				System.out.println("탈퇴 실패.");
-				throw new Exception();
+				throw new Exception();		
+			
 			}
 
 		}
