@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import beans.ItemDao;
 import beans.ItemReplyDao;
 import beans.ItemReplyDto;
 
@@ -43,6 +44,10 @@ public class ItemReplyInsertTargetServlet extends HttpServlet{
 				//Dto에 4가지의 정보를 담아서 대댓글 추가 작업 시행.
 
 				itemReplyDao.insertTarget(itemReplyDto);
+				
+//				게시물 댓글 수 추가
+				ItemDao itemDao = new ItemDao();
+				itemDao.countReply(itemIdx);
 
 				resp.sendRedirect(req.getContextPath()+"/item/detail.jsp?itemIdx="+Integer.parseInt(req.getParameter("itemIdx")));
 

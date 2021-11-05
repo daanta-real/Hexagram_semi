@@ -111,7 +111,6 @@
 		<tr>
 			<td align ="center"><%=itemDto.getItemType() %></td>
 			<td align ="center">
-			<%--  클릭시 단 한번의 조회를 위해서 Count서블릿으로 item_idx을 넘겨줌 --%>
 			<a href="detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>">
 			<%=itemDto.getItemName()%>
 			</a>

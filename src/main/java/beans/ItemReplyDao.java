@@ -117,11 +117,12 @@ public class ItemReplyDao {
 	}
 
 
-	public boolean update(int itemReplyIdx) throws Exception {
+	public boolean update(ItemReplyDto itemReplyDto) throws Exception {
 		Connection con = JdbcUtils.connect3();
-		String sql = "update item_reply set item_reply_detail where item_reply_idx=?";
+		String sql = "update item_reply set item_reply_detail=? where item_reply_idx=?";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, itemReplyIdx);
+		ps.setString(1, itemReplyDto.getItemReplyDetail());
+		ps.setInt(2, itemReplyDto.getItemReplyIdx());
 		int result = ps.executeUpdate();
 
 		con.close();

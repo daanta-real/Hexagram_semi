@@ -1,6 +1,8 @@
 package beans;
 
 import java.sql.Date;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 
 public class ItemReplyDto {
 	private int itemReplyIdx;
@@ -108,7 +110,10 @@ public class ItemReplyDto {
 		this.itemReplyDepth = itemReplyDepth;
 	}
 
-
+	public String getItemReplyTotalDate() {
+		Format f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		return f.format(this.itemReplyDate);
+	}
 
 	public ItemReplyDto() {
 		super();
