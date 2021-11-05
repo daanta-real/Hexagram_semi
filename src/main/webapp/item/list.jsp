@@ -57,7 +57,6 @@
 <%
 	List<ItemDto> list;
 	ItemDao itemDao = new ItemDao();
-	
 	if(itemPagination.isSearch()){
 		list = itemDao.searchList
 		(itemPagination.getColumn(), itemPagination.getKeyword(), itemPagination.getBegin(), itemPagination.getEnd());
@@ -104,6 +103,7 @@
 			<th>카테고리</th>
 			<th>관광지명</th>
 			<th>관광지 소개</th>
+			<th>조회수</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -115,9 +115,13 @@
 			<a href="detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>">
 			<%=itemDto.getItemName()%>
 			</a>
+			<%-- 댓글수 --%>
+			<%if(itemDto.isCountReply()){ %>
+				[<%=itemDto.getItemCountReply() %>]
+			<%} %>
 			</td>
 			<td><%=itemDto.getItemDetail().substring(0, 4) %>....</td>
-
+			<td><%=itemDto.getItemCountView() %></td>
 		</tr>
 		<%} %>
 	</tbody>	

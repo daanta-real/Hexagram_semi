@@ -109,6 +109,11 @@ public class ItemDto {
 		this.itemCountReply = itemCountReply;
 	}
 	
+	//댓글 수 갱신 기능
+	public boolean isCountReply() {
+		return this.itemCountReply > 0;
+	}
+	
 	
 	public ItemDto() {
 		super();
