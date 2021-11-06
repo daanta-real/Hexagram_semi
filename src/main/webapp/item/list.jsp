@@ -71,11 +71,9 @@
 	String title = itemPagination.isSearch() ? "["+itemPagination.getKeyword()+"]" + " 검색" : "관광지 목록";
 %>
 
-<%-- 썸네일표시를 위한 파일 조회 --%>
+<%-- 썸네일표시를 위한 파일 조회를 위한 ItemFileDao 생성 --%>
 <%
-
  	ItemFileDao itemFileDao = new ItemFileDao();
-	ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());
 %>
 
 <%-- 페이지 제목 --%>
@@ -119,6 +117,11 @@
 	</thead>
 	<tbody>
 		<%for(ItemDto itemDtoList : list){ %>
+		
+<!-- 		목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
+		<%
+		ItemFileDto itemFileDto = itemFileDao.find2(itemDtoList.getItemIdx());
+		%>
 		<tr>
 			<td align ="center"><%=itemDtoList.getItemType() %></td>
 			<td>
@@ -126,7 +129,7 @@
 			<%if(itemFileDto == null){ %>
 					 <img src="http://via.placeholder.com/100x100" class="image">
 			<%}else{ %>
-					<img src="file/listPageDownload.nogari?itemIdx=<%=itemDto.getItemIdx()%>" width="20%">
+					<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="20%">
 			<%} %>
 			</td>
 			<td align ="center">
