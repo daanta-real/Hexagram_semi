@@ -11,7 +11,7 @@
 <% String root = request.getContextPath(); %>
 <!-- 페이지 내용 시작 -->
 
-<h3><a href="#">회원 관리</a></h3>
+<h3><a href="usersList.jsp">회원 관리</a></h3>
 <h3><a href="#">포인트 상품 관리?</a></h3>
 
 <!-- 페이지 내용 끝. -->
