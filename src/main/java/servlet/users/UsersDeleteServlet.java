@@ -63,14 +63,16 @@ public class UsersDeleteServlet extends HttpServlet {
 			} else {
 				System.out.println("탈퇴 실패.");
 				resp.sendRedirect(req.getContextPath()+"/users/unregister.jsp?fail");
-
 			}
 
 		}
+
 		catch(Exception e) {
+
 			System.out.println("\n[회원 탈퇴] 에러가 발생했습니다.");
 			e.printStackTrace();
 			resp.sendError(500);
+
 		}
 	}
 }

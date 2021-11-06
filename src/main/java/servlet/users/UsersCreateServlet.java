@@ -17,14 +17,14 @@ public class UsersCreateServlet extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 
+			// 변수 준비
 			System.out.println("[회원 가입]");
-
-			// 값 받아옴
-			String usersId = req.getParameter("usersId");
-			String usersPw = req.getParameter("usersPw");
-			String usersNick = req.getParameter("usersNick");
+			String usersId    = req.getParameter("usersId"   );
+			String usersPw    = req.getParameter("usersPw"   );
+			String usersNick  = req.getParameter("usersNick" );
 			String usersEmail = req.getParameter("usersEmail");
 			String usersPhone = req.getParameter("usersPhone");
+
 
 			// 값 검사: 양식에 맞지 않는 값은 쳐내기
 			// 작성 예정

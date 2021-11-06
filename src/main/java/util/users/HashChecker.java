@@ -11,8 +11,7 @@ public class HashChecker {
 
 	// dto에서 id와 pw 두 개를 빼내어 로그인 검증용 해쉬를 만들어 줌
 	// 이때 오늘날짜문자열도 합쳐준다.
-	// 재부용이다. (공개되어 있지 않다.)
-	private static Integer getIdPwHash(UsersDto dto) {
+	public static Integer getIdPwHash(UsersDto dto) {
 
 		// ID문자열 + PW문자열 + 오늘날짜문자열 세 개를 합친 '합체문자열'을 준비
 		String id = dto.getUsersId();
