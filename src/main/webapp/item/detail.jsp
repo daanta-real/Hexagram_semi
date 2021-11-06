@@ -53,10 +53,19 @@
 </script>    
 
 <style>
-	.container-500{width: 500px;}
+	.container-900{width: 900px;}
 	.container-center{margin-left: auto; margin-right: auto;}
 	.row{margin-top: 5px; margin-bottom: 5px;}
-	.center{text-align: center;}
+	.left {
+	    text-align: left;
+	}
+	.center {
+	    text-align: center;
+	}
+	.right {
+	    text-align: right;
+	}
+	
 		*{
 			box-sizing: border-box;
 		}
@@ -98,7 +107,45 @@
      		display: flex;
      	}
      	
+     	.image {
+		    border: 2px solid transparent;
+		    padding: 2rem;
+		}
      	
+     	.table{
+			    width: 100%;
+			}
+			
+			.table>thead>tr>th,
+			.table>thead>tr>td,
+			.table>tbody>tr>th,
+			.table>tbody>tr>td,
+			.table>tfoot>tr>th,
+			.table>tfoot>tr>td{
+			    padding: 0.5rem;
+			    text-align: center;
+			}
+			
+			
+			
+			.table.table-border {
+			    border:1px solid black;
+			    border-collapse: collapse;
+			
+			}
+			.table.table-border > thead > tr > th, 
+			.table.table-border > thead > tr > td,
+			.table.table-border > tbody > tr > th,
+			.table.table-border > tbody > tr > td,
+			.table.table-border > tfoot > tr > th,
+			.table.table-border > tfoot > tr > td {
+			    border:1px solid black;
+			
+			}
+			
+			.table > .table-detail {
+				min-height: 200px;
+			}
 </style>
  
  <% 
@@ -139,106 +186,109 @@ request.getSession().setAttribute("boardCountView", boardCountView);
 %>
  
  <!-- **기본정보 표시  -->
+ <div class="container-900 container-center">
  
-<!-- 지명 표시 -->
-<h1 align="center"><%=itemDto.getItemName()%></h1>
-
-<!-- 지역 표시 -->
-<h3 align="center"><%=itemDto.getItemAddress().substring(0,2)%></h3>
-
-<!-- 기간 표시(축제 경우에 한해서임) -->
-<%if(itemDto.getItemType().equals("축제")) {%>
-<h3 align="center"><%=itemDto.getItemPeriod()%></h3>
-<%}%>
-
-<h3 align="center">
-<br>
-좋아요 표시(예정)
-</h3>
-
-
-<!-- 관리자 또는 글 작성자가 보는 경우 글작성 / 수정 / 삭제가 가능하도록 설정 : 수정 삭제의 경우 필터에서도 처리가능하도록 해야함.-->
-<%if(isManager || isMyboard){%>
-<h4 align="center">
-<a href="<%=root%>/item/insert.jsp">새 글작성</a>
-<a href="<%=root%>/item/edit.jsp?itemIdx=<%=itemIdx%>">수정</a>
-<a href="<%=root%>/item/delete.nogari?itemIdx=<%=itemIdx%>">삭제</a>
-</h4>
-<%}%>
-
-
-<!-- **사진 표시(DB테이블 만들어서 resource 파일정보를 불러올 예정(idea) -->
-<table border="1" align="center" width="950">
-	<thead>
-		<tr>
-			<th>사진</th>
-		</tr>
-	</thead>
-	
-	<tbody align="center" >
-		<%-- 첨부파일이 있다면 --%>
+     <div class="row center">
+            	<!-- 지명 표시 -->
+				<h1><%=itemDto.getItemName()%></h1>
+     </div>
+ 
+ 	 <div class="row center">
+            <!-- 지역 표시 -->
+			<h3><%=itemDto.getItemAddress().substring(0,2)%></h3>
+    </div>
+    
+    <div class="row center">
+    <%if(itemDto.getItemType().equals("축제")) {%>
+		<h3><%=itemDto.getItemPeriod()%></h3>
+	<%}%>
+    </div>
+    
+      <div class="row right">
+      좋아요 표시(예정)
+      |
+      조회수 : <%=itemDto.getItemCountView()%>
+    </div>
+    
+      <div class="row right">
+      <!-- 관리자 또는 글 작성자가 보는 경우 글작성 / 수정 / 삭제가 가능하도록 설정 : 수정 삭제의 경우 필터에서도 처리가능하도록 해야함.-->
+		<!-- 		리모컨으로 구현하기 -->
+		<%if(isManager || isMyboard){%>
+			<a href="<%=root%>/item/insert.jsp">새 글작성</a>
+			<a href="<%=root%>/item/edit.jsp?itemIdx=<%=itemIdx%>">수정</a>
+			<a href="<%=root%>/item/delete.nogari?itemIdx=<%=itemIdx%>">삭제</a>
+		<%}%>
+    </div>
+    
+    <div class="row center">
+    <!-- **사진 표시(DB테이블 만들어서 resource 파일정보를 불러올 예정(idea) -->
+      <img src="http://via.placeholder.com/500" class="image">
+      		<%-- 첨부파일이 있다면 --%>
 <%-- 		<%if(itemFileList.isEmpty()){ %> --%>
 <%-- 			<%for(ItemFileDto itemFileDto : itemFileList){ %> --%>
 <%-- 				<img src = "file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx() %>" width="50%" height="50%"> --%>
 <%-- 			<%} %> --%>
 <%-- 		<%} %> --%>
-	</tbody>
-</table>
+    </div>
+    
+    <!-- **상세정보 표시 -->
+     <div class="row">
+	      <table class="table table-border">
+	      	<tbody>
+			     <tr>
+					<th>지도표시</th>
+					<td>
+						<jsp:include page="kakaomap.jsp">
+							<jsp:param value="<%=itemDto.getItemIdx()%>" name="itemIdx"/>
+						</jsp:include>
+					</td>
+				</tr>
+				
+				<tr>
+					<th>상세정보</th>
+					<td clas="table-detail"><%=itemDto.getItemDetail()%></td>
+				</tr>
+				
+				<tr>
+					<th height="50">상세주소</th>
+					<td><%=itemDto.getItemAddress()%></td>
+				</tr>
 
-
-
-
-<!-- **상세정보 표시 -->
-<table align="center"  border="1" width="950">
-
-	<tbody>
-		<tr>
-			<th>조회수</th>
-			<td><%=itemDto.getItemCountView()%></td>
-		</tr>
-		<tr height="200">
-			<th>상세정보</th>
-			<td><%=itemDto.getItemDetail()%></td>
-		</tr>
-<!-- 	카카오 지도 API활용한 jsp를 끌고옴 -->
-		<tr>
-			<th>지도표시</th>
-			<td>
-				<jsp:include page="kakaomap.jsp">
-					<jsp:param value="<%=itemDto.getItemIdx()%>" name="itemIdx"/>
-				</jsp:include>
-			</td>
-		</tr>
-		<tr>
-			<th height="50">상세주소</th>
-			<td><%=itemDto.getItemAddress()%></td>
-		</tr>
-		<tr>
-			<th height="50">홈페이지</th>
-			<td><%=itemDto.getItemHomepage()%></td>
-		</tr>
-		<tr>
-			<th height="50">운영시간</th>
-			<td><%=itemDto.getItemTime()%></td>
-		</tr>
-		<tr>
-			<th height="50">주차</th>
-			<td><%=itemDto.getItemParking()%></td>
-		</tr>
-	</tbody>
-</table>
-
-
-<!-- 구분선표시 -->
-<hr>
+				<tr>
+					<th height="50">홈페이지</th>
+					<td><%=itemDto.getItemHomepage()%></td>
+				</tr>
+				
+				<tr>
+					<th height="50">운영시간</th>
+					<td><%=itemDto.getItemTime()%></td>
+				</tr>
+				
+				<tr>
+					<th height="50">주차</th>
+					<td><%=itemDto.getItemParking()%></td>
+				</tr>
+				
+	      	</tbody>
+	      </table>
+	      
+    </div>
+ 	
+ 	 <div class="row">
+    </div>
+    
+     <div class="row">
+    </div>
+    
+<!--  마지막 div -->
+ </div>
+>>>>>>> refs/remotes/origin/DoeKim
 
 <!-- **댓글 표시(끌고옴) -->
 <%
 //이 글의 댓글 목록 불러오기.
 ItemReplyDao itemReplyDao = new ItemReplyDao();
 List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
-
-
 //게시물 수정 삭제와 같은 것과 마찬가지로 필터가 필요함(주소에서 침범하는것 방지.)!!!!!!!!!
 %>
 
@@ -355,17 +405,15 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 <h3 align="center">댓글이 없습니다.</h3>
 	<%} %>
 	
-<!-- 댓글 작성란 추가(수정란까지 포함해서) -->
-<!-- 댓글작성자 및 수정 삭제 권한 추가 -->
-<!-- 댓글 있을때 없을떄 구분해서 추가하기 -->
-<!-- 수정 및 삭제 a태그 추가하기. -->
+<!-- 필터를 통해서 댓글 수정 및 삭제 금지하는 필터 설정을 해야한다!!!!!!!!!!!!!!!! -->
+	
 <!-- 디자인 -->
 <!-- 이미지 파일 연동 -->
 <!-- 대댓글 추가 표시 / 구분이 되도록 div또는 테이블로 구성 -->
 <!-- 플로우차트 그리기 -->
 <!-- 디자인 구현하기. -->
 <!-- 파일 사진 올리기. 구현 -->
-<!-- 대딧글 수정 눌렀을떄 구현되게 하는 자바스크립트 구현 -->
+
 <!-- 새글작성 수정 삭제 버튼으로 만들기  / 댓글 레이아웃-->
 <!-- 비주얼로 테스트 해보고 시행하기. -->
 <!-- 이전글 다음글 -->
