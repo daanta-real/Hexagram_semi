@@ -9,6 +9,9 @@
 <%@page import="beans.ItemReplyDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
+	
+	
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
@@ -19,6 +22,34 @@
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
 <!-- 페이지 내용 시작 -->
+<script src="https://code.jquery.com/jquery-latest.js"></script>
+<script>
+	$(function(){
+		$(".view-row").find(".edit-btn").click(function(){
+			$(this).parents("tr.view-row").hide();
+			$(this).parents("tr.view-row").next("tr.edit-row").show();
+		});
+		
+		$(".edit-row").find(".edit-cancel-btn").click(function(){
+			$(this).parents("tr.edit-row").hide();
+			$(this).parents("tr.edit-row").prev("tr.view-row").show();
+		});
+		
+
+		$(".view-row").find(".reply-btn").click(function(){
+			$(this).parents("tr.view-row").next("tr.edit-row").next("tr.reply-row").show();
+		});			
+			
+		
+		$(".reply-row").find(".reply-cancel-btn").click(function(){
+			$(this).parents("tr.reply-row").hide();
+		});
+		
+		$(".edit-row").hide();
+		$(".reply-row").hide();
+	});
+</script>    
+
 <style>
 	.container-500{width: 500px;}
 	.container-center{margin-left: auto; margin-right: auto;}
@@ -235,7 +266,7 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 						boolean isUsersReplyWriter = usersIdx == itemReplyDto.getUsersIdx();
 						%>
 						
-						<tr>
+						<tr class="view-row">
 
 							<td>
 	
@@ -260,47 +291,50 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 							
 <!-- 							댓글 작성자이거나 관리자의 경우 수정 삭제가 가능하다. -->
 							<%if(isManager || isUsersReplyWriter) {%>
-								<a>대댓글</a>
-								<a>수정</a>
+								<a class="reply-btn">대댓글</a>
+								<a class="edit-btn">수정</a>
 								<a href="<%=root%>/item_reply/delete.nogari?itemIdx=<%=itemIdx%>&itemReplyIdx=<%=itemReplyDto.getItemReplyIdx()%>">삭제</a>
 							<%} %>
 	
 							</td>
 							
 						</tr>
-						
-<!-- 							자바스크립트를 배우고 나서 이부분을 수정한다. -->
-<!-- 대댓글 창 -->
-						<tr>
-							<td>
-								<form action="<%=root%>/item_reply/insert.nogari" method="post">
-											<textarea name="itemReplyDetail" rows="2" cols="20" placeholder="댓글 입력" required></textarea>
-											<input type="submit" value="대댓글">
-											<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
-											<input type="hidden" name="itemReplyTargetIdx" value="<%=itemReplyDto.getItemReplyIdx()%>">
-								</form>
-							
-							</td>
-						</tr>	
-						
-<!-- 						각 댓글마다 수정 칸을 숨겨준다. -->
+						<!-- 						각 댓글마다 수정 칸을 숨겨준다. -->
 <!-- 							자바스크립트를 배우고 나서 이부분을 수정한다. -->
 
 <!-- 							수정 창 -->
 <!-- 							댓글 작성자이거나 관리자의 경우 수정 입력이 가능하다. -->
 <%if(isManager || isUsersReplyWriter) {%>
+						<tr class="edit-row">
 							<td>
 								<form action="<%=root%>/item_reply/update.nogari" method="post">
 											<textarea name="itemReplyDetail" rows="2" cols="20" placeholder="수정" required></textarea>
-											<input type="submit" value="수정">
 											<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
 											<input type="hidden" name="itemReplyIdx" value="<%=itemReplyDto.getItemReplyIdx()%>">
+											<input type="submit" value="수정">
+											<a class="edit-cancel-btn">취소</a>
 								</form>
 							</td>
-						<%} %>	
-						<tr>
-								
 						</tr>
+						<%} %>	
+						
+<!-- 							자바스크립트를 배우고 나서 이부분을 수정한다. -->
+<!-- 대댓글 창 -->
+						<tr class="reply-row">
+							<td>
+								<form action="<%=root%>/item_reply/insert.nogari" method="post">
+											<textarea name="itemReplyDetail" rows="2" cols="20" placeholder="댓글 입력" required></textarea>
+											<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
+											<input type="hidden" name="itemReplyTargetIdx" value="<%=itemReplyDto.getItemReplyIdx()%>">
+											<input type="submit" value="대댓글">
+											<a class="reply-cancel-btn">취소</a>
+								</form>
+							
+							</td>
+						</tr>	
+						
+
+								
 						
 				</tbody>
 			</table>
@@ -325,7 +359,7 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 <!-- 이전글 다음글 -->
 <!-- 수정 삭제 새글 리모컨 픽스 추가 -->
 <!-- 작성일 작성시간 몇분전 몇일 전 표시하기. -->
-
+<!-- 테이블 디자인 변경 -->
 
 <!-- 페이지 내용 끝. -->
 </SECTION>
