@@ -59,17 +59,19 @@ if(isLogin) {
 		<DIV ID='mobileMenuLoginContainer' CLASS="flexCenter flexCol">
 			<!-- 모바일 박스 메뉴 - 로그인 없을 시 -->
 			<%if(isLogin) { /* 로그인이 되었을 경우 */ %>
-			<DIV CLASS="userInfoTxt flexCenter flexRow"><%=usersNick%>(<%=usersId%>)님 <SPAN class="<%=gradeStr%>"><%=usersGrade%></SPAN></DIV>
-			<A CLASS='actionButtons loginoutButton flexCenter' HREF='<%=root%>/users/logout.nogari'>로그아웃</A>
+				<DIV CLASS="userInfoTxt flexCenter flexRow"><%=usersNick%>(<%=usersId%>)님 <SPAN class="<%=gradeStr%>"><%=usersGrade%></SPAN></DIV>
+				<A CLASS='userButton' HREF='<%=root%>/users/detail.jsp'>내 정보</A>
+				<%if(usersGrade.equals("관리자")) {%> <A CLASS='userButton' HREF='<%=root%>/admin/main.jsp'>관리</A> <%} %>
+				<A CLASS='userButton' HREF='<%=root%>/users/logout.nogari'>로그아웃</A>
 			<%} else { /* 로그인이 되지 않았을 경우 */ %>
-			<FORM ID='loginInput' CLASS='flexCenter flexCol' NAME='login' METHOD='POST' ACTION='<%=root%>/users/login.nogari'>
-				<INPUT TYPE='text' NAME='usersId' VALUE="<% %>" PLACEHOLDER="입력하세요"/>
-				<INPUT TYPE='password' NAME='usersPw' VALUE="<% %>" PLACEHOLDER="입력하세요"/>
-				<DIV CLASS="loginButtonBox flexCenter flexRow">
-					<BUTTON CLASS='actionButtons loginoutButton' TYPE='submit'>로그인</BUTTON>
-					<INPUT CLASS='actionButtons joinButton' TYPE='button' VALUE="회원가입" />
-				</DIV>
-			</FORM>
+				<FORM ID='loginInput' CLASS='flexCenter flexCol' NAME='login' METHOD='POST' ACTION='<%=root%>/users/login.nogari'>
+					<INPUT TYPE='text' NAME='usersId' VALUE="<% %>" PLACEHOLDER="입력하세요"/>
+					<INPUT TYPE='password' NAME='usersPw' VALUE="<% %>" PLACEHOLDER="입력하세요"/>
+					<DIV CLASS="loginButtonBox flexCenter flexRow">
+						<BUTTON CLASS='actionButtons loginoutButton' TYPE='submit'>로그인</BUTTON>
+						<INPUT CLASS='actionButtons joinButton' TYPE='button' VALUE="회원가입" />
+					</DIV>
+				</FORM>
 			<%}%>
 		</DIV>
 		
@@ -85,8 +87,8 @@ if(isLogin) {
 	<%if(isLogin) { /* 로그인이 되었을 경우 */ %>
 		<DIV CLASS="userInfoTxt flexCenter flexRow"><%=usersNick%>(<%=usersId%>)님 <SPAN class="<%=gradeStr%>"><%=usersGrade%></SPAN></DIV>
 		<A CLASS='userButton' HREF='<%=root%>/users/detail.jsp'>내 정보</A>
-		<A CLASS='userButton' HREF='<%=root%>/users/logout.nogari'>로그아웃</A>
 		<%if(usersGrade.equals("관리자")) {%> <A CLASS='userButton' HREF='<%=root%>/admin/main.jsp'>관리</A> <%} %>
+		<A CLASS='userButton' HREF='<%=root%>/users/logout.nogari'>로그아웃</A>
 	<%} else { /* 로그인이 되지 않았을 경우 */ %>
 		<H4 CLASS="userInfoTxt mobile">로그인하세요.</H4>
 		<A CLASS='userButton' HREF='<%=root%>/users/login.jsp'>로그인</A>
