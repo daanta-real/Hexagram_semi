@@ -273,7 +273,7 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 <!-- 대댓글 창 -->
 						<tr>
 							<td>
-								<form action="<%=root%>/item_reply/target_insert.nogari" method="post">
+								<form action="<%=root%>/item_reply/insert.nogari" method="post">
 											<textarea name="itemReplyDetail" rows="2" cols="20" placeholder="댓글 입력" required></textarea>
 											<input type="submit" value="대댓글">
 											<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
