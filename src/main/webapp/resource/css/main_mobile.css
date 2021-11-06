@@ -102,15 +102,14 @@ SECTION {
 #mobileMenuHamburgerInput:checked + #hamburgerBox > label span:nth-child(3) { bottom:50%; transform:translateY(50%) rotate(-45deg); }
 
 /* 모바일 전용 로그인 메뉴 레이아웃 */
-#mobileMenuLoginContainer {
+#mobileMenuLoginContainer, #mobileMenuLinkContainer {
 	width:100%;
 }
+/* 모바일 전용 로그인 메뉴 - 아디 비번 입력창 */
 #mobileMenuLoginContainer input:focus, button:focus {
 	outline:none; /* 입력란 외곽선 표시 제거 */
 	-webkit-tap-highlight-color: rgba(0,0,0,0); /* 입력란 하이라이트 제거 */
 }
-
-/* 모바일 전용 로그인 메뉴 - 아디 비번 입력창 */
 #mobileMenuLoginContainer > form > input {
 	width:55vw; margin:3vw 0; padding:1vw;
 	font-size:5.5vw;
@@ -120,7 +119,6 @@ SECTION {
 }
 
 /* 모바일 전용 로그인 메뉴 - 모든 동작버튼들 */
-#mobileMenuLoginContainer > *, .loginButtonBox > * { margin:0.2rem auto; }
 #mobileMenuLoginContainer .actionButtons {
 	min-width:20vw; max-width:20vw;
 	border:none; border-radius:3.5vw; padding:1vw;
@@ -137,6 +135,27 @@ SECTION {
 #mobileMenuLoginContainer .loginButtonBox { justify-content:space-evenly; width:100%; }
 #mobileMenuLoginContainer .loginoutButton  { background-color: var(--color6); }
 #mobileMenuLoginContainer .joinButton { background-color: var(--color5); }
+
+/* 모바일 전용 로그인 메뉴 - 로그인 시 뜨는 내 정보 */
+#mobileMenuLoginContainer .userInfoTxt {
+	width:100%; background:var(--color3);
+}
+#mobileMenuLoginContainer .userInfoTxt > div:first-child {
+	height: 20vw; font-size: 8vw; }
+#mobileMenuLoginContainer .myMenues { width:100%; height:15vw; }
+#mobileMenuLoginContainer .myMenues > * { margin: auto 2vw; }
+/* 모바일 전용 로그인 메뉴 - 로그인 시 뜨는 내 정보 - 등급뱃지 */
+#mobileMenuLoginContainer .gradeBadge {
+	margin-left: 2vw; border-radius: 1.5vw; padding: 0.1vw 1.5vw;
+    color: white; font-size: 4vw;
+	background-color: var(--color6);
+}
+
+/* 모바일 전용 사이드 메뉴 링크들 */
+#mobileMenuLinkContainer .menuLink {	
+	width: 100%; height: 20vw;
+    font-size: 12vw; line-height: 21vw;
+}
 
 /* 레이아웃 - 검색창 */
 #searcherContainer { height:fit-content; }
