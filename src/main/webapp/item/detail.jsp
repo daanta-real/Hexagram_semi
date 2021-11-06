@@ -1,3 +1,5 @@
+<%@page import="beans.ItemFileDto"%>
+<%@page import="beans.ItemFileDao"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="beans.UsersDao"%>
 <%@page import="java.util.HashSet"%>
@@ -98,6 +100,13 @@ if(boardCountView.add(itemIdx)){
 request.getSession().setAttribute("boardCountView", boardCountView);
  %>
  
+ 
+<%-- 게시글 사진파일 정보 조회  --%>
+<%
+	ItemFileDao itemFileDao = new ItemFileDao();
+	List<ItemFileDto> itemFileList = itemFileDao.find1(itemIdx);
+%>
+ 
  <!-- **기본정보 표시  -->
  
 <!-- 지명 표시 -->
@@ -136,9 +145,12 @@ request.getSession().setAttribute("boardCountView", boardCountView);
 	</thead>
 	
 	<tbody align="center" >
-		<tr>
-			<td><img src="http://via.placeholder.com/200"></td>
-		</tr>
+		<%-- 첨부파일이 있다면 --%>
+<%-- 		<%if(itemFileList.isEmpty()){ %> --%>
+<%-- 			<%for(ItemFileDto itemFileDto : itemFileList){ %> --%>
+<%-- 				<img src = "file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx() %>" width="50%" height="50%"> --%>
+<%-- 			<%} %> --%>
+<%-- 		<%} %> --%>
 	</tbody>
 </table>
 

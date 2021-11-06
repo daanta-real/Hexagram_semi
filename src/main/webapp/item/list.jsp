@@ -1,3 +1,5 @@
+<%@page import="beans.ItemFileDto"%>
+<%@page import="beans.ItemFileDao"%>
 <%@page import="beans.ItemPagination"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="java.util.ArrayList"%>
@@ -68,6 +70,12 @@
 	String title = itemPagination.isSearch() ? "["+itemPagination.getKeyword()+"]" + " 검색" : "관광지 목록";
 %>
 
+<%-- 썸네일표시를 위한 파일 조회 --%>
+<%
+// 	ItemFileDao itemFileDao = new ItemFileDao();
+// 	ItemFileDto itemFileDto = itemFileDao.find2(itemFileDto.getItemIdx());
+%>
+
 <%-- 페이지 제목 --%>
 <h2><%=title %></h2>
 
@@ -101,6 +109,7 @@
 	<thead>
 		<tr>
 			<th>카테고리</th>
+<!-- 			<th>사진</th> -->
 			<th>관광지명</th>
 			<th>관광지 소개</th>
 			<th>조회수</th>
@@ -110,6 +119,11 @@
 		<%for(ItemDto itemDto : list){ %>
 		<tr>
 			<td align ="center"><%=itemDto.getItemType() %></td>
+<!-- 			<td> -->
+<%-- 			<%if(itemFileDto != null){ %> --%>
+<%-- 					<img src = "file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx() %>" width="50%" height="50%"> --%>
+<%-- 			<%} %> --%>
+<!-- 			</td> -->
 			<td align ="center">
 			<a href="detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>">
 			<%=itemDto.getItemName()%>
