@@ -284,7 +284,7 @@ request.getSession().setAttribute("boardCountView", boardCountView);
  </div>
 >>>>>>> refs/remotes/origin/DoeKim
 
-<!-- **댓글 표시(끌고옴) -->
+<!-- **댓글 표시(끌고옴)  -->
 <%
 //이 글의 댓글 목록 불러오기.
 ItemReplyDao itemReplyDao = new ItemReplyDao();
