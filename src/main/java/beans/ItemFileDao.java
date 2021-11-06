@@ -26,6 +26,19 @@ public class ItemFileDao {
 		con.close();
 		
 	}
+	
+	
+	public void delete(int itemFileIdx) throws Exception{
+		Connection con = JdbcUtils.connect3();
+		
+		String sql = "delete item_file where item_file_idx = ?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, itemFileIdx);
+		
+		ps.execute();
+		
+		con.close();
+	}
 
 	public ItemFileDto get(int itemFileIdx) throws Exception{
 		Connection con = JdbcUtils.connect3();
