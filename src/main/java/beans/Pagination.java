@@ -76,12 +76,6 @@ public class Pagination {
 	public boolean isNextAvailable()	  
 	{	return this.finishBlock < lastBlock;	}
 	
-	//추가 : 검색모드인가요?
-	public boolean isSearch() {
-		return this.column != null && !this.column.equals("")
-		&&this.keyword != null && !this.keyword.equals("");
-	}
-	
 	//추가 : 회원목록 검색모드 인가요?
 	public boolean searchUsers() {
 		return this.column != null && !this.column.equals("")

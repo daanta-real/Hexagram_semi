@@ -26,30 +26,30 @@
     <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post">
 	     <select name="column">
 	    	<option value="">항목선택</option>
-			<%if(pn.columnIs("usersId")) {%>
-	    	<option value="usersId" selected>아이디</option>
+			<%if(pn.columnIs("users_id")) {%>
+	    	<option value="users_id" selected>아이디</option>
 	    	<%}else {%>
-	    	<option value="usersId">아이디</option>
+	    	<option value="users_id">아이디</option>
 	    	<%} %>
-	    	<%if(pn.columnIs("usersNick")) {%>
-	    	<option value="usersNick" selected>닉네임</option>
+	    	<%if(pn.columnIs("users_nick")) {%>
+	    	<option value="users_nick" selected>닉네임</option>
 	    	<%}else {%>
-	    	<option value="usersNick">닉네임</option>
+	    	<option value="users_nick">닉네임</option>
 	    	<% }%>
-	    	<%if(pn.columnIs("usersEmail")) {%>
-	    	<option value="usersEmail" selected>이메일</option>
+	    	<%if(pn.columnIs("users_email")) {%>
+	    	<option value="users_email" selected>이메일</option>
 	    	<%}else {%>
-	    	<option value="usersEmail">이메일</option>
+	    	<option value="users_email">이메일</option>
 	    	<%} %>
-	    	<%if(pn.columnIs("usersPhone")) {%>
-	    	<option value="usersPhone" selected>전화번호</option>
+	    	<%if(pn.columnIs("users_phone")) {%>
+	    	<option value="users_phone" selected>전화번호</option>
 	    	<%}else {%>
-	    	<option value="usersPhone">전화번호</option>
+	    	<option value="users_phone">전화번호</option>
 	    	<% }%>
-	    	<%if(pn.columnIs("usersGrade")) {%>
-	    	<option value="usersGrade" selected>회원등급</option>
+	    	<%if(pn.columnIs("users_grade")) {%>
+	    	<option value="users_grade" selected>회원등급</option>
 	    	<%}else {%>
-	    	<option value="usersGrade">회원등급</option>
+	    	<option value="users_grade">회원등급</option>
 	    	<% }%>
 	    </select>
 	    <input type="text" name="keyword" placeholder="검색어입력" required value="<%=pn.getKeywordString() %>">
@@ -74,14 +74,18 @@
 	%>
 		<tr>
 			<td align="center"><%=usersDto.getUsersIdx() %></td>
-			<!-- 회원 아이디를 누르면 회우너 상세정보 페이지로 이동 -->
-			<td><a href="detail.jsp"><%=usersDto.getUsersId() %></a></td>
+			<!-- 회원 아이디를 누르면 회원 상세정보 페이지로 이동 -->
+			<td>
+				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">
+					<%=usersDto.getUsersId() %>
+				</a>
+			</td>
 			<td><%=usersDto.getUsersNick() %></td>
 			<td><%=usersEmail%></td>
 			<td align="center"><%=usersDto.getUsersGrade() %></td>
 			<th align="center">
-				<a href="detail.jsp">상세</a>
-				<a href="edit.jsp">수정</a>
+				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">상세</a>
+				<a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">수정</a>
 			</th>
 		</tr>
 	<%} %>
@@ -91,28 +95,28 @@
 <!-- 페이지 네비게이터 검색 / 목록-->
 <DIV>
 <%if(pn.isPreviousAvailable()) {%>
-	<%if(pn.isSearch()) {%>
-		<a href="users/list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getStartBlock()-1 %>">&lt;</a>
+	<%if(pn.searchUsers()) {%>
+		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getStartBlock()-1 %>">&lt;</a>
 	<%} else{ %>
-		<a href="users/list.jsp?page=<%=pn. getPreviousBlock()%>">&lt;</a>
+		<a href="list.jsp?page=<%=pn. getPreviousBlock()%>">&lt;</a>
 	<%} %>
 <%} else{ %>
 	<a>&lt;</a>
 <%} %>
 
 <%for(int i = pn.getStartBlock() ; i <= pn.getRealLastBlock() ; i++) {%>
-	<%if(pn.isSearch()) { %>
-		<a href="users/list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
+	<%if(pn.searchUsers()) { %>
+		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
 	<%}else{ %>
-		<a href="users/list.jsp?page=<%=i %>"><%=i %></a>
+		<a href="list.jsp?page=<%=i %>"><%=i %></a>
 	<%} %>
 <%} %>
 
 <%if(pn.isNextAvailable()) {%>
-	<%if(pn.isSearch()) {%>
-		<a href="users/list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock() %>">&gt;</a>
+	<%if(pn.searchUsers()) {%>
+		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock() %>">&gt;</a>
 	<%} else{ %>
-		<a href="users/list.jsp?page=<%=pn.getNextBlock()%>">&gt;</a>
+		<a href="list.jsp?page=<%=pn.getNextBlock()%>">&gt;</a>
 	<%} %>
 <%} else{%>
 	<a>&gt;</a>
