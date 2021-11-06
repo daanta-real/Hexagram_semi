@@ -34,9 +34,22 @@ protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws S
 			itemReplyDto.setItemIdx(itemIdx);
 			itemReplyDto.setUsersIdx(usersIdx);
 			itemReplyDto.setItemReplyDetail(itemReplyDetail);
-			//Dto에 3가지의 정보를 담아서 댓글 추가 작업 시행.
+			
 
-			itemReplyDao.insert(itemReplyDto);
+			if(req.getParameter("itemReplyTargetIdx") != null) {
+				int itemReplyTargetIdx = Integer.parseInt(req.getParameter("itemReplyTargetIdx"));
+				ItemReplyDto itemReplyParent = itemReplyDao.get(itemReplyTargetIdx);
+				
+				itemReplyDto.setItemReplySuperno(itemReplyTargetIdx);
+				itemReplyDto.setItemReplyGroupno(itemReplyParent.getItemReplyGroupno());
+				itemReplyDto.setItemReplyDepth(itemReplyParent.getItemReplyDepth()+1);
+				
+				itemReplyDao.insertTarget(itemReplyDto);
+			}else {
+				itemReplyDao.insert(itemReplyDto);
+			}
+			
+
 			
 //			게시물 댓글 수 추가
 			ItemDao itemDao = new ItemDao();
