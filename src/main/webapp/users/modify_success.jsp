@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
-<TITLE>노가리투어 - [여기다가 타이틀이름 쓰세요. []는 제거하시구요~]</TITLE>
+<TITLE>노가리투어 - 회원 정보 변경 완료</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
 <BODY>
@@ -11,7 +11,11 @@
 <% String root = request.getContextPath(); %>
 <!-- 페이지 내용 시작 -->
 
-<h3>변경 완료</h3>
+<h1>회원 정보 변경 완료</h1>
+
+<h3>회원 정보 변경에 성공하셨습니다.</h3>
+
+<h6><a href="<%=root%>/">메인 페이지로</a></h6>
 
 <!-- 페이지 내용 끝. -->
 </SECTION>

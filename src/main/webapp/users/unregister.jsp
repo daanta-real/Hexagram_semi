@@ -20,7 +20,7 @@
 				<th>내 아이디</th>
 				<td><%=sessionId %></td>
 			</tr>
-				<tr>
+			<tr>
 				<th>비밀번호 확인</th>
 				<td>
 					<input type="password" name="usersPw" required>

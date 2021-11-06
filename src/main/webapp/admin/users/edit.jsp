@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
-<TITLE>노가리투어 - [여기다가 타이틀이름 쓰세요. []는 제거하시구요~]</TITLE>
+<TITLE>노가리투어 - 회원 정보 변경</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
 <BODY>
