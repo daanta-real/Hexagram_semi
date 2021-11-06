@@ -111,11 +111,11 @@ SECTION {
 }
 
 /* 아디 비번 입력창 */
-#mobileMenuLoginContainer input {
+#mobileMenuLoginContainer > form > input {
 	width:55vw; margin:3vw 0; padding:1vw;
 	font-size:5.5vw;
 }
-#mobileMenuLoginContainer input:first-child {
+#mobileMenuLoginContainer > form > input:first-child {
 	margin-bottom:0;
 }
 
