@@ -1,17 +1,15 @@
 package util.users;
 
-import javax.servlet.http.HttpServletRequest;
-
 import beans.UsersDao;
 
 public class GrantChecker {
 
 	// 권한검사: 내가 나에 대해서 요청한 것이거나, 아니면 내가 관리자여야만 true를 반환함
 	// 글 수정/삭제, 회원정보 수정/탈퇴 등에 사용
-	public static boolean isGranted(String sessionId, String sessionGrade, String targetId) {
+	public static boolean isGranted(String sessionId, String targetId, String sessionGrade) {
 
 		// 1. 관리자 권한이라면 무조건 true를 회신함
-		boolean isAdmin = sessionGrade != null && sessionGrade.equals(GRADE_ADMIN);
+		boolean isAdmin = sessionGrade != null && sessionGrade.equals(UsersUtils.GRADE_ADMIN);
 		if(isAdmin) return true;
 
 		// 2. 내가 관리자가 아니라면 여기로 온다.
@@ -54,14 +52,6 @@ public class GrantChecker {
 		System.out.print("[권한확인] 4. 적절한 권한이 확인되었습니다.");
 		return true;
 
-	}
-
-	// 세션 ID의 회원이 관리자 등급인지 여부를 리턴
-	public static boolean isAdmin(HttpServletRequest req) throws Exception { return isAdmin(req, new UsersDao()); } // DAO 안들어왔을경우 생성하는 과정임
-	public static boolean isAdmin(HttpServletRequest req, UsersDao dao) throws Exception {
-		String sessionId = (String)req.getSession().getAttribute("id");
-		String userGrade = dao.get(sessionId).getUsersGrade();
-		return userGrade.equals("관리자");
 	}
 
 }
