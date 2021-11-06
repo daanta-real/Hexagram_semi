@@ -23,7 +23,7 @@
 <!-- 페이지 내용 시작 -->
 
  <!-- 검색 -->
-    <form action="<%=request.getContextPath()%>/admin/usersList.jsp" method="post">
+    <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post">
 	     <select name="column">
 	    	<option value="">항목선택</option>
 			<%if(pn.columnIs("usersId")) {%>
@@ -73,13 +73,13 @@
 		<tr>
 			<td align="center"><%=usersDto.getUsersIdx() %></td>
 			<!-- 회원 아이디를 누르면 회우너 상세정보 페이지로 이동 -->
-			<td><a href="usersInfo.jsp"><%=usersDto.getUsersId() %></a></td>
+			<td><a href="detail.jsp"><%=usersDto.getUsersId() %></a></td>
 			<td><%=usersDto.getUsersNick() %></td>
 			<td><%=usersDto.getUsersEmailNull() %></td>
 			<td align="center"><%=usersDto.getUsersGrade() %></td>
 			<th align="center">
-				<a href="usersInfo.jsp">상세</a>
-				<a href="usersModify.jsp">수정</a>
+				<a href="detail.jsp">상세</a>
+				<a href="edit.jsp">수정</a>
 			</th>
 		</tr>
 	<%} %>
@@ -90,9 +90,9 @@
 <DIV>
 <%if(pn.isPreviousAvailable()) {%>
 	<%if(pn.isSearch()) {%>
-		<a href="usersList.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getStartBlock()-1 %>">&lt;</a>
+		<a href="users/list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getStartBlock()-1 %>">&lt;</a>
 	<%} else{ %>
-		<a href="usersList.jsp?page=<%=pn. getPreviousBlock()%>">&lt;</a>
+		<a href="users/list.jsp?page=<%=pn. getPreviousBlock()%>">&lt;</a>
 	<%} %>
 <%} else{ %>
 	<a>&lt;</a>
@@ -100,17 +100,17 @@
 
 <%for(int i = pn.getStartBlock() ; i <= pn.getRealLastBlock() ; i++) {%>
 	<%if(pn.isSearch()) { %>
-		<a href="usersList.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
+		<a href="users/list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
 	<%}else{ %>
-		<a href="usersList.jsp?page=<%=i %>"><%=i %></a>
+		<a href="users/list.jsp?page=<%=i %>"><%=i %></a>
 	<%} %>
 <%} %>
 
 <%if(pn.isNextAvailable()) {%>
 	<%if(pn.isSearch()) {%>
-		<a href="usersList.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock() %>">&gt;</a>
+		<a href="users/list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock() %>">&gt;</a>
 	<%} else{ %>
-		<a href="usersList.jsp?page=<%=pn.getNextBlock()%>">&gt;</a>
+		<a href="users/list.jsp?page=<%=pn.getNextBlock()%>">&gt;</a>
 	<%} %>
 <%} else{%>
 	<a>&gt;</a>
