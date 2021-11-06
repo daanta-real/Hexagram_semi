@@ -213,22 +213,24 @@ request.getSession().setAttribute("boardCountView", boardCountView);
       <div class="row right">
       <!-- 관리자 또는 글 작성자가 보는 경우 글작성 / 수정 / 삭제가 가능하도록 설정 : 수정 삭제의 경우 필터에서도 처리가능하도록 해야함.-->
 		<!-- 		리모컨으로 구현하기 -->
+			<a href="<%=root%>/item/list.jsp">목록으로</a>
 		<%if(isManager || isMyboard){%>
 			<a href="<%=root%>/item/insert.jsp">새 글작성</a>
 			<a href="<%=root%>/item/edit.jsp?itemIdx=<%=itemIdx%>">수정</a>
 			<a href="<%=root%>/item/delete.nogari?itemIdx=<%=itemIdx%>">삭제</a>
 		<%}%>
     </div>
-    
+
     <div class="row center">
     <!-- **사진 표시(DB테이블 만들어서 resource 파일정보를 불러올 예정(idea) -->
-      <img src="http://via.placeholder.com/500" class="image">
-      		<%-- 첨부파일이 있다면 --%>
-<%-- 		<%if(itemFileList.isEmpty()){ %> --%>
-<%-- 			<%for(ItemFileDto itemFileDto : itemFileList){ %> --%>
-<%-- 				<img src = "file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx() %>" width="50%" height="50%"> --%>
-<%-- 			<%} %> --%>
-<%-- 		<%} %> --%>
+     <%-- 첨부파일이 있다면 --%>
+		<%if(!itemFileList.isEmpty()){ %>
+			<%for(ItemFileDto itemFileDto : itemFileList){ %>
+				<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="50%">
+			<%} %>
+		<%}else{ %>
+				 <img src="http://via.placeholder.com/500" class="image">
+		<%} %>
     </div>
     
     <!-- **상세정보 표시 -->
@@ -281,8 +283,7 @@ request.getSession().setAttribute("boardCountView", boardCountView);
     </div>
     
 <!--  마지막 div -->
- </div>
->>>>>>> refs/remotes/origin/DoeKim
+</div>
 
 <!-- **댓글 표시(끌고옴)  -->
 <%

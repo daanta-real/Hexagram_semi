@@ -10,7 +10,7 @@ import java.util.List;
 import util.JdbcUtils;
 import util.SQLBuilder;
 
-public class CourseReplyDao {
+public class Junsung_CourseReplyDao {
 
 	// 기능 목록
 	// 1. List<CourseReplyDto> select(                             ): 모든 코스댓글 목록 조회
@@ -20,7 +20,7 @@ public class CourseReplyDao {
 	// 5. boolean              update(CourseReplyDto dto           ): 코스댓글 수정
 
 	// READ: 모든 코스댓글의 정보를 조회
-	public List<CourseReplyDto> select() throws Exception {
+	public List<Junsung_CourseReplyDto> select() throws Exception {
 
 		// SQL 준비
 		String sql = "SELECT * FROM course_reply";
@@ -29,9 +29,9 @@ public class CourseReplyDao {
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
-		List<CourseReplyDto> list = new ArrayList<>();
+		List<Junsung_CourseReplyDto> list = new ArrayList<>();
 		while(rs.next()) {
-			CourseReplyDto dto = new CourseReplyDto();
+			Junsung_CourseReplyDto dto = new Junsung_CourseReplyDto();
 			dto.setCourseReplyIdx(rs.getInt("course_reply_idx"));
 			dto.setCourseIdx(rs.getInt("item_idx"));
 			dto.setUsersIdx(rs.getInt("users_idx"));
@@ -47,7 +47,7 @@ public class CourseReplyDao {
 	}
 
 	// READ: 딱 한 개의 코스댓글의 정보를 조회
-	public CourseReplyDto get (int courseReplyIdx) throws Exception {
+	public Junsung_CourseReplyDto get (int courseReplyIdx) throws Exception {
 
 		// SQL 준비
 		String sql = "SELECT * FROM course_reply WHERE course_reply_idx = ?";
@@ -57,9 +57,9 @@ public class CourseReplyDao {
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
-		CourseReplyDto dto = null;
+		Junsung_CourseReplyDto dto = null;
 		if(rs.next()) {
-			dto = new CourseReplyDto();
+			dto = new Junsung_CourseReplyDto();
 			dto.setCourseReplyIdx(rs.getInt("course_reply_idx"));
 			dto.setCourseIdx(rs.getInt("item_idx"));
 			dto.setUsersIdx(rs.getInt("users_idx"));
@@ -74,7 +74,7 @@ public class CourseReplyDao {
 	}
 
 	// CREATE: 코스댓글 추가
-	public boolean insert(CourseReplyDto dto) throws Exception {
+	public boolean insert(Junsung_CourseReplyDto dto) throws Exception {
 
 		// SQL 준비
 		String sql = "INSERT INTO course_reply (course_reply_idx, item_idx, users_idx, course_reply_target_idx, course_reply_detail)"
@@ -117,7 +117,7 @@ public class CourseReplyDao {
 
 	// UPDATE: 코스댓글 수정
 	// DTO에는 ID 외에 수정할 컬럼에 해당하는 값이 반드시 한 개는 있어야 한다. 아예 없으면 에러 난다.
-	public boolean update(CourseReplyDto dto) throws Exception {
+	public boolean update(Junsung_CourseReplyDto dto) throws Exception {
 
 		// SQL 정보 준비
 		List<String[]> info = new ArrayList<>(Arrays.asList(

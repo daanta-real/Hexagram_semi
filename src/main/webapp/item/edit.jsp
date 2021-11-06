@@ -1,3 +1,5 @@
+<%@page import="beans.ItemFileDto"%>
+<%@page import="beans.ItemFileDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.ItemDto"%>
 <%@page import="java.util.List"%>
@@ -28,10 +30,11 @@
 	int itemIdx = Integer.parseInt(request.getParameter("itemIdx"));
 	ItemDao itemDao = new ItemDao();
 	ItemDto itemDto = itemDao.get(itemIdx);
+	
 %>
  <h3>게시글 수정(관리자 페이지)</h3>
  
- <form action="edit.nogari" method="post">
+ <form action="edit.nogari" method="post" enctype="multipart/form-data">
 	<table border="1" style="width:500px;">
 		<tbody>
 			<tr>
@@ -84,6 +87,10 @@
 			<tr>
 				<td>주차</td>
 				<td><input type="text" name="itemParking" placeholder="주차가능여부 입력" value="<%=itemDto.getItemParking()%>"></td>
+			</tr>
+			<tr>
+				<td>이미지</td>
+				<td><input type="file" name="attach" accept="image/*"></td>				
 			</tr>
 		</tbody>
 		<tfoot>

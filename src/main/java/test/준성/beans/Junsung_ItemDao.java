@@ -11,7 +11,7 @@ import util.HexaLibrary;
 import util.JdbcUtils;
 import util.SQLBuilder;
 
-public class ItemDao {
+public class Junsung_ItemDao {
 
 	// 기능 목록
 	// 1. List<ItemDto> select(               ): 모든 관광지 목록 조회
@@ -21,7 +21,7 @@ public class ItemDao {
 	// 5. boolean       update(ItemDto dto    ): 관광지 수정
 
 	// READ: 모든 관광지의 정보를 조회
-	public List<ItemDto> select() throws Exception {
+	public List<Junsung_ItemDto> select() throws Exception {
 
 		// SQL 준비
 		String sql = "SELECT * FROM item";
@@ -30,9 +30,9 @@ public class ItemDao {
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
-		List<ItemDto> list = new ArrayList<>();
+		List<Junsung_ItemDto> list = new ArrayList<>();
 		while(rs.next()) {
-			ItemDto dto = new ItemDto();
+			Junsung_ItemDto dto = new Junsung_ItemDto();
 			dto.setItemIdx(rs.getInt("item_idx"));
 			dto.setUsersIdx(rs.getInt("users_idx"));
 			dto.setItemType(rs.getString("item_type"));
@@ -51,7 +51,7 @@ public class ItemDao {
 	}
 
 	// READ: 딱 한 개의 관광지의 정보를 조회
-	public ItemDto get(int itemIdx) throws Exception {
+	public Junsung_ItemDto get(int itemIdx) throws Exception {
 
 		// SQL 준비
 		String sql = "SELECT * FROM item WHERE item_idx = ?";
@@ -61,9 +61,9 @@ public class ItemDao {
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
-		ItemDto dto = null;
+		Junsung_ItemDto dto = null;
 		if(rs.next()) {
-			dto = new ItemDto();
+			dto = new Junsung_ItemDto();
 			dto.setItemIdx(rs.getInt("item_idx"));
 			dto.setUsersIdx(rs.getInt("users_idx"));
 			dto.setItemType(rs.getString("item_type"));
@@ -81,7 +81,7 @@ public class ItemDao {
 	}
 
 	// CREATE: 관광지 추가
-	public boolean insert(ItemDto dto) throws Exception {
+	public boolean insert(Junsung_ItemDto dto) throws Exception {
 
 		// SQL 준비
 		String sql = "INSERT INTO item (item_idx, users_idx, item_type, item_name, item_detail, item_tags, item_date, item_period)"
@@ -126,7 +126,7 @@ public class ItemDao {
 
 	// UPDATE: 관광지 수정
 	// DTO에는 ID 외에 수정할 컬럼에 해당하는 값이 반드시 한 개는 있어야 한다. 아예 없으면 에러 난다.
-	public boolean update(ItemDto dto) throws Exception {
+	public boolean update(Junsung_ItemDto dto) throws Exception {
 
 		// SQL 정보 준비
 		List<String[]> list = new ArrayList<>(Arrays.asList(

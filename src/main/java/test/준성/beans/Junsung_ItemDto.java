@@ -6,7 +6,7 @@ import java.util.List;
 
 import util.HexaLibrary;
 
-public class ItemDto {
+public class Junsung_ItemDto {
 
 	// 1. Declarations
 	private Integer itemIdx;
@@ -22,16 +22,16 @@ public class ItemDto {
 	// 2. Constructors
 	// 변수값들을 한 번에 다 받는 생성자는 itemTags와 itemPeriods의 자료형별로 오버로딩해줘야 해서 총 네 개를 만들어야 된다.
 	// <기본 생성자>
-	public ItemDto() {
+	public Junsung_ItemDto() {
 		super();
 	}
 	// <서브 생성자> 태그rk 문자일 때
-	public ItemDto(Integer itemIdx, Integer usersIdx, String itemType, String itemName, String itemDetail,
+	public Junsung_ItemDto(Integer itemIdx, Integer usersIdx, String itemType, String itemName, String itemDetail,
 			String itemTagsStr, java.util.Date itemDate, String itemPeriod) {
 		this(itemIdx, usersIdx, itemType, itemName, itemDetail, HexaLibrary.strToList(itemTagsStr), itemDate, itemPeriod);
 	}
 	// <서브 생성자> 태그는 list, 기간은 문자열일 때
-	public ItemDto(Integer itemIdx, Integer usersIdx, String itemType, String itemName, String itemDetail,
+	public Junsung_ItemDto(Integer itemIdx, Integer usersIdx, String itemType, String itemName, String itemDetail,
 			List<String> itemTags, java.util.Date itemDate, String itemPeriod) {
 		super();
 		setItemIdx(itemIdx);

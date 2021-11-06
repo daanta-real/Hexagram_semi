@@ -10,7 +10,7 @@ import java.util.List;
 import util.JdbcUtils;
 import util.SQLBuilder;
 
-public class CourseDao {
+public class Junsung_CourseDao {
 
 	// 기능 목록
 	// 1. List<CourseDto> select(                   ): 모든 코스 목록 조회
@@ -20,7 +20,7 @@ public class CourseDao {
 	// 5. boolean         update(CourseDto  dto     ): 코스 수정
 
 	// READ: 모든 코스의 정보를 조회
-	public List<CourseDto> select() throws Exception {
+	public List<Junsung_CourseDto> select() throws Exception {
 
 		// SQL 준비
 		String sql = "SELECT * FROM course";
@@ -29,9 +29,9 @@ public class CourseDao {
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
-		List<CourseDto> list = null;
+		List<Junsung_CourseDto> list = null;
 		while(rs.next()) {
-			CourseDto dto = new CourseDto();
+			Junsung_CourseDto dto = new Junsung_CourseDto();
 			dto.setCourseIdx      (rs.getInt   ("course_idx"      ));
 			dto.setUsersIdx       (rs.getInt   ("users_idx"       ));
 			dto.setCourseSubject  (rs.getString("course_subject"  ));
@@ -48,7 +48,7 @@ public class CourseDao {
 	}
 
 	// READ: 딱 한 명의 코스의 정보를 조회
-	public CourseDto get(int courseIdx) throws Exception {
+	public Junsung_CourseDto get(int courseIdx) throws Exception {
 
 		// SQL 준비
 		String sql = "SELECT * FROM course WHERE course_idx = ?";
@@ -58,9 +58,9 @@ public class CourseDao {
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
-		CourseDto dto = null;
+		Junsung_CourseDto dto = null;
 		if(rs.next()) {
-			dto = new CourseDto();
+			dto = new Junsung_CourseDto();
 			dto.setCourseIdx      (rs.getInt   ("course_idx"      ));
 			dto.setUsersIdx       (rs.getInt   ("users_idx"       ));
 			dto.setCourseSubject  (rs.getString("course_subject"  ));
@@ -77,7 +77,7 @@ public class CourseDao {
 	}
 
 	// CREATE: 코스 추가
-	public boolean insert(CourseDto dto) throws Exception {
+	public boolean insert(Junsung_CourseDto dto) throws Exception {
 
 		// SQL 준비
 		String sql = "INSERT INTO course (course_idx, users_idx, course_subject, course_list, course_locations, course_detail, course_tags)"
@@ -122,7 +122,7 @@ public class CourseDao {
 
 	// UPDATE: 코스 수정
 	// DTO에는 ID 외에 수정할 컬럼에 해당하는 값이 반드시 한 개는 있어야 한다. 아예 없으면 에러 난다.
-	public boolean update(CourseDto dto) throws Exception {
+	public boolean update(Junsung_CourseDto dto) throws Exception {
 
 		// SQL 정보 준비
 		List<String[]> info = new ArrayList<>(Arrays.asList(

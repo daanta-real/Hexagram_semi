@@ -1,6 +1,6 @@
 package test.준성.beans;
 
-public class EventDto {
+public class Junsung_EventDto {
 
 	// 1. Declarations
 	private Integer eventIdx;
@@ -10,11 +10,11 @@ public class EventDto {
 	private String eventPeriod;
 
 	// 2. Constructors
-	public EventDto() {
+	public Junsung_EventDto() {
 		super();
 	}
 
-	public EventDto(Integer eventIdx, Integer usersIdx, String eventSubject, String eventDetail, String eventPeriod) {
+	public Junsung_EventDto(Integer eventIdx, Integer usersIdx, String eventSubject, String eventDetail, String eventPeriod) {
 		super();
 		setEventIdx(eventIdx);
 		setUsersIdx(usersIdx);
