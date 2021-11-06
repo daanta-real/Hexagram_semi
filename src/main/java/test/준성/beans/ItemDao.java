@@ -9,6 +9,7 @@ import java.util.List;
 
 import util.HexaLibrary;
 import util.JdbcUtils;
+import util.SQLBuilder;
 
 public class ItemDao {
 
@@ -142,7 +143,7 @@ public class ItemDao {
 
 		// SQL문 만들어 보내고 결과 받아오기
 		Connection conn = JdbcUtils.connect3();
-		PreparedStatement ps = HexaLibrary.sqlBuilder(conn, list);
+		PreparedStatement ps = SQLBuilder.getInstance(conn, list);
 		int result = ps.executeUpdate();
 		boolean isSucceed = result == 1;
 

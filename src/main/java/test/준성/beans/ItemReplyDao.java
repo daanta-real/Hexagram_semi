@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import util.HexaLibrary;
 import util.JdbcUtils;
+import util.SQLBuilder;
 
 public class ItemReplyDao {
 
@@ -129,7 +129,7 @@ public class ItemReplyDao {
 			new String[] {" WHERE item_reply_idx = ?", "int"   , String.valueOf(dto.getItemIdx())           , null}
 		));
 		Connection conn = JdbcUtils.connect3();
-		PreparedStatement ps = HexaLibrary.sqlBuilder(conn, info);
+		PreparedStatement ps = SQLBuilder.getInstance(conn, info);
 
 		// SQL문 만들어 보내고 결과 받아오기
 		int result = ps.executeUpdate();
