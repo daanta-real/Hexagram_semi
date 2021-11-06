@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import beans.UsersDao;
 import beans.UsersDto;
 import util.HexaLibrary;
-import util.users.UsersUtils;
+import util.users.GrantChecker;
 
 @SuppressWarnings("serial")
 @WebServlet("/users/unregister.nogari")
@@ -39,10 +39,10 @@ public class UsersDeleteServlet extends HttpServlet {
 			System.out.print("[회원 탈퇴] 2. 권한 확인..");
 			UsersDao dao = new UsersDao();
 			// 아래 둘 중 하나여야 한다. 내가 관리자거나, 내가 내 아이디 요청한 거거나.
-			boolean isGranted = UsersUtils.isGranted(sessionId, sessionGrade, targetId);
+			boolean isGranted = GrantChecker.isGranted(sessionId, sessionGrade, targetId);
 			if(!isGranted) throw new Exception();
 			System.out.println("권한 확인 완료.");
-			
+
 
 			// 3. 전송
 			//추가. 비밀번호 일치여부 검사
@@ -62,8 +62,8 @@ public class UsersDeleteServlet extends HttpServlet {
 				resp.sendRedirect(req.getContextPath()+"/users/unregister_success.jsp");
 			} else {
 				System.out.println("탈퇴 실패.");
-				resp.sendRedirect(req.getContextPath()+"/users/unregister.jsp?fail");	
-			
+				resp.sendRedirect(req.getContextPath()+"/users/unregister.jsp?fail");
+
 			}
 
 		}
