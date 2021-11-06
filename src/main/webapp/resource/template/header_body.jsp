@@ -57,7 +57,6 @@ if(isLogin) {
 	<DIV ID='mobileMenuContainer'>
 	
 		<DIV ID='mobileMenuLoginContainer' CLASS="flexCenter flexCol">
-			<!-- 모바일 박스 메뉴 - 로그인 없을 시 -->
 			<%if(isLogin) { /* 로그인이 되었을 경우 */ %>
 				<DIV CLASS="userInfoTxt flexCenter flexRow"><%=usersNick%>(<%=usersId%>)님 <SPAN class="<%=gradeStr%>"><%=usersGrade%></SPAN></DIV>
 				<A CLASS='userButton' HREF='<%=root%>/users/detail.jsp'>내 정보</A>
@@ -90,7 +89,7 @@ if(isLogin) {
 		<%if(usersGrade.equals("관리자")) {%> <A CLASS='userButton' HREF='<%=root%>/admin/main.jsp'>관리</A> <%} %>
 		<A CLASS='userButton' HREF='<%=root%>/users/logout.nogari'>로그아웃</A>
 	<%} else { /* 로그인이 되지 않았을 경우 */ %>
-		<H4 CLASS="userInfoTxt mobile">로그인하세요.</H4>
+		<DIV CLASS="userInfoTxt mobile">로그인하세요.</DIV>
 		<A CLASS='userButton' HREF='<%=root%>/users/login.jsp'>로그인</A>
 		<A CLASS='userButton' HREF='<%=root%>/users/join.jsp'>회원가입</A>
 	<%}%>

@@ -110,7 +110,7 @@ SECTION {
 	-webkit-tap-highlight-color: rgba(0,0,0,0); /* 입력란 하이라이트 제거 */
 }
 
-/* 아디 비번 입력창 */
+/* 모바일 전용 로그인 메뉴 - 아디 비번 입력창 */
 #mobileMenuLoginContainer > form > input {
 	width:55vw; margin:3vw 0; padding:1vw;
 	font-size:5.5vw;
@@ -119,13 +119,19 @@ SECTION {
 	margin-bottom:0;
 }
 
-/* 모든 동작버튼들 */
+/* 모바일 전용 로그인 메뉴 - 모든 동작버튼들 */
+#mobileMenuLoginContainer > *, .loginButtonBox > * { margin:0.2rem auto; }
 #mobileMenuLoginContainer .actionButtons {
 	min-width:20vw; max-width:20vw;
 	border:none; border-radius:3.5vw; padding:1vw;
 	font-size:6vw;
 }
-#mobileMenuLoginContainer > *, .loginButtonBox > * { margin:0.2rem auto; }
+#mobileMenuLoginContainer .userButton {
+    margin-left: 0.3rem; border-radius: 0.6rem; padding: 0.05rem 0.6rem;
+    box-shadow: 0 0 1rem #8882;
+	color: var(--color8);
+    background: var(--color1);
+}
 
 /* 모바일 전용 로그인 메뉴 - 버튼관련만 */
 #mobileMenuLoginContainer .loginButtonBox { justify-content:space-evenly; width:100%; }
