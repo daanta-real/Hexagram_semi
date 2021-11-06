@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import util.HexaLibrary;
 import util.JdbcUtils;
+import util.SQLBuilder;
 
-public class EventDao {
+public class Junsung_EventDao {
 
 	// 기능 목록
 	// 1. List<EventDto> select(                 ): 모든 이벤트 목록 조회
@@ -20,7 +20,7 @@ public class EventDao {
 	// 5. boolean        update(EventDto dto     ): 이벤트 수정
 
 	// READ: 모든 이벤트의 정보를 조회
-	public List<EventDto> select() throws Exception {
+	public List<Junsung_EventDto> select() throws Exception {
 
 		// SQL 준비
 		String sql = "SELECT * FROM event";
@@ -29,9 +29,9 @@ public class EventDao {
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
-		List<EventDto> list = new ArrayList<>();
+		List<Junsung_EventDto> list = new ArrayList<>();
 		while (rs.next()) {
-			EventDto dto = new EventDto();
+			Junsung_EventDto dto = new Junsung_EventDto();
 			dto.setEventIdx(rs.getInt("event_idx"));
 			dto.setUsersIdx(rs.getInt("users_idx"));
 			dto.setEventSubject(rs.getString("event_subject"));
@@ -47,7 +47,7 @@ public class EventDao {
 	}
 
 	// READ: 딱 한 명의 이벤트의 정보를 조회
-	public EventDto get(int eventIdx) throws Exception {
+	public Junsung_EventDto get(int eventIdx) throws Exception {
 
 		// SQL 준비
 		String sql = "SELECT * FROM event WHERE event_idx = ?";
@@ -57,9 +57,9 @@ public class EventDao {
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
-		EventDto dto = null;
+		Junsung_EventDto dto = null;
 		if (rs.next()) {
-			dto = new EventDto();
+			dto = new Junsung_EventDto();
 			dto.setEventIdx(rs.getInt("event_idx"));
 			dto.setUsersIdx(rs.getInt("users_idx"));
 			dto.setEventSubject(rs.getString("event_subject"));
@@ -74,7 +74,7 @@ public class EventDao {
 	}
 
 	// CREATE: 이벤트 추가
-	public boolean insert(EventDto dto) throws Exception {
+	public boolean insert(Junsung_EventDto dto) throws Exception {
 
 		// SQL 준비
 		String sql = "INSERT INTO event (event_idx, users_idx, event_subject, event_detail, event_period)"
@@ -117,7 +117,7 @@ public class EventDao {
 
 	// UPDATE: 이벤트 수정
 	// DTO에는 ID 외에 수정할 컬럼에 해당하는 값이 반드시 한 개는 있어야 한다. 아예 없으면 에러 난다.
-	public boolean update(EventDto dto) throws Exception {
+	public boolean update(Junsung_EventDto dto) throws Exception {
 
 		// SQL 정보 준비
 		List<String[]> info = new ArrayList<>(Arrays.asList(
@@ -131,7 +131,7 @@ public class EventDao {
 
 		// SQL문 만들어 보내고 결과 받아오기
 		Connection conn = JdbcUtils.connect3();
-		PreparedStatement ps = HexaLibrary.sqlBuilder(conn, info);
+		PreparedStatement ps = SQLBuilder.getInstance(conn, info);
 		int result = ps.executeUpdate();
 		boolean isSucceed = result == 1;
 

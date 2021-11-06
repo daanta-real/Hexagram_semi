@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import util.HexaLibrary;
 import util.JdbcUtils;
+import util.SQLBuilder;
 
-public class ItemReplyDao {
+public class Junsung_ItemReplyDao {
 
 	// 기능 목록
 	// 1. List<ItemReplyDto> select(                         ): 모든 관광지댓글 목록 조회
@@ -20,7 +20,7 @@ public class ItemReplyDao {
 	// 5. boolean            update(ItemReplyDto dto         ): 관광지댓글 수정
 
 	// READ: 모든 관광지댓글의 정보를 조회
-	public List<ItemReplyDto> select() throws Exception {
+	public List<Junsung_ItemReplyDto> select() throws Exception {
 
 		// SQL 준비
 		String sql = "SELECT * FROM item_reply";
@@ -29,9 +29,9 @@ public class ItemReplyDao {
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
-		List<ItemReplyDto> list = new ArrayList<>();
+		List<Junsung_ItemReplyDto> list = new ArrayList<>();
 		while(rs.next()) {
-			ItemReplyDto dto = new ItemReplyDto();
+			Junsung_ItemReplyDto dto = new Junsung_ItemReplyDto();
 			dto.setItemReplyIdx(rs.getInt("item_reply_idx"));
 			dto.setItemIdx(rs.getInt("item_idx"));
 			dto.setUsersIdx(rs.getInt("users_idx"));
@@ -47,7 +47,7 @@ public class ItemReplyDao {
 	}
 
 	// READ: 딱 한 개의 관광지댓글의 정보를 조회
-	public ItemReplyDto get (int itemReplyIdx) throws Exception {
+	public Junsung_ItemReplyDto get (int itemReplyIdx) throws Exception {
 
 		// SQL 준비
 		String sql = "SELECT * FROM item_reply WHERE item_reply_idx = ?";
@@ -57,9 +57,9 @@ public class ItemReplyDao {
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
-		ItemReplyDto dto = null;
+		Junsung_ItemReplyDto dto = null;
 		if(rs.next()) {
-			dto = new ItemReplyDto();
+			dto = new Junsung_ItemReplyDto();
 			dto.setItemReplyIdx(rs.getInt("item_reply_idx"));
 			dto.setItemIdx(rs.getInt("item_idx"));
 			dto.setUsersIdx(rs.getInt("users_idx"));
@@ -74,7 +74,7 @@ public class ItemReplyDao {
 	}
 
 	// CREATE: 관광지댓글 추가
-	public boolean insert(ItemReplyDto dto) throws Exception {
+	public boolean insert(Junsung_ItemReplyDto dto) throws Exception {
 
 		// SQL 준비
 		String sql = "INSERT INTO item_reply (item_reply_idx, item_idx, users_idx, item_reply_target_idx, item_reply_detail)"
@@ -117,7 +117,7 @@ public class ItemReplyDao {
 
 	// UPDATE: 관광지댓글 수정
 	// DTO에는 ID 외에 수정할 컬럼에 해당하는 값이 반드시 한 개는 있어야 한다. 아예 없으면 에러 난다.
-	public boolean update(ItemReplyDto dto) throws Exception {
+	public boolean update(Junsung_ItemReplyDto dto) throws Exception {
 
 		// SQL 정보 준비
 		List<String[]> info = new ArrayList<>(Arrays.asList(
@@ -129,7 +129,7 @@ public class ItemReplyDao {
 			new String[] {" WHERE item_reply_idx = ?", "int"   , String.valueOf(dto.getItemIdx())           , null}
 		));
 		Connection conn = JdbcUtils.connect3();
-		PreparedStatement ps = HexaLibrary.sqlBuilder(conn, info);
+		PreparedStatement ps = SQLBuilder.getInstance(conn, info);
 
 		// SQL문 만들어 보내고 결과 받아오기
 		int result = ps.executeUpdate();

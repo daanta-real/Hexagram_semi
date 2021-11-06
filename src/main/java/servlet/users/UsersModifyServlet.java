@@ -10,7 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import beans.UsersDao;
 import beans.UsersDto;
-import util.UsersUtils;
+import util.users.GrantChecker;
+import util.users.UsersUtils;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns="/users/modify.nogari")
@@ -65,15 +66,26 @@ public class UsersModifyServlet extends HttpServlet {
 			System.out.println(dto);
 
 			// 3. 권한 검사: 해당 ID를 조작할 권한이 있는 상황인지 확인
-			System.out.print("[회원 수정] 3. 권한 확인..");
+			System.out.print("[회원 수정] 3. 권한 확인(요청자 id = '" + sessionId + "', 요청자 등급 = '" + sessionGrade + "').. ");
 			// 수정 자체의 권한 확인
-			boolean isGranted = UsersUtils.isGranted(sessionId, sessionGrade, usersId);
-			// grade를 수정하는 경우, 세션이 관리자 유저 세션인지 추가로 확인 필요함
-			if(usersGrade != null) isGranted = isGranted
-				&& (sessionGrade != null && sessionGrade.equals(UsersUtils.GRADE_ADMIN)
-			);
-			if(!isGranted) throw new Exception();
-			System.out.println("권한 확인 완료.");
+			boolean isGranted = GrantChecker.isGranted(sessionId, sessionGrade, usersId);
+			if(isGranted) {
+				System.out.println("권한 확인 완료.");
+			} else {
+				System.out.println("권한 확인 실패. 권한이 부족합니다.");
+				throw new Exception();
+			}
+			// 추거) grade를 수정하는 경우
+			boolean modifyingGrade = usersGrade != null && !usersGrade.equals("");
+			if(modifyingGrade) { // grade에 수정이 있는 경우에 한해, 세션이 관리자 유저인지 추가로 확인.
+				System.out.print("[회원 수정] 3 추가. 등급 수정이 요청되어, 요청자가 관리자 권한인지 추가로 확인하겠습니다.");
+				boolean isAdmin = sessionGrade != null && sessionGrade.equals(UsersUtils.GRADE_ADMIN);
+				if(!isAdmin) {
+					System.out.println("회원등급을 수정하려 하셨지만, 요청자가 관리자가 아닙니다. (권한='" + sessionGrade + "')");
+					throw new Exception();
+				}
+			}
+			System.out.println("[회원 수정] 모든 권한 확인 완료.");
 
 			// 4. 수정 실행
 			System.out.print("[회원 수정] 4. 실제 수정 실행..");
