@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import beans.UsersDao;
 import beans.UsersDto;
 import util.HexaLibrary;
-import util.UsersUtils;
+import util.users.UsersUtils;
 
 @SuppressWarnings("serial")
 @WebServlet("/users/unregister.nogari")

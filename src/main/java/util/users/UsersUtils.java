@@ -1,9 +1,13 @@
-package util;
+package util.users;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.servlet.http.HttpServletRequest;
+
+import beans.UsersDao;
 import beans.UsersDto;
+import util.JdbcUtils;
 
 public class UsersUtils {
 
@@ -12,6 +16,7 @@ public class UsersUtils {
 	public static final String GRADE_ADMIN     = "관리자";
 	public static final String GRADE_REGULAR   = "정회원";
 	public static final String GRADE_ASSOCIATE = "준회원";
+
 
 	// 로그인 검사: 로그인 아디/비번 일치 여부 체크 결과를 반환.
 	// 회원탈퇴 검사도 가능 입력한 아이디/비밀번호에 해장하는 정보가 있는지 확인
@@ -50,12 +55,20 @@ public class UsersUtils {
 	// 권한검사: 내가 나에 대해서 요청한 것이거나, 아니면 내가 관리자여야만 true를 반환함
 	// 글 수정/삭제, 회원정보 수정/탈퇴 등에 사용
 	public static boolean isGranted(String sessionId, String sessionGrade, String targetId) {
-		return (
-			// 내가 관리자거나
-			(sessionGrade != null && sessionGrade.equals(GRADE_ADMIN))
-			// 내가 나에 대해 요청한거거나
-			|| (sessionId != null && sessionId.equals(targetId))
-		);
+
+		// 1. 관리자 권한이라면 무조건 true를 회신함
+		boolean isAdmin = sessionGrade != null && sessionGrade.equals(GRADE_ADMIN);
+		if(isAdmin) return true;
+
+		// 2. 내가 관리자가 아니라면 여기로 온다.
+		//    내가 나를 대상으로 요청한 것인지 확인. 맞으면 true 돌려줌.
+		boolean isSelf = sessionId != null && sessionId.equals(targetId);
+		if(isSelf) return true;
+
+		// 3. 위 내용 둘다 아니라면 여기로 온다.
+		//    내가 관리자도 아니고, 대상id가 내 스스로도 아니다. false를 회신
+		return false;
+
 	}
 
 	// 중복검사: 회원 가입 시 미사용 아이디가 맞는지 확인한 결과를 리턴
@@ -80,33 +93,6 @@ public class UsersUtils {
 
 	}
 
-	/*
-	// 5. Methods - Common
-	// 아이디와 비번 문자열을 이용해, 로그인 검증용 해쉬를 만들어 줌
-	public static int getHash(UsersDto dto) {
-		// 오늘 날짜를 문자열로 얻기 (YYYY-MM-DD 형식)
-		Calendar c = Calendar.getInstance();
-		Date cTime = c.getTime();
-		SimpleDateFormat ymdSDF = new SimpleDateFormat("YYYY-MM-DD");
-		String ymdString = ymdSDF.format(cTime);
-		// ID문자열 + PW문자열 + 오늘날짜문자열 조합을 hashCode로 만들어 리턴
-		String result = dto.getUsersId() + dto.getUsersPw() + ymdString;
-		return result.hashCode();
-	}
-
-	// 입력한 아이디 비번이 맞는지 확인
-	// 아디와 비번을 담은 dto vs DB측 dto 비교하는 것임.
-	public static boolean idPwMatch(UsersDto dto_input) throws Exception {
-		String id = dto_input.getUsersId();
-		UsersDto dto_org = new UsersDao().get(id);
-
-		int hash_org   = getHash(dto_org);
-		int hash_input = getHash(dto_input);
-
-		System.out.println("　　1) 입력값: " + dto_input.getUsersId() + " / " + dto_input.getUsersPw() + " / " + hash_input);
-		System.out.println("　　2) DB값 : " +   dto_org.getUsersId() + " / " +   dto_org.getUsersPw() + " / " + hash_org  );
-		return hash_org == hash_input;
-	}
 
 	// 데이터 조작 권한이 있는지 확인하여 t/f로 리턴해 줌.
 	// true가 나오려면, 요청자가 관리자이거나, 아니면 요청대상 ID가 본인의 ID여야 함.
@@ -148,6 +134,5 @@ public class UsersUtils {
 		String userGrade = dao.get(sessionId).getUsersGrade();
 		return userGrade.equals("관리자");
 	}
-	*/
 
 }
