@@ -57,6 +57,7 @@
 
 <%-- 검색 및 목록 처리 --%>
 <%
+	ItemDto itemDto = new ItemDto();
 	List<ItemDto> list;
 	ItemDao itemDao = new ItemDao();
 	if(itemPagination.isSearch()){
@@ -72,8 +73,9 @@
 
 <%-- 썸네일표시를 위한 파일 조회 --%>
 <%
-// 	ItemFileDao itemFileDao = new ItemFileDao();
-// 	ItemFileDto itemFileDto = itemFileDao.find2(itemFileDto.getItemIdx());
+
+ 	ItemFileDao itemFileDao = new ItemFileDao();
+	ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());
 %>
 
 <%-- 페이지 제목 --%>
@@ -109,32 +111,35 @@
 	<thead>
 		<tr>
 			<th>카테고리</th>
-<!-- 			<th>사진</th> -->
+			<th>사진</th>
 			<th>관광지명</th>
 			<th>관광지 소개</th>
 			<th>조회수</th>
 		</tr>
 	</thead>
 	<tbody>
-		<%for(ItemDto itemDto : list){ %>
+		<%for(ItemDto itemDtoList : list){ %>
 		<tr>
-			<td align ="center"><%=itemDto.getItemType() %></td>
-<!-- 			<td> -->
-<%-- 			<%if(itemFileDto != null){ %> --%>
-<%-- 					<img src = "file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx() %>" width="50%" height="50%"> --%>
-<%-- 			<%} %> --%>
-<!-- 			</td> -->
-			<td align ="center">
-			<a href="detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>">
-			<%=itemDto.getItemName()%>
-			</a>
-			<%-- 댓글수 --%>
-			<%if(itemDto.isCountReply()){ %>
-				[<%=itemDto.getItemCountReply() %>]
+			<td align ="center"><%=itemDtoList.getItemType() %></td>
+			<td>
+			<%-- 첨부파일이 있다면 --%>
+			<%if(itemFileDto == null){ %>
+					 <img src="http://via.placeholder.com/100x100" class="image">
+			<%}else{ %>
+					<img src="file/listPageDownload.nogari?itemIdx=<%=itemDto.getItemIdx()%>" width="20%">
 			<%} %>
 			</td>
-			<td><%=itemDto.getItemDetail().substring(0, 4) %>....</td>
-			<td><%=itemDto.getItemCountView() %></td>
+			<td align ="center">
+			<a href="detail.jsp?itemIdx=<%=itemDtoList.getItemIdx()%>">
+			<%=itemDtoList.getItemName()%>
+			</a>
+			<%-- 댓글수 --%>
+			<%if(itemDtoList.isCountReply()){ %>
+				[<%=itemDtoList.getItemCountReply() %>]
+			<%} %>
+			</td>
+			<td><%=itemDtoList.getItemDetail().substring(0, 1) %>....</td>
+			<td><%=itemDtoList.getItemCountView() %></td>
 		</tr>
 		<%} %>
 	</tbody>	
