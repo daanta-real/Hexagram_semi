@@ -22,7 +22,7 @@
 
  <h3>게시글 작성</h3>
  
- <form action="insert.nogari" method="post" enctype="multipart/form-data">
+ <form action="insert.nogari" method="post">
 	<table border="1" width="500">
 	
 		<tbody>
@@ -69,10 +69,7 @@
 				<td>주차</td>
 				<td><input type="text" name="itemParking" placeholder="주차가능여부 입력"></td>
 			</tr>
-			<tr>
-				<td>이미지</td>
-				<td><input type="file" name="attach" accept="image/*"></td>				
-			</tr>
+			
 		</tbody>
 		
 		<tfoot>

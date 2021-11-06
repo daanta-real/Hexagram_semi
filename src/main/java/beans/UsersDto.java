@@ -60,5 +60,14 @@ public class UsersDto {
 				+ usersNick + ", usersEmail=" + usersEmail + ", usersPhone=" + usersPhone + ", usersGrade=" + usersGrade
 				+ ", usersJoin=" + usersJoin + ", usersPoint=" + usersPoint +"]";
 	}
-
+	
+	//추가 : null 값 치환 usersEmail, usersPhone
+	public String getUsersEmailNull() {
+		if(usersEmail == null) return " ";
+		else return usersEmail;
+	}
+	public String getUsersPhonelNull() {
+		if(usersPhone == null) return " ";
+		else return usersPhone;
+	}
 }

@@ -25,6 +25,7 @@ public class UsersDao {
 			UsersDto dto = new UsersDto();
 			dto.setUsersIdx(rs.getInt("users_idx"));
 			dto.setUsersId(rs.getString("users_id"));
+			dto.setUsersPw(rs.getString("users_pw"));
 			dto.setUsersNick(rs.getString("users_nick"));
 			dto.setUsersEmail(rs.getString("users_email"));
 			dto.setUsersPhone(rs.getString("users_phone"));
@@ -45,10 +46,10 @@ public class UsersDao {
 	public UsersDto get(int usersIdx) throws Exception{
 
 		// SQL 준비
-		Connection con = JdbcUtils.connect3();
+		Connection conn = JdbcUtils.connect3();
 
 		String sql = "SELECT * FROM users WHERE users_idx = ?";
-		PreparedStatement ps = con.prepareStatement(sql);
+		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, usersIdx);
 
 		// 완성된 SQL문 보내고 결과 받아오기
@@ -58,6 +59,7 @@ public class UsersDao {
 			dto = new UsersDto();
 			dto.setUsersIdx(rs.getInt("users_idx"));
 			dto.setUsersId(rs.getString("users_id"));
+			dto.setUsersPw(rs.getString("users_pw"));
 			dto.setUsersNick(rs.getString("users_nick"));
 			dto.setUsersEmail(rs.getString("users_email"));
 			dto.setUsersPhone(rs.getString("users_phone"));
@@ -67,7 +69,7 @@ public class UsersDao {
 		}
 
 		// 마무리
-		con.close();
+		conn.close();
 		return dto;
 	}
 
@@ -206,5 +208,147 @@ public class UsersDao {
 		return isSucceed;
 
 	}
+	
+	//검색(항목, 검색어)기능- 관리자: 회원목록
+	public List<UsersDto> search(String column, String keyword) throws Exception{
+		
+		//SQL준비
+		String sql = "SELECT * FROM users WHERE INSTR(#1, ?) > 0 ORDER BY users_idx ASC";
+		sql = sql.replace("#1", column);
+		Connection conn = JdbcUtils.connect3();
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, keyword);
+
+		// 완성된 SQL문 보내고 결과 받아오기
+		ResultSet rs = ps.executeQuery();
+		List<UsersDto> list = new ArrayList<>();
+		UsersDto dto = null;
+		while(rs.next()) {
+			dto = new UsersDto();
+			dto.setUsersIdx(rs.getInt("users_idx"));
+			dto.setUsersId(rs.getString("users_id"));
+			dto.setUsersPw(rs.getString("users_pw"));
+			dto.setUsersNick(rs.getString("users_nick"));
+			dto.setUsersEmail(rs.getString("users_email"));
+			dto.setUsersPhone(rs.getString("users_phone"));
+			dto.setUsersGrade(rs.getString("users_grade"));
+			dto.setUsersJoin(rs.getDate("users_join"));
+			dto.setUsersPoint(rs.getInt("users_point"));
+			list.add(dto);
+		}
+		
+		// 마무리
+		conn.close();
+		return list;
+		
+	}
+	
+	// 회원 검색목록 페이징 
+	public List<UsersDto> searchRownum(String column, String keyword, int begin, int end) throws Exception {
+		//SQL준비
+		String sql = "SELECT * FROM ( "
+						+ " SELECT ROWNUM RN, TMP.* FROM( "
+							+ " SELECT * FROM users WHERE INSTR(#1, ?) > 0"
+						  + " )TMP"
+						+ " )WHERE RN BETWEEN ? AND ?";
+		sql = sql.replace("#1", column);
+		Connection conn = JdbcUtils.connect3();
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ps.setInt(2, begin);
+		ps.setInt(3, end);
+		
+		// 완성된 SQL문 보내고 결과 받아오기	
+		ResultSet rs = ps.executeQuery();
+		List<UsersDto> list = new ArrayList<>();
+		UsersDto dto = null;
+		while(rs.next()) {
+			dto = new UsersDto();
+			dto.setUsersIdx(rs.getInt("users_idx"));
+			dto.setUsersId(rs.getString("users_id"));
+			dto.setUsersPw(rs.getString("users_pw"));
+			dto.setUsersNick(rs.getString("users_nick"));
+			dto.setUsersEmail(rs.getString("users_email"));
+			dto.setUsersPhone(rs.getString("users_phone"));
+			dto.setUsersGrade(rs.getString("users_grade"));
+			dto.setUsersJoin(rs.getDate("users_join"));
+			dto.setUsersPoint(rs.getInt("users_point"));
+			list.add(dto);
+		}
+		
+		// 마무리
+		conn.close();
+		return list;
+	}
+	
+	// 회원목록 페이징
+	public List<UsersDto> listRownum(int begin, int end) throws Exception {
+		//SQL준비
+		String sql = "SELECT * FROM ( "
+						+ " SELECT ROWNUM RN, TMP.* FROM( "
+					+ " SELECT * FROM users "
+				  + ")TMP "
+				+ ")WHERE RN BETWEEN ? AND ?";
+		Connection conn = JdbcUtils.connect3();
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, begin);
+		ps.setInt(2, end);
+		// 완성된 SQL문 보내고 결과 받아오기	
+		ResultSet rs = ps.executeQuery();
+		List<UsersDto> list = new ArrayList<>();
+		UsersDto dto = null;
+		while(rs.next()) {
+			dto = new UsersDto();
+			dto.setUsersIdx(rs.getInt("users_idx"));
+			dto.setUsersId(rs.getString("users_id"));
+			dto.setUsersPw(rs.getString("users_pw"));
+			dto.setUsersNick(rs.getString("users_nick"));
+			dto.setUsersEmail(rs.getString("users_email"));
+			dto.setUsersPhone(rs.getString("users_phone"));
+			dto.setUsersGrade(rs.getString("users_grade"));
+			dto.setUsersJoin(rs.getDate("users_join"));
+			dto.setUsersPoint(rs.getInt("users_point"));
+			list.add(dto);
+		}
+		
+		// 마무리
+		conn.close();
+		return list;
+	}
+	
+	//목록 - 페이징에서 마지막 블록을 구하기 위하여 회원목록글 개수를 구하는 기능
+	public int count() throws Exception {
+		//SQL준비
+		String sql = "SELECT COUNT(*) FROM users";
+		Connection conn = JdbcUtils.connect3();
+		PreparedStatement ps = conn.prepareStatement(sql);
+		// 완성된 SQL문 보내고 결과 받아오기	
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		// 마무리
+		conn.close();
+		return count;
+	}
+	
+	//검색 - 페이징에서 마지막 블록을 구하기 위하여 회원목록글 개수를 구하는 기능
+	public int count(String column, String keyword) throws Exception {
+		//SQL준비
+		String sql = "SELECT COUNT(*) FROM users WHERE INSTR(#1, ?) > 0 ";
+		sql = sql.replace("#1", column);
+		Connection conn = JdbcUtils.connect3();
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, keyword);
+		// 완성된 SQL문 보내고 결과 받아오기	
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+		// 마무리
+		conn.close();
+		return count;
+	}
+
+
+	
 
 }

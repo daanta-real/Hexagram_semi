@@ -1,3 +1,5 @@
+<%@page import="beans.ItemFileDto"%>
+<%@page import="beans.ItemFileDao"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="beans.UsersDao"%>
 <%@page import="java.util.HashSet"%>
@@ -176,6 +178,13 @@ if(boardCountView.add(itemIdx)){
 request.getSession().setAttribute("boardCountView", boardCountView);
  %>
  
+ 
+<%-- 게시글 사진파일 정보 조회  --%>
+<%
+	ItemFileDao itemFileDao = new ItemFileDao();
+	List<ItemFileDto> itemFileList = itemFileDao.find1(itemIdx);
+%>
+ 
  <!-- **기본정보 표시  -->
  <div class="container-900 container-center">
  
@@ -214,6 +223,12 @@ request.getSession().setAttribute("boardCountView", boardCountView);
     <div class="row center">
     <!-- **사진 표시(DB테이블 만들어서 resource 파일정보를 불러올 예정(idea) -->
       <img src="http://via.placeholder.com/500" class="image">
+      		<%-- 첨부파일이 있다면 --%>
+<%-- 		<%if(itemFileList.isEmpty()){ %> --%>
+<%-- 			<%for(ItemFileDto itemFileDto : itemFileList){ %> --%>
+<%-- 				<img src = "file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx() %>" width="50%" height="50%"> --%>
+<%-- 			<%} %> --%>
+<%-- 		<%} %> --%>
     </div>
     
     <!-- **상세정보 표시 -->
@@ -267,8 +282,9 @@ request.getSession().setAttribute("boardCountView", boardCountView);
     
 <!--  마지막 div -->
  </div>
+>>>>>>> refs/remotes/origin/DoeKim
 
-<!-- **댓글 표시(끌고옴) -->
+<!-- **댓글 표시(끌고옴)  -->
 <%
 //이 글의 댓글 목록 불러오기.
 ItemReplyDao itemReplyDao = new ItemReplyDao();
