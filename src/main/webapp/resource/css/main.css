@@ -114,7 +114,7 @@ HEADER #logoContainer span {
 }
 HEADER #logoBox {
     position: relative;
-    top: 2rem;
+    top: 3rem;
 	margin: 0 auto 1rem auto;
 }
 HEADER #logo {
@@ -149,32 +149,6 @@ HEADER #logo {
     top: 50%; transform: translateY(-50%); right: 0.6rem;
     font-size: 1.4rem; line-height: 100%;
     cursor: pointer;
-}
-
-/* HEADER - USER */
-HEADER #userContainer {
-	position:absolute; top:0; right:0; height:1rem;
-	padding:1rem;
-	font-size:1.1rem;
-}
-HEADER #userContainer > * {
-    font-weight:500;
-}
-HEADER #userContainer .userInfoTxt {
-	color:var(--color6);
-	padding:0 0.5rem;
-}
-HEADER #userContainer .userButton {
-	background: var(--color1);
-    border-radius: 0.5rem;
-    padding: 0.2rem 1rem;
-    box-shadow: 0 0 1rem #8882;
-}
-HEADER #userContainer span {
-	border-radius:20px;
-}
-HEADER #userContainer span.admin:after {
-	background:var(--color9);
 }
 
 /* HEADER - MENU */
