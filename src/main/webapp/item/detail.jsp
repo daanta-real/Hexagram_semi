@@ -67,8 +67,10 @@
 	    margin-right:0;
 	}
 
+	.row{
+	margin-top: 5px; margin-bottom: 5px;
+	}
 	
-	.row{margin-top: 5px; margin-bottom: 5px;}
 	.left {
 	    text-align: left !important;
 	}
@@ -489,9 +491,11 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 <!-- 필터를 통해서 댓글 수정 및 삭제 금지하는 필터 설정을 해야한다!!!!!!!!!!!!!!!! -->
 	
 <!-- 이전글 다음글 -->
+
 <!-- 수정 삭제 새글 리모컨 픽스 추가 -->
+<!-- 사이드 바 구현 -->
+
 <!-- 작성일 작성시간 몇분전 몇일 전 표시하기. -->
-<!-- 테이블 디자인 변경 -->
 
 <!-- 맵의 xy좌표 구현 -->
 
