@@ -46,7 +46,7 @@ public class ItemReplyInsertTargetServlet extends HttpServlet{
 
 				itemReplyDao.insertTarget(itemReplyDto);
 				
-//				게시물 댓글 수 추가
+//				게시물 댓글 수 추가111111
 				ItemDao itemDao = new ItemDao();
 				itemDao.countReply(itemIdx);
 
