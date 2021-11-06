@@ -63,11 +63,12 @@ public class UsersDto {
 	
 	//추가 : null 값 치환 usersEmail, usersPhone
 	public String getUsersEmailNull() {
-		if(usersEmail == null) return " ";
+		if(usersEmail == null) return "";
 		else return usersEmail;
 	}
-	public String getUsersPhonelNull() {
-		if(usersPhone == null) return " ";
+	public String getUsersPhoneNull() {
+		if(usersPhone == null) return "";
 		else return usersPhone;
 	}
+	
 }
