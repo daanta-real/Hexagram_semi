@@ -41,7 +41,7 @@ if(isLogin) {
 </DIV>
 
 <!-- 모바일 메뉴 콘테이너 -->
-<DIV ID='mobileMenuLayer'>
+<DIV ID='mobileMenuLayer' CLASS='mobile'>
 	
 	<!-- 모바일 메뉴 - 햄버거 버튼 -->
 	<!-- <INPUT ID='mobileMenuHamburgerInput' TYPE='hidden'> -->
@@ -59,7 +59,7 @@ if(isLogin) {
 		<DIV ID='mobileMenuLoginContainer' CLASS="flexCenter flexCol">
 			<!-- 모바일 박스 메뉴 - 로그인 없을 시 -->
 			<%if(isLogin) { /* 로그인이 되었을 경우 */ %>
-			<H3 CLASS="userInfoTxt"><%=usersNick%>(<%=usersId%>)님 <SPAN class="<%=gradeStr%>"><%=usersGrade%></SPAN></H3>
+			<DIV CLASS="userInfoTxt flexCenter flexRow"><%=usersNick%>(<%=usersId%>)님 <SPAN class="<%=gradeStr%>"><%=usersGrade%></SPAN></DIV>
 			<A CLASS='actionButtons loginoutButton flexCenter' HREF='<%=root%>/users/logout.nogari'>로그아웃</A>
 			<%} else { /* 로그인이 되지 않았을 경우 */ %>
 			<FORM ID='loginInput' CLASS='flexCenter flexCol' NAME='login' METHOD='POST' ACTION='<%=root%>/users/login.nogari'>
@@ -83,15 +83,14 @@ if(isLogin) {
 	<!-- 상단메뉴 - 로그인 정보 박스 -->
 	<DIV ID="userContainer" CLASS="flexCenter flexRow">
 	<%if(isLogin) { /* 로그인이 되었을 경우 */ %>
-		<H4 CLASS="userInfoTxt"><%=usersNick%>(<%=usersId%>)님 <SPAN class="<%=gradeStr%>"><%=usersGrade%></SPAN></H4>
+		<DIV CLASS="userInfoTxt flexCenter flexRow"><%=usersNick%>(<%=usersId%>)님 <SPAN class="<%=gradeStr%>"><%=usersGrade%></SPAN></DIV>
 		<A CLASS='userButton' HREF='<%=root%>/users/detail.jsp'>내 정보</A>
 		<A CLASS='userButton' HREF='<%=root%>/users/logout.nogari'>로그아웃</A>
-		<%if( usersGrade.equals("관리자")) {%>
-			<A CLASS='userButton' HREF='<%=root%>/admin/main.jsp'>관리</A>
-		<%} %>
+		<%if(usersGrade.equals("관리자")) {%> <A CLASS='userButton' HREF='<%=root%>/admin/main.jsp'>관리</A> <%} %>
 	<%} else { /* 로그인이 되지 않았을 경우 */ %>
-		<H4 CLASS="userInfoTxt">로그인하세요.</H4><A CLASS='userButton' HREF='<%=root%>/users/login.jsp'>로그인</A>
-		<H4 CLASS="userInfoTxt">회원가입 페이지</H4><A CLASS='userButton' HREF='<%=root%>/users/join.jsp'>회원가입</A>
+		<H4 CLASS="userInfoTxt mobile">로그인하세요.</H4>
+		<A CLASS='userButton' HREF='<%=root%>/users/login.jsp'>로그인</A>
+		<A CLASS='userButton' HREF='<%=root%>/users/join.jsp'>회원가입</A>
 	<%}%>
 	</DIV>
 	
