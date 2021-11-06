@@ -32,15 +32,15 @@ public class UsersDto {
 	}
 
 	// 3. Getters
-	public Integer getUsersIdx	() { return usersIdx  ; }
+	public Integer getUsersIdx	 () { return usersIdx  ; }
 	public String  getUsersId    () { return usersId   ; }
 	public String  getUsersPw    () { return usersPw   ; }
-	public String  getUsersNick	() { return usersNick ; }
+	public String  getUsersNick	 () { return usersNick ; }
 	public String  getUsersEmail () { return usersEmail; }
 	public String  getUsersPhone () { return usersPhone; }
 	public String  getUsersGrade () { return usersGrade; }
 	public Date    getUsersJoin  () { return usersJoin ; }
-	public int     getUsersPoint () { return usersPoint; }
+	public Integer getUsersPoint () { return usersPoint; }
 
 	// 4. Setters
 	public void setUsersIdx   (Integer usersIdx   ) { this.usersIdx   = usersIdx   ; }
