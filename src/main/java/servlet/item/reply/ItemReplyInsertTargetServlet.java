@@ -18,6 +18,7 @@ public class ItemReplyInsertTargetServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			try {
+				dddddd
 				//댓글 내용 받기
 				String itemReplyDetail = req.getParameter("itemReplyDetail");
 				//게시글 번호 받기
