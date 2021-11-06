@@ -58,8 +58,8 @@ public class ItemInsertServlet extends HttpServlet{
 			if(mRequest.getFile("attach") != null) {
 				ItemFileDto itemFileDto = new ItemFileDto();
 				itemFileDto.setItemIdx(sequnceNo);
-				itemFileDto.setItemFileUploadname(mRequest.getFilesystemName("attach"));
-				itemFileDto.setItemFileSaveName(mRequest.getOriginalFileName("attach"));
+				itemFileDto.setItemFileUploadname(mRequest.getOriginalFileName("attach"));
+				itemFileDto.setItemFileSaveName(mRequest.getFilesystemName("attach"));
 				itemFileDto.setItemFileType(mRequest.getContentType("attach"));
 				itemFileDto.setItemFileSize(mRequest.getFile("attach").length());
 				

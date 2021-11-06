@@ -59,7 +59,7 @@ public class ItemFileDao {
 	public List<ItemFileDto> find1(int itemIdx) throws Exception{
 		Connection con = JdbcUtils.connect3();
 		
-		String sql = "select * from item_file where item_file_idx = ? order by item_file_idx asc";
+		String sql = "select * from item_file where item_idx = ? order by item_file_idx asc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, itemIdx);
 		ResultSet rs = ps.executeQuery();
