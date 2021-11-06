@@ -9,14 +9,14 @@ public class Sessioner {
 
 	// 해당 session에 대해 로그인 처리를 해준다.
 	// 이때 dto 안에 idx, id, grade 반드시 다 있어야 한다.
-	public static void sessionSetLogin(HttpSession session, UsersDto dto) throws Exception {
+	public static void login(HttpSession session, UsersDto dto) throws Exception {
 
 		// 값 준비
 		System.out.println("[UsersUtils 세션 셋팅기] 값을 준비합니다.");
 		Integer idx   = dto.getUsersIdx  ();
 		String  id    = dto.getUsersId   ();
 		String  grade = dto.getUsersGrade();
-		if(idx   == null ||   idx.equals("")) { System.out.println("[에러] idx가 입력되지 않았습니다."  ); throw new Exception(); }
+		if(idx   == null                    ) { System.out.println("[에러] idx가 입력되지 않았습니다."  ); throw new Exception(); }
 		if(id    == null ||    id.equals("")) { System.out.println("[에러] id가 입력되지 않았습니다."   ); throw new Exception(); }
 		if(grade == null || grade.equals("")) { System.out.println("[에러] grade가 입력되지 않았습니다."); throw new Exception(); }
 		System.out.println("[UsersUtils 세션 셋팅기] 값 준비 완료.");
@@ -36,7 +36,7 @@ public class Sessioner {
 
 	// 해당 session에 대해 로그아웃 처리를 해준다.
 	// 세션 값 모두 제거
-	public static void sessionSetLogout(HttpSession session) {
+	public static void logout(HttpSession session) {
 		session.removeAttribute("usersIdx");
 		session.removeAttribute("usersId");
 		session.removeAttribute("usersGrade");

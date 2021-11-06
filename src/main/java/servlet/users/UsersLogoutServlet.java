@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import util.HexaLibrary;
+import util.users.Sessioner;
 
 @SuppressWarnings("serial")
 @WebServlet("/users/logout.nogari")
@@ -33,7 +33,7 @@ public class UsersLogoutServlet extends HttpServlet {
 
 			// 2. 로그아웃 처리
 			System.out.println("[회원 로그아웃] 2. 로그아웃 처리..");
-			HexaLibrary.removeSession(session);
+			Sessioner.logout(session);
 			System.out.print("완료. 현재 session: usersId = '" + session.getAttribute("usersId") + "'");
 			System.out.print(", usersGrade= '" + session.getAttribute("usersId")  + "'");
 			System.out.print(", usersIdx= '"   + session.getAttribute("usersIdx") + "'");

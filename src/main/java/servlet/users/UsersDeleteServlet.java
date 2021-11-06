@@ -10,8 +10,8 @@ import javax.servlet.http.HttpSession;
 
 import beans.UsersDao;
 import beans.UsersDto;
-import util.HexaLibrary;
 import util.users.GrantChecker;
+import util.users.Sessioner;
 
 @SuppressWarnings("serial")
 @WebServlet("/users/unregister.nogari")
@@ -57,7 +57,7 @@ public class UsersDeleteServlet extends HttpServlet {
 			// 4. 결과를 세션에 반영
 			System.out.print("[회원 탈퇴] 4. 최종 결과: ");
 			if(isSucceed) {
-				HexaLibrary.removeSession(session);
+				Sessioner.logout(session);
 				System.out.println("탈퇴 성공.");
 				resp.sendRedirect(req.getContextPath()+"/users/unregister_success.jsp");
 			} else {
