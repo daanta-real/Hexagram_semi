@@ -252,7 +252,8 @@ request.getSession().setAttribute("boardCountView", boardCountView);
  
  	 <div class="row center">
             <!-- 지역 표시 -->
-			<h3><%=itemDto.getItemAddress().substring(0,2)%></h3>
+            <%String area = itemDto.getAdressCity()+" "+itemDto.getAdressCitySub();%>
+			<h3><%=area%></h3>
     </div>
     
     <div class="row center">
@@ -305,7 +306,7 @@ request.getSession().setAttribute("boardCountView", boardCountView);
 				
 				<tr height="400px">
 					<th>상세정보</th>
-					<td><pre><%=itemDto.getItemDetail()%></pre></td>
+					<td><%=itemDto.getItemDetail()%></td>
 				</tr>
 				
 				<tr>
@@ -466,10 +467,10 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 		
 		
 	<%}else{%>
-<h3 align="center">댓글이 없습니다.</h3>
+<h3 align="center gapy">댓글이 없습니다.</h3>
 	<%} %>
 	
-<div class="row center">
+<div class="row center gapy">
 	<h3>[댓글 작성]</h3>
 </div>
 	
