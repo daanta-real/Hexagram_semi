@@ -118,6 +118,7 @@
 		        
 		.form-input {
 		    border: 1px solid rgb(43, 48, 90);
+		    width: 200px;
 		}
 		
 		.form-btn {
@@ -220,11 +221,11 @@
 			flex-grow:1;
 		}
 		.flex-container > .image-wrapper {
-			width:40%;
+			width:25%;
 		}
 		.flex-container > .image-wrapper > img {
-			width:100%;
-			height: 100%;
+			width:130px;
+			height: 130px;
 		}
 		.flex-container > .detail-wrapper {
 			flex-grow:1;
@@ -337,7 +338,7 @@
 						<%if(itemFileDto == null){ %>
 								 <img src="http://via.placeholder.com/100x100" class="image">
 						<%}else{ %>
-								<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" height="100px">
+								<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>">
 						<%} %>
 					</div>
 					
