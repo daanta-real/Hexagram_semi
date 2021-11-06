@@ -100,7 +100,7 @@
     	<h5>
 		 	<font color="red">회원 정보 변경에 실패하였습니다</font>
 		 </h5>
-    <%} %>
+ <%} %>
 
 	<a href="<%=root%>/admin/users/list.jsp">
 		<input type="button" value="회원목록으로 돌아가기">
