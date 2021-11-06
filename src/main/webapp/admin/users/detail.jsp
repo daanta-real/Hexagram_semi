@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
-<TITLE>노가리투어 - 관리자페이지</TITLE>
+<TITLE>노가리투어 - [여기다가 타이틀이름 쓰세요. []는 제거하시구요~]</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
 <BODY>
@@ -11,8 +11,7 @@
 <% String root = request.getContextPath(); %>
 <!-- 페이지 내용 시작 -->
 
-<h3><a href="users/list.jsp">회원 관리</a></h3>
-<h3><a href="#">포인트 상품 관리?</a></h3>
+
 
 <!-- 페이지 내용 끝. -->
 </SECTION>
