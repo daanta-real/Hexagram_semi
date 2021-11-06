@@ -57,6 +57,10 @@
 	</form>
 
 <!-- 회원목록 -->
+<!-- 회원 탈퇴 리다이렉트 delete파라미터 -->
+ <%if(request.getParameter("delete") != null) {%>
+ 	<h5>아이디 <%=request.getParameter("usersId") %> 회원 탈퇴 완료</h5>
+ <%} %>
 <table border="1" width="70%">
 	<thead>
 		<tr>
@@ -84,8 +88,9 @@
 			<td><%=usersEmail%></td>
 			<td align="center"><%=usersDto.getUsersGrade() %></td>
 			<th align="center">
-				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">상세</a>
-				<a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">수정</a>
+				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">상세</a> |
+				<a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">수정</a> |
+				<a href="unregister.nogari?usersId=<%=usersDto.getUsersId()%>">탈퇴</a>
 			</th>
 		</tr>
 	<%} %>
