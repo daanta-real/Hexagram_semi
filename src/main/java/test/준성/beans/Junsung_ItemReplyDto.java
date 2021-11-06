@@ -1,6 +1,6 @@
 package test.준성.beans;
 
-public class ItemReplyDto {
+public class Junsung_ItemReplyDto {
 
 	// 1. Declarations
 	private Integer itemReplyIdx;
@@ -10,11 +10,11 @@ public class ItemReplyDto {
 	private String itemReplyDetail;
 
 	// 2. Constructors
-	public ItemReplyDto() {
+	public Junsung_ItemReplyDto() {
 		super();
 	}
 
-	public ItemReplyDto(int itemReplyIdx, int itemIdx, int usersIdx, int itemReplyTargetIdx, String itemReplyDetail) {
+	public Junsung_ItemReplyDto(int itemReplyIdx, int itemIdx, int usersIdx, int itemReplyTargetIdx, String itemReplyDetail) {
 		super();
 		setItemReplyIdx(itemReplyIdx);
 		setItemIdx(itemIdx);

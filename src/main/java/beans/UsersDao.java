@@ -145,7 +145,7 @@ public class UsersDao {
 		// 마무리
 		conn.close();
 		return isSucceed;
-		
+
 	}
 
 	// 5. UPDATE: 회원 수정
@@ -208,10 +208,10 @@ public class UsersDao {
 		return isSucceed;
 
 	}
-	
+
 	//검색(항목, 검색어)기능- 관리자: 회원목록
 	public List<UsersDto> search(String column, String keyword) throws Exception{
-		
+
 		//SQL준비
 		String sql = "SELECT * FROM users WHERE INSTR(#1, ?) > 0 ORDER BY users_idx ASC";
 		sql = sql.replace("#1", column);
@@ -236,14 +236,14 @@ public class UsersDao {
 			dto.setUsersPoint(rs.getInt("users_point"));
 			list.add(dto);
 		}
-		
+
 		// 마무리
 		conn.close();
 		return list;
-		
+
 	}
-	
-	// 회원 검색목록 페이징 
+
+	// 회원 검색목록 페이징
 	public List<UsersDto> searchRownum(String column, String keyword, int begin, int end) throws Exception {
 		//SQL준비
 		String sql = "SELECT * FROM ( "
@@ -257,8 +257,8 @@ public class UsersDao {
 		ps.setString(1, keyword);
 		ps.setInt(2, begin);
 		ps.setInt(3, end);
-		
-		// 완성된 SQL문 보내고 결과 받아오기	
+
+		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
 		List<UsersDto> list = new ArrayList<>();
 		UsersDto dto = null;
@@ -275,12 +275,12 @@ public class UsersDao {
 			dto.setUsersPoint(rs.getInt("users_point"));
 			list.add(dto);
 		}
-		
+
 		// 마무리
 		conn.close();
 		return list;
 	}
-	
+
 	// 회원목록 페이징
 	public List<UsersDto> listRownum(int begin, int end) throws Exception {
 		//SQL준비
@@ -293,7 +293,7 @@ public class UsersDao {
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, begin);
 		ps.setInt(2, end);
-		// 완성된 SQL문 보내고 결과 받아오기	
+		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
 		List<UsersDto> list = new ArrayList<>();
 		UsersDto dto = null;
@@ -310,19 +310,19 @@ public class UsersDao {
 			dto.setUsersPoint(rs.getInt("users_point"));
 			list.add(dto);
 		}
-		
+
 		// 마무리
 		conn.close();
 		return list;
 	}
-	
+
 	//목록 - 페이징에서 마지막 블록을 구하기 위하여 회원목록글 개수를 구하는 기능
 	public int count() throws Exception {
 		//SQL준비
 		String sql = "SELECT COUNT(*) FROM users";
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
-		// 완성된 SQL문 보내고 결과 받아오기	
+		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 		int count = rs.getInt(1);
@@ -330,7 +330,7 @@ public class UsersDao {
 		conn.close();
 		return count;
 	}
-	
+
 	//검색 - 페이징에서 마지막 블록을 구하기 위하여 회원목록글 개수를 구하는 기능
 	public int count(String column, String keyword) throws Exception {
 		//SQL준비
@@ -339,7 +339,7 @@ public class UsersDao {
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, keyword);
-		// 완성된 SQL문 보내고 결과 받아오기	
+		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 		int count = rs.getInt(1);
@@ -349,6 +349,6 @@ public class UsersDao {
 	}
 
 
-	
+
 
 }

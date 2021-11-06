@@ -11,7 +11,8 @@ import javax.servlet.http.HttpSession;
 
 import beans.UsersDao;
 import beans.UsersDto;
-import util.UsersUtils;
+import util.users.HashChecker;
+import util.users.Sessioner;
 
 @SuppressWarnings("serial")
 @WebServlet("/users/login.nogari")
@@ -29,12 +30,10 @@ public class UsersLoginServlet extends HttpServlet {
 			String usersPw = req.getParameter("usersPw");
 			System.out.println("　　▷ 입력된 usersId: [" + usersId + "] / 입력된 usersPw: [" + usersPw + "]");
 
-			// 1. 입력값 존재여부 검사
+			// 1. 입력값 존재여부 검사 (usersId, usersPw 둘다)
 			System.out.print("[회원 로그인] 1. 입력값 존재여부 검사..");
-			boolean filledReqs =
-				usersId != null && !usersId.equals("")
-					&&
-				usersPw != null && !usersPw.equals("");
+			boolean filledReqs = usersId != null && !usersId.equals("")
+							  && usersPw != null && !usersPw.equals("");
 			if(!filledReqs) throw new Exception();
 			System.out.println("정상.");
 
@@ -50,10 +49,8 @@ public class UsersLoginServlet extends HttpServlet {
 
 			// 3. id/pw 일치하는 값 있는지 검사
 			System.out.println("[회원 로그인] 3. ID/PW 일치 검사..");
-			UsersDto foundDto = UsersUtils.getValidDto(usersId, usersPw);
-			boolean isLoginValid = foundDto != null ? true : false;
+			boolean isLoginValid = HashChecker.idPwMatch(dto, dao);
 			System.out.print("　　▷ 확인 결과: " + isLoginValid);
-			if(isLoginValid) System.out.print(" → 찾았습니다. 상세: " + foundDto);
 
 			// 4. 최종 처리: 세션 부여
 			// 로그인 실패 시
@@ -64,17 +61,16 @@ public class UsersLoginServlet extends HttpServlet {
 			// 로그인 성공 시
 			else {
 				System.out.print("[회원 로그인] 4. 모든 확인 완료. 세션 부여..");
+
+				// 입력한 id에 해당하는 DTO 가져옴
+				UsersDto foundDto = dao.get(usersId);
+				if(isLoginValid) System.out.print(" → 찾았습니다. 상세: " + foundDto);
+				else             throw new Exception();
+
+				// 세션 부여
 				HttpSession session = req.getSession();
-				int usersIdx = foundDto.getUsersIdx();
-				String usersGrade = foundDto.getUsersGrade();
-				session.setAttribute("usersIdx"  , usersIdx  );
-				session.setAttribute("usersId"   , usersId   );
-				session.setAttribute("usersGrade", usersGrade);
-				System.out.println("세션 부여 완료. \n"
-					+ "　　usersId = '"    + session.getAttribute("usersId"   ) + "', "
-					+ "　　usersGrade = '" + session.getAttribute("usersGrade") + "', "
-					+ "　　usersIdx = '"   + session.getAttribute("usersIdx"  ) + "'"
-				);
+				Sessioner.login(session, foundDto);
+				System.out.println("세션 부여 완료.");
 				resp.sendRedirect(req.getContextPath()+"/index.jsp");
 			}
 		}

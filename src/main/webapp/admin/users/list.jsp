@@ -69,7 +69,9 @@
 		</tr>
 	</thead>
 	<tbody>
-	<%for(UsersDto usersDto : pn.getUsersList()) {%>
+	<%for(UsersDto usersDto : pn.getUsersList()) {
+		String usersEmail = usersDto.getUsersEmail(); if(usersEmail == null || usersEmail.equals("")) usersEmail = " "; 
+	%>
 		<tr>
 			<td align="center"><%=usersDto.getUsersIdx() %></td>
 			<!-- 회원 아이디를 누르면 회원 상세정보 페이지로 이동 -->
@@ -79,7 +81,7 @@
 				</a>
 			</td>
 			<td><%=usersDto.getUsersNick() %></td>
-			<td><%=usersDto.getUsersEmailNull() %></td>
+			<td><%=usersEmail%></td>
 			<td align="center"><%=usersDto.getUsersGrade() %></td>
 			<th align="center">
 				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">상세</a>
