@@ -59,7 +59,7 @@
 <!-- 회원 정보 변경 성공시 success파라미터 -->
  <%if(request.getParameter("success") != null) {%>
     	<h5>회원 정보 변경에 성공하였습니다</h5>
-    <%} %>
+  <%} %>
     
 	<a href="<%=root%>/admin/users/edit.jsp?usersIdx=<%=usersIdx%>">
 		<input type="button" value="회원정보 변경하기">
@@ -67,9 +67,10 @@
 	<a href="<%=root%>/admin/users/list.jsp">
 		<input type="button" value="회원목록으로 돌아가기">
 	</a>
-	<a href="<%=root%>/admin/users/unregister.nogari?usersIdx=<%=usersIdx%>">
+	<a href="<%=root%>/admin/users/unregister.nogari?usersId=<%=usersDto.getUsersId() %>">
 		<input type="button" value="회원탈퇴 처리">
 	</a>
+	
 <!-- 페이지 내용 끝. -->
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>
