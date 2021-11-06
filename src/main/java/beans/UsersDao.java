@@ -104,40 +104,6 @@ public class UsersDao {
 
 	}
 
-	// 3) id & pw 기준
-	//    로그인, 탈퇴 시에 활용 가능
-	// 성공시 - 해당 유저의 UsersDto 반환
-	// 실패시 - null 반환
-	public static UsersDto get(String usersId, String usersPw) throws Exception {
-
-		// SQL 준비
-		String sql = "SELECT * FROM users WHERE users_id = ? AND users_pw = ?";
-		Connection con = JdbcUtils.connect3();
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, usersId);
-		ps.setString(2, usersPw);
-
-		// 완성된 SQL문 보내고 결과 받아오기
-		ResultSet rs = ps.executeQuery();
-		UsersDto dto = null;
-		if(rs.next()) {
-			dto = new UsersDto();
-			dto.setUsersIdx(rs.getInt("users_idx"));
-			dto.setUsersId(rs.getString("users_id"));
-			dto.setUsersNick(rs.getString("users_nick"));
-			dto.setUsersEmail(rs.getString("users_email"));
-			dto.setUsersPhone(rs.getString("users_phone"));
-			dto.setUsersGrade(rs.getString("users_grade"));
-			dto.setUsersJoin(rs.getDate("users_join"));
-			dto.setUsersPoint(rs.getInt("users_point"));
-		}
-
-		// 마무리
-		con.close();
-		return dto;
-
-	}
-
 	// 3. CREATE: 회원 추가
 	// 기본값 - 등급: 준회원, 가입일: sysdate, 포인트: 0
 	public boolean insert(UsersDto dto) throws Exception {

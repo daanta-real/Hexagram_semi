@@ -34,9 +34,7 @@ public class UsersLogoutServlet extends HttpServlet {
 			// 2. 로그아웃 처리
 			System.out.println("[회원 로그아웃] 2. 로그아웃 처리..");
 			Sessioner.logout(session);
-			System.out.print("완료. 현재 session: usersId = '" + session.getAttribute("usersId") + "'");
-			System.out.print(", usersGrade= '" + session.getAttribute("usersId")  + "'");
-			System.out.print(", usersIdx= '"   + session.getAttribute("usersIdx") + "'");
+			System.out.println("세션 비우기 완료.");
 			resp.sendRedirect(req.getContextPath()+"/index.jsp");
 
 		}
