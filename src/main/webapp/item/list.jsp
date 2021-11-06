@@ -343,8 +343,18 @@
 					</div>
 					
 					<div class="detail-wrapper">
-						<h3><%=itemDtoList.getItemDetail().substring(0, 1) %>...</h3>
-						<p><%=itemDtoList.getItemAddress()%></p>					
+						<%
+						String showItemDetail;
+						if(itemDtoList.getItemDetail().length() >= 20){
+							showItemDetail = itemDtoList.getItemDetail().substring(0, 20) + "...";
+						}else{
+							showItemDetail = itemDtoList.getItemDetail();
+						}
+						
+						String area = itemDtoList.getAdressCity()+" "+itemDtoList.getAdressCitySub();
+						%>
+						<h4 class="center"><%=showItemDetail%></h4>
+						<p><%=area%></p>	
 					</div>
 				</div>
 			</td>
