@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 //Item 리스트 페이지 네이션 모듈화
 
-public class ItemPagination {
+public class Pagination_item {
 	
 	// 입력
 	// - 페이지번호 (p)
@@ -17,7 +17,7 @@ public class ItemPagination {
 	private String keyword;
 	
 	//생성자
-	public ItemPagination(HttpServletRequest req) {
+	public Pagination_item(HttpServletRequest req) {
 		try {
 			p = Integer.parseInt(req.getParameter("p"));
 			

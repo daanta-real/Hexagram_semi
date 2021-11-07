@@ -4,7 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class Pagination {
+public class Pagination_users {
 	//필수 데이터
 	private int page;		
 	private int count;
@@ -14,7 +14,7 @@ public class Pagination {
 	
 	//생성자를 이용하여 필수 데이터를 설정하도록 구현
 	//HttpServletRequest req 에 page, column, keyword 있음
-	public Pagination(HttpServletRequest req) {
+	public Pagination_users(HttpServletRequest req) {
 		try {
 			this.page = Integer.parseInt(req.getParameter("page"));			
 			if(this.page <= 0) throw new Exception();

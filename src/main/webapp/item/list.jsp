@@ -1,6 +1,6 @@
 <%@page import="beans.ItemFileDto"%>
 <%@page import="beans.ItemFileDao"%>
-<%@page import="beans.ItemPagination"%>
+<%@page import="beans.Pagination_item"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.ItemDto"%>
@@ -21,7 +21,7 @@
 
 <%-- 관리자만 글쓰기위한 세션 받기 --%>
 <%
-	String usersId = (String)request.getSession().getAttribute("usersId");
+String usersId = (String)request.getSession().getAttribute("usersId");
 	
 
 // 	list.jsp에서 확인 후 필요없으면 삭제(회원 번호)
@@ -45,7 +45,7 @@
 
 <%-- 페이지네이션(모듈화) --%>
 <%
-	ItemPagination itemPagination = new ItemPagination(request);
+Pagination_item itemPagination = new Pagination_item(request);
 	itemPagination.calculateList();
 %>
 

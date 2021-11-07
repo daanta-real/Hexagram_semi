@@ -1,4 +1,4 @@
-<%@page import="beans.Pagination"%>
+<%@page import="beans.Pagination_users"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="java.util.List"%>
 <%@page import="beans.UsersDao"%>
@@ -12,13 +12,15 @@
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
-<% String root = request.getContextPath(); %>
+<%
+String root = request.getContextPath();
+%>
 
 <%
-	//회원 목록 페이징
-	Pagination pn = new Pagination(request);
+//회원 목록 페이징
+	Pagination_users pn = new Pagination_users(request);
 	pn.setPageSize(20);
-	pn.usersCalculater();	
+	pn.usersCalculater();
 %>
 <!-- 페이지 내용 시작 -->
 
