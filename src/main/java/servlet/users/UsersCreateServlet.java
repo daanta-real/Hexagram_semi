@@ -17,6 +17,7 @@ import util.users.Sessioner;
 public class UsersCreateServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		try {
 
 			// 0. 변수 준비
@@ -55,7 +56,7 @@ public class UsersCreateServlet extends HttpServlet {
 			if(isSucceed) {
 				System.out.println("[회원 가입] 5. 가입에 성공했습니다.");
 				HttpSession session = req.getSession();
-				Sessioner.login(session, dto);
+				Sessioner.login(session, dto); // idx(시퀀스로 만들어논 것), id, grade 세 개 넘어감.
 				resp.sendRedirect(req.getContextPath() + "/users/join_success.jsp");
 			}
 			else {
@@ -63,10 +64,13 @@ public class UsersCreateServlet extends HttpServlet {
 			}
 
 		}
+
 		catch(Exception e) {
+
 			System.out.println("\n[회원 가입] 에러가 발생했습니다.");
 			e.printStackTrace();
 			resp.sendError(500);
+
 		}
 	}
 }

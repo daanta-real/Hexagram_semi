@@ -21,14 +21,15 @@ public class UsersDeleteServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 
-			// 0. 설정
+			// 0. 변수준비
 			req.setCharacterEncoding("UTF-8");
 			resp.setContentType("text/html;charset=utf-8");
 			HttpSession session = req.getSession();
-			String sessionId = (String)session.getAttribute("usersId");
+			String sessionId    = (String)session.getAttribute("usersId");
 			String sessionGrade = (String)session.getAttribute("usersGrade");
-			String targetId = req.getParameter("targetId");
-			System.out.println("[회원 탈퇴] 0. 세션Id: '" + sessionId + "' / 내 회원등급: '" + sessionGrade + "' / 탈퇴요청대상 ID: '" + targetId);
+			String targetId     = req.getParameter("targetId");
+			System.out.println("[회원 탈퇴] 0. 변수준비.. "
+				+ "세션Id: '" + sessionId + "' / 내 회원등급: '" + sessionGrade + "' / 탈퇴요청대상 ID: '" + targetId);
 
 			// 1. 입력값 검사: 지울 id값이 들어와 있어야 됨
 			System.out.print("[회원 탈퇴] 1. id 빈값 여부 확인..");
@@ -42,7 +43,6 @@ public class UsersDeleteServlet extends HttpServlet {
 			boolean isGranted = GrantChecker.isGranted(sessionId, sessionGrade, targetId);
 			if(!isGranted) throw new Exception();
 			System.out.println("권한 확인 완료.");
-
 
 			// 3. 전송
 			//추가. 비밀번호 일치여부 검사
