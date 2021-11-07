@@ -1,10 +1,11 @@
 package beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class Pagination_users {
+public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 
 
 
@@ -17,34 +18,47 @@ public class Pagination_users {
 	private int count; // DB 상의 전체 데이터 수 (혹은 검색결과수)
 
 	// 2) 선택 데이터
-	private String column; // 검색할 대상 컬럼명
-	private String keyword; // 검색할 키워드
+	private String column;
+	private String keyword;
 
-	// 3) 페이징 관련 데이터
-	private int pageSize = 10; // 페이지당 글 개수
-	private int blockSize = 10; // 블록 당 페이지 수
+	// 2) 페이징 관련 데이터
+	private int pageSize; // 페이지당 글 개수
+	private int blockSize; // 블록 당 페이지 수
 	private int begin, end; // 페이지 첫 글번호, 페이지 끝 글번호
 	private int startBlock, finishBlock, lastBlock; // 시작 블록, 목록 상 마지막 블록, DB상 마지막 블록
-	private List<UsersDto> usersList; // 실제 출력되는 Data
+
+	// 3) 검색 관련 변수 및 DAO, DTO들
+	private DAO dao; // 검색에 이용할 DAO
+	private List<DTO> resultList = new ArrayList<>(); // 검색 결과 목록을 담을 DTO List
 
 
 
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 	// 2. Constructors
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
+	// - req의 역할: page, column, keyword 매개변수 빼먹는 용도로만 사용된다. 이후 안 쓴다(버려짐)
+	// - dao의 역할: 계속해서 쓴다.
+	// - req/DAO는 필수지만, DTO/pageSize/blockSize는 선택사항이다.
 
-	// 생성자를 이용하여 필수 데이터를 설정하도록 구현
-	// HttpServletRequest req 에 page, column, keyword 있음
-	public Pagination_users(HttpServletRequest req) {
+	public Pagination_users(HttpServletRequest req, DAO dao) { this(req, dao, 10, 10); }
+	public Pagination_users(HttpServletRequest req, DAO dao, int pageSize, int blockSize) {
+
+		// 1. page 결정
 		try {
-			page = Integer.parseInt(req.getParameter("page"));
-			if(page <= 0) throw new Exception();
+			this.page = Integer.parseInt(req.getParameter("page"));
+			if(this.page <= 0) throw new Exception();
 		}
 		catch(Exception e) {
-			page = 1;
+			this.page = 1;
 		}
-		column = req.getParameter("column");
-		keyword = req.getParameter("keyword");
+
+		// 2. 기타 필드 결정
+		this.column = req.getParameter("column");
+		this.keyword = req.getParameter("keyword");
+		this.dao = dao;
+		this.pageSize = pageSize;
+		this.blockSize = blockSize;
+
 	}
 
 
@@ -65,6 +79,7 @@ public class Pagination_users {
 	public int getStartBlock() { return startBlock; }
 	public int getFinishBlock() { return finishBlock; }
 	public int getLastBlock() { return lastBlock; }
+	public List<DTO> getResultList() { return resultList; }
 
 	// 2) 특수 Getters
 	// keyword 값이 null일 경우 ""로 바꿔줌
@@ -75,7 +90,6 @@ public class Pagination_users {
 	public int getPreviousBlock() { return startBlock - 1; }
 	// 다음을 누르면 나오는 블록 번호
 	public int getNextBlock() { return finishBlock + 1; }
-	public List<UsersDto> getUsersList() { return usersList; }
 
 
 
@@ -85,8 +99,7 @@ public class Pagination_users {
 
 	public void setPageSize(int pageSize) { this.pageSize = pageSize; }
 	public void setBlockSize(int blockSize) { this.blockSize = blockSize; }
-
-
+	public void setResultList(List<DTO> resultList) { this.resultList = resultList; }
 
 
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
@@ -109,7 +122,6 @@ public class Pagination_users {
 	}
 
 
-
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 	// 5. Methods
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
@@ -117,44 +129,36 @@ public class Pagination_users {
 	// UsersList 계산 메소드
 	public void calculate() throws Exception{
 
-		// 1. 전체 결과 수 계산
-		UsersDao usersDao = new UsersDao();
-		count = isSearchMode()
-			? usersDao.count(column, keyword)
-			: usersDao.count();
+		// 1. 출력할 rownum 범위 계산
+		end   = page * pageSize;      // 페이지의 마지막 rownum
+		begin = end - (pageSize - 1); // 페이지의 첫    rownum
 
-		// 2. 첫 rownum계산
-		end   = page * pageSize;
-		begin = end - (pageSize - 1);
+		// 2. 검색 모드 해당여부에 따라 resultList, count 구하기
+		if(isSearchMode()) {
+			System.out.println("검색 모드: " + column + "=" + keyword + " (" + begin + "~" + end + ")");
+			this.resultList = dao.search(column, keyword, begin, end);
+			this.count = dao.count(column, keyword);
+		}
+		else {
+			System.out.println("전체목록 모드");
+			this.resultList = dao.list(begin, end);
+			this.count = dao.count();
+		}
 
-		//block계산
-		lastBlock   = (count - 1) / pageSize + 1;
-		startBlock  = (page - 1) / blockSize * blockSize + 1;
-		finishBlock = startBlock + (blockSize - 1);
-
-		//UsersList계산
-		usersList = isSearchMode()
-			? usersDao.searchRownum(column, keyword, begin, end)
-			: usersDao.listRownum(begin, end);
+		// 3. 하단 각 페이지 바로가기 버튼 출력범위 계산 (= block 계산)
+		startBlock  = (page - 1) / blockSize * blockSize + 1; // 출력할 가장 첫 페이지 번호 (연속형 출력X blockSize단위로 끊어 출력O)
+		finishBlock = startBlock + (blockSize - 1);           // 이론 상 표시 가능한 가장 마지막 페이지 번호
+		lastBlock   = (count - 1) / pageSize + 1;             // 실제로 출력되는 가장 마지막 페이지 번호
 
 	}
 
 	@Override
 	public String toString() {
-		return "Pagination [page=" + page + ", count=" + count + ", column=" + column + ", keyword=" + keyword + ", pageSize="
-			+ pageSize + ", blockSize=" + blockSize + ", begin=" + begin + ", end=" + end + ", startBlock="
-			+ startBlock + ", finishBlock=" + finishBlock + ", lastBlock=" + lastBlock + "]";
+		return "Pagination_users [page=" + page + ", count=" + count + ", column=" + column + ", keyword=" + keyword
+				+ ", pageSize=" + pageSize + ", blockSize=" + blockSize + ", begin=" + begin + ", end=" + end
+				+ ", startBlock=" + startBlock + ", finishBlock=" + finishBlock + ", lastBlock=" + lastBlock + ", dao="
+				+ dao + ", 검색모드?=" + isSearchMode() + ", resultList개수=" + resultList.size() + "]";
 	}
 
+
 }
-
-
-
-
-
-
-
-
-
-
-

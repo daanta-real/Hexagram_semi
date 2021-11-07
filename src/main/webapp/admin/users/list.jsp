@@ -12,17 +12,22 @@
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
-<%
-String root = request.getContextPath();
-%>
+<%String root = request.getContextPath();%>
+<!-- 페이지 내용 시작 -->
 
 <%
-//회원 목록 페이징
-	Pagination_users pn = new Pagination_users(request);
-	pn.setPageSize(20);
-	pn.calculate();
+// 1. 변수 준비
+String column = request.getParameter("column");
+String keyword = request.getParameter("keyword");
+boolean isSearchMode = column != null && !column.equals("");
+UsersDao usersDao = new UsersDao();
+
+// 2. 회원 목록 페이징
+Pagination_users<UsersDao, UsersDto> pn = new Pagination_users<>(request, usersDao);
+pn.setPageSize(20);
+pn.calculate();
+System.out.println("페이지네이션 정보: " + pn);
 %>
-<!-- 페이지 내용 시작 -->
 
  <!-- 검색 -->
     <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post">
@@ -75,8 +80,12 @@ String root = request.getContextPath();
 		</tr>
 	</thead>
 	<tbody>
-	<%for(UsersDto usersDto : pn.getUsersList()) {
-		String usersEmail = usersDto.getUsersEmail(); if(usersEmail == null || usersEmail.equals("")) usersEmail = " "; 
+	<%
+	List<UsersDto> list = pn.getResultList();
+	System.out.println("출력할 회원 수: " + list.size());
+	for(UsersDto usersDto : list) {
+		String usersEmail = usersDto.getUsersEmail();
+		if(usersEmail == null || usersEmail.equals("")) usersEmail = " ";
 	%>
 		<tr>
 			<td align="center"><%=usersDto.getUsersIdx() %></td>

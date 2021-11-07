@@ -8,7 +8,7 @@ import java.util.List;
 
 import util.JdbcUtils;
 
-public class UsersDao {
+public class UsersDao implements PaginationInterface<UsersDto> {
 
 
 
@@ -298,15 +298,59 @@ public class UsersDao {
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 	// 7. PAGING: 회원 검색목록 페이징
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
-	// 1. 회원 검색목록 페이징
-	public List<UsersDto> searchRownum(String column, String keyword, int begin, int end) throws Exception {
+
+	// 1. 목록 - 페이징에서 마지막 블록을 구하기 위하여 회원목록글 개수를 구하는 기능
+	@Override
+	public Integer count() throws Exception {
+
+		// SQL 준비
+		String sql = "SELECT COUNT(*) FROM users";
+		Connection conn = JdbcUtils.connect3();
+		PreparedStatement ps = conn.prepareStatement(sql);
+
+		// 완성된 SQL문 보내고 결과 받아오기
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+
+		// 마무리
+		conn.close();
+		return count;
+
+	}
+
+	// 2. 검색 - 페이징에서 마지막 블록을 구하기 위하여 회원목록글 개수를 구하는 기능
+	@Override
+	public Integer count(String column, String keyword) throws Exception {
+
+		// SQL 준비
+		String sql = "SELECT COUNT(*) FROM users WHERE INSTR(#1, ?) > 0 ";
+		sql = sql.replace("#1", column);
+		Connection conn = JdbcUtils.connect3();
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, keyword);
+
+		// 완성된 SQL문 보내고 결과 받아오기
+		ResultSet rs = ps.executeQuery();
+		rs.next();
+		int count = rs.getInt(1);
+
+		// 마무리
+		conn.close();
+		return count;
+
+	}
+
+	// 3. 회원 검색목록 페이징
+	@Override
+	public List<UsersDto> search(String column, String keyword, int begin, int end) throws Exception {
 
 		// SQL 준비
 		String sql = "SELECT * FROM ( "
-						+ " SELECT ROWNUM RN, TMP.* FROM( "
+						+ " SELECT ROWNUM RN, TMP.* FROM ( "
 							+ " SELECT * FROM users WHERE INSTR(#1, ?) > 0"
-						  + " )TMP"
-						+ " )WHERE RN BETWEEN ? AND ?";
+						+ " )TMP"
+				   + " )WHERE RN BETWEEN ? AND ?";
 		sql = sql.replace("#1", column);
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
@@ -338,15 +382,16 @@ public class UsersDao {
 
 	}
 
-	// 2. 회원목록 페이징
-	public List<UsersDto> listRownum(int begin, int end) throws Exception {
+	// 4. 회원목록 페이징
+	@Override
+	public List<UsersDto> list(int begin, int end) throws Exception {
 
 		// SQL 준비
 		String sql = "SELECT * FROM ( "
-						+ " SELECT ROWNUM RN, TMP.* FROM( "
-					+ " SELECT * FROM users "
-				  + ")TMP "
-				+ ")WHERE RN BETWEEN ? AND ?";
+						+ " SELECT ROWNUM RN, TMP.* FROM ( "
+							+ " SELECT * FROM users "
+						+ ")TMP "
+				   + ") WHERE RN BETWEEN ? AND ?";
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, begin);
@@ -375,46 +420,5 @@ public class UsersDao {
 		return list;
 
 	}
-
-	// 3. 목록 - 페이징에서 마지막 블록을 구하기 위하여 회원목록글 개수를 구하는 기능
-	public int count() throws Exception {
-
-		// SQL 준비
-		String sql = "SELECT COUNT(*) FROM users";
-		Connection conn = JdbcUtils.connect3();
-		PreparedStatement ps = conn.prepareStatement(sql);
-
-		// 완성된 SQL문 보내고 결과 받아오기
-		ResultSet rs = ps.executeQuery();
-		rs.next();
-		int count = rs.getInt(1);
-
-		// 마무리
-		conn.close();
-		return count;
-
-	}
-
-	// 4. 검색 - 페이징에서 마지막 블록을 구하기 위하여 회원목록글 개수를 구하는 기능
-	public int count(String column, String keyword) throws Exception {
-
-		// SQL 준비
-		String sql = "SELECT COUNT(*) FROM users WHERE INSTR(#1, ?) > 0 ";
-		sql = sql.replace("#1", column);
-		Connection conn = JdbcUtils.connect3();
-		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setString(1, keyword);
-
-		// 완성된 SQL문 보내고 결과 받아오기
-		ResultSet rs = ps.executeQuery();
-		rs.next();
-		int count = rs.getInt(1);
-
-		// 마무리
-		conn.close();
-		return count;
-
-	}
-
 
 }

@@ -376,7 +376,7 @@ Pagination_item itemPagination = new Pagination_item(request);
 			<%if(itemPagination.isSearch()){%>
 				<a href="list.jsp?column=<%=itemPagination.getColumn() %>&keyword<%=itemPagination.getKeyword() %>&p=<%=itemPagination.getBackPage()%>">[이전]</a>
 			<%}else{ %>
-				<a href="list.jsp?p=<%=itemPagination.getBackPage() %>">[이전]</a>
+				<a href="list.jsp?page=<%=itemPagination.getBackPage() %>">[이전]</a>
 			<%} %>	
 		<%}else{%>
 			<a>[이전]</a>
@@ -387,7 +387,7 @@ Pagination_item itemPagination = new Pagination_item(request);
 			<%if(itemPagination.isSearch()){ %>
 				<a href="list.jsp?column=<%=itemPagination.getColumn() %>&keyword<%=itemPagination.getKeyword() %>&p=<%=i %>"><%=i %></a>
 			<%}else{ %>
-				<a href="list.jsp?p=<%=i %>"><%=i %></a>
+				<a href="list.jsp?page=<%=i %>"><%=i %></a>
 			<%} %>
 		<%} %>
 		
@@ -396,7 +396,7 @@ Pagination_item itemPagination = new Pagination_item(request);
 			<%if(itemPagination.isSearch()){%>
 				<a href="list.jsp?column=<%=itemPagination.getColumn() %>&keyword<%=itemPagination.getKeyword() %>&p=<%=itemPagination.getEndBlock()%>">[다음]</a>
 			<%}else{ %>
-				<a href="list.jsp?p=<%=itemPagination.getEndBlock() %>">[다음]</a>
+				<a href="list.jsp?page=<%=itemPagination.getEndBlock() %>">[다음]</a>
 			<%} %>	
 		<%}else{ %>
 			<a>[다음]</a>
