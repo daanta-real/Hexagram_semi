@@ -13,6 +13,112 @@
 <HEAD>
 <TITLE>노가리투어 - 관광지 목록</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
+<style type='text/css'>
+* {
+    box-sizing: border-box;
+}
+.container-900 {
+    width: 900px;
+}
+.row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.container-left {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.container-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-right {
+    margin-left: auto;
+    margin-right: 0;
+}
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.float-container::after {
+    content:"";
+    display: block;
+    clear: both;
+}
+.float-container > .float-item-left {
+    float:left;
+}
+.float-container > .float-item-right {
+    float:right;
+}
+.search-select{
+    font-size:3.5mm;
+    padding: 6px;
+    margin:0.5rem;
+}
+.search-input{
+    font-size:3.5mm;
+    padding: 6px;
+    margin:0.5rem;
+}
+.search-btn{
+    font-size:3.5mm;
+    padding: 6px;
+    margin:0.5rem;
+    background-color:hsl(34, 93%, 67%);
+    border:none;
+}
+.content{
+    color:black;
+}
+.item-list{
+    border-top:2px solid gray;
+}
+.item-list > .item-image {
+    padding:1rem;
+    width:150px;
+}
+.item-list > .item-content {
+    width:740px;
+    height:154px;
+    padding:5px;
+}
+
+.pagination {
+    border-top:2px solid gray;
+    text-align: center;
+}
+
+.pagination>a,
+.pagination>a:link,
+.pagination>a:visited {
+    color: black;
+    text-decoration: none;
+    border: 1px solid gray;
+    min-width: 2.5rem;
+    display: inline-block;
+    text-align: center;
+    padding: 0.5rem;
+    margin:20px 0px;
+}
+
+.pagination>a:hover,
+.pagination>a.active {
+    color: red;
+    border: 1px solid red;
+}
+</style>
 </HEAD>
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
@@ -75,115 +181,6 @@ Pagination_item itemPagination = new Pagination_item(request);
 <%
  	ItemFileDao itemFileDao = new ItemFileDao();
 %>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-        .container-900 {
-            width: 900px;
-        }
-        .row {
-            margin-top: 10px;
-            margin-bottom: 10px;
-        }
-
-        .container-left {
-            margin-left: 0;
-            margin-right: auto;
-        }
-
-        .container-center {
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .container-right {
-            margin-left: auto;
-            margin-right: 0;
-        }
-        .left {
-            text-align: left;
-        }
-
-        .center {
-            text-align: center;
-        }
-
-        .right {
-            text-align: right;
-        }
-
-        .float-container::after {
-            content:"";
-            display: block;
-            clear: both;
-        }
-        .float-container > .float-item-left {
-            float:left;
-        }
-        .float-container > .float-item-right {
-            float:right;
-        }
-        .search-select{
-            font-size:3.5mm;
-            padding: 6px;
-            margin:0.5rem;
-        }
-        .search-input{
-            font-size:3.5mm;
-            padding: 6px;
-            margin:0.5rem;
-        }
-        .search-btn{
-            font-size:3.5mm;
-            padding: 6px;
-            margin:0.5rem;
-            background-color:hsl(34, 93%, 67%);
-            border:none;
-        }
-        .content{
-            color:black;
-        }
-        .item-list{
-            border-top:2px solid gray;
-        }
-        .item-list > .item-image {
-            padding:1rem;
-            width:150px;
-        }
-        .item-list > .item-content {
-            width:740px;
-            height:154px;
-            padding:5px;
-        }
-       
-        .pagination {
-            border-top:2px solid gray;
-            text-align: center;
-        }
-
-        .pagination>a,
-        .pagination>a:link,
-        .pagination>a:visited {
-            color: black;
-            text-decoration: none;
-            border: 1px solid gray;
-            min-width: 2.5rem;
-            display: inline-block;
-            text-align: center;
-            padding: 0.5rem;
-            margin:20px 0px;
-        }
-
-        .pagination>a:hover,
-        .pagination>a.active {
-            color: red;
-            border: 1px solid red;
-        }
-  
-    </style>
-</head>
-<body>
     
     <div class="container-900 container-center">
     	<div class="row center">

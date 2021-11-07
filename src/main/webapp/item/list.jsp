@@ -13,6 +13,8 @@
 <HEAD>
 <TITLE>노가리투어 - 관광지 목록</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
+<%String root = request.getContextPath();%>
+<LINK REL="STYLESHEET" HREF="<%=root%>/resource/css/item/list.css" /> <!-- CSS 첨부 -->
 </HEAD>
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
@@ -22,25 +24,20 @@
 <%-- 관리자만 글쓰기위한 세션 받기 --%>
 <%
 String usersId = (String)request.getSession().getAttribute("usersId");
-	
 
-// 	list.jsp에서 확인 후 필요없으면 삭제(회원 번호)
-	int usersIdx;
-	try{
-		
-		usersIdx = (int)request.getSession().getAttribute("usersIdx");
-		
-	}catch(Exception e){
-		e.printStackTrace();
-		usersIdx = 0;
-	}
-	
-	
-	String usersGrade = (String)request.getSession().getAttribute("usersGrade");
-	//세션 Grade값이 관리자라면
-	boolean admin = usersGrade != null && usersGrade.equals("관리자");
-	//root path
-	String root = request.getContextPath();
+//	list.jsp에서 확인 후 필요없으면 삭제(회원 번호)?????
+int usersIdx;
+try{
+	usersIdx = (int)request.getSession().getAttribute("usersIdx");
+}catch(Exception e){
+	e.printStackTrace();
+	usersIdx = 0;
+}
+
+//세션 Grade값 획득 및 이에 따른 관리자 여부 결정
+String usersGrade = (String)request.getSession().getAttribute("usersGrade");
+boolean admin = usersGrade != null && usersGrade.equals("관리자");
+
 %>
 
 <%-- 페이지네이션(모듈화) --%>
@@ -75,194 +72,6 @@ Pagination_item itemPagination = new Pagination_item(request);
 <%
  	ItemFileDao itemFileDao = new ItemFileDao();
 %>
-<style>
-	.container-900{width: 900px;}
-	.container-left {
-	    margin-left: 0;
-	    margin-right: auto;
-	}
-	.container-center {
-	    margin-left: auto;
-	    margin-right:auto;
-	}
-	.container-right {
-	    margin-left: auto;
-	    margin-right:0;
-	}
-
-	.row{
-	margin-top: 5px; margin-bottom: 5px;
-	}
-	
-	.left {
-	    text-align: left !important;
-	}
-	.center {
-	    text-align: center !important;
-	}
-	.right {
-	    text-align: right !important;
-	}
-	
-	
-		*{
-			box-sizing: border-box;
-		}
-		
-		.form-input,
-		.form-btn {
-		    width: 100%;
-		    font-size: 20px;
-		    padding: 10px;
-		}
-		        
-		.form-input {
-		    border: 1px solid rgb(43, 48, 90);
-		    width: 200px;
-		}
-		
-		.form-btn {
-		    color: white;
-		    background-color: rgb(43, 48, 90);
-		    font-weight: bold;
-		    height: 90%;
-		}
-		
-		.form-block {
-		    display: block;
-		}
-		
-		.form-inline {
-		    width: auto;
-		}
-		
-		.form-inline-block {
-		   display: inline-block;
-		}
-     
-     	.flex-container{
-     		display: flex;
-             flex-direction: row;
-     	}
-
-         .table{
-            width: 100%;
-        }
-
-        .table>thead>tr>th,
-        .table>thead>tr>td,
-        .table>tbody>tr>th,
-        .table>tbody>tr>td,
-        .table>tfoot>tr>th,
-        .table>tfoot>tr>td{
-            padding: 0.5rem;
-            text-align: center;
-        }
-		.table.table-border {
-		    border:1px solid black;
-		    border-collapse: collapse;
-		
-		}
-		.table.table-border > thead > tr > th, 
-		.table.table-border > thead > tr > td,
-		.table.table-border > tbody > tr > th,
-		.table.table-border > tbody > tr > td,
-		.table.table-border > tfoot > tr > th,
-		.table.table-border > tfoot > tr > td {
-		    border:1px solid black;
-		
-		}
-		.table.table-stripe>thead>tr{
-		    background-color: darksalmon;
-		}
-		.table.table-hover>tbody>tr:hover{
-		    background-color: bisque;
-		}
-		.table.table-hover>tbody>tr>td>a:hover{
-		   	color: darksalmon;
-		}
-
-        .flex-container > .flex-reply-write-wrapper{
-            flex-grow: 2;
-        }
-        .flex-container > .flex-reply-btn-wrapper{
-            flex-grow: 1;
-            margin-top: auto;
-            margin-bottom: auto;
-        }
-        .link-btn, 
-        .link-btn-block,
-        .form-link-btn
-        {
-            padding:0.5rem;
-            border:1px solid gray;
-            text-decoration: none;
-            color:gray;
-        }
-        .link-btn:hover,
-        .link-btn-block:hover,
-        .form-link-btn:hover {
-            border-color:black;
-            color:black;
-        }
-        .link-btn-block{
-            display:block;
-            width:100%;
-        }
-        .form-link-btn {
-            padding:0.85rem 0.75rem;
-            font-size:20px;
-        }
-
-        .flex-container > .reply-write-wrapper {
-			width:80%;
-		}
-		.flex-container > .reply-send-wrapper {
-			flex-grow:1;
-		}
-		.flex-container > .image-wrapper {
-			width:25%;
-		}
-		.flex-container > .image-wrapper > img {
-			width:130px;
-			height: 130px;
-		}
-		.flex-container > .detail-wrapper {
-			flex-grow:1;
-		}
-		
-		.flex-container > .reply-send-wrapper > .form-btn,
-		.flex-container > .reply-send-wrapper > .form-link-btn {
-			width:100%;
-			height:100%;
-			display: flex;
-			align-items:center;
-			justify-content:center;
-		}	
-			
-		.pagination {
-		    text-align: center;
-		}
-		
-		.pagination > a{
-		    color:black;
-		    text-decoration: none;
-		    border:1px solid gray;
-		    min-width:2.5rem;
-		    display: inline-block;
-		    text-align: center;
-		    padding:0.5rem;
-		}
-		
-		.pagination > a:hover,
-		.pagination > a.active{
-		    color:red;
-		    border:1px solid red;
-		}	
-		
-		
-
-</style>
 <div class="container-900 container-center">
 	<div class="row center">
 		<%-- 페이지 제목 --%>
