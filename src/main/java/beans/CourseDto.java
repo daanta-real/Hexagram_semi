@@ -4,13 +4,13 @@ import java.sql.Date;
 
 public class CourseDto {
 
-	private int courseIdx; //코스번호
-	private int usersIdx; //회원번호(작성자)
-	private String courseName; //코스제목
-	private String courseDetail; //코스내용
-	private Date courseDate; //코스목록
-	private int courseCountView; //코스지역
-	private int courseCountReply; //코스태그
+	private int courseIdx; 
+	private int usersIdx; 
+	private String courseName; 
+	private String courseDetail; 
+	private Date courseDate; 
+	private int courseCountView; 
+	private int courseCountReply; 
 	public int getCourseIdx() {
 		return courseIdx;
 	}

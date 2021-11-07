@@ -24,7 +24,7 @@
     List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
 //     3개이상만 가능하게 하는 기능 / 목록을 보여주고 삭제 옵션을 주는 기능
 
-
+	boolean isLogin = request.getSession().getAttribute("usersIdx") != null;
     %>
 <!DOCTYPE HTML>
 <HTML>
@@ -38,7 +38,7 @@
 <!-- 페이지 내용 시작 -->
 
 
-<form action="insert_course.nogari">	
+<form action="insert_course.nogari" method="post">	
 	<table border="1" width="800px">
 		<tbody>
 			<tr>
@@ -48,13 +48,14 @@
 			<tr>
 				<th>내용</th>
 				<td><input type="text" name="courseDetail" required></td>
+			<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
 			</tr>
 			
 			<tr>
-			<%if(courseItemList != null && courseItemList.size() >=3) {%>
+			<%if(courseItemList != null && courseItemList.size() >=3 && isLogin) {%>
 			<td><input type="submit" value="최종 선택 완료"></td>
 			<%}else{%>
-			<td><input type="button" value="관광지 3개이상 선택필수"></td>
+			<td><input type="button" value="관광지 3개이상 선택필수(로그인 필수)"></td>
 			<%}%>
 			</tr>
 		</tbody>
