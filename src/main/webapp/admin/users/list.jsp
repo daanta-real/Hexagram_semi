@@ -20,7 +20,7 @@ String root = request.getContextPath();
 //회원 목록 페이징
 	Pagination_users pn = new Pagination_users(request);
 	pn.setPageSize(20);
-	pn.usersCalculater();
+	pn.calculate();
 %>
 <!-- 페이지 내용 시작 -->
 
@@ -28,27 +28,27 @@ String root = request.getContextPath();
     <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post">
 	     <select name="column">
 	    	<option value="">항목선택</option>
-			<%if(pn.columnIs("users_id")) {%>
+			<%if(pn.columnValExists("users_id")) {%>
 	    	<option value="users_id" selected>아이디</option>
 	    	<%}else {%>
 	    	<option value="users_id">아이디</option>
 	    	<%} %>
-	    	<%if(pn.columnIs("users_nick")) {%>
+	    	<%if(pn.columnValExists("users_nick")) {%>
 	    	<option value="users_nick" selected>닉네임</option>
 	    	<%}else {%>
 	    	<option value="users_nick">닉네임</option>
 	    	<% }%>
-	    	<%if(pn.columnIs("users_email")) {%>
+	    	<%if(pn.columnValExists("users_email")) {%>
 	    	<option value="users_email" selected>이메일</option>
 	    	<%}else {%>
 	    	<option value="users_email">이메일</option>
 	    	<%} %>
-	    	<%if(pn.columnIs("users_phone")) {%>
+	    	<%if(pn.columnValExists("users_phone")) {%>
 	    	<option value="users_phone" selected>전화번호</option>
 	    	<%}else {%>
 	    	<option value="users_phone">전화번호</option>
 	    	<% }%>
-	    	<%if(pn.columnIs("users_grade")) {%>
+	    	<%if(pn.columnValExists("users_grade")) {%>
 	    	<option value="users_grade" selected>회원등급</option>
 	    	<%}else {%>
 	    	<option value="users_grade">회원등급</option>
@@ -102,7 +102,7 @@ String root = request.getContextPath();
 <!-- 페이지 네비게이터 검색 / 목록-->
 <DIV>
 <%if(pn.isPreviousAvailable()) {%>
-	<%if(pn.searchUsers()) {%>
+	<%if(pn.isSearchMode()) {%>
 		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getStartBlock()-1 %>">&lt;</a>
 	<%} else{ %>
 		<a href="list.jsp?page=<%=pn. getPreviousBlock()%>">&lt;</a>
@@ -112,7 +112,7 @@ String root = request.getContextPath();
 <%} %>
 
 <%for(int i = pn.getStartBlock() ; i <= pn.getRealLastBlock() ; i++) {%>
-	<%if(pn.searchUsers()) { %>
+	<%if(pn.isSearchMode()) { %>
 		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
 	<%}else{ %>
 		<a href="list.jsp?page=<%=i %>"><%=i %></a>
@@ -120,7 +120,7 @@ String root = request.getContextPath();
 <%} %>
 
 <%if(pn.isNextAvailable()) {%>
-	<%if(pn.searchUsers()) {%>
+	<%if(pn.isSearchMode()) {%>
 		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock() %>">&gt;</a>
 	<%} else{ %>
 		<a href="list.jsp?page=<%=pn.getNextBlock()%>">&gt;</a>
