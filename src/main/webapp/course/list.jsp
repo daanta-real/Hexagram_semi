@@ -28,8 +28,12 @@ CourseDao courseDao = new CourseDao();
 List<CourseDto> list = courseDao.list();
 %>
 
+<!-- 두가지 방법이 있는데, (둘다 시도 중)-->
+<!-- 첫번째는 세션을 이용하여 세션안에서 아이템들을 모아서 처리하였다가 마지막에 그 세션을 파기 시키는 방법 (course_try 내부에 저장해 두었다)-->
 
-<h2><a href="insert.jsp">확인용 글 쓰기</a></h2>
+<!-- 두번째는 글쓰기를 누를떄 시퀀스 번호를 생성하는 서블릿으로 이동한 후, 그 시퀀스 번호를 이용해서 코스아이템 DB에 추가 저장하는 방식. -->
+
+<h2><a href="insert_sequence.nogari">확인용 글 쓰기</a></h2>
 
 <%if(!list.isEmpty()) {%>
 		<%for(CourseDto courseDto : list) {%>
