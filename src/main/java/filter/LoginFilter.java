@@ -30,7 +30,7 @@ public class LoginFilter implements Filter {
 
 			// 1. 세션 검사
 			String sessionId = (String) req.getSession().getAttribute("usersId");
-			boolean hasSession = sessionId == null || sessionId.equals("");
+			boolean hasSession = sessionId != null && !sessionId.equals("");
 
 			// 2. 세션 검사 결과에 따른 작동
 			// 세션이 없을 경우
