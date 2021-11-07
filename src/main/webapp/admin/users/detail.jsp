@@ -35,11 +35,11 @@
 		</tr>
 		<tr>
 			<th>이메일</th>
-			<td><%=usersDto.getUsersEmailNull() %></td>
+			<td><%=usersDto.getUsersEmail() %></td>
 		</tr>
 		<tr>
 			<th>전화번호</th>
-			<td><%=usersDto.getUsersPhoneNull() %></td>
+			<td><%=usersDto.getUsersPhone() %></td>
 		</tr>
 		<tr>
 			<th>회원등급</th>

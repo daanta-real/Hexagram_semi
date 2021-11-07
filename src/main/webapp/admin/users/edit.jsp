@@ -47,13 +47,13 @@
 			<tr>
 				<th>이메일</th>
 				<td>
-					<input type="email" name="usersEmail" value="<%=usersDto.getUsersEmailNull() %>">	
+					<input type="email" name="usersEmail" value="<%=usersDto.getUsersEmail() %>">	
 				</td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
 				<td>
-					<input type="tel" name="usersPhone" value="<%=usersDto.getUsersPhoneNull() %>">
+					<input type="tel" name="usersPhone" value="<%=usersDto.getUsersPhone() %>">
 				</td>
 			</tr>
 			<tr>
