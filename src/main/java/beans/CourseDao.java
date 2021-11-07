@@ -68,8 +68,6 @@ public class CourseDao {
 			ps.setInt(2, courseDto.getUsersIdx());
 			ps.setString(3, courseDto.getCourseName());
 			ps.setString(4, courseDto.getCourseDetail());
-			ps.setInt(5, courseDto.getCourseCountView());
-			ps.setInt(6, courseDto.getCourseCountReply());
 
 			int result = ps.executeUpdate();
 
