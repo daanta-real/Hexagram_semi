@@ -137,19 +137,19 @@ public class UsersDao {
 	}
 
 	// 2) 회원 추가 부분
-	// ※ 시퀀스 없을 때는 새로 따갖고 넘겨줌. (단, 이러면 시퀀스 번호는 못 얻음)
+	// 여기서 설정 못하는 기본값: 등급(DB값; 아마 준회원), 가입일(SYSDATE), 포인트(0)
 	public boolean insert(UsersDto dto) throws Exception {
-		return insert(dto, getNextSequence());
-	}
-	// 여기서 설정 않는 기본값: 등급(DB값; 아마 준회원), 가입일(SYSDATE), 포인트(0)
-	public boolean insert(UsersDto dto, Integer sequenceNo) throws Exception {
+
+		// ※ 시퀀스 없을 때는 알아서 새로 따서 DTO에 넣어 준다.
+		// 단, 이러면 당연히 외부에서 시퀀스 번호를 못 얻게 된다.
+		if(dto.getUsersIdx() == null) dto.setUsersIdx(getNextSequence());
 
 		// SQL 준비
 		String sql = "INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email, users_phone)"
 			+ " VALUES(?, ?, ?, ?, ?, ?)";
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setInt   (1, sequenceNo);
+		ps.setInt   (1, dto.getUsersIdx());
 		ps.setString(2, dto.getUsersId());
 		ps.setString(3, dto.getUsersPw());
 		ps.setString(4, dto.getUsersNick());
@@ -300,7 +300,8 @@ public class UsersDao {
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 	// 1. 회원 검색목록 페이징
 	public List<UsersDto> searchRownum(String column, String keyword, int begin, int end) throws Exception {
-		//SQL준비
+
+		// SQL 준비
 		String sql = "SELECT * FROM ( "
 						+ " SELECT ROWNUM RN, TMP.* FROM( "
 							+ " SELECT * FROM users WHERE INSTR(#1, ?) > 0"
@@ -334,11 +335,13 @@ public class UsersDao {
 		// 마무리
 		conn.close();
 		return list;
+
 	}
 
 	// 2. 회원목록 페이징
 	public List<UsersDto> listRownum(int begin, int end) throws Exception {
-		//SQL준비
+
+		// SQL 준비
 		String sql = "SELECT * FROM ( "
 						+ " SELECT ROWNUM RN, TMP.* FROM( "
 					+ " SELECT * FROM users "
@@ -348,6 +351,7 @@ public class UsersDao {
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, begin);
 		ps.setInt(2, end);
+
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
 		List<UsersDto> list = new ArrayList<>();
@@ -369,38 +373,47 @@ public class UsersDao {
 		// 마무리
 		conn.close();
 		return list;
+
 	}
 
 	// 3. 목록 - 페이징에서 마지막 블록을 구하기 위하여 회원목록글 개수를 구하는 기능
 	public int count() throws Exception {
-		//SQL준비
+
+		// SQL 준비
 		String sql = "SELECT COUNT(*) FROM users";
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
+
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 		int count = rs.getInt(1);
+
 		// 마무리
 		conn.close();
 		return count;
+
 	}
 
 	// 4. 검색 - 페이징에서 마지막 블록을 구하기 위하여 회원목록글 개수를 구하는 기능
 	public int count(String column, String keyword) throws Exception {
-		//SQL준비
+
+		// SQL 준비
 		String sql = "SELECT COUNT(*) FROM users WHERE INSTR(#1, ?) > 0 ";
 		sql = sql.replace("#1", column);
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setString(1, keyword);
+
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
 		rs.next();
 		int count = rs.getInt(1);
+
 		// 마무리
 		conn.close();
 		return count;
+
 	}
 
 
