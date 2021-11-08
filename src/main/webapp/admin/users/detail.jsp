@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
-<TITLE>노가리투어 - [여기다가 타이틀이름 쓰세요. []는 제거하시구요~]</TITLE>
+<TITLE>노가리투어 - 회원 정보 상세</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
 <BODY>
@@ -35,11 +35,11 @@
 		</tr>
 		<tr>
 			<th>이메일</th>
-			<td><%=usersDto.getUsersEmailNull() %></td>
+			<td><%=usersDto.getUsersEmail() %></td>
 		</tr>
 		<tr>
 			<th>전화번호</th>
-			<td><%=usersDto.getUsersPhoneNull() %></td>
+			<td><%=usersDto.getUsersPhone() %></td>
 		</tr>
 		<tr>
 			<th>회원등급</th>

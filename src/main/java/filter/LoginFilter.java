@@ -23,25 +23,32 @@ public class LoginFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		try {
-			// 준비
+
+			// 0. 변수준비
 			HttpServletRequest req = (HttpServletRequest)request;
 			System.out.println("[필터 작동 - 로그인 검사] from " + req.getRequestURL().toString());
 
-			// 세션 검사
+			// 1. 세션 검사
 			String sessionId = (String) req.getSession().getAttribute("usersId");
-			if(sessionId == null || sessionId.equals("")) {
+			boolean hasSession = sessionId != null && !sessionId.equals("");
+
+			// 2. 세션 검사 결과에 따른 작동
+			// 세션이 없을 경우
+			if(!hasSession) {
 				System.out.println("[필터 작동 - 로그인 검사] 로그인되지 않아 로그인 검사 필터를 통과하지 못했습니다. (세션ID:'" + sessionId + "') 로그인 필터 통과 실패.");
 				((HttpServletResponse) response).sendError(401); // 로그인페이지로 이동
 			}
-
-			// 다음 필터로 넘김
-			System.out.println("[필터 작동 - 로그인 검사] 로그인 확인됨. 로그인 필터 통과.");
-			chain.doFilter(request, response);
+			// 세션이 있을 경우
+			else {
+				System.out.println("[필터 작동 - 로그인 검사] 로그인 확인됨. 로그인 필터 통과.");
+				chain.doFilter(request, response);
+			}
 
 		} catch(Exception e) {
 
 			System.out.println("[필터 작동 - 로그인 검사] 처리 중에 에러 발생");
 			e.printStackTrace();
+			((HttpServletResponse)response).sendError(401); // 로그인페이지로 이동
 
 		}
 

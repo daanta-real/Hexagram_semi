@@ -160,7 +160,7 @@ startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>, lastBlock = <%=l
 	<%if(search){%>
 		<a href="list.jsp?column=<%=column %>&keyword<%=keyword %>&p=<%=startBlock - 1%>">[이전]</a>
 	<%}else{ %>
-		<a href="list.jsp?p=<%=startBlock - 1 %>">[이전]</a>
+		<a href="list.jsp?page=<%=startBlock - 1 %>">[이전]</a>
 	<%} %>	
 <%}else{%>
 	<a>[이전]</a>
@@ -170,7 +170,7 @@ startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>, lastBlock = <%=l
 	<%if(search){ %>
 		<a href="list.jsp?column=<%=column %>&keyword<%=keyword %>&p=<%=i %>"><%=i %></a>
 	<%}else{ %>
-		<a href="list.jsp?p=<%=i %>"><%=i %></a>
+		<a href="list.jsp?page=<%=i %>"><%=i %></a>
 	<%} %>
 <%} %>
 
@@ -178,7 +178,7 @@ startBlock = <%=startBlock %>, finishBlock = <%=finishBlock %>, lastBlock = <%=l
 	<%if(search){%>
 		<a href="list.jsp?column=<%=column %>&keyword<%=keyword %>&p=<%=finishBlock + 1%>">[다음]</a>
 	<%}else{ %>
-		<a href="list.jsp?p=<%=finishBlock + 1 %>">[다음]</a>
+		<a href="list.jsp?page=<%=finishBlock + 1 %>">[다음]</a>
 	<%} %>	
 <%}else{ %>
 	<a>[다음]</a>

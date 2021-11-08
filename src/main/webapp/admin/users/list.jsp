@@ -1,4 +1,4 @@
-<%@page import="beans.Pagination"%>
+<%@page import="beans.Pagination_users"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="java.util.List"%>
 <%@page import="beans.UsersDao"%>
@@ -12,41 +12,48 @@
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
-<% String root = request.getContextPath(); %>
+<%String root = request.getContextPath();%>
+<!-- 페이지 내용 시작 -->
 
 <%
-	//회원 목록 페이징
-	Pagination pn = new Pagination(request);
-	pn.setPageSize(20);
-	pn.usersCalculater();	
+// 1. 변수 준비
+String column = request.getParameter("column");
+String keyword = request.getParameter("keyword");
+boolean isSearchMode = column != null && !column.equals("");
+UsersDao usersDao = new UsersDao();
+
+// 2. 회원 목록 페이징
+Pagination_users<UsersDao, UsersDto> pn = new Pagination_users<>(request, usersDao);
+pn.setPageSize(20);
+pn.calculate();
+System.out.println("페이지네이션 정보: " + pn);
 %>
-<!-- 페이지 내용 시작 -->
 
  <!-- 검색 -->
     <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post">
 	     <select name="column">
 	    	<option value="">항목선택</option>
-			<%if(pn.columnIs("users_id")) {%>
+			<%if(pn.columnValExists("users_id")) {%>
 	    	<option value="users_id" selected>아이디</option>
 	    	<%}else {%>
 	    	<option value="users_id">아이디</option>
 	    	<%} %>
-	    	<%if(pn.columnIs("users_nick")) {%>
+	    	<%if(pn.columnValExists("users_nick")) {%>
 	    	<option value="users_nick" selected>닉네임</option>
 	    	<%}else {%>
 	    	<option value="users_nick">닉네임</option>
 	    	<% }%>
-	    	<%if(pn.columnIs("users_email")) {%>
+	    	<%if(pn.columnValExists("users_email")) {%>
 	    	<option value="users_email" selected>이메일</option>
 	    	<%}else {%>
 	    	<option value="users_email">이메일</option>
 	    	<%} %>
-	    	<%if(pn.columnIs("users_phone")) {%>
+	    	<%if(pn.columnValExists("users_phone")) {%>
 	    	<option value="users_phone" selected>전화번호</option>
 	    	<%}else {%>
 	    	<option value="users_phone">전화번호</option>
 	    	<% }%>
-	    	<%if(pn.columnIs("users_grade")) {%>
+	    	<%if(pn.columnValExists("users_grade")) {%>
 	    	<option value="users_grade" selected>회원등급</option>
 	    	<%}else {%>
 	    	<option value="users_grade">회원등급</option>
@@ -73,8 +80,12 @@
 		</tr>
 	</thead>
 	<tbody>
-	<%for(UsersDto usersDto : pn.getUsersList()) {
-		String usersEmail = usersDto.getUsersEmail(); if(usersEmail == null || usersEmail.equals("")) usersEmail = " "; 
+	<%
+	List<UsersDto> list = pn.getResultList();
+	System.out.println("출력할 회원 수: " + list.size());
+	for(UsersDto usersDto : list) {
+		String usersEmail = usersDto.getUsersEmail();
+		if(usersEmail == null || usersEmail.equals("")) usersEmail = " ";
 	%>
 		<tr>
 			<td align="center"><%=usersDto.getUsersIdx() %></td>
@@ -100,7 +111,7 @@
 <!-- 페이지 네비게이터 검색 / 목록-->
 <DIV>
 <%if(pn.isPreviousAvailable()) {%>
-	<%if(pn.searchUsers()) {%>
+	<%if(pn.isSearchMode()) {%>
 		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getStartBlock()-1 %>">&lt;</a>
 	<%} else{ %>
 		<a href="list.jsp?page=<%=pn. getPreviousBlock()%>">&lt;</a>
@@ -110,7 +121,7 @@
 <%} %>
 
 <%for(int i = pn.getStartBlock() ; i <= pn.getRealLastBlock() ; i++) {%>
-	<%if(pn.searchUsers()) { %>
+	<%if(pn.isSearchMode()) { %>
 		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
 	<%}else{ %>
 		<a href="list.jsp?page=<%=i %>"><%=i %></a>
@@ -118,7 +129,7 @@
 <%} %>
 
 <%if(pn.isNextAvailable()) {%>
-	<%if(pn.searchUsers()) {%>
+	<%if(pn.isSearchMode()) {%>
 		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock() %>">&gt;</a>
 	<%} else{ %>
 		<a href="list.jsp?page=<%=pn.getNextBlock()%>">&gt;</a>

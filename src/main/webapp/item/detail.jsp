@@ -67,8 +67,10 @@
 	    margin-right:0;
 	}
 
+	.row{
+	margin-top: 5px; margin-bottom: 5px;
+	}
 	
-	.row{margin-top: 5px; margin-bottom: 5px;}
 	.left {
 	    text-align: left !important;
 	}
@@ -250,7 +252,8 @@ request.getSession().setAttribute("boardCountView", boardCountView);
  
  	 <div class="row center">
             <!-- 지역 표시 -->
-			<h3><%=itemDto.getItemAddress().substring(0,2)%></h3>
+            <%String area = itemDto.getAdressCity()+" "+itemDto.getAdressCitySub();%>
+			<h3><%=area%></h3>
     </div>
     
     <div class="row center">
@@ -303,7 +306,7 @@ request.getSession().setAttribute("boardCountView", boardCountView);
 				
 				<tr height="400px">
 					<th>상세정보</th>
-					<td><pre><%=itemDto.getItemDetail()%></pre></td>
+					<td><%=itemDto.getItemDetail()%></td>
 				</tr>
 				
 				<tr>
@@ -464,10 +467,10 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 		
 		
 	<%}else{%>
-<h3 align="center">댓글이 없습니다.</h3>
+<h3 align="center gapy">댓글이 없습니다.</h3>
 	<%} %>
 	
-<div class="row center">
+<div class="row center gapy">
 	<h3>[댓글 작성]</h3>
 </div>
 	
@@ -489,11 +492,14 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 <!-- 필터를 통해서 댓글 수정 및 삭제 금지하는 필터 설정을 해야한다!!!!!!!!!!!!!!!! -->
 	
 <!-- 이전글 다음글 -->
-<!-- 수정 삭제 새글 리모컨 픽스 추가 -->
-<!-- 작성일 작성시간 몇분전 몇일 전 표시하기. -->
-<!-- 테이블 디자인 변경 -->
 
-<!-- 맵의 xy좌표 구현 -->
+<!-- 수정 삭제 새글 리모컨 픽스 추가 -->
+<!-- 사이드 바 구현 -->
+
+<!-- 작성일 작성시간 몇분전 몇일 전 표시하기. -->
+
+<!-- 지역별 리스트 구현 -->
+<!-- 사이드바 혹은 슬라이드바를 통해서 리스트 검색 가능케하기 -->
 
 <!-- 페이지 내용 끝. -->
 </SECTION>

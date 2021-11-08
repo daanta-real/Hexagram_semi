@@ -36,8 +36,8 @@ public class UsersDto {
 	public String  getUsersId    () { return usersId   ; }
 	public String  getUsersPw    () { return usersPw   ; }
 	public String  getUsersNick	 () { return usersNick ; }
-	public String  getUsersEmail () { return usersEmail; }
-	public String  getUsersPhone () { return usersPhone; }
+	public String  getUsersEmail () { return usersEmail == null ? "" : usersEmail; }
+	public String  getUsersPhone () { return usersPhone == null ? "" : usersPhone; }
 	public String  getUsersGrade () { return usersGrade; }
 	public Date    getUsersJoin  () { return usersJoin ; }
 	public Integer getUsersPoint () { return usersPoint; }
@@ -60,16 +60,5 @@ public class UsersDto {
 			+ usersNick + ", usersEmail=" + usersEmail + ", usersPhone=" + usersPhone + ", usersGrade=" + usersGrade
 			+ ", usersJoin=" + usersJoin + ", usersPoint=" + usersPoint +"]";
 	}
-	
-	//추가 : null 값 치환 usersEmail, usersPhone
-	public String getUsersEmailNull() {
-		if(usersEmail == null) return "";
-		else return usersEmail;
-	}
-	public String getUsersPhoneNull() {
-		if(usersPhone == null) return "";
-		else return usersPhone;
-	}
-	
 
 }

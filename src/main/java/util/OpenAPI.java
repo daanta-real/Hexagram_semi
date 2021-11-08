@@ -18,11 +18,14 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import system.Settings;
+
 public class OpenAPI {
 
 
 	public static void main(String[] args) {
-
+		String APIKey = Settings.API_KEY_TOUR;
+		String ServiceKey = "?ServiceKey="+APIKey;
 
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		List<String[]> strList = new ArrayList<>();
@@ -33,7 +36,7 @@ public class OpenAPI {
 
 			@SuppressWarnings("unused")
 			String urlString = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList"
-					+ "?ServiceKey=8449nJCdkPtXHEe5cmeJbx9PwaXdOWgXRrm%2BL7ooFLzFw%2FQHA8kMJA57Q%2FvGXRb59Ih7utDWjQqkYPBFKungEQ%3D%3D"
+					+ ServiceKey
 					+ "&contentTypeId=12&areaCode=1&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y"
 					+ "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo="+pageNo+"";
 
@@ -44,7 +47,7 @@ public class OpenAPI {
 
 			StringBuffer buffer_url= new StringBuffer();
 			buffer_url.append("http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword");
-			buffer_url.append("?ServiceKey=8449nJCdkPtXHEe5cmeJbx9PwaXdOWgXRrm%2BL7ooFLzFw%2FQHA8kMJA57Q%2FvGXRb59Ih7utDWjQqkYPBFKungEQ%3D%3D");
+			buffer_url.append(ServiceKey);
 			buffer_url.append("&keyword=");
 			buffer_url.append(keyword);
 			buffer_url.append("&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo=");

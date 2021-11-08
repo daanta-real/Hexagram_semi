@@ -5,6 +5,11 @@ import javax.servlet.http.HttpSession;
 
 public class GrantChecker {
 
+	// 기본
+	// 권한 관련 문자가 변경될 상황을 대비하여 미리 관련변수를 지정해 두는 바임.
+	public static final String GRADE_ADMIN     = "관리자";
+	public static final String GRADE_REGULAR   = "정회원";
+	public static final String GRADE_ASSOCIATE = "준회원";
 	private GrantChecker() { super(); }
 
 	// 권한검사: 현재 세션의 유저에게 타겟id 데이터의 조작권한이 있는지 검사.
@@ -24,9 +29,9 @@ public class GrantChecker {
 
 		// 2. 요청자가 관리자인 경우, 무조건 프리패스 (바로 true 리턴)
 		System.out.println("[권한확인] 2. 관리자 여부 검사.. ");
-		boolean isAdmin = sessionGrade.equals(UsersUtils.GRADE_ADMIN);
+		boolean isAdmin = sessionGrade.equals(GRADE_ADMIN);
 		if(isAdmin) {
-			System.out.println(UsersUtils.GRADE_ADMIN + " 등급입니다. 권한 확인되었습니다.");
+			System.out.println(GRADE_ADMIN + " 등급입니다. 권한 확인되었습니다.");
 			return true;
 		} else {
 			System.out.println("관리자가 아닙니다.");
