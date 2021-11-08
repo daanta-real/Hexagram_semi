@@ -1,6 +1,7 @@
 package servlet.course;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +22,9 @@ public class CourseItemDeleteServlet extends HttpServlet{
 			
 			int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
 			int courseSequnce = Integer.parseInt(req.getParameter("courseSequnce"));
+			String city = req.getParameter("city");
+			if(city.length() != 4) city = city.substring(0,2);
+			
 			
 			CourseItemDao courseItemDao = new CourseItemDao();
 			CourseItemDto courseItemDto = new CourseItemDto();
@@ -29,7 +33,7 @@ public class CourseItemDeleteServlet extends HttpServlet{
 			
 			courseItemDao.delete(courseItemDto);
 			
-			resp.sendRedirect("insert.jsp?courseSequnce="+courseSequnce);
+			resp.sendRedirect("insert.jsp?courseSequnce="+courseSequnce+"&city="+URLEncoder.encode(city,"UTF-8"));
 			
 		}catch (Exception e) {
 			// TODO: handle exception

@@ -167,7 +167,7 @@ List<ItemDto> listchek = itemDao.getCityList(city);
 <%for(CourseItemDto courseItemDto : courseItemList) {
 ItemDto showItemDto = itemDao.get(courseItemDto.getItemIdx());
 %>
-<a href="delete_course_item.nogari?courseSequnce=<%=courseSequnce%>&itemIdx=<%=courseItemDto.getItemIdx()%>">
+<a href="delete_course_item.nogari?courseSequnce=<%=courseSequnce%>&itemIdx=<%=courseItemDto.getItemIdx()%>&city=<%=city%>">
 <!-- 도시명은 아마,, 다시 돌아와서 최신화? 아니면 그대로 보여주기.. -->
 <%=showItemDto.getItemName()%></a>
 <br>
