@@ -348,7 +348,7 @@ public class UsersDao implements PaginationInterface<UsersDto> {
 		// SQL 준비
 		String sql = "SELECT * FROM ( "
 						+ " SELECT ROWNUM RN, TMP.* FROM( "
-							+ " SELECT * FROM users WHERE INSTR(#1, ?) > 0 "
+							+ " SELECT * FROM users WHERE INSTR(#1, ?) > 0 ORDER BY users_idx ASC"
 						  + " )TMP"
 						+ " )WHERE RN BETWEEN ? AND ?";
 		sql = sql.replace("#1", column);
@@ -389,7 +389,7 @@ public class UsersDao implements PaginationInterface<UsersDto> {
 		// SQL 준비
 		String sql = "SELECT * FROM ( "
 						+ " SELECT ROWNUM RN, TMP.* FROM( "
-					+ " SELECT * FROM users "
+					+ " SELECT * FROM users ORDER BY users_idx ASC"
 				  + ")TMP "
 				+ ")WHERE RN BETWEEN ? AND ?";
 		Connection conn = JdbcUtils.connect3();
