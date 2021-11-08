@@ -50,9 +50,9 @@ public class CourseItemInsertServlet extends HttpServlet{
 		    	
 		    	boolean isSameCity = itemDto.getItemAddress().substring(0, 2).equals(itemDtoCheck.getItemAddress().substring(0, 2));
 
+		    	String city = itemDtoCheck.getAdressCity();
+		    	if(city.length() != 4) city = city.substring(0,2);
 		    	if(!isContainItem && isSameCity) {
-			    	String city = itemDtoCheck.getAdressCity();
-			    	if(city.length() != 4) city = city.substring(0,2);
 		    		
 			    	courseItemDao.insert(courseItemDto);
 //					코스 아이템 DB에 생성된 코스번호로 아이템을 추가한다.
@@ -60,7 +60,7 @@ public class CourseItemInsertServlet extends HttpServlet{
 					resp.sendRedirect("insert.jsp?courseSequnce="+courseSequnce+"&city="+URLEncoder.encode(city,"UTF-8"));
 //					정상적으로 중복확인을 하였다면 추가 후에 에러없이 insert.jsp에 다시 코스번호를 전달한다.
 		    	}else {
-		    		resp.sendRedirect("insert.jsp?error&courseSequnce="+courseSequnce);
+		    		resp.sendRedirect("insert.jsp?error&courseSequnce="+courseSequnce+"&city="+URLEncoder.encode(city,"UTF-8"));
 		    	}
 //		    	리스트 첫번째에 들어간 도시명이랑 같은지만 비교해주자.
 		    
