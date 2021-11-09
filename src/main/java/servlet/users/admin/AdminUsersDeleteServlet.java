@@ -18,13 +18,14 @@ public class AdminUsersDeleteServlet extends HttpServlet{
 		try {
 			//회원 탈퇴 처리를 위한  usersId 파라미터 값
 			String usersId = req.getParameter("usersId");
-
+			System.out.println("[관리자 - 회원탈퇴] 시도. 아이디 : " + usersId);
 			//탈퇴 처리
 			UsersDao usersDao = new UsersDao();
 			boolean isDelete = usersDao.delete(usersId);
 
 			//탈퇴 성공시 회원목록 페이지로 돌아가기
 			if(isDelete) {
+				System.out.println("[관리자 - 회원탈퇴] 완료. 아이디 : " + usersId);
 				resp.sendRedirect(req.getContextPath()+"/admin/users/list.jsp?delete&usersId="+usersId);
 			}
 

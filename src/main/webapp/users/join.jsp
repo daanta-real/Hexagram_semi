@@ -4,6 +4,7 @@
 <HEAD>
 <TITLE>노가리투어 - 회원 가입</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
+
 </HEAD>
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
