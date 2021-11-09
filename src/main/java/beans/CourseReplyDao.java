@@ -14,14 +14,12 @@ public class CourseReplyDao {
 	public void insert(CourseReplyDto courseReplyDto) throws Exception {
 		Connection con = JdbcUtils.connect3();
 		
-		String sql = "insert into course_reply values(?, ?, ?, ?, sysdate, null, ?, 0)";
+		String sql = "insert into course_reply values(course_reply_seq.nextval, ?, ?, ?, sysdate, null, 0, 0)";
 		PreparedStatement ps = con.prepareStatement(sql);
-		
-		ps.setInt(1, courseReplyDto.getCourseReplyIdx());
-		ps.setInt(2, courseReplyDto.getUsersIdx());
-		ps.setInt(3, courseReplyDto.getCourseIdx());
-		ps.setString(4, courseReplyDto.getCourseReplyDetail());
-		ps.setInt(5, courseReplyDto.getCourseReplyIdx());
+	
+		ps.setInt(1, courseReplyDto.getUsersIdx());
+		ps.setInt(2, courseReplyDto.getCourseIdx());
+		ps.setString(3, courseReplyDto.getCourseReplyDetail());
 		ps.execute();
 		
 		con.close();
@@ -34,7 +32,7 @@ public class CourseReplyDao {
 		String sql = "update course_reply set course_reply_detail = ? where course_reply_idx = ?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, courseReplyDto.getCourseReplyDetail());
-		ps.setInt(2, courseReplyDto.getCourseIdx());
+		ps.setInt(2, courseReplyDto.getCourseReplyIdx());
 		
 		int result = ps.executeUpdate();
 		
@@ -62,7 +60,7 @@ public class CourseReplyDao {
 	public List<CourseReplyDto> list(int courseIdx) throws Exception {
 		Connection con = JdbcUtils.connect3();
 		
-		String sql = "select * from course_reply where course_idx = ? order by course_idx dese";
+		String sql = "select * from course_reply where course_idx = ? order by course_idx desc";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, courseIdx);
 		ResultSet rs = ps.executeQuery();
@@ -76,7 +74,7 @@ public class CourseReplyDao {
 			courseReplyDto.setCourseReplyDetail(rs.getString("course_reply_detail"));
 			courseReplyDto.setCourseReplyDate(rs.getDate("course_reply_date"));
 			courseReplyDto.setCourseReplySuperno(rs.getInt("course_reply_superno"));
-			courseReplyDto.setCourseReplyGroupno(rs.getInt("course_reply_group"));
+			courseReplyDto.setCourseReplyGroupno(rs.getInt("course_reply_groupno"));
 			courseReplyDto.setCourseReplyDepth(rs.getInt("course_reply_depth"));
 			
 			list.add(courseReplyDto);
