@@ -1,6 +1,7 @@
 package servlet.course;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,17 +21,17 @@ public class CourseItemInsertServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			req.setCharacterEncoding("UTF-8");
-
+			
 			
 			int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
 			int courseSequnce = Integer.parseInt(req.getParameter("courseSequnce"));
-			String city = req.getParameter("city");
 			
 			CourseItemDao courseItemDao = new CourseItemDao();
 			CourseItemDto courseItemDto = new CourseItemDto();
 			courseItemDto.setCourseIdx(courseSequnce);
 			courseItemDto.setItemIdx(itemIdx);
 			
+			ItemDao itemDao = new ItemDao();
 			
 //			데이터를 넣기전에 중복된 값인지 체크해서 에러를 발생시켜줘야한다. 있다면 데이터를 추가시키지 않는다.
 		    List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
@@ -43,26 +44,35 @@ public class CourseItemInsertServlet extends HttpServlet{
 		    	boolean isContainItem = courseItemList.indexOf(itemIdxBox) >= 0;
 		    	
 		    	//같은 도시명인지 확인을 해줘야 한다.
-		    	ItemDao itemDao = new ItemDao();
 		    	
 		    	ItemDto itemDtoCheck = itemDao.get(courseItemList.get(0).getItemIdx());
 		    	ItemDto itemDto = itemDao.get(itemIdx);
 		    	
 		    	boolean isSameCity = itemDto.getItemAddress().substring(0, 2).equals(itemDtoCheck.getItemAddress().substring(0, 2));
 
+		    	String city = itemDtoCheck.getAdressCity();
+		    	if(city.length() != 4) city = city.substring(0,2);
 		    	if(!isContainItem && isSameCity) {
+		    		
 			    	courseItemDao.insert(courseItemDto);
 //					코스 아이템 DB에 생성된 코스번호로 아이템을 추가한다.
-					resp.sendRedirect("insert.jsp?courseSequnce="+courseSequnce);
+			    	resp.setCharacterEncoding("UTF-8");
+					resp.sendRedirect("insert.jsp?courseSequnce="+courseSequnce+"&city="+URLEncoder.encode(city,"UTF-8"));
 //					정상적으로 중복확인을 하였다면 추가 후에 에러없이 insert.jsp에 다시 코스번호를 전달한다.
 		    	}else {
-		    		resp.sendRedirect("insert.jsp?error&courseSequnce="+courseSequnce);
+		    		resp.sendRedirect("insert.jsp?error&courseSequnce="+courseSequnce+"&city="+URLEncoder.encode(city,"UTF-8"));
 		    	}
 //		    	리스트 첫번째에 들어간 도시명이랑 같은지만 비교해주자.
 		    
 		    }else {
+		    	ItemDto getCityItemDto = itemDao.get(itemIdx);
+		    	String city = getCityItemDto.getAdressCity();
+		    	if(city.length() != 4) city = city.substring(0,2);
+		    	
 		    	courseItemDao.insert(courseItemDto);
-				resp.sendRedirect("insert.jsp?courseSequnce="+courseSequnce);
+		    	
+		    	
+				resp.sendRedirect("insert.jsp?courseSequnce="+courseSequnce+"&city="+URLEncoder.encode(city,"UTF-8"));
 		    }
 
 //		    딜리트 까지만.

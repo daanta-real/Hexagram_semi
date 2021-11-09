@@ -47,7 +47,7 @@ List<CourseDto> list = courseDao.list();
 					<tr>
 						<td><%=courseDto.getCourseIdx() %></td>
 						<td>
-						<a href="detail.jsp?courseIdx=<%=courseDto.getCourseName() %>">
+						<a href="detail.jsp?courseIdx=<%=courseDto.getCourseIdx()%>">
 						<%=courseDto.getCourseName() %>
 						</a>
 						</td>

@@ -35,7 +35,7 @@ public class CourseInsertServlet extends HttpServlet{
 			courseDao.insertWithSequence(courseDto);
 			
 //			추후에 detail.jsp로 보낼것!!!!!
-			resp.sendRedirect("list.jsp");
+			resp.sendRedirect("detail.jsp?courseIdx="+courseIdx);
 			
 		}catch (Exception e) {
 			e.printStackTrace();
