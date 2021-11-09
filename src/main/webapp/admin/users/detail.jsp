@@ -16,6 +16,17 @@
 	UsersDao usersDao = new UsersDao();
 	UsersDto usersDto = usersDao.get(usersIdx);
 %>
+<script>
+function deleteConfirm(){
+	var deleteConfirm = window.confirm("탈퇴를 진행할까요?");
+	console.log(deleteConfirm);
+	if(deleteConfirm == true){
+		location.href="unregister.nogari?usersId=<%=usersDto.getUsersId()%>"
+	}else{
+		location.href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"
+	}
+}
+</script>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
 <!-- 페이지 내용 시작 -->
@@ -67,9 +78,10 @@
 	<a href="<%=root%>/admin/users/list.jsp">
 		<input type="button" value="회원목록으로 돌아가기">
 	</a>
-	<a href="<%=root%>/admin/users/unregister.nogari?usersId=<%=usersDto.getUsersId() %>">
-		<input type="button" value="회원탈퇴 처리">
-	</a>
+		<input type="button" value="회원탈퇴 처리" onclick="deleteConfirm();">
+<%-- 	
+	<a href="<%=root%>/admin/users/unregister.nogari?usersId=<%=usersDto.getUsersId() %>"></a> 
+--%>
 	
 <!-- 페이지 내용 끝. -->
 </SECTION>
