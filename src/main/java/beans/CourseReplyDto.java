@@ -100,7 +100,10 @@ public class CourseReplyDto {
 		return f.format(this.courseReplyDate);
 	}
 
-
+	//추가 : 답변 글인지 확인하는 메소드
+	public boolean hasDepth() {
+		return this.courseReplyDepth > 0;
+	}
 	public CourseReplyDto() {
 		super();
 	}
