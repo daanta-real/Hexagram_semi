@@ -17,15 +17,20 @@
 	UsersDto usersDto = usersDao.get(usersIdx);
 %>
 <script>
-function deleteConfirm(){
-	var deleteConfirm = window.confirm("탈퇴를 진행할까요?");
-	console.log(deleteConfirm);
-	if(deleteConfirm == true){
-		location.href="unregister.nogari?usersId=<%=usersDto.getUsersId()%>"
-	}else{
-		location.href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"
-	}
-}
+window.addEventListener("load", function(){
+	//탙퇴버튼 클릭시 확인창을 보여주고 확인이면 탈퇴진행, 취소면 다시 회원상세페이지 보여주기
+	document.querySelector("#deleteConfirm").addEventListener("click", function(){
+		var deleteConfirm = confirm("정말로 탈퇴를 진행하실 건가요?");
+		console.log(deleteConfirm);
+		if(deleteConfirm == true){
+			console.log("[관리자-회원관리]탈퇴진행");
+			location.href = "unregister.nogari?usersId=<%=usersDto.getUsersId()%>";
+		}else{
+			console.log("[관리자-회원관리]탈퇴취소]");
+			location.href = "detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>";
+		}
+	});
+});
 </script>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
@@ -78,7 +83,7 @@ function deleteConfirm(){
 	<a href="<%=root%>/admin/users/list.jsp">
 		<input type="button" value="회원목록으로 돌아가기">
 	</a>
-		<input type="button" value="회원탈퇴 처리" onclick="deleteConfirm();">
+		<input type="button" value="회원탈퇴 처리" id="deleteConfirm">
 <%-- 	
 	<a href="<%=root%>/admin/users/unregister.nogari?usersId=<%=usersDto.getUsersId() %>"></a> 
 --%>
