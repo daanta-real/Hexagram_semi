@@ -44,12 +44,10 @@ System.out.println("[관광지 목록] 페이지네이션 정보: " + pn);
 ItemDto itemDto = new ItemDto();
 List<ItemDto> list;
 if(isSearchMode){
-	list = itemDao.searchList
-	(pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
+	list = itemDao.searchList(pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
 }
 else{
-	list = itemDao.list
-	(pn.getBegin(), pn.getEnd());
+	list = itemDao.list(pn.getBegin(), pn.getEnd());
 }
 String title = isSearchMode ? "["+pn.getKeyword()+"]" + " 검색" : "관광지 목록";
 
