@@ -128,7 +128,7 @@ public class UsersDao implements PaginationInterface<UsersDto> {
 		// 완성된 SQL 구문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();
 		Integer result = null;
-		if(rs.next()) result = rs.getInt(0);
+		if(rs.next()) result = rs.getInt(1);
 
 		// 마무리
 		conn.close();

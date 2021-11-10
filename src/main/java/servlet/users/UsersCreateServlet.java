@@ -55,6 +55,9 @@ public class UsersCreateServlet extends HttpServlet {
 			// 5. 요청 결과에 따른 후처리
 			if(isSucceed) {
 				System.out.println("[회원 가입] 5. 가입에 성공했습니다.");
+				//회원등륵시에는 등급을 받지 않기 때문에 세션에 등급도 넘어가려면 
+				//회원등록시 발급받은 시퀀스(seqNo=usersIdx)로 다시 조회하여 dto정보를 불러와야 함  
+				dto = dao.get(seqNo);
 				HttpSession session = req.getSession();
 				Sessioner.login(session, dto); // idx(시퀀스로 만들어논 것), id, grade 세 개 넘어감.
 				resp.sendRedirect(req.getContextPath() + "/users/join_success.jsp");
