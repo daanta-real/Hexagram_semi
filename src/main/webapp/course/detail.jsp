@@ -41,8 +41,9 @@ ItemFileDao itemFileDao = new ItemFileDao();
 <%
 	//댓글 게시물 작성자 확인을 위한 courseDto 선언
 	CourseDto courseDto = new CourseDto();
+	//댓글 리스트 불러오기
 	CourseReplyDao courseReplyDao = new CourseReplyDao();
-	List<CourseReplyDto> list = courseReplyDao.list(courseIdx);
+	List<CourseReplyDto> list = courseReplyDao.listByTreeSort();
 %>
 
 <h1>현재 코스의 아이템 목록 보여주기</h1>
@@ -122,8 +123,16 @@ ItemFileDao itemFileDao = new ItemFileDao();
 		//본인 댓글인지 확인
 		boolean myReply = usersIdx == courseReplyDto.getUsersIdx();
 		%>
+		
 		<tr>
-			<td>
+			<td width="35%">
+				<%if(courseReplyDto.hasDepth()){ //CourseReplyDto에 메소드 추가 %>
+					<%for(int i = 0 ; i < courseReplyDto.getCourseReplyDepth() ; i++){ %>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<%} %>
+				<img src="<%=root%>/resource/image/reply.png" width="20px">
+			<%} %>
+			
 			<%=usersDto.getUsersId() %>(<%=usersDto.getUsersNick() %>)
 			<%-- 게시글 작성자라면 [작성자]라고 표시해준다 --%>
 			<%if(ownerReply){ %>
@@ -157,6 +166,21 @@ ItemFileDao itemFileDao = new ItemFileDao();
 			</td>
 		</tr>
 		<%} %>
+		
+		<%-- 대댓글 작성 창 --%>
+		<tr>
+			<td colspan="3">
+				<form action="<%=root %>/course_reply/insert.nogari" method="post">
+				<input type="hidden" name="courseIdx" value="<%=courseIdx %>">
+				
+				<%-- 대댓글 확인을 위해 댓글 번호를 같이 보내준다 --%>
+				<input type="hidden" name="courseReplyIdx" value="<%=courseReplyDto.getCourseReplyIdx() %>">
+				
+				<textarea name="courseReplyDetail" cols="110" rows="5" required></textarea>
+				<input type="submit" value="대댓글 등록">
+				</form>
+			</td>
+		</tr>
 	<%} %>
 	</tbody>
 </table>
