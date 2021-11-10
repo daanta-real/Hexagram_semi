@@ -6,7 +6,7 @@
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
-<TITLE>노가리투어 - 회원관리</TITLE>
+<TITLE>노가리투어 - 회원 목록</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
 <BODY>
@@ -17,16 +17,17 @@
 
 <%
 // 1. 변수 준비
-String column = request.getParameter("column");
-String keyword = request.getParameter("keyword");
-boolean isSearchMode = column != null && !column.equals("");
 UsersDao usersDao = new UsersDao();
-
-// 2. 회원 목록 페이징
 Pagination_users<UsersDao, UsersDto> pn = new Pagination_users<>(request, usersDao);
+boolean isSearchMode = pn.isSearchMode();
+System.out.println(
+	  "[회원 목록] 컬럼(" + request.getParameter("column") + ")"
+	+ ", 키워드(" + request.getParameter("keyword") + ")"
+	+ ", 검색모드 여부(" + isSearchMode + ")"
+);
 pn.setPageSize(20);
 pn.calculate();
-System.out.println("페이지네이션 정보: " + pn);
+System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 %>
 
  <!-- 검색 -->
@@ -75,7 +76,7 @@ System.out.println("페이지네이션 정보: " + pn);
 			<th>아이디</th>
 			<th>닉네임</th>
 			<th>이메일</th>
-			<th>회원등급</th>			
+			<th>회원등급</th>
 			<th>회원관리</th>
 		</tr>
 	</thead>

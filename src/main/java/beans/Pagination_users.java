@@ -127,7 +127,7 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 
 	// UsersList 계산 메소드
-	public void calculate() throws Exception{
+	public void calculate() throws Exception {
 
 		// 1. 출력할 rownum 범위 계산
 		end   = page * pageSize;      // 페이지의 마지막 rownum
@@ -159,6 +159,5 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 				+ ", startBlock=" + startBlock + ", finishBlock=" + finishBlock + ", lastBlock=" + lastBlock + ", dao="
 				+ dao + ", 검색모드?=" + isSearchMode() + ", resultList개수=" + resultList.size() + "]";
 	}
-
 
 }
