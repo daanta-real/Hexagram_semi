@@ -43,12 +43,8 @@ System.out.println("[관광지 목록] 페이지네이션 정보: " + pn);
 // 검색 및 목록 처리
 ItemDto itemDto = new ItemDto();
 List<ItemDto> list;
-if(isSearchMode){
-	list = itemDao.searchList(pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-}
-else{
-	list = itemDao.list(pn.getBegin(), pn.getEnd());
-}
+if(isSearchMode) list = itemDao.searchList(pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
+else list = itemDao.list(pn.getBegin(), pn.getEnd());
 String title = isSearchMode ? "["+pn.getKeyword()+"]" + " 검색" : "관광지 목록";
 
 // 썸네일표시를 위한 파일 조회를 위한 ItemFileDao 생성
