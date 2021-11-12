@@ -8,38 +8,18 @@
 </HEAD>
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
+
 <SECTION>
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="join_id_check.js"></script>
-<script>
-	window.addEventListener("load", function(){
-		//입력한 비밀번호와 재확인 비밀번호 일치 여부에 따른 메세지 보여주기
-		document.querySelector("input[name=reInputPw]").addEventListener("blur", function(e){
-			var usersPw = document.querySelector("input[name=usersPw]");
-			var noticePw = document.querySelector(".noticePw");
-			if(usersPw.value.length > 0 && this.value.length > 0){
-				if(usersPw.value == this.value){
-					noticePw.textContent = "";
-					console.log("비번 & 재확인비번 일치");
-					e.preventDefault();	
-				}else{
-					noticePw.textContent = "비밀번호가 일치하지 않습니다. 다시 확인해 주세요";
-					console.log("비번 & 재확인비번 불일치");
-					e.preventDefault();	
-				}			
-			}else{
-				noticePw.textContent = "입력해주세요";
-			}
-		});
-	});
-</script>
-<!-- 페이지 내용 시작 -->
 <%String root = request.getContextPath();%>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="<%=root%>/resource/js/join_id_check.js"></script>
+<script type="text/javascript" src="<%=root%>/resource/js/join_pw_recheck.js"></script>
+<!-- 페이지 내용 시작 -->
 <h1>회원 가입</h1>
 <form method='post' action='<%=root%>/users/join.nogari'>
 <table border=1>
 <tbody>       
-	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'><div></div></td></tr>
+	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'><span></span></td></tr>
 	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'></td></tr>
 	<tr>
 		<th>비번확인</th>
