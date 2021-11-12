@@ -76,6 +76,12 @@ ItemFileDao itemFileDao = new ItemFileDao();
 			</tr>
 <%} %>
 		</table>
+		<div>		
+		<jsp:include page="course_kakaomap.jsp">
+			<jsp:param value="<%=courseIdx%>" name="courseIdx"/>
+		</jsp:include>
+		</div>
+
 <!-- 페이지 내용 끝. -->
 <br><br>
 
