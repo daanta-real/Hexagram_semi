@@ -16,15 +16,19 @@
 <script type="text/javascript" src="<%=root%>/resource/js/join_pw_recheck.js"></script>
 <!-- 페이지 내용 시작 -->
 <h1>회원 가입</h1>
-<form method='post' action='<%=root%>/users/join.nogari'>
+<!-- 
+		비밀번호 입력값 일치여부 검사시 템플릿안에 로그인에도 name=usersPw가 있어서 값을 못받아 오기때문에
+		form에 id=joinForm 을 부여하여 선택자 지정시킴  
+ -->
+<form id="joinForm" method='post' action='<%=root%>/users/join.nogari'>
 <table border=1>
 <tbody>       
 	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'><span></span></td></tr>
-	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'></td></tr>
+	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'><span></span></td></tr>
 	<tr>
 		<th>비번확인</th>
 		<td>
-			<input type='password' name='reInputPw' placeholder='비밀번호 재확인'>
+			<input type='password' id='reInputPw' placeholder='비밀번호 재확인'>
 			<div class="noticePw"></div>
 		</td>
 	</tr>
