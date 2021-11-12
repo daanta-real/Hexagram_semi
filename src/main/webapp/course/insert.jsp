@@ -152,11 +152,11 @@
     
    
     if(searchByName){
-    	count = itemDao.countLastSearch(column,keyword);
+    	count = itemDao.count(column,keyword);
     }else if(searchByCity){
     	count =itemDao.countLastSearch(city);
     }else{
-    	count =itemDao.countLastList();
+    	count =itemDao.count();
     }
     
     int lastBlock = (count-1)/psize+1;
@@ -166,7 +166,7 @@
     
 	 List<ItemDto> list;
     if(searchByName){
-    	list = itemDao.searchList(column,keyword,begin,end);
+    	list = itemDao.search(column,keyword,begin,end);
     }else if(searchByCity){
     	list = itemDao.searchList(city,begin,end);
     }else{
