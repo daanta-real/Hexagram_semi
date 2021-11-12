@@ -9,6 +9,8 @@
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="join_id_check.js"></script>
 <script>
 	window.addEventListener("load", function(){
 		//입력한 비밀번호와 재확인 비밀번호 일치 여부에 따른 메세지 보여주기
@@ -37,7 +39,7 @@
 <form method='post' action='<%=root%>/users/join.nogari'>
 <table border=1>
 <tbody>       
-	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'></td></tr>
+	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'><div></div></td></tr>
 	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'></td></tr>
 	<tr>
 		<th>비번확인</th>
