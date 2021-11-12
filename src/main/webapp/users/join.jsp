@@ -8,12 +8,13 @@
 </HEAD>
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
+
 <SECTION>
-<!-- 페이지 내용 시작 -->
 <%String root = request.getContextPath();%>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script type="text/javascript" src="<%=root%>/resource/js/join_id_check.js"></script>
 <script type="text/javascript" src="<%=root%>/resource/js/join_pw_recheck.js"></script>
+<!-- 페이지 내용 시작 -->
 <h1>회원 가입</h1>
 <form method='post' action='<%=root%>/users/join.nogari'>
 <table border=1>
