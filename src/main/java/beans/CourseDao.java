@@ -87,5 +87,21 @@ public class CourseDao {
 			con.close();
 			return result;
 		}
+		
+		//게시글 댓글 개수 갱신 기능
+		public boolean countCourseReply(int courseIdx) throws Exception{
+			Connection con = JdbcUtils.connect3();
+			String sql = "update course set course_count_reply = (select count(*) from course_reply where course_idx = ?) where course_idx = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, courseIdx);
+			ps.setInt(2, courseIdx);
+			
+			int result = ps.executeUpdate();
+			
+			con.close();
+			
+			return result > 0;
+			
+		}
 
 }

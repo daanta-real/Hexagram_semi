@@ -1,4 +1,4 @@
-<%@page import="beans.Pagination"%>
+<%@page import="beans.Pagination_users"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="java.util.List"%>
 <%@page import="beans.UsersDao"%>
@@ -8,48 +8,66 @@
 <HEAD>
 <TITLE>노가리투어 - 회원관리</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
+
 </HEAD>
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
-<% String root = request.getContextPath(); %>
-
-<%
-	//회원 목록 페이징
-	Pagination pn = new Pagination(request);
-	pn.setPageSize(20);
-	pn.usersCalculater();	
-%>
+<%String root = request.getContextPath();%>
 <!-- 페이지 내용 시작 -->
 
- <!-- 검색 -->
+<%
+// 1. 변수 준비
+String column = request.getParameter("column");
+String keyword = request.getParameter("keyword");
+boolean isSearchMode = column != null && !column.equals("");
+UsersDao usersDao = new UsersDao();
+
+// 2. 회원 목록 페이징
+Pagination_users<UsersDao, UsersDto> pn = new Pagination_users<>(request, usersDao);
+pn.setPageSize(20);
+pn.calculate();
+System.out.println("페이지네이션 정보: " + pn);
+%>
+			
+<script>
+//function deleteConfirm의 매개변수로 usersId로 설정하고 onclick설정한 버튼에 매개변수로 usersDto.getUsersId()로 설정 
+function deleteConfirm(usersId){
+	var deleteConfirm = window.confirm("탈퇴를 진행할까요?");
+	console.log(deleteConfirm);
+	if(deleteConfirm == true){
+		location.href="unregister.nogari?usersId="+usersId;
+	}
+}
+</script>
+<!-- 검색 -->
     <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post">
 	     <select name="column">
 	    	<option value="">항목선택</option>
-			<%if(pn.columnIs("usersId")) {%>
-	    	<option value="usersId" selected>아이디</option>
+			<%if(pn.columnValExists("users_id")) {%>
+	    	<option value="users_id" selected>아이디</option>
 	    	<%}else {%>
-	    	<option value="usersId">아이디</option>
+	    	<option value="users_id">아이디</option>
 	    	<%} %>
-	    	<%if(pn.columnIs("usersNick")) {%>
-	    	<option value="usersNick" selected>닉네임</option>
+	    	<%if(pn.columnValExists("users_nick")) {%>
+	    	<option value="users_nick" selected>닉네임</option>
 	    	<%}else {%>
-	    	<option value="usersNick">닉네임</option>
+	    	<option value="users_nick">닉네임</option>
 	    	<% }%>
-	    	<%if(pn.columnIs("usersEmail")) {%>
-	    	<option value="usersEmail" selected>이메일</option>
+	    	<%if(pn.columnValExists("users_email")) {%>
+	    	<option value="users_email" selected>이메일</option>
 	    	<%}else {%>
-	    	<option value="usersEmail">이메일</option>
+	    	<option value="users_email">이메일</option>
 	    	<%} %>
-	    	<%if(pn.columnIs("usersPhone")) {%>
-	    	<option value="usersPhone" selected>전화번호</option>
+	    	<%if(pn.columnValExists("users_phone")) {%>
+	    	<option value="users_phone" selected>전화번호</option>
 	    	<%}else {%>
-	    	<option value="usersPhone">전화번호</option>
+	    	<option value="users_phone">전화번호</option>
 	    	<% }%>
-	    	<%if(pn.columnIs("usersGrade")) {%>
-	    	<option value="usersGrade" selected>회원등급</option>
+	    	<%if(pn.columnValExists("users_grade")) {%>
+	    	<option value="users_grade" selected>회원등급</option>
 	    	<%}else {%>
-	    	<option value="usersGrade">회원등급</option>
+	    	<option value="users_grade">회원등급</option>
 	    	<% }%>
 	    </select>
 	    <input type="text" name="keyword" placeholder="검색어입력" required value="<%=pn.getKeywordString() %>">
@@ -57,6 +75,10 @@
 	</form>
 
 <!-- 회원목록 -->
+<!-- 회원 탈퇴 리다이렉트 delete파라미터 -->
+ <%if(request.getParameter("delete") != null) {%>
+ 	<h4>아이디 <%=request.getParameter("usersId") %> 회원 탈퇴 완료</h4>
+ <%} %>
 <table border="1" width="70%">
 	<thead>
 		<tr>
@@ -69,19 +91,32 @@
 		</tr>
 	</thead>
 	<tbody>
-	<%for(UsersDto usersDto : pn.getUsersList()) {
-		String usersEmail = usersDto.getUsersEmail(); if(usersEmail == null || usersEmail.equals("")) usersEmail = " "; 
+
+	<%
+	List<UsersDto> list = pn.getResultList();
+	System.out.println("출력할 회원 수: " + list.size());
+	
+	for(UsersDto usersDto : list) {
+		String usersEmail = usersDto.getUsersEmail();
+		if(usersEmail == null || usersEmail.equals("")) usersEmail = " ";
 	%>
+
 		<tr>
 			<td align="center"><%=usersDto.getUsersIdx() %></td>
-			<!-- 회원 아이디를 누르면 회우너 상세정보 페이지로 이동 -->
-			<td><a href="detail.jsp"><%=usersDto.getUsersId() %></a></td>
+			<!-- 회원 아이디를 누르면 회원 상세정보 페이지로 이동 -->
+			<td>
+				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">
+					<%=usersDto.getUsersId() %>
+				</a>
+			</td>
 			<td><%=usersDto.getUsersNick() %></td>
 			<td><%=usersEmail%></td>
 			<td align="center"><%=usersDto.getUsersGrade() %></td>
 			<th align="center">
-				<a href="detail.jsp">상세</a>
-				<a href="edit.jsp">수정</a>
+				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">상세</a> |
+				<a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">수정</a> |
+<%-- 		<a href="unregister.nogari?usersId=<%=usersDto.getUsersId()%>">탈퇴</a> --%>
+				<button onclick="deleteConfirm('<%=usersDto.getUsersId()%>');">탈퇴</button>
 			</th>
 		</tr>
 	<%} %>
@@ -91,28 +126,28 @@
 <!-- 페이지 네비게이터 검색 / 목록-->
 <DIV>
 <%if(pn.isPreviousAvailable()) {%>
-	<%if(pn.isSearch()) {%>
-		<a href="users/list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getStartBlock()-1 %>">&lt;</a>
+	<%if(pn.isSearchMode()) {%>
+		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getStartBlock()-1 %>">&lt;</a>
 	<%} else{ %>
-		<a href="users/list.jsp?page=<%=pn. getPreviousBlock()%>">&lt;</a>
+		<a href="list.jsp?page=<%=pn. getPreviousBlock()%>">&lt;</a>
 	<%} %>
 <%} else{ %>
 	<a>&lt;</a>
 <%} %>
 
 <%for(int i = pn.getStartBlock() ; i <= pn.getRealLastBlock() ; i++) {%>
-	<%if(pn.isSearch()) { %>
-		<a href="users/list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
+	<%if(pn.isSearchMode()) { %>
+		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
 	<%}else{ %>
-		<a href="users/list.jsp?page=<%=i %>"><%=i %></a>
+		<a href="list.jsp?page=<%=i %>"><%=i %></a>
 	<%} %>
 <%} %>
 
 <%if(pn.isNextAvailable()) {%>
-	<%if(pn.isSearch()) {%>
-		<a href="users/list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock() %>">&gt;</a>
+	<%if(pn.isSearchMode()) {%>
+		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock() %>">&gt;</a>
 	<%} else{ %>
-		<a href="users/list.jsp?page=<%=pn.getNextBlock()%>">&gt;</a>
+		<a href="list.jsp?page=<%=pn.getNextBlock()%>">&gt;</a>
 	<%} %>
 <%} else{%>
 	<a>&gt;</a>

@@ -1,8 +1,31 @@
 @charset "UTF-8";
 
 /* 모바일용 메뉴 숨기기 */
-#mobileMenuLayer {
-	display:none;
+.mobile { display:none; }
+
+/* 헤더 유저메뉴 부분 */
+HEADER #userContainer {
+	position:absolute; top:0; right:0;
+	padding:1rem;
+	font-size:1rem;
+    font-weight:500;
+}
+HEADER #userContainer .userInfoTxt {
+	color:var(--color6);
+}
+HEADER #userContainer span {
+	margin-left: 0.3rem; border-radius: 0.3rem; padding: 0.05rem 0.4rem;
+    color: white; font-size: 0.7rem;
+	background-color: var(--color6);
+}
+HEADER #userContainer span.admin:after {
+	background:var(--color9);
+}
+HEADER #userContainer .userButton {
+    margin-left: 0.3rem; border-radius: 0.5rem; padding: 0.05rem 0.6rem;
+    box-shadow: 0 0 1rem #8882;
+	color: var(--color8);
+    background: var(--color1);
 }
 
 /* 돋보기 전용 설정 */

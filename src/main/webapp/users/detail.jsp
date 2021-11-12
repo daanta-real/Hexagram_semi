@@ -24,7 +24,7 @@ UsersDto usersDto = usersDao.get(usersId);
 
 <!-- 페이지 내용 시작 -->
 
-<table width="300">
+<table width="60%">
 	<tbody>
 		<tr>
 			<th>아이디</th>
@@ -62,23 +62,10 @@ UsersDto usersDto = usersDao.get(usersId);
 			<th>보유 포인트</th>
 			<td><%=usersDto.getUsersPoint() %> point</td>
 		</tr>
-		<tr>
-			<th colspan="2" align="center">
-				<a href="<%=root%>/users/modify.jsp">
-					내 정보 변경하기(click!)
-				</a>
-			</th>
-		</tr>
-		<tr>
-			<th colspan="2" align="center">
-				<a href="<%=root%>/users/unregister.jsp">
-					회원탈퇴하기(ㅠㅠclick!)
-				</a>
-			</th>
-		</tr>
 	</tbody>
 </table>
-
+	<a href="<%=root%>/users/modify.jsp">내 정보 변경하기(click!)</a>
+	<a href="<%=root%>/users/unregister.jsp">회원탈퇴하기(ㅠㅠclick!)</a>				
 <!-- 페이지 내용 끝. -->
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>

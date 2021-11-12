@@ -36,21 +36,15 @@ UsersDto usersDto = usersDao.get(sessionId);
 			</tr>
 			<tr>
 				<th>닉네임 변경</th>
-				<td>
-					<input type="text" name="usersNick" value="<%=usersDto.getUsersNick() %>">
-				</td>
+				<td><input type="text" name="usersNick" value="<%=usersDto.getUsersNick() %>"></td>
 			</tr>
 			<tr>
 				<th>이메일 변경</th>
-				<td>
-					<input type="text" name="usersEmail" value="<%=usersDto.getUsersEmail() %>">
-				</td>
+				<td><input type="text" name="usersEmail" value="<%=usersDto.getUsersEmail() %>"></td>
 			</tr>
 			<tr>
 				<th>전화번호 변경</th>
-				<td>
-					<input type="text" name="usersPhone" value="<%=usersDto.getUsersPhone() %>">
-				</td>
+				<td><input type="text" name="usersPhone" value="<%=usersDto.getUsersPhone() %>"></td>
 			</tr>
 			<tr>
 				<th>회원등급</th>
@@ -69,10 +63,11 @@ UsersDto usersDto = usersDao.get(sessionId);
 			<tr>
 				<!-- 취소 시 회원정보 페이지로 이동 -->
 				<td align="center" colspan="2">
+					<input type="submit" value="변경">
 					<a href = "<%=root %>/users/detail.jsp">
 						<input type="button" value="취소">
 					</a>
-					<input type="submit" value="변경">
+					<input type='reset' value='초기화' />
 				</td>
 			</tr>
 		</tfoot>
@@ -81,9 +76,7 @@ UsersDto usersDto = usersDao.get(sessionId);
 
 <!-- 변경실패시 fail파라미터 확인하고 메세지 보여주기-->
 <%if(request.getParameter("fail") != null) {%>
-	<h5>
-		<font color="red">회원정보 변경에 실패하였습니다. 입력정보를 다시 확인해 주세요</font>
-	</h5>
+	<h5 style='color:red;'>회원정보 변경에 실패하였습니다. 입력정보를 다시 확인해 주세요</h5>
 <%} %>
 
 <!-- 페이지 내용 끝. -->

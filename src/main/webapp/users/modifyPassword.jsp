@@ -42,9 +42,7 @@
 
 <!-- 비밀번호 변경실패시 fail파라미터 확인하고 메세지 보여주기-->
 <%if(request.getParameter("fail") != null) {%>
-	<h5>
-		<font color="red">변경할 수 없는 비밀번호입니다. 다시 입력해 주세요</font>
-	</h5>
+	<h5> <font color="red">변경할 수 없는 비밀번호입니다. 다시 입력해 주세요</font> </h5>
 <%} %>
 
 
