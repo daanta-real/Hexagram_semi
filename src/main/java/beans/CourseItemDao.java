@@ -30,6 +30,20 @@ public class CourseItemDao {
 		con.close();
 		return list;
 	}
+	
+	public int getItemIdxByCourse(int courseIdx) throws Exception {
+		String sql = "SELECT * FROM course_item where course_idx=?";
+		Connection con = JdbcUtils.connect3();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, courseIdx);
+		ResultSet rs = ps.executeQuery();
+
+		rs.next();
+		int result = rs.getInt("item_idx");
+		
+		con.close();
+		return result;
+		}
 
 	public void insert(CourseItemDto courseItemDto) throws Exception {
 		String sql = "INSERT INTO course_item values(course_item_seq.nextval,?,?)";
@@ -44,13 +58,12 @@ public class CourseItemDao {
 		con.close();
 	}
 
-	public boolean delete(CourseItemDto courseItemDto) throws Exception {
-		String sql = "delete course_item where item_idx=? and course_idx=?";
+	public boolean delete(int courseIdx) throws Exception {
+		String sql = "delete course_item where course_idx=?";
 		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 
-		ps.setInt(1, courseItemDto.getItemIdx());
-		ps.setInt(2, courseItemDto.getCourseIdx());
+		ps.setInt(1, courseIdx);
 
 		int result = ps.executeUpdate();
 
