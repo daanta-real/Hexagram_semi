@@ -29,7 +29,7 @@
 }
 
 a:hover, a:link, a:visited, a:active {
-	color:inherit; text-decoration:none; /* 링크 밑줄 및 변색 차단 */ 
+	color:inherit; text-decoration:none; /* 링크 밑줄 및 변색 차단 */
 	-webkit-tap-highlight-color: transparent; /* iOS 클릭시 깜박임 방지 */
 }
 
@@ -58,7 +58,7 @@ BODY {
     border-radius:var(--main_border_radius);
 
     background: var(--color_bg);
-    box-shadow: 0 0 1rem 0 #8882;
+    box-shadow: 0 0 1rem 0 #0002;
 }
 
 /* 외곽선 */
@@ -68,15 +68,15 @@ HEADER #menuContainer,
 SECTION,
 FOOTER {
     box-sizing:border-box;
-    border:var(--main_border) solid #8882;
+    border:var(--main_border) solid #0002;
 }
 
 /* 전체 모서리 */
-HEADER, #logoContainer { 
+HEADER, #logoContainer {
 	border-top-left-radius:var(--main_border_radius);
 	border-top-right-radius:var(--main_border_radius);
 }
-FOOTER { 
+FOOTER {
 	border-bottom-left-radius:var(--main_border_radius);
 	border-bottom-right-radius:var(--main_border_radius);
 }
@@ -151,7 +151,7 @@ HEADER #logo {
 
 	box-sizing:border-box; border:0.4rem solid var(--color8);
 	padding:0.2rem;
-	
+
 	background:white;
     font-family:'mainFont'; font-size:2.2rem; line-height:1.6rem; text-align:left;
 
@@ -172,7 +172,7 @@ HEADER #menuContainer {
 
 	background:var(--color4);
 	font-size:1.4rem; color:var(--color8);
-	box-shadow: 0 0 1rem #8882;
+	box-shadow: 0 0 1rem #0002;
 }
 HEADER #menuContainer a {
 	margin:0.5rem 2rem; padding:0rem 2rem; border-radius:0.5rem;
