@@ -103,5 +103,93 @@ public class CourseDao {
 			return result > 0;
 			
 		}
+		
+		public int count() throws Exception {
+			Connection con = JdbcUtils.connect3();
+			String sql = "select count(*) from course";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			int result = rs.getInt(1);
+
+			con.close();
+			return result;
+		}
+		
+		public int count(String column,String keyword) throws Exception {
+			Connection con = JdbcUtils.connect3();
+			String sql = "select count(*) from course where(#1,?)>0";
+			sql = sql.replace("#1", column);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			int result = rs.getInt(1);
+
+			con.close();
+			return result;
+		}
+		
+		public List<CourseDto> listByRownum(int begin, int end) throws Exception {
+			String sql = "select * from( "
+					+ "select rownum rn,tmp.* from( "
+					+ "(SELECT * FROM course order by course_idx desc)tmp)) "
+					+ "where rn between ? and ?";
+			Connection con = JdbcUtils.connect3();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, begin);
+			ps.setInt(2, end);
+			ResultSet rs = ps.executeQuery();
+
+			List<CourseDto> list = new ArrayList<>();
+			while (rs.next()) {
+				CourseDto courseDto = new CourseDto();
+				courseDto.setCourseIdx(rs.getInt("course_idx"));
+				courseDto.setUsersIdx(rs.getInt("users_idx"));
+				courseDto.setCourseName(rs.getString("course_name"));
+				courseDto.setCourseDetail(rs.getString("course_detail"));
+				courseDto.setCourseDate(rs.getDate("course_date"));
+				courseDto.setCourseCountView(rs.getInt("course_count_view"));
+				courseDto.setCourseCountReply(rs.getInt("course_count_reply"));
+
+				list.add(courseDto);
+			}
+
+			con.close();
+			return list;
+		}
+		
+		public List<CourseDto> searchByRownum(String column, String keyword, int begin, int end) throws Exception {
+			String sql = "select * from( "
+					+ "select rownum rn,tmp.* from( "
+					+ "(SELECT * FROM course where instr(#1,?)>0 order by course_idx desc)tmp)) "
+					+ "where rn between ? and ?";
+			sql = sql.replace("#1", column);
+			Connection con = JdbcUtils.connect3();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ps.setInt(2, begin);
+			ps.setInt(3, end);
+			ResultSet rs = ps.executeQuery();
+
+			List<CourseDto> list = new ArrayList<>();
+			while (rs.next()) {
+				CourseDto courseDto = new CourseDto();
+				courseDto.setCourseIdx(rs.getInt("course_idx"));
+				courseDto.setUsersIdx(rs.getInt("users_idx"));
+				courseDto.setCourseName(rs.getString("course_name"));
+				courseDto.setCourseDetail(rs.getString("course_detail"));
+				courseDto.setCourseDate(rs.getDate("course_date"));
+				courseDto.setCourseCountView(rs.getInt("course_count_view"));
+				courseDto.setCourseCountReply(rs.getInt("course_count_reply"));
+
+				list.add(courseDto);
+			}
+
+			con.close();
+			return list;
+		}
 
 }
