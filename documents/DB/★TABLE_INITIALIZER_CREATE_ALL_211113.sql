@@ -10,14 +10,14 @@ CLEAR SCREEN;
 -- 테이블/시퀀스 새로 정의 (users)
 CREATE SEQUENCE users_seq;
 CREATE TABLE    users (
-  users_idx   NUMBER(20)   NOT NULL CONSTRAINT users_PK PRIMARY KEY,
-  users_id    VARCHAR2(20) ,
+  users_idx   NUMBER(20)   CONSTRAINT users_idx_not_null NOT NULL CONSTRAINT users_PK PRIMARY KEY,
+  users_id    VARCHAR2(20) CONSTRAINT users_id_unique UNIQUE,
   users_pw    VARCHAR2(20) ,
   users_nick  VARCHAR2(30) ,
   users_email VARCHAR2(30) ,
   users_phone CHAR(13)     ,
-  users_join  DATE         DEFAULT SYSDATE NOT NULL,
-  users_point NUMBER(20)   DEFAULT 0       NOT NULL,
+  users_join  DATE         DEFAULT SYSDATE  CONSTRAINT users_join_not_null NOT NULL,
+  users_point NUMBER(20)   DEFAULT 0        CONSTRAINT users_number_not_null NOT NULL,
   users_grade CHAR(9)      DEFAULT '준회원' CONSTRAINT users_grade_check_in CHECK(users_grade IN('준회원', '정회원', '관리자'))
 );
 
