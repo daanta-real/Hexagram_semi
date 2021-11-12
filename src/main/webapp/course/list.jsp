@@ -9,6 +9,7 @@
     
     <%
     String root = request.getContextPath();
+   
     
     String column = request.getParameter("column");
     String keyword = request.getParameter("keyword");
@@ -103,7 +104,10 @@
 	<input type="submit" value="검색">
 </form>
 
+<%if(request.getSession().getAttribute("usersIdx") != null){ %>
 <h2><a href="insert_sequence.nogari">글 쓰기</a></h2>
+<%} %>
+
 
 <%if(!list.isEmpty()) {%>
 			<table border="1" width="800px">
