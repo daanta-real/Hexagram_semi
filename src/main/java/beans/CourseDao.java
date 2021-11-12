@@ -75,6 +75,19 @@ public class CourseDao {
 			return result > 0;
 		}
 		
+		public boolean delete(int courseIdx) throws Exception {
+			String sql = "delete course where course_idx=?";
+			Connection con = JdbcUtils.connect3();
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ps.setInt(1, courseIdx);
+
+			int result = ps.executeUpdate();
+
+			con.close();
+			return result > 0;
+		}
+		
 		public int getSequence() throws Exception {
 			String sql = "select course_seq.nextval from dual";
 			Connection con = JdbcUtils.connect3();
@@ -119,7 +132,7 @@ public class CourseDao {
 		
 		public int count(String column,String keyword) throws Exception {
 			Connection con = JdbcUtils.connect3();
-			String sql = "select count(*) from course where(#1,?)>0";
+			String sql = "select count(*) from course where instr(#1,?)>0";
 			sql = sql.replace("#1", column);
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, keyword);

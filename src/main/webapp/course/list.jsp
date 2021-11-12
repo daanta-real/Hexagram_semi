@@ -1,3 +1,6 @@
+<%@page import="beans.ItemDto"%>
+<%@page import="beans.ItemDao"%>
+<%@page import="beans.CourseItemDao"%>
 <%@page import="beans.CourseDto"%>
 <%@page import="java.util.List"%>
 <%@page import="beans.CourseDao"%>
@@ -13,7 +16,7 @@
     boolean search = column != null && keyword != null && !column.equals("") && !keyword.equals("");
     CourseDao courseDao = new CourseDao();
     
-    int psize = 1;
+    int psize = 5;
     int p;
     try{
     	p=Integer.parseInt(request.getParameter("p"));
@@ -44,9 +47,6 @@
     }else{
     	list = courseDao.listByRownum(begin,end);
     }
-    //지역 알아내기 -> 코스아이템에서 첫번쨰 아이템 내용 전달.
-    //코스 명 및 코스 내용은 -> 코스 에서 내용 추출
-    //
     %>
     
 <!DOCTYPE HTML>
@@ -114,14 +114,21 @@
 						<th>내용</th>
 					</tr>
 		<%for(CourseDto courseDto : list) {%>
+			<%
+		    //지역 알아내기 -> 코스아이템에서 첫번쨰 아이템 내용 전달.
+		     CourseItemDao courseItemDao = new CourseItemDao();
+		     int itemIdx = courseItemDao.getItemIdxByCourse(courseDto.getCourseIdx());
+		     ItemDao itemDao = new ItemDao();
+		   	ItemDto itemDto = itemDao.get(itemIdx);	
+			%>
 					<tr>
-						<td><%=courseDto.getCourseIdx() %></td>
+						<td><%=itemDto.getItemAddress()%></td>
 						<td>
 						<a href="detail.jsp?courseIdx=<%=courseDto.getCourseIdx()%>">
-						<%=courseDto.getCourseName() %>
+						<%=courseDto.getCourseName()%>
 						</a>
 						</td>
-						<td><%=courseDto.getCourseDetail() %></td>
+						<td><%=courseDto.getCourseDetail()%></td>
 					</tr>
 		<%} %>
 				</tbody>
