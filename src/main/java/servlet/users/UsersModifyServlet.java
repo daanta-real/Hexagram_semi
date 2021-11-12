@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import beans.UsersDao;
 import beans.UsersDto;
 import util.users.GrantChecker;
-import util.users.UsersUtils;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns="/users/modify.nogari")
@@ -79,7 +78,7 @@ public class UsersModifyServlet extends HttpServlet {
 			boolean modifyingGrade = usersGrade != null && !usersGrade.equals("");
 			if(modifyingGrade) { // grade에 수정이 있는 경우에 한해, 세션이 관리자 유저인지 추가로 확인.
 				System.out.print("[회원 수정] 3 추가. 등급 수정이 요청되어, 요청자가 관리자 권한인지 추가로 확인하겠습니다.");
-				boolean isAdmin = sessionGrade != null && sessionGrade.equals(UsersUtils.GRADE_ADMIN);
+				boolean isAdmin = sessionGrade != null && sessionGrade.equals(GrantChecker.GRADE_ADMIN);
 				if(!isAdmin) {
 					System.out.println("회원등급을 수정하려 하셨지만, 요청자가 관리자가 아닙니다. (권한='" + sessionGrade + "')");
 					throw new Exception();

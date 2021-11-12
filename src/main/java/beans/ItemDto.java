@@ -1,6 +1,7 @@
 package beans;
 
 import java.sql.Date;
+import java.util.StringTokenizer;
 
 public class ItemDto {
 	private int itemIdx;
@@ -114,6 +115,30 @@ public class ItemDto {
 		return this.itemCountReply > 0;
 	}
 	
+	public String getAdressCity() {
+		StringTokenizer st = new StringTokenizer(this.itemAddress," ");
+		StringBuffer sb = new StringBuffer();
+		int i = 0;
+		while(st.hasMoreTokens()) {
+			i++;
+			sb.append(st.nextToken());
+			if(i==1) break;
+		}
+		return sb.toString();
+		}
+		
+		public String getAdressCitySub() {
+			StringTokenizer st = new StringTokenizer(this.itemAddress," ");
+			StringBuffer sb = new StringBuffer();
+			int i = 0;
+			while(st.hasMoreTokens()) {
+				i++;
+				if(i==1) st.nextToken();
+				if(i==2) sb.append(st.nextToken());
+				if(i==2) break;
+			}
+			return sb.toString();
+	}
 	
 	public ItemDto() {
 		super();

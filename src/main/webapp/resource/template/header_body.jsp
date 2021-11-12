@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="util.HexaLibrary" %>
+<%@ page import="util.users.GrantChecker" %>
 <%@ page import="beans.UsersDao" %>
 <%@ page import="beans.UsersDto" %>
 
@@ -11,13 +12,14 @@ System.out.println("[헤더 출력] from " + request.getRequestURL().toString())
 String root = request.getContextPath();
 String searcher = request.getParameter("searchKeyword");
 if(searcher == null) searcher = "";
+String usersId = "", usersNick = "", usersGrade = "", gradeStr = "";
+boolean isLogin = false, isAdmin = false;
 
 // 세션id를 확인하여 로그인 여부를 검사
 String sessionId = (String) request.getSession().getAttribute("usersId");
-boolean isLogin = sessionId != null && !sessionId.equals("");
+isLogin = sessionId != null && !sessionId.equals("");
 
 // 로그인 검사결과에 따른 변수준비
-String usersId = "", usersNick = "", usersGrade = "", gradeStr = "";
 
 // 로그인 시에만 변수대입
 if(isLogin) {
@@ -27,10 +29,11 @@ if(isLogin) {
 	usersNick = dto.getUsersNick();
 	usersGrade = dto.getUsersGrade();
 	gradeStr
-		= usersGrade.equals("준회원") ? "newbie"
-		: usersGrade.equals("정회원") ? "normal"
-		: usersGrade.equals("관리자") ? "admin"
-		:                             "error";
+		= usersGrade.equals(GrantChecker.GRADE_ASSOCIATE) ? "newbie"
+		: usersGrade.equals(GrantChecker.GRADE_REGULAR  ) ? "normal"
+		: usersGrade.equals(GrantChecker.GRADE_ADMIN    ) ? "admin"
+		: "error";
+	isAdmin = usersGrade.equals(GrantChecker.GRADE_ADMIN);
 }
 %>
 
@@ -41,7 +44,7 @@ if(isLogin) {
 </DIV>
 
 <!-- 모바일 메뉴 콘테이너 -->
-<DIV ID='mobileMenuLayer'>
+<DIV ID='mobileMenuLayer' CLASS='mobile'>
 	
 	<!-- 모바일 메뉴 - 햄버거 버튼 -->
 	<!-- <INPUT ID='mobileMenuHamburgerInput' TYPE='hidden'> -->
@@ -56,21 +59,39 @@ if(isLogin) {
 	<!-- 모바일 메뉴 박스 -->
 	<DIV ID='mobileMenuContainer'>
 	
+		<!-- 로그인 영역 -->
 		<DIV ID='mobileMenuLoginContainer' CLASS="flexCenter flexCol">
-			<!-- 모바일 박스 메뉴 - 로그인 없을 시 -->
+			
 			<%if(isLogin) { /* 로그인이 되었을 경우 */ %>
-			<H3 CLASS="userInfoTxt"><%=usersNick%>(<%=usersId%>)님 <SPAN class="<%=gradeStr%>"><%=usersGrade%></SPAN></H3>
-			<A CLASS='actionButtons loginoutButton flexCenter' HREF='<%=root%>/users/logout.nogari'>로그아웃</A>
-			<%} else { /* 로그인이 되지 않았을 경우 */ %>
-			<FORM ID='loginInput' CLASS='flexCenter flexCol' NAME='login' METHOD='POST' ACTION='<%=root%>/users/login.nogari'>
-				<INPUT TYPE='text' NAME='usersId' VALUE="<% %>" PLACEHOLDER="입력하세요"/>
-				<INPUT TYPE='password' NAME='usersPw' VALUE="<% %>" PLACEHOLDER="입력하세요"/>
-				<DIV CLASS="loginButtonBox flexCenter flexRow">
-					<BUTTON CLASS='actionButtons loginoutButton' TYPE='submit'>로그인</BUTTON>
-					<INPUT CLASS='actionButtons joinButton' TYPE='button' VALUE="회원가입" />
+				<DIV CLASS="userInfoTxt flexCenter flexCol">
+					<DIV CLASS="flexCenter flexCol">
+						<SPAN><%=usersNick%>(<%=usersId%>)님</SPAN>
+						<SPAN class="gradeBadge <%=gradeStr%>"><%=usersGrade%></SPAN>
+					</DIV>
+					<DIV CLASS="myMenues flexRow flexCenter">
+						<A CLASS='userButton' HREF='<%=root%>/users/detail.jsp'>내 정보</A>
+						<%if(isAdmin) {%><A CLASS='userButton' HREF='<%=root%>/admin/main.jsp'>관리</A><%}%>
+						<A CLASS='userButton' HREF='<%=root%>/users/logout.nogari'>로그아웃</A>
+					</DIV>
 				</DIV>
-			</FORM>
+								
+			<%} else { /* 로그인이 되지 않았을 경우 */ %>
+				<FORM ID='loginInput' CLASS='flexCenter flexCol' NAME='login' METHOD='POST' ACTION='<%=root%>/users/login.nogari'>
+					<INPUT TYPE='text' NAME='usersId' VALUE="<% %>" PLACEHOLDER="입력하세요"/>
+					<INPUT TYPE='password' NAME='usersPw' VALUE="<% %>" PLACEHOLDER="입력하세요"/>
+					<DIV CLASS="loginButtonBox flexCenter flexRow">
+						<BUTTON CLASS='actionButtons loginoutButton' TYPE='submit'>로그인</BUTTON>
+						<INPUT CLASS='actionButtons joinButton' TYPE='button' VALUE="회원가입" />
+					</DIV>
+				</FORM>
 			<%}%>
+		</DIV>
+			
+		<!-- 주 메뉴 영역 -->
+		<DIV ID='mobileMenuLinkContainer' CLASS="flexCenter flexCol">
+			<A CLASS='menuLink blocked' HREF="<%=root%>/item/list.jsp">관광지 정보</A>
+			<A CLASS='menuLink blocked' HREF="<%=root%>/course/list.jsp">코스 정보</A>
+			<A CLASS='menuLink blocked' HREF="<%=root%>/event/list.jsp">이벤트 정보</A>
 		</DIV>
 		
 	</DIV>
@@ -83,15 +104,14 @@ if(isLogin) {
 	<!-- 상단메뉴 - 로그인 정보 박스 -->
 	<DIV ID="userContainer" CLASS="flexCenter flexRow">
 	<%if(isLogin) { /* 로그인이 되었을 경우 */ %>
-		<H4 CLASS="userInfoTxt"><%=usersNick%>(<%=usersId%>)님 <SPAN class="<%=gradeStr%>"><%=usersGrade%></SPAN></H4>
+		<DIV CLASS="userInfoTxt flexCenter flexRow"><%=usersNick%>(<%=usersId%>)님 <SPAN class="gradeBadge <%=gradeStr%>"><%=usersGrade%></SPAN></DIV>
 		<A CLASS='userButton' HREF='<%=root%>/users/detail.jsp'>내 정보</A>
+		<%if(isAdmin) {%> <A CLASS='userButton' HREF='<%=root%>/admin/main.jsp'>관리</A> <%} %>
 		<A CLASS='userButton' HREF='<%=root%>/users/logout.nogari'>로그아웃</A>
-		<%if( usersGrade.equals("관리자")) {%>
-			<A CLASS='userButton' HREF='<%=root%>/admin/main.jsp'>관리</A>
-		<%} %>
 	<%} else { /* 로그인이 되지 않았을 경우 */ %>
-		<H4 CLASS="userInfoTxt">로그인하세요.</H4><A CLASS='userButton' HREF='<%=root%>/users/login.jsp'>로그인</A>
-		<H4 CLASS="userInfoTxt">회원가입 페이지</H4><A CLASS='userButton' HREF='<%=root%>/users/join.jsp'>회원가입</A>
+		<DIV CLASS="userInfoTxt mobile">로그인하세요.</DIV>
+		<A CLASS='userButton' HREF='<%=root%>/users/login.jsp'>로그인</A>
+		<A CLASS='userButton' HREF='<%=root%>/users/join.jsp'>회원가입</A>
 	<%}%>
 	</DIV>
 	

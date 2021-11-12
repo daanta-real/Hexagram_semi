@@ -24,14 +24,14 @@ ItemDto itemDto = itemDao.get(itemIdx);
 </head>
 <body>
 
-<div id="map" style="width:100%;height:350px;"></div>
+<div id="map" style="width:800px;height:350px;"></div>
 
 <script type="text/javascript"
-		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=system.Settings.API_KEY_KAKAOMAP%>"></script>
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=system.Settings.API_KEY_KAKAOMAP%>&libraries=services"></script>
 	<script>
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
-        center: new kakao.maps.LatLng(37.55321, 126.972613), // 지도의 중심좌표
+        center: new kakao.maps.LatLng(37.55321, 126.972613), // 지도의 중심좌표 지금은 서울역으로 해놓았으나, 정확한 주소를 입력할 시에 이동이 가능함.
         level: 3 // 지도의 확대 레벨
     };  
 
@@ -42,7 +42,7 @@ var map = new kakao.maps.Map(mapContainer, mapOption);
 var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-geocoder.addressSearch('경상남도 합천군 가야면 해인사길 122', function(result, status) {
+geocoder.addressSearch('<%=itemDto.getItemAddress()%>', function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
@@ -57,7 +57,7 @@ geocoder.addressSearch('경상남도 합천군 가야면 해인사길 122', func
 
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+            content: '<div style="width:150px;text-align:center;padding:6px 0;"><%=itemDto.getItemName()%></div>'
         });
         infowindow.open(map, marker);
 

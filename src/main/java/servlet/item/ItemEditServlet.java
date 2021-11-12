@@ -16,6 +16,7 @@ import beans.ItemDao;
 import beans.ItemDto;
 import beans.ItemFileDao;
 import beans.ItemFileDto;
+import system.Settings;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/item/edit.nogari")
@@ -25,12 +26,12 @@ public class ItemEditServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			String savePath = "C:/image";
+			String savePath = Settings.PATH_FILES;
 			int maxSize = 5 * 1024 * 1024;
 			String encoding = "UTF-8";
 			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
 			MultipartRequest mRequest = new MultipartRequest(req, savePath, maxSize, encoding, policy);
-			
+
 
 			ItemDto itemDto = new ItemDto();
 			itemDto.setItemType(mRequest.getParameter("itemType"));
@@ -42,19 +43,19 @@ public class ItemEditServlet extends HttpServlet{
 			itemDto.setItemParking(mRequest.getParameter("itemParking"));
 			itemDto.setItemAddress(mRequest.getParameter("itemAddress"));
 			itemDto.setItemIdx(Integer.parseInt(mRequest.getParameter("itemIdx")));
-			
+
 			ItemDao itemDao = new ItemDao();
-			
+
 			if(mRequest.getFile("attach") != null) {
 				ItemFileDao itemFileDao = new ItemFileDao();
 				ItemFileDto itemFileOrigin = itemFileDao.find2(itemDto.getItemIdx());
-				File dir = new File("c:/image");
+				File dir = new File(Settings.PATH_FILES);
 				File target = new File(dir,itemFileOrigin.getItemFileSaveName());
 //				저장된 파일을 삭제
 				target.delete();
 //				파일 정보를 삭제
 				itemFileDao.delete(itemFileOrigin.getItemFileIdx());
-				
+
 				ItemFileDto itemFileDto = new ItemFileDto();
 				itemFileDto.setItemIdx(itemDto.getItemIdx());
 				itemFileDto.setItemFileUploadname(mRequest.getOriginalFileName("attach"));
@@ -64,11 +65,11 @@ public class ItemEditServlet extends HttpServlet{
 //				새로운 파일 등록
 				itemFileDao.insert(itemFileDto);
 			}
-			
+
 			boolean result = itemDao.update(itemDto);
 			//수정 성공시 상세 페이지로 이동
 			if(result) {
-				resp.sendRedirect("detail.jsp?itemIdx="+itemDto.getItemIdx());	
+				resp.sendRedirect("detail.jsp?itemIdx="+itemDto.getItemIdx());
 			}
 			//수정 실패시 에러페이지 500번으로
 			else {

@@ -13,28 +13,30 @@ import javax.servlet.http.HttpServletResponse;
 
 import beans.ItemFileDao;
 import beans.ItemFileDto;
+import system.Settings;
 
+@SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/item/file/download.nogari")
 public class ItemFileDownServlet extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		try {
-			//입력 : 
+			//입력 :
 			int itemFileIdx = Integer.parseInt(req.getParameter("itemFileIdx"));
-			
+
 			//처리
 			//1. 파일 단일조회
 			ItemFileDao itemFileDao = new ItemFileDao();
 			ItemFileDto itemFileDto = itemFileDao.get(itemFileIdx);
-			
+
 			//2. 파일 정보 설정
-			File dir = new File("c:/image");
+			File dir = new File(Settings.PATH_FILES);
 			File target = new File(dir,itemFileDto.getItemFileSaveName());
 			FileInputStream in = new FileInputStream(target);
 			byte[]buffer = new byte[8192];
-			
+
 			//3. 헤더 설정 and 한글 파일명 변환 처리
 			String uploadName = URLEncoder.encode(itemFileDto.getItemFileUploadname(),"UTF-8");
 			uploadName = uploadName.replace("+", "%20");
@@ -42,14 +44,14 @@ public class ItemFileDownServlet extends HttpServlet{
 			resp.setHeader("Content-Disposition", "attachment; fileName="+uploadName);
 			resp.setHeader("Content-Encoding", "UTF-8");
 			resp.setHeader("Content-Length", String.valueOf(itemFileDto.getItemFileSize()));
-			
+
 			//4. 출력(다운로드)
 			while(true) {
 				int size = in.read(buffer);
 				if(size == -1) break;
 				resp.getOutputStream().write(buffer, 0, size);
 			}
-			
+
 			in.close();
 
 		}

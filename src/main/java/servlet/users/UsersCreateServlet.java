@@ -6,61 +6,74 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.UsersDao;
 import beans.UsersDto;
+import util.users.Sessioner;
 
 @SuppressWarnings("serial")
 @WebServlet("/users/join.nogari")
 public class UsersCreateServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		try {
 
-			System.out.println("[회원 가입]");
-
-			// 값 받아옴
-			String usersId = req.getParameter("usersId");
-			String usersPw = req.getParameter("usersPw");
-			String usersNick = req.getParameter("usersNick");
+			// 0. 변수 준비
+			System.out.println("[회원 가입] 0. 변수 준비");
+			String usersId    = req.getParameter("usersId"   );
+			String usersPw    = req.getParameter("usersPw"   );
+			String usersNick  = req.getParameter("usersNick" );
 			String usersEmail = req.getParameter("usersEmail");
 			String usersPhone = req.getParameter("usersPhone");
 
-			// 값 검사: 양식에 맞지 않는 값은 쳐내기
+
+			// 1. 값 검사: 양식에 맞지 않는 값은 쳐내기
 			// 작성 예정
 
-			// 삽입할 DTO 준비
+
+			// 2. 회원등록에 쓸 DTO 준비
 			UsersDto dto = new UsersDto();
 			dto.setUsersId(usersId);
 			dto.setUsersPw(usersPw);
 			dto.setUsersNick(usersNick);
 			dto.setUsersEmail(usersEmail);
 			dto.setUsersPhone(usersPhone);
+			System.out.println("[회원 가입] 2. 등록정보: " + dto);
 
-			// 전송
-			System.out.println("[회원 가입] 회원가입 요청: " + dto);
-			boolean isSucceed = new UsersDao().insert(dto);
-			System.out.println("[회원 가입] 회원가입 결과: " + isSucceed);
+			// 3. 회원등록에 쓸 DAO를 준비하고, 시퀀스 따내서 DTO에 미리 넣는다.
+			UsersDao dao = new UsersDao();
+			Integer seqNo = dao.getNextSequence();
+			dto.setUsersIdx(seqNo);
+			System.out.println("[회원 가입] 3. 생성된 시퀀스 번호: " + seqNo);
 
-			// 후처리
+			// 4. 회원 생성 요청
+			System.out.println("[회원 가입] 4. 회원가입 요청.. ");
+			boolean isSucceed = dao.insert(dto);
+
+			// 5. 요청 결과에 따른 후처리
 			if(isSucceed) {
-				System.out.println("[회원 가입] 가입에 성공했습니다.");/*
-
-				회원가입과 동시에 세션 부여해보려 했으나, 시퀀스 넘버 획득방법 없어 추가 실패함. 나중에 DAO 작업하면 다시 시도하겠음
-				// 세션 부여하고 가입성공 페이지로 보냄
+				System.out.println("[회원 가입] 5. 가입에 성공했습니다.");
+				//회원등륵시에는 등급을 받지 않기 때문에 세션에 등급도 넘어가려면 
+				//회원등록시 발급받은 시퀀스(seqNo=usersIdx)로 다시 조회하여 dto정보를 불러와야 함  
+				dto = dao.get(seqNo);
 				HttpSession session = req.getSession();
-				session.setAttribute("id", usersId);
-				session.setAttribute("usersId"   , usersId);
-				session.setAttribute("usersGrade", "준회원");*/
+				Sessioner.login(session, dto); // idx(시퀀스로 만들어논 것), id, grade 세 개 넘어감.
 				resp.sendRedirect(req.getContextPath() + "/users/join_success.jsp");
 			}
-			else throw new Exception();
+			else {
+				throw new Exception();
+			}
 
 		}
+
 		catch(Exception e) {
+
 			System.out.println("\n[회원 가입] 에러가 발생했습니다.");
 			e.printStackTrace();
 			resp.sendError(500);
+
 		}
 	}
 }

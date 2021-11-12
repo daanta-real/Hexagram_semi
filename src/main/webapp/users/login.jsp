@@ -21,9 +21,7 @@
 <tfoot><tr><td colspan=2 align=center>
 	<button type=submit>로그인</button>
 <%if(request.getParameter("error") != null) {%>
-	<h5>
-		<font color="red">로그인 정보가 일치하지 않습니다</font>
-	</h5>
+	<h5><font color="red">로그인 정보가 일치하지 않습니다</font></h5>
 <%}%>
 </td></tr></tfoot>
 </table>

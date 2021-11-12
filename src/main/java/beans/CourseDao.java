@@ -2,72 +2,106 @@ package beans;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import util.JdbcUtils;
 
 public class CourseDao {
+	// 전체 조회
+		public List<CourseDto> list() throws Exception {
+			String sql = "SELECT * FROM course";
+			Connection con = JdbcUtils.connect3();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
 
-	//jdbc driver 아이디 패스워드
-		public static final String USERNAME = "hexa", PASSWORD="hexa";
+			List<CourseDto> list = new ArrayList<>();
+			while (rs.next()) {
+				CourseDto courseDto = new CourseDto();
+				courseDto.setCourseIdx(rs.getInt("course_idx"));
+				courseDto.setUsersIdx(rs.getInt("users_idx"));
+				courseDto.setCourseName(rs.getString("course_name"));
+				courseDto.setCourseDetail(rs.getString("course_detail"));
+				courseDto.setCourseDate(rs.getDate("course_date"));
+				courseDto.setCourseCountView(rs.getInt("course_count_view"));
+				courseDto.setCourseCountReply(rs.getInt("course_count_reply"));
 
-	//1. 등록(insert)
-	public void insert(CourseDto courseDto)	throws Exception{
+				list.add(courseDto);
+			}
 
-		//jdbcDriver 연결
-		Connection con = JdbcUtils.connect3();
+			con.close();
+			return list;
+		}
+		
+		// 단일 조회
+		public CourseDto get(int courseIdx) throws Exception {
+			String sql = "SELECT * FROM course WHERE course_idx = ?";
+			Connection con = JdbcUtils.connect3();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, courseIdx);
+			ResultSet rs = ps.executeQuery();
 
-		//외래키는 등록하지 않음
-		String sql = "insert into course(course_idx, course_subject, course_list, course_detail, course_locations, course_tags)"
-				+ "    values(courseSeq.nextval, ?, ?, ?, ?)";
-		PreparedStatement ps = con.prepareStatement(sql);
-//		ps.setInt(?, courseDto.getCourseId()); //시퀀스 번호?
-		ps.setString(1, courseDto.getCourseSubject());
-		ps.setString(2, courseDto.getCourseList());
-		ps.setString(3, courseDto.getCourseDetail());
-		ps.setString(4, courseDto.getCourseLocations());
-		ps.setString(5, courseDto.getCourseTags());
-		ps.execute();
 
-		//jdbcDriver 닫기
-		con.close();
-	}
+			CourseDto courseDto = new CourseDto();
+			if (rs.next()) {
+				courseDto.setCourseIdx(rs.getInt("course_idx"));
+				courseDto.setUsersIdx(rs.getInt("users_idx"));
+				courseDto.setCourseName(rs.getString("course_name"));
+				courseDto.setCourseDetail(rs.getString("course_detail"));
+				courseDto.setCourseDate(rs.getDate("course_date"));
+				courseDto.setCourseCountView(rs.getInt("course_count_view"));
+				courseDto.setCourseCountReply(rs.getInt("course_count_reply"));
 
-	//2. 수정(update)
-	public boolean update(CourseDto courseDto) throws Exception{
+			}
 
-		//jdbcDriver 연결
-		Connection con = JdbcUtils.connect3();
+			con.close();
+			return courseDto;
+		}
+		
+		public boolean insertWithSequence(CourseDto courseDto) throws Exception {
+			String sql = "INSERT INTO course VALUES(?,?,?,?,sysdate,0,0)";
+			Connection con = JdbcUtils.connect3();
+			PreparedStatement ps = con.prepareStatement(sql);
 
-		//수정할수 있는 컬럼(목록, 내용, 지역, 태그)을 예상하여 기능 생성
-		String sql = "update course set course_subject=?, course_list= ?, course_detail= ?, course_locations = ?, course_tags = ? where course_idx = ?";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, courseDto.getCourseSubject());
-		ps.setString(2, courseDto.getCourseList());
-		ps.setString(3, courseDto.getCourseDetail());
-		ps.setString(4, courseDto.getCourseLocations());
-		ps.setString(5, courseDto.getCourseTags());
-		ps.setInt(6, courseDto.getCourseIdx());
+			ps.setInt(1, courseDto.getCourseIdx());
+			ps.setInt(2, courseDto.getUsersIdx());
+			ps.setString(3, courseDto.getCourseName());
+			ps.setString(4, courseDto.getCourseDetail());
 
-		int result = ps.executeUpdate();
+			int result = ps.executeUpdate();
 
-		con.close();
+			con.close();
+			return result > 0;
+		}
+		
+		public int getSequence() throws Exception {
+			String sql = "select course_seq.nextval from dual";
+			Connection con = JdbcUtils.connect3();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
 
-		return result > 0;
-	}
+			rs.next();
+			int result = rs.getInt(1);
 
-	//3. 삭제(delete)
-	public boolean delete(int courseIdx) throws Exception{
-		Connection con = JdbcUtils.connect3();
-
-		String sql = "delete course where course_idx = ?";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, courseIdx);
-
-		int result = ps.executeUpdate();
-
-		con.close();
-
-		return result > 0;
-	}
+			con.close();
+			return result;
+		}
+		
+		//게시글 댓글 개수 갱신 기능
+		public boolean countCourseReply(int courseIdx) throws Exception{
+			Connection con = JdbcUtils.connect3();
+			String sql = "update course set course_count_reply = (select count(*) from course_reply where course_idx = ?) where course_idx = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, courseIdx);
+			ps.setInt(2, courseIdx);
+			
+			int result = ps.executeUpdate();
+			
+			con.close();
+			
+			return result > 0;
+			
+		}
 
 }
