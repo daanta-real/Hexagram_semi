@@ -12,7 +12,9 @@
 <SECTION>
 <%String root = request.getContextPath();%>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- 회원가입 아이디 중복검사 스크립트 -->
 <script type="text/javascript" src="<%=root%>/resource/js/join_id_check.js"></script>
+<!-- 회원가입 비밀번호, 비밀번호확인 입력값 스크립트 -->
 <script type="text/javascript" src="<%=root%>/resource/js/join_pw_recheck.js"></script>
 <!-- 페이지 내용 시작 -->
 <h1>회원 가입</h1>
@@ -23,8 +25,8 @@
 <form id="joinForm" method='post' action='<%=root%>/users/join.nogari'>
 <table border=1>
 <tbody>       
-	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'><span></span></td></tr>
-	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'><span></span></td></tr>
+	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'><div></div></td></tr>
+	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'></td></tr>
 	<tr>
 		<th>비번확인</th>
 		<td>
