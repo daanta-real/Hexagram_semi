@@ -45,7 +45,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 	CourseReplyDao courseReplyDao = new CourseReplyDao();
 	List<CourseReplyDto> list = courseReplyDao.listByTreeSort();
 %>
-<h3><a href="delete.nogari">삭제</a></h3>
+<h3><a href="delete.nogari?courseIdx=<%=courseIdx%>">삭제</a></h3>
 <h1>현재 코스의 아이템 목록 보여주기</h1>
 		<table border="1" width="900px">
 			<tr>

@@ -122,7 +122,7 @@
 		   	ItemDto itemDto = itemDao.get(itemIdx);	
 			%>
 					<tr>
-						<td><%=itemDto.getItemAddress()%></td>
+						<td><%=itemDto.getAdressCity()%></td>
 						<td>
 						<a href="detail.jsp?courseIdx=<%=courseDto.getCourseIdx()%>">
 						<%=courseDto.getCourseName()%>
