@@ -6,81 +6,81 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import util.JdbcUtils;
+
 public class EventFileDao {
-
-	//∆ƒ¿œ ¡§∫∏ ¿˙¿Â ±‚¥…
-	public void insert(EventFileDto eventFileDto) throws Exception {
-		Connection con = JdbcUtils.connect2();
-		
-		String sql = "insert into event_file values(event_file_seq.nextval, ?, ?, ?, ?, ?)";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, eventFileDto.getEventNo());
-		ps.setString(2, eventFileDto.getEventFileUploadname());
-		ps.setString(3, eventFileDto.getEventFileSavename());
-		ps.setLong(4, eventFileDto.getEventFileSize());
-		ps.setString(5, eventFileDto.getEventFileType());
-		ps.execute();
-		
-		con.close();
-	}
-
-	//¥‹¿œ¡∂»∏
-	public EventFileDto get(int eventFileNo) throws Exception{
-		Connection con = JdbcUtils.connect2();
-		
-		String sql = "select * from event_file where event_file_no = ?";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, eventFileNo);
-		ResultSet rs = ps.executeQuery();
-		
-		EventFileDto eventFileDto;
-		if(rs.next()) {
-			eventFileDto = new EventFileDto();
+	//ÌååÏùº Ï†ïÎ≥¥ Ï†ÄÏû• Í∏∞Îä•
+		public void insert(EventFileDto eventFileDto) throws Exception {
+			Connection con = JdbcUtils.connect3();
 			
-			//copy
-			eventFileDto.setEventFileNo(rs.getInt("event_file_no"));
-			eventFileDto.setEventNo(rs.getInt("event_no"));
-			eventFileDto.setEventFileSavename(rs.getString("event_file_savename"));
-			eventFileDto.setEventFileUploadname(rs.getString("event_file_uploadname"));
-			eventFileDto.setEventFileType(rs.getString("event_file_type"));
-			eventFileDto.setEventFileSize(rs.getLong("event_file_size"));
+			String sql = "insert into event_file values(event_file_seq.nextval, ?, ?, ?, ?, ?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, eventFileDto.getEventNo());
+			ps.setString(2, eventFileDto.getEventFileUploadname());
+			ps.setString(3, eventFileDto.getEventFileSavename());
+			ps.setLong(4, eventFileDto.getEventFileSize());
+			ps.setString(5, eventFileDto.getEventFileType());
+			ps.execute();
+			
+			con.close();
 		}
-		else {
-			eventFileDto = null;
-		}
-		
-		con.close();
-		
-		return eventFileDto;
-	}
-	
-	//∞‘Ω√±€ø° «ÿ¥Á«œ¥¬ ∆ƒ¿œ∏Ò∑œ ¡∂»∏
-	public List<EventFileDto> find(int eventNo) throws Exception {
-		Connection con = JdbcUtils.connect2();
-		
-		String sql = "select * from event_file where event_no = ? order by event_file_no asc";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, eventNo);
-		ResultSet rs = ps.executeQuery();
-		
-		List<EventFileDto> list = new ArrayList<>();
-		while(rs.next()) {
-			EventFileDto eventFileDto = new EventFileDto();
+
+		//Îã®ÏùºÏ°∞Ìöå
+		public EventFileDto get(int eventFileNo) throws Exception{
+			Connection con = JdbcUtils.connect3();
 			
-			//copy
-			eventFileDto.setEventFileNo(rs.getInt("event_file_no"));
-			eventFileDto.setEventNo(rs.getInt("event_no"));
-			eventFileDto.setEventFileSavename(rs.getString("event_file_savename"));
-			eventFileDto.setEventFileUploadname(rs.getString("event_file_uploadname"));
-			eventFileDto.setEventFileType(rs.getString("event_file_type"));
-			eventFileDto.setEventFileSize(rs.getLong("event_file_size"));
+			String sql = "select * from event_file where event_file_no = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, eventFileNo);
+			ResultSet rs = ps.executeQuery();
 			
-			list.add(eventFileDto);
+			EventFileDto eventFileDto;
+			if(rs.next()) {
+				eventFileDto = new EventFileDto();
+				
+				//copy
+				eventFileDto.setEventFileNo(rs.getInt("event_file_no"));
+				eventFileDto.setEventNo(rs.getInt("event_no"));
+				eventFileDto.setEventFileSavename(rs.getString("event_file_savename"));
+				eventFileDto.setEventFileUploadname(rs.getString("event_file_uploadname"));
+				eventFileDto.setEventFileType(rs.getString("event_file_type"));
+				eventFileDto.setEventFileSize(rs.getLong("event_file_size"));
+			}
+			else {
+				eventFileDto = null;
+			}
+			
+			con.close();
+			
+			return eventFileDto;
 		}
 		
-		con.close();
-		
-		return list;
-	}
-
+		//Í≤åÏãúÍ∏ÄÏóê Ìï¥ÎãπÌïòÎäî ÌååÏùºÎ™©Î°ù Ï°∞Ìöå
+		public List<EventFileDto> find(int eventNo) throws Exception {
+			Connection con = JdbcUtils.connect3();
+			
+			String sql = "select * from event_file where event_no = ? order by event_file_no asc";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, eventNo);
+			ResultSet rs = ps.executeQuery();
+			
+			List<EventFileDto> list = new ArrayList<>();
+			while(rs.next()) {
+				EventFileDto eventFileDto = new EventFileDto();
+				
+				//copy
+				eventFileDto.setEventFileNo(rs.getInt("event_file_no"));
+				eventFileDto.setEventNo(rs.getInt("event_no"));
+				eventFileDto.setEventFileSavename(rs.getString("event_file_savename"));
+				eventFileDto.setEventFileUploadname(rs.getString("event_file_uploadname"));
+				eventFileDto.setEventFileType(rs.getString("event_file_type"));
+				eventFileDto.setEventFileSize(rs.getLong("event_file_size"));
+				
+				list.add(eventFileDto);
+			}
+			
+			con.close();
+			
+			return list;
+		}
 }
