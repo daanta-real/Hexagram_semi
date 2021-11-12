@@ -107,9 +107,9 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 
 	// 이전이 존재하나요?
-	public boolean isPreviousAvailable() { return startBlock > 1; }
+	public boolean hasPreviousBlock() { return startBlock > 1; }
 	// 다음이 존재하나요?
-	public boolean isNextAvailable() { return finishBlock < lastBlock;	}
+	public boolean hasNextBlock() { return finishBlock < lastBlock;	}
 	// 회원목록 검색모드 인가요?
 	public boolean isSearchMode() {
 		return column  != null && !column.equals("")

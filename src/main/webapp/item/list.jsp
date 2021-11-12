@@ -37,27 +37,26 @@ System.out.println(
 pn.calculate();
 System.out.println("[관광지 목록] 페이지네이션 정보: " + pn);
 
-// 페이지네이션 확인을 위한 toString
-// <%=pn.toString() %>
+// 관광지 목록 도출
+List<ItemDto> list = pn.getResultList();
+System.out.println("[관광지 목록] 출력할 관광지 수: " + list.size());
 
-// 검색 및 목록 처리
-ItemDto itemDto = new ItemDto();
-List<ItemDto> list;
-if(isSearchMode) list = itemDao.searchList(pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-else list = itemDao.list(pn.getBegin(), pn.getEnd());
-String title = isSearchMode ? "["+pn.getKeyword()+"]" + " 검색" : "관광지 목록";
+// 제목 h2 태그에 들어갈 타이틀 결정
+String title = isSearchMode
+    ? ("["+pn.getKeyword()+"]" + " 검색")
+    : ("관광지 목록");
 
 // 썸네일표시를 위한 파일 조회를 위한 ItemFileDao 생성
 ItemFileDao itemFileDao = new ItemFileDao();
-
-
 
 // HTML 출력 시작
 %>
 <div class="container-900 container-center">
 	<div class="row center">
 		<%-- 페이지 제목 --%>
-		<h2><%=title %></h2>
+		<h2>
+		<%=title%>
+		</h2>
 	</div>
 
 	<div class="row center">
@@ -92,7 +91,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 
 	<div class="row center">
 		<%-- 전체 목록 조회 --%>
-<%if(!list.isEmpty()){%>
+<%if(!list.isEmpty()) {%>
 <table class="table table-border table-hover table-stripe">
 	<thead>
 		<tr>
@@ -163,18 +162,18 @@ ItemFileDao itemFileDao = new ItemFileDao();
 <!-- 	페이지네이션 -->
 	<div class="row pagination">
 		<%-- [이전] a 태그 --%>
-		<%if(pn.isBackPage()){ %>
+		<%if(pn.hasPreviousBlock()){ %>
 			<%if(isSearchMode){%>
-				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword<%=pn.getKeyword() %>&p=<%=pn.getBackPage()%>">[이전]</a>
+				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword<%=pn.getKeyword() %>&p=<%=pn.getStartBlock()%>">[이전]</a>
 			<%}else{ %>
-				<a href="list.jsp?page=<%=pn.getBackPage() %>">[이전]</a>
+				<a href="list.jsp?page=<%=pn.getPreviousBlock() %>">[이전]</a>
 			<%} %>
 		<%}else{%>
 			<a>[이전]</a>
 		<%} %>
 
 		<%-- 숫자 a 태그 --%>
-		<%for(int i = pn.getStartBlock(); i<=pn.getEndBlock(); i++) {%>
+		<%for(int i = pn.getStartBlock(); i<=pn.getRealLastBlock(); i++) {%>
 			<%if(isSearchMode){ %>
 				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword<%=pn.getKeyword() %>&p=<%=i %>"><%=i %></a>
 			<%}else{ %>
@@ -183,11 +182,11 @@ ItemFileDao itemFileDao = new ItemFileDao();
 		<%} %>
 
 		<%-- [다음] a 태그 --%>
-		<%if(pn.isNextPage()){ %>
+		<%if(pn.hasNextBlock()){ %>
 			<%if(isSearchMode){%>
-				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword<%=pn.getKeyword() %>&p=<%=pn.getEndBlock()%>">[다음]</a>
+				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword<%=pn.getKeyword() %>&p=<%=pn.getNextBlock()%>">[다음]</a>
 			<%}else{ %>
-				<a href="list.jsp?page=<%=pn.getEndBlock() %>">[다음]</a>
+				<a href="list.jsp?page=<%=pn.getNextBlock() %>">[다음]</a>
 			<%} %>
 		<%}else{ %>
 			<a>[다음]</a>

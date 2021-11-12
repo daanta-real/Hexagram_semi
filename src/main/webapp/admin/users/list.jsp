@@ -111,26 +111,26 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 
 <!-- 페이지 네비게이터 검색 / 목록-->
 <DIV>
-<%if(pn.isPreviousAvailable()) {%>
-	<%if(pn.isSearchMode()) {%>
+<%if(pn.hasPreviousBlock()) {%>
+	<%if(isSearchMode) {%>
 		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getStartBlock()-1 %>">&lt;</a>
 	<%} else{ %>
-		<a href="list.jsp?page=<%=pn. getPreviousBlock()%>">&lt;</a>
+		<a href="list.jsp?page=<%=pn.getPreviousBlock()%>">&lt;</a>
 	<%} %>
 <%} else{ %>
 	<a>&lt;</a>
 <%} %>
 
 <%for(int i = pn.getStartBlock() ; i <= pn.getRealLastBlock() ; i++) {%>
-	<%if(pn.isSearchMode()) { %>
+	<%if(isSearchMode) { %>
 		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
 	<%}else{ %>
 		<a href="list.jsp?page=<%=i %>"><%=i %></a>
 	<%} %>
 <%} %>
 
-<%if(pn.isNextAvailable()) {%>
-	<%if(pn.isSearchMode()) {%>
+<%if(pn.hasNextBlock()) {%>
+	<%if(isSearchMode) {%>
 		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock() %>">&gt;</a>
 	<%} else{ %>
 		<a href="list.jsp?page=<%=pn.getNextBlock()%>">&gt;</a>
