@@ -23,8 +23,8 @@
 <form id="joinForm" method='post' action='<%=root%>/users/join.nogari'>
 <table border=1>
 <tbody>       
-	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'><span></span></td></tr>
-	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'><span></span></td></tr>
+	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'><div></div></td></tr>
+	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'></td></tr>
 	<tr>
 		<th>비번확인</th>
 		<td>
