@@ -36,7 +36,7 @@ ItemDao itemDao = new ItemDao();
 </head>
 <body>
 
-<div id="map" style="width:900px;height:700px;"></div>
+<div id="map" style="width:900px;height:450px;"></div>
 
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=system.Settings.API_KEY_KAKAOMAP%>&libraries=services"></script>
