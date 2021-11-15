@@ -7,10 +7,15 @@
 <TITLE>노가리투어 - 내 정보 변경</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
+<!-- 테이블 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
+<!-- 페이지 제목 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
 <% String root = request.getContextPath(); %>
+
 <!--세션에 저장된 아이디 -->
 <%String sessionId = (String)session.getAttribute("usersId"); %>	
 
@@ -20,15 +25,12 @@ UsersDao usersDao = new UsersDao();
 UsersDto usersDto = usersDao.get(sessionId);
 %>
 <!-- 페이지 내용 시작 -->
+<div class="sub_title">내 정보 변경</div>
+<br>
 <form action="<%=root %>/users/modify.nogari" method="post">
 <input type="hidden" name="usersId" value="<%=usersDto.getUsersId()%>">
 <input type="hidden" name="usersPw" value="<%=usersDto.getUsersPw()%>">
-	<table border="0">
-		<thead>
-			<tr>
-				<th align="center" colspan="2">내 정보 변경 페이지</th>
-			</tr>
-		</thead>
+	<table class="table">
 		<tbody>
 			<tr>
 				<th>아이디</th>

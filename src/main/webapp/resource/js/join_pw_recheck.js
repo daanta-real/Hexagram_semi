@@ -26,7 +26,7 @@
                 console.log("비번 & 재확인비번 일치");	
 			}
             if(usersPw != reInputPw){
-                noticePw.textContent = "비밀번호가 일치하지 않습니다. 다시 확인해 주세요";
+                noticePw.textContent = "비밀번호가 일치하지 않습니다";
                 console.log("비번 & 재확인비번 불일치");
 			}
 		}

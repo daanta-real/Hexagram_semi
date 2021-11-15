@@ -6,6 +6,10 @@
 <HEAD>
 <TITLE>노가리투어 - 회원 정보 변경</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
+<!-- 테이블 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
+<!-- 페이지 제목 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 </HEAD>
 <BODY>
 <% String root = request.getContextPath(); %>
@@ -19,10 +23,11 @@
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
 <!-- 페이지 내용 시작 -->
+<div class="sub_title">회원 정보 변경</div>
 <form action="<%=root%>/admin/users/edit.nogari" method="post">
 <input type="hidden" name="usersIdx" value="<%=usersDto.getUsersIdx()%>">
 <input type="hidden" name="usersId" value="<%=usersDto.getUsersId()%>">
-	<table>
+	<table class="table">
 		<tbody>
 			<tr>
 				<th>회원No.</th>

@@ -10,6 +10,11 @@
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 
 </HEAD>
+<!-- 테이블 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
+<style>
+.table{ width:80%; padding:0.1rem;}
+</style>
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
@@ -41,6 +46,7 @@ function deleteConfirm(usersId){
 	}
 }
 </script>
+
 <!-- 검색 -->
     <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post">
 	     <select name="column">
@@ -80,7 +86,7 @@ function deleteConfirm(usersId){
  <%if(request.getParameter("delete") != null) {%>
  	<h4>아이디 <%=request.getParameter("usersId") %> 회원 탈퇴 완료</h4>
  <%} %>
-<table border="1" width="70%">
+<table class="table table-border">
 	<thead>
 		<tr>
 			<th>회원번호</th>
