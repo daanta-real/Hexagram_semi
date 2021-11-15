@@ -12,7 +12,7 @@
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <style>
-.table{ width:50%;}
+.table{ width:30%;}
 </style>
 <BODY>
 <%String root = request.getContextPath(); %>
