@@ -50,6 +50,10 @@ public class CourseUpdateServlet extends HttpServlet{
 			courseDto.setCourseDetail(courseDetail);
 			
 			courseDao.update(courseDto);
+			//새로 만든 시퀀스에 대한 정보는 덮어쓰기 이후 삭제해주면 된다.
+			courseItemDao.delete(courseIdx);
+			
+			
 			
 //			추후에 detail.jsp로 보낼것!!!!!
 			resp.sendRedirect("detail.jsp?courseIdx="+courseOriginSequnce);
