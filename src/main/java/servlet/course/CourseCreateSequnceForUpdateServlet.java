@@ -20,8 +20,11 @@ public class CourseCreateSequnceForUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			try {
 				
-				 CourseDao courseDao = new CourseDao();
-				 
+					CourseDao courseDao = new CourseDao();
+					int getMaxIdx = courseDao.getMaxIdx();
+					courseDao.getMaxIdxDelete(getMaxIdx);
+					//새글을 작성 혹은 수정을할때 시퀀스 번호를 생성해주게 되는데, 코스게시판의 가장 큰 글보다 큰(쓰레기 작성글들을)것 들을 삭제해주는 작업.
+					
 				 int courseSequnce = courseDao.getSequence(); //새로 생성한 번호
 				 int courseOriginSequnce = Integer.parseInt(req.getParameter("courseOriginSequnce")); //기존 번호
 				 
