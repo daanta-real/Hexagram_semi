@@ -18,7 +18,7 @@ CREATE TABLE    users (
   users_phone CHAR(13)     ,
   users_join  DATE         DEFAULT SYSDATE  CONSTRAINT users_join_not_null NOT NULL,
   users_point NUMBER(20)   DEFAULT 0        CONSTRAINT users_number_not_null NOT NULL,
-  users_grade CHAR(9)      DEFAULT '준회원' CONSTRAINT users_grade_check_in CHECK(users_grade IN('준회원', '정회원', '관리자'))
+  users_grade CHAR(9)      DEFAULT '준회원'  CONSTRAINT users_grade_check_in CHECK(users_grade IN('준회원', '정회원', '관리자'))
 );
 
 -- 데이터 생성 (users)
@@ -202,10 +202,10 @@ CREATE TABLE    item_reply(
   item_reply_depth   NUMBER                                DEFAULT 0 NOT NULL
 );
 
--- 저장
+-- 저장 (item_reply)
 COMMIT;
 
--- 테이블 데이터 보기
+-- 테이블 데이터 보기 (item_reply)
 SELECT * FROM item_reply;
 
 
@@ -214,8 +214,6 @@ SELECT * FROM item_reply;
 -- ★★★★★★★★★★ item_file ★★★★★★★★★★
 
 -- 테이블 생성 구문 및 더미 모음 (item_file)
--- 서블릿에서 파일 다운로드를 C:/image로 해놨기 때문에
--- 테이블 생성 후 C:/image 폴더 만들어야 합니다.
 
 -- 테이블/시퀀스 새로 정의 (item_file)
 CREATE SEQUENCE item_file_seq;
@@ -228,11 +226,111 @@ item_file_size       NUMBER,
 item_file_type       VARCHAR2(256)
 );
 
--- 저장
+-- 저장 (item_file)
 COMMIT;
 
--- 테이블 데이터 보기
+-- 테이블 데이터 보기 (item_file)
 SELECT * FROM item_file;
+
+
+
+-- ★★★★★★★★★★ course ★★★★★★★★★★
+
+-- 테이블 생성 구문 및 더미 모음 (course)
+
+-- 테이블/시퀀스 새로 정의 (course)
+CREATE SEQUENCE course_seq;
+CREATE TABLE course(
+  course_idx         NUMBER(20)                                   CONSTRAINT course_PK                   PRIMARY KEY,
+  users_idx          REFERENCES users (users_idx) ON DELETE CASCADE,
+  course_name        VARCHAR2(100)                                CONSTRAINT course_name_not_null        NOT NULL,
+  course_detail      VARCHAR2(2000)                               CONSTRAINT course_detail_not_null      NOT NULL,
+  course_date        DATE                         DEFAULT SYSDATE CONSTRAINT course_date_not_null        NOT NULL,
+  course_count_view  NUMBER(20)                   DEFAULT 0       CONSTRAINT course_count_view_not_null  NOT NULL,
+  course_count_reply NUMBER(20)                   DEFAULT 0       CONSTRAINT course_count_reply_not_null NOT NULL
+);
+
+-- 데이터 생성 (course)
+INSERT INTO course VALUES(1, 1, '코스제목1', '코스내용1', SYSDATE, 0, 0);
+INSERT INTO course VALUES(2, 1, '코스제목2', '코스내용2', SYSDATE, 0, 0);
+INSERT INTO course VALUES(3, 3, '코스제목3', '코스내용3', SYSDATE, 0, 0);
+
+-- 저장 (course)
+COMMIT;
+
+-- 테이블 데이터 보기 (course)
+SELECT * FROM course;
+
+
+
+
+-- ★★★★★★★★★★ course_item ★★★★★★★★★★
+
+-- 테이블 생성 구문 및 더미 모음 (course_item)
+
+-- 테이블/시퀀스 새로 정의 (course_item)
+CREATE SEQUENCE course_item_seq;
+CREATE TABLE course_item(
+  course_item_idx NUMBER(20)                  CONSTRAINT course_item_PK      PRIMARY KEY,
+  item_idx        REFERENCES users(users_idx) ON DELETE SET NULL,
+  course_idx      NUMBER(20)                  CONSTRAINT course_idx_not_null NOT NULL
+                                              CONSTRAINT course_idx_check    CHECK(course_idx > 0)
+);
+
+-- 데이터 생성 (course_item)
+INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 1, 1);
+INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 2, 1);
+INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 3, 1);
+
+INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 4, 2);
+INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 5, 2);
+INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 6, 2);
+
+INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 7, 3);
+INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 8, 3);
+INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 9, 3);
+
+-- 저장 (course_item)
+COMMIT;
+
+-- 테이블 데이터 보기 (course_item)
+SELECT * FROM course_item;
+
+
+
+
+-- ★★★★★★★★★★ course_reply ★★★★★★★★★★
+
+-- 테이블 생성 구문 및 더미 모음 (course_reply)
+
+-- 테이블/시퀀스 새로 정의 (course_reply)
+CREATE SEQUENCE course_reply_seq;
+CREATE TABLE    course_reply(
+  course_reply_idx     NUMBER
+                       CONSTRAINT course_reply_PK                PRIMARY KEY,
+  users_idx            REFERENCES users (users_idx)              ON DELETE CASCADE
+                       CONSTRAINT users_idx_not_null_2           NOT NULL,
+  course_idx           REFERENCES course(course_idx)             ON DELETE CASCADE
+                       CONSTRAINT course_idx_not_null_2          NOT NULL,
+  course_reply_detail  VARCHAR2(2000)
+                       CONSTRAINT course_reply_deatil_not_null   NOT NULL,
+  course_reply_date    DATE DEFAULT SYSDATE
+                       CONSTRAINT course_reply_date_not_null     NOT NULL,
+  course_reply_superno REFERENCES course_reply(course_reply_idx) ON DELETE SET NULL,
+  course_reply_groupno NUMBER
+                       DEFAULT 0
+                       CONSTRAINT course_reply_groupno_not_null  NOT NULL,
+  course_reply_depth   NUMBER DEFAULT 0
+                       CONSTRAINT course_reply_depth_not_null    NOT NULL
+);
+
+-- 데이터 생성 (course_reply)
+
+-- 저장 (course_reply)
+COMMIT;
+
+-- 테이블 데이터 보기 (course_reply)
+SELECT * FROM course_reply;
 
 
 
@@ -254,14 +352,14 @@ CREATE TABLE board_event(
 );
 
 -- 데이터 생성 (board_event)
-INSERT INTO board_event VALUES(board_event_seq.NEXTVAL, 1, '노가리 투어 서포터즈', '관광코스 개발 및 월별 테마에 맞는 관광홍보미션 수행'                                        , TO_DATE('2021-11-01', 'YYYY-MM-DD'), 0, 0);
+INSERT INTO board_event VALUES(board_event_seq.NEXTVAL, 1, '노가리 투어 서포터즈'  , '관광코스 개발 및 월별 테마에 맞는 관광홍보미션 수행'                                        , TO_DATE('2021-11-01', 'YYYY-MM-DD'), 0, 0);
 INSERT INTO board_event VALUES(board_event_seq.NEXTVAL, 3, '충북 청년 축제'      , '충북지역 청년들이 기획부터 운영까지 참여한 2021 충북 청년축제'                              , TO_DATE('2021-09-17', 'YYYY-MM-DD'), 0, 0);
 INSERT INTO board_event VALUES(board_event_seq.NEXTVAL, 5, '강경 젓갈 축제'      , '강경젓갈시장에는 야간 경관을 조성해 강경을 찾는 관람객들에 아름다운 추억을 선사할 예정이다.', TO_DATE('2021-10-13', 'YYYY-MM-DD'), 0, 0);
 INSERT INTO board_event VALUES(board_event_seq.NEXTVAL, 7, '괴산 고추 축제'      , '유기농의 메카, 괴산 방방곳곳 온-오프 투어'                                                  , TO_DATE('2021-08-26', 'YYYY-MM-DD'), 0, 0);
 INSERT INTO board_event VALUES(board_event_seq.NEXTVAL, 9, '영주 사과 축제'      , '가을이 익어가는 계절, ‘영주사과’를 온라인으로 만난다'                                     , TO_DATE('2021-10-13', 'YYYY-MM-DD'), 0, 0);
 
--- 저장
+-- 저장 (board_event)
 COMMIT;
 
--- 테이블 데이터 보기
+-- 테이블 데이터 보기 (board_event)
 SELECT * FROM board_event;

@@ -10,6 +10,7 @@
 <%@page import="beans.CourseItemDto"%>
 <%@page import="java.util.List"%>
 <%@page import="beans.CourseItemDao"%>
+<%@page import="util.users.Sessioner"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
@@ -26,7 +27,7 @@
 <!-- 세션 받기 -->
 <%
 int courseIdx = Integer.parseInt(request.getParameter("courseIdx"));
-int usersIdx = (int)request.getSession().getAttribute("usersIdx");
+int usersIdx = (Integer)request.getSession().getAttribute("usersIdx");
 %>
 
 <%
