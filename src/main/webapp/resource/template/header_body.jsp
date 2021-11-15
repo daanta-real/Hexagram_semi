@@ -39,7 +39,7 @@ if(isLogin) {
 
 <!-- 디버그용 -->
 <DIV ID="debugContainer">
-	<BUTTON ONCLICK='location.href="<%=root%>/users/tableInitializer.jsp";'>DB 초기화</BUTTON>
+	<BUTTON ONCLICK='location.href="<%=root%>/admin/tableInitializer.jsp";'>DB 초기화</BUTTON>
 	<form onsubmit="return false;"><INPUT ID='debug_query' TYPE=text /><BUTTON ONCLICK='debug_rainbowQueryRun();'>레이어 해체보기</BUTTON></form>
 </DIV>
 
