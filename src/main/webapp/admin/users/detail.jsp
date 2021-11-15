@@ -7,14 +7,9 @@
 <TITLE>노가리투어 - 회원 정보 상세</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
-<!-- 테이블 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
-<style>
-.table{width:20%;}
-</style>
- <!-- jquery CDN을 불러오는 코드-->
+<!-- jquery CDN을 불러오는 코드-->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- 회원탈퇴 시 확인창을 불러오는 script -->
 <script type="text/javascript" src="/Hexagram_semi/resource/js/users/admin_users_delete.js"></script>
@@ -31,7 +26,7 @@
 <SECTION>
 <!-- 페이지 내용 시작 -->
 <div class="sub_title">회원 상세 정보</div>
-<table class="table">
+<table>
 	<tbody>
 		<tr>
 			<th>회원번호</th>
