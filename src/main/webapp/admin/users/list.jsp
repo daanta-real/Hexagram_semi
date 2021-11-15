@@ -21,6 +21,11 @@
 <%String root = request.getContextPath();%>
 <!-- 페이지 내용 시작 -->
 
+ <!-- jquery CDN 또는 파일을 불러오는 코드를 작성-->
+ <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- 회원탈퇴 시 확인창을 불러오는 script -->
+<script type="text/javascript" src="<%=root%>/resource/js/users/admin_users_delete.js"></script>
+
 <%
 // 1. 변수 준비
 UsersDao usersDao = new UsersDao();
@@ -35,18 +40,6 @@ pn.setPageSize(20);
 pn.calculate();
 System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 %>
-			
-<script>
-//function deleteConfirm의 매개변수로 usersId로 설정하고 onclick설정한 버튼에 매개변수로 usersDto.getUsersId()로 설정 
-function deleteConfirm(usersId){
-	var deleteConfirm = window.confirm("탈퇴를 진행할까요?");
-	console.log(deleteConfirm);
-	if(deleteConfirm == true){
-		location.href="unregister.nogari?usersId="+usersId;
-	}
-}
-</script>
-
 <!-- 검색 -->
     <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post">
 	     <select name="column">
