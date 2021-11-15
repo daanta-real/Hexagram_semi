@@ -108,8 +108,8 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 			<td><%=usersEmail%></td>
 			<td align="center"><%=usersDto.getUsersGrade() %></td>
 			<th align="center">
-				<button><a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">상세</a></button>
-				<button><a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">수정</a></button>
+				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"><button>상세</button></a>
+				<a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"><button>수정</button></a>
 				<button onclick="deleteConfirm('<%=usersDto.getUsersId()%>');">탈퇴</button>
 			</th>
 		</tr>
