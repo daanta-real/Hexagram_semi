@@ -47,6 +47,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 %>
 <h3><a href="delete.nogari?courseIdx=<%=courseIdx%>">삭제</a></h3>
 <h3><a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>">수정</a></h3>
+<h2><a href="insert_sequence.nogari">새 코스 작성</a></h2>
 
 <!-- 수정/삭제는 jsp에서도 막아주는 것 이외로 주소로 입력하는 것을 방지하게 위해서 필터로도 막아줘야 한다. -->
 

@@ -117,6 +117,7 @@
 						<th>코스명</th>
 						<th>내용</th>
 					</tr>
+					
 		<%for(CourseDto courseDto : list) {%>
 			<%
 		    //지역 알아내기 -> 코스아이템에서 첫번쨰 아이템 내용 전달.
