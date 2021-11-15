@@ -1,3 +1,6 @@
+<%@page import="beans.CourseDao"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.util.Set"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="beans.UsersDao"%>
 <%@page import="beans.CourseDto"%>
@@ -24,10 +27,20 @@
 <SECTION>
 <!-- 페이지 내용 시작 -->
 <% String root = request.getContextPath(); %>
-<!-- 세션 받기 -->
+
+<%-- 세션 받기 --%>
 <%
+//courseDto, courseDao는 여러곳에서 필요하기때문에 미리 선언
+CourseDto courseDto = new CourseDto();
+CourseDao courseDao = new CourseDao();
+
+//코스번호 받기
 int courseIdx = Integer.parseInt(request.getParameter("courseIdx"));
-int usersIdx = (Integer)request.getSession().getAttribute("usersIdx");
+//int usersIdx = Sessioner.getUsersIdx(session);
+
+//자신의 글인지 확인 (수정, 삭제, 조회수증가)
+int usersIdx = (int)request.getSession().getAttribute("usersIdx");
+boolean isMyboard = request.getSession().getAttribute("usersIdx") != null && courseDto.getUsersIdx() == usersIdx;
 %>
 
 <%
@@ -40,12 +53,24 @@ ItemFileDao itemFileDao = new ItemFileDao();
 
 <%-- 현재 게시글에 대한 댓글 목록 출력 --%>
 <%
-	//댓글 게시물 작성자 확인을 위한 courseDto 선언
-	CourseDto courseDto = new CourseDto();
 	//댓글 리스트 불러오기
 	CourseReplyDao courseReplyDao = new CourseReplyDao();
 	List<CourseReplyDto> list = courseReplyDao.listByTreeSort(courseIdx);
 %>
+
+<%-- 조회수 증가 기능 (조회수 중복 방지) --%>
+<%
+Set<Integer> boardCountView = (Set<Integer>)request.getSession().getAttribute("boardCountView");
+
+if(boardCountView==null){
+	boardCountView = new HashSet<Integer>();
+}
+if(boardCountView.add(courseIdx)){
+	courseDao.readUp(courseIdx,usersIdx);
+}
+request.getSession().setAttribute("boardCountView", boardCountView);
+ %>
+ 
 <h3><a href="delete.nogari?courseIdx=<%=courseIdx%>">삭제</a></h3>
 <h3><a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>">수정</a></h3>
 

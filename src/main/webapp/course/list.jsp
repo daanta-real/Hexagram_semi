@@ -116,6 +116,7 @@
 						<th>지역명</th>
 						<th>코스명</th>
 						<th>내용</th>
+						<th>조회수</th>
 					</tr>
 		<%for(CourseDto courseDto : list) {%>
 			<%
@@ -129,10 +130,11 @@
 						<td><%=itemDto.getAdressCity()%></td>
 						<td>
 						<a href="detail.jsp?courseIdx=<%=courseDto.getCourseIdx()%>">
-						<%=courseDto.getCourseName()%>
+						<%=courseDto.getCourseName()%>[<%=courseDto.getCourseCountReply() %>]
 						</a>
 						</td>
 						<td><%=courseDto.getCourseDetail()%></td>
+						<td><%=courseDto.getCourseCountView() %></td>
 					</tr>
 		<%} %>
 				</tbody>
