@@ -22,7 +22,8 @@
     
     String root = request.getContextPath();
     
-//  최초 코스 번호는서블릿에서 생성한 번호를 받아준다. 이후에는 코스_아이템 항목 추가,삭제 서블릿에서 전달한 해당 시퀀스 값을 다시 받는다.
+	int courseOriginSequnce = Integer.parseInt(request.getParameter("courseOriginSequnce"));
+	//기존의 번호
 	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));
 //	최초로 지역을 먼저 설정하게 한다. 이것을 선택한 후에는 대부분 courseSequnce / city는 함께 파라미터로 움직여야 한다.
  String city = request.getParameter("city");
@@ -267,7 +268,7 @@
 
 <div class="page">
 <!-- 지역 선택(그 지역에 한해서 한정 선택할 수 있다.) -->
-<form action="insert.jsp" method="get">
+<form action="update.jsp" method="get">
 	<select name="city" required>
 		<%if(city == null) {%>
 		<option disabled>선택</option>
@@ -380,7 +381,8 @@
 		<option>충청북도</option>
 		<%} %>				
 	</select>
-	
+
+	<input type="hidden" name="courseOriginSequnce" value="<%=courseOriginSequnce%>">
 	<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
 <!-- 	핵심이다.. courseSequnce는 무슨일이 있어서 최초 생성하고 잃어서는 안될 고유 번호이다. -->
 	<input type="hidden" name="pa" value="<%=0%>">
@@ -392,7 +394,7 @@
 </div>
 
 <div class="page">
-<form action="insert.jsp" method="get">
+<form action="update.jsp" method="get">
 		<select name="column" required>
 			<option disabled>선택</option>
 			
@@ -416,6 +418,7 @@
 		<%} %>
 			<input type="hidden" name="pa" value="<%=1%>">
 			<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
+			<input type="hidden" name="courseOriginSequnce" value="<%=courseOriginSequnce%>">
 			<!-- 	핵심이다.. courseSequnce는 무슨일이 있어서 최초 생성하고 잃어서는 안될 고유 번호이다. -->
 			<input type="submit" value="검색">
 </form>
@@ -458,13 +461,13 @@
 	<%if(startBlock > 1){ %>
 		<%if(searchByName){ %>
 			<!-- 검색용 링크 -->
-			<a href="insert.jsp?column=<%=column%>&keyword=<%=keyword%>&p=<%=startBlock-1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&lt;</a>
+			<a href="update.jsp?column=<%=column%>&keyword=<%=keyword%>&p=<%=startBlock-1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>&courseOriginSequnce=<%=courseOriginSequnce%>">&lt;</a>
 		<%} else if(searchByCity) { %>
 			<!-- 검색용 링크 -->
-			<a href="insert.jsp?p=<%=startBlock-1%>&city=<%=city%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&lt;</a>
+			<a href="update.jsp?p=<%=startBlock-1%>&city=<%=city%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>&courseOriginSequnce=<%=courseOriginSequnce%>">&lt;</a>
 		<%} else { %>
 			<!-- 목록용 링크 -->
-			<a href="insert.jsp?p=<%=startBlock-1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&lt;</a>
+			<a href="update.jsp?p=<%=startBlock-1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>&courseOriginSequnce=<%=courseOriginSequnce%>">&lt;</a>
 		<%} %>
 	<%} else { %>
 		 <a>&lt;</a>
@@ -474,13 +477,13 @@
 	<%for(int i = startBlock; i <= Math.min(finishBlock, lastBlock); i++){ %>
 		<%if(searchByName){ %>
 		<!-- 검색용 링크 -->
-		<a href="insert.jsp?column=<%=column%>&keyword=<%=keyword%>&p=<%=i%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>"><%=i%></a>
+		<a href="update.jsp?column=<%=column%>&keyword=<%=keyword%>&p=<%=i%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>&courseOriginSequnce=<%=courseOriginSequnce%>"><%=i%></a>
 		<%}else if(searchByCity){ %>
 		<!-- 검색용 링크 -->
-		<a href="insert.jsp?p=<%=i%>&city=<%=city%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>"><%=i%></a>
+		<a href="update.jsp?p=<%=i%>&city=<%=city%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>&courseOriginSequnce=<%=courseOriginSequnce%>"><%=i%></a>
 		<%}else{ %>
 		<!-- 목록용 링크 -->
-		<a href="insert.jsp?p=<%=i%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>"><%=i%></a>
+		<a href="update.jsp?p=<%=i%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>&courseOriginSequnce=<%=courseOriginSequnce%>"><%=i%></a>
 		<%} %>
 	<%} %>
 	
@@ -488,13 +491,13 @@
 	<%if(finishBlock < lastBlock){ %>
 		<%if(searchByName){ %>
 			<!-- 검색용 링크 -->
-			<a href="insert.jsp?column=<%=column%>&keyword=<%=keyword%>&p=<%=finishBlock+1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&gt;</a>
+			<a href="update.jsp?column=<%=column%>&keyword=<%=keyword%>&p=<%=finishBlock+1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>&courseOriginSequnce=<%=courseOriginSequnce%>">&gt;</a>
 			<%}else if(searchByCity){ %>
 			<!-- 검색용 링크 -->
-			<a href="insert.jsp?p=<%=finishBlock+1%>&city=<%=city%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&gt;</a>
+			<a href="update.jsp?p=<%=finishBlock+1%>&city=<%=city%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>&courseOriginSequnce=<%=courseOriginSequnce%>">&gt;</a>
 		<%} else { %>
 			<!-- 목록용 링크 -->
-			<a href="insert.jsp?p=<%=finishBlock+1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&gt;</a>
+			<a href="update.jsp?p=<%=finishBlock+1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>&courseOriginSequnce=<%=courseOriginSequnce%>">&gt;</a>
 		<%} %> 
 	<%} else {%>
 		<a>&gt;</a>
@@ -533,10 +536,11 @@
 </div>
 
 <div>
-	<form action="insert_last.jsp" class="next-submit">
+	<form action="update_last.jsp" class="next-submit">
 		<button class="next-btn">다음 단계로(제목/내용/선택한 목록 조회 및 수정)</button>
 		<span></span>
 		<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
+		<input type="hidden" name="courseOriginSequnce" value="<%=courseOriginSequnce%>">
 		<input type="hidden" name="city" value="<%=city%>">
 	</form>
 </div>

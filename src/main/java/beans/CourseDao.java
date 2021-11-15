@@ -88,6 +88,21 @@ public class CourseDao {
 			return result > 0;
 		}
 		
+		public boolean update(CourseDto courseDto) throws Exception {
+			String sql = "update course set course_name=?,course_detail=? where course_idx=?";
+			Connection con = JdbcUtils.connect3();
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ps.setString(1, courseDto.getCourseName());
+			ps.setString(2, courseDto.getCourseDetail());
+			ps.setInt(3, courseDto.getCourseIdx());
+
+			int result = ps.executeUpdate();
+
+			con.close();
+			return result > 0;
+		}
+		
 		public int getSequence() throws Exception {
 			String sql = "select course_seq.nextval from dual";
 			Connection con = JdbcUtils.connect3();
