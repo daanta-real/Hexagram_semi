@@ -9,8 +9,6 @@
 </HEAD>
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
-<!-- jquery CDN을 불러오는 코드-->
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- 회원탈퇴 시 확인창을 불러오는 script -->
 <script type="text/javascript" src="/Hexagram_semi/resource/js/users/admin_users_delete.js"></script>
 <BODY>
