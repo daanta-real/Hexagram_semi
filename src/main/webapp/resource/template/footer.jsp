@@ -15,8 +15,8 @@ System.out.println("[풋터 출력] from " + request.getRequestURL().toString())
 	<LI>사업자등록번호: 123-45-6789</LI>
 	<LI>고객지원문의전화: 010-6744-3229 (평일 오전 9시 30분 ~ 오후 6시 30분; ※ 토/일/공휴일/회사 정기휴일 및 특별휴일 제외)</LI>
 	<LI>Github: <A HREF='https://github.com/daanta-real/Hexagram_semi'>https://github.com/daanta-real/Hexagram_semi</A></LI>
-	<LI>세션 IDX = '<%=session.getAttribute("usersIdx") %>'</LI>
-	<LI>세션 ID = '<%=session.getAttribute("usersId") %>'</LI>
-	<LI>세션 GRADE = '<%=session.getAttribute("usersGrade") %>'</LI>
+	<LI>세션 IDX (usersIdx) = '<%=session.getAttribute("usersIdx") %>', <%= session.getAttribute("usersIdx").getClass().getName() %></LI>
+	<LI>세션 ID (usersId) = '<%=session.getAttribute("usersId") %>', <%= session.getAttribute("usersId").getClass().getName() %></LI>
+	<LI>세션 GRADE (usersGrade) = '<%=session.getAttribute("usersGrade") %>', <%= session.getAttribute("usersGrade").getClass().getName() %></LI>
 	<LI>#mobileMenuLayer *</LI>
 </UL></FOOTER>
