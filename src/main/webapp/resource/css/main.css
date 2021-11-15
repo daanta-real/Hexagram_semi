@@ -12,15 +12,15 @@
 
 /* 일반 공통 속성 */
 :root {
-    --color1:hsl(34, 93%, 67%);
+    --color1:hsl(34, 60%, 70%);
     --color2:hsl(33, 75%, 55%);
     --color3:hsl(44, 100%, 75%);
-    --color4:hsl(38, 84%, 50%);
+    --color4:hsl(38, 70%, 70%);
     --color5:hsl(41, 93%, 57%);
     --color6:hsl(123, 72%, 35%);
     --color7:hsl(40, 5%, 89%);
-    --color8:hsl(0, 64%, 19%);
-    --color9:hsl(43, 100%, 90%);
+    --color8:hsl(0, 50%, 20%);
+    --color9:hsl(43, 60%, 95%);
     --color10:hsl(34, 93%, 67%);
     --color_bg:hsl(34, 5%, 95%);
 
