@@ -10,8 +10,8 @@ CLEAR SCREEN;
 -- 테이블/시퀀스 새로 정의 (users)
 CREATE SEQUENCE users_seq;
 CREATE TABLE    users (
-  users_idx   NUMBER(20)   NOT NULL CONSTRAINT users_PK PRIMARY KEY,
-  users_id    VARCHAR2(20) ,
+  users_idx   NUMBER(20)   CONSTRAINT users_idx_not_null NOT NULL CONSTRAINT users_PK PRIMARY KEY,
+  users_id    VARCHAR2(20) CONSTRAINT users_id_unique UNIQUE,
   users_pw    VARCHAR2(20) ,
   users_nick  VARCHAR2(30) ,
   users_email VARCHAR2(30) ,
