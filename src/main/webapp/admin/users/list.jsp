@@ -8,18 +8,18 @@
 <HEAD>
 <TITLE>노가리투어 - 회원 목록</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
-
 </HEAD>
-<!-- 테이블 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
-<style>
-.table{ width:80%; padding:0.1rem;}
-</style>
+<!-- 페이지 제목 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
 <%String root = request.getContextPath();%>
+
+<!-- 회원탈퇴 시 확인창을 불러오는 script -->
+<script type="text/javascript" src="<%=root%>/resource/js/users/admin_users_delete.js"></script>
 <!-- 페이지 내용 시작 -->
+
 
 <%
 // 1. 변수 준비
@@ -35,18 +35,6 @@ pn.setPageSize(20);
 pn.calculate();
 System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 %>
-			
-<script>
-//function deleteConfirm의 매개변수로 usersId로 설정하고 onclick설정한 버튼에 매개변수로 usersDto.getUsersId()로 설정 
-function deleteConfirm(usersId){
-	var deleteConfirm = window.confirm("탈퇴를 진행할까요?");
-	console.log(deleteConfirm);
-	if(deleteConfirm == true){
-		location.href="unregister.nogari?usersId="+usersId;
-	}
-}
-</script>
-
 <!-- 검색 -->
     <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post">
 	     <select name="column">
@@ -84,9 +72,9 @@ function deleteConfirm(usersId){
 <!-- 회원목록 -->
 <!-- 회원 탈퇴 리다이렉트 delete파라미터 -->
  <%if(request.getParameter("delete") != null) {%>
- 	<h4>아이디 <%=request.getParameter("usersId") %> 회원 탈퇴 완료</h4>
+ 	<div class="sub_title">아이디 <%=request.getParameter("usersId") %> 회원 탈퇴 완료</div>
  <%} %>
-<table class="table table-border">
+<table>
 	<thead>
 		<tr>
 			<th>회원번호</th>
@@ -120,9 +108,8 @@ function deleteConfirm(usersId){
 			<td><%=usersEmail%></td>
 			<td align="center"><%=usersDto.getUsersGrade() %></td>
 			<th align="center">
-				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">상세</a> |
-				<a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">수정</a> |
-<%-- 		<a href="unregister.nogari?usersId=<%=usersDto.getUsersId()%>">탈퇴</a> --%>
+				<button><a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">상세</a></button>
+				<button><a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">수정</a></button>
 				<button onclick="deleteConfirm('<%=usersDto.getUsersId()%>');">탈퇴</button>
 			</th>
 		</tr>

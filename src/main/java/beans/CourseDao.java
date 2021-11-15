@@ -88,6 +88,21 @@ public class CourseDao {
 			return result > 0;
 		}
 		
+		public boolean update(CourseDto courseDto) throws Exception {
+			String sql = "update course set course_name=?,course_detail=? where course_idx=?";
+			Connection con = JdbcUtils.connect3();
+			PreparedStatement ps = con.prepareStatement(sql);
+
+			ps.setString(1, courseDto.getCourseName());
+			ps.setString(2, courseDto.getCourseDetail());
+			ps.setInt(3, courseDto.getCourseIdx());
+
+			int result = ps.executeUpdate();
+
+			con.close();
+			return result > 0;
+		}
+		
 		public int getSequence() throws Exception {
 			String sql = "select course_seq.nextval from dual";
 			Connection con = JdbcUtils.connect3();
@@ -99,6 +114,33 @@ public class CourseDao {
 
 			con.close();
 			return result;
+		}
+		
+		//등록 및 수정시에 사용자가 완료하지 않고 생성한 코스번호에 대해서 삭제해준다.
+		public int getMaxIdx() throws Exception {
+			String sql = "select max(course_idx) from course";
+			Connection con = JdbcUtils.connect3();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			int result = rs.getInt(1);
+
+			con.close();
+			return result;
+		}
+		
+		//코스아이템 DAO에서 처리할 수 있으나 여기에서도 충분히 처리가능하여 여기에서 처리하기로 함.
+		public boolean getMaxIdxDelete(int maxCourseIdx) throws Exception {
+			String sql = "delete course_item where course_idx > ?";
+			Connection con = JdbcUtils.connect3();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, maxCourseIdx);
+			
+			int result = ps.executeUpdate();
+
+			con.close();
+			return result>0;
 		}
 		
 		//게시글 댓글 개수 갱신 기능

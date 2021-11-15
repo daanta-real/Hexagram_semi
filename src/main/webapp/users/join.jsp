@@ -10,8 +10,14 @@
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/table.css">
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
+
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- 회원가입 아이디 중복검사 스크립트 -->
+<script type="text/javascript" src="<%=root%>/resource/js/users/join_id_check.js"></script>
+<!-- 회원가입 비밀번호, 비밀번호확인 입력값 스크립트 -->
+<script type="text/javascript" src="<%=root%>/resource/js/users/join_pw_recheck.js"></script>
+
 <!-- 인라인 스크립트 -->
 <script type='text/javascript'>
 
@@ -127,10 +133,10 @@ window.addEventListener("load", () => {
 		form에 id=joinForm 을 부여하여 선택자 지정시킴  
  -->
 <form id="joinForm" method='post' action='<%=root%>/users/join.nogari'>
-<table class="table">
+<table>
 <tbody>       
 	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'><div></div></td></tr>
-	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'></td></tr>
+	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'><div id="noticeIdPw"></div></td></tr>
 	<tr>
 		<th>비번확인</th>
 		<td>

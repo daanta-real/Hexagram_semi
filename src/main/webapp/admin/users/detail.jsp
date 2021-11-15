@@ -7,13 +7,10 @@
 <TITLE>노가리투어 - 회원 정보 상세</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
-<!-- 테이블 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
-<style>
-.table{width:20%;}
-</style>
+<!-- 회원탈퇴 시 확인창을 불러오는 script -->
+<script type="text/javascript" src="/Hexagram_semi/resource/js/users/admin_users_delete.js"></script>
 <BODY>
 <% String root = request.getContextPath(); %>
 
@@ -23,27 +20,11 @@
 	UsersDao usersDao = new UsersDao();
 	UsersDto usersDto = usersDao.get(usersIdx);
 %>
-<script>
-window.addEventListener("load", function(){
-	//탙퇴버튼 클릭시 확인창을 보여주고 확인이면 탈퇴진행, 취소면 다시 회원상세페이지 보여주기
-	document.querySelector("#deleteConfirm").addEventListener("click", function(){
-		var deleteConfirm = confirm("정말로 탈퇴를 진행하실 건가요?");
-		console.log(deleteConfirm);
-		if(deleteConfirm == true){
-			console.log("[관리자-회원관리]탈퇴진행");
-			location.href = "unregister.nogari?usersId=<%=usersDto.getUsersId()%>";
-		}else{
-			console.log("[관리자-회원관리]탈퇴취소]");
-			location.href = "detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>";
-		}
-	});
-});
-</script>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
 <!-- 페이지 내용 시작 -->
 <div class="sub_title">회원 상세 정보</div>
-<table class="table">
+<table>
 	<tbody>
 		<tr>
 			<th>회원번호</th>
@@ -91,7 +72,7 @@ window.addEventListener("load", function(){
 	<a href="<%=root%>/admin/users/list.jsp">
 		<input type="button" value="회원목록으로 돌아가기">
 	</a>
-		<input type="button" value="회원탈퇴 처리" id="deleteConfirm">
+		<button onclick="deleteConfirm('<%=usersDto.getUsersId()%>');">탈퇴</button>
 <%-- 	
 	<a href="<%=root%>/admin/users/unregister.nogari?usersId=<%=usersDto.getUsersId() %>"></a> 
 --%>
