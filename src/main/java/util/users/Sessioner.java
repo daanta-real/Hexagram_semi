@@ -1,5 +1,7 @@
 package util.users;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpSession;
 
 import beans.UsersDto;
@@ -45,9 +47,21 @@ public class Sessioner {
 
 	// 현재 세션 정보 문자열 return
 	public static String getInfo(HttpSession session) {
-		return "　　usersId = '"    + session.getAttribute("usersId"   ) + "', "
-		     + "　　usersGrade = '" + session.getAttribute("usersGrade") + "', "
-		     + "　　usersIdx = '"   + session.getAttribute("usersIdx"  ) + "'";
+		StringBuffer sb = new StringBuffer();
+		Enumeration<String> sessionNamesList = session.getAttributeNames();
+		int i;
+		for(i = 1; sessionNamesList.hasMoreElements(); i++) {
+			sb.append("  (" + i + ") " + sessionNamesList.nextElement() + ", " + sessionNamesList.nextElement().getClass().getName() + "\n");
+		}
+		sb.append("[세션정보] 끝\n");
+		sb.insert(0, "[세션정보] 세션의 총 개수: " + i + " \n[세션정보] 세션 상세 정보:\n");
+		return sb.toString();
 	}
+
+	// 현재 각 세션 정보 회신
+	// 각 문자와 숫자 모두 null이 나올 수도 있다. 따라서 메소드로 값 획득 후 null check 필히 할 것.
+	public static Integer getUsersIdx  (HttpSession session) { return Integer.parseInt((String) session.getAttribute("usersIdx")); }
+	public static String  getUsersId   (HttpSession session) { return (String) session.getAttribute("usersId"   ); }
+	public static String  getUsersGrade(HttpSession session) { return (String) session.getAttribute("usersGrade"); }
 
 }

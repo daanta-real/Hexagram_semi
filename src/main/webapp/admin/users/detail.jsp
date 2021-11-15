@@ -7,6 +7,13 @@
 <TITLE>노가리투어 - 회원 정보 상세</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
+<!-- 테이블 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
+<!-- 페이지 제목 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
+<style>
+.table{width:20%;}
+</style>
 <BODY>
 <% String root = request.getContextPath(); %>
 
@@ -35,7 +42,8 @@ window.addEventListener("load", function(){
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
 <!-- 페이지 내용 시작 -->
-<table>
+<div class="sub_title">회원 상세 정보</div>
+<table class="table">
 	<tbody>
 		<tr>
 			<th>회원번호</th>

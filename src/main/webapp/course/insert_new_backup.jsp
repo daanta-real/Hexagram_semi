@@ -19,19 +19,6 @@
     	pa = 0;
     }
     
-    
-    String root = request.getContextPath();
-    
-//  최초 코스 번호는서블릿에서 생성한 번호를 받아준다. 이후에는 코스_아이템 항목 추가,삭제 서블릿에서 전달한 해당 시퀀스 값을 다시 받는다.
-	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));
-//	최초로 지역을 먼저 설정하게 한다. 이것을 선택한 후에는 대부분 courseSequnce / city는 함께 파라미터로 움직여야 한다.
- String city = request.getParameter("city");
-	
- ItemDao itemDao = new ItemDao();
- CourseItemDao courseItemDao = new CourseItemDao();
- 
- List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
-//  3개이상만 가능하게 하는 기능 / 목록을 보여주고 삭제 옵션을 주는 기능
     %>
 <!DOCTYPE HTML>
 <HTML>
@@ -39,6 +26,13 @@
 <TITLE>노가리투어 - 관광지 목록</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
+<style>
+.my-hide{
+	display: none;
+}
+
+</style>
+
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 
@@ -62,69 +56,78 @@
                     },
                     //완료 처리
                     success:function(resp){//NNNNN, NNNNY 중 하나가 돌아왔다(통신이 성공)
+     						console.log(resp);
                          if(resp == "NNNNS"){
-                        	 $(".result").text("동일 지역을 선택하세요!").css("color","red");
+                        	 $(".remove-result").text("동일 지역을 선택하세요!").css("color","red");
                          }
                          else if(resp == "NNNNC"){
-                        	 $(".result").text(" 이미 선택한 관광지입니다~!").css("color","red");
+                        	 $(".remove-result").text(" 이미 선택한 관광지입니다~!").css("color","red");
                          }
                          else if(resp == "NNNNO"){
-                        	 $(".result").text("관광지가 8개를 초과하였습니다.").css("color","red");
+                        	 $(".remove-result").text("관광지가 8개를 초과하였습니다.").css("color","red");
                          }
                          else{
-                            var tr = $("<tr>");
+                            var tr = $("<tr>").addClass("count-row"); 
                          	var td1 = $("<td>").append(item_address);
                          	var td2 = $("<td>").append(item_name);
                          	var td3 = $("<td>");
                          	var button3 = $("<button>").addClass("item-remove-new-btn").attr("data-course_idx",course_Idx).attr("data-item_idx",item_Idx);
-                         	button3.on("click",function(){
-
-                               	 if(parseInt($(".result-number").text())>3){
-                                	$(this).parents("tr").hide();
-                                	
-                                	var new_course_Idx = $(this).attr("data-course_idx");
-                                    var new_item_Idx = $(this).attr("data-item_idx");
-                                    
-                                    $.ajax({
-                                        //준비 설정
-                                        url:"http://localhost:8080/Hexagram_semi/course/ajax_delete_item.nogari",
-                                        type:"get",//전송 방식
-                                        data:{//전송 시 첨부할 파라미터 정보
-                                        	itemIdx : new_item_Idx,
-                                        	courseIdx : new_course_Idx
-                                        },
-                                        //완료 처리
-                                        success:function(resp){//NNNNN, NNNNY 중 하나가 돌아왔다(통신이 성공)
-                                        	if(resp == "NNNNN"){
-                                                 $(".result").text("최소 3개의 관광지가 필요합니다.").css("color","red");
-                                                 $(".result-number").text($(".result-number").text());
-      
-                                        		}
-                                             else{
-                                            	 $(".result").text("삭제 완료!").css("color","blue");
-                                            	 $(".result-number").text(resp);
-                                             }
-                                        },
-                                        error:function(err){//통신이 실패했다.
-                                            console.log("실패");
-                                            console.log(err);
-                                        }        	
-                                	});
-                               	 
-
-                               	 }else{
-                                    	$(".result").text("최소 3개의 관광지가 필요합니다.").css("color","red");
-                                        $(".result-number").text($(".result-number").text());
-                                    }         
-            		
-                         	});
                          	
                          	$(".item-add").append(tr);
                          	tr.append(td1).append(td2);
                          	tr.append(td3.append(button3.append("삭제하기")));
                          	
-                             $(".result").text("추가 완료").css("color","blue");
-                             $(".result-number").text(resp);
+                             $(".remove-result").text("추가 완료").css("color","blue");
+                             $(".remove-result-number").text(resp).addClass("my-hide");
+                             
+                            $(".item-remove-new-btn").click(function(){
+                            	 if(parseInt($(".remove-result-number").text())>3){
+                             	$(this).parents("tr").hide();
+                             		
+                             	var new_course_Idx = $(this).attr("data-course_idx");
+                                 var new_item_Idx = $(this).attr("data-item_idx");
+                                 
+                                 console.log(course_Idx);
+                                 console.log(item_Idx);
+                                 console.log("new");
+                                 $.ajax({
+                                     //준비 설정
+                                     url:"http://localhost:8080/Hexagram_semi/course/ajax_delete_item2.nogari",
+                                     type:"get",//전송 방식
+                                     data:{//전송 시 첨부할 파라미터 정보
+                                     	itemIdx : new_item_Idx,
+                                     	courseIdx : new_course_Idx
+                                     },
+                                     //완료 처리
+                                     success:function(response){//NNNNN, NNNNY 중 하나가 돌아왔다(통신이 성공)
+                                     	if(response == "NNNNN"){
+     
+                                              $(".remove-result").text("최소 3개의 관광지가 필요합니다.new").css("color","red");
+                                              $(".remove-result-number").text($(".remove-result-number").text()).addClass("my-hide");
+   
+                                     		}
+                                          else{
+                                         	 $(".remove-result").text("삭제 완료!").css("color","blue");
+                                         	 $(".remove-result-number").text(response).addClass("my-hide");
+                                          }
+                                     },
+                                     error:function(err){//통신이 실패했다.
+                                         console.log("실패");
+                                         console.log(err);
+                                     }        	
+                             	});
+                            	 
+                                 
+                                 
+
+                            	 }else{
+                                 	$(".remove-result").text("최소 3개의 관광지가 필요합니다.n").css("color","red");
+                                     $(".remove-result-number").text($(".remove-result-number").text()).addClass("my-hide");
+                                 }         
+                                 
+                                 
+                        		 });
+                             
                              
                          }
                     },
@@ -139,12 +142,16 @@
             
 
             $(".item-remove-btn").click(function(){
-            	if(parseInt($(".result-number").text())>3){
+            	if(parseInt($(".remove-result-number").text())>3){
             	$(this).parents("tr").hide();
  
             	var course_Idx = $(this).attr("data-course_idx");
                 var item_Idx = $(this).attr("data-item_idx");
-
+                
+                console.log(course_Idx);
+                console.log(item_Idx);
+                console.log("old");
+                
                 $.ajax({
                     //준비 설정
                     url:"http://localhost:8080/Hexagram_semi/course/ajax_delete_item.nogari",
@@ -155,26 +162,28 @@
                     },
                     //완료 처리
                     success:function(resp){//NNNNN, NNNNY 중 하나가 돌아왔다(통신이 성공)
-
+                    	console.log(resp);
                     	if(resp == "NNNNN"){
-                    		   $(".result").text("최소 3개의 관광지가 필요합니다.").css("color","red");
-                               $(".result-number").text($(".result-number").text());
+                    		   $(".remove-result").text("최소 3개의 관광지가 필요합니다.old").css("color","red");
+                               $(".remove-result-number").text($(".remove-result-number").text()).addClass("my-hide");
+
                     	} else{
-                        	 $(".result").text("삭제 완료!").css("color","blue");
-                         	 $(".result-number").text(resp);
+                        	 $(".remove-result").text("삭제 완료!").css("color","blue");
+                         	 $(".remove-result-number").text(resp).addClass("my-hide");
+                        	 console.log(resp);
                          }
                     },
                     error:function(err){//통신이 실패했다.
+                        console.log("실패");
                         console.log(err);
                     }        	
             	});
             }else{
-            	$(".result").text("최소 3개의 관광지가 필요합니다.").css("color","red");
-                $(".result-number").text($(".result-number").text());
+            	$(".remove-result").text("최소 3개의 관광지가 필요합니다.o").css("color","red");
+                $(".remove-result-number").text($(".remove-result-number").text()).addClass("my-hide");
             }  
        		 });
             
-         
             
             var pa = <%=pa%>;
             $(".page").hide();
@@ -199,20 +208,40 @@
 
             
             $(".next-submit").on("submit",function(e){
-      				if(parseInt($(".result-number").text())<3){
+            	var text = $(".add-result-number").text();
+            	if(parseInt(text)<3){
             		e.preventDefault();
-            		$(this).find("span").text("3개이상 선택하세요..!").css("color","red");
-      				}
+            		$(this).next().next().text("3개이상 선택하세요..!").css("color","red");
+            	}
             });
             
         });
 		
-
+        
+        var total = 1;
+        $(".count-row").each(function(){
+        	total++;
+        });
+        $(".count").text(total);
+        console.log("행의 총 개수 : ");
+        console.log(total);
     </script>
 	
 <SECTION>
 <!-- 페이지 내용 시작 -->
     <%
+    String root = request.getContextPath();
+    
+//  최초 코스 번호는서블릿에서 생성한 번호를 받아준다. 이후에는 코스_아이템 항목 추가,삭제 서블릿에서 전달한 해당 시퀀스 값을 다시 받는다.
+	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));
+//	최초로 지역을 먼저 설정하게 한다. 이것을 선택한 후에는 대부분 courseSequnce / city는 함께 파라미터로 움직여야 한다.
+ String city = request.getParameter("city");
+	
+ ItemDao itemDao = new ItemDao();
+ CourseItemDao courseItemDao = new CourseItemDao();
+ 
+ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
+//  3개이상만 가능하게 하는 기능 / 목록을 보여주고 삭제 옵션을 주는 기능
 	boolean isLogin = request.getSession().getAttribute("usersIdx") != null;
 
     String column = request.getParameter("column");
@@ -263,11 +292,9 @@
     
     %>
 
-<div><h1>관광지 선택 메뉴(등록/삭제)</h1></div>
-
 <div class="page">
 <!-- 지역 선택(그 지역에 한해서 한정 선택할 수 있다.) -->
-<form action="insert.jsp" method="get">
+<form action="update.jsp" method="get">
 	<select name="city" required>
 		<%if(city == null) {%>
 		<option disabled>선택</option>
@@ -385,14 +412,14 @@
 <!-- 	핵심이다.. courseSequnce는 무슨일이 있어서 최초 생성하고 잃어서는 안될 고유 번호이다. -->
 	<input type="hidden" name="pa" value="<%=0%>">
 	
-	<input type="submit" value="지역 검색">
+	<input type="submit" value="지역 선택 완료">
 </form>
 
-<button class="btn btn-name">키워드로 검색</button>
+<button class="btn btn-name">관광지명 또는 키워드로 검색하기</button>
 </div>
 
 <div class="page">
-<form action="insert.jsp" method="get">
+<form action="update.jsp" method="get">
 		<select name="column" required>
 			<option disabled>선택</option>
 			
@@ -419,15 +446,16 @@
 			<!-- 	핵심이다.. courseSequnce는 무슨일이 있어서 최초 생성하고 잃어서는 안될 고유 번호이다. -->
 			<input type="submit" value="검색">
 </form>
-<button class="btn btn-city">지역으로 검색</button>
+<button class="btn btn-city">지역으로 검색하기</button>
 </div>
 
-<br>
-<span>검색 결과  : <%=count%> 개의 관광지가 검색되었습니다.</span>
-<br>
+<br><br>
+
+총 갯수  : <%=count%>
+<br><br>
 
 
-<h3>- 관광지 목록 -</h3>
+<h3>관광지 목록</h3>
 <%if(list.isEmpty()) {%>
 	<h3>결과가 없습니다.</h3>
 <%}else{ %>
@@ -458,13 +486,13 @@
 	<%if(startBlock > 1){ %>
 		<%if(searchByName){ %>
 			<!-- 검색용 링크 -->
-			<a href="insert.jsp?column=<%=column%>&keyword=<%=keyword%>&p=<%=startBlock-1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&lt;</a>
+			<a href="update.jsp?column=<%=column%>&keyword=<%=keyword%>&p=<%=startBlock-1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&lt;</a>
 		<%} else if(searchByCity) { %>
 			<!-- 검색용 링크 -->
-			<a href="insert.jsp?p=<%=startBlock-1%>&city=<%=city%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&lt;</a>
+			<a href="update.jsp?p=<%=startBlock-1%>&city=<%=city%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&lt;</a>
 		<%} else { %>
 			<!-- 목록용 링크 -->
-			<a href="insert.jsp?p=<%=startBlock-1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&lt;</a>
+			<a href="update.jsp?p=<%=startBlock-1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&lt;</a>
 		<%} %>
 	<%} else { %>
 		 <a>&lt;</a>
@@ -474,13 +502,13 @@
 	<%for(int i = startBlock; i <= Math.min(finishBlock, lastBlock); i++){ %>
 		<%if(searchByName){ %>
 		<!-- 검색용 링크 -->
-		<a href="insert.jsp?column=<%=column%>&keyword=<%=keyword%>&p=<%=i%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>"><%=i%></a>
+		<a href="update.jsp?column=<%=column%>&keyword=<%=keyword%>&p=<%=i%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>"><%=i%></a>
 		<%}else if(searchByCity){ %>
 		<!-- 검색용 링크 -->
-		<a href="insert.jsp?p=<%=i%>&city=<%=city%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>"><%=i%></a>
+		<a href="update.jsp?p=<%=i%>&city=<%=city%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>"><%=i%></a>
 		<%}else{ %>
 		<!-- 목록용 링크 -->
-		<a href="insert.jsp?p=<%=i%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>"><%=i%></a>
+		<a href="update.jsp?p=<%=i%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>"><%=i%></a>
 		<%} %>
 	<%} %>
 	
@@ -488,13 +516,13 @@
 	<%if(finishBlock < lastBlock){ %>
 		<%if(searchByName){ %>
 			<!-- 검색용 링크 -->
-			<a href="insert.jsp?column=<%=column%>&keyword=<%=keyword%>&p=<%=finishBlock+1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&gt;</a>
+			<a href="update.jsp?column=<%=column%>&keyword=<%=keyword%>&p=<%=finishBlock+1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&gt;</a>
 			<%}else if(searchByCity){ %>
 			<!-- 검색용 링크 -->
-			<a href="insert.jsp?p=<%=finishBlock+1%>&city=<%=city%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&gt;</a>
+			<a href="update.jsp?p=<%=finishBlock+1%>&city=<%=city%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&gt;</a>
 		<%} else { %>
 			<!-- 목록용 링크 -->
-			<a href="insert.jsp?p=<%=finishBlock+1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&gt;</a>
+			<a href="update.jsp?p=<%=finishBlock+1%>&courseSequnce=<%=courseSequnce%>&pa=<%=pa%>">&gt;</a>
 		<%} %> 
 	<%} else {%>
 		<a>&gt;</a>
@@ -526,15 +554,17 @@
 	</div>
 
 <div>
-<span class="result"></span>
+<span class="remove-result"></span>
+<span class="remove-result-number my-hide"><%=courseItemList.size()%></span>
 </div>
-<div>
-현재 선택한 관광지 : <span class="result-number"><%=courseItemList.size()%></span> 개
+
+<div class="count">
+	<span></span>
 </div>
 
 <div>
-	<form action="insert_last.jsp" class="next-submit">
-		<button class="next-btn">다음 단계로(제목/내용/선택한 목록 조회 및 수정)</button>
+	<form action="update_last.jsp" class="next-submit">
+		<button>다음 단계로(제목/내용/선택한 목록 조회 및 수정)</button>
 		<span></span>
 		<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
 		<input type="hidden" name="city" value="<%=city%>">

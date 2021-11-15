@@ -1,0 +1,46 @@
+@charset "UTF-8";
+/*
+    테이블 스타일링
+    - 공용 스타일 : .table
+    - 확장 스타일
+            .table-border - 테두리 추가
+            .table-hover - 마우스가 올라간 줄에 배경색이 표시되는 효과 부여(내용만)
+            .table-stripe - 줄무늬 테이블
+*/
+.table {
+    width:100%;
+}
+.table > thead > tr > th, 
+.table > thead > tr > td,
+.table > tbody > tr > th,
+.table > tbody > tr > td,
+.table > tfoot > tr > th,
+.table > tfoot > tr > td {
+    padding:0.1rem;
+    text-align: center;
+}
+
+.table.table-border {
+    border:1px solid black;
+    border-collapse: collapse;
+}
+.table.table-border > thead > tr > th, 
+.table.table-border > thead > tr > td,
+.table.table-border > tbody > tr > th,
+.table.table-border > tbody > tr > td,
+.table.table-border > tfoot > tr > th,
+.table.table-border > tfoot > tr > td {
+    border:1px solid black;
+}
+
+.table.table-hover > tbody > tr:hover {
+    background-color:#EEEEEE;
+}
+
+/*
+    :nth-child(2n) 일 경우 n=1부터 증가하면서 패턴으로 적용
+*/
+.table.table-stripe > thead > tr,
+.table.table-stripe > tbody > tr:nth-child(2n) {
+    background-color:#EEEEEE;
+}

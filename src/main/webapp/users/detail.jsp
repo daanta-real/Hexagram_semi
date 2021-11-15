@@ -7,6 +7,13 @@
 <TITLE>노가리투어 - 마이페이지</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
+<!-- 테이블 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
+<!-- 페이지 제목 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
+<style>
+.table{ width:30%;}
+</style>
 <BODY>
 <%String root = request.getContextPath(); %>
 
@@ -23,8 +30,8 @@ UsersDto usersDto = usersDao.get(usersId);
 <SECTION>
 
 <!-- 페이지 내용 시작 -->
-
-<table width="60%">
+<div class="sub_title">내 정보</div>
+<table class="table">
 	<tbody>
 		<tr>
 			<th>아이디</th>
@@ -33,9 +40,7 @@ UsersDto usersDto = usersDao.get(usersId);
 		<tr>
 			<th>비밀번호</th>
 			<th align="left">
-				<a href="<%=root%>/users/modifyPassword.jsp">
-					비밀번호 변경하기(클릭..!)
-				</a>
+				<a href="<%=root%>/users/modifyPassword.jsp">비밀번호 변경하기(클릭..!)</a>
 			</th>
 		</tr>
 		<tr>
@@ -65,7 +70,7 @@ UsersDto usersDto = usersDao.get(usersId);
 	</tbody>
 </table>
 	<a href="<%=root%>/users/modify.jsp">내 정보 변경하기(click!)</a>
-	<a href="<%=root%>/users/unregister.jsp">회원탈퇴하기(ㅠㅠclick!)</a>				
+	<a href="<%=root%>/users/unregister.jsp">회원탈퇴하기(ㅠㅠclick!)</a>			
 <!-- 페이지 내용 끝. -->
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>
