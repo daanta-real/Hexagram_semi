@@ -6,24 +6,29 @@
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 
 </HEAD>
+<!-- 테이블 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
+<!-- 페이지 제목 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 
 <SECTION>
 <%String root = request.getContextPath();%>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- 회원가입 아이디 중복검사 스크립트 -->
 <script type="text/javascript" src="<%=root%>/resource/js/join_id_check.js"></script>
 <!-- 회원가입 비밀번호, 비밀번호확인 입력값 스크립트 -->
 <script type="text/javascript" src="<%=root%>/resource/js/join_pw_recheck.js"></script>
 <!-- 페이지 내용 시작 -->
-<h1>회원 가입</h1>
+<div class="sub_title">회원 가입</div>
 <!-- 
 		비밀번호 입력값 일치여부 검사시 템플릿안에 로그인에도 name=usersPw가 있어서 값을 못받아 오기때문에
 		form에 id=joinForm 을 부여하여 선택자 지정시킴  
  -->
 <form id="joinForm" method='post' action='<%=root%>/users/join.nogari'>
-<table border=1>
+<table class="table">
 <tbody>       
 	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'><div></div></td></tr>
 	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'></td></tr>
