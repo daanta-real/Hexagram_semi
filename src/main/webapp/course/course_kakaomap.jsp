@@ -89,7 +89,7 @@ geocoder.addressSearch('<%=itemDto.getItemAddress()%>', function(result, status)
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         if(mapX<result[0].x){
-        	mapX = result[0].x;	
+        	mapX = result[0].x;
        		 map.setCenter(coords);
         }
     } 
