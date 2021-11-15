@@ -7,8 +7,6 @@
 <TITLE>노가리투어 - 내 정보 변경</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
-<!-- 테이블 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <BODY>
@@ -30,7 +28,7 @@ UsersDto usersDto = usersDao.get(sessionId);
 <form action="<%=root %>/users/modify.nogari" method="post">
 <input type="hidden" name="usersId" value="<%=usersDto.getUsersId()%>">
 <input type="hidden" name="usersPw" value="<%=usersDto.getUsersPw()%>">
-	<table class="table">
+	<table>
 		<tbody>
 			<tr>
 				<th>아이디</th>

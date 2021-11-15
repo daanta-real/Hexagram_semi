@@ -58,6 +58,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 	List<CourseReplyDto> list = courseReplyDao.listByTreeSort(courseIdx);
 %>
 
+
 <%-- 조회수 증가 기능 (조회수 중복 방지) --%>
 <%
 Set<Integer> boardCountView = (Set<Integer>)request.getSession().getAttribute("boardCountView");
@@ -76,7 +77,16 @@ request.getSession().setAttribute("boardCountView", boardCountView);
 
 <!-- 수정/삭제는 jsp에서도 막아주는 것 이외로 주소로 입력하는 것을 방지하게 위해서 필터로도 막아줘야 한다. -->
 
-<h1>코스 목록</h1>
+<div><h1>코스 상세</h1></div>
+
+<div>
+<span><a href="delete.nogari?courseIdx=<%=courseIdx%>">삭제</a></span>
+&nbsp;&nbsp;
+<span><a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>">수정</a></span>
+&nbsp;&nbsp;
+<span><a href="insert_sequence.nogari">새 코스 작성</a></span>
+</div>
+
 		<table border="1" width="900px">
 			<tr>
 				<th>코스 번호</th>

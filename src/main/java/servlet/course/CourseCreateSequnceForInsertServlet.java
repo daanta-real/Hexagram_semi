@@ -15,7 +15,12 @@ public class CourseCreateSequnceForInsertServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			try {
-
+				CourseDao courseDao = new CourseDao();
+				
+				int getMaxIdx = courseDao.getMaxIdx();
+				courseDao.getMaxIdxDelete(getMaxIdx);
+				//새글을 작성할때 코스게시판의 가장 큰 글보다 큰(쓰레기 작성글들을)것 들을 삭제해주는 작업.
+				
 				
 				//코스 시퀀스를 만들어서 insert.jsp에 전달해준다.(단지 그 역할일 뿐인 줄 알았으나, 코스 아이템DB에 추가할때 외래키 문제가 생기기 때문에,,)
 				
@@ -37,7 +42,7 @@ public class CourseCreateSequnceForInsertServlet extends HttpServlet {
 				
 				//최종 결론 : 코스 idx를 비식별로 두고 , 미리 생성한 코스 시퀀스를 통해서 관광지_코스 DB를 먼저 등록하고 추후에 이 시퀀스 번호로 최종 코스를 등록한다.
 				//즉 기존하던대로 진행해도 괜찮다.
-				 CourseDao courseDao = new CourseDao();
+				 
 				 
 				 int courseSequnce = courseDao.getSequence();
 				 

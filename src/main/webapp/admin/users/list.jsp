@@ -8,23 +8,18 @@
 <HEAD>
 <TITLE>노가리투어 - 회원 목록</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
-
 </HEAD>
-<!-- 테이블 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
-<style>
-.table{ width:80%; padding:0.1rem;}
-</style>
+<!-- 페이지 제목 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
 <%String root = request.getContextPath();%>
-<!-- 페이지 내용 시작 -->
 
- <!-- jquery CDN 또는 파일을 불러오는 코드를 작성-->
- <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- 회원탈퇴 시 확인창을 불러오는 script -->
 <script type="text/javascript" src="<%=root%>/resource/js/users/admin_users_delete.js"></script>
+<!-- 페이지 내용 시작 -->
+
 
 <%
 // 1. 변수 준비
@@ -77,9 +72,9 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 <!-- 회원목록 -->
 <!-- 회원 탈퇴 리다이렉트 delete파라미터 -->
  <%if(request.getParameter("delete") != null) {%>
- 	<h4>아이디 <%=request.getParameter("usersId") %> 회원 탈퇴 완료</h4>
+ 	<div class="sub_title">아이디 <%=request.getParameter("usersId") %> 회원 탈퇴 완료</div>
  <%} %>
-<table class="table table-border">
+<table>
 	<thead>
 		<tr>
 			<th>회원번호</th>
@@ -113,9 +108,8 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 			<td><%=usersEmail%></td>
 			<td align="center"><%=usersDto.getUsersGrade() %></td>
 			<th align="center">
-				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">상세</a> |
-				<a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">수정</a> |
-<%-- 		<a href="unregister.nogari?usersId=<%=usersDto.getUsersId()%>">탈퇴</a> --%>
+				<button><a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">상세</a></button>
+				<button><a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">수정</a></button>
 				<button onclick="deleteConfirm('<%=usersDto.getUsersId()%>');">탈퇴</button>
 			</th>
 		</tr>

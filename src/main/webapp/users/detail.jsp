@@ -7,13 +7,8 @@
 <TITLE>노가리투어 - 마이페이지</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
-<!-- 테이블 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
-<style>
-.table{ width:30%;}
-</style>
 <BODY>
 <%String root = request.getContextPath(); %>
 
@@ -31,7 +26,7 @@ UsersDto usersDto = usersDao.get(usersId);
 
 <!-- 페이지 내용 시작 -->
 <div class="sub_title">내 정보</div>
-<table class="table">
+<table>
 	<tbody>
 		<tr>
 			<th>아이디</th>
