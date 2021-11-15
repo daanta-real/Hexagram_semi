@@ -45,13 +45,18 @@ ItemFileDao itemFileDao = new ItemFileDao();
 	CourseReplyDao courseReplyDao = new CourseReplyDao();
 	List<CourseReplyDto> list = courseReplyDao.listByTreeSort();
 %>
-<h3><a href="delete.nogari?courseIdx=<%=courseIdx%>">삭제</a></h3>
-<h3><a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>">수정</a></h3>
-<h2><a href="insert_sequence.nogari">새 코스 작성</a></h2>
-
 <!-- 수정/삭제는 jsp에서도 막아주는 것 이외로 주소로 입력하는 것을 방지하게 위해서 필터로도 막아줘야 한다. -->
 
-<h1>코스 목록</h1>
+<div><h1>코스 상세</h1></div>
+
+<div>
+<span><a href="delete.nogari?courseIdx=<%=courseIdx%>">삭제</a></span>
+&nbsp;&nbsp;
+<span><a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>">수정</a></span>
+&nbsp;&nbsp;
+<span><a href="insert_sequence.nogari">새 코스 작성</a></span>
+</div>
+
 		<table border="1" width="900px">
 			<tr>
 				<th>코스 번호</th>
