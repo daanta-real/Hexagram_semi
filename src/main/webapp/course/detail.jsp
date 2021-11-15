@@ -44,7 +44,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 	CourseDto courseDto = new CourseDto();
 	//댓글 리스트 불러오기
 	CourseReplyDao courseReplyDao = new CourseReplyDao();
-	List<CourseReplyDto> list = courseReplyDao.listByTreeSort();
+	List<CourseReplyDto> list = courseReplyDao.listByTreeSort(courseIdx);
 %>
 <h3><a href="delete.nogari?courseIdx=<%=courseIdx%>">삭제</a></h3>
 <h3><a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>">수정</a></h3>
