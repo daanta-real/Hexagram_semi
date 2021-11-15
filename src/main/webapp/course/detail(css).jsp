@@ -18,7 +18,11 @@
 <TITLE>노가리투어 - 메인</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
- <style>
+<BODY>
+<jsp:include page="/resource/template/header_body.jsp"></jsp:include>
+ 
+<SECTION>
+<style>
         
         * {
             box-sizing: border-box;
@@ -123,10 +127,6 @@
         }
 
     </style>
-<BODY>
-<jsp:include page="/resource/template/header_body.jsp"></jsp:include>
- 
-<SECTION>
 
 <!-- 페이지 내용 시작 -->
 <% String root = request.getContextPath(); %>
