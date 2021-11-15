@@ -46,7 +46,11 @@ ItemFileDao itemFileDao = new ItemFileDao();
 	List<CourseReplyDto> list = courseReplyDao.listByTreeSort();
 %>
 <h3><a href="delete.nogari?courseIdx=<%=courseIdx%>">삭제</a></h3>
-<h1>현재 코스의 아이템 목록 보여주기</h1>
+<h3><a href="update.jsp?courseSequnce=<%=courseIdx%>">수정</a></h3>
+
+<!-- 수정/삭제는 jsp에서도 막아주는 것 이외로 주소로 입력하는 것을 방지하게 위해서 필터로도 막아줘야 한다. -->
+
+<h1>코스 목록</h1>
 		<table border="1" width="900px">
 			<tr>
 				<th>코스 번호</th>
