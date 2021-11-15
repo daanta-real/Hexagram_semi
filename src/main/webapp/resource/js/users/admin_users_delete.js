@@ -10,5 +10,5 @@ function deleteConfirm(usersId){
 		location.href="unregister.nogari?usersId="+usersId;
 	}else{
 			console.log("[관리자-회원관리]탈퇴취소");
-		}
+	}
 }
