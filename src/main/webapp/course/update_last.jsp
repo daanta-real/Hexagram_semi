@@ -1,3 +1,4 @@
+<%@page import="beans.CourseDto"%>
 <%@page import="beans.CourseItemDto"%>
 <%@page import="beans.CourseDao"%>
 <%@page import="beans.CourseItemDao"%>
@@ -194,18 +195,23 @@
    
     String root = request.getContextPath();
     
-//     최초 코스 번호는서블릿에서 생성한 번호를 받아준다. 이후에는 코스_아이템 항목 추가,삭제 서블릿에서 전달한 해당 시퀀스 값을 다시 받는다.
+    int courseOriginSequnce = Integer.parseInt(request.getParameter("courseOriginSequnce"));
 	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));
 // 	최초로 지역을 먼저 설정하게 한다. 이것을 선택한 후에는 대부분 courseSequnce / city는 함께 파라미터로 움직여야 한다.
 	
+	CourseDao courseDao = new CourseDao();
+	CourseDto courseDto = courseDao.get(courseOriginSequnce); //기존 내용을 넘기기 위함.
+
     ItemDao itemDao = new ItemDao();
     CourseItemDao courseItemDao = new CourseItemDao();
     
     List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
-    
    	ItemDto getCityDto = itemDao.get( courseItemList.get(0).getItemIdx());
 
-    String city = getCityDto.getAdressCity();
+   	
+    String city;
+   	if(getCityDto.getAdressCity().length() != 4) city=getCityDto.getAdressCity().substring(0,2);
+   	else city = getCityDto.getAdressCity();
  
 
     %>
@@ -217,7 +223,7 @@
     
     
     
-<form action="insert_course.nogari" class="next-submit" method="post">
+<form action="update_course.nogari" class="next-submit" method="post">
 	<div class="row">
 	<table class="table table-border">
 		<tbody>
@@ -231,11 +237,11 @@
 			</tr>
 			<tr>
 				<th>제목</th>
-				<td><input type="text" name="courseName" required placeholder="제목 입력" class="form-input"></td>
+				<td><input type="text" name="courseName" value = "<%=courseDto.getCourseName()%>" required placeholder="제목 입력" class="form-input"></td>
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea name="courseDetail" rows="5" required placeholder="내용 입력" class="form-input"></textarea>
+				<td><textarea name="courseDetail" rows="5" required placeholder="내용 입력" class="form-input"><%=courseDto.getCourseDetail()%></textarea>
 				</td>
 			</tr>
 		</tbody>
@@ -245,6 +251,7 @@
 			<button class="btn form-btn">최종 제출</button>
 			<span class="show-login"></span>
 			<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
+			<input type="hidden" name="courseOriginSequnce" value="<%=courseOriginSequnce%>">
 	</div>
 </form>
 
@@ -257,9 +264,10 @@
 
 
 <div class = "row">
-	<form action="insert.jsp" method="get">
+	<form action="update.jsp" method="get">
 	<button class="form-btn">이전으로</button>
 	<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
+	<input type="hidden" name="courseOriginSequnce" value="<%=courseOriginSequnce%>">
 	<input type="hidden" name="city" value="<%=city%>">
 	</form>
 </div>
