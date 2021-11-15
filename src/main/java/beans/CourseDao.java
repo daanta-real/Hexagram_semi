@@ -246,5 +246,19 @@ public class CourseDao {
 			con.close();
 			return list;
 		}
+		public boolean readUp(int courseIdx, int usersIdx) throws Exception {
+			Connection con = JdbcUtils.connect3();
+			
+			String sql = "update course set course_count_view = course_count_view + 1"
+							+ " where course_idx = ? and users_idx != ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, courseIdx);
+			ps.setInt(2, usersIdx);
+
+			int result = ps.executeUpdate();
+
+			con.close();
+			return result > 0;
+		}
 
 }
