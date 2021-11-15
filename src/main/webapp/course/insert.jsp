@@ -502,7 +502,6 @@
 	</div>
 
 <div><h3>- 내가 선택한 관광지 목록 -</h3></div>
-
 	<div>
 			<table border="1" width="800px">
 				<tbody class="item-add">

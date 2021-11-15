@@ -205,7 +205,9 @@
     
    	ItemDto getCityDto = itemDao.get( courseItemList.get(0).getItemIdx());
 
-    String city = getCityDto.getAdressCity();
+    String city;
+   	if(getCityDto.getAdressCity().length() != 4) city=getCityDto.getAdressCity().substring(0,2);
+   	else city = getCityDto.getAdressCity();
  
 
     %>
