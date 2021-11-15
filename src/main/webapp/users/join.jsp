@@ -6,8 +6,6 @@
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 
 </HEAD>
-<!-- 테이블 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <BODY>
@@ -28,7 +26,7 @@
 		form에 id=joinForm 을 부여하여 선택자 지정시킴  
  -->
 <form id="joinForm" method='post' action='<%=root%>/users/join.nogari'>
-<table class="table">
+<table>
 <tbody>       
 	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'><div></div></td></tr>
 	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'><div id="noticeIdPw"></div></td></tr>

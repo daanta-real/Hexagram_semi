@@ -5,8 +5,6 @@
 <TITLE>노가리투어 - 비밀번호 변경</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
-<!-- 테이블 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <BODY>
@@ -19,7 +17,7 @@
 <div class="sub_title">비밀번호 변경</div>
 <form action="<%=root%>/users/modifyPassword.nogari" method="post">
 <input type="hidden" name="usersId" value="<%=sessionId%>">
-	<table class="table">
+	<table>
 		<tbody>
 			<tr>
 				<th>내 아이디</th>

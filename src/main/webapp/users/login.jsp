@@ -5,8 +5,6 @@
 <TITLE>노가리투어 - 로그인</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
-<!-- 테이블 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <BODY>
@@ -17,7 +15,7 @@
 
 <div class="sub_title">회원 로그인</div>
 <form method='post' action='<%=root%>/users/login.nogari'>
-<table class="table">
+<table>
 <tbody>
 	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'></td></tr>
 	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'></td></tr>

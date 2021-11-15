@@ -5,8 +5,6 @@
 <TITLE>노가리투어 - 회원탈퇴</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
-<!-- 테이블 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <BODY>
@@ -20,7 +18,7 @@
 <div class="sub_title">회원 탈퇴 비번 확인</div>
 <form action="<%=root %>/users/unregister.nogari" method="post">
 <input type="hidden" name="targetId" value="<%=sessionId%>">
-	<table class="table">
+	<table>
 		<tbody>
 			<tr>
 				<th>내 아이디</th>
