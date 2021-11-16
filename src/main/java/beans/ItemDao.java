@@ -187,46 +187,6 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 
 		return list;
 	}
-	
-	// 키워드 조회 및 페이징 조회
-		public List<ItemDto> searchList(String city, int begin, int end) throws Exception {
-
-			Connection con = JdbcUtils.connect3();
-			String sql = "select * from ("
-							+ "select rownum rn,TMP.*from("
-								+ "select * from item where instr(item_address, ?) > 0 order by item_idx desc"
-							+ ")TMP"
-						+ ")where rn between ? and ?";
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, city);
-			ps.setInt(2, begin);
-			ps.setInt(3, end);
-			ResultSet rs = ps.executeQuery();
-			List<ItemDto> list = new ArrayList<>();
-			while (rs.next()) {
-				ItemDto itemDto = new ItemDto();
-				itemDto.setItemIdx(rs.getInt("item_idx"));
-				itemDto.setUsersIdx(rs.getInt("users_idx"));
-				itemDto.setItemType(rs.getString("item_type"));
-				itemDto.setItemName(rs.getString("item_name"));
-				itemDto.setItemDetail(rs.getString("item_detail"));
-				itemDto.setItemPeriod(rs.getString("item_period"));
-				itemDto.setItemTime(rs.getString("item_time"));
-				itemDto.setItemHomepage(rs.getString("item_homepage"));
-				itemDto.setItemParking(rs.getString("item_parking"));
-				itemDto.setItemAddress(rs.getString("item_address"));
-				itemDto.setItemDate(rs.getDate("item_date"));
-				itemDto.setItemCountView(rs.getInt("item_count_view"));
-				itemDto.setItemCountReply(rs.getInt("item_count_reply"));
-
-
-				list.add(itemDto);
-			}
-
-			con.close();
-
-			return list;
-		}
 
 	@Override
 	// 페이징 마지막 블록을 구하기 위하여 게시글 개수를 구하는 기능(목록)
@@ -265,26 +225,6 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 
 		return count;
 	}
-
-	
-	// 페이징 마지막 블록을 구하기 위하여 게시글 개수를 구하는 기능(검색)
-	public int countLastSearch(String city) throws Exception {
-		Connection con = JdbcUtils.connect3();
-		
-		String sql = "select count(*) from item where instr(item_address, ?) > 0";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, city);
-		ResultSet rs = ps.executeQuery();
-		
-		rs.next();
-		
-		int count = rs.getInt(1);
-		
-		con.close();
-		
-		return count;
-	}
-	
 
 	// 관광지 추가(축제인지 관광지인지는 나중에 생각)
 	public boolean insert(ItemDto itemDto) throws Exception {

@@ -15,8 +15,8 @@ import beans.CourseItemDto;
 import beans.ItemDao;
 import beans.ItemDto;
 
-@WebServlet(urlPatterns = "/course/ajax_item_add.nogari")
-public class CourseAjaxItemAddServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/course/ajax_item_update.nogari")
+public class CourseAjaxItemUpdateServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
