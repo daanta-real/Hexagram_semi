@@ -41,7 +41,7 @@
 	
 	//글 작성자 아이디 및 닉네임 출력을 위한 단일 조회
 	UsersDao usersDao = new UsersDao();
-	UsersDto usersShow = usersDao.get(courseDto.getCourseIdx());
+	UsersDto usersShow = usersDao.get(courseDto.getUsersIdx());
 
 	//자신의 글인지 확인 (수정, 삭제, 조회수증가)
 	boolean isMyboard = request.getSession().getAttribute("usersIdx") != null && courseDto.getUsersIdx() == usersIdx;
