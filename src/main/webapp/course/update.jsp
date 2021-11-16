@@ -55,7 +55,7 @@
 
                 $.ajax({
                     //준비 설정
-                    url:"http://localhost:8080/Hexagram_semi/course/ajax_item_update.nogari",
+                    url:"http://localhost:8080/Hexagram_semi/course/ajax_item_add.nogari",
                     type:"get",//전송 방식
                     data:{//전송 시 첨부할 파라미터 정보
                     	itemIdx : item_Idx,
@@ -88,7 +88,7 @@
                                     
                                     $.ajax({
                                         //준비 설정
-                                        url:"http://localhost:8080/Hexagram_semi/course/ajax_delete_item.nogari",
+                                        url:"http://localhost:8080/Hexagram_semi/course/ajax_delete_update_item.nogari",
                                         type:"get",//전송 방식
                                         data:{//전송 시 첨부할 파라미터 정보
                                         	itemIdx : new_item_Idx,
@@ -148,7 +148,7 @@
 
                 $.ajax({
                     //준비 설정
-                    url:"http://localhost:8080/Hexagram_semi/course/ajax_delete_item.nogari",
+                    url:"http://localhost:8080/Hexagram_semi/course/ajax_delete_update_item.nogari",
                     type:"get",//전송 방식
                     data:{//전송 시 첨부할 파라미터 정보
                     	itemIdx : item_Idx,

@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import beans.CourseItemDao;
 import beans.CourseItemDto;
 
-@WebServlet(urlPatterns = "/course/ajax_delete_item.nogari")
-public class CourseItemAjaxDeleteServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/course/ajax_delete_update_item.nogari")
+public class CourseItemAjaxDeleteForUpdateServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
@@ -28,13 +28,17 @@ public class CourseItemAjaxDeleteServlet extends HttpServlet{
 			 List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseIdx);
 			
 			 
+			 if(courseItemList.size() > 3) {
 			CourseItemDto courseItemDto = new CourseItemDto();
 			courseItemDto.setCourseIdx(courseIdx);
 			courseItemDto.setItemIdx(itemIdx);
 			
 				courseItemDao.deleteItem(courseItemDto);
 				resp.getWriter().write(String.valueOf(courseItemList.size()-1));
-
+			 }else {
+				 resp.getWriter().write("NNNNN");
+			 }
+		
 			
 		}catch (Exception e) {
 			// TODO: handle exception
