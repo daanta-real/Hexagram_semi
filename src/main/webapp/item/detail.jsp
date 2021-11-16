@@ -223,16 +223,8 @@ boolean isMyboard = request.getSession().getAttribute("usersIdx") != null && ite
  
 
 
-//조회수 산정하기.
-Set<Integer> boardCountView = (Set<Integer>)request.getSession().getAttribute("boardCountView");
-
-if(boardCountView==null){
-	boardCountView = new HashSet<Integer>();
-}
-if(boardCountView.add(itemIdx)){
-	itemDao.readUp(itemIdx,usersIdx); //조회수를 늘려준다.
-}
-request.getSession().setAttribute("boardCountView", boardCountView);
+//조회수 산정하기.(조회수 중복 증가는 제거)
+itemDao.readUp(itemIdx); //조회수를 늘려준다.
  %>
  
  

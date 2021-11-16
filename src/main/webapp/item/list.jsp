@@ -41,6 +41,9 @@ System.out.println("[관광지 목록] 페이지네이션 정보: " + pn);
 List<ItemDto> list = pn.getResultList();
 System.out.println("[관광지 목록] 출력할 관광지 수: " + list.size());
 
+// 관광지 목록 (인기순)
+
+
 // 제목 h2 태그에 들어갈 타이틀 결정
 String title = isSearchMode
     ? ("["+pn.getKeyword()+"]" + " 검색")

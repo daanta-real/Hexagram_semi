@@ -16,7 +16,10 @@ import beans.ItemReplyDto;
 public class ItemReplyUpdateServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		//댓글 수정 Servlet
 		try {
+			
 			//업데이트 대상 댓글 내용 받기
 			String itemReplyDetail = req.getParameter("itemReplyDetail");
 			//업데이트 대상 댓글 번호 받기
@@ -26,7 +29,6 @@ public class ItemReplyUpdateServlet extends HttpServlet {
 			
 			ItemReplyDao itemReplyDao = new ItemReplyDao();
 			ItemReplyDto itemReplyDto = new ItemReplyDto();
-			
 			itemReplyDto.setItemReplyIdx(itemReplyIdx);
 			itemReplyDto.setItemReplyDetail(itemReplyDetail);
 			
