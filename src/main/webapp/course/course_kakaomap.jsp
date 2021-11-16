@@ -63,12 +63,27 @@ geocoder.addressSearch('<%=itemDto.getItemAddress()%>', function(result, status)
      if (status === kakao.maps.services.Status.OK) {
         var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
         // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
-        marker.setMap(map);
-        
+       var imageSrc = 'http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png'; // 마커 이미지 url, 스프라이트 이미지를 씁니다
+    //var imageSize = new kakao.maps.Size(36, 32);  // 마커 이미지의 크기
+    var imageSize = new kakao.maps.Size(36, 37);  // 예제 사이트 마커 이미지의 크기
+    var imgOptions =  {
+        spriteSize : new kakao.maps.Size(36, 691), // 스프라이트 이미지의 크기
+        spriteOrigin : new kakao.maps.Point(0, (<%=i%>*46)+10), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+        //spriteSize : new kakao.maps.Size(25, 960), // 스프라이트 이미지의 크기            
+        //spriteOrigin : new kakao.maps.Point(0, (idx*32)), // 스프라이트 이미지 중 사용할 영역의 좌상단 좌표
+        offset: new kakao.maps.Point(13, 37) // 마커 좌표에 일치시킬 이미지 내에서의 좌표
+    };
+    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imgOptions),
+		   markerPosition = new kakao.maps.LatLng(result[0].y, result[0].x); // 마커가 표시될 위치입니다
+		
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+		  position: markerPosition,
+		  image: markerImage // 마커이미지 설정 
+		});
+		
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);  
         var content = '<div class ="label">'+
         '<span class="left"></span><span class="center">'+
         '  <a href="<%=root%>/item/detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>"><%=(i+1)+"."+itemDto.getItemName()%></a>' +
