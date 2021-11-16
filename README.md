@@ -1,8 +1,8 @@
-### Hexagram Semi 프로젝트
+### Hexagram Semi Project
 
-#### 팀명: <b>Hexagram</b>
+#### 팀명 : <b>Hexagram</b>
 
-#### 팀주제: 관광장소 안내 및 리뷰 공유 웹사이트 제작
+#### 주제 : 관광장소 안내 및 리뷰 공유 웹사이트 제작
 <br>
 >  팀원
   - <b>박준성</b>(팀장)
