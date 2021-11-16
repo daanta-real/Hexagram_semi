@@ -1,8 +1,17 @@
+
 package beans;
 
 import java.sql.Date;
+import java.util.regex.Pattern;
 
 public class UsersDto {
+
+	// 0. Final Fields
+	public final static String REGEX_USERSID    = "^(?=[a-z].*)[a-z_\\d]{4,20}$";
+	public final static String REGEX_USERSPW    = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[-_`~!?@#$%^&*=+/,.<>;:’”(){}[\\]])[a-zA-Z-_`~!?@#$%^&*=+/,.<>;:’”(){}[\\]]{4,20}$";
+	public final static String REGEX_USERSEMAIL = "^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*\\.([a-zA-Z])+$";
+	public final static String REGEX_USERSNICK  = "^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,10}$";
+	public final static String REGEX_USERSPHONE = "^(01[016-9])\\d{4}\\d{4}$";
 
 	// 1. Declarations
 	private Integer usersIdx  ; // 기본 0으로 처리되지 않도록 하기 위해서 일부러 Integer로 함.
@@ -60,5 +69,12 @@ public class UsersDto {
 			+ usersNick + ", usersEmail=" + usersEmail + ", usersPhone=" + usersPhone + ", usersGrade=" + usersGrade
 			+ ", usersJoin=" + usersJoin + ", usersPoint=" + usersPoint +"]";
 	}
+
+	// 6. Methods - Matches
+	public static boolean matchUsersId   (String str) { return Pattern.matches(REGEX_USERSID   , str); }
+	public static boolean matchUsersPw   (String str) { return Pattern.matches(REGEX_USERSPW   , str); }
+	public static boolean matchUsersEmail(String str) { return Pattern.matches(REGEX_USERSEMAIL, str); }
+	public static boolean matchUsersNick (String str) { return Pattern.matches(REGEX_USERSNICK , str); }
+	public static boolean matchUsersPhone(String str) { return Pattern.matches(REGEX_USERSPHONE, str); }
 
 }
