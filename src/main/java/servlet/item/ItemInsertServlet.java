@@ -23,9 +23,13 @@ public class ItemInsertServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		//관광지 등록 Servlet(첨부파일 추가)
 		try {
+			
 			//Multipart 요청 처리 준비(파일 업로드)
 			String savePath = Settings.PATH_FILES;
+			//전송 속도 (byte로 지정) 5MB
 			int maxSize = 5 * 1024 * 1024;
 			String encoding = "UTF-8";
 			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();

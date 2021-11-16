@@ -11,7 +11,7 @@ import util.JdbcUtils;
 public class ItemDao implements PaginationInterface<ItemDto> {
 
 
-	// 전체 조회
+	// 전체 조회 (list.jsp 목록) - 페이지네이션 전
 		public List<ItemDto> list() throws Exception {
 			String sql = "SELECT * FROM item order by item_idx desc";
 			Connection con = JdbcUtils.connect3();
@@ -43,7 +43,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 			return list;
 		}
 
-	// 전체 조회(페이징)
+	// 전체 조회 - 페이지 네이션
 	@Override
 	public List<ItemDto> list(int begin, int end) throws Exception {
 		String sql = "select * from ("
@@ -111,7 +111,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		return itemDto;
 	}
 
-	// 키워드 조회
+	// 키워드 조회 - 검색용 (페이지네이션 전)
 	public List<ItemDto> searchList(String column, String keyword) throws Exception {
 
 		Connection con = JdbcUtils.connect3();
@@ -147,7 +147,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 	}
 
 	@Override
-	// 키워드 조회 및 페이징 조회
+	// 키워드 조회 (페이지네이션)
 	public List<ItemDto> search(String column, String keyword, int begin, int end) throws Exception {
 
 		Connection con = JdbcUtils.connect3();
@@ -188,7 +188,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		return list;
 	}
 	
-	// 키워드 조회 및 페이징 조회
+	// 지역 키워드 조회 및 페이징 조회
 		public List<ItemDto> searchList(String city, int begin, int end) throws Exception {
 
 			Connection con = JdbcUtils.connect3();
@@ -310,6 +310,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		return result > 0;
 	}
 
+	// 등록후 detail페이지로 가기위해 시퀀스값 등록을 위한 등록 메소드
 	public boolean insertWithSequence(ItemDto itemDto) throws Exception {
 		String sql = "INSERT INTO item (item_idx,users_idx,item_type,item_name,item_detail,item_period,"
 				+ "item_time,item_homepage,item_parking,item_address,item_date,item_count_view,item_count_reply)"
@@ -368,7 +369,8 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		con.close();
 		return result > 0;
 	}
-
+	
+	//조회수 증가(유저 중복 증가 방지)
 	public boolean readUp(int itemIdx, int usersIdx) throws Exception {
 		String sql = "UPDATE item set item_count_view=item_count_view+1" + " where item_idx=? and users_idx != ?";
 		Connection con = JdbcUtils.connect3();
@@ -382,7 +384,22 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		con.close();
 		return result > 0;
 	}
+	
+	//조회수 증가(중복 증가 방지 없음)
+	public boolean readUp(int itemIdx) throws Exception {
+		String sql = "UPDATE item set item_count_view=item_count_view+1" + " where item_idx=?";
+		Connection con = JdbcUtils.connect3();
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, itemIdx);
+		
+		int result = ps.executeUpdate();
+		
+		con.close();
+		return result > 0;
+	}
 
+	//시퀀스 미리 부여받는 메소드
 	public int getSequence() throws Exception {
 		String sql = "select item_seq.nextval from dual";
 		Connection con = JdbcUtils.connect3();
@@ -395,7 +412,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		con.close();
 		return result;
 	}
-
+	
 	//목록에서 댓글수 보여주기위한 댓글 갱신 메소드
 	public boolean countReply(int itemIdx) throws Exception{
 		Connection con = JdbcUtils.connect3();
@@ -444,6 +461,46 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		}
 
 		con.close();
+		return list;
+	}
+	
+	//인기순으로 정렬
+	public List<ItemDto> popularityList(int begin, int end) throws Exception {
+
+		Connection con = JdbcUtils.connect3();
+		String sql = "select * from ("
+						+ "select rownum rn,TMP.*from("
+							+ "select * from item order by item_count_view desc"
+						+ ")TMP"
+					+ ")where rn between ? and ?";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, begin);
+		ps.setInt(2, end);
+		ResultSet rs = ps.executeQuery();
+		List<ItemDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ItemDto itemDto = new ItemDto();
+			itemDto.setItemIdx(rs.getInt("item_idx"));
+			itemDto.setUsersIdx(rs.getInt("users_idx"));
+			itemDto.setItemType(rs.getString("item_type"));
+			itemDto.setItemName(rs.getString("item_name"));
+			itemDto.setItemDetail(rs.getString("item_detail"));
+			itemDto.setItemPeriod(rs.getString("item_period"));
+			itemDto.setItemTime(rs.getString("item_time"));
+			itemDto.setItemHomepage(rs.getString("item_homepage"));
+			itemDto.setItemParking(rs.getString("item_parking"));
+			itemDto.setItemAddress(rs.getString("item_address"));
+			itemDto.setItemDate(rs.getDate("item_date"));
+			itemDto.setItemCountView(rs.getInt("item_count_view"));
+			itemDto.setItemCountReply(rs.getInt("item_count_reply"));
+
+
+			list.add(itemDto);
+		}
+
+		con.close();
+
 		return list;
 	}
 

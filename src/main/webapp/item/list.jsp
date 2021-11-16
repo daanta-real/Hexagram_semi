@@ -41,6 +41,9 @@ System.out.println("[관광지 목록] 페이지네이션 정보: " + pn);
 List<ItemDto> list = pn.getResultList();
 System.out.println("[관광지 목록] 출력할 관광지 수: " + list.size());
 
+// 관광지 목록 (인기순)
+
+
 // 제목 h2 태그에 들어갈 타이틀 결정
 String title = isSearchMode
     ? ("["+pn.getKeyword()+"]" + " 검색")
@@ -62,7 +65,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 	<div class="row center">
 		<%-- 검색창 --%>
 		<form action="<%=root%>/item/list.jsp" method="get">
-
+		<!-- 검색후 검색한 내용을 고정하기 위해 if문과 selected를 사용 -->
 		<select name="column" class="form-input form-inline">
 				<%if(pn.columnValExists("item_type")) {%>
 				<option value="item_type" selected>카테고리</option>
@@ -80,7 +83,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 				<option value="item_detail">내용</option>
 				<%} %>
 			</select>
-
+			<!-- 검색어 입력 창 -->
 			<input type="search" name="keyword" placeholder="검색어 입력"
 			required value="<%=pn.getKeywordString()%>"  class="form-input form-inline">
 
