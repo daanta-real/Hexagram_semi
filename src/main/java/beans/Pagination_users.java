@@ -117,8 +117,7 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	}
 	// 컬럼에 특정한 값이 존재하고 있는지 검사
 	public boolean columnValExists(String column) {
-		String thisColumnValue = this.column;
-		return thisColumnValue != null && !thisColumnValue.equals("");
+		return this.column != null && this.column.equals(column);
 	}
 
 
