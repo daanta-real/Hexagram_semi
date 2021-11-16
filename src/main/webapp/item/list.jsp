@@ -63,15 +63,13 @@ ItemFileDao itemFileDao = new ItemFileDao();
 	    $(".page").hide();
 	    $(".page").eq(searchSelector).show();
 	
-	    $(".btn-pop").click(function(e){
-	        e.preventDefault();
+	    $(".btn-pop").click(function(){
 	        searchSelector++;
 	        $(".page").hide();
 	        $(".page").eq(searchSelector).show();
 	    });
 	
-	    $(".btn-new").click(function(e){
-	        e.preventDefault();
+	    $(".btn-new").click(function(){
 	        searchSelector--;
 	        $(".page").hide();
 	        $(".page").eq(searchSelector).show();
@@ -114,19 +112,22 @@ ItemFileDao itemFileDao = new ItemFileDao();
 			
 			<input type="submit" value="검색"  class="form-btn form-inline">
 		</form>
-		
+	</div>
+	
+	<div>
 		<form action="<%=root%>/item/list.jsp" method="get">
 			<input type="hidden" name="searchSelector" value="<%=1%>">
 			<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
 			<input type="hidden" name="column" value="<%=pn.getColumn()%>">
-			<button class="btn-pop">인기순</button>
+			<input type="submit" value="인기순 조회" class="btn-pop">
 		</form>
 		
+				
 		<form action="<%=root%>/item/list.jsp" method="get">
 			<input type="hidden" name="searchSelector" value="<%=0%>">
 			<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
 			<input type="hidden" name="column" value="<%=pn.getColumn()%>">
-			<button class="btn-new">최신순</button>
+			<input type="submit" value="최신순 조회" class="btn-new">
 		</form>
 	</div>
 
