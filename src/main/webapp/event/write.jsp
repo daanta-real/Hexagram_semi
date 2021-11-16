@@ -1,49 +1,39 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%-- 입력 : 답글일 경우에는 eventSuperno라는 값이 전달된다. --%>
-<%
-	String eventSuperno = request.getParameter("eventSuperno");
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
+<HTML>
+<HEAD>
+<TITLE>노가리투어 - [여기다가 타이틀이름 쓰세요. []는 제거하시구요~]</TITLE>
+<jsp:include page="/resource/template/header_head.jsp"></jsp:include>
+</HEAD>
+<BODY>
+<jsp:include page="/resource/template/header_body.jsp"></jsp:include>
+<SECTION>
+<% String root = request.getContextPath(); %>
+<!-- 페이지 내용 시작 -->
 
-<%-- 처리 --%>
-<%
-	boolean answer = eventSuperno != null;
-	String title = answer ? "답글 작성" : "새글 작성";
-%>
+<%--입력--%>
 
-<%-- 출력 --%>
-<jsp:include page="/template/header.jsp"></jsp:include>
+<%--처리--%>
 
-<h2><%=title%></h2>
+<%--출력--%>
+<jsp:include page="/resource/template/header_head.jsp"/></jsp:include>
 
-<form action="write.kh" method="post" enctype="multipart/form-data">
+<h2>게시글 작성</h2>
 
-<%-- 답글일 경우에는 반드시 "상위글번호(eventSuperno)" 를 처리페이지로 전송해야 한다 --%>
-<%if(answer){ %>
-<input type="hidden" name="eventSuperno" value="<%=eventSuperno%>">
-<%} %>
+<form action="write.nagari" method="post">
 
 <table border="0">
 	<tbody>
 		<tr>
 			<th>제목</th>
-			<td><input type="text" name="eventTitle" required></td>
+			<td><input type="text" name="eventName" required></td>
 		</tr>
 		<tr>
 			<th>내용</th>
 			<td>
-				<textarea name="eventContent" required rows="10" cols="60"></textarea>
+				<textarea name="eventDetail" required rows="10" cols="60"></textarea>
 			</td>
 		</tr>
-		
-		<!-- 첨부파일 -->
-		<tr>
-			<th>첨부</th>
-			<td>
-				<input type="file" name="attach">
-			</td>
-		</tr>
-		
 	</tbody>
 	<tfoot>
 		<tr>
@@ -53,7 +43,11 @@
 		</tr>
 	</tfoot>
 </table>
-	
 </form>
 
-<jsp:include page="/template/footer.jsp"></jsp:include>
+<!-- 페이지 내용 끝. -->
+</SECTION>
+<jsp:include page="/resource/template/footer.jsp"></jsp:include>
+<SCRIPT TYPE="TEXT/JAVASCRIPT" SRC="<%=root%>/resource/js/footer.js"></SCRIPT>
+</BODY>
+</HTML>

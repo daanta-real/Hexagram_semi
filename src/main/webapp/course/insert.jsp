@@ -28,7 +28,7 @@
 	
 	 CourseItemDao courseItemDao = new CourseItemDao();
 	 List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
-	// 생성한 시퀀스 번호에서 ajax로 처리한 데이터 결과값을 확인해주는 열할.(수정시에 span숫자 확인 용도 및 선택 목록 초기 화면 표시)
+	// 생성한 시퀀스 번호에서 ajax로 처리한 데이터 결과값을 확인해주는 열할.(수정시에 span숫자 확인 용도 및 선택 목록 초기 화면 표시//이전으로 돌아왔을때 처리하게 해주어야하니까, 필요)
     %>
     
 <!DOCTYPE HTML>
@@ -78,7 +78,7 @@
                          	var td2 = $("<td>").append(item_name);//추가한 아이템 목록에 추가하였을때 보여줄 명칭
                          	var td3 = $("<td>");
                          	//테이블에 추가할 사항들
-                         	var button3 = $("<button>").attr("data-course_idx",course_Idx).attr("data-item_idx",item_Idx);
+                         	var button3 = $("<button>").addClass("item-remove-btn").attr("data-course_idx",course_Idx).attr("data-item_idx",item_Idx);
                          	//추가한 아이템 목록에서 삭제 될때도 courseidx , itemIdx가 필요하므로 설정해둔다.
                          	button3.on("click",function(){
 							//버튼을 눌렀을때 삭제ajax 처리를 해주어야 하므로 (load시 설정이 되지 않았으므로 추가할때마다 설정해주어야함)
@@ -133,11 +133,39 @@
                         console.log("실패");
                         console.log(err);
                     }
-
                 });
                 
             });
-         
+
+            $(".item-remove-btn").click(function(){
+            	$(this).parents("tr").hide();
+ 
+            	var course_Idx = $(this).attr("data-course_idx");
+                var item_Idx = $(this).attr("data-item_idx");
+
+                $.ajax({
+                    url:"http://localhost:8080/Hexagram_semi/course/ajax_delete_item.nogari",
+                    type:"get",
+                    data:{
+                    	itemIdx : item_Idx,
+                    	courseIdx : course_Idx
+                    },
+                    success:function(resp){
+
+                    	if(resp == "NNNNN"){
+                    		   $(".result").text("최소 3개의 관광지가 필요합니다.").css("color","red");
+                               $(".result-number").text($(".result-number").text());
+                    	} else{
+                        	 $(".result").text("삭제 완료!").css("color","blue");
+                         	 $(".result-number").text(resp);
+                         }
+                    },
+                    error:function(err){
+                        console.log(err);
+                    }        	
+            	});
+       		 });
+            
             
             var searchSelector = <%=pn.getSearchSelector()%>;
             $(".page").hide();//모든 페이지를 숨기고
@@ -164,7 +192,7 @@
             $(".next-submit").on("submit",function(e){//다음으로 이동 버튼을 누를시, 선택한 아이템 수가 3개가 안된다면 submit을 막아준다(3차 방지)
       				if(parseInt($(".result-number").text())<3){//검색 span의 숫자가(문자열->숫자로 변환해서 확인해야함 기본적으로 문자이므로) 3보다 작을때,
             		e.preventDefault();
-            		$(this).find("span").text("3개이상 선택하세요..!").css("color","red");//알림 span에다가 결과를 알려 막는다.
+            		$(this).find("span").text("코스에 관광지는 최소 3개이상 추가되어야 합니다..!").css("color","red");//알림 span에다가 결과를 알려 막는다.
       				}
             });
             
@@ -182,106 +210,103 @@
 <form action="insert.jsp" method="get">
 	<select name="keyword" required>
 	
-		<%if(pn.columnValExists("서울")) {%>
+		<%if(pn.keywordValExists("서울")) {%>
 		<option value="서울" selected>서울특별시</option>
 		<%}else{ %>
 		<option value="서울">서울특별시</option>
 		<%} %>
 		
-		<%if(pn.columnValExists("부산")) {%>
+		<%if(pn.keywordValExists("부산")) {%>
 		<option value="부산" selected>부산광역시</option>
 		<%}else{ %>
 		<option value="부산">부산광역시</option>
 		<%} %>
 		
-		<%if(pn.columnValExists("인천")) {%>
+		<%if(pn.keywordValExists("인천")) {%>
 		<option value="인천" selected>인천광역시</option>
 		<%}else{ %>
 		<option value="인천">인천광역시</option>
 		<%} %>
 		
-		<%if(pn.columnValExists("대구")) {%>
+		<%if(pn.keywordValExists("대구")) {%>
 		<option value="대구" selected>대구광역시</option>
 		<%}else{ %>
 		<option value="대구">대구광역시</option>
 		<%} %>
 		
-		<%if(pn.columnValExists("대전")) {%>
+		<%if(pn.keywordValExists("대전")) {%>
 		<option value="대전" selected>대전광역시</option>
 		<%}else{ %>
 		<option value="대전">대전광역시</option>
 		<%} %>
 		
-		<%if(pn.columnValExists("광주")) {%>
+		<%if(pn.keywordValExists("광주")) {%>
 		<option value="광주" selected>광주광역시</option>
 		<%}else{ %>
 		<option value="광주">광주광역시</option>
 		<%} %>
 		
-		<%if(pn.columnValExists("울산")) {%>
+		<%if(pn.keywordValExists("울산")) {%>
 		<option value="울산" selected>울산광역시</option>
 		<%}else{ %>
 		<option value="울산">울산광역시</option>
 		<%} %>
 		
-		<%if(pn.columnValExists("경기")) {%>
+		<%if(pn.keywordValExists("경기")) {%>
 		<option value="경기" selected>경기도</option>
 		<%}else{ %>
 		<option>경기도</option>
 		<%} %>
 		
-		<%if(pn.columnValExists("세종")) {%>
+		<%if(pn.keywordValExists("세종")) {%>
 		<option value="세종" selected>세종특별자치시</option>
 		<%}else{ %>
 		<option>세종특별자치시</option>
 		<%} %>
 		
-		<%if(pn.columnValExists("강원")) {%>
+		<%if(pn.keywordValExists("강원")) {%>
 		<option value="강원" selected>강원도</option>
 		<%}else{ %>
 		<option>강원도</option>
 		<%} %>																		
 		
-		<%if(pn.columnValExists("제주")) {%>
+		<%if(pn.keywordValExists("제주")) {%>
 		<option value="제주" selected>	제주특별자치도</option>
 		<%}else{ %>
 		<option value="제주">제주특별자치도</option>
 		<%} %>
 		
-		<%if(pn.columnValExists("경상북도")) {%>
+		<%if(pn.keywordValExists("경상북도")) {%>
 		<option selected>경상북도</option>
 		<%}else{ %>
 		<option>경상북도</option>
 		<%} %>
-		
-		
-		<%if(pn.columnValExists("경상남도")) {%>
+	
+		<%if(pn.keywordValExists("경상남도")) {%>
 		<option selected>경상남도</option>
 		<%}else{ %>
 		<option>경상남도</option>
 		<%} %>
 		
-		<%if(pn.columnValExists("전라남도")) {%>
+		<%if(pn.keywordValExists("전라남도")) {%>
 		<option selected>전라남도</option>
 		<%}else{ %>
 		<option>전라남도</option>
 		<%} %>
-		
-		
-		<%if(pn.columnValExists("전라북도")) {%>
+
+		<%if(pn.keywordValExists("전라북도")) {%>
 		<option selected>전라북도</option>
 		<%}else{ %>
 		<option>전라북도</option>
 		<%} %>
 		
-		<%if(pn.columnValExists("충청남도")) {%>
+		<%if(pn.keywordValExists("충청남도")) {%>
 		<option selected>충청남도</option>
 		<%}else{ %>
 		<option>충청남도</option>
 		<%} %>
-		
-		
-		<%if(pn.columnValExists("충청북도")) {%>
+	
+		<%if(pn.keywordValExists("충청북도")) {%>
 		<option selected>충청북도</option>
 		<%}else{ %>
 		<option>충청북도</option>
@@ -289,8 +314,8 @@
 	</select>
 	<input type="hidden" name="column" value="item_address">
 	<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
-	<input type="hidden" name="searchSelector" value="<%=0%>">
 <!-- 	핵심이다.. courseSequnce는 무슨일이 있어서 최초 생성하고 잃어서는 안될 고유 번호이다. -->
+	<input type="hidden" name="searchSelector" value="<%=0%>">
 	
 	<input type="submit" value="지역 검색">
 </form>
@@ -424,12 +449,15 @@
 </div>
 <div>
 현재 선택한 관광지 : <span class="result-number"><%=courseItemList.size()%></span> 개
-</div>
+</div> 
+<!-- 이전 화면으로 돌아올 것을 대비하여 생성해야함 -->
 
 <div>
 	<form action="insert_last.jsp" class="next-submit">
-		<button class="next-btn">다음 단계로(제목/내용/선택한 목록 조회 및 수정)</button>
+		<button>다음 단계로(제목/내용/선택한 목록 조회 및 수정)</button>
+		<div>
 		<span></span>
+		</div>
 		<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
 	</form>
 </div>
