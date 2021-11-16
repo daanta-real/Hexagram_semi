@@ -41,6 +41,7 @@ public class ItemReplyDao {
 		return result;
 	}
 	
+	//대댓글시 상위 댓글을 위한 단일조회
 	public ItemReplyDto get(int itemReplyIdx) throws Exception {
 		Connection con = JdbcUtils.connect3();
 		String sql = "select * from item_reply where item_reply_idx=?";
@@ -116,7 +117,7 @@ public class ItemReplyDao {
 		return list;
 	}
 
-
+	//댓글 수정
 	public boolean update(ItemReplyDto itemReplyDto) throws Exception {
 		Connection con = JdbcUtils.connect3();
 		String sql = "update item_reply set item_reply_detail=? where item_reply_idx=?";
@@ -129,6 +130,7 @@ public class ItemReplyDao {
 		return result>0;
 	}
 
+	//댓글 삭제
 	public boolean delete(int itemReplyIdx) throws Exception {
 		Connection con = JdbcUtils.connect3();
 		String sql = "delete item_reply where item_reply_idx=?";
@@ -139,9 +141,6 @@ public class ItemReplyDao {
 		con.close();
 		return result>0;
 	}
-
-
-
 
 }
 

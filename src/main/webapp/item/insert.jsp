@@ -38,47 +38,57 @@
 			<tr>
 				<td>관광지명</td>
 				<td>
-				<input type="text" name="itemName" placeholder="관광지명 입력" required>
+					<input type="text" name="itemName" placeholder="관광지명 입력" required>
 				</td>
 			</tr>
 			<tr>
 				<td>주소</td>
 				<td>
-				<textarea name="itemAddress" rows="1" cols="50" placeholder="주소를 입력하세요"></textarea>
+					<textarea name="itemAddress" rows="1" cols="50" placeholder="주소를 입력하세요"></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>내용</td>
 				<td>
-				<textarea name="itemDetail" rows="20" cols="50" placeholder="내용을 입력하세요"></textarea>
+					<textarea name="itemDetail" rows="20" cols="50" placeholder="내용을 입력하세요"></textarea>
 				</td>
 			</tr>
 			<tr>
 				<td>기간</td>
-				<td><input type="text" name="itemPeriod" placeholder="기간 입력"></td>
+				<td>
+					<input type="text" name="itemPeriod" placeholder="기간 입력">
+				</td>
 			</tr>
 			<tr>
 				<td>운영시간</td>
-				<td><input type="text" name="itemTime" placeholder="운영시간 입력"></td>
+				<td>
+					<input type="text" name="itemTime" placeholder="운영시간 입력">
+				</td>
 			</tr>
 			<tr>
 				<td>홈페이지</td>
-				<td><input type="url" name="itemHomepage" placeholder="홈페이지 입력"></td>
+				<td>
+					<input type="url" name="itemHomepage" placeholder="홈페이지 입력">
+				</td>
 			</tr>
 			<tr>
 				<td>주차</td>
-				<td><input type="text" name="itemParking" placeholder="주차가능여부 입력"></td>
+				<td>
+					<input type="text" name="itemParking" placeholder="주차가능여부 입력">
+				</td>
 			</tr>
 			<tr>
 				<td>이미지</td>
-				<td><input type="file" name="attach" accept="image/*"></td>				
+				<td>
+					<input type="file" name="attach" accept="image/*">
+				</td>				
 			</tr>
 		</tbody>
 		
 		<tfoot>
 			<tr align="center">
 				<td colspan="3">
-				<input type="submit" value="작성 완료">
+					<input type="submit" value="작성 완료">
 				</td>
 			</tr>
 		</tfoot>

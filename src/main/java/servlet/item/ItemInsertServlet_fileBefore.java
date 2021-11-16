@@ -17,6 +17,8 @@ public class ItemInsertServlet_fileBefore extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		//파일 첨부 전 관광지 등록 Servlet (사용하지 않음)
 		try {
 			//현재 회원이 작성
 			int usersIdx = (int)req.getSession().getAttribute("usersIdx");

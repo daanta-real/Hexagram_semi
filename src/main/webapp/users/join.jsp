@@ -6,10 +6,14 @@
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 <%String root = request.getContextPath();%>
 
+
+
 <!-- 테이블 css -->
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/table.css">
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
+
+
 
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -17,6 +21,8 @@
 <script type="text/javascript" src="<%=root%>/resource/js/users/join_id_check.js"></script>
 <!-- 회원가입 비밀번호, 비밀번호확인 입력값 스크립트 -->
 <script type="text/javascript" src="<%=root%>/resource/js/users/join_pw_recheck.js"></script>
+
+
 
 <!-- 인라인 스크립트 -->
 <script type='text/javascript'>
@@ -55,8 +61,6 @@ function checkPwInputsEquals() {
 	}
     
 }
-
-
 
 
 
@@ -108,6 +112,7 @@ function checkIdIsUnique() {
 }
 
 
+
 // 로드 이후 리스너 추가
 window.addEventListener("load", () => {
 	
@@ -118,6 +123,8 @@ window.addEventListener("load", () => {
 	document.querySelector("#joinForm #reInputPw").addEventListener("blur", checkPwInputsEquals);
 	
 });
+
+
 
 </script>
 
@@ -135,16 +142,16 @@ window.addEventListener("load", () => {
 <form id="joinForm" method='post' action='<%=root%>/users/join.nogari'>
 <table>
 <tbody>       
-	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'><div></div></td></tr>
-	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'><div id="noticeIdPw"></div></td></tr>
+	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요' required><div></div></td></tr>
+	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요' required><div id="noticeIdPw"></div></td></tr>
 	<tr>
 		<th>비번확인</th>
 		<td>
-			<input type='password' id='reInputPw' placeholder='비밀번호 재확인'>
+			<input type='password' id='reInputPw' placeholder='비밀번호 재확인' required>
 			<div class="noticePw"></div>
 		</td>
 	</tr>
-	<tr><th>닉네임</th><td><input type='text' name='usersNick' placeholder='입력하세요'></td></tr>
+	<tr><th>닉네임</th><td><input type='text' name='usersNick' placeholder='입력하세요' required></td></tr>
 	<tr><th>이메일</th><td><input type='email' name='usersEmail' placeholder='입력하세요'></td></tr>
 	<tr><th>폰번호</th><td><input type='tel' name='usersPhone' placeholder='입력하세요'></td></tr>
 </tbody>

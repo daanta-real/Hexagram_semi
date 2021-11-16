@@ -9,16 +9,16 @@
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
+<%String root = request.getContextPath();%>
 <SECTION>
 <!-- 페이지 내용 시작 -->
-<%String root = request.getContextPath();%>
 
 <div class="sub_title">회원 로그인</div>
 <form method='post' action='<%=root%>/users/login.nogari'>
 <table>
 <tbody>
-	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'></td></tr>
-	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'></td></tr>
+	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요' required></td></tr>
+	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요' required></td></tr>
 </tbody>
 <tfoot><tr><td colspan=2 align=center>
 	<button type=submit>로그인</button>
