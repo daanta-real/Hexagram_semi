@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import util.JdbcUtils;
-
+////////
 public class EventDao {
 
 	//[1] 등록 메소드
