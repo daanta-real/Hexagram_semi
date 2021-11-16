@@ -20,6 +20,7 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	// 2) 선택 데이터
 	private String column;
 	private String keyword;
+	private int searchSelector;//코스 선택 메뉴에서 키워드로 선택할지 지역으로 선택할지 구분해주는 구분자.
 
 	// 2) 페이징 관련 데이터
 	private int pageSize; // 페이지당 글 개수
@@ -58,6 +59,13 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 		this.dao = dao;
 		this.pageSize = pageSize;
 		this.blockSize = blockSize;
+		
+	    try{
+	    	this.searchSelector = Integer.parseInt(req.getParameter("searchSelector"));
+	    	if(this.searchSelector<0 || this.searchSelector>1) throw new Exception();//지역으로 확인할지:0? 키워드로 입력할지:1? 이외의 값은 예외처리한다.
+	    }catch(Exception e){
+	    	this.searchSelector = 0;
+	    }
 
 	}
 
@@ -80,7 +88,8 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	public int getFinishBlock() { return finishBlock; }
 	public int getLastBlock() { return lastBlock; }
 	public List<DTO> getResultList() { return resultList; }
-
+	public int getSearchSelector() {return searchSelector;}
+	
 	// 2) 특수 Getters
 	// keyword 값이 null일 경우 ""로 바꿔줌
 	public String getKeywordString() { return keyword == null ? "" : keyword; }
@@ -107,9 +116,9 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 
 	// 이전이 존재하나요?
-	public boolean isPreviousAvailable() { return startBlock > 1; }
+	public boolean hasPreviousBlock() { return startBlock > 1; }
 	// 다음이 존재하나요?
-	public boolean isNextAvailable() { return finishBlock < lastBlock;	}
+	public boolean hasNextBlock() { return finishBlock < lastBlock;	}
 	// 회원목록 검색모드 인가요?
 	public boolean isSearchMode() {
 		return column  != null && !column.equals("")
@@ -117,8 +126,7 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	}
 	// 컬럼에 특정한 값이 존재하고 있는지 검사
 	public boolean columnValExists(String column) {
-		String thisColumnValue = this.column;
-		return thisColumnValue != null && !thisColumnValue.equals("");
+		return this.column != null && this.column.equals(column);
 	}
 
 
@@ -127,7 +135,7 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 
 	// UsersList 계산 메소드
-	public void calculate() throws Exception{
+	public void calculate() throws Exception {
 
 		// 1. 출력할 rownum 범위 계산
 		end   = page * pageSize;      // 페이지의 마지막 rownum
@@ -159,6 +167,5 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 				+ ", startBlock=" + startBlock + ", finishBlock=" + finishBlock + ", lastBlock=" + lastBlock + ", dao="
 				+ dao + ", 검색모드?=" + isSearchMode() + ", resultList개수=" + resultList.size() + "]";
 	}
-
 
 }

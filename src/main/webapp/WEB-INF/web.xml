@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
-<web-app>
+<web-app version="4.0"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee                       
+									http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
 
 <welcome-file-list>
   <welcome-file>index.jsp</welcome-file>
@@ -18,4 +22,20 @@
 <error-page><error-code>405</error-code><location>/resource/template/error.jsp</location></error-page>
 <error-page><error-code>500</error-code><location>/resource/template/error.jsp</location></error-page>
 
+
+	<!-- 
+		CORS 허용 설정 : 비동기 통신을 지정한 주소에서 보낼 수 있도록 처리하는 설정
+	 -->
+	<filter>
+		<filter-name>CorsFilter</filter-name>
+		<filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+		<init-param>
+			<param-name>cors.allowed.origins</param-name>
+			<param-value>http://127.0.0.1:8080</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CorsFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>

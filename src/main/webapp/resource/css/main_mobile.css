@@ -126,7 +126,7 @@ SECTION {
 }
 #mobileMenuLoginContainer .userButton {
     margin-left: 0.3rem; border-radius: 0.6rem; padding: 0.05rem 0.6rem;
-    box-shadow: 0 0 1rem #8882;
+    box-shadow: 0 0 1rem #0002;
 	color: var(--color8);
     background: var(--color1);
 }

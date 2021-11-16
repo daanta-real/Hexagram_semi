@@ -109,7 +109,8 @@ public class ItemReplyDto {
 	public void setItemReplyDepth(int itemReplyDepth) {
 		this.itemReplyDepth = itemReplyDepth;
 	}
-
+	
+	//댓글 목록 보여줄 때 날짜 및 시간을 보여주기위한 format 적용
 	public String getItemReplyTotalDate() {
 		Format f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		return f.format(this.itemReplyDate);

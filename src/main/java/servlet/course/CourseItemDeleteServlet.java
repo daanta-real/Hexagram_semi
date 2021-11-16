@@ -31,7 +31,7 @@ public class CourseItemDeleteServlet extends HttpServlet{
 			courseItemDto.setCourseIdx(courseSequnce);
 			courseItemDto.setItemIdx(itemIdx);
 			
-			courseItemDao.delete(courseItemDto);
+			courseItemDao.deleteItem(courseItemDto);
 			
 			resp.sendRedirect("insert.jsp?courseSequnce="+courseSequnce+"&city="+URLEncoder.encode(city,"UTF-8"));
 			

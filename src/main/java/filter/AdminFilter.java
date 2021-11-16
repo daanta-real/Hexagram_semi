@@ -15,7 +15,6 @@ import util.users.GrantChecker;
 
 // 관리자 페이지 대상.
 @WebFilter( urlPatterns = {
-	"/users/tableInitializer.jsp",
 	"/users/list.nogari"
 } )
 public class AdminFilter implements Filter {

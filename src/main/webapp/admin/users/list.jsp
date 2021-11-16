@@ -6,40 +6,35 @@
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
-<TITLE>노가리투어 - 회원관리</TITLE>
+<TITLE>노가리투어 - 회원 목록</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
-
 </HEAD>
+<!-- 페이지 제목 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
 <%String root = request.getContextPath();%>
+
+<!-- 회원탈퇴 시 확인창을 불러오는 script -->
+<script type="text/javascript" src="<%=root%>/resource/js/users/admin_users_delete.js"></script>
 <!-- 페이지 내용 시작 -->
+
 
 <%
 // 1. 변수 준비
-String column = request.getParameter("column");
-String keyword = request.getParameter("keyword");
-boolean isSearchMode = column != null && !column.equals("");
 UsersDao usersDao = new UsersDao();
-
-// 2. 회원 목록 페이징
 Pagination_users<UsersDao, UsersDto> pn = new Pagination_users<>(request, usersDao);
+boolean isSearchMode = pn.isSearchMode();
+System.out.println(
+	  "[회원 목록] 컬럼(" + request.getParameter("column") + ")"
+	+ ", 키워드(" + request.getParameter("keyword") + ")"
+	+ ", 검색모드 여부(" + isSearchMode + ")"
+);
 pn.setPageSize(20);
 pn.calculate();
-System.out.println("페이지네이션 정보: " + pn);
+System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 %>
-			
-<script>
-//function deleteConfirm의 매개변수로 usersId로 설정하고 onclick설정한 버튼에 매개변수로 usersDto.getUsersId()로 설정 
-function deleteConfirm(usersId){
-	var deleteConfirm = window.confirm("탈퇴를 진행할까요?");
-	console.log(deleteConfirm);
-	if(deleteConfirm == true){
-		location.href="unregister.nogari?usersId="+usersId;
-	}
-}
-</script>
 <!-- 검색 -->
     <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post">
 	     <select name="column">
@@ -77,16 +72,16 @@ function deleteConfirm(usersId){
 <!-- 회원목록 -->
 <!-- 회원 탈퇴 리다이렉트 delete파라미터 -->
  <%if(request.getParameter("delete") != null) {%>
- 	<h4>아이디 <%=request.getParameter("usersId") %> 회원 탈퇴 완료</h4>
+ 	<div class="sub_title">아이디 <%=request.getParameter("usersId") %> 회원 탈퇴 완료</div>
  <%} %>
-<table border="1" width="70%">
+<table>
 	<thead>
 		<tr>
 			<th>회원번호</th>
 			<th>아이디</th>
 			<th>닉네임</th>
 			<th>이메일</th>
-			<th>회원등급</th>			
+			<th>회원등급</th>
 			<th>회원관리</th>
 		</tr>
 	</thead>
@@ -113,9 +108,8 @@ function deleteConfirm(usersId){
 			<td><%=usersEmail%></td>
 			<td align="center"><%=usersDto.getUsersGrade() %></td>
 			<th align="center">
-				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">상세</a> |
-				<a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">수정</a> |
-<%-- 		<a href="unregister.nogari?usersId=<%=usersDto.getUsersId()%>">탈퇴</a> --%>
+				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"><button>상세</button></a>
+				<a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"><button>수정</button></a>
 				<button onclick="deleteConfirm('<%=usersDto.getUsersId()%>');">탈퇴</button>
 			</th>
 		</tr>
@@ -125,26 +119,26 @@ function deleteConfirm(usersId){
 
 <!-- 페이지 네비게이터 검색 / 목록-->
 <DIV>
-<%if(pn.isPreviousAvailable()) {%>
-	<%if(pn.isSearchMode()) {%>
+<%if(pn.hasPreviousBlock()) {%>
+	<%if(isSearchMode) {%>
 		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getStartBlock()-1 %>">&lt;</a>
 	<%} else{ %>
-		<a href="list.jsp?page=<%=pn. getPreviousBlock()%>">&lt;</a>
+		<a href="list.jsp?page=<%=pn.getPreviousBlock()%>">&lt;</a>
 	<%} %>
 <%} else{ %>
 	<a>&lt;</a>
 <%} %>
 
 <%for(int i = pn.getStartBlock() ; i <= pn.getRealLastBlock() ; i++) {%>
-	<%if(pn.isSearchMode()) { %>
+	<%if(isSearchMode) { %>
 		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
 	<%}else{ %>
 		<a href="list.jsp?page=<%=i %>"><%=i %></a>
 	<%} %>
 <%} %>
 
-<%if(pn.isNextAvailable()) {%>
-	<%if(pn.isSearchMode()) {%>
+<%if(pn.hasNextBlock()) {%>
+	<%if(isSearchMode) {%>
 		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock() %>">&gt;</a>
 	<%} else{ %>
 		<a href="list.jsp?page=<%=pn.getNextBlock()%>">&gt;</a>

@@ -88,13 +88,14 @@ public class CourseReplyDao {
 	}
 
 	// 계층형 댓글 목록
-	public List<CourseReplyDto> listByTreeSort() throws Exception {
+	public List<CourseReplyDto> listByTreeSort(int courseIdx) throws Exception {
 		Connection con = JdbcUtils.connect3();
 
-		String sql = "select * from course_reply connect by prior course_reply_idx = course_reply_superno "
+		String sql = "select * from course_reply where course_idx = ? connect by prior course_reply_idx = course_reply_superno "
 				+ "start with course_reply_superno is null "
 				+ "order siblings by course_reply_groupno desc, course_idx asc";
 		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, courseIdx);;
 		ResultSet rs = ps.executeQuery();
 
 		List<CourseReplyDto> list = new ArrayList<CourseReplyDto>();
@@ -176,4 +177,5 @@ public class CourseReplyDao {
 		con.close();
 		return courseReplyDto;
 	}
+	
 }

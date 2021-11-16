@@ -11,9 +11,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-// 모든 JSP 파일, 모든 서블릿 파일 대상. (각종 설정파일 등 제외)
+// 로그인한 사용자만 접근 필요한 경우 사용하는 필터
 @WebFilter( urlPatterns = {
-	"/users/tableInitializer.jsp",
 	"/users/join_success.jsp",
 	"/items/insert.jsp"
 } )

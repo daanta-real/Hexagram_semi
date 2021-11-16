@@ -5,17 +5,17 @@
 <TITLE>노가리투어 - 회원탈퇴 완료</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
+<!-- 페이지 제목 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
 <% String root = request.getContextPath(); %>
 <!-- 페이지 내용 시작 -->
 
-<h1>회원 탈퇴</h1>
-
-<h3>회원 탈퇴가 완료되었어요. ;_;)// good bye </h3>
-
-<h6><a href="<%=root%>/">메인 페이지로</a></h6>
+<div class="sub_title">회원 탈퇴가 완료되었어요. ;_;)// good bye </div>
+<br><br>
+<div class="sub_title"><a href="<%=root%>/">메인 페이지로</a></div>
 
 <!-- 페이지 내용 끝. -->
 </SECTION>
