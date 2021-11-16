@@ -11,7 +11,7 @@ import util.JdbcUtils;
 public class CourseItemDao {
 
 	public List<CourseItemDto> getByCourse(int courseSequnce) throws Exception {
-		String sql = "SELECT * FROM course_item where course_idx=?";
+		String sql = "SELECT * FROM course_item where course_idx=? order by course_item_idx asc";
 		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, courseSequnce);
