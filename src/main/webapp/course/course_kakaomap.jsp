@@ -44,7 +44,7 @@ ItemDao itemDao = new ItemDao();
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(37.55321, 126.972613), // 지도의 중심좌표 지금은 서울역으로 해놓았으나, 정확한 주소를 입력할 시에 이동이 가능함.
-        level: 10 // 지도의 확대 레벨
+        level: 8 // 지도의 확대 레벨
     };  
 // 지도를 생성합니다    
 var map = new kakao.maps.Map(mapContainer, mapOption); 
