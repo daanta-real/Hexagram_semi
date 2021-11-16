@@ -16,7 +16,7 @@
 <br>
 
 #### 사용 기술 스택 / 사용 언어
-
+```
 - FE(Front End)
    	- CSS
    	- JavaScript
@@ -34,10 +34,9 @@
    - Oracle: SQL-Developer
    - FE : VScode
 
-
 #### 사용한 오픈 API
   - 카카오 주소 찾기 API
-  
+```  
 <br><br>
 
 #### 프로젝트 기능 구현
