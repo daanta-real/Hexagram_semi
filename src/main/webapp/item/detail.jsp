@@ -205,7 +205,7 @@
 				}
 </style>
  
-<%-- 페이지에 필요한 변수 저장 및 변수 선언 --%>
+<%-- 페이지에 필요한 세션, 파라미터값 저장 및 변수 선언 --%>
  <% 
 	//경로 설정을 위해 index.jsp를 변수 저장
 	 String root = request.getContextPath();

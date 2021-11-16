@@ -20,6 +20,8 @@ public class CourseCreateSequnceForUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			try {
 				
+				//코스 수정시 시퀀스 번호 정리 Servlet
+				
 				CourseDao courseDao = new CourseDao();
 				int getMaxIdx = courseDao.getMaxIdx();
 				//새글을 작성 혹은 수정을할때 시퀀스 번호를 생성해주게 되는데, 코스게시판의 가장 큰 글보다 큰(쓰레기 작성글들을)것 들을 삭제해주는 작업.

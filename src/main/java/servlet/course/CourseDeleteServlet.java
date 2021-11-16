@@ -17,6 +17,8 @@ public class CourseDeleteServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			
+			//코스 게시물 삭제 Servlet
+			
 			//파라미터로 받은 courseIdx를 변수에 저장
 			int courseIdx = Integer.parseInt(req.getParameter("courseIdx"));
 			
