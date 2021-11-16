@@ -13,18 +13,22 @@
   [최종 코드]
 <br>
 
- ###사용 기술 스택
- ###사용 언어
-  FE(Front End)
+###사용 기술 스택
+###사용 언어
+
+- FE(Front End)
    			- CSS
    			- JavaScript
    			- JQuery
-   BE(Back-End)
+
+- BE(Back-End)
    			- Language: Java
    			- WAS(Web-Application-Server): Apache Tomcat 9.0
-   Database
+
+- Database
      - RDBMS: Oracle database 11g
-   Developer tool
+
+- Developer tool
     	 - Java: Eclipse
 	     - Oracle: SQL-Developer
 
