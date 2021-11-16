@@ -82,8 +82,7 @@
                          	//추가한 아이템 목록에서 삭제 될때도 courseidx , itemIdx가 필요하므로 설정해둔다.
                          	button3.on("click",function(){
 							//버튼을 눌렀을때 삭제ajax 처리를 해주어야 하므로 (load시 설정이 되지 않았으므로 추가할때마다 설정해주어야함)
-                               	 if(parseInt($(".result-number").text())>3){
-                               		 //결과 span에 나오는 값의 수가 3개 이상일 경우 삭제를 처리하게 하였음.
+    
                                 	$(this).parents("tr").hide();
                                 	//실제 데이터가 삭제되었음을 해당 아이템을 숨김표시로 처리하였음
                                		 
@@ -114,10 +113,7 @@
                                         }        	
                                 	});
                                	 
-                               	 }else{//앞으 조건절에서 ajax에서 받아온 정보들을 결과 span에 나오는 값에 실시간으로 옮겨서 확인한 값이 3개일때,
-                                    	$(".result").text("최소 3개의 관광지가 필요합니다.").css("color","red");
-                                        $(".result-number").text($(".result-number").text());
-                                    }         
+
             		
                          	});
                          	//success:function(resp)부분에서 esle의 성공 부분이다. 즉

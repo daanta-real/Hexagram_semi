@@ -23,28 +23,6 @@
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script>
-	$(function(){
-	    //[1] 1페이지 빼고 다 숨김
-	    //= 다 숨기고 1페이지만 표시
-	    $(".page").hide();
-	    $(".page").eq(0).show();
-	
-	    $(".btn-pop").click(function(e){
-	        e.preventDefault();
-	
-	        $(".page").hide(0);
-	        $(".page").eq(1).show();
-	    });
-	
-	    $(".btn-new").click(function(e){
-	        e.preventDefault();
-	
-	        $(".page").hide(1);
-	        $(".page").eq(0).show();
-	    });
-	});
-</script>
 <!-- 페이지 내용 시작 -->
 
 <%
@@ -77,6 +55,30 @@ ItemFileDao itemFileDao = new ItemFileDao();
 
 // HTML 출력 시작
 %>
+
+<script>
+	$(function(){   
+	 var searchSelector = <%=pn.getSearchSelector()%>;
+
+	    $(".page").hide();
+	    $(".page").eq(searchSelector).show();
+	
+	    $(".btn-pop").click(function(e){
+	        e.preventDefault();
+	        searchSelector++;
+	        $(".page").hide();
+	        $(".page").eq(searchSelector).show();
+	    });
+	
+	    $(".btn-new").click(function(e){
+	        e.preventDefault();
+	        searchSelector--;
+	        $(".page").hide();
+	        $(".page").eq(searchSelector).show();
+	    });
+	});
+</script>
+
 <div class="container-900 container-center">
 	<div class="row center">
 		<%-- 페이지 제목 --%>
@@ -109,11 +111,23 @@ ItemFileDao itemFileDao = new ItemFileDao();
 			<!-- 검색어 입력 창 -->
 			<input type="search" name="keyword" placeholder="검색어 입력"
 			required value="<%=pn.getKeywordString()%>"  class="form-input form-inline">
-
+			
 			<input type="submit" value="검색"  class="form-btn form-inline">
 		</form>
-			<button class="btn-new">최신순</button>
+		
+		<form action="<%=root%>/item/list.jsp" method="get">
+			<input type="hidden" name="searchSelector" value="<%=1%>">
+			<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
+			<input type="hidden" name="column" value="<%=pn.getColumn()%>">
 			<button class="btn-pop">인기순</button>
+		</form>
+		
+		<form action="<%=root%>/item/list.jsp" method="get">
+			<input type="hidden" name="searchSelector" value="<%=0%>">
+			<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
+			<input type="hidden" name="column" value="<%=pn.getColumn()%>">
+			<button class="btn-new">최신순</button>
+		</form>
 	</div>
 
 	<div class="row center">
@@ -197,6 +211,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 </table>
 </div>
 <%} %>
+
 <!-- 인기 검색이라면 -->
 <div class="page">
 <%if(!popularity.isEmpty()) {%>
@@ -284,9 +299,9 @@ ItemFileDao itemFileDao = new ItemFileDao();
 		<%-- [이전] a 태그 --%>
 		<%if(pn.hasPreviousBlock()){ %>
 			<%if(isSearchMode){%>
-				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getPreviousBlock()%>">[이전]</a>
+				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getPreviousBlock()%>&searchSelector=<%=pn.getSearchSelector()%>">[이전]</a>
 			<%}else{ %>
-				<a href="list.jsp?page=<%=pn.getPreviousBlock() %>">[이전]</a>
+				<a href="list.jsp?page=<%=pn.getPreviousBlock() %>&searchSelector=<%=pn.getSearchSelector()%>">[이전]</a>
 			<%} %>
 		<%}else{%>
 			<a>[이전]</a>
@@ -295,18 +310,18 @@ ItemFileDao itemFileDao = new ItemFileDao();
 		<%-- 숫자 a 태그 --%>
 		<%for(int i = pn.getStartBlock(); i<=pn.getRealLastBlock(); i++) {%>
 			<%if(isSearchMode){ %>
-				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
+				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>&searchSelector=<%=pn.getSearchSelector()%>"><%=i %></a>
 			<%}else{ %>
-				<a href="list.jsp?page=<%=i %>"><%=i %></a>
+				<a href="list.jsp?page=<%=i %>&searchSelector=<%=pn.getSearchSelector()%>"><%=i %></a>
 			<%} %>
 		<%} %>
 
 		<%-- [다음] a 태그 --%>
 		<%if(pn.hasNextBlock()){ %>
 			<%if(isSearchMode){%>
-				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock()%>">[다음]</a>
+				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock()%>&searchSelector=<%=pn.getSearchSelector()%>">[다음]</a>
 			<%}else{ %>
-				<a href="list.jsp?page=<%=pn.getNextBlock() %>">[다음]</a>
+				<a href="list.jsp?page=<%=pn.getNextBlock() %>&searchSelector=<%=pn.getSearchSelector()%>">[다음]</a>
 			<%} %>
 		<%}else{ %>
 			<a>[다음]</a>
