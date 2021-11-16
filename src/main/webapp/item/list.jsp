@@ -167,7 +167,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 		<%-- [이전] a 태그 --%>
 		<%if(pn.hasPreviousBlock()){ %>
 			<%if(isSearchMode){%>
-				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword<%=pn.getKeyword() %>&p=<%=pn.getStartBlock()%>">[이전]</a>
+				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getPreviousBlock()%>">[이전]</a>
 			<%}else{ %>
 				<a href="list.jsp?page=<%=pn.getPreviousBlock() %>">[이전]</a>
 			<%} %>
@@ -178,7 +178,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 		<%-- 숫자 a 태그 --%>
 		<%for(int i = pn.getStartBlock(); i<=pn.getRealLastBlock(); i++) {%>
 			<%if(isSearchMode){ %>
-				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword<%=pn.getKeyword() %>&p=<%=i %>"><%=i %></a>
+				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
 			<%}else{ %>
 				<a href="list.jsp?page=<%=i %>"><%=i %></a>
 			<%} %>
@@ -187,7 +187,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 		<%-- [다음] a 태그 --%>
 		<%if(pn.hasNextBlock()){ %>
 			<%if(isSearchMode){%>
-				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword<%=pn.getKeyword() %>&p=<%=pn.getNextBlock()%>">[다음]</a>
+				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock()%>">[다음]</a>
 			<%}else{ %>
 				<a href="list.jsp?page=<%=pn.getNextBlock() %>">[다음]</a>
 			<%} %>
