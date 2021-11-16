@@ -268,7 +268,8 @@
 	<button class="form-btn">이전으로</button>
 	<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
 	<input type="hidden" name="courseOriginSequnce" value="<%=courseOriginSequnce%>">
-	<input type="hidden" name="city" value="<%=city%>">
+	<input type="hidden" name="keyword" value="<%=city%>">
+	<input type="hidden" name="column" value="item_address">
 	</form>
 </div>
 <!-- 페이지 내용 끝. -->
