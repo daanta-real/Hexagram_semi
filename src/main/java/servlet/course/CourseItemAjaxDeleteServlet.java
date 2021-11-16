@@ -19,7 +19,8 @@ public class CourseItemAjaxDeleteServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		try {
-
+			
+			//
 			
 			int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
 			int courseIdx = Integer.parseInt(req.getParameter("courseIdx"));

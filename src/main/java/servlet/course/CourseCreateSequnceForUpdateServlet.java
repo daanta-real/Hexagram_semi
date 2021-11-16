@@ -20,10 +20,10 @@ public class CourseCreateSequnceForUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			try {
 				
-					CourseDao courseDao = new CourseDao();
-					int getMaxIdx = courseDao.getMaxIdx();
-					courseDao.getMaxIdxDelete(getMaxIdx);
-					//새글을 작성 혹은 수정을할때 시퀀스 번호를 생성해주게 되는데, 코스게시판의 가장 큰 글보다 큰(쓰레기 작성글들을)것 들을 삭제해주는 작업.
+				CourseDao courseDao = new CourseDao();
+				int getMaxIdx = courseDao.getMaxIdx();
+				//새글을 작성 혹은 수정을할때 시퀀스 번호를 생성해주게 되는데, 코스게시판의 가장 큰 글보다 큰(쓰레기 작성글들을)것 들을 삭제해주는 작업.
+				courseDao.getMaxIdxDelete(getMaxIdx);
 					
 				 int courseSequnce = courseDao.getSequence(); //새로 생성한 번호
 				 int courseOriginSequnce = Integer.parseInt(req.getParameter("courseOriginSequnce")); //기존 번호
@@ -33,13 +33,14 @@ public class CourseCreateSequnceForUpdateServlet extends HttpServlet {
 				 CourseItemDao courseItemDao = new CourseItemDao();
 				 List<CourseItemDto> originList = courseItemDao.getByCourse(courseOriginSequnce);//기존의 아이템 목록을 가져오기 위함
 				 
+				 //기존 아이템 목록을 출력
 				 for(CourseItemDto courseItemDto : originList) {
 					 CourseItemDto courseItemUpdateDto = new CourseItemDto();
 					 courseItemUpdateDto.setCourseIdx(courseSequnce);
 					 courseItemUpdateDto.setItemIdx(courseItemDto.getItemIdx());
 					 
-					 courseItemDao.insert(courseItemUpdateDto);
 					 //있는 것 만큼 담아준다.
+					 courseItemDao.insert(courseItemUpdateDto);
 				 }
 				 
 				 

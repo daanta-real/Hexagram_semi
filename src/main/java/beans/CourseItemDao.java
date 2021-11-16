@@ -10,6 +10,7 @@ import util.JdbcUtils;
 
 public class CourseItemDao {
 
+	//코스 목록
 	public List<CourseItemDto> getByCourse(int courseSequnce) throws Exception {
 		String sql = "SELECT * FROM course_item where course_idx=? order by course_item_idx asc";
 		Connection con = JdbcUtils.connect3();
@@ -31,6 +32,7 @@ public class CourseItemDao {
 		return list;
 	}
 	
+	//
 	public int getItemIdxByCourse(int courseIdx) throws Exception {
 		String sql = "SELECT * FROM course_item where course_idx=?";
 		Connection con = JdbcUtils.connect3();
@@ -45,7 +47,7 @@ public class CourseItemDao {
 		return result;
 		}
 
-
+	//코스 등록시 course_item 등록 메소드
 	public void insert(CourseItemDto courseItemDto) throws Exception {
 		String sql = "INSERT INTO course_item values(course_item_seq.nextval,?,?)";
 		Connection con = JdbcUtils.connect3();
@@ -59,6 +61,7 @@ public class CourseItemDao {
 		con.close();
 	}
 
+	//코스 수정시 관광지 삭제를 위한 메소드
 	public boolean deleteItem(CourseItemDto courseItemDto) throws Exception {
 		String sql = "delete course_item where item_idx=? and course_idx=?";
 		Connection con = JdbcUtils.connect3();
@@ -73,6 +76,7 @@ public class CourseItemDao {
 		return result>0;
 	}
 	
+	//코스 게시물 삭제
 	public boolean delete(int courseIdx) throws Exception {
 		String sql = "delete course_item where course_idx=?";
 		Connection con = JdbcUtils.connect3();

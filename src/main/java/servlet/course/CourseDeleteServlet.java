@@ -17,15 +17,20 @@ public class CourseDeleteServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			
+			//파라미터로 받은 courseIdx를 변수에 저장
 			int courseIdx = Integer.parseInt(req.getParameter("courseIdx"));
 			
+			//처리
 			CourseDao courseDao = new CourseDao();
 			CourseItemDao courseItemDao = new CourseItemDao();
 			
+			//삭제(courseItem, course둘다 삭제한다.)
 			courseItemDao.delete(courseIdx);
 			courseDao.delete(courseIdx);
 			
+			//목록 페이지로 이동
 			resp.sendRedirect("list.jsp");
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
