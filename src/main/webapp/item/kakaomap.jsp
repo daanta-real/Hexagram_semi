@@ -20,29 +20,35 @@ ItemDto itemDto = itemDao.get(itemIdx);
 <head>
     <meta charset="utf-8">
     <title>주소로 장소 표시하기</title>
-    
-</head>
-<body>
-
-<div id="map" style="width:800px;height:350px;"></div>
+    	<style>
+		#map {
+			width: 800px;
+			height: 350px;
+		}
+	</style>
 
 <script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=system.Settings.API_KEY_KAKAOMAP%>&libraries=services"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = {
-        center: new kakao.maps.LatLng(37.55321, 126.972613), // 지도의 중심좌표 지금은 서울역으로 해놓았으나, 정확한 주소를 입력할 시에 이동이 가능함.
-        level: 3 // 지도의 확대 레벨
-    };  
+	var address = '<%=itemDto.getItemAddress()%>';
 
-// 지도를 생성합니다    
-var map = new kakao.maps.Map(mapContainer, mapOption); 
+	$(function(){
+		//지도 생성 준비 코드
+		var container = document.querySelector("#map");
+		var options = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
+		};
 
+		//지도 생성 코드
+		var map = new kakao.maps.Map(container, options);
+		
 // 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-geocoder.addressSearch('<%=itemDto.getItemAddress()%>', function(result, status) {
+geocoder.addressSearch(address, function(result, status) {
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
@@ -54,17 +60,43 @@ geocoder.addressSearch('<%=itemDto.getItemAddress()%>', function(result, status)
             map: map,
             position: coords
         });
-
+        
+        marker.setMap(map);
+        
+		var infoWindowText = $("#marker-info-window-template").html();
+		infoWindowText = infoWindowText.replace("{mapY}", result[0].y);
+		infoWindowText = infoWindowText.replace("{mapX}", result[0].x);
+		infoWindowText = infoWindowText.replace("{mapY}", result[0].y);
+		infoWindowText = infoWindowText.replace("{mapX}", result[0].x);
+		var iwPosition = new kakao.maps.LatLng(result[0].y, result[0].x);
+		
         // 인포윈도우로 장소에 대한 설명을 표시합니다
         var infowindow = new kakao.maps.InfoWindow({
-            content: '<div style="width:150px;text-align:center;padding:6px 0;"><%=itemDto.getItemName()%></div>'
-        });
+            position : iwPosition,
+        	content: infoWindowText
+        	
+        		});
         infowindow.open(map, marker);
 
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
     } 
 });    
+
+
+	});
+
 </script>
+</head>
+<body>
+	<template id="marker-info-window-template">
+		<div style="padding:5px;">
+			<%=itemDto.getItemName()%> <br>
+			<a href="https://map.kakao.com/link/map/<%=itemDto.getItemName()%>,{mapY},{mapX}" style="color:blue" target="_blank">큰지도보기</a> 
+			<a href="https://map.kakao.com/link/to/<%=itemDto.getItemName()%>,{mapY},{mapX}" style="color:blue" target="_blank">길찾기</a>
+		</div>
+	</template>
+	
+	<div id="map"></div>
 </body>
 </html>

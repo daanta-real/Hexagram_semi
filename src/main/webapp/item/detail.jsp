@@ -332,7 +332,7 @@
 
 				<tr>
 					<th>홈페이지</th>
-					<td><%=itemDto.getItemHomepage()%></td>
+					<td><a href="<%=itemDto.getItemHomepage()%>" target="_blank"><%=itemDto.getItemHomepage()%></a></td>
 				</tr>
 				
 				<tr>
