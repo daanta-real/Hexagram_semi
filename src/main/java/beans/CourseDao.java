@@ -8,7 +8,7 @@ import java.util.List;
 
 import util.JdbcUtils;
 
-public class CourseDao {
+public class CourseDao implements PaginationInterface<CourseDto> {
 	// 전체 조회
 		public List<CourseDto> list() throws Exception {
 			String sql = "SELECT * FROM course";
@@ -159,7 +159,7 @@ public class CourseDao {
 			
 		}
 		
-		public int count() throws Exception {
+		public Integer count() throws Exception {
 			Connection con = JdbcUtils.connect3();
 			String sql = "select count(*) from course";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -172,7 +172,7 @@ public class CourseDao {
 			return result;
 		}
 		
-		public int count(String column,String keyword) throws Exception {
+		public Integer count(String column,String keyword) throws Exception {
 			Connection con = JdbcUtils.connect3();
 			String sql = "select count(*) from course where instr(#1,?)>0";
 			sql = sql.replace("#1", column);
@@ -187,7 +187,7 @@ public class CourseDao {
 			return result;
 		}
 		
-		public List<CourseDto> listByRownum(int begin, int end) throws Exception {
+		public List<CourseDto> list(int begin, int end) throws Exception {
 			String sql = "select * from( "
 					+ "select rownum rn,tmp.* from( "
 					+ "(SELECT * FROM course order by course_idx desc)tmp)) "
@@ -216,7 +216,7 @@ public class CourseDao {
 			return list;
 		}
 		
-		public List<CourseDto> searchByRownum(String column, String keyword, int begin, int end) throws Exception {
+		public List<CourseDto> search(String column, String keyword, int begin, int end) throws Exception {
 			String sql = "select * from( "
 					+ "select rownum rn,tmp.* from( "
 					+ "(SELECT * FROM course where instr(#1,?)>0 order by course_idx desc)tmp)) "
