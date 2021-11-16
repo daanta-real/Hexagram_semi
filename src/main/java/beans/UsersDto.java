@@ -6,13 +6,6 @@ import java.util.regex.Pattern;
 
 public class UsersDto {
 
-	// 0. Final Fields
-	public final static String REGEX_USERSID    = "^(?=[a-z].*)[a-z_\\d]{4,20}$";
-	public final static String REGEX_USERSPW    = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[-_`~!?@#$%^&*=+/,.<>;:’”(){}[\\]])[a-zA-Z-_`~!?@#$%^&*=+/,.<>;:’”(){}[\\]]{4,20}$";
-	public final static String REGEX_USERSEMAIL = "^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*\\.([a-zA-Z])+$";
-	public final static String REGEX_USERSNICK  = "^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,10}$";
-	public final static String REGEX_USERSPHONE = "^(01[016-9])\\d{4}\\d{4}$";
-
 	// 1. Declarations
 	private Integer usersIdx  ; // 기본 0으로 처리되지 않도록 하기 위해서 일부러 Integer로 함.
 	private String  usersId   ;
@@ -27,7 +20,7 @@ public class UsersDto {
 	// 2. Constructors
 	public UsersDto() { super(); }
 	public UsersDto(Integer usersIdx, String usersId, String usersPw, String usersNick, String usersEmail,
-			String usersPhone, String usersGrade, Date usersJoin, int usersPoint) {
+			String usersPhone, String usersGrade, Date usersJoin, int usersPoint) throws Exception {
 		super();
 		setUsersIdx  (usersIdx  );
 		setUsersId   (usersId   );
@@ -52,15 +45,15 @@ public class UsersDto {
 	public Integer getUsersPoint () { return usersPoint; }
 
 	// 4. Setters
-	public void setUsersIdx   (Integer usersIdx   ) { this.usersIdx   = usersIdx   ; }
-	public void setUsersId    (String  usersId    ) { this.usersId    = usersId    ; }
-	public void setUsersPw    (String  usersPw    ) { this.usersPw    = usersPw    ; }
-	public void setUsersNick  (String  usersNick  ) { this.usersNick  = usersNick  ; }
-	public void setUsersEmail (String  usersEmail ) { this.usersEmail = usersEmail ; }
-	public void setUsersPhone (String  usersPhone ) { this.usersPhone = usersPhone ; }
-	public void setUsersGrade (String  usersGrade ) { this.usersGrade = usersGrade ; }
-	public void setUsersJoin  (Date    usersJoin  ) { this.usersJoin  = usersJoin  ; }
-	public void setUsersPoint (Integer usersPoint ) { this.usersPoint = usersPoint ; }
+	public void setUsersIdx   (Integer usersIdx   ) throws Exception { if(!isValidUsersIdx  (usersIdx  )) throw new Exception(); else this.usersIdx   = usersIdx   ; }
+	public void setUsersId    (String  usersId    ) throws Exception { if(!isValidUsersId   (usersId   )) throw new Exception(); else this.usersId    = usersId    ; }
+	public void setUsersPw    (String  usersPw    ) throws Exception { if(!isValidUsersPw   (usersPw   )) throw new Exception(); else this.usersPw    = usersPw    ; }
+	public void setUsersNick  (String  usersNick  ) throws Exception { if(!isValidUsersNick (usersNick )) throw new Exception(); else this.usersNick  = usersNick  ; }
+	public void setUsersEmail (String  usersEmail ) throws Exception { if(!isValidUsersEmail(usersEmail)) throw new Exception(); else this.usersEmail = usersEmail ; }
+	public void setUsersPhone (String  usersPhone ) throws Exception { if(!isValidUsersPhone(usersPhone)) throw new Exception(); else this.usersPhone = usersPhone ; }
+	public void setUsersGrade (String  usersGrade ) throws Exception { if(!isValidUsersGrade(usersGrade)) throw new Exception(); else this.usersGrade = usersGrade ; }
+	public void setUsersJoin  (Date    usersJoin  ) throws Exception { this.usersJoin  = usersJoin  ; }
+	public void setUsersPoint (Integer usersPoint ) throws Exception { if(!isValidUsersPoint(usersPoint)) throw new Exception(); else this.usersPoint = usersPoint ; }
 
 	// 5. Methods - Overrided
 	@Override
@@ -70,11 +63,14 @@ public class UsersDto {
 			+ ", usersJoin=" + usersJoin + ", usersPoint=" + usersPoint +"]";
 	}
 
-	// 6. Methods - Matches
-	public static boolean matchUsersId   (String str) { return Pattern.matches(REGEX_USERSID   , str); }
-	public static boolean matchUsersPw   (String str) { return Pattern.matches(REGEX_USERSPW   , str); }
-	public static boolean matchUsersEmail(String str) { return Pattern.matches(REGEX_USERSEMAIL, str); }
-	public static boolean matchUsersNick (String str) { return Pattern.matches(REGEX_USERSNICK , str); }
-	public static boolean matchUsersPhone(String str) { return Pattern.matches(REGEX_USERSPHONE, str); }
+	// 6. Methods - Valid value tester
+	public static boolean isValidUsersIdx  (Integer num) { return num != null; }
+	public static boolean isValidUsersId   (String  str) { return Pattern.matches(DTORegex.USERSID   , str); }
+	public static boolean isValidUsersPw   (String  str) { return Pattern.matches(DTORegex.USERSPW   , str); }
+	public static boolean isValidUsersNick (String  str) { return Pattern.matches(DTORegex.USERSNICK , str); }
+	public static boolean isValidUsersEmail(String  str) { return Pattern.matches(DTORegex.USERSEMAIL, str); }
+	public static boolean isValidUsersPhone(String  str) { return Pattern.matches(DTORegex.USERSPHONE, str); }
+	public static boolean isValidUsersGrade(String  str) { return Pattern.matches(DTORegex.USERSGRADE, str); }
+	public static boolean isValidUsersPoint(Integer num) { return num != null; }
 
 }
