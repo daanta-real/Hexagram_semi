@@ -20,7 +20,7 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	// 2) 선택 데이터
 	private String column;
 	private String keyword;
-	private int searchSelector;//코스 선택 메뉴에서 키워드로 선택할지 지역으로 선택할지 구분해주는 구분자.
+	private int searchSelector;//한jsp에 보여줄 화면을 선택할때 사용한다 현재 리스트 조회구문과 인서트 검색에서 사용중(구분자)
 
 	// 2) 페이징 관련 데이터
 	private int pageSize; // 페이지당 글 개수
@@ -62,7 +62,7 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 		
 	    try{
 	    	this.searchSelector = Integer.parseInt(req.getParameter("searchSelector"));
-	    	if(this.searchSelector<0 || this.searchSelector>1) throw new Exception();//지역으로 확인할지:0? 키워드로 입력할지:1? 이외의 값은 예외처리한다.
+	    	if(this.searchSelector<0 || this.searchSelector>1) throw new Exception();//한jsp에 보여줄 화면을 선택할때 사용한다 현재 리스트 조회구문과 인서트 검색에서 사용중
 	    }catch(Exception e){
 	    	this.searchSelector = 0;
 	    }
@@ -127,6 +127,10 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	// 컬럼에 특정한 값이 존재하고 있는지 검사
 	public boolean columnValExists(String column) {
 		return this.column != null && this.column.equals(column);
+	}
+	// 키워드에 특정한 값이 존재하고 있는지 검사
+	public boolean keywordValExists(String keyword) {
+		return this.keyword != null && this.keyword.equals(keyword);
 	}
 
 
