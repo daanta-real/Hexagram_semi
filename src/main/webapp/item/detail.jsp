@@ -206,25 +206,28 @@
 </style>
  
  <% 
- String root = request.getContextPath();
- int itemIdx = Integer.parseInt(request.getParameter("itemIdx"));
- ItemDao itemDao = new ItemDao();
- ItemDto itemDto = itemDao.get(itemIdx);
-
- 
- int usersIdx = (int)request.getSession().getAttribute("usersIdx");
- //자신이 쓴글인지(현재 접속자 = 게시물 작성자)?
-boolean isMyboard = request.getSession().getAttribute("usersIdx") != null && itemDto.getUsersIdx() == usersIdx;
- 
- 
- String usersGrade = (String)request.getSession().getAttribute("usersGrade");
-//  관리자인지?
- boolean isManager = request.getSession().getAttribute("users_grade") != null && usersGrade.equals("관리자");
- 
-
-
-//조회수 산정하기.(조회수 중복 증가는 제거)
-itemDao.readUp(itemIdx); //조회수를 늘려준다.
+	 //경로 설정을 위해 index.jsp를 변수 저장
+	 String root = request.getContextPath();
+	 //list.jsp에서 받은 itemIdx 파라미터값 변수 저장
+	 int itemIdx = Integer.parseInt(request.getParameter("itemIdx"));
+	 //출력을위해 Dao Dto 변수 선언
+	 ItemDao itemDao = new ItemDao();
+	 ItemDto itemDto = itemDao.get(itemIdx);
+	
+	//usersIdx 변수 저장 (본인글인지 확인을 위해)
+	int usersIdx = (int)request.getSession().getAttribute("usersIdx");
+	//자신이 쓴글인지(현재 접속자 = 게시물 작성자)?
+	boolean isMyboard = request.getSession().getAttribute("usersIdx") != null && itemDto.getUsersIdx() == usersIdx;
+	 
+	 
+	String usersGrade = (String)request.getSession().getAttribute("usersGrade");
+	//  관리자인지?
+	boolean isManager = request.getSession().getAttribute("users_grade") != null && usersGrade.equals("관리자");
+	 
+	
+	
+	//조회수 산정하기.(조회수 중복 증가는 제거)
+	itemDao.readUp(itemIdx); //조회수를 늘려준다.
  %>
  
  
