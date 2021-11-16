@@ -12,14 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import beans.CourseItemDao;
 import beans.CourseItemDto;
 
-@WebServlet(urlPatterns = "/course/delete_course_item.nogari")
+@WebServlet(urlPatterns = "/course/delete_course_item.nogari2")
 public class CourseItemDeleteServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		try {
 
-			
+			//ajax 배우기전 Servlet(현재는 사용하지 않음 urlPatterns 뒤에 2를 붙혀 접근하지 못하도록 설정)
+
 			int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
 			int courseSequnce = Integer.parseInt(req.getParameter("courseSequnce"));
 			String city = req.getParameter("city");

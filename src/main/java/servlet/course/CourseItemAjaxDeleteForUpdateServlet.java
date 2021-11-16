@@ -19,7 +19,7 @@ public class CourseItemAjaxDeleteForUpdateServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		try {
-			//코스게시물 수정시 관광지 삭제에 필요한 Servlet
+			//코스 게시물 수정시 course_item에 등록된 관광지 삭제에 필요한 Servlet
 			
 			//입력
 			//itemIdx : 파라미터로 받은 itemIdx 변수에 저장

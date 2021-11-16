@@ -20,6 +20,9 @@ public class CourseAjaxItemAddServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			
+			//코스 등록시 course_item에 먼저 등록하기 위한 Servlet
+			
 			//insert.jsp의  $(".item-add-btn").on("click", function(){})의 옵션으로 통신 
 			int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
 			int courseIdx = Integer.parseInt(req.getParameter("courseIdx"));

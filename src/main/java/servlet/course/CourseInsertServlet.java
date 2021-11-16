@@ -16,6 +16,9 @@ public class CourseInsertServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			
+			//코스 등록 Servlet
+			
 			//필터적용전
 			req.setCharacterEncoding("UTF-8");
 			
