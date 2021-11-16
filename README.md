@@ -1,6 +1,8 @@
-> ###Hexagram Semi 프로젝트
->  ###팀명: <b>Hexagram</b>
-> ###팀주제: 관광장소 안내 및 리뷰 공유 웹사이트 제작
+### Hexagram Semi 프로젝트
+
+#### 팀명: <b>Hexagram</b>
+
+#### 팀주제: 관광장소 안내 및 리뷰 공유 웹사이트 제작
 <br>
 >  팀원
   - <b>박준성</b>(팀장)
@@ -13,26 +15,28 @@
   [최종 코드]
 <br>
 
-###사용 기술 스택
-###사용 언어
+#### 사용 기술 스택
+
+####사용 언어
 
 - FE(Front End)
-   			- CSS
-   			- JavaScript
-   			- JQuery
+   	- CSS
+   	- JavaScript
+   	- JQuery
 
 - BE(Back-End)
-   			- Language: Java
-   			- WAS(Web-Application-Server): Apache Tomcat 9.0
+   	- Language: Java
+   	- WAS(Web-Application-Server): Apache Tomcat 9.0
 
 - Database
-     - RDBMS: Oracle database 11g
+   - RDBMS: Oracle database 11g
 
 - Developer tool
-    	 - Java: Eclipse
-	     - Oracle: SQL-Developer
+   - Java: Eclipse
+   - Oracle: SQL-Developer
 
-###사용한 오픈 API
+
+### 사용한 오픈 API
   - 카카오 주소 찾기 API
 <br><br>
 
@@ -51,4 +55,4 @@
 - ### **김소은**
  
 <br><br><hr>
-> # 결과물
+# 결과물
