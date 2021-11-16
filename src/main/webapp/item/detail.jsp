@@ -205,8 +205,9 @@
 				}
 </style>
  
+<%-- 페이지에 필요한 변수 저장 및 변수 선언 --%>
  <% 
-	 //경로 설정을 위해 index.jsp를 변수 저장
+	//경로 설정을 위해 index.jsp를 변수 저장
 	 String root = request.getContextPath();
 	 //list.jsp에서 받은 itemIdx 파라미터값 변수 저장
 	 int itemIdx = Integer.parseInt(request.getParameter("itemIdx"));
@@ -219,17 +220,27 @@
 	//자신이 쓴글인지(현재 접속자 = 게시물 작성자)?
 	boolean isMyboard = request.getSession().getAttribute("usersIdx") != null && itemDto.getUsersIdx() == usersIdx;
 	 
-	 
+	//회원 등급 변수 저장(관리자만에게만 보이는 수정 삭제 버튼 표시를 위해)
 	String usersGrade = (String)request.getSession().getAttribute("usersGrade");
-	//  관리자인지?
+	//관리자인지?
 	boolean isManager = request.getSession().getAttribute("users_grade") != null && usersGrade.equals("관리자");
 	 
-	
-	
 	//조회수 산정하기.(조회수 중복 증가는 제거)
 	itemDao.readUp(itemIdx); //조회수를 늘려준다.
  %>
  
+<%-- 조회수 중복방지 기능 (추 후 필요할시 주석 제거하고 위에 조회수 기능 삭제) --%>
+<%
+	//Set<Integer> boardCountView = (Set<Integer>)request.getSession().getAttribute("boardCountView");
+
+	//if(boardCountView==null){
+	//	boardCountView = new HashSet<Integer>();
+	//}
+	//if(boardCountView.add(itemIdx)){
+	//	itemDao.readUp(itemIdx,usersIdx);
+	//}
+	//request.getSession().setAttribute("boardCountView", boardCountView);
+%>
  
 <%-- 게시글 사진파일 정보 조회  --%>
 <%
@@ -237,56 +248,66 @@
 	List<ItemFileDto> itemFileList = itemFileDao.find1(itemIdx);
 %>
  
- <!-- **기본정보 표시  -->
+ <!-- 기본정보 표시  -->
  <div class="container-900 container-center">
  
-     <div class="row center">
-            	<!-- 지명 표시 -->
-				<h1><%=itemDto.getItemName()%></h1>
-     </div>
- 
- 	 <div class="row center">
-            <!-- 지역 표시 -->
-            <%String area = itemDto.getAdressCity()+" "+itemDto.getAdressCitySub();%>
-			<h3><%=area%></h3>
-    </div>
-    
+	<!-- 지명 표시 -->
     <div class="row center">
-    <%if(itemDto.getItemType().equals("축제")) {%>
-		<h3><%=itemDto.getItemPeriod()%></h3>
-	<%}%>
+		<h1><%=itemDto.getItemName()%></h1>
     </div>
     
-      <div class="row right">
-      좋아요 표시(예정)
-      |
-      조회수 : <%=itemDto.getItemCountView()%>
+	<!-- 지역 표시 -->
+ 	<div class="row center">
+        <%String area = itemDto.getAdressCity()+" "+itemDto.getAdressCitySub();%>
+		<h3><%=area%></h3>
     </div>
     
-      <div class="row right">
-      <!-- 관리자 또는 글 작성자가 보는 경우 글작성 / 수정 / 삭제가 가능하도록 설정 : 수정 삭제의 경우 필터에서도 처리가능하도록 해야함.-->
-		<!-- 		리모컨으로 구현하기 -->
-			<a href="<%=root%>/item/list.jsp">목록으로</a>
-		<%if(isManager || isMyboard){%>
+    <!-- 만약 축제라면 축제 기간을 표시 -->
+    <div class="row center">
+    	<%if(itemDto.getItemType().equals("축제")) {%>
+			<h3><%=itemDto.getItemPeriod()%></h3>
+		<%}%>
+    </div>
+    
+    <!-- 좋아요 및 조회수 출력 -->
+	<div class="row right">
+		좋아요 표시(예정)
+		|
+		조회수 : <%=itemDto.getItemCountView()%>
+    </div>
+	
+	<!-- a태그 링크 -->    
+	<div class="row right">
+		<!-- 관리자 또는 글 작성자가 보는 경우 글작성 / 수정 / 삭제가 가능하도록 설정 : 수정 삭제의 경우 필터에서도 처리가능하도록 해야함.-->
+		<!-- 리모컨으로 구현하기 -->
+		<a href="<%=root%>/item/list.jsp">목록으로</a>
+			<%if(isManager || isMyboard){%>
+			<!-- 글 작성 페이지로 이동 -->
 			<a href="<%=root%>/item/insert.jsp">새 글작성</a>
+			<!-- itemIdx번호와 함께 수정페이지로 이동 -->
 			<a href="<%=root%>/item/edit.jsp?itemIdx=<%=itemIdx%>">수정</a>
+			<!-- itemIdx번호를 delete Servlet으로 보내주고 삭제 -->
 			<a href="<%=root%>/item/delete.nogari?itemIdx=<%=itemIdx%>">삭제</a>
 		<%}%>
     </div>
 
-    <div class="row center gapy">
     <!-- **사진 표시(DB테이블 만들어서 resource 파일정보를 불러올 예정(idea) -->
-     <%-- 첨부파일이 있다면 --%>
+    <div class="row center gapy">
+     	<!-- 만약 첨부파일이 있다면 -->
 		<%if(!itemFileList.isEmpty()){ %>
+			<!-- 점부파일 목록 조회 -->
 			<%for(ItemFileDto itemFileDto : itemFileList){ %>
+				<!-- 첨부파일 출력 -->
 				<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="80%">
 			<%} %>
+		<!-- 첨부파일이 없다면 (대체 이미지를 보여줄지 없앨지 회의 후 결정) -->
 		<%}else{ %>
-				 <img src="http://via.placeholder.com/500" class="image">
+				<!-- 첨부 파일이 없다면 대체 이미지를 설정 -->
+				<img src="http://via.placeholder.com/500" class="image">
 		<%} %>
     </div>
     
-    <!-- **상세정보 표시 -->
+    <!-- 상세정보 표시 -->
      <div class="row">
 	      <table class="table table-border">
 	      	<tbody>
@@ -331,12 +352,12 @@
  	
 
 
-<!-- **댓글 표시(끌고옴)  -->
+<!-- 댓글 표시 -->
 <%
-//이 글의 댓글 목록 불러오기.
-ItemReplyDao itemReplyDao = new ItemReplyDao();
-List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
-//게시물 수정 삭제와 같은 것과 마찬가지로 필터가 필요함(주소에서 침범하는것 방지.)!!!!!!!!!
+	//이 글의 댓글 목록 불러오기.
+	//게시물 수정 삭제와 같은 것과 마찬가지로 필터가 필요함(주소에서 침범하는것 방지.)!!!!!!!!!
+	ItemReplyDao itemReplyDao = new ItemReplyDao();
+	List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 %>
 
 
@@ -345,13 +366,13 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 </div>
 
 <!-- 댓글 리스트 -->
-
 	<div class="row center gapy">
-			<table class="table table-border">
-	<%if(!list.isEmpty()) {%>
-		<%for (ItemReplyDto itemReplyDto : list) {%>
-			
-				<tbody>
+		<table class="table table-border">
+			<!-- 만약 댓글이 있다면 -->
+			<%if(!list.isEmpty()) {%>
+				<!-- 댓글 조회 -->
+				<%for (ItemReplyDto itemReplyDto : list) {%>
+					<tbody>
 						<%
 						//이 글을 쓴사람의 아이디를 알기 위해서 user의 정보를 불러와야 한다.
 						UsersDao usersDao = new UsersDao();
@@ -363,126 +384,126 @@ List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
 						%>
 						
 						<tr class="view-row">
-
 							<td width="35%" class="left">
-<!-- 							대댓글이면 띄워서 표시해주어라 -->
-							<%if(itemReplyDto.getItemReplyDepth() != 0){ %>
-								<%for(int i = 0 ; i < itemReplyDto.getItemReplyDepth() ; i++){ %>
+								<!-- 대댓글이라면 표시해주어라 -->
+								<%if(itemReplyDto.getItemReplyDepth() != 0){ %>
+									<%for(int i = 0 ; i < itemReplyDto.getItemReplyDepth() ; i++){ %>
+									<!-- 대댓글이라면 4칸 띄어서 보여준다 -->
 									&nbsp;&nbsp;&nbsp;&nbsp;
+									<%} %>
+									<!-- 대댓글을 표시해줄 이미지 -->
+									<img src="<%=root%>/resource/image/reply.png" width="20px">
 								<%} %>
-								<img src="<%=root%>/resource/image/reply.png" width="20px">
-							<%} %>
-
-							<%=usersDto.getUsersId()%>
-<!-- 							게시물의 작성자가 댓글 작성자 -->
-							<%if(isSameItemReply) {%>
-								<span>(글쓴이)</span>
-							<%} %>
-<!-- 							날짜 표시 -->
-							<br>
-							(<%=itemReplyDto.getItemReplyTotalDate()%>)
+								<!-- 댓글 작성자의 아이디 출력 -->
+								<%=usersDto.getUsersId()%>
+								<!-- 게시물의 작성자가 댓글 작성자 -->
+								<%if(isSameItemReply) {%>
+									<!-- 게시물의 작성자라면 아이디 옆에 (글쓴이를 표시해준다) -->
+									<span>(글쓴이)</span>
+								<%} %>
+							<!-- 날짜 표시 -->
+							<br>(<%=itemReplyDto.getItemReplyTotalDate()%>)
 							</td>
 							
 							
 							<td class="left">
+							<!-- 댓글 내용 -->
 							<%=itemReplyDto.getItemReplyDetail()%>
 							</td>
 							
-<!-- 							댓글 작성자이거나 관리자의 경우 수정 삭제가 가능하다. -->
+							<!-- 댓글 작성자이거나 관리자의 경우 수정 삭제가 가능하다. -->
 							<%if(isManager || isUsersReplyWriter) {%>
-							<td width="17%">
-								<a class="reply-btn form-link-btn form-line">대댓글</a>
-								<a class="edit-btn form-link-btn form-line">수정</a>
-								<a href="<%=root%>/item_reply/delete.nogari?itemIdx=<%=itemIdx%>&itemReplyIdx=<%=itemReplyDto.getItemReplyIdx()%>" class="form-link-btn form-line">삭제</a>
-							</td>
+								<td width="17%">
+									<a class="reply-btn form-link-btn form-line">대댓글</a>
+									<a class="edit-btn form-link-btn form-line">수정</a>
+									<a href="<%=root%>/item_reply/delete.nogari?itemIdx=<%=itemIdx%>&itemReplyIdx=<%=itemReplyDto.getItemReplyIdx()%>" class="form-link-btn form-line">삭제</a>
+								</td>
 							<%} %>
 						</tr>
 						
-<!-- 							수정 창(각 댓글마다 수정 칸을 숨겨준다. ) -->
-<!-- 							댓글 작성자이거나 관리자의 경우 수정 입력이 가능하다. -->
-<%if(isManager || isUsersReplyWriter) {%>
+						<!-- 수정 창(각 댓글마다 수정 칸을 숨겨준다. ) -->
+						<!-- 댓글 작성자이거나 관리자의 경우 수정 입력이 가능하다. -->
+						<%if(isManager || isUsersReplyWriter) {%>
 						<tr class="edit-row">
 							<td colspan="3">
+								<!-- 댓글 수정시 댓글 수정에 필요한 itemIdx와 itemReplyIdx를 숨겨서 보내준다 -->
 								<form action="<%=root%>/item_reply/update.nogari" method="post">
-											<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
-											<input type="hidden" name="itemReplyIdx" value="<%=itemReplyDto.getItemReplyIdx()%>">
-											
-										<div class="flex-container">
-											<div class="reply-write-wrapper">
+									<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
+									<input type="hidden" name="itemReplyIdx" value="<%=itemReplyDto.getItemReplyIdx()%>">
+									<!-- 댓글 수정 내용 -->
+									<div class="flex-container">
+										<div class="reply-write-wrapper">
 											<textarea name="itemReplyDetail" rows="3" cols="30" placeholder="수정" required class="form-input"><%=itemReplyDto.getItemReplyDetail()%></textarea>
-											</div>
-											
-											<div class="reply-send-wrapper" height="100%">
-											<input type="submit" value="수정" class="form-btn">
-											</div>
-											
-											<div class="reply-send-wrapper">
-											<a class="edit-cancel-btn form-link-btn">취소</a>
-											</div>
 										</div>
+										<!-- 댓글 수정 버튼 -->
+										<div class="reply-send-wrapper" height="100%">
+											<input type="submit" value="수정" class="form-btn">
+										</div>
+										<!-- 취소 버튼 -->
+										<div class="reply-send-wrapper">
+											<a class="edit-cancel-btn form-link-btn">취소</a>
+										</div>
+									</div>
 								</form>
 							</td>
 						</tr>
 						<%} %>	
 						
-<!-- 							자바스크립트를 배우고 나서 이부분을 수정한다. -->
-<!-- 대댓글 창 -->
+						<!-- 자바스크립트를 배우고 나서 이부분을 수정한다. -->
+						
+						<!-- 대댓글 창 -->
 						<tr class="reply-row">
 							<td colspan="3">
+								<!-- 대댓글 입력시 필요한 itemIdx와 itemReplyTargetIdx(대댓글시 상위 댓글번호가 필요)를 숨겨서 보낸다 -->
 								<form action="<%=root%>/item_reply/insert.nogari" method="post">
-											<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
-											<input type="hidden" name="itemReplyTargetIdx" value="<%=itemReplyDto.getItemReplyIdx()%>">
-											<div	class="flex-container">
-												<div class="reply-write-wrapper">
+									<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
+									<input type="hidden" name="itemReplyTargetIdx" value="<%=itemReplyDto.getItemReplyIdx()%>">
+										<div class="flex-container">
+											<!-- 대댓글 내용 -->
+											<div class="reply-write-wrapper">
 												<textarea name="itemReplyDetail" rows="2" cols="20" placeholder="댓글 입력" required class="form-input"></textarea>
-												</div >
-												
-												<div class="reply-send-wrapper">
+											</div >
+											<!-- 대댓글 등록 버튼 -->
+											<div class="reply-send-wrapper">
 												<input type="submit" value="대댓글" class="form-btn">
-												</div>
-												
-												<div class="reply-send-wrapper">
-												<a class="reply-cancel-btn form-link-btn">취소</a>
-												</div>
 											</div>
-											
+											<!-- 대댓글 취소 버튼 -->
+											<div class="reply-send-wrapper">
+												<a class="reply-cancel-btn form-link-btn">취소</a>
+											</div>
+										</div>	
 								</form>
-							
 							</td>
 						</tr>	
-						
-
-								
-						
 				</tbody>
-		<%}%>
-			</table>
-		</div>
-<!-- 		테이블 정보 종료지점 -->
-		
-		
-	<%}else{%>
-<h3 align="center gapy">댓글이 없습니다.</h3>
-	<%} %>
+			<%}%>
+		</table>
+	</div>
 	
+<!--테이블 정보 종료지점 -->	
+			<%}else{%>
+				<h3 align="center gapy">댓글이 없습니다.</h3>
+			<%} %>
+
+<!-- 댓글 등록 -->
 <div class="row center gapy">
 	<h3>[댓글 작성]</h3>
 </div>
 	
-	<!-- 	댓글작성란 -->
+	<!-- 댓글작성란 -->
 		<form action="<%=root%>/item_reply/insert.nogari" method="post">
-					<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
-		<div class="row center">
-				<div class="flex-container">
-					<div class="reply-write-wrapper">
-					<textarea name="itemReplyDetail" rows="2" cols="30" placeholder="댓글 입력" required class="form-input"></textarea>
+			<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
+				<div class="row center">
+					<div class="flex-container">
+						<div class="reply-write-wrapper">
+							<textarea name="itemReplyDetail" rows="2" cols="30" placeholder="댓글 입력" required class="form-input"></textarea>
+						</div>
+						<div class="reply-send-wrapper">
+							<input type="submit" value="댓글 작성" class="form-btn">
+						</div>
 					</div>
-					
-					<div class="reply-send-wrapper">
-					<input type="submit" value="댓글 작성" class="form-btn">
-					</div>
-		</div>
-	</form>
+				</div>
+		</form>
 	</div>
 <!-- 필터를 통해서 댓글 수정 및 삭제 금지하는 필터 설정을 해야한다!!!!!!!!!!!!!!!! -->
 	
