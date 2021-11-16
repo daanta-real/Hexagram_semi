@@ -79,9 +79,14 @@
 	<input type="submit" value="검색">
 </form>
 
+
+<!-- 컨셉 :  -->
+<!-- 1) 코스 번호는 코스_아이템 DB에 저장되어야 하므로, 미리 생성해서 작성란으로 가야한다. -->
+<!-- 2) 비회원은 작성할 수 없도록 설정해 두었다. -->
 <%if(request.getSession().getAttribute("usersIdx") != null){ %>
 <h2><a href="insert_sequence.nogari">글 쓰기</a></h2>
 <%} %>
+<!-- CourseCreateSequnceForInsertServlet 으로 이동해서 시퀀스 번호를 생성해준다. -->
 
 
 <%if(!list.isEmpty()) {%>

@@ -262,7 +262,9 @@
 	<form action="insert.jsp" method="get">
 	<button class="form-btn">이전으로</button>
 	<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
-	<input type="hidden" name="city" value="<%=city%>">
+	<input type="hidden" name="keyword" value="<%=city%>">
+	<input type="hidden" name="column" value="item_address">
+<!-- 	이전으로 돌아갔을때 현재 선택한 코스 지역에 대한 정보를 넘겨주기 위해 컬럼과 키워드를 변경 -->
 	</form>
 </div>
 <!-- 페이지 내용 끝. -->
