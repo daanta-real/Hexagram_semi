@@ -468,6 +468,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 	public List<ItemDto> popularityList(int begin, int end) throws Exception {
 
 		Connection con = JdbcUtils.connect3();
+		//String sql = "select * from item order by item_count_view desc";
 		String sql = "select * from ("
 						+ "select rownum rn,TMP.*from("
 							+ "select * from item order by item_count_view desc"

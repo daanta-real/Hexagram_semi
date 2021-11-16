@@ -22,6 +22,29 @@
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+	$(function(){
+	    //[1] 1페이지 빼고 다 숨김
+	    //= 다 숨기고 1페이지만 표시
+	    $(".page").hide();
+	    $(".page").eq(0).show();
+	
+	    $(".btn-pop").click(function(e){
+	        e.preventDefault();
+	
+	        $(".page").hide(0);
+	        $(".page").eq(1).show();
+	    });
+	
+	    $(".btn-new").click(function(e){
+	        e.preventDefault();
+	
+	        $(".page").hide(1);
+	        $(".page").eq(0).show();
+	    });
+	});
+</script>
 <!-- 페이지 내용 시작 -->
 
 <%
@@ -42,7 +65,7 @@ List<ItemDto> list = pn.getResultList();
 System.out.println("[관광지 목록] 출력할 관광지 수: " + list.size());
 
 // 관광지 목록 (인기순)
-
+List<ItemDto> popularity = itemDao.popularityList(pn.getBegin(), pn.getEnd());
 
 // 제목 h2 태그에 들어갈 타이틀 결정
 String title = isSearchMode
@@ -88,15 +111,17 @@ ItemFileDao itemFileDao = new ItemFileDao();
 			required value="<%=pn.getKeywordString()%>"  class="form-input form-inline">
 
 			<input type="submit" value="검색"  class="form-btn form-inline">
-
 		</form>
+			<button class="btn-new">최신순</button>
+			<button class="btn-pop">인기순</button>
 	</div>
 
 	<div class="row center">
 
 <%-- 전체 목록 조회 --%>
-		
-<!-- 목록 내용이 있다면 -->
+
+<!-- 목록 내용이 있다면 (인기순 인지 일반 목록인지 확인)-->
+<div class="page">
 <%if(!list.isEmpty()) {%>
 <table class="table table-border table-hover table-stripe">
 	<thead>
@@ -170,6 +195,84 @@ ItemFileDao itemFileDao = new ItemFileDao();
 		<%} %>
 	</tbody>
 </table>
+</div>
+<%} %>
+<!-- 인기 검색이라면 -->
+<div class="page">
+<%if(!popularity.isEmpty()) {%>
+<table class="table table-border table-hover table-stripe">
+	<thead>
+		<tr>
+			<th>카테고리</th>
+			<th>관광지명</th>
+			<th>관광지 소개</th>
+			<th>조회수</th>
+		</tr>
+	</thead>
+	<tbody>
+		<!-- 목록 불러오기 -->
+		<%for(ItemDto itemDtopop : popularity){ %>
+
+		<!-- 목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
+		<%ItemFileDto itemFileDto = itemFileDao.find2(itemDtopop.getItemIdx());%>
+		<tr>
+			<!-- 카테고리 출력 -->
+			<td width="10%"><%=itemDtopop.getItemType() %></td>
+			<td class="left" width="30%">
+			<!-- 관광지 제목을 출력 (제목을 누르면 상세페이지 이동)  -->
+			<a href="detail.jsp?itemIdx=<%=itemDtopop.getItemIdx()%>">
+			<%=itemDtopop.getItemName()%>
+			</a>
+			<%-- 댓글수 --%>
+			<!-- 댓글이 있다면 개수를 출력 -->
+			<%if(itemDtopop.isCountReply()){ %>
+				[<%=itemDtopop.getItemCountReply() %>]
+			<%} %>
+			</td>
+
+			<td width="50%">
+				<div	class="flex-container">
+					<div class="image-wrapper">
+						<!-- 만약 첨부파일이 있다면 첨부파일을 썸네일로 보여준다 -->
+						<%if(itemFileDto == null){ %>
+								<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
+								<img src="http://via.placeholder.com/100x100" class="image">
+						<%}else{ %>
+								<!-- 첨부파일이 있다면 첨부파일을 출력  -->
+								<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>">
+						<%} %>
+					</div>
+
+					<div class="detail-wrapper">
+						<!-- 관광지 소개 및 지역 출력 -->
+						<%
+						//관광지 소개를 변수에 저장
+						String showItemDetail;
+						//만약 소개글이 20글자 이상이라면
+						if(itemDtopop.getItemDetail().length() >= 20){
+							//20글자 까지만 화면에 출력
+							showItemDetail = itemDtopop.getItemDetail().substring(0, 20) + "...";
+						}else{
+							//20글자 이하라면 화면에 전부 출력
+							showItemDetail = itemDtopop.getItemDetail();
+						}
+						//관광지 지역 변수 저장
+						String area = itemDtopop.getAdressCity()+" "+itemDtopop.getAdressCitySub();
+						%>
+						<!-- 관광지 소개글 출력 -->
+						<h4 class="center"><%=showItemDetail%></h4>
+						<!-- 관광지 지역 출력 -->
+						<p><%=area%></p>
+					</div>
+				</div>
+			</td>
+			<!-- 조회수 출력 -->
+			<td><%=itemDtopop.getItemCountView() %></td>
+		</tr>
+		<%} %>
+	</tbody>
+</table>
+</div>
 <!-- 검색결과가 없다면 -->
 <%}else{ %>
 <h2>결과가 없습니다.</h2>
