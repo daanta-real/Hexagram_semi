@@ -86,7 +86,7 @@ geocoder.addressSearch('<%=itemDto.getItemAddress()%>', function(result, status)
 		marker.setMap(map);  
         var content = '<div class ="label">'+
         '<span class="left"></span><span class="center">'+
-        '  <a href="<%=root%>/item/detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>"><%=(i+1)+"."+itemDto.getItemName()%></a>' +
+        '  <a href="<%=root%>/item/detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>"><%=itemDto.getItemName()%></a>' +
         '</span><span class="right"></span></div>';
 
 
