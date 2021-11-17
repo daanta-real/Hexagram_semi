@@ -6,22 +6,12 @@
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 <%String root = request.getContextPath();%>
 
-
-
-<!-- 테이블 css -->
-<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/table.css">
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
 
 
-
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<!-- 회원가입 아이디 중복검사 스크립트 -->
-<script type="text/javascript" src="<%=root%>/resource/js/users/join_id_check.js"></script>
-<!-- 회원가입 비밀번호, 비밀번호확인 입력값 스크립트 -->
-<script type="text/javascript" src="<%=root%>/resource/js/users/join_pw_recheck.js"></script>
-
 
 
 <!-- 인라인 스크립트 -->
