@@ -118,7 +118,7 @@ public class ItemDto {
 		this.itemCountReply = itemCountReply;
 	}
 	
-	//댓글 수 갱신 기능
+	//댓글이 1개 이상 있는지?
 	public boolean isCountReply() {
 		return this.itemCountReply > 0;
 	}

@@ -71,17 +71,17 @@
 %>
 
 
-<%-- 조회수 증가 기능 (조회수 중복 방지) --%>
+<%-- 조회수 증가 기능 (조회수 중복 방지) => 한번이 아니라 다른 회원이 들어올떄마다 조회수를 증가시켜주기 위해 게시물을 클릭시킬떄마다 +1을 해준다.(새로고침 방지)--%>
 <%
-	Set<Integer> boardCountView = (Set<Integer>)request.getSession().getAttribute("boardCountView");
+// 	Set<Integer> boardCountView = (Set<Integer>)request.getSession().getAttribute("boardCountView");
 	
-	if(boardCountView==null){
-		boardCountView = new HashSet<Integer>();
-	}
-	if(boardCountView.add(courseIdx)){
-		courseDao.readUp(courseIdx,usersIdx);
-	}
-	request.getSession().setAttribute("boardCountView", boardCountView);
+// 	if(boardCountView==null){
+// 		boardCountView = new HashSet<Integer>();
+// 	}
+// 	if(boardCountView.add(courseIdx)){
+// 		courseDao.readUp(courseIdx,usersIdx);
+// 	}
+// 	request.getSession().setAttribute("boardCountView", boardCountView);
  %>
 
 
