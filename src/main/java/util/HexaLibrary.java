@@ -1,5 +1,7 @@
 package util;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -48,4 +50,21 @@ public class HexaLibrary {
 		return todayString;
 	}
 
+	// 문자열 → SHA-256 HASH
+	public static String testSHA256(String pwd) throws RuntimeException, NoSuchAlgorithmException {
+
+		MessageDigest digest = MessageDigest.getInstance("SHA-256");
+		byte[] hash = digest.digest(pwd.getBytes("UTF-8"));
+		StringBuffer hexString = new StringBuffer();
+
+		for (int i = 0; i < hash.length; i++) {
+			String hex = Integer.toHexString(0xff & hash[i]);
+			if(hex.length() == 1) hexString.append('0');
+			hexString.append(hex);
+		}
+
+		//출력
+		return hexString.toString();
+
+	}
 }

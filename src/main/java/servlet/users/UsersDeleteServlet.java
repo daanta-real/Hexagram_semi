@@ -10,11 +10,10 @@ import javax.servlet.http.HttpSession;
 
 import beans.UsersDao;
 import beans.UsersDto;
-import util.users.GrantChecker;
 import util.users.Sessioner;
 
 @SuppressWarnings("serial")
-@WebServlet("/users/unregister.nogari")
+@WebServlet(urlPatterns = "/users/unregister.nogari")
 public class UsersDeleteServlet extends HttpServlet {
 
 	@Override
@@ -25,37 +24,52 @@ public class UsersDeleteServlet extends HttpServlet {
 			req.setCharacterEncoding("UTF-8");
 			resp.setContentType("text/html;charset=utf-8");
 			HttpSession session = req.getSession();
-			String sessionId    = (String)session.getAttribute("usersId");
-			String sessionGrade = (String)session.getAttribute("usersGrade");
-			String targetId     = req.getParameter("targetId");
-			System.out.println("[회원 탈퇴] 0. 변수준비.. "
-				+ "세션Id: '" + sessionId + "' / 내 회원등급: '" + sessionGrade + "' / 탈퇴요청대상 ID: '" + targetId);
+			String sessionId    = Sessioner.getUsersId(session);    // 내가 로그인한 내 ID
+			String sessionGrade = Sessioner.getUsersGrade(session); // 내 회원등급
+			String targetId     = req.getParameter("targetId");     // 내가 탈퇴시킬 대상 ID
+			String inputPw      = req.getParameter("usersPw");      // 내가 탈퇴시킬 대상의 비밀번호
+			System.out.println("[회원 탈퇴 - 유저가 요청] 0. 변수준비.. "
+				+ "내 세션Id: '" + sessionId + "' / 내 회원등급: '" + sessionGrade + "' / 탈퇴시킬 대상 ID: '" + targetId);
 
-			// 1. 입력값 검사: 지울 id값이 들어와 있어야 됨
-			System.out.print("[회원 탈퇴] 1. id 빈값 여부 확인..");
-			if(sessionId == null || sessionId.equals("")) throw new Exception();
-			System.out.println("id가 빈값이 아닌 것을 확인했습니다. 계속 진행합니다.");
+			// 1. 로그인했는지 검사: 생략. 필터가 체크하므로 여기서 검사할 필요 없다.
 
-			// 2. 권한 검사: 해당 ID를 조작할 권한이 있는 상황인지 확인
-			System.out.print("[회원 탈퇴] 2. 권한 확인..");
+			// 2. 입력값 검사: 탈퇴할 id값(targetID)이 들어와 있어야 됨
+			System.out.println("[회원 탈퇴 - 유저가 요청] 1. 탈퇴할 id값 입력했는지 여부 확인..");
+			if(targetId == null || targetId.equals("")) throw new Exception();
+			System.out.println("　　▷ id가 빈값이 아닌 것을 확인했습니다. 계속 진행합니다.");
+
+			// 3. 권한 검사
+			System.out.print("[회원 탈퇴 - 유저가 요청] 2. 권한 검사..");
+			boolean isGranted = Sessioner.isGranted(session, targetId);
+			if(!isGranted) {
+				System.out.println("권한이 없습니다.");
+				throw new Exception();
+			} else {
+				System.out.println("권한이 있음이 확인되었습니다.");
+			}
+
+			// 4. 내 아이디 PW 검사
+			// 내가 내 아이디에 요청한 상황일 경우 (즉 내가 내 아이디 탈퇴할 경우) 내 PW가 입력되어야 한다.
+			// 이때, 내가 관리자냐 아니냐는 상관이 없다.
+			if(sessionId.equals(targetId)) {
+
+			}
 			UsersDao dao = new UsersDao();
-			// 아래 둘 중 하나여야 한다. 내가 관리자거나, 내가 내 아이디 요청한 거거나.
-			boolean isGranted = GrantChecker.isGranted(sessionId, sessionGrade, targetId);
-			if(!isGranted) throw new Exception();
-			System.out.println("권한 확인 완료.");
+			UsersDto targetDto = new UsersDto();
+			targetDto.setUsersId(targetId);
+			targetDto.setUsersPw(inputPw);
 
 			// 3. 전송
 			//추가. 비밀번호 일치여부 검사
-			//targetId 로 조회한 dto의 getUsersPw와 입력한 pw(파라미터 usersPw)일치여부 검사
+			// targetId 로 조회한 dto의 getUsersPw와 입력한 pw(파라미터 usersPw)일치여부 검사
 			UsersDto dto = dao.get(targetId);
-			String inputPw = req.getParameter("usersPw");
-			System.out.print("[회원 탈퇴] 3. 탈퇴 실행..(" + targetId + ")");
+			System.out.print("[회원 탈퇴 - 유저가 요청] 3. 탈퇴 실행..(" + targetId + ")");
 			//입력한 비밀번호(inputPw)와 dto의 getUsersPw가 서로 일치하고 탈퇴되는게 성공
-			boolean isSucceed = 	dto.getUsersPw().equals(inputPw) && dao.delete(targetId);
+			boolean isSucceed = dto.getUsersPw().equals(inputPw) && dao.delete(targetId);
 			System.out.println("　　▷ 탈퇴 요청 실시함.");
 
 			// 4. 결과를 세션에 반영
-			System.out.print("[회원 탈퇴] 4. 최종 결과: ");
+			System.out.print("[회원 탈퇴 - 유저가 요청] 4. 최종 결과: ");
 			if(isSucceed) {
 				Sessioner.logout(session);
 				System.out.println("탈퇴 성공.");
