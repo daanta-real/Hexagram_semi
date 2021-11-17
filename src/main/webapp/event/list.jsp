@@ -57,6 +57,7 @@
 			<td><%eventDto.getEventDate()%></td>
 			<td><%eventDto.getEventCountView()%></td>
 		</tr>
+		<%}%>
 	</tbody>
 </tabel>
 
@@ -65,7 +66,40 @@
 
 <!-- 페이지 네비게이터 -->
 <br><br>
-[이전] 1 2 3 4 5 6 7 8 9 10 [다음]
+<%if(pagination.isPreviousAvailable()){ %>
+	<%if(pagination.isSearch()){ %>
+		<!-- 검색용 링크 -->
+		<a href="list.jsp?column=<%=pagination.getColumn()%>&keyword=<%=pagination.getKeyword()%>&p=<%=pagination.getPreviousBlock()%>">&lt;</a>
+	<%} else { %>
+		<!-- 목록용 링크 -->
+		<a href="list.jsp?p=<%=pagination.getPreviousBlock()%>">&lt;</a>
+	<%} %>
+<%} else { %>
+	 <a>&lt;</a>
+<%} %> 
+
+<%for(int i = pagination.getStartBlock(); i <= pagination.getRealLastBlock(); i++){ %>
+	<%if(pagination.isSearch()){ %>
+	<!-- 검색용 링크 -->
+	<a href="list.jsp?column=<%=pagination.getColumn()%>&keyword=<%=pagination.getKeyword()%>&p=<%=i%>"><%=i%></a>
+	<%}else{ %>
+	<!-- 목록용 링크 -->
+	<a href="list.jsp?p=<%=i%>"><%=i%></a>
+	<%} %>
+<%} %>
+
+<%if(pagination.isNextAvailable()){ %>
+	<%if(pagination.isSearch()){ %>
+		<!-- 검색용 링크 -->
+		<a href="list.jsp?column=<%=pagination.getColumn()%>&keyword=<%=pagination.getKeyword()%>&p=<%=pagination.getNextBlock()%>">&gt;</a>
+	<%} else { %>
+		<!-- 목록용 링크 -->
+		<a href="list.jsp?p=<%=pagination.getNextBlock()%>">&gt;</a>
+	<%} %> 
+<%} else {%>
+	<a>&gt;</a>
+<%} %>
+
 <br><br>
 
 <!-- 검색창 -->
