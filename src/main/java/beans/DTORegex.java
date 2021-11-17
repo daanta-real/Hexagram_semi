@@ -1,6 +1,6 @@
 package beans;
 
-import util.users.GrantChecker;
+import util.users.Sessioner;
 
 public class DTORegex {
 
@@ -13,6 +13,6 @@ public class DTORegex {
 	public final static String USERSNICK  = "^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,10}$";
 	public final static String USERSEMAIL = "^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*\\.([a-zA-Z])+$";
 	public final static String USERSPHONE = "^(01[016-9])\\d{4}\\d{4}$";
-	public final static String USERSGRADE = "^(" + GrantChecker.GRADE_ADMIN + ")|(" + GrantChecker.GRADE_REGULAR + ")|(" + GrantChecker.GRADE_ASSOCIATE + ")$";
+	public final static String USERSGRADE = "^(" + Sessioner.GRADE_ADMIN + ")|(" + Sessioner.GRADE_REGULAR + ")|(" + Sessioner.GRADE_ASSOCIATE + ")$";
 
 }

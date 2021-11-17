@@ -97,19 +97,17 @@ public class Sessioner {
 	public static boolean isLoggedIn   (HttpSession session) { return getUsersIdx(session) != null; }
 	public static boolean isAdmin      (HttpSession session) { return getUsersId(session).equals(GRADE_ADMIN); }
 
-	// 권한검사: 현재 세션의 유저에게 타겟id 데이터의 조작권한이 있는지 검사.
-	//         권한 있으면 true 아니면 false를 리턴함.
-	// true가 나오려면, (1) 요청자가 관리자이거나 (2) 내가 내 id에 요청하는 경우여야 함.
+	// 권한검사
+	// 현재 세션의 유저에게 타겟id 데이터의 조작권한이 있는지 검사하여, 있으면 True 없으면 False를 반환함.
+	// ※ 권한이 있으려면,(1) 요청자가 관리자이거나 (2) 내가 내 id에 요청하는 경우여야 함
 	public static boolean isGranted(HttpSession session, String targetId) throws Exception {
 
 		// 0. 변수준비
 		String sessionId = (String) session.getAttribute("usersId");
-		String
 
 		// 1. 세션 검사: 로그인했는지 검사
 		System.out.print("[권한확인] 1. 세션 검사.. ");
-		boolean sessionExists = sessionId != null && !sessionId.equals("");
-		if(!sessionExists) {
+		if(!isLoggedIn(session)) {
 			System.out.println("세션이 없습니다. 따라서 아무 권한도 줄 수 없습니다.");
 			return false;
 		} else {
@@ -118,31 +116,31 @@ public class Sessioner {
 
 		// 2. 요청자가 관리자인 경우, 무조건 프리패스 (바로 true 리턴)
 		System.out.println("[권한확인] 2. 관리자 여부 검사.. ");
-		boolean isAdmin = sessionGrade.equals(GRADE_ADMIN);
-		if(isAdmin) {
+		if(isAdmin(session)) {
 			System.out.println(GRADE_ADMIN + " 등급입니다. 권한 확인되었습니다.");
 			return true;
 		} else {
 			System.out.println("관리자가 아닙니다.");
 		}
 
-		// 3. 본인이면, 즉 요청자 id와 요청대상 id가 같으면 true
+		// 3. 관리자가 아니라면, 둘 중 하나여야 함.
+		//    1) 요청대상 ID가 존재하지 않을 경우(내가 스스로 행하는 동작임), 무조건 TRUE
+		//    2) 요청대상 ID가 존재할 경우(내가 타인을 대상으로 행하는 동작임), 본인의 ID와 같아야 함
 		System.out.print("[권한확인] 3. 본인 확인.. ");
-		boolean isSelf = sessionId.equals(targetId);
-		if(isSelf) {
+		boolean isSuitableTarget
+			=  (targetId == null || targetId.equals("")) // 1)
+			|| (sessionId.equals(targetId));             // 2)
+		if(isSuitableTarget) {
 			System.out.println("본인 확인되었습니다. 권한 확인되었습니다.");
 			return true;
-		} else {
-			System.out.println("본인 ID에 대한 요청이 아닙니다. (세션 ID = '" + sessionId + "' ↔ 대상id = '" + targetId + "'");
 		}
 
-		// 4. 관리자가 요청한 것도 아니고 자기 자신에 대해 요청한 것도 아니라면,
-		//    당연히 권한이 없으므로, false 회신
-		System.out.println("[권한확인] 4. 권한이 없는 사용자임이 확인되었습니다.");
+		// 4. 여기까지 왔다면 요청자가 관리자도 아니고, 본인 타겟으로 한 것도 아닐 것이다.
+		//    당연히 권한이 없으므로 FALSE를 회신
+		System.out.println("[권한확인] (세션 ID = '" + sessionId + "', 회원등급 = '" + session.getAttribute("usersGrade") + "', 대상id = '" + targetId + "'");
 		return false;
 
 	}
-
 
 	// 오버라이드 메소드들
 
@@ -150,7 +148,9 @@ public class Sessioner {
 	public static boolean isGranted(HttpServletRequest req, String targetId) throws Exception {
 		return isGranted(req.getSession(), targetId);
 	}
-	// (session, 대상id) 형태
-	public static boolean isGranted(HttpSession session, String targetId) throws Exception {
-		return isGranted((String)session.getAttribute("usersId"), (String)session.getAttribute("usersGrade"), targetId);
+	// (session) 형태: targetId는 null이 된다.
+	public static boolean isGranted(HttpSession session) throws Exception {
+		return isGranted(session, null);
 	}
+
+}
