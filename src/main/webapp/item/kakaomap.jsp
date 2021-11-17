@@ -38,7 +38,7 @@ ItemDto itemDto = itemDao.get(itemIdx);
 		var container = document.querySelector("#map");
 		var options = {
 			center: new kakao.maps.LatLng(33.450701, 126.570667),
-			level: 3
+			level: 5
 		};
 
 		//지도 생성 코드
