@@ -98,7 +98,11 @@
 <div>
 	<span><a href="delete.nogari?courseIdx=<%=courseIdx%>">삭제</a></span>
 	&nbsp;&nbsp;
+	
 	<span><a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>">수정</a></span>
+<!-- 	수정을 위해서는 대상 코스 번호를 넘겨줘야한다(courseIdx이지만 다른 시퀀스 번호와 구분하기 위해서 sourseOriginSequnce로 하여 보내기로 정함) -->
+<!-- CourseCreateSequnceForUpdateServlet 참조 -->
+
 	&nbsp;&nbsp;
 	<span><a href="insert_sequence.nogari">새 코스 작성</a></span>
 </div>
