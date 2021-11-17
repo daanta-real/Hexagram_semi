@@ -21,6 +21,10 @@ public class Encrypter {
 	}
 
 	// 2. 실제 해쉬 생성
+	public static String getHash(String pw, String saltStr) throws NoSuchAlgorithmException { // salt가 Hex String으로 들어오는 경우
+		byte[] salt = HexaLibrary.hexStringToByteArr(saltStr);
+		return getHash(pw, salt);
+	}
 	public static String getHash(String pw, byte[] salt) throws NoSuchAlgorithmException {
 
 		// 변수준비
@@ -41,7 +45,7 @@ public class Encrypter {
 		System.out.println("[해시] 생성 완료. 실행 소요시간 1: " + (end - start)/1000.0 + "초");
 
 		// 완성된 해쉬 문자열을 반환.
-		String result = HexaLibrary.bytesArr_to_hexString(strBytes);
+		String result = HexaLibrary.bytesArrToHexString(strBytes);
 		System.out.println("[해시] 완성된 해시값: " + result);
 		return result;
 
