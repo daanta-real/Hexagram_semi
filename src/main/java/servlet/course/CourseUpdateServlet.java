@@ -19,6 +19,11 @@ public class CourseUpdateServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			
+			
+			//ajax 배우기전 Servlet(현재는 사용하지 않음 urlPatterns 뒤에 2를 붙혀 접근하지 못하도록 설정)
+			
+			
 			//필터적용전
 			req.setCharacterEncoding("UTF-8");
 			

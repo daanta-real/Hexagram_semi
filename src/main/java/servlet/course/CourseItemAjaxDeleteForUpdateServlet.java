@@ -13,14 +13,13 @@ import javax.servlet.http.HttpServletResponse;
 import beans.CourseItemDao;
 import beans.CourseItemDto;
 
-@WebServlet(urlPatterns = "/course/ajax_delete_item.nogari")
-public class CourseItemAjaxDeleteServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/course/ajax_delete_update_item.nogari")
+public class CourseItemAjaxDeleteForUpdateServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
 		try {
-			
-			//코스 게시물 등록시 course_item에 추가된 관광지를 삭제하기 위한 Servlet
+			//코스 게시물 수정시 course_item에 등록된 관광지 삭제에 필요한 Servlet
 			
 			//입력
 			//itemIdx : 파라미터로 받은 itemIdx 변수에 저장
@@ -28,23 +27,31 @@ public class CourseItemAjaxDeleteServlet extends HttpServlet{
 			int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
 			int courseIdx = Integer.parseInt(req.getParameter("courseIdx"));
 			
-			//course_item에 저장된 목록을 보기위해 목록 출력
+			//처리
 			CourseItemDao courseItemDao = new CourseItemDao();
+			//수정해야 할 courseIdx를 받아 목록을 조회
 			List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseIdx);
 			
+			//만약 courseItem이 3개 이상이라면
+			if(courseItemList.size() > 3) {
 			CourseItemDto courseItemDto = new CourseItemDto();
 			courseItemDto.setCourseIdx(courseIdx);
 			courseItemDto.setItemIdx(itemIdx);
 			
-			//목록을 삭제
+			//관광지를 삭제 할 수 있다.
 			courseItemDao.deleteItem(courseItemDto);
-			
-			//브라우저에 출력된 아이템 수에서 -1되어 출력된다
+			//관광지를 삭제하면 브라우저에 삭제된 개수에서 -1하여 출력
 			resp.getWriter().write(String.valueOf(courseItemList.size()-1));
-
+			}
 			
-		}catch (Exception e) {
-			// TODO: handle exception
+			//3개 이하로 삭제할 경우 브라우저에 NNNNN을 출력 (삭제 할수 없다) 
+			else {
+				 resp.getWriter().write("NNNNN");
+			 }	
+		}
+		
+		//예외는 던진다
+		catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
 		}

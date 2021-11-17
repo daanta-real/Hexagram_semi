@@ -20,6 +20,7 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	// 2) 선택 데이터
 	private String column;
 	private String keyword;
+	private int searchSelector;//한jsp에 보여줄 화면을 선택할때 사용한다 현재 리스트 조회구문과 인서트 검색에서 사용중(구분자)
 
 	// 2) 페이징 관련 데이터
 	private int pageSize; // 페이지당 글 개수
@@ -58,6 +59,13 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 		this.dao = dao;
 		this.pageSize = pageSize;
 		this.blockSize = blockSize;
+		
+	    try{
+	    	this.searchSelector = Integer.parseInt(req.getParameter("searchSelector"));
+	    	if(this.searchSelector<0 || this.searchSelector>1) throw new Exception();//한jsp에 보여줄 화면을 선택할때 사용한다 현재 리스트 조회구문과 인서트 검색에서 사용중
+	    }catch(Exception e){
+	    	this.searchSelector = 0;
+	    }
 
 	}
 
@@ -80,7 +88,8 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	public int getFinishBlock() { return finishBlock; }
 	public int getLastBlock() { return lastBlock; }
 	public List<DTO> getResultList() { return resultList; }
-
+	public int getSearchSelector() {return searchSelector;}
+	
 	// 2) 특수 Getters
 	// keyword 값이 null일 경우 ""로 바꿔줌
 	public String getKeywordString() { return keyword == null ? "" : keyword; }
@@ -117,8 +126,11 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	}
 	// 컬럼에 특정한 값이 존재하고 있는지 검사
 	public boolean columnValExists(String column) {
-		String thisColumnValue = this.column;
-		return thisColumnValue != null && !thisColumnValue.equals("");
+		return this.column != null && this.column.equals(column);
+	}
+	// 키워드에 특정한 값이 존재하고 있는지 검사
+	public boolean keywordValExists(String keyword) {
+		return this.keyword != null && this.keyword.equals(keyword);
 	}
 
 
