@@ -225,6 +225,28 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 
 		return count;
 	}
+	
+	public Integer count(String column, String keyword, String subCity) throws Exception {
+		Connection con = JdbcUtils.connect3();
+
+		String sql = "select count(*) from("
+				+ "select * from item where instr(#1, ?) > 0"
+				+ ")where instr(#2, ?) > 0";
+		sql = sql.replace("#1", column);
+		sql = sql.replace("#2", column);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ps.setString(2, subCity);
+		ResultSet rs = ps.executeQuery();
+
+		rs.next();
+
+		int count = rs.getInt(1);
+
+		con.close();
+
+		return count;
+	}
 
 	// 관광지 추가(축제인지 관광지인지는 나중에 생각)
 	public boolean insert(ItemDto itemDto) throws Exception {
@@ -403,17 +425,17 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		con.close();
 		return list;
 	}
-	
-	//인기순으로 정렬
-	public List<ItemDto> popularityList(int begin, int end) throws Exception {
+
+
+	public List<ItemDto> orderByList(String order,int begin, int end) throws Exception {
 
 		Connection con = JdbcUtils.connect3();
 		String sql = "select * from ("
 						+ "select rownum rn,TMP.*from("
-							+ "select * from item order by item_count_view desc"
+							+ "select * from item order by #1 desc"
 						+ ")TMP"
 					+ ")where rn between ? and ?";
-		
+		sql = sql.replace("#1", order);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, begin);
 		ps.setInt(2, end);
@@ -443,6 +465,91 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 
 		return list;
 	}
+	
 
+		public List<ItemDto> orderByKeywordList(String order,String column, String keyword, int begin, int end) throws Exception {
+
+			Connection con = JdbcUtils.connect3();
+			String sql = "select * from ("
+					+ "select rownum rn,TMP.*from("
+						+ "select * from item where instr(#1, ?) > 0 order by #2 desc"
+					+ ")TMP"
+				+ ")where rn between ? and ?";
+			sql = sql.replace("#1", column);
+			sql = sql.replace("#2", order);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ps.setInt(2, begin);
+			ps.setInt(3, end);
+			
+			ResultSet rs = ps.executeQuery();
+			List<ItemDto> list = new ArrayList<>();
+			while (rs.next()) {
+				ItemDto itemDto = new ItemDto();
+				itemDto.setItemIdx(rs.getInt("item_idx"));
+				itemDto.setUsersIdx(rs.getInt("users_idx"));
+				itemDto.setItemType(rs.getString("item_type"));
+				itemDto.setItemName(rs.getString("item_name"));
+				itemDto.setItemDetail(rs.getString("item_detail"));
+				itemDto.setItemPeriod(rs.getString("item_period"));
+				itemDto.setItemTime(rs.getString("item_time"));
+				itemDto.setItemHomepage(rs.getString("item_homepage"));
+				itemDto.setItemParking(rs.getString("item_parking"));
+				itemDto.setItemAddress(rs.getString("item_address"));
+				itemDto.setItemDate(rs.getDate("item_date"));
+				itemDto.setItemCountView(rs.getInt("item_count_view"));
+				itemDto.setItemCountReply(rs.getInt("item_count_reply"));
+
+
+				list.add(itemDto);
+			}
+
+			con.close();
+
+			return list;
+		}
+
+		public List<ItemDto> subCityList(String subCity,String order,String column, String keyword, int begin, int end) throws Exception {
+
+			Connection con = JdbcUtils.connect3();
+			String sql = "select * from ("
+					+ "select rownum rn,TMP.*from("
+						+ "select * from item where instr(#1, ?) > 0"
+					+ ")TMP where instr(#1,?)>0  order by #2 desc"
+				+ ")where rn between ? and ?";
+			sql = sql.replace("#1", column);
+			sql = sql.replace("#2", order);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ps.setString(2, subCity);
+			ps.setInt(3, begin);
+			ps.setInt(4, end);
+			
+			ResultSet rs = ps.executeQuery();
+			List<ItemDto> list = new ArrayList<>();
+			while (rs.next()) {
+				ItemDto itemDto = new ItemDto();
+				itemDto.setItemIdx(rs.getInt("item_idx"));
+				itemDto.setUsersIdx(rs.getInt("users_idx"));
+				itemDto.setItemType(rs.getString("item_type"));
+				itemDto.setItemName(rs.getString("item_name"));
+				itemDto.setItemDetail(rs.getString("item_detail"));
+				itemDto.setItemPeriod(rs.getString("item_period"));
+				itemDto.setItemTime(rs.getString("item_time"));
+				itemDto.setItemHomepage(rs.getString("item_homepage"));
+				itemDto.setItemParking(rs.getString("item_parking"));
+				itemDto.setItemAddress(rs.getString("item_address"));
+				itemDto.setItemDate(rs.getDate("item_date"));
+				itemDto.setItemCountView(rs.getInt("item_count_view"));
+				itemDto.setItemCountReply(rs.getInt("item_count_reply"));
+
+
+				list.add(itemDto);
+			}
+
+			con.close();
+
+			return list;
+		}
 
 }
