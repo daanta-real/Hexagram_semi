@@ -123,6 +123,7 @@
     </style>
 
 <SECTION>
+
 <!-- 페이지 내용 시작 -->
 <% String root = request.getContextPath(); %>
 

@@ -203,11 +203,10 @@
 	//관리자인지?
 	boolean isManager = request.getSession().getAttribute("users_grade") != null && usersGrade.equals("관리자");
 	 
-	//조회수 산정하기.(조회수 중복 증가는 제거)
-	itemDao.readUp(itemIdx); //조회수를 늘려준다.
  %>
  
 <%-- 조회수 중복방지 기능 (추 후 필요할시 주석 제거하고 위에 조회수 기능 삭제) --%>
+<%-- 조회수 증가 기능 (조회수 중복 방지) => 한번이 아니라 다른 회원이 들어올떄마다 조회수를 증가시켜주기 위해 게시물을 클릭시킬떄마다 +1을 해준다.(새로고침 방지)--%>
 <%
 	//Set<Integer> boardCountView = (Set<Integer>)request.getSession().getAttribute("boardCountView");
 
