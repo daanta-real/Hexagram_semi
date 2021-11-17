@@ -34,23 +34,21 @@ public class UsersCreateServlet extends HttpServlet {
 			inputDto.setUsersNick(usersNick);
 			inputDto.setUsersEmail(usersEmail);
 			inputDto.setUsersPhone(usersPhone);
-			System.out.println("[회원 가입] 2. 등록정보: " + inputDto);
+			System.out.println("[회원 가입] 1. 등록정보: " + inputDto);
 
 			// 2. 회원등록에 쓸 DAO를 준비하고, 시퀀스 따내서 DTO에 미리 넣는다.
 			UsersDao dao = new UsersDao();
 			Integer seqNo = dao.getNextSequence();
 			inputDto.setUsersIdx(seqNo);
-			System.out.println("[회원 가입] 3. 생성된 시퀀스 번호: " + seqNo);
+			System.out.println("[회원 가입] 2. 생성된 시퀀스 번호: " + seqNo);
 
 			// 3. 회원 생성 요청
-			System.out.println("[회원 가입] 4. 회원가입 요청.. ");
+			System.out.println("[회원 가입] 3. 회원가입 요청.. ");
 			boolean isSucceed = dao.insert(inputDto);
+			if(!isSucceed) throw new Exception(); // 실패 시 예외부로
 
-			// 4. 요청 결과에 따른 후처리
-			if(!isSucceed) throw new Exception(); // insert 실패 시 500에러
-			System.out.println("[회원 가입] 5. 가입에 성공했습니다.");
-
-			// 5. 자동 로그인 처리
+			// 4. 자동 로그인 처리
+			System.out.println("[회원 가입] 4. 가입에 성공했습니다.");
 			// 로그인 처리를 하려면 idx, id, grade 세 개를 Sessioner에 넘겨야 하는데,
 			// idx와 id는 위에 만든 게 있지만, grade는 정보가 없다.
 			// 따라서 DB에 추가로 접속해 해당 유저의 grade를 조회해야 함.
@@ -62,7 +60,7 @@ public class UsersCreateServlet extends HttpServlet {
 
 		catch(Exception e) {
 
-			System.out.println("\n[회원 가입] 에러가 발생했습니다.");
+			System.out.println("[회원 가입] 에러가 발생했습니다.");
 			e.printStackTrace();
 			resp.sendError(500);
 

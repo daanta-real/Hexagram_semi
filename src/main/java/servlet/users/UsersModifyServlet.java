@@ -74,26 +74,23 @@ public class UsersModifyServlet extends HttpServlet {
 				System.out.println("권한 확인 완료.");
 			}
 
-			// 3+. 권한 검사: 추가적으로, grade를 수정하는 경우, 등급이 관리자인지도 확인함.
+			// 4. 권한 검사: 추가적으로, grade를 수정하는 경우, 등급이 관리자인지도 확인함.
 			boolean hasGradeModifying = usersGrade != null && !usersGrade.equals("");
 			if(hasGradeModifying) {
-				System.out.print("[회원 수정] 3 추가. 등급 수정이 요청되어, 요청자가 관리자 권한인지 추가로 확인하겠습니다.");
+				System.out.print("[회원 수정] 4. 등급 수정이 요청되어, 요청자가 관리자 권한인지 추가로 확인하겠습니다.");
 				boolean isAdmin = Sessioner.isAdmin(session);
 				if(!isAdmin) {
-					System.out.println("회원등급을 수정하려 하셨지만, 요청자가 관리자가 아닙니다. (권한='" + sessionGrade + "')");
+					System.out.println("회원등급을 수정하려 하였지만, 요청자가 관리자가 아닙니다.");
 					throw new Exception();
 				} else {
 					System.out.println("등급 수정 권한이 있음이 확인되었습니다.");
 				}
 			}
-			System.out.println("[회원 수정] 모든 권한 확인 완료.");
+			System.out.println("[회원 수정] 4. 모든 권한 확인 완료.");
 
-			// 4. 수정 실행
-			System.out.print("[회원 수정] 4. 실제 수정 실행..");
+			// 5. 수정 실행 및 결과 출력
+			System.out.print("[회원 수정] 5. 실제 수정 실행..");
 			boolean isSucceed = dao.update(dto);
-			System.out.println("수정 요청 실시함.");
-
-			// 5. 결과 출력
 			System.out.print("[회원 수정] 5. 최종 결과: ");
 			if(isSucceed) {
 				System.out.println("수정 성공.");
