@@ -10,12 +10,13 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import util.users.GrantChecker;
+import util.users.Sessioner;
 
 // 관리자 페이지 대상.
 @WebFilter( urlPatterns = {
-	"/users/list.nogari"
+	"/admin/"
 } )
 public class AdminFilter implements Filter {
 
@@ -26,17 +27,17 @@ public class AdminFilter implements Filter {
 
 			// 0. 변수준비
 			HttpServletRequest req = (HttpServletRequest)request;
+			HttpSession session = req.getSession();
 			System.out.println("[필터 작동 - 관리자 검사] from " + req.getRequestURL().toString());
 
 			// 1. 등급 검사 - grade가 정확히 관리자여야만 함.
-			String sessionGrade = (String) req.getSession().getAttribute("usersGrade");
-			boolean isAdmin = (sessionGrade != null && sessionGrade.equals(GrantChecker.GRADE_ADMIN));
+			boolean isAdmin = Sessioner.isAdmin(session);
 
 			// 2. 세션 검사 결과에 따른 작동
 			// 관리자가 아닐 경우
 			if(!isAdmin) {
-				System.out.println("[필터 작동 - 관리자 검사] 관리자가 아닙니다. (등급: '" + sessionGrade + "') 관리자 필터 통과 실패.");
-				((HttpServletResponse) response).sendError(500);
+				System.out.println("[필터 작동 - 관리자 검사] 관리자가 아닙니다. (등급: '" + (String) session.getAttribute("usersGrade") + "') 관리자 필터 통과 실패.");
+				throw new Exception();
 			}
 			// 관리자일 경우 다음 필터로 넘김
 			else {
