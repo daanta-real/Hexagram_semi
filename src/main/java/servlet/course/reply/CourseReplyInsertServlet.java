@@ -17,6 +17,7 @@ public class CourseReplyInsertServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
+			
 			//입력 받기
 			//회원 번호 세션으로 받기(usersIdx)
 			int usersIdx = (int) req.getSession().getAttribute("usersIdx");
@@ -27,8 +28,8 @@ public class CourseReplyInsertServlet extends HttpServlet{
 			//댓글인지 대댓글인지 판정 : 파라미터에 댓글 번호가 온다면
 			boolean reReply = req.getParameter("courseReplyIdx") != null;
 			
+			//기능을 사용하기위해 Dao 변수 선언
 			CourseReplyDao courseReplyDao = new CourseReplyDao();
-			
 			
 			//시퀀스 번호 먼저 받기
 			int courseReplySeq = courseReplyDao.getSequenceNo();
@@ -64,6 +65,7 @@ public class CourseReplyInsertServlet extends HttpServlet{
 			CourseDao courseDao = new CourseDao();
 			courseDao.countCourseReply(courseIdx);
 			
+			//댓글 등록 완료 후 게시글 페이지로 이동
 			resp.sendRedirect(req.getContextPath() + "/course/detail.jsp?courseIdx=" + courseIdx);
 		}
 		catch(Exception e) {

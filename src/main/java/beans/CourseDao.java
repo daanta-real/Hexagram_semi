@@ -9,7 +9,8 @@ import java.util.List;
 import util.JdbcUtils;
 
 public class CourseDao implements PaginationInterface<CourseDto> {
-	// 전체 조회
+	
+		// 전체 조회 - 페이지네이션 전
 		public List<CourseDto> list() throws Exception {
 			String sql = "SELECT * FROM course";
 			Connection con = JdbcUtils.connect3();
@@ -59,6 +60,7 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			return courseDto;
 		}
 		
+		//시퀀스값을 같이 등록하는 메소드
 		public boolean insertWithSequence(CourseDto courseDto) throws Exception {
 			String sql = "INSERT INTO course VALUES(?,?,?,?,sysdate,0,0)";
 			Connection con = JdbcUtils.connect3();
@@ -75,6 +77,7 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			return result > 0;
 		}
 		
+		//코스 게시물 삭제 메소드
 		public boolean delete(int courseIdx) throws Exception {
 			String sql = "delete course where course_idx=?";
 			Connection con = JdbcUtils.connect3();
@@ -88,6 +91,7 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			return result > 0;
 		}
 		
+		//코스 게시물 수정 메소드
 		public boolean update(CourseDto courseDto) throws Exception {
 			String sql = "update course set course_name=?,course_detail=? where course_idx=?";
 			Connection con = JdbcUtils.connect3();
@@ -103,6 +107,7 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			return result > 0;
 		}
 		
+		//시퀀스 번호 미리 부여받는 메소드
 		public int getSequence() throws Exception {
 			String sql = "select course_seq.nextval from dual";
 			Connection con = JdbcUtils.connect3();
@@ -159,6 +164,7 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			
 		}
 		
+		//코스 게시물 총 개수 확인 메소드
 		public Integer count() throws Exception {
 			Connection con = JdbcUtils.connect3();
 			String sql = "select count(*) from course";
@@ -172,6 +178,7 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			return result;
 		}
 		
+		//코스 게시물 총 개수 확인 메소드(검색용)
 		public Integer count(String column,String keyword) throws Exception {
 			Connection con = JdbcUtils.connect3();
 			String sql = "select count(*) from course where instr(#1,?)>0";
@@ -187,6 +194,7 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			return result;
 		}
 		
+		//목록 기능 - 페이지네이션
 		public List<CourseDto> list(int begin, int end) throws Exception {
 			String sql = "select * from( "
 					+ "select rownum rn,tmp.* from( "
@@ -216,6 +224,7 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			return list;
 		}
 		
+		//검색 메소드 - 페이지네이션
 		public List<CourseDto> search(String column, String keyword, int begin, int end) throws Exception {
 			String sql = "select * from( "
 					+ "select rownum rn,tmp.* from( "
@@ -246,6 +255,8 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			con.close();
 			return list;
 		}
+		
+		//조회수 증가 메소드
 		public boolean readUp(int courseIdx, int usersIdx) throws Exception {
 			Connection con = JdbcUtils.connect3();
 			
