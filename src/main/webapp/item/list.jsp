@@ -157,8 +157,9 @@ ItemFileDao itemFileDao = new ItemFileDao();
 			<!-- 카테고리 출력 -->
 			<td width="10%"><%=itemDtoList.getItemType() %></td>
 			<td class="left" width="30%">
-			<!-- 관광지 제목을 출력 (제목을 누르면 상세페이지 이동)  -->
-			<a href="detail.jsp?itemIdx=<%=itemDtoList.getItemIdx()%>">
+			<!-- 관광지 제목을 출력 (제목을 누르면 조회수 증가 서블릿으로 이동)  -->
+			<a href="readup.nogari?itemIdx=<%=itemDtoList.getItemIdx()%>">
+			<!-- 				이 항목을 리스트에서 누를시에만 조회수가 올라가게 ItemReadupServlet 서블릿에서 게시물 조회수 증가를 시킨 후 detail페이지로 이동시킨다. -->
 			<%=itemDtoList.getItemName()%>
 			</a>
 			<%-- 댓글수 --%>

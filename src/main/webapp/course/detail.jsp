@@ -25,6 +25,7 @@
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
+
 <!-- 페이지 내용 시작 -->
 <% String root = request.getContextPath(); %>
 

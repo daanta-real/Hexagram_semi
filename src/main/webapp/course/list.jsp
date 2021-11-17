@@ -116,7 +116,7 @@
 			<!-- 지역 -->
 			<td><%=itemDto.getAdressCity()%></td>
 			<td>
-				<!-- 코스제목을 누르면 상세페이지 이동, 코스 제목옆에 댓글의 개수를 보여준다 -->
+				<!-- 코스제목을 누르면 조회수 증가 서블릿으로 이동, 코스 제목옆에 댓글의 개수를 보여준다 -->
 				<a href="readup.nogari?courseIdx=<%=courseDto.getCourseIdx()%>">
 <!-- 				이 항목을 리스트에서 누를시에만 조회수가 올라가게 CourseReadupServlet 서블릿에서 게시물 조회수 증가를 시킨 후 detail페이지로 이동시킨다. -->
 				<%=courseDto.getCourseName()%>
