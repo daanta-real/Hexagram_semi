@@ -56,6 +56,9 @@ public class CourseDto {
 	public CourseDto() {
 		super();
 	}
-
+	//댓글이 1개 이상 있는지?
+	public boolean isCountReply() {
+		return this.courseCountReply > 0;
+	}
 	
 }

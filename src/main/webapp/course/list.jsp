@@ -117,9 +117,15 @@
 			<td><%=itemDto.getAdressCity()%></td>
 			<td>
 				<!-- 코스제목을 누르면 상세페이지 이동, 코스 제목옆에 댓글의 개수를 보여준다 -->
-				<a href="detail.jsp?courseIdx=<%=courseDto.getCourseIdx()%>">
-				<%=courseDto.getCourseName()%>[<%=courseDto.getCourseCountReply() %>]
+				<a href="readup.nogari?courseIdx=<%=courseDto.getCourseIdx()%>">
+<!-- 				이 항목을 리스트에서 누를시에만 조회수가 올라가게 CourseReadupServlet 서블릿에서 게시물 조회수 증가를 시킨 후 detail페이지로 이동시킨다. -->
+				<%=courseDto.getCourseName()%>
 				</a>
+			<%-- 댓글수 --%>
+			<!-- 댓글이 있다면 개수를 출력 -->
+					<%if(courseDto.isCountReply()){ %>
+						[<%=courseDto.getCourseCountReply() %>]
+					<%} %>
 			</td>
 			<!-- 코스 내용 -->
 			<td><%=courseDto.getCourseDetail()%></td>
