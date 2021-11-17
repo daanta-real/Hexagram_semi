@@ -16,6 +16,7 @@
 	String keyword=request.getPatameter("keyword");
 %>
 
+
 <%--처리--%>
 <%
 	boolean search=column!=null&&!column.isEmpty()&&keyword!=numm&&!keyword.isEmpty();
