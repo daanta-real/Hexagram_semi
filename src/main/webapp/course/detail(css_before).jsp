@@ -24,104 +24,6 @@
 </HEAD>
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
-<script src="https://code.jquery.com/jquery-latest.js"></script>
-<script src="/resource/css/item/reply.js"></script>
-<style>
-        
-        * {
-            box-sizing: border-box;
-        }
-
-        /* 전체 레이아웃 사이즈 (메인으로 옮겨 메인에 맞게 조정)*/
-        .container-900 {width: 900px;}
-        /* 각 div 마다 부여할 margin 값 */
-        .row {margin-top: 10px; margin-bottom: 10px;}
-        /* 컨테이너 왼쪽 정렬 */
-        .container-left {margin-left: 0; margin-right: auto;}
-        /* 컨테이너 가운데 정렬 */
-        .container-center {margin-left: auto; margin-right: auto;}
-        /* 컨테이너 오른쪽 정렬*/
-        .container-right {margin-left: auto; margin-right: 0;}
-        /* div 내에 태그 왼쪽 정렬*/
-        .left {text-align: left;}
-        /* div 내에 태그 가운데 정렬*/
-        .center {text-align: center;}
-        /* div 내에 태그 오른쪽 정렬*/
-        .right {text-align: right;}
-
-        /* 코스 제목*/
-        .course-name{
-            font-size:40px;
-            border-bottom:3px solid black;
-        }
-        /* 코스 제목 밑에 지역 및 코스 총 거리 (총거리는 계산할수 있으면 추가)*/
-        .course-location{
-            color:gray;
-            font-size: 12px;
-            text-align: center;
-        }
-        /* float 만들기 */
-        .float-container::after {
-            content:"";
-            display: block;
-            clear: both;
-        }
-        /* float 안에 왼쪽 정렬*/
-        .float-container > .float-left{
-            font-size: 17px;
-            float:left;
-        }
-        /* float 안에 오른쪽 정렬*/
-        .float-container > .float-right{
-            font-size:17px;
-            font-weight: bold;
-            float:right;
-        }
-        .float-container > .float-btn{
-        	font-size:17px;
-            border:1px solid black;
-            margin: 10px 10px;
-            padding:6px 6px;
-        }
-        /* 코스 내용*/
-        .course-detail{
-        	padding:10px;
-            border-top: 3px solid gray;
-        }
-		.course-map{
-			border-top: 3px solid gray;
-		}
-        .item-title{
-            display:block;
-            position:relative;
-            top:30px;
-            
-        }
-
-        ul{
-        	list-style:none;
-        }
-        
-        .item-link{
-            text-decoration:none; 
-            color:inherit;
-        }
-        #slide ul{
-            white-space:nowrap; 
-            overflow-x: auto; 
-            text-align:center;
-        }
-        
-        #slide ul li{
-            display:inline-block; 
-            padding: 10px 20px; 
-            background: #ccc; 
-            margin-right:10px;
-            margin-bottom: 20px;
-        }
-        
-    </style>
-
 <SECTION>
 <!-- 페이지 내용 시작 -->
 <% String root = request.getContextPath(); %>
@@ -148,7 +50,6 @@
 	String usersGrade = (String)request.getSession().getAttribute("usersGrade");
 	//관리자인지?
 	boolean isManager = request.getSession().getAttribute("users_grade") != null && usersGrade.equals("관리자");
-	
 %>
 
 <%-- course_item 및 course의 제목 및 내용 출력을 위한 변수 선언 --%>
@@ -183,82 +84,82 @@
 // 	request.getSession().setAttribute("boardCountView", boardCountView);
  %>
 
-<!-- 전체 레이아웃 컨테이너 사이즈는 메인에 맞게 조절-->
-<div class="container-900 container-center">
 
-    <!-- 작성자 닉네임 및 아이디 왼쪽 정렬 -->
-    <div class="row">
-        <div class="row float-container">
-            <span class="float-left">작성자 : <%=usersShow.getUsersId() %>(<%=usersShow.getUsersNick() %>)</span>
-            <%if(isMyboard || isManager){ %>
-            <!-- 수정/삭제는 jsp에서도 막아주는 것 이외로 주소로 입력하는 것을 방지하게 위해서 필터로도 막아줘야 한다. -->
-			<!-- 댓글 작성자 또는 관리자가 아니라면 버튼이 보여지지 않게 처리 -->
-			
-            <a href="delete.nogari?courseIdx=<%=courseIdx%>" class="float-right float-btn">수정</a>
-            <a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>" class="float-right float-btn">삭제</a>
-            <a href="insert_sequence.nogari" class="float-right float-btn">새글작성</a>
-            <%} %>
-        </div>
-        
-        <div class="top-menu right">
-        </div>
-        <!-- 코스 제목 가운데 정렬-->
-        <div class="row center">
-            <span class="course-name"><%=courseDto.getCourseName() %></span><br>
-            <!-- 코스 제목 밑에 지역 표시-->
-            <%
-            int itemIdx = courseItemDao.getItemIdxByCourse(courseIdx);
-            ItemDto location = itemDao.get(itemIdx);
-            %>
-            <span class="course-location"><%=location.getAdressCity() %> &nbsp; <%=location.getAdressCitySub() %></span>
-        </div>
-        <!-- 조회수 및 좋아요? 왼쪽 정렬 / 작성일자 오른쪽 정렬 -->
-        <div class="row float-container">
-            <span class="float-left">조회수 : <%=courseDto.getCourseCountView() %> or 좋아요</span>
-            <span class="float-right"><%=courseDto.getCourseDate() %></span>
-        </div>
-    </div>
-    <!-- 코스 작성 내용-->
-    <div class="row course-detail">
-    	<span>[글 작성 내용]</span>
-    	<br>
-        <span><%=courseDto.getCourseDetail() %></span>
-    </div>
-    <!-- 지도 표시-->
-    <div class="row center course-map">
-        <!-- 지도 들어가는곳 이미 임시 추가-->
-        <jsp:include page="course_kakaomap.jsp">
-		<jsp:param value="<%=courseIdx%>" name="courseIdx"/>
-		</jsp:include>
-    </div>
-    <!-- 코스 목록 썸네일 구역-->
-    <div class="row" id="slide">
-    <!-- courseItem 목록 출력 -->
-        <ul>
-		<%for(CourseItemDto courseItemDto : getItemList){ %>
+ 
+<!-- 코스 게시글 제목 -->
+<div>
+	<h1><%=courseDto.getCourseName() %></h1>
+	<h4><%=usersShow.getUsersId() %>(<%=usersShow.getUsersNick() %>)</h4>
+</div>
+
+<!-- 수정/삭제는 jsp에서도 막아주는 것 이외로 주소로 입력하는 것을 방지하게 위해서 필터로도 막아줘야 한다. -->
+<!-- 댓글 작성자 또는 관리자가 아니라면 버튼이 보여지지 않게 처리 -->
+<%if(isMyboard || isManager){ %>
+<div>
+	<span><a href="delete.nogari?courseIdx=<%=courseIdx%>">삭제</a></span>
+	&nbsp;&nbsp;
+	
+	<span><a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>">수정</a></span>
+<!-- 	수정을 위해서는 대상 코스 번호를 넘겨줘야한다(courseIdx이지만 다른 시퀀스 번호와 구분하기 위해서 sourseOriginSequnce로 하여 보내기로 정함) -->
+<!-- CourseCreateSequnceForUpdateServlet 참조 -->
+
+	&nbsp;&nbsp;
+	<span><a href="insert_sequence.nogari">새 코스 작성</a></span>
+</div>
+<%} %>
+
+<!-- course_item 및 course 목록 출력 -->
+<table border="1" width="900px">
+	<tr>
+		<th>코스 번호</th>
+		<th>관광지 번호</th>
+		<th>관광지 작성자</th>
+		<th>관광지 사진</th>
+		<th>관광지 지역</th>
+	</tr>
+	<!-- courseItem 목록 출력 -->
+	<%for(CourseItemDto courseItemDto : getItemList){ %>
 		<%
 		ItemDto itemDto = itemDao.get(courseItemDto.getItemIdx());
 		ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());
 		%>
-            <li>
-                <span class="item-title"><%=itemDto.getItemName() %></span>
-                <a href="<%=root %>/item/detail.jsp?itemIdx=<%=itemDto.getItemIdx() %>" class="item-link">
-                    <%if(itemFileDto == null){ %>
+		<tr>
+			<td><%=courseItemDto.getCourseIdx()%></td>
+			<td><%=itemDto.getItemIdx()%></td>
+			<td><%=itemDto.getUsersIdx()%></td>
+			<td width="30%">
+			<!-- 첨부파일이 있다면 -->
+				<%if(itemFileDto == null){ %>
 					<!-- 첨부파일 출력 -->
 					<img src="http://via.placeholder.com/100x100">
-					<%}else{ %>
+				<%}else{ %>
 					<!-- 대체 이미지 출력 -->
 					<img src="<%=root%>/item/file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="150px" height="150px">
-					<%} %>
-                </a>
-            </li>
-        <%} %>
-        </ul>
-    </div>
-    <div class="row">
-        <div>댓글 구간</div>
-    </div>
+				<%} %>
+			</td>
+			<td>
+			<%=itemDto.getItemAddress()%>
+			</td>
+		</tr>
+	<%} %>
+</table>
+
+<!-- 지도 -->
+<div>		
+	<jsp:include page="course_kakaomap.jsp">
+	<jsp:param value="<%=courseIdx%>" name="courseIdx"/>
+	</jsp:include>
 </div>
+<br>
+
+<!-- 코스 내용 -->
+<div>
+	<span><%=courseDto.getCourseDetail() %></span>
+</div>
+
+
+<!-- 페이지 내용 끝. -->
+<br><br>
 
 <!-- 댓글 -->
 
@@ -282,7 +183,6 @@
 </table>
 </form>
 
-<div class="row center"></div>
 
 <!-- 댓글이 있다면 댓글목록을 출력한다-->
 <%if(!list.isEmpty()){ %>
