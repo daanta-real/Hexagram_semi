@@ -1,50 +1,26 @@
 package util.users;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
-import java.text.ParseException;
-import java.util.Objects;
-
 import beans.UsersDao;
 import beans.UsersDto;
-import system.Settings;
-import util.HexaLibrary;
 
 // 해시를 이용한 메소드들만 모아놓았다.
 public class HashChecker {
 
-	// ID문자열 & PW문자열 & 날짜문자열 & 해시키워드 네 개를 해쉬값으로 변환해줌.
-	public static Integer getIdPwHash(String id, String pw, String joinedDate) throws NoSuchAlgorithmException {
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
-		byte[] hash = md.digest()
-		return Objects.hash(id, pw, joinedDate, Settings.HASH_KEYWORD);
-	}
-	// (↑ 만약 날짜가 Date로 들어온다면 String으로 변환해서 구해줌.)
-	public static Integer getIdPwHash(String id, String pw, Date joinedDate) throws ParseException {
-		String formattedDateStr = HexaLibrary.dateToStr(joinedDate);
-		return Objects.hash(id, pw, formattedDateStr, Settings.HASH_KEYWORD);
-	}
-
 	// 입력한 아이디 비번이 맞는지 확인
-	// 입력측 해쉬 내용 = hashInput = 메소드 실행 시 생성됨  ; 구성요소: [ID, 지금 입력받은 PW, DB상 가입일자, 해시키워드]
-	// 원본측 해쉬 내용 = hashOrg   = DB에 미리 생성되어 있음; 구성요소: [ID, 가입때 입력한 PW, DB상 가입일자, 해시키워드]
 	public static boolean idPwMatch(String inputtedId, String inputtedPw, UsersDao dao) throws Exception {
 
 		System.out.println("[해쉬 비교기] 0. 해쉬 비교를 시작합니다.");
 
-		// 1. 원본 DB DTO 겟
-		UsersDto dtoOrg = dao.get(inputtedId);
-		String hashOrg = dtoOrg.getUsersPw();
-		Date joinnedDate = dtoOrg.getUsersJoin();
-		System.out.println(
-			"[해쉬 비교기] 1. DB 정보\n"
-			+ "　　▷ 원본 DTO: " + dtoOrg + "\n"
-			+ "　　▷ 원본 해쉬값: " + hashOrg
-		);
+		// 1. 원본 DB 정보
+		// 비밀번호 관련 정보는 DB의 usersPw 컬럼에 아래와 같은 구조의 문자열로 저장되어 있다.
+		// "비밀번호알고리즘명$솔트값$해쉬값"
+		// 이 문자열을 $로 split한 후, 순서대로 algo, salt, hashOrg에 저장할 것이다.
+		UsersDto dto = dao.get(inputtedId);
+		String[] pwInfoes = dto.getUsersPw().split("$");
+		String algo = pwInfoes[0], salt = pwInfoes[1], hashOrg = pwInfoes[2];
 
 		// 2.
-		Integer hashInput = getIdPwHash(inputtedId, inputtedPw, joinnedDate);
+		Integer hashInput = Encrypter.getHash(null, salt);
 
 		// String DB_HASHED_PW = dtoOrg.getPw(); <<< DB암호화 이후 적용 예정
 
