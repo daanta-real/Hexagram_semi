@@ -18,187 +18,188 @@
 </HEAD>
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
-	<style>
-	.container-800{width: 800px;}
-	.container-left {
-	    margin-left: 0;
-	    margin-right: auto;
-	}
-	.container-center {
-	    margin-left: auto;
-	    margin-right:auto;
-	}
-	.container-right {
-	    margin-left: auto;
-	    margin-right:0;
-	}
+<style>
+.container-800{width: 800px;}
+.container-left {
+	margin-left: 0;
+	margin-right: auto;
+}
+.container-center {
+	margin-left: auto;
+	margin-right:auto;
+}
+.container-right {
+    margin-left: auto;
+	margin-right:0;
+}
 
-	.row{
+.row{
 	margin-top: 5px; margin-bottom: 5px;
-	}
+}
 	
-	.left {
-	    text-align: left !important;
-	}
-	.center {
-	    text-align: center !important;
-	}
-	.right {
-	    text-align: right !important;
-	}
-	
-		*{
-			box-sizing: border-box;
-		}
-		
-        textarea {
-            resize:none;
-        }
-        .form-input,
-		.form-btn {
-		    width: 100%;
-		    font-size: 20px;
-		    padding: 10px;
-		}
-		        
-		.form-input {
-		    border: 1px solid rebeccapurple;
-		}
-		
-		.form-btn {
-		    color: white;
-		    background-color: rebeccapurple;
-		    font-weight: bold;
-		    height: 90%;
-		}
-		.form-btn:hover{
-		 color: red;
-		}
-		
-		.form-block {
-		    display: block;
-		}
-		
-		.form-inline {
-		    width: auto;
-		}
-		
-		.form-in {
-		   display: inline;
-		}
-     
-     	.flex-container{
-     		display: flex;
-     	}
-        .flex-container > .flex-reply-write-wrapper{
-            flex-grow: 3;
-        }
-        .flex-container > .flex-reply-btn-wrapper{
-            flex-grow: 1;
-            margin-top: auto;
-            margin-bottom: auto;
-        }
-     	
-     	.image {
-		    border: 2px solid transparent;
-		    padding: 2rem;
-		}
-     	
-     	.table{
-			    width: 100%;
-			}
-			
-			.table>thead>tr>th,
-			.table>thead>tr>td,
-			.table>tbody>tr>th,
-			.table>tbody>tr>td,
-			.table>tfoot>tr>th,
-			.table>tfoot>tr>td{
-			    padding: 0.5rem;
-			    text-align: center;
-			}
-			
-			.table>.tabheight{
-				min-height: 300px;
-			}
-			
-			.table.table-border {
-			    border:1px solid black;
-			    border-collapse: collapse;
-			
-			}
-			.table.table-border > thead > tr > th, 
-			.table.table-border > thead > tr > td,
-			.table.table-border > tbody > tr > th,
-			.table.table-border > tbody > tr > td,
-			.table.table-border > tfoot > tr > th,
-			.table.table-border > tfoot > tr > td {
-			    border:1px solid black;
-			
-			}
-			
-			.form-link-btn
-	        {
-	            border:1px solid rebeccapurple;
-	            text-decoration: none;
-	            color:rebeccapurple;
-	            padding:0.1rem 0.1rem;
-         	    font-size:20px;
-         	    margin: 0 0;
-	        }
-	      .form-link-btn:hover {
-            border-color:red;
-            color:red;
-       		 }
-	        	.flex-container > .reply-write-wrapper {
-					width:80%;
-				}
-				.flex-container > .reply-send-wrapper {
-					flex-grow:1;
-				}
-				.flex-container > .reply-send-wrapper > .form-btn,
-				.flex-container > .reply-send-wrapper > .form-link-btn {
-					width:100%;
-					height:93%;
-					display: flex;
-					align-items:center;
-					justify-content:center;
-				}
-				
-				.gapy{
-					margin-top: 2rem;
-					margin-bottom: 2rem;
-				}
-	</style>
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script>
-        
-        $(function(){
-           
+.left {
+    text-align: left !important;
+}
+.center {
+    text-align: center !important;
+}
+.right {
+    text-align: right !important;
+}
 
-            
-            $(".next-submit").on("submit",function(e){
-            	<%boolean isLogin = request.getSession().getAttribute("usersIdx") != null;%>
-            	var login = <%=isLogin%>;
-            	if(!login){
-            		e.preventDefault();
-            		$(".show-login").text("로그인하세요..!").css("color","red");
-            	}
-            });
-              
-        });
-            </script>
+*{
+	box-sizing: border-box;
+}
+		
+textarea {
+    resize:none;
+}
+.form-input,
+.form-btn {
+	width: 100%;
+	font-size: 20px;
+	padding: 10px;
+}
+		        
+.form-input {
+	border: 1px solid rebeccapurple;
+}
+		
+.form-btn {
+	color: white;
+	background-color: rebeccapurple;
+	font-weight: bold;
+	height: 90%;
+}
+.form-btn:hover{
+	color: red;
+}
+	
+.form-block {
+    display: block;
+}
+		
+.form-inline {
+    width: auto;
+}
+		
+.form-in {
+   display: inline;
+}
+     
+.flex-container{
+	display: flex;
+}
+.flex-container > .flex-reply-write-wrapper{
+    flex-grow: 3;
+}
+.flex-container > .flex-reply-btn-wrapper{
+    flex-grow: 1;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+     	
+.image {
+    border: 2px solid transparent;
+    padding: 2rem;
+}
+     	
+.table{
+    width: 100%;
+}
+			
+.table>thead>tr>th,
+.table>thead>tr>td,
+.table>tbody>tr>th,
+.table>tbody>tr>td,
+.table>tfoot>tr>th,
+.table>tfoot>tr>td{
+	padding: 0.5rem;
+	text-align: center;
+}
+			
+.table>.tabheight{
+	min-height: 300px;
+}
+			
+.table.table-border {
+    border:1px solid black;
+    border-collapse: collapse;
+			
+}
+.table.table-border > thead > tr > th, 
+.table.table-border > thead > tr > td,
+.table.table-border > tbody > tr > th,
+.table.table-border > tbody > tr > td,
+.table.table-border > tfoot > tr > th,
+.table.table-border > tfoot > tr > td {
+    border:1px solid black;
+		
+}
+			
+.form-link-btn{
+    border:1px solid rebeccapurple;
+    text-decoration: none;
+    color:rebeccapurple;
+    padding:0.1rem 0.1rem;
+    font-size:20px;
+    margin: 0 0;
+}
+.form-link-btn:hover {
+    border-color:red;
+    color:red;
+}
+.flex-container > .reply-write-wrapper {
+	width:80%;
+}
+.flex-container > .reply-send-wrapper {
+	flex-grow:1;
+}
+.flex-container > .reply-send-wrapper > .form-btn,
+.flex-container > .reply-send-wrapper > .form-link-btn {
+	width:100%;
+	height:93%;
+	display: flex;
+	align-items:center;
+	justify-content:center;
+}
+			
+.gapy{
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+        
+	$(function(){
+		//최종제출 등록버튼을 누르면 생기는 이벤트
+	    $(".next-submit").on("submit",function(e){
+	    	//로그인 확인
+	    	<%boolean isLogin = request.getSession().getAttribute("usersIdx") != null;%> 
+	    	var login = <%=isLogin%>;
+	    	//만약 로그인이 안되었다면 이벤트를 발생시킨다
+	    	if(!login){
+	    		e.preventDefault();
+	    		$(".show-login").text("로그인하세요..!").css("color","red");
+	    	}
+	    });   
+	});	
+	
+</script>
 
 <SECTION>
 <!-- 페이지 내용 시작 -->
     <%
-   
+  	//절대 경로를 위해 index.jsp 페이지 변수 저장
     String root = request.getContextPath();
-    
+
+    //파라미터로 받은 값 변수에 저장 (기존 번호와 새로 생성한 번호) - 
     int courseOriginSequnce = Integer.parseInt(request.getParameter("courseOriginSequnce"));
 	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));
-// 	최초로 지역을 먼저 설정하게 한다. 이것을 선택한 후에는 대부분 courseSequnce / city는 함께 파라미터로 움직여야 한다.
-	
+		
+	// 	최초로 지역을 먼저 설정하게 한다. 이것을 선택한 후에는 대부분 courseSequnce / city는 함께 파라미터로 움직여야 한다.
 	CourseDao courseDao = new CourseDao();
 	CourseDto courseDto = courseDao.get(courseOriginSequnce); //기존 내용을 넘기기 위함.
 
