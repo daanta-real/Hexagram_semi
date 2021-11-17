@@ -242,6 +242,14 @@ ItemFileDao itemFileDao = new ItemFileDao();
                 </div>
                 
 			<div class="row float-container">
+				<div class="float-item-left btn">
+					<form action="<%=root%>/item/list_city.jsp" method="get">
+						<input type="hidden" name="order" value="item_idx">
+						<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
+						<input type="hidden" name="column" value="<%=pn.getColumn()%>">
+						<input type="submit" value="최신순 조회">
+					</form>
+				</div>
 			<div class="float-item-left btn">
 				<form action="<%=root%>/item/list_city.jsp" method="get">
 					<input type="hidden" name="order" value="item_count_view">
@@ -391,7 +399,9 @@ if(admin){ %>
                     <a href="list_city.jsp?column=item_address&keyword=충청북도" class="city">충북</a>
                 </div>
             </div>
-            <%List<String> subCityList = ItemCityList.getSubcityList(pn.getKeyword()); %>
+            <%
+            if(isSearchMode){
+            List<String> subCityList = ItemCityList.getSubcityList(pn.getKeyword()); %>
 <!--             리스트가 널이 아니라면 -->
             <div class="right-wrap">
                 <div class="menu-city">
@@ -400,7 +410,7 @@ if(admin){ %>
 					if(!subCityList.isEmpty()){
 					for(String s : subCityList){ %>
                     <a href="list_city.jsp?column=item_address&keyword=<%=pn.getKeyword()%>&subCity=<%=s%>" class="city"><%=s %></a>
-                    <%}} %>
+                    <%}}} %>
                 </div>
             </div>
              
