@@ -105,10 +105,11 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 	// 3. Setters
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
-
+	
 	public void setPageSize(int pageSize) { this.pageSize = pageSize; }
 	public void setBlockSize(int blockSize) { this.blockSize = blockSize; }
 	public void setResultList(List<DTO> resultList) { this.resultList = resultList; }
+	public void setCount(int count) {this.count = count;}
 
 
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈

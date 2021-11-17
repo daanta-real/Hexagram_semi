@@ -89,7 +89,7 @@ if(isLogin) {
 			
 		<!-- 주 메뉴 영역 -->
 		<DIV ID='mobileMenuLinkContainer' CLASS="flexCenter flexCol">
-			<A CLASS='menuLink blocked' HREF="<%=root%>/item/list.jsp">관광지 정보</A>
+			<A CLASS='menuLink blocked' HREF="<%=root%>/item/list_first.jsp">관광지 정보</A>
 			<A CLASS='menuLink blocked' HREF="<%=root%>/course/list.jsp">코스 정보</A>
 			<A CLASS='menuLink blocked' HREF="<%=root%>/event/list.jsp">이벤트 정보</A>
 		</DIV>
@@ -136,7 +136,7 @@ if(isLogin) {
 	
 	<!-- 상단메뉴 - 주 메뉴 영역 -->
 	<DIV ID='menuContainer' CLASS="flexCenter flexRow">
-		<A HREF="<%=root%>/item/list.jsp">관광지 정보</A>
+		<A HREF="<%=root%>/item/list_first.jsp">관광지 정보</A>
 		<span>|</span>
 		<A HREF="<%=root%>/course/list.jsp">코스 정보</A>
 		<span>|</span>
