@@ -243,13 +243,13 @@ ItemFileDao itemFileDao = new ItemFileDao();
                 
 			<div class="row float-container">
 				<div class="float-item-left btn">
-					<form action="<%=root%>/item/list_city.jsp" method="get">
-						<input type="hidden" name="order" value="item_idx">
-						<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
-						<input type="hidden" name="column" value="<%=pn.getColumn()%>">
-						<input type="submit" value="최신순 조회">
-					</form>
-				</div>
+				<form action="<%=root%>/item/list.jsp" method="get">
+					<input type="hidden" name="order" value="item_idx">
+					<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
+					<input type="hidden" name="column" value="<%=pn.getColumn()%>">
+					<input type="submit" value="최신순 조회">
+				</form>
+			</div>
 			<div class="float-item-left btn">
 				<form action="<%=root%>/item/list_city.jsp" method="get">
 					<input type="hidden" name="order" value="item_count_view">
