@@ -14,7 +14,7 @@ import beans.CourseDto;
 import beans.CourseItemDao;
 import beans.CourseItemDto;
 
-@WebServlet(urlPatterns = "/course/update_course.nogari2")
+@WebServlet(urlPatterns = "/course/update_course.nogari")
 public class CourseUpdateServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

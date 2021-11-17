@@ -195,7 +195,7 @@ textarea {
   	//절대 경로를 위해 index.jsp 페이지 변수 저장
     String root = request.getContextPath();
 
-    //파라미터로 받은 값 변수에 저장 (기존 번호와 새로 생성한 번호)
+    //파라미터로 받은 값 변수에 저장 (기존 번호와 새로 생성한 번호) - 
     int courseOriginSequnce = Integer.parseInt(request.getParameter("courseOriginSequnce"));
 	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));
 		
