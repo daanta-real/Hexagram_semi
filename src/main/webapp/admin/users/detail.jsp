@@ -7,10 +7,13 @@
 <TITLE>노가리투어 - 회원 정보 상세</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
+
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
+
 <!-- 회원탈퇴 시 확인창을 불러오는 script -->
-<script type="text/javascript" src="/Hexagram_semi/resource/js/users/admin_users_delete.js"></script>
+<script type="text/javascript" src="admin_users_delete.js"></script>
+
 <BODY>
 <% String root = request.getContextPath(); %>
 
