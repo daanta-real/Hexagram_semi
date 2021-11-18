@@ -8,7 +8,7 @@ window.addEventListener("load", () => {
     document.querySelector(".form-regexCheck input[name=usersNick]").addEventListener("blur", function(){
 
         var form  = document.querySelector('.form-regexCheck');
-        var regex = /^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,10}$/
+        var regex = /^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,10}$/;
         var inputNick = form.querySelector("input[name=usersNick]").value;
         var message = form.querySelector("input[name=usersNick] + .message");
         if(inputNick != ""){
