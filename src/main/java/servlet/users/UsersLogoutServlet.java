@@ -22,26 +22,27 @@ public class UsersLogoutServlet extends HttpServlet {
 			req.setCharacterEncoding("UTF-8");
 			resp.setContentType("text/plain;charset=utf-8");
 			HttpSession session = req.getSession();
-			String sessionId = (String) session.getAttribute("usersId");
-			System.out.print("[회원 로그아웃]");
-			System.out.println(" 현재 sessionId = " + sessionId);
+			String sessionId = Sessioner.getUsersId(session);
+			System.out.print("[회원 로그아웃] 0. 현재 sessionId = " + sessionId);
 
-			// 1. 기 로그아웃 검사: 이미 로그아웃되어 session의 id가 없으면 에러처리
-			System.out.print("[회원 로그아웃] 1. 로그아웃 검사(이미 로그아웃 되어있는지 검사)..");
-			if (sessionId == null || sessionId.equals("")) throw new Exception();
-			System.out.println("아직 로그아웃되어 있지 않은 게 확인되었습니다.");
+			// 1. 기 로그아웃 검사는 하지 않는다. 무조건 로그아웃시켜야 하는 경우도 있을 수 있으므로 없앴다.
 
 			// 2. 로그아웃 처리
-			System.out.println("[회원 로그아웃] 2. 로그아웃 처리..");
+			System.out.print("[회원 로그아웃] 1. 로그아웃 처리..");
 			Sessioner.logout(session);
-			System.out.println("세션 비우기 완료.");
+
+			// 3. 로그아웃을 성공적으로 끝냈으면 메인 페이지로 리다이렉트
+			System.out.println("[회원 로그아웃] 2. 세션 비우기 완료.");
 			resp.sendRedirect(req.getContextPath()+"/index.jsp");
 
 		}
+
 		catch(Exception e) {
-			System.out.println("\n[회원 로그아웃] 에러가 발생했습니다.");
+
+			System.out.println("[회원 로그아웃] 에러가 발생했습니다.");
 			e.printStackTrace();
 			resp.sendError(500);
+
 		}
 	}
 

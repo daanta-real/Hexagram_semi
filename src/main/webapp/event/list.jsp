@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="beans.EventDao" %>
+<%@ page import="beans.EventDto" %>
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
@@ -19,10 +22,12 @@
 
 <%--처리--%>
 <%
-	boolean search=column!=null&&!column.isEmpty()&&keyword!=numm&&!keyword.isEmpty();
+	boolean search
+		=  column  != null && !column.isEmpty()
+		&& keyword != null && !keyword.isEmpty();
 
-	EventDao eventDao=new EventDao();
-	List<EventDto>list;
+	EventDao eventDao = new EventDao();
+	List<EventDto> list;
 	if(search){
 		list=eventDao.search(column,keyword);
 	}
@@ -32,11 +37,10 @@
 %>
 
 <%--출력--%>
-<jsp:include page="/resource/template/header_head.jsp"/></jsp:include>
 
 <h2>이벤트 게시판</h2>
 
-<tabel border="1" width="90%">
+<table border="1" width="90%">
 	<thead>
 		<tr>
 			<th>번호</th>
@@ -49,17 +53,17 @@
 	<tbody align="center">
 		<%for(EventDto eventDto:list){ %>
 		<tr>
-			<td><%eventDto.getEventIdx()%></td>
+			<td><%=eventDto.getEventIdx()%></td>
 			<td align="left">
-				<a href="detail.jsp?eventIdx=<%=eventDto.getEventIdx()%>"><%eventDto.getEventName()%></a>
+				<a href="detail.jsp?eventIdx=<%=eventDto.getEventIdx()%>"><%=eventDto.getEventName()%></a>
 			</td>
-			<td><%eventDto.getUsersIdx()%></td>
-			<td><%eventDto.getEventDate()%></td>
-			<td><%eventDto.getEventCountView()%></td>
+			<td><%=eventDto.getUsersIdx()%></td>
+			<td><%=eventDto.getEventDate()%></td>
+			<td><%=eventDto.getEventCountView()%></td>
 		</tr>
 		<%}%>
 	</tbody>
-</tabel>
+</table>
 
 <br>
 <a href="write.jsp">글쓰기</a><%--위치수정필요--%>
@@ -103,7 +107,7 @@
 <br><br>
 
 <!-- 검색창 -->
-<from action="list.jsp" method="get">
+<form action="list.jsp" method="get">
 
 	<select name="column">
 		<%if(column !=null&&column.equals("event_name")){%>
@@ -134,7 +138,7 @@
 	
 	<input type="submit" value="검색">
 	
-</from>
+</form>
 
 <!-- 페이지 내용 끝. -->
 </SECTION>

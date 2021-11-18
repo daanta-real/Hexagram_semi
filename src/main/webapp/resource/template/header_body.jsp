@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="util.HexaLibrary" %>
-<%@ page import="util.users.GrantChecker" %>
+<%@ page import="util.users.Sessioner" %>
 <%@ page import="beans.UsersDao" %>
 <%@ page import="beans.UsersDto" %>
 
@@ -29,11 +29,11 @@ if(isLogin) {
 	usersNick = dto.getUsersNick();
 	usersGrade = dto.getUsersGrade();
 	gradeStr
-		= usersGrade.equals(GrantChecker.GRADE_ASSOCIATE) ? "newbie"
-		: usersGrade.equals(GrantChecker.GRADE_REGULAR  ) ? "normal"
-		: usersGrade.equals(GrantChecker.GRADE_ADMIN    ) ? "admin"
+		= usersGrade.equals(Sessioner.GRADE_ASSOCIATE) ? "newbie"
+		: usersGrade.equals(Sessioner.GRADE_REGULAR  ) ? "normal"
+		: usersGrade.equals(Sessioner.GRADE_ADMIN    ) ? "admin"
 		: "error";
-	isAdmin = usersGrade.equals(GrantChecker.GRADE_ADMIN);
+	isAdmin = usersGrade.equals(Sessioner.GRADE_ADMIN);
 }
 %>
 
@@ -89,7 +89,7 @@ if(isLogin) {
 			
 		<!-- 주 메뉴 영역 -->
 		<DIV ID='mobileMenuLinkContainer' CLASS="flexCenter flexCol">
-			<A CLASS='menuLink blocked' HREF="<%=root%>/item/list.jsp">관광지 정보</A>
+			<A CLASS='menuLink blocked' HREF="<%=root%>/item/list_first.jsp">관광지 정보</A>
 			<A CLASS='menuLink blocked' HREF="<%=root%>/course/list.jsp">코스 정보</A>
 			<A CLASS='menuLink blocked' HREF="<%=root%>/event/list.jsp">이벤트 정보</A>
 		</DIV>
@@ -136,7 +136,7 @@ if(isLogin) {
 	
 	<!-- 상단메뉴 - 주 메뉴 영역 -->
 	<DIV ID='menuContainer' CLASS="flexCenter flexRow">
-		<A HREF="<%=root%>/item/list.jsp">관광지 정보</A>
+		<A HREF="<%=root%>/item/list_first.jsp">관광지 정보</A>
 		<span>|</span>
 		<A HREF="<%=root%>/course/list.jsp">코스 정보</A>
 		<span>|</span>

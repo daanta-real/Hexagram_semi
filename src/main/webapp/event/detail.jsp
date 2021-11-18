@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="beans.EvantDao" %>
+<%@ page import="java.util.HashSet" %>
+<%@ page import="java.util.Set" %>
+<%@ page import="java.util.List" %>
+<%@ page import="beans.EventDao" %>
+<%@ page import="beans.EventDto" %>
 <!DOCTYPE HTML>
 <HTML>
 
@@ -22,8 +26,7 @@
 
 <%--처리--%>
 <%
-	String memberId=(int)session.getAttribute("usersIdx");	
-
+	String memberId=(String)session.getAttribute("usersIdx");
 	EventDao eventDao=new EventDao();
 	
 	/**
@@ -38,11 +41,11 @@
 	*/
 	
 	//1.eventViewedNo 라는 이름의 저장소를 세션에서 꺼내어 본다.
-	Set<Integer> eventViewedNo=session.getAttribute("eventViewedNo");
+	Set<Integer> eventViewedNo = session.getAttribute("eventViewedNo");
 	
 	//2.eventViewedNo 가 null 이면 "처음 글을 읽는 상태"임을 말하므로 저장소를 신규로 생성
-	if(eventViewedNo==null){
-		eventViewedNo=new HashSet<>();
+	if(eventViewedNo == null){
+		eventViewedNo = new HashSet<>();
 		System.out.println("처음으로 글을 읽기 시작했습니다(저장소 생성)");
 	}
 	
