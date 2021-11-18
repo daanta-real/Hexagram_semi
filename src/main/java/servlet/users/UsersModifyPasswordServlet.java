@@ -70,6 +70,7 @@ public class UsersModifyPasswordServlet extends HttpServlet{
 			System.out.print("[비밀번호 변경] 5. 모든 검사를 통과하여 비밀번호 변경을 실시합니다.. ");
 			try {
 				// 비밀번호 변경에 성공하면 성공 페이지로 이동
+				// ※ 실제 컬럼에 들어가는 $문자열은 여기서 만드는 게 아니다. 아래 요청한 DAO 안에서 알아서 만든다.
 				usersDao.updatePw(sessionId, newPw);
 				System.out.println("비밀번호 변경이 성공하였습니다. 성공 페이지로 이동합니다.");
 				resp.sendRedirect(req.getContextPath() + "/users/modify_success.jsp");

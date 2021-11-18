@@ -30,7 +30,7 @@ public class UsersCreateServlet extends HttpServlet {
 			// 1. 회원등록에 쓸 DTO 준비
 			UsersDto inputDto = new UsersDto();
 			inputDto.setUsersId(usersId);
-			inputDto.setUsersPw(usersPw);
+			inputDto.setUsersPw(usersPw); // ※ DTO 내의 PW는 평문이다. $문자열이 아니다. $문자열은 DAO의 INSERT/UPDATE계열에서만 만들어진다.
 			inputDto.setUsersNick(usersNick);
 			inputDto.setUsersEmail(usersEmail);
 			inputDto.setUsersPhone(usersPhone);
