@@ -1,6 +1,7 @@
 package beans;
 
 import java.util.Date;
+import java.util.StringTokenizer;
 
 public class EventDto {
 
@@ -11,6 +12,7 @@ public class EventDto {
 	private Date eventDate;
 	private Integer eventCountView;
 	private Integer eventCountReply;
+	private String eventAddress;
 
 	public int getEventIdx() {
 		return eventIdx;
@@ -54,13 +56,38 @@ public class EventDto {
 	public void setEventCountReply(Integer eventCountReply) {
 		this.eventCountReply = eventCountReply;
 	}
-
-
-	@Override
-	public String toString() {
-		return "EventDto [eventIdx=" + eventIdx + ", usersIdx=" + usersIdx + ", eventName=" + eventName
-				+ ", eventDetail=" + eventDetail + ", eventDate=" + eventDate + ", eventCountView=" + eventCountView
-				+ ", eventCountReply=" + eventCountReply + "]";
+	
+//댓글 수 갱신 기능
+	public boolean isCountReply() {
+		return this.eventCountReply > 0;
 	}
-
+		
+	public String getAdressCity() {
+		StringTokenizer st = new StringTokenizer(this.eventAddress," ");
+		StringBuffer sb = new StringBuffer();
+		int i = 0;
+		while(st.hasMoreTokens()) {
+			i++;
+			sb.append(st.nextToken());
+			if(i==1) break;
+			}
+		return sb.toString();
+	}
+			
+	public String getAdressCitySub() {
+			StringTokenizer st = new StringTokenizer(this.eventAddress," ");
+			StringBuffer sb = new StringBuffer();
+			int i = 0;
+			while(st.hasMoreTokens()) {
+				i++;
+				if(i==1) st.nextToken();
+				if(i==2) sb.append(st.nextToken());
+				if(i==2) break;
+			}
+			return sb.toString();
+	}
+		
+	public EventDto() {
+		super();
+	}
 }

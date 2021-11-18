@@ -173,4 +173,9 @@ public class EventReplyDao {
 		ps.execute();
 		con.close();
 	}
+
+	public EventReplyDto get(int eventReplyTargetIdx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

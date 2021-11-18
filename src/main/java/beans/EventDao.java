@@ -214,6 +214,19 @@ public class EventDao {
 			return result>0;
 		}
 
+		public void countReply(int eventIdx) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void insertWithSequence(EventDto eventDto) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		
+		
+
 		
 
 }
