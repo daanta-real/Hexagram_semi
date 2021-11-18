@@ -11,6 +11,18 @@
 </HEAD>
 <BODY>
 <% String root = request.getContextPath(); %>
+
+<!-- 비밀번호 정규식 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/regexPw.js"></script>
+<!-- 닉네임 정규식 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/regexNick.js"></script>
+<!-- 이메일 정규식 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/regexEmail.js"></script>
+<!-- 폰번호 정규식 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/regexPhone.js"></script>
+<!-- 비밀번호 토글 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/togglePw.js"></script>
+
 <!-- 회원의 원래 정보는 그대로 보여 주고 수정할 수 있도록 처리 -->
 <!-- 회원상세정보 불러오기. 파라미터로 전달한 조회할 회원의 usersIdx -->
 <%
@@ -27,36 +39,35 @@
 <input type="hidden" name="usersId" value="<%=usersDto.getUsersId()%>">
 	<table>
 		<tbody>
-			<tr>
-				<th>회원No.</th>
-				<td><%=usersDto.getUsersIdx() %></td>
-			</tr>
-			<tr>
-				<th>아이디</th>
-				<td><%=usersDto.getUsersId() %></td>
-			</tr>
+			<tr><th>회원No.</th><td><%=usersDto.getUsersIdx() %></td></tr>
+			<tr><th>아이디</th><td><%=usersDto.getUsersId() %></td></tr>
 			<tr>
 				<th>비번</th>
 				<td>
 					<input type="password" name="usersPw"  required value="<%=usersDto.getUsersPw()%>">
+					<div class="message"></div>
+					<label><input type="checkbox"><span>보기</span></label>
 				</td>
 			</tr>
 			<tr>
 				<th>닉네임</th>
-				<td>
-					<input type="text" name="usersNick"  required value="<%=usersDto.getUsersNick() %>">
-				</td>
+					<td>
+						<input type="text" name="usersNick"  required value="<%=usersDto.getUsersNick() %>">
+						<div class="message"></div>
+					</td>
 			</tr>
 			<tr>
 				<th>이메일</th>
 				<td>
 					<input type="email" name="usersEmail"  required value="<%=usersDto.getUsersEmail() %>">	
+					<div class="message"></div>
 				</td>
 			</tr>
 			<tr>
 				<th>전화번호</th>
 				<td>
 					<input type="tel" name="usersPhone" value="<%=usersDto.getUsersPhone() %>">
+					<div class="message"></div>
 				</td>
 			</tr>
 			<tr>
