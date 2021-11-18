@@ -15,6 +15,7 @@
 <!-- 회원가입 검사 스크립트 -->
 <script type='text/javascript' src="join_check.js"></script>
 
+
 </HEAD>
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
@@ -30,13 +31,15 @@
 <table>
 <tbody>       
 	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요' required><div class="message"></div></td></tr>
-	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요' required><div class="message"></div></td></tr>
 	<tr>
-		<th>비번확인</th>
+		<th>비번</th>
 		<td>
-			<input type='password' id='reInputPw' placeholder='비밀번호 재확인' required>
-			<div class="noticePw"></div>
+			<input type='password' name='usersPw' placeholder='입력하세요' required>
+			<div class="message"></div>
+			<label><input type="checkbox"><span>보기</span></label>
 		</td>
+	</tr>
+	<tr><th>비번확인</th><td><input type='password' id='reInputPw' placeholder='비밀번호 재확인' required><div class="noticePw"></div></td>
 	</tr>
 	<tr><th>닉네임</th><td><input type='text' name='usersNick' placeholder='입력하세요' required><div class="message"></div></td></tr>
 	<tr><th>이메일</th><td><input type='email' name='usersEmail' placeholder='입력하세요'><div class="message"></div></td></tr>
