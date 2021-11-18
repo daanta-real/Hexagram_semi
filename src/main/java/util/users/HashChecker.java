@@ -18,7 +18,7 @@ public class HashChecker {
 		System.out.println("[해쉬 비교기] 1. 해쉬 정보 입수 시작.. ");
 		UsersDto dto = dao.get(id);
 		System.out.println("[해쉬 비교기] 획득한 DTO 정보: " + dto);
-		String[] pwInfoes = dto.getUsersPw().split("$");
+		String[] pwInfoes = dto.getUsersPw().split("\\$");
 		String algo = pwInfoes[0], salt = pwInfoes[1], hashOrg = pwInfoes[2];
 
 		// 2. 값 비교
