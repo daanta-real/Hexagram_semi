@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
-<TITLE>노가리투어 - 회원 정보 변경</TITLE>
+<TITLE>노가리투어 - []회원관리] 회원 정보 변경</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
@@ -34,7 +34,7 @@
 <SECTION>
 <!-- 페이지 내용 시작 -->
 <div class="sub_title">회원 정보 변경</div>
-<form action="<%=root%>/admin/users/edit.nogari" method="post">
+<form class="form-regexCheck" action="<%=root%>/admin/users/edit.nogari" method="post">
 <input type="hidden" name="usersIdx" value="<%=usersDto.getUsersIdx()%>">
 <input type="hidden" name="usersId" value="<%=usersDto.getUsersId()%>">
 	<table>
@@ -44,9 +44,9 @@
 			<tr>
 				<th>비번</th>
 				<td>
-					<input type="password" name="usersPw"  required value="<%=usersDto.getUsersPw()%>">
+					<input type="password" name="usersPw" required value="<%=usersDto.getUsersPw()%>">
 					<div class="message"></div>
-					<label><input type="checkbox"><span>보기</span></label>
+					<label><input type="checkbox" class="togglePw"><span>보기</span></label>
 				</td>
 			</tr>
 			<tr>
@@ -109,17 +109,17 @@
 	</table>
 </form>
 
+
+	<a href="<%=root%>/admin/users/list.jsp">
+		<input type="button" value="회원목록으로 돌아가기">
+	</a>
+
 <!-- 회원 정보 변경 실패시 fail파라미터 -->
  <%if(request.getParameter("fail") != null) {%>
     	<h5>
 		 	<font color="red">회원 정보 변경에 실패하였습니다</font>
 		 </h5>
  <%} %>
-
-	<a href="<%=root%>/admin/users/list.jsp">
-		<input type="button" value="회원목록으로 돌아가기">
-	</a>
-
 <!-- 페이지 내용 끝. -->
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>
