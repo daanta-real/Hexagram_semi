@@ -9,7 +9,7 @@ function checkPwInputsEquals() {
 	// 비밀번호 입력값 일치여부 검사시 템플릿안의 로그인에도 name=usersPw가 있어서 값을 못받아 오기때문에
 	// form에 id=joinForm 을 부여하여 선택자 지정시킴  
 	console.log("비번 재입력값 검사 시작");
-	var form      = document.querySelector('#joinForm');
+	var form      = document.querySelector('.form-regexCheck');
 	var usersPw   = form.querySelector("input[name=usersPw]").value; // 비밀번호 입력값
 	var reInputPw = form.querySelector("#reInputPw").value;          // 비밀번호 재확인 입력값
 	var noticePw  = form.querySelector(".noticePw");                 // 비번 두개 일치확인결과 출력하는 레이어.noticePw 클래스
@@ -46,7 +46,7 @@ function checkPwInputsEquals() {
 //아이디 정규표현식 검사
 function regexCheckId(){
 	
-	var form  = document.querySelector("#joinForm");
+	var form  = document.querySelector('.form-regexCheck');
 	var regex = /^(?=[a-z].*)[a-z_0-9]{4,20}$/;
 	var inputId = form.querySelector("input[name=usersId]").value;	
 	var message = form.querySelector("input[name=usersId] + .message");
@@ -107,7 +107,7 @@ function regexCheckId(){
 //비밀번호 정규표현식 검사
 function regexCheckPw(){
 
-	var form  = document.querySelector('#joinForm');
+	var form  = document.querySelector('.form-regexCheck');
 	var regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[-_~!@#$%^&*=+/,.;’”?])[a-zA-Z0-9-_~!@#$%^&*=+/,.;’”?]{4,20}$/
 	var inputPw = form.querySelector("input[name=usersPw]").value;
 	var message = form.querySelector("input[name=usersPw] + .message");
@@ -128,7 +128,7 @@ function regexCheckPw(){
  //닉네임 정규표현식 검사
  function regexCheckNick(){
 
-	var form  = document.querySelector('#joinForm');
+	var form  = document.querySelector('.form-regexCheck');
 	var regex = /^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,10}$/
 	var inputNick = form.querySelector("input[name=usersNick]").value;
 	var message = form.querySelector("input[name=usersNick] + .message");
@@ -149,7 +149,7 @@ function regexCheckPw(){
  //이메일 정규표현식 검사
  function regexCheckEmail(){
 
-	var form  = document.querySelector('#joinForm');
+	var form  = document.querySelector('.form-regexCheck');
 	var regex = /^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*\.([a-zA-Z])+$/
 	var inputEmail = form.querySelector("input[name=usersEmail]").value;
 	var message = form.querySelector("input[name=usersEmail] + .message");
@@ -170,7 +170,7 @@ function regexCheckPw(){
  //폰번호 정규표현식 검사
  function regexCheckPhone(){
 
-	var form  = document.querySelector('#joinForm');
+	var form  = document.querySelector('.form-regexCheck');
 	var regex = /^(01[016-9])[0-9]{4}[0-9]{4}$/
 	var inputPhone = form.querySelector("input[name=usersPhone]").value;
 	var message = form.querySelector("input[name=usersPhone] + .message");
@@ -197,7 +197,7 @@ function regexCheckPw(){
 //비밀번호 보기/숨김 토글
 function togglePw() {
     //type이 password면 text로 바꾸고 text면 password로 바꾼다
-	var form = document.querySelector("#joinForm");
+	var form = document.querySelector('.form-regexCheck');
     var input = form.querySelector("input[name=usersPw]");
     if (input.type == "password") {
         input.type = "text";
@@ -210,28 +210,28 @@ function togglePw() {
 window.addEventListener("load", () => {
 	
 	// 1. PW 주 입력부 & 재확인 입력부 간 일치 검사
-	document.querySelector("#joinForm #reInputPw").addEventListener("blur", checkPwInputsEquals);
+	document.querySelector(".form-regexCheck #reInputPw").addEventListener("blur", checkPwInputsEquals);
 	
 	// 2. ID 정규표현식 검사 & 중복검사
-	document.querySelector("#joinForm input[name=usersId]").addEventListener("blur", regexCheckId);
+	document.querySelector(".form-regexCheck input[name=usersId]").addEventListener("blur", regexCheckId);
 	
  	// 3. PW 정규표현식 검사
- 	document.querySelector("#joinForm input[name=usersPw]").addEventListener("blur", regexCheckPw);
+ 	document.querySelector(".form-regexCheck input[name=usersPw]").addEventListener("blur", regexCheckPw);
 	
  	// 4. NICK 정규표현식 검사
- 	document.querySelector("#joinForm input[name=usersNick]").addEventListener("blur", regexCheckNick);
+ 	document.querySelector(".form-regexCheck input[name=usersNick]").addEventListener("blur", regexCheckNick);
 	
  	// 5. EMAIL 정규표현식 검사
- 	document.querySelector("#joinForm input[name=usersEmail]").addEventListener("blur", regexCheckEmail);
+ 	document.querySelector(".form-regexCheck input[name=usersEmail]").addEventListener("blur", regexCheckEmail);
 	
  	// 7. PHONE 정규표현식 검사
- 	document.querySelector("#joinForm input[name=usersPhone]").addEventListener("blur", regexCheckPhone);
+ 	document.querySelector(".form-regexCheck input[name=usersPhone]").addEventListener("blur", regexCheckPhone);
  	
  	// 8. 초기화 버튼 클릭시 검사관련 메세지도 초기화 하기
- 	document.querySelector("#joinForm #reset").addEventListener("click",  resetAll);
+ 	document.querySelector(".form-regexCheck #reset").addEventListener("click",  resetAll);
 	
 	// 9. 비밀번호 숨김/보기 토글
-	document.querySelector("#joinForm input[type=checkbox]").addEventListener("input", togglePw);	
+	document.querySelector(".form-regexCheck input[type=checkbox]").addEventListener("input", togglePw);	
 	
 });
 
