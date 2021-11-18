@@ -51,7 +51,7 @@ public class UsersModifyPasswordServlet extends HttpServlet{
 			boolean isValidIdPw = HashChecker.idPwMatch(sessionId, currPw);
 			if(!isValidIdPw) {
 				System.out.println("오류. 비번이 일치하지 않습니다.");
-				throw new Exception();
+				resp.sendRedirect(req.getContextPath() + "/users/modifyPassword.jsp?fail");
 			} else {
 				System.out.println("OK.");
 			}
@@ -61,7 +61,7 @@ public class UsersModifyPasswordServlet extends HttpServlet{
 			boolean isValidNewPw = UsersDto.isValidUsersPw(newPw);
 			if(!isValidNewPw) {
 				System.out.println("오류. 새 비번이 제약조건에 맞지 않습니다.");
-				throw new Exception();
+				throw new Exception();				
 			} else {
 				System.out.println("OK.");
 			}
