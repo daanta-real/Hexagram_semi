@@ -42,7 +42,7 @@
 	<tr><th>비번확인</th><td><input type='password' id='reInputPw' placeholder='비밀번호 재확인' required><div class="noticePw"></div></td>
 	</tr>
 	<tr><th>닉네임</th><td><input type='text' name='usersNick' placeholder='입력하세요' required><div class="message"></div></td></tr>
-	<tr><th>이메일</th><td><input type='email' name='usersEmail' placeholder='입력하세요'><div class="message"></div></td></tr>
+	<tr><th>이메일</th><td><input type='email' name='usersEmail' placeholder='입력하세요' required><div class="message"></div></td></tr>
 	<tr><th>폰번호</th><td><input type='tel' name='usersPhone' placeholder='입력하세요'><div class="message"></div></td></tr>
 </tbody>
 <tfoot><tr><td colspan=2 align=center>
