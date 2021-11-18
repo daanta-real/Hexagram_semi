@@ -17,15 +17,15 @@ CREATE TABLE    users (
                                AND
                              (REGEXP_COUNT(users_id, '[a-z0-9_]') between 4 and 20)
                            ),
-  users_pw    VARCHAR2(150) CONSTRAINT users_pw_not_null   NOT NULL
-                            CONSTRAINT users_pw_check      CHECK(REGEXP_LIKE(users_pw, '.*?[a-zA-Z0-9-]+')),
-  users_nick  VARCHAR2(30)  CONSTRAINT users_nick_not_null NOT NULL
-                            CONSTRAINT users_nick_unique   UNIQUE
-                            CONSTRAINT users_nick_check    CHECK(REGEXP_LIKE(users_nick, '^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,10}$')),
+  users_pw    VARCHAR2(150) CONSTRAINT users_pw_not_null    NOT NULL
+                            CONSTRAINT users_pw_check       CHECK(REGEXP_LIKE(users_pw, '.*?[a-zA-Z0-9-]+')),
+  users_nick  VARCHAR2(30)  CONSTRAINT users_nick_not_null  NOT NULL
+                            CONSTRAINT users_nick_unique    UNIQUE
+                            CONSTRAINT users_nick_check     CHECK(REGEXP_LIKE(users_nick, '^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,10}$')),
   users_email VARCHAR2(30)  CONSTRAINT users_email_not_null NOT NULL
-                            CONSTRAINT users_email_unique   UNIQUE  
-                            CONSTRAINT users_email_check   CHECK(REGEXP_LIKE(users_email, '^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*\.([a-zA-Z])+$')),
-  users_phone CHAR(11)      CONSTRAINT users_phone_check   CHECK(REGEXP_LIKE(users_phone, '^(01[016-9])[0-9]{4}[0-9]{4}$')),
+                            CONSTRAINT users_email_unique   UNIQUE
+                            CONSTRAINT users_email_check    CHECK(REGEXP_LIKE(users_email, '^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*\.([a-zA-Z])+$')),
+  users_phone CHAR(11)      CONSTRAINT users_phone_check    CHECK(REGEXP_LIKE(users_phone, '^(01[016-9])[0-9]{4}[0-9]{4}$')),
   users_join  DATE          DEFAULT SYSDATE CONSTRAINT users_join_not_null   NOT NULL,
   users_point NUMBER(20)    DEFAULT 0       CONSTRAINT users_number_not_null NOT NULL
                                             CONSTRAINT users_point_check     CHECK(users_point >= 0),

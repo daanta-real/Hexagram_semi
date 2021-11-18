@@ -28,7 +28,7 @@ public class HashChecker {
 		System.out.println("　　　  컬럼에 저장시킨 원본 해쉬값: " + hashOrg);
 		// 입력한 패스워드를 토대로 해시 구하기
 		String hashInput = Encrypter.getHash(inputtedPw, salt);
-		System.out.println("　　4) 입력된 비번으로 만든 해쉬값: " + hashInput);
+		System.out.println("　　3) 입력된 비번으로 만든 해쉬값: " + hashInput);
 
 		// 4. 결과 도출 및 회신
 		boolean isEqual = hashOrg.equals(hashInput);
