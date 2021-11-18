@@ -1,6 +1,8 @@
 package beans;
 
 import java.sql.Date;
+import java.text.Format;
+import java.text.SimpleDateFormat;
 
 public class EventReplyDto {
 	private int eventReplyIdx;
@@ -68,12 +70,14 @@ public class EventReplyDto {
 		this.eventReplyDepth = eventReplyDepth;
 	}
 	
-	@Override
-	public String toString() {
-		return "EventReplyDto [eventReplyIdx=" + eventReplyIdx + ", usersIdx=" + usersIdx + ", eventIdx=" + eventIdx
-				+ ", eventReplyTargetIdx=" + eventReplyTargetIdx + ", eventReplyDetail=" + eventReplyDetail
-				+ ", eventReplyDate=" + eventReplyDate + ", eventReplySuperno=" + eventReplySuperno
-				+ ", eventReplyGroupno=" + eventReplyGroupno + ", eventReplyDepth=" + eventReplyDepth + "]";
+	public String getItemReplyTotalDate() {
+		Format f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		return f.format(this.eventReplyDate);
 	}
-		
+
+	public EventReplyDto() {
+		super();
+	}
+
+
 }

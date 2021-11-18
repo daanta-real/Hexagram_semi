@@ -3,8 +3,8 @@ package beans;
 public class EventFileDto {
 	private int eventFileNo;
 	private int eventNo;
-	private String eventFileUploadname;
-	private String eventFileSavename;
+	private String eventFileUploadName;
+	private String eventFileSaveName;
 	private String eventFileType;
 	private long eventFileSize;
 	public EventFileDto() {
@@ -22,17 +22,17 @@ public class EventFileDto {
 	public void setEventNo(int eventNo) {
 		this.eventNo = eventNo;
 	}
-	public String getEventFileUploadname() {
-		return eventFileUploadname;
+	public String getEventFileUploadName() {
+		return eventFileUploadName;
 	}
-	public void setEventFileUploadname(String eventFileUploadname) {
-		this.eventFileUploadname = eventFileUploadname;
+	public void setEventFileUploadName(String eventFileUploadName) {
+		this.eventFileUploadName = eventFileUploadName;
 	}
-	public String getEventFileSavename() {
-		return eventFileSavename;
+	public String getEventFileSaveName() {
+		return eventFileSaveName;
 	}
-	public void setEventFileSavename(String eventFileSavename) {
-		this.eventFileSavename = eventFileSavename;
+	public void setEventFileSaveName(String eventFileSaveName) {
+		this.eventFileSaveName = eventFileSaveName;
 	}
 	public String getEventFileType() {
 		return eventFileType;
