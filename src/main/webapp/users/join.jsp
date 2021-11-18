@@ -52,7 +52,7 @@
 		<td>
 			<input type='password' name='usersPw' placeholder='입력하세요' required>
 			<div class="message"></div>
-			<label><input type="checkbox"><span>보기</span></label>
+			<label><input type="checkbox" class="togglePw"><span>보기</span></label>
 		</td>
 	</tr>
 	<tr><th>비번확인</th><td><input type='password' id='reInputPw' placeholder='비밀번호 재확인' required><div class="noticePw"></div></td>
