@@ -12,9 +12,25 @@
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
-<!-- 회원가입 검사 스크립트 -->
-<script type='text/javascript' src="join_check.js"></script>
+<!-- 아이디 정규식, 중복검사, 비밀번호 일치 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/checkPwEquals_regexId_ajax.js"></script>
+<!-- 비밀번호 정규식 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/regexPw.js"></script>
+<!-- 닉네임 정규식 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/regexNick.js"></script>
+<!-- 이메일 정규식 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/regexEmail.js"></script>
+<!-- 폰번호 정규식 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/regexPhone.js"></script>
+<!-- 비밀번호 토글 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/togglePw.js"></script>
+<!-- 초기화(새로고침) 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/resetAll.js"></script>
 
+<!-- 인라인 -->
+<script type="text/javascript">
+
+</script>
 
 </HEAD>
 <BODY>
@@ -46,9 +62,9 @@
 	<tr><th>폰번호</th><td><input type='tel' name='usersPhone' placeholder='입력하세요'><div class="message"></div></td></tr>
 </tbody>
 <tfoot><tr><td colspan=2 align=center>
-	<input type=submit value="가입하기">
+	<input type='submit' value="가입하기">
 	&nbsp;&nbsp;
-	<input type='button' value='초기화' id="reset">
+	<input type='button' value='초기화' class="reset">
 </td></tr></tfoot>
 </table>
 </form>
