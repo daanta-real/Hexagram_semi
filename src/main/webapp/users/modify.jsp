@@ -32,8 +32,8 @@ UsersDto usersDto = usersDao.get(sessionId);
 		<!-- 수정될 회원 정보 입력받는 부분 -->
 		<tbody>
 			<tr><th>아이디</th><td><%=usersDto.getUsersId() %></td></tr>
-			<tr><th>닉네임 변경</th><td><input type="text" name="usersNick" value="<%=usersDto.getUsersNick() %>"></td></tr>
-			<tr><th>이메일 변경</th><td><input type="text" name="usersEmail" value="<%=usersDto.getUsersEmail() %>"></td></tr>
+			<tr><th>닉네임 변경</th><td><input type="text" name="usersNick" required value="<%=usersDto.getUsersNick() %>"></td></tr>
+			<tr><th>이메일 변경</th><td><input type="text" name="usersEmail" required value="<%=usersDto.getUsersEmail() %>"></td></tr>
 			<tr><th>전화번호 변경</th><td><input type="text" name="usersPhone" value="<%=usersDto.getUsersPhone() %>"></td></tr>
 			<tr><th>회원등급</th><td><%=usersDto.getUsersGrade() %></td></tr>
 			<tr><th>가입일</th><td><%=usersDto.getUsersJoin() %></td></tr>
