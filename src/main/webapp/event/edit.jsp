@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.List" %>
+<%@ page import="beans.EventDao" %>
+<%@ page import="beans.EventDto" %>
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
@@ -13,7 +16,7 @@
 
 <%--입력--%>
 <%
-	int EventIdx=Integer.parseInt(request.getParameter("eventIdx"));
+	int eventIdx=Integer.parseInt(request.getParameter("eventIdx"));
 %>
 
 <%--처리--%>
@@ -22,8 +25,6 @@
 	EventDto eventDto=eventDao.get(eventIdx);
 %>
 
-<%--출력--%>
-<jsp:include page="/resource/template/header_head.jsp"/></jsp:include>
 
 <h2>게시글 수정</h2>
 
