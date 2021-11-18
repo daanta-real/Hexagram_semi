@@ -55,7 +55,7 @@ UsersDto usersDto = usersDao.get(sessionId);
 			<tr><td align="center" colspan="2">
 				<input type="submit" value="변경">
 				<a href = "<%=root %>/users/detail.jsp"><input type="button" value="취소"></a>
-				<input type='reset' value='초기화' />
+				<input type='reset' value='초기화' class="reset">
 			</td></tr>
 		</tfoot>
 
