@@ -38,19 +38,19 @@
 			<tr>
 				<th>비번</th>
 				<td>
-					<input type="password" name="usersPw" value="<%=usersDto.getUsersPw()%>" required>
+					<input type="password" name="usersPw"  required value="<%=usersDto.getUsersPw()%>">
 				</td>
 			</tr>
 			<tr>
 				<th>닉네임</th>
 				<td>
-					<input type="text" name="usersNick" value="<%=usersDto.getUsersNick() %>" required>
+					<input type="text" name="usersNick"  required value="<%=usersDto.getUsersNick() %>">
 				</td>
 			</tr>
 			<tr>
 				<th>이메일</th>
 				<td>
-					<input type="email" name="usersEmail" value="<%=usersDto.getUsersEmail() %>">	
+					<input type="email" name="usersEmail"  required value="<%=usersDto.getUsersEmail() %>">	
 				</td>
 			</tr>
 			<tr>
