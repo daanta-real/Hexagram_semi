@@ -9,8 +9,9 @@ import util.HexaLibrary;
 public class Encrypter {
 
 	// 0. 변수준비
-	private static int SALT_SIZE_BYTES = 32;               // 솔트 길이(바이트)
-	private static int KEY_STRETCHING_ITERATIONS = 500000; // 키 스트레칭 횟수(회)
+	private static final String ALGO = "SHA-256";                   // 사용 알고리즘명
+	private static final int    SALT_SIZE_BYTES = 32;               // 솔트 길이(바이트)
+	private static final int    KEY_STRETCHING_ITERATIONS = 500000; // 키 스트레칭 횟수(회)
 
 	// 1. 솔트 생성
 	public static byte[] getSalt() {
@@ -47,6 +48,21 @@ public class Encrypter {
 		// 완성된 해쉬 문자열을 반환.
 		String result = HexaLibrary.bytesArrToHexString(strBytes);
 		System.out.println("[해시] 완성된 해시값: " + result);
+		return result;
+
+	}
+
+	// usersPw 컬럼에 들어갈 양식문자열 암호 + 솔트를 해쉬값으로 저장
+	// salt는 꺼내서 대조할 때나 쓰지 문자열을 만드는 지금은 회신할 필요 없다.
+	public static String getUsersPwColumnTxt(String pw) throws NoSuchAlgorithmException {
+
+		// 각 재료문자열들 준비
+		String algo = ALGO;
+		String salt = HexaLibrary.bytesArrToHexString(getSalt());
+		String hash = getHash(pw, salt);
+
+		// 결과물자열 만들어 회신
+		String result = String.format("%s$%s$%s", algo, salt, hash);
 		return result;
 
 	}
