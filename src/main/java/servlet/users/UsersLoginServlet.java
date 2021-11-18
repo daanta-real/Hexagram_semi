@@ -39,23 +39,14 @@ public class UsersLoginServlet extends HttpServlet {
 				throw new Exception();
 			}
 			System.out.println("정상.");
-
-			// 2. DTO/DAO 제작
-			System.out.println("[회원 로그인] 2. DTO/DAO 설정..");
-			UsersDto dto = new UsersDto();
-			dto.setUsersId(usersId);
-			dto.setUsersPw(usersPw);
 			UsersDao dao = new UsersDao();
-			System.out.println("　　DTO: " + dto);
-			System.out.println("　　DAO: " + dao);
-			System.out.println("　　▷ 완료.");
 
-			// 3. id/pw 일치하는 값 있는지 검사
-			System.out.println("[회원 로그인] 3. ID/PW 일치 검사..");
+			// 2. id/pw 일치하는 값 있는지 검사
+			System.out.println("[회원 로그인] 2. ID/PW 일치 검사..");
 			boolean isLoginValid = HashChecker.idPwMatch(usersId, usersPw, dao);
 			System.out.print("　　▷ 확인 결과: " + isLoginValid);
 
-			// 4. 최종 처리: 세션 부여
+			// 3. 최종 처리: 세션 부여
 			// 로그인 실패 시
 			if(!isLoginValid) {
 				System.out.println("　　▷ 로그인 실패. usersId 혹은 usersPw가 맞지 않습니다.");
@@ -63,7 +54,7 @@ public class UsersLoginServlet extends HttpServlet {
 			}
 			// 로그인 성공 시
 			else {
-				System.out.println("[회원 로그인] 4. 모든 확인 완료. 세션 부여..");
+				System.out.println("[회원 로그인] 3. 모든 확인 완료. 세션 부여..");
 
 				// 입력한 id에 해당하는 DTO 가져옴
 				UsersDto foundDto = dao.get(usersId);

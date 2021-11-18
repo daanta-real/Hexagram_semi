@@ -74,10 +74,10 @@ public class Sessioner {
 		Enumeration<String> sessionNamesList = session.getAttributeNames();
 		int i;
 		for(i = 1; sessionNamesList.hasMoreElements(); i++) {
-			sb.append("  (" + i + ") " + sessionNamesList.nextElement() + ", " + sessionNamesList.nextElement().getClass().getName() + "\n");
+			String el = sessionNamesList.nextElement();
+			sb.append("  (" + i + ") 세션명: " + el + " / 자료형: " + el.getClass().getName() + "\n");
 		}
 		sb.append("[세션정보] 끝\n");
-		sb.insert(0, "[세션정보] 세션의 총 개수: " + i + " \n[세션정보] 세션 상세 정보:\n");
 		return sb.toString();
 	}
 

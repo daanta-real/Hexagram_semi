@@ -68,8 +68,8 @@ public class UsersDto {
 	public static boolean isValidUsersId   (String  str) { return str != null && str != "" && Pattern.matches(DTORegex.USERSID   , str); }
 	public static boolean isValidUsersPw   (String  str) { return str != null && str != "" && Pattern.matches(DTORegex.USERSPW   , str); }
 	public static boolean isValidUsersNick (String  str) { return str != null && str != "" && Pattern.matches(DTORegex.USERSNICK , str); }
-	public static boolean isValidUsersEmail(String  str) { return str != null && str != "" && Pattern.matches(DTORegex.USERSEMAIL, str); }
-	public static boolean isValidUsersPhone(String  str) { return str != null && str != "" && Pattern.matches(DTORegex.USERSPHONE, str); }
+	public static boolean isValidUsersEmail(String  str) { return str == null || str == "" || Pattern.matches(DTORegex.USERSEMAIL, str); }
+	public static boolean isValidUsersPhone(String  str) { return str == null || str == "" || Pattern.matches(DTORegex.USERSPHONE, str); }
 	public static boolean isValidUsersGrade(String  str) { return str != null && str != "" && Pattern.matches(DTORegex.USERSGRADE, str); }
 	public static boolean isValidUsersPoint(Integer num) { return num != null; }
 
