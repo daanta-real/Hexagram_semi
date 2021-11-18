@@ -32,11 +32,11 @@ catch(Exception e) { e.printStackTrace(); return; }
 완료!</p>
 
 <!-- 4. 메인으로 리다이렉트 -->
-<p>[DB 초기화] DB 초기화 성공. admin(닉네임: 관리자1, 등급: 관리자)님으로 세션을 새로 부여해 드립니다..</p>
+<p>[DB 초기화] DB 초기화 성공. admin1 (idx: 1, 닉네임: 관리자1, 등급: 관리자)님으로 세션을 새로 부여해 드립니다..</p>
 <%
 session.setAttribute("usersIdx"  , "1");
-session.setAttribute("usersId"   , "admin");
-session.setAttribute("usersGrade", "관리자");
+session.setAttribute("usersId"   , "admin1");
+session.setAttribute("usersGrade", "관리자1");
 %>
 <p>메인 페이지로 돌아갑니다..</p>
 <a href="<%=root%>"><button>메인으로</button></a>
