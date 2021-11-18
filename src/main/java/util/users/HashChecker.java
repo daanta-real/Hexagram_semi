@@ -1,63 +1,44 @@
 package util.users;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
-import java.text.ParseException;
-import java.util.Objects;
-
 import beans.UsersDao;
 import beans.UsersDto;
-import system.Settings;
-import util.HexaLibrary;
 
 // 해시를 이용한 메소드들만 모아놓았다.
 public class HashChecker {
 
-	// ID문자열 & PW문자열 & 날짜문자열 & 해시키워드 네 개를 해쉬값으로 변환해줌.
-	public static Integer getIdPwHash(String id, String pw, String joinedDate) throws NoSuchAlgorithmException {
-		MessageDigest md = MessageDigest.getInstance("SHA-256");
-		byte[] hash = md.digest()
-		return Objects.hash(id, pw, joinedDate, Settings.HASH_KEYWORD);
-	}
-	// (↑ 만약 날짜가 Date로 들어온다면 String으로 변환해서 구해줌.)
-	public static Integer getIdPwHash(String id, String pw, Date joinedDate) throws ParseException {
-		String formattedDateStr = HexaLibrary.dateToStr(joinedDate);
-		return Objects.hash(id, pw, formattedDateStr, Settings.HASH_KEYWORD);
-	}
-
 	// 입력한 아이디 비번이 맞는지 확인
-	// 입력측 해쉬 내용 = hashInput = 메소드 실행 시 생성됨  ; 구성요소: [ID, 지금 입력받은 PW, DB상 가입일자, 해시키워드]
-	// 원본측 해쉬 내용 = hashOrg   = DB에 미리 생성되어 있음; 구성요소: [ID, 가입때 입력한 PW, DB상 가입일자, 해시키워드]
-	public static boolean idPwMatch(String inputtedId, String inputtedPw, UsersDao dao) throws Exception {
+	public static boolean idPwMatch(String id, String inputtedPw, UsersDao dao) throws Exception {
 
 		System.out.println("[해쉬 비교기] 0. 해쉬 비교를 시작합니다.");
 
-		// 1. 원본 DB DTO 겟
-		UsersDto dtoOrg = dao.get(inputtedId);
-		String hashOrg = dtoOrg.getUsersPw();
-		Date joinnedDate = dtoOrg.getUsersJoin();
-		System.out.println(
-			"[해쉬 비교기] 1. DB 정보\n"
-			+ "　　▷ 원본 DTO: " + dtoOrg + "\n"
-			+ "　　▷ 원본 해쉬값: " + hashOrg
-		);
+		// 1. 원본 DB 정보
+		// 비밀번호 관련 정보는 DB의 usersPw 컬럼에 아래와 같은 구조의 문자열로 저장되어 있다.
+		// "비밀번호알고리즘명$솔트값$해쉬값"
+		// 이 문자열을 $로 split한 후, 순서대로 algo, salt, hashOrg에 저장할 것이다.
+		System.out.println("[해쉬 비교기] 1. 해쉬 정보 입수 시작..");
+		UsersDto dto = dao.get(id);
+		String[] pwInfoes = dto.getUsersPw().split("$");
+		String algo = pwInfoes[0], salt = pwInfoes[1], hashOrg = pwInfoes[2];
 
-		// 2.
-		Integer hashInput = getIdPwHash(inputtedId, inputtedPw, joinnedDate);
+		// 2. 값 비교
+		System.out.println("[해쉬 비교기] 2. 해쉬 정보 비교 시작");
+		System.out.println("　　1) 대상 ID: " + id);
+		System.out.println("　　2) 암호화 정보: 알고리즘(" + algo + ") / 솔트(" + salt + "),");
+		System.out.println("　　　  컬럼에 저장시킨 원본 해쉬값: " + hashOrg);
+		// 입력한 패스워드를 토대로 해시 구하기
+		String hashInput = Encrypter.getHash(inputtedPw, salt);
+		System.out.println("　　4) 입력된 비번으로 만든 해쉬값: " + hashInput);
 
-		// String DB_HASHED_PW = dtoOrg.getPw(); <<< DB암호화 이후 적용 예정
-
-		// 3. 결과 도출
-		System.out.println("　　1) 입력값: " + inputtedId          + " / " + inputtedPw          + " ▶ 해쉬: " + hashInput);
-		System.out.println("　　2) DB값 : " + dtoOrg.getUsersId() + " / " + dtoOrg.getUsersPw() + " ▶ 해쉬: " + hashOrg  );
-		return hashOrg.equals(hashInput); // Integer vs Integer이므로 equals 써도 된다..
+		// 4. 결과 도출 및 회신
+		boolean isEqual = hashOrg.equals(hashInput);
+		System.out.println("[해쉬 비교기] 3. 해쉬값끼리 비교 결과: " + isEqual);
+		return isEqual;
 
 	}
 
 
 	// 오버로딩: .idPwMatch() 메소드 호출받았을 때, DAO를 못 넘겨받았을 경우, 새 DAO를 만들어서 호출함
-	public static boolean idPwMatch(String usersId, String usersPw) throws Exception {
-		return idPwMatch(usersId, usersPw, new UsersDao()); }
+	public static boolean idPwMatch(String id, String inputtedPw) throws Exception {
+		return idPwMatch(id, inputtedPw, new UsersDao()); }
 
 }

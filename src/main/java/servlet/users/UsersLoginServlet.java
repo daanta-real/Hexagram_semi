@@ -52,7 +52,7 @@ public class UsersLoginServlet extends HttpServlet {
 
 			// 3. id/pw 일치하는 값 있는지 검사
 			System.out.println("[회원 로그인] 3. ID/PW 일치 검사..");
-			boolean isLoginValid = HashChecker.idPwMatch(dto, dao);
+			boolean isLoginValid = HashChecker.idPwMatch(usersId, usersPw, dao);
 			System.out.print("　　▷ 확인 결과: " + isLoginValid);
 
 			// 4. 최종 처리: 세션 부여
