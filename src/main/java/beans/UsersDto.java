@@ -38,7 +38,7 @@ public class UsersDto {
 	public String  getUsersId    () { return usersId   ; }
 	public String  getUsersPw    () { return usersPw   ; }
 	public String  getUsersNick	 () { return usersNick ; }
-	public String  getUsersEmail () { return usersEmail ; }
+	public String  getUsersEmail () { return usersEmail; }
 	public String  getUsersPhone () { return usersPhone == null ? "" : usersPhone; }
 	public String  getUsersGrade () { return usersGrade; }
 	public Date    getUsersJoin  () { return usersJoin ; }
@@ -52,7 +52,7 @@ public class UsersDto {
 	public void setUsersEmail (String  usersEmail ) throws Exception { if(!isValidUsersEmail(usersEmail)) throw new Exception(); else this.usersEmail = usersEmail; }
 	public void setUsersPhone (String  usersPhone ) throws Exception { if(!isValidUsersPhone(usersPhone)) throw new Exception(); else this.usersPhone = usersPhone; }
 	public void setUsersGrade (String  usersGrade ) throws Exception { if(!isValidUsersGrade(usersGrade)) throw new Exception(); else this.usersGrade = usersGrade; }
-	public void setUsersJoin  (Date    usersJoin  ) throws Exception { this.usersJoin  = usersJoin  ; }
+	public void setUsersJoin  (Date    usersJoin  ) throws Exception { this.usersJoin  = usersJoin; }
 	public void setUsersPoint (Integer usersPoint ) throws Exception { if(!isValidUsersPoint(usersPoint)) throw new Exception(); else this.usersPoint = usersPoint; }
 
 	// 5. Methods - Overrided
@@ -68,7 +68,7 @@ public class UsersDto {
 	public static boolean isValidUsersId   (String  str) { return str != null && str != "" && Pattern.matches(DTORegex.USERSID   , str); }
 	public static boolean isValidUsersPw   (String  str) { return str != null && str != "" && Pattern.matches(DTORegex.USERSPW   , str); }
 	public static boolean isValidUsersNick (String  str) { return str != null && str != "" && Pattern.matches(DTORegex.USERSNICK , str); }
-	public static boolean isValidUsersEmail(String  str) { return str == null || str == "" || Pattern.matches(DTORegex.USERSEMAIL, str); }
+	public static boolean isValidUsersEmail(String  str) { return str != null && str != "" && Pattern.matches(DTORegex.USERSEMAIL, str); }
 	public static boolean isValidUsersPhone(String  str) { return str == null || str == "" || Pattern.matches(DTORegex.USERSPHONE, str); }
 	public static boolean isValidUsersGrade(String  str) { return str != null && str != "" && Pattern.matches(DTORegex.USERSGRADE, str); }
 	public static boolean isValidUsersPoint(Integer num) { return num != null; }
