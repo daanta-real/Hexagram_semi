@@ -8,11 +8,17 @@ window.addEventListener("load", () => {
     
         //type이 password면 text로 바꾸고 text면 password로 바꾼다
         var form = document.querySelector('.form-regexCheck');
-        var input = form.querySelector("input[name=usersPw]");
-        if (input.type == "password") {
-            input.type = "text";
+        var inputPw = form.querySelector("input[name=usersPw]");
+        if (inputPw.type == "password") {
+            inputPw.type = "text";
         } else {
             input.type = "password"
+        }
+        var updatePw = form.querySelector("input[name=pwUpdate]");
+        if (updatePw.type == "password") {
+            updatePw.type = "text";
+        } else {
+            updatePw.type = "password"
         }
     });	
    
