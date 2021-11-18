@@ -5,17 +5,23 @@
 <TITLE>노가리투어 - 비밀번호 변경</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
+<% String root = request.getContextPath(); %>
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
+
+<!-- 비밀번호 정규식 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/regexPw.js"></script>
+<!-- 비밀번호 토글 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/togglePw.js"></script>
+
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
-<% String root = request.getContextPath(); %>
 
 <%String sessionId = (String)session.getAttribute("usersId"); %>
 <!-- 페이지 내용 시작 -->
 <div class="sub_title">비밀번호 변경</div>
-<form action="<%=root%>/users/modifyPassword.nogari" method="post">
+<form class="form-regexCheck" action="<%=root%>/users/modifyPassword.nogari" method="post">
 <input type="hidden" name="usersId" value="<%=sessionId%>">
 	<table>
 		<tbody>
@@ -25,11 +31,15 @@
 			</tr>
 			<tr>
 				<th>현재 비밀번호</th>
-				<td><input type="password" name="usersPw" required></td>
+				<td><input type="password" name="usersPw" required><label><input type="checkbox"><span>보기</span></label></td>
 			</tr>
 			<tr>
 				<th>변경할 비밀번호</th>
-				<td><input type="password" name="pwUpdate" required></td>
+				<td>
+					<input type="password" name="pwUpdate" required>
+					<div class="message"></div>
+					<label><input type="checkbox"><span>보기</span></label>
+				</td>
 			</tr>
 		</tbody>
 		<tfoot>
@@ -47,7 +57,7 @@
 
 <!-- 비밀번호 변경실패시 fail파라미터 확인하고 메세지 보여주기-->
 <%if(request.getParameter("fail") != null) {%>
-	<h5> <font color="red">변경할 수 없는 비밀번호입니다. 다시 입력해 주세요</font> </h5>
+	<h5> <font color="red">.현재 비밀번호가 일치하지 않습니다. 다시 입력해 주세요</font> </h5>
 <%} %>
 
 
