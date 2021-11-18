@@ -8,7 +8,7 @@
 <HTML>
 
 <HEAD>
-<TITLE>노가리투어 - [여기다가 타이틀이름 쓰세요. []는 제거하시구요~]</TITLE>
+<TITLE>노가리투어 - 이벤트 게시판</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
 
@@ -65,11 +65,24 @@
 	//4.저장소 갱신
 	session.setAttribute("eventViewedNo", eventViewedNo);
 	
-	eventDao.readUp(eventIdx, memberId);//조회수 증가(남의 글일때만)
+	eventDao.readUp(eventIdx, memberId);//조회수 증가
 	EventDto eventDto=eventDao.get(eventIdx);//단일조회
 	
 	//본인 글이니지 아닌지를 판정하는 변수
 	boolean owner=eventDto.getUsersIdx().equals(memberId);
+%>
+
+<%
+	//현재 게시글에 대한 댓글을 조회
+	EventReplyDao replyDao = new EventReplyDao();
+	List<EventReplyDto> replyList = eventReplyDao.list(eventIdx);
+%>
+
+<%
+	//현재 게시글에 대한 파일정보를 조회
+	EventFileDao eventFileDao = new EventFileDao();
+	List<EventFileDto> eventFileList = evnetFileDao.find(evnetIdx);//파일이 여러 개일 경우
+	//EventFileDto eventFileDto = eventFileDao.find2(evnetIdx);//파일이 한 개일 경우
 %>
 
 <%--출력--%>
@@ -114,6 +127,99 @@
 		</tr>
 	</tbody>
 </table>
+
+<%-- 댓글 작성, 목록 영역 --%>
+<form action="./reply/insert.nogari" method="post">
+<input type="hidden" name="eventIdx" value="<%=eventDto.getEventIdx()%>">
+<table border="0" width="80%">
+	<tbody>
+		<tr>
+			<td>
+				<textarea name="replyContent" required rows="4" cols="80"></textarea>
+			</td>
+			<td>
+				<input type="submit" value="댓글작성">
+			</td>
+		</tr>
+	</tbody>	
+</table>
+</form>
+
+<%if(replyList.isEmpty()){ %>
+	<!-- 댓글이 없을 경우에 표시할 테이블 -->
+	<table border="1" width="80%">
+		<tbody>
+			<tr><th>작성된 댓글이 없습니다</th></tr>
+		</tbody>
+	</table>
+<%}else{ %>
+	<!-- 댓글이 있을 경우에 표시할 테이블 -->
+	<table border="1" width="80%">
+		<tbody>
+			<%for(EventReplyDto evnetreplyDto : eventreplyList){ %>
+			<%
+				//본인 댓글인지 판정 : 세션의 회원아이디와 댓글의 작성자를 비교
+				//작성자 댓글인지 판정 : 게시글 작성자와 댓글의 작성자를 비교
+				boolean myReply = memberId.equals(eventreplyDto.getReplyWriter());
+				boolean ownerReply = eventDto.getUserIdx().equals(eventreplyDto.getReplyWriter());
+			%>
+			<tr class="view-row">
+				<td width="30%">
+					<%=eventreplyDto.getReplyWriter()%>
+					<%-- 게시글 작성자의 댓글에는 표시 --%>
+					<%if(ownerReply){ %>
+						(작성자)
+					<%} %>
+					
+					<br>
+					(<%=eventreplyDto.getReplyFullTime()%>)
+				</td>
+				<td>
+					<pre><%=eventreplyDto.getReplyContent()%></pre>
+				</td>
+				<td width="15%">
+				<%-- 현재 사용자가 작성한 글에만 수정, 삭제를 표시 --%>
+				<%if(myReply){ %>
+				<a class="edit-btn">수정</a> | 
+				<a href="reply/delete.nogari?eventIdx=<%=eventreplyDto.getEventIdx()%>&replyNo=<%=eventreplyDto.getReplyNo()%>">삭제</a>
+				<%} %>
+				</td>
+			</tr>
+			
+			<%-- 본인 글일 경우 수정을 위한 공간을 추가적으로 생성 --%>
+			<%if(myReply){ %>
+			<tr class="edit-row">
+				<td colspan="3">
+					<form action="reply/edit.nogari" method="post">
+						<input type="hidden" name="replyNo" value="<%=eventreplyDto.getReplyNo()%>">
+						<input type="hidden" name="boardNo" value="<%=eventreplyDto.getEventIdx()%>">
+						<textarea name="replyContent" required rows="4" cols="80"><%=eventreplyDto.getReplyContent()%></textarea>
+						<input type="submit" value="수정">
+						<a class="edit-cancel-btn">취소</a>
+					</form>
+				</td>
+			</tr>
+			<%} %>
+			
+			<%} %>
+		</tbody>
+	</table>
+<%} %>
+
+<%-- 첨부파일이 있다면 첨부파일을 다운받을 수 있는 링크를 제공 --%>
+<%if(!eventFileList.isEmpty()){ %>
+	<%for(EventFileDto evnetFileDto : eventFileList){ %>
+		<h6>
+			<%=eventFileDto.getEvnetFileUploadname() %>
+			(<%=eventFileDto.getEventFileSize()%> bytes)
+			<a href="file/download.kh?boardFileNo=<%=eventFileDto.getEventFileNo()%>">
+				다운로드
+			</a>
+			
+			<img src="file/download.kh?boardFileNo=<%=eventFileDto.getEventFileNo()%>" width="50" height="50">
+		</h6>
+	<%} %>
+<%} %>
 
 <!-- 페이지 내용 끝. -->
 </SECTION>
