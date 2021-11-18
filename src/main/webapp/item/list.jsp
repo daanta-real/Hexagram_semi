@@ -343,7 +343,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 // 현재 로그인한 사용자 등급이 관리자인지 확인
 String usersGrade = (String)request.getSession().getAttribute("usersGrade");
 //usersGrade가 null이 아니고 usersGrade가 관리자라면
-boolean admin = usersGrade != null && usersGrade.equals(util.users.GrantChecker.GRADE_ADMIN);
+boolean admin = usersGrade != null && usersGrade.equals(util.users.Sessioner.GRADE_ADMIN);
 System.out.println("[관광지 목록] 관리자 여부 → " + admin);
 
 // 관리자일 경우에 한해 글쓰기 버튼 표시

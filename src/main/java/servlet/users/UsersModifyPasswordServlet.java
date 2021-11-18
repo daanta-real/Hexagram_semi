@@ -14,7 +14,7 @@ import beans.UsersDto;
 import util.users.HashChecker;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns="/users/modifyPassword.nogari")
+@WebServlet(urlPatterns = "/users/modifyPassword.nogari")
 public class UsersModifyPasswordServlet extends HttpServlet{
 
 	@Override
@@ -24,37 +24,58 @@ public class UsersModifyPasswordServlet extends HttpServlet{
 		try {
 
 			// 1. 변수 준비 (id, pw, 변경할pw)
+			System.out.print("[비밀번호 변경] 1. 변수 준비.. ");
 			HttpSession session = req.getSession();
 			String sessionId = (String) session.getAttribute("usersId");
-			String usersPw = req.getParameter("usersPw");
-			String pwUpdate = req.getParameter("pwUpdate");
-			System.out.println("[비밀번호 변경] usersId = " + sessionId + ", usersPw = " + usersPw + ", pwUpdate = " + pwUpdate);
-
-			// 2. DAO/DTO 준비
+			String currPw = req.getParameter("usersPw");
+			String newPw = req.getParameter("pwUpdate");
 			UsersDao usersDao = new UsersDao();
-			UsersDto usersDto = new UsersDto();
-			usersDto.setUsersId(sessionId);
-			usersDto.setUsersPw(usersPw);
-			System.out.println("[비밀번호 변경] 기존 ID/PW DTO 준비: " + usersDto);
+			System.out.println("입력받은 값: usersId = " + sessionId + ", usersPw = " + currPw + ", pwUpdate = " + newPw);
 
-			// 3. 비밀번호 변경 가능 검사
-// ★ 1) 변경 전후 비번이 똑같은지 조회: 작업 생략 (DB PW 암호화 이후에 반영 가능)
-			// 입력한 아이디/비번이 DB 것과 일치하는지 조회
-			boolean isValid = HashChecker.idPwMatch(usersDto, usersDao);
-			System.out.println("[비밀번호 변경] 입력 ID/PW DB상 존재여부 조회 결과: " + usersDto);
-
-			// 4. 비밀번호 심사 결과에 따른 비번 변경 반영
-			if(isValid) {
-				System.out.println("[비밀번호 변경] 비밀번호 변경이 가능한 것으로 확인되었습니다.");
-				// 비밀번호 변경에 성공하면 성공 페이지로 이동
-				usersDao.updatePw(sessionId, pwUpdate);
-				System.out.println("[비밀번호 변경] 비밀번호 변경이 성공하였습니다. 성공 페이지로 이동합니다.");
-				resp.sendRedirect(req.getContextPath()+"/users/modify_success.jsp");
-
+			// 2. 검사 - 비번 변경을 요청할 자격이 있는지 검사
+			System.out.print("[비밀번호 변경] 2. 검사 - 비밀번호 변경 요청 자격 확인.. ");
+			boolean isFormReady
+				 = sessionId != null && !sessionId.equals("") // 1) 로그인되어 있어야 한다.
+				&& currPw != null    && !currPw.equals("")    // 2) 현재 암호가 입력되어야 한다.
+				&& newPw != null     && !newPw.equals("")     // 3) 변경될 암호도 입력되어야 한다.
+				&& currPw.equals(newPw);                      // 4) 현재 암호와 변경될 암호가 똑같이 입력되어서는 안 된다.
+			if(!isFormReady) {
+				System.out.println("비밀번호 변경에 필요한 양식들이 제대로 입력되지 않았습니다.");
+				throw new Exception();
 			} else {
+				System.out.println("OK.");
+			}
+
+			// 3. 검사 - 현재 ID/비번 정합성 검사
+			System.out.print("[비밀번호 변경] 3. 검사 - ID & PW 정합성 확인.. ");
+			boolean isValidIdPw = HashChecker.idPwMatch(sessionId, currPw);
+			if(!isValidIdPw) {
+				System.out.println("오류. 비번이 일치하지 않습니다.");
+				throw new Exception();
+			} else {
+				System.out.println("OK.");
+			}
+
+			// 4. 검사 - 변경할 비번이 제약조건에 맞는 것인지 검사
+			System.out.print("[비밀번호 변경] 4. 검사 - 변경할 비번이 DB 제약조건에 맞는지 확인.. ");
+			boolean isValidNewPw = UsersDto.isValidUsersPw(newPw);
+			if(!isValidNewPw) {
+				System.out.println("오류. 새 비번이 제약조건에 맞지 않습니다.");
+				throw new Exception();
+			} else {
+				System.out.println("OK.");
+			}
+
+			// 5. 비밀번호 심사 결과에 따른 비번 변경 반영
+			System.out.print("[비밀번호 변경] 5. 모든 검사를 통과하여 비밀번호 변경을 실시합니다.. ");
+			try {
+				// 비밀번호 변경에 성공하면 성공 페이지로 이동
+				usersDao.updatePw(sessionId, newPw);
+				System.out.println("비밀번호 변경이 성공하였습니다. 성공 페이지로 이동합니다.");
+				resp.sendRedirect(req.getContextPath() + "/users/modify_success.jsp");
+			} catch(Exception e) {
 				// 변경 실패 시 다시 비밀번호변경 페이지로 이동
-				System.out.println("[비밀번호 변경] 비밀번호 변경이 불가능합니다.");
-				resp.sendRedirect(req.getContextPath()+"/users/modifyPassword.jsp?fail");
+				System.out.println("비밀번호 변경 과정에서 에러가 발생하였습니다.");
 			}
 
 		}
