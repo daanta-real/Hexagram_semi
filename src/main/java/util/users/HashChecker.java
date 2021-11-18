@@ -9,14 +9,15 @@ public class HashChecker {
 	// 입력한 아이디 비번이 맞는지 확인
 	public static boolean idPwMatch(String id, String inputtedPw, UsersDao dao) throws Exception {
 
-		System.out.println("[해쉬 비교기] 0. 해쉬 비교를 시작합니다.");
+		System.out.println("[해쉬 비교기] 0. 해쉬 비교를 시작합니다. ID=" + id + " / PW=" + inputtedPw);
 
 		// 1. 원본 DB 정보
 		// 비밀번호 관련 정보는 DB의 usersPw 컬럼에 아래와 같은 구조의 문자열로 저장되어 있다.
 		// "비밀번호알고리즘명$솔트값$해쉬값"
 		// 이 문자열을 $로 split한 후, 순서대로 algo, salt, hashOrg에 저장할 것이다.
-		System.out.println("[해쉬 비교기] 1. 해쉬 정보 입수 시작..");
+		System.out.println("[해쉬 비교기] 1. 해쉬 정보 입수 시작.. ");
 		UsersDto dto = dao.get(id);
+		System.out.println("[해쉬 비교기] 획득한 DTO 정보: " + dto);
 		String[] pwInfoes = dto.getUsersPw().split("$");
 		String algo = pwInfoes[0], salt = pwInfoes[1], hashOrg = pwInfoes[2];
 
