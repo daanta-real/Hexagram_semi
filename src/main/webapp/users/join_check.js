@@ -190,6 +190,19 @@ function regexCheckPw(){
 	 location.reload();
  }
 
+
+//비밀번호 보기/숨김 토글
+function togglePw() {
+    //type이 password면 text로 바꾸고 text면 password로 바꾼다
+	var form = document.querySelector("#joinForm");
+    var input = form.querySelector("input[name=usersPw]");
+    if (input.type == "password") {
+        input.type = "text";
+    } else {
+        input.type = "password"
+    }
+}
+
 // 로드 이후 리스너 추가
 window.addEventListener("load", () => {
 	
@@ -213,6 +226,9 @@ window.addEventListener("load", () => {
  	
  	// 8. 초기화 버튼 클릭시 검사관련 메세지도 초기화 하기
  	document.querySelector("#joinForm #reset").addEventListener("click",  resetAll);
+	
+	// 9. 비밀번호 숨김/보기 토글
+	document.querySelector("#joinForm input[type=checkbox]").addEventListener("input", togglePw);	
 	
 });
 
