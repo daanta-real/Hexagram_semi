@@ -21,7 +21,7 @@ public class Main {
 		System.out.println("algo: '" + algo + "'");
 		System.out.println("saltStr: '" + saltStr + "' (길이 " + saltStr.length() + ")");
 		System.out.println("hash: '" + hash + "' (길이 " + hash.length() + ")");
-		System.out.printf("비밀번호 저장: \"%s$%s$%s", algo, saltStr, hash);
+		System.out.printf("비밀번호 저장: \"%s$%s$%s\"", algo, saltStr, hash);
 
 	}
 
