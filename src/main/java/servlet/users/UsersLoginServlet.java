@@ -34,50 +34,48 @@ public class UsersLoginServlet extends HttpServlet {
 			System.out.print("[회원 로그인] 1. 입력값 존재여부 검사..");
 			boolean filledReqs = usersId != null && !usersId.equals("")
 							  && usersPw != null && !usersPw.equals("");
-			if(!filledReqs) throw new Exception();
+			if(!filledReqs) {
+				System.out.println("　　▷ 일부 입력값이 존재하지 않습니다.");
+				throw new Exception();
+			}
 			System.out.println("정상.");
-
-			// 2. DTO/DAO 제작
-			System.out.println("[회원 로그인] 2. DTO/DAO 설정..");
-			UsersDto dto = new UsersDto();
-			dto.setUsersId(usersId);
-			dto.setUsersPw(usersPw);
 			UsersDao dao = new UsersDao();
-			System.out.println("　　DTO: " + dto);
-			System.out.println("　　DAO: " + dao);
-			System.out.println("　　▷ 완료.");
 
-			// 3. id/pw 일치하는 값 있는지 검사
-			System.out.println("[회원 로그인] 3. ID/PW 일치 검사..");
-			boolean isLoginValid = HashChecker.idPwMatch(dto, dao);
+			// 2. id/pw 일치하는 값 있는지 검사
+			System.out.println("[회원 로그인] 2. ID/PW 일치 검사..");
+			boolean isLoginValid = HashChecker.idPwMatch(usersId, usersPw, dao);
 			System.out.print("　　▷ 확인 결과: " + isLoginValid);
 
-			// 4. 최종 처리: 세션 부여
+			// 3. 최종 처리: 세션 부여
 			// 로그인 실패 시
 			if(!isLoginValid) {
-				System.out.println("　　▷ 로그인 실패. usersId 혹은 usersPw가 맞지 않습니다. 로그인 페이지로 돌아갑니다.");
-				resp.sendRedirect(req.getContextPath() + "/users/login.jsp?error"); // 로그인페이지로 이동
+				System.out.println("　　▷ 로그인 실패. usersId 혹은 usersPw가 맞지 않습니다.");
+				throw new Exception();
 			}
 			// 로그인 성공 시
 			else {
-				System.out.print("[회원 로그인] 4. 모든 확인 완료. 세션 부여..");
+				System.out.println("[회원 로그인] 3. 모든 확인 완료. 세션 부여..");
 
 				// 입력한 id에 해당하는 DTO 가져옴
 				UsersDto foundDto = dao.get(usersId);
-				if(isLoginValid) System.out.print(" → 찾았습니다. 상세: " + foundDto);
-				else             throw new Exception();
+				if(foundDto == null) {
+					System.out.println("　　▷ ID와 PW에 해당하는 DTO를 찾지 못했습니다.");
+					throw new Exception();
+				} else {
+					System.out.println("　　▷ ID와 PW에 해당하는 DTO를 찾았습니다. 상세: " + foundDto);
+				}
 
 				// 세션 부여
 				HttpSession session = req.getSession();
 				Sessioner.login(session, foundDto);
-				System.out.println("세션 부여 완료.");
+				System.out.println("　　▷ 세션 부여 완료.");
 				resp.sendRedirect(req.getContextPath()+"/index.jsp");
 			}
 		}
 		catch(Exception e) {
 			System.out.println("\n[회원 로그인] 에러가 발생했습니다.");
 			e.printStackTrace();
-			resp.sendError(500);
+			resp.sendRedirect(req.getContextPath() + "/users/login.jsp?error"); // 로그인페이지로 이동
 		}
 
 	}

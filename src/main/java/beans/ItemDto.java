@@ -49,6 +49,8 @@ public class ItemDto {
 	public void setItemDetail(String itemDetail) {
 		this.itemDetail = itemDetail;
 	}
+	
+	// 제약조건 not null 이 없기때문에 null이 출력되는걸 방지하기 위한 조건
 	public String getItemPeriod() {
 		if(itemPeriod == null) 
 			return "";
@@ -58,6 +60,8 @@ public class ItemDto {
 	public void setItemPeriod(String itemPeriod) {
 		this.itemPeriod = itemPeriod;
 	}
+	
+	// 제약조건 not null 이 없기때문에 null이 출력되는걸 방지하기 위한 조건
 	public String getItemTime() {
 		if(itemTime == null)
 			return "";
@@ -67,6 +71,8 @@ public class ItemDto {
 	public void setItemTime(String itemTime) {
 		this.itemTime = itemTime;
 	}
+	
+	// 제약조건 not null 이 없기때문에 null이 출력되는걸 방지하기 위한 조건
 	public String getItemHomepage() {
 		if(itemHomepage == null)
 			return "";
@@ -76,6 +82,8 @@ public class ItemDto {
 	public void setItemHomepage(String itemHomepage) {
 		this.itemHomepage = itemHomepage;
 	}
+	
+	// 제약조건 not null 이 없기때문에 null이 출력되는걸 방지하기 위한 조건
 	public String getItemParking() {
 		if(itemParking == null)
 			return "";
@@ -110,7 +118,7 @@ public class ItemDto {
 		this.itemCountReply = itemCountReply;
 	}
 	
-	//댓글 수 갱신 기능
+	//댓글이 1개 이상 있는지?
 	public boolean isCountReply() {
 		return this.itemCountReply > 0;
 	}

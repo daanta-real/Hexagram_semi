@@ -4,23 +4,23 @@
 <HEAD>
 <TITLE>노가리투어 - 회원 가입</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
+<%String root = request.getContextPath();%>
+
+<!-- 페이지 제목 css -->
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
+
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<!-- 회원가입 검사 스크립트 -->
+<script type='text/javascript' src="join_check.js"></script>
+
 
 </HEAD>
-<!-- 테이블 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/table.css">
-<!-- 페이지 제목 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 
 <SECTION>
-<%String root = request.getContextPath();%>
-
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<!-- 회원가입 아이디 중복검사 스크립트 -->
-<script type="text/javascript" src="<%=root%>/resource/js/join_id_check.js"></script>
-<!-- 회원가입 비밀번호, 비밀번호확인 입력값 스크립트 -->
-<script type="text/javascript" src="<%=root%>/resource/js/join_pw_recheck.js"></script>
 <!-- 페이지 내용 시작 -->
 <div class="sub_title">회원 가입</div>
 <!-- 
@@ -28,25 +28,27 @@
 		form에 id=joinForm 을 부여하여 선택자 지정시킴  
  -->
 <form id="joinForm" method='post' action='<%=root%>/users/join.nogari'>
-<table class="table">
+<table>
 <tbody>       
-	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요'><div></div></td></tr>
-	<tr><th>비번</th><td><input type='password' name='usersPw' placeholder='입력하세요'></td></tr>
+	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요' required><div class="message"></div></td></tr>
 	<tr>
-		<th>비번확인</th>
+		<th>비번</th>
 		<td>
-			<input type='password' id='reInputPw' placeholder='비밀번호 재확인'>
-			<div class="noticePw"></div>
+			<input type='password' name='usersPw' placeholder='입력하세요' required>
+			<div class="message"></div>
+			<label><input type="checkbox"><span>보기</span></label>
 		</td>
 	</tr>
-	<tr><th>닉네임</th><td><input type='text' name='usersNick' placeholder='입력하세요'></td></tr>
-	<tr><th>이메일</th><td><input type='email' name='usersEmail' placeholder='입력하세요'></td></tr>
-	<tr><th>폰번호</th><td><input type='tel' name='usersPhone' placeholder='입력하세요'></td></tr>
+	<tr><th>비번확인</th><td><input type='password' id='reInputPw' placeholder='비밀번호 재확인' required><div class="noticePw"></div></td>
+	</tr>
+	<tr><th>닉네임</th><td><input type='text' name='usersNick' placeholder='입력하세요' required><div class="message"></div></td></tr>
+	<tr><th>이메일</th><td><input type='email' name='usersEmail' placeholder='입력하세요'><div class="message"></div></td></tr>
+	<tr><th>폰번호</th><td><input type='tel' name='usersPhone' placeholder='입력하세요'><div class="message"></div></td></tr>
 </tbody>
 <tfoot><tr><td colspan=2 align=center>
-	<button type=submit>가입하기</button>
+	<input type=submit value="가입하기">
 	&nbsp;&nbsp;
-	<input type='reset' value='초기화' />
+	<input type='button' value='초기화' id="reset">
 </td></tr></tfoot>
 </table>
 </form>

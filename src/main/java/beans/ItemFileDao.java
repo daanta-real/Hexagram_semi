@@ -10,6 +10,7 @@ import util.JdbcUtils;
 
 public class ItemFileDao {
 
+	//첨부파일 등록 메소드
 	public void insert(ItemFileDto itemFileDto) throws Exception{
 		Connection con = JdbcUtils.connect3();
 		
@@ -27,7 +28,7 @@ public class ItemFileDao {
 		
 	}
 	
-	
+	//첨부파일 삭제 메소드
 	public void delete(int itemFileIdx) throws Exception{
 		Connection con = JdbcUtils.connect3();
 		
@@ -40,6 +41,7 @@ public class ItemFileDao {
 		con.close();
 	}
 
+	//첨부파일 단일조회 메소드
 	public ItemFileDto get(int itemFileIdx) throws Exception{
 		Connection con = JdbcUtils.connect3();
 		

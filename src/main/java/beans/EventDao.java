@@ -214,6 +214,7 @@ public class EventDao {
 			return result>0;
 		}
 
+<<<<<<< HEAD
 		public void countReply(int eventIdx) {
 			// TODO Auto-generated method stub
 			
@@ -225,6 +226,8 @@ public class EventDao {
 		}
 
 
+=======
+>>>>>>> branch 'main' of https://github.com/daanta-real/Hexagram_semi.git
 		
 
 }
