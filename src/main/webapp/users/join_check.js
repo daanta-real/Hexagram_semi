@@ -40,7 +40,7 @@ function checkPwInputsEquals() {
 
 // 회원가입 정규표현식 검사 
 //- 검사결과에 따른 메세지를 보여줄 div에 class="message" 부여
-//- 입력값이 있을 경우에만 검사하도록 설정. 필수입력값(아이디, 비번, 비번확인,닉네임) 미입력시 'OOO을 입력해 주세요' 메세지 출력
+//- 입력값이 있을 경우에만 검사하도록 설정. 필수입력값(아이디, 비번, 비번확인,닉네임, 이메일) 미입력시 'OOO을 입력해 주세요' 메세지 출력
 //     - 아이디 정규표현식 검사 통과 후 아이디 중복검사 진행
 
 //아이디 정규표현식 검사
@@ -161,6 +161,9 @@ function regexCheckPw(){
 			console.log("이메일 정규표현식 검사 실패");
 			message.textContent = "이메일 형식에 맞지 않습니다";
 		}			
+	}else{
+		console.log("이메일 미입력");
+		message.textContent = "이메일을 입력해 주세요";
 	}	
  }
  
@@ -190,6 +193,19 @@ function regexCheckPw(){
 	 location.reload();
  }
 
+
+//비밀번호 보기/숨김 토글
+function togglePw() {
+    //type이 password면 text로 바꾸고 text면 password로 바꾼다
+	var form = document.querySelector("#joinForm");
+    var input = form.querySelector("input[name=usersPw]");
+    if (input.type == "password") {
+        input.type = "text";
+    } else {
+        input.type = "password"
+    }
+}
+
 // 로드 이후 리스너 추가
 window.addEventListener("load", () => {
 	
@@ -213,6 +229,9 @@ window.addEventListener("load", () => {
  	
  	// 8. 초기화 버튼 클릭시 검사관련 메세지도 초기화 하기
  	document.querySelector("#joinForm #reset").addEventListener("click",  resetAll);
+	
+	// 9. 비밀번호 숨김/보기 토글
+	document.querySelector("#joinForm input[type=checkbox]").addEventListener("input", togglePw);	
 	
 });
 

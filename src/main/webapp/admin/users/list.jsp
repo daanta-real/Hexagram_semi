@@ -77,7 +77,7 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
  <%if(request.getParameter("delete") != null) {%>
  	<div class="sub_title">아이디 <%=request.getParameter("usersId") %> 회원 탈퇴 완료</div>
  <%} %>
-<table>
+<table border="1">
 	<thead>
 		<tr>
 			<th>회원번호</th>
