@@ -16,8 +16,8 @@ public class EventFileDao {
 			String sql = "insert into event_file values(event_file_seq.nextval, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, eventFileDto.getEventNo());
-			ps.setString(2, eventFileDto.getEventFileUploadname());
-			ps.setString(3, eventFileDto.getEventFileSavename());
+			ps.setString(2, eventFileDto.getEventFileUploadName());
+			ps.setString(3, eventFileDto.getEventFileSaveName());
 			ps.setLong(4, eventFileDto.getEventFileSize());
 			ps.setString(5, eventFileDto.getEventFileType());
 			ps.execute();
@@ -41,8 +41,8 @@ public class EventFileDao {
 				//copy
 				eventFileDto.setEventFileNo(rs.getInt("event_file_no"));
 				eventFileDto.setEventNo(rs.getInt("event_no"));
-				eventFileDto.setEventFileSavename(rs.getString("event_file_savename"));
-				eventFileDto.setEventFileUploadname(rs.getString("event_file_uploadname"));
+				eventFileDto.setEventFileSaveName(rs.getString("event_file_saveName"));
+				eventFileDto.setEventFileUploadName(rs.getString("event_file_uploadName"));
 				eventFileDto.setEventFileType(rs.getString("event_file_type"));
 				eventFileDto.setEventFileSize(rs.getLong("event_file_size"));
 			}
@@ -71,8 +71,8 @@ public class EventFileDao {
 				//copy
 				eventFileDto.setEventFileNo(rs.getInt("event_file_no"));
 				eventFileDto.setEventNo(rs.getInt("event_no"));
-				eventFileDto.setEventFileSavename(rs.getString("event_file_savename"));
-				eventFileDto.setEventFileUploadname(rs.getString("event_file_uploadname"));
+				eventFileDto.setEventFileSaveName(rs.getString("event_file_saveName"));
+				eventFileDto.setEventFileUploadName(rs.getString("event_file_uploadName"));
 				eventFileDto.setEventFileType(rs.getString("event_file_type"));
 				eventFileDto.setEventFileSize(rs.getLong("event_file_size"));
 				
@@ -82,5 +82,10 @@ public class EventFileDao {
 			con.close();
 			
 			return list;
+		}
+
+		public EventFileDto delete(int usersIdx) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 }

@@ -96,13 +96,13 @@ public class EventDao {
 
 		while(rs.next()) {
 			EventDto eventDto = new EventDto();
-			eventDto.setEventIdx(rs.getInt("eventIdx"));
-			eventDto.setUsersIdx(rs.getInt("usersIdx"));
-			eventDto.setEventName(rs.getString("eventName"));
-			eventDto.setEventDetail(rs.getString("eventDetail"));
-			eventDto.setEventDate(rs.getDate("eventDate"));
-			eventDto.setEventCountView(rs.getInt("eventCountView"));
-			eventDto.setEventCountReply(rs.getInt("eventCountReply"));
+			eventDto.setEventIdx(rs.getInt("event_idx"));
+			eventDto.setUsersIdx(rs.getInt("users_idx"));
+			eventDto.setEventName(rs.getString("event_name"));
+			eventDto.setEventDetail(rs.getString("event_detail"));
+			eventDto.setEventDate(rs.getDate("event_date"));
+			eventDto.setEventCountView(rs.getInt("event_count_view"));
+			eventDto.setEventCountReply(rs.getInt("event_count_reply"));
 
 			list.add(eventDto);
 		}
@@ -114,64 +114,12 @@ public class EventDao {
 
 	//[6] 제목 검색 메소드
 	public List<EventDto> selectByEventName(String eventName) throws Exception {
-		Connection con = JdbcUtils.connect3();
-
-		String sql = "select * from event "
-						+ "where eventName = ? "
-						+ "order by examIdx asc";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setString(1, eventName);
-		ResultSet rs = ps.executeQuery();
-
-		List<EventDto> list = new ArrayList<>();
-
-		while(rs.next()) {
-			EventDto eventDto = new EventDto();
-			eventDto.setEventIdx(rs.getInt("eventIdx"));
-			eventDto.setUsersIdx(rs.getInt("usersIdx"));
-			eventDto.setEventName(rs.getString("eventName"));
-			eventDto.setEventDetail(rs.getString("eventDetail"));
-			eventDto.setEventDate(rs.getDate("eventDate"));
-			eventDto.setEventCountView(rs.getInt("eventCountView"));
-			eventDto.setEventCountReply(rs.getInt("eventCountReply"));
-
-			list.add(eventDto);
-		}
-
-		con.close();
-
-		return list;
+		return select("event_name", eventName);
 	}
 
 	//[7] 유저 검색 메소드
 	public List<EventDto> selectByUsersIdx(int usersIdx) throws Exception {
-		Connection con = JdbcUtils.connect3();
-
-		String sql = "select * from event "
-						+ "where usersIdx = ? "
-						+ "order by examIdx asc";
-		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, usersIdx);
-		ResultSet rs = ps.executeQuery();
-
-		List<EventDto> list = new ArrayList<>();
-
-		while(rs.next()) {
-			EventDto eventDto = new EventDto();
-			eventDto.setEventIdx(rs.getInt("eventIdx"));
-			eventDto.setUsersIdx(rs.getInt("usersIdx"));
-			eventDto.setEventName(rs.getString("eventName"));
-			eventDto.setEventDetail(rs.getString("eventDetail"));
-			eventDto.setEventDate(rs.getDate("eventDate"));
-			eventDto.setEventCountView(rs.getInt("eventCountView"));
-			eventDto.setEventCountReply(rs.getInt("eventCountReply"));
-
-			list.add(eventDto);
-		}
-
-		con.close();
-
-		return list;
+		return select("users_idx", String.valueOf(usersIdx));
 	}
 
 	//[8] column, keyword를 이용한 검색 메소드
@@ -190,11 +138,11 @@ public class EventDao {
 
 		while(rs.next()) {
 			EventDto eventDto = new EventDto();
-			eventDto.setEventIdx(rs.getInt("eventIdx"));
-			eventDto.setUsersIdx(rs.getInt("usersIdx"));
-			eventDto.setEventName(rs.getString("eventName"));
-			eventDto.setEventDetail(rs.getString("eventDetail"));
-			eventDto.setEventDate(rs.getDate("eventDate"));
+			eventDto.setEventIdx(rs.getInt("event_idx"));
+			eventDto.setUsersIdx(rs.getInt("users_idx"));
+			eventDto.setEventName(rs.getString("event_name"));
+			eventDto.setEventDetail(rs.getString("event_detail"));
+			eventDto.setEventDate(rs.getDate("event_date"));
 
 			list.add(eventDto);
 		}
@@ -218,11 +166,11 @@ public class EventDao {
 
 		if(rs.next()) {
 			eventDto = new EventDto();
-			eventDto.setEventIdx(rs.getInt("eventIdx"));
-			eventDto.setUsersIdx(rs.getInt("usersIdx"));
-			eventDto.setEventName(rs.getString("eventName"));
-			eventDto.setEventDetail(rs.getString("eventDetail"));
-			eventDto.setEventDate(rs.getDate("eventDate"));
+			eventDto.setEventIdx(rs.getInt("event_idx"));
+			eventDto.setUsersIdx(rs.getInt("users_idx"));
+			eventDto.setEventName(rs.getString("event_name"));
+			eventDto.setEventDetail(rs.getString("event_detail"));
+			eventDto.setEventDate(rs.getDate("event_date"));
 		}
 		else {
 			eventDto = null;
@@ -232,5 +180,51 @@ public class EventDao {
 
 		return eventDto;
 	}
+	
+	
+	//[10] 번호 생성 기능 : 번호를 미리 생성해두어야 할 필요가 있는 경우 사용
+		public int getSequence() throws Exception {
+			Connection con = JdbcUtils.connect3();
+			
+			String sql="select event_seq.nextval from dual";
+			PreparedStatement ps=con.prepareStatement(sql);
+			ResultSet rs=ps.executeQuery();
+			
+			rs.next();
+			int seq=rs.getInt(1);
+			
+			con.close();
+			
+			return seq;
+		}
+		
+		
+		//[11] 남의 글일 경우에만 조회수 증가하는 기능
+		public boolean readUp(int eventIdx, String memberId) throws Exception{
+			Connection con = JdbcUtils.connect3();
+			
+			String sql="update event set event_count_view=event_count_view +1 where event_idx=? and users_idx !=?";
+			PreparedStatement ps=con.prepareStatement(sql);
+			ps.setInt(1,eventIdx);
+			ps.setString(2,memberId);
+			int result=ps.executeUpdate();
+			
+			con.close();
+			
+			return result>0;
+		}
+
+		public void countReply(int eventIdx) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void insertWithSequence(EventDto eventDto) {
+			// TODO Auto-generated method stub
+			
+		}
+
+
+		
 
 }
