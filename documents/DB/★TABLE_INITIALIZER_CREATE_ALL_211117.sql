@@ -23,9 +23,9 @@ CREATE TABLE    users (
                                                                                                 AND
                                                                                                 REGEXP_LIKE(users_pw, '.*?[0-9]+')
                                                                                                 AND
-                                                                                                REGEXP_LIKE(users_pw, '.*?[_-~!@#$%^&*=+/,.;’”?]+')
+                                                                                                REGEXP_LIKE(users_pw, '.*?[-_~!@#$%^&*=+/,.;’”?]+')
                                                                                                 AND
-                                                                                                (REGEXP_COUNT(users_pw, '[a-zA-Z0-9_-~!@#$%^&*=+/,.;’”?]') between 4 and 20)
+                                                                                                (REGEXP_COUNT(users_pw, '[a-zA-Z0-9-_~!@#$%^&*=+/,.;’”?]') between 4 and 20)
                                                                                             ),
   users_nick  VARCHAR2(30) CONSTRAINT users_nick_not_null NOT NULL 
                                          CONSTRAINT users_nick_unique UNIQUE 
