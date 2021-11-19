@@ -22,6 +22,8 @@
 </tbody>
 <tfoot><tr><td colspan=2 align=center>
 	<button type=submit>로그인</button>
+
+<!-- 로그인 실패시 error 파라미터 서블릿에서 전달 -->
 <%if(request.getParameter("error") != null) {%>
 	<h5><font color="red">로그인 정보가 일치하지 않습니다</font></h5>
 <%}%>
