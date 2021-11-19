@@ -68,11 +68,11 @@
         }
 
         .float-container > .float-item-left:nth-child(1) {
-		width:74%;	
+		width:70%;	
 		padding:0.5rem;
         }
         .float-container > .float-item-left:nth-child(2) {
-            width:26%;
+            width:30%;
             padding:0.5rem;
         }
         .float-container > .float-item-left.item-image {
@@ -85,7 +85,7 @@
         }
         
         .float-container > .float-item-left.btn {
-            width:24%;
+            width:15%;
         }
 
         .float-container > .float-item-right {
@@ -147,41 +147,55 @@
 
     .float-container > .float-item-left > .right-wrap{
         border: 1px solid gray;
-        margin-top: 250px;
+        margin-top: 150px;
+    }
+    .float-container > .float-item-left > .right-wrap2{
+        border: 1px solid gray;
+        margin-top: 8px;
     }
 
         .city{
         float: left;
-        height: 30px;
-        width: 30%;
+        height: 40px;
+        width: 33%;
         font-weight: bold;
         text-align: center;
         text-decoration: none;
         color:gray;
+         line-height: 40px;
     }
     .menu-bar{
-        height: 55px;
-        line-height: 55px;
+        height: 40px;
+        line-height: 40px;
         width: 100%;
         margin: 0 auto;
     }
 
     .menu-city{
-        height: 300px;
+        height: 440px;
         width: 100%;
         margin: 0 auto;
-        padding: 1rem;
+        padding: 0;
     }
 
     .city:hover{
         float: left;
-        height: 30px;
-        width: 30%;
+        height: 40px;
+        line-height: 40px;
+        width: 33%;
         font-weight: bold;
         text-align: center;
         text-decoration: none;
         color:blue
     }
+    
+          .flex-container {
+            display: flex;
+            flex-direction: row;
+        }
+          .flex-btn {
+            flex-grow: 25%;
+        }
     </style>
 </HEAD>
 <BODY>
@@ -211,6 +225,7 @@ if(isSearchMode){
 	if(subCity != null){
 		list = itemDao.subCityList(subCity,order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
 		pn.setCount(itemDao.count(pn.getColumn(), pn.getKeyword(),subCity));
+		pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
 	}else{
 	list=itemDao.orderByKeywordList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
 	}
@@ -241,26 +256,35 @@ ItemFileDao itemFileDao = new ItemFileDao();
                     <h3>총 <%=pn.getCount() %>건</h3>
                 </div>
                 
-			<div class="row float-container">
-				<div class="float-item-left btn">
-				<form action="<%=root%>/item/list.jsp" method="get">
+			<div class="row flex-container">
+				<div class="flex-btn">
+				<form action="<%=root%>/item/list_city.jsp" method="get">
 					<input type="hidden" name="order" value="item_idx">
+					<%if(subCity != null) {%>
+					<input type="hidden" name="subCity" value="<%=subCity%>">
+					<%} %>
 					<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
 					<input type="hidden" name="column" value="<%=pn.getColumn()%>">
 					<input type="submit" value="최신순 조회">
 				</form>
 			</div>
-			<div class="float-item-left btn">
+			<div class="flex-btn">
 				<form action="<%=root%>/item/list_city.jsp" method="get">
 					<input type="hidden" name="order" value="item_count_view">
+			<%if(subCity != null) {%>
+					<input type="hidden" name="subCity" value="<%=subCity%>">
+					<%} %>
 					<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
 					<input type="hidden" name="column" value="<%=pn.getColumn()%>">
 					<input type="submit" value="인기순 조회">
 				</form>	
 			</div >
-				<div class="float-item-left btn">			
+				<div class="flex-btn">			
 				<form action="<%=root%>/item/list_city.jsp" method="get">
 					<input type="hidden" name="order" value="item_count_reply">
+			<%if(subCity != null) {%>
+					<input type="hidden" name="subCity" value="<%=subCity%>">
+					<%} %>
 					<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
 					<input type="hidden" name="column" value="<%=pn.getColumn()%>">
 					<input type="submit" value="댓글순 조회">
@@ -314,12 +338,16 @@ ItemFileDao itemFileDao = new ItemFileDao();
 <%} %>
 
 
-	<!-- 페이지네이션 -->
+<!-- 페이지네이션 -->
 	<div class="row pagination">
 		<%-- [이전] a 태그 --%>
 		<%if(pn.hasPreviousBlock()){ %>
 			<%if(isSearchMode){%>
+				<%if(subCity != null) {%>
+				<a href="list_city.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getPreviousBlock()%>&order=<%=order%>&subCity=<%=subCity%>">[이전]</a>
+				<%}else{ %>
 				<a href="list_city.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getPreviousBlock()%>&order=<%=order%>">[이전]</a>
+				<%} %>
 			<%}else{ %>
 				<a href="list_city.jsp?page=<%=pn.getPreviousBlock() %>&order=<%=order%>">[이전]</a>
 			<%} %>
@@ -330,7 +358,11 @@ ItemFileDao itemFileDao = new ItemFileDao();
 		<%-- 숫자 a 태그 --%>
 		<%for(int i = pn.getStartBlock(); i<=pn.getRealLastBlock(); i++) {%>
 			<%if(isSearchMode){ %>
+				<%if(subCity != null) {%>
+				<a href="list_city.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>&order=<%=order%>&subCity=<%=subCity%>"><%=i %></a>
+				<%}else{ %>
 				<a href="list_city.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>&order=<%=order%>"><%=i %></a>
+				<%} %>
 			<%}else{ %>
 				<a href="list_city.jsp?page=<%=i %>&order=<%=order%>"><%=i %></a>
 			<%} %>
@@ -339,7 +371,11 @@ ItemFileDao itemFileDao = new ItemFileDao();
 		<%-- [다음] a 태그 --%>
 		<%if(pn.hasNextBlock()){ %>
 			<%if(isSearchMode){%>
+				<%if(subCity != null) {%>
+				<a href="list_city.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&order=<%=order%>&subCity=<%=subCity%>">[다음]</a>
+				<%}else{ %>
 				<a href="list_city.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&order=<%=order%>">[다음]</a>
+				<%} %>
 			<%}else{ %>
 				<a href="list_city.jsp?page=<%=pn.getNextBlock() %>&order=<%=order%>">[다음]</a>
 			<%} %>
@@ -352,17 +388,17 @@ ItemFileDao itemFileDao = new ItemFileDao();
 <%-- 관리자만 글쓰기 버튼 보이기 --%>
 <%
 // 현재 로그인한 사용자 등급이 관리자인지 확인
-String usersGrade = (String)request.getSession().getAttribute("usersGrade");
-//usersGrade가 null이 아니고 usersGrade가 관리자라면
-boolean admin = usersGrade != null && usersGrade.equals(util.users.GrantChecker.GRADE_ADMIN);
-System.out.println("[관광지 목록] 관리자 여부 → " + admin);
-
-// 관리자일 경우에 한해 글쓰기 버튼 표시
-if(admin){ %>
-<form action="insert.jsp">
-	<input type="submit" value="글쓰기">
-</form>
-<%} %>
+// String usersGrade = (String)request.getSession().getAttribute("usersGrade");
+// //usersGrade가 null이 아니고 usersGrade가 관리자라면
+// boolean admin = usersGrade != null && usersGrade.equals(util.users.GrantChecker.GRADE_ADMIN);
+// System.out.println("[관광지 목록] 관리자 여부 → " + admin);
+%>
+<!-- 관리자일 경우에 한해 글쓰기 버튼 표시 -->
+<%-- <%if(admin){%> --%>
+<!-- <form action="insert.jsp"> -->
+<!-- 	<input type="submit" value="글쓰기"> -->
+<!-- </form> -->
+<%-- <%} %> --%>
  </div>
             </div>
             
@@ -399,11 +435,11 @@ if(admin){ %>
                     <a href="list_city.jsp?column=item_address&keyword=충청북도" class="city">충북</a>
                 </div>
             </div>
-            <%
+   <%
             if(isSearchMode){
             List<String> subCityList = ItemCityList.getSubcityList(pn.getKeyword()); %>
 <!--             리스트가 널이 아니라면 -->
-            <div class="right-wrap">
+            <div class="right-wrap2">
                 <div class="menu-city">
                 
 					<%

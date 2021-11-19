@@ -513,7 +513,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 
 			Connection con = JdbcUtils.connect3();
 			String sql = "select * from ("
-					+ "select rownum rn,TMP.*from("
+					+ "select rownum rn,TMP.* from("
 						+ "select * from item where instr(#1, ?) > 0"
 					+ ")TMP where instr(#1,?)>0  order by #2 desc"
 				+ ")where rn between ? and ?";
