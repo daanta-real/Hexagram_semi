@@ -408,9 +408,11 @@
 			<%} %>
 		</select>	
 		</div>
+		
 		<div class="row">
 		<button class="btn btn-name">키워드로 검색</button>
 		</div>
+		
 </div>
 
 <!-- 지역 선택한 후 관광지 검색 from -->
