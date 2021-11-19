@@ -49,7 +49,7 @@ public class CourseItemDao {
 
 		rs.next();
 		int result = rs.getInt("item_idx");
-		
+
 		con.close();
 		return result;
 		}
