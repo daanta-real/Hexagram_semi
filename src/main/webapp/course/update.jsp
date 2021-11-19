@@ -288,7 +288,7 @@
 <!-- 페이지 클래스는 지역으로 검색할지 키워드로 검색할지 사용자에게 편한 보기옵션을 선택한다 (화면 토글을 통해서 검색을 왔다리 갔다리할 수 있다) -->
 <div class="page">
 <!-- 지역 선택(그 지역에 한해서 한정 선택할 수 있다.) -->
-	<h2>지역 검색!</h2>
+	<h2 style="text-align: center; color: gray">지역 검색!</h2>
 		<div class="row">
 <!-- 	여기에서 큰 컨셉은 경상남도 전라북도와 같이 4글자로 딱 맞춰지는 도시는 4글자로 설정하였고 그 이외의 도시들은 2글자로 같은 도시인지를 구분하게 설정하였다 -->
 <!-- 이는 insert_last.jsp , update_last.jsp에서 이전으로 돌아갈떄도 아이템_코스의 첫번째 데이터에 들어있는 도시를 선택하여 다시 값을 전달해줄때 확실한 방법이 될 수 있다. -->
@@ -431,15 +431,16 @@
 		</div>
 		
 		<div class="row">
-		<button class="btn btn-name">키워드로 검색</button>
+		<button class="btn btn-name form-btn">키워드로 검색 >></button>
 		</div>
 <!-- 키워드 검색으로 누르게 되면 구분자의 숫자를 1으로 바꾸게 설정함 -->
 </div>
 
 <div class="page">
-<h2>키워드 검색!</h2>
+<h2 style="text-align: center;color: gray">키워드 검색!</h2>
 <form action="update.jsp" method="get">
-		<select name="column" required>
+	<div class="row">
+		<select name="column" required class="form-input form-inline">
 			<option disabled>선택</option>
 			
 			<%if(pn.columnValExists("item_name")){ %>
@@ -469,9 +470,10 @@
 			<input type="hidden" name="courseOriginSequnce" value="<%=courseOriginSequnce%>">
 			<!-- 	핵심이다..courseOriginSequnce(기존코스번호) 및 courseSequnce(수정용 임시 코스번호)는 무슨일이 있어서 최초 생성하고 잃어서는 안될 고유 번호이다. -->
 			<!-- courseOriginSequnce(기존코스번호)는 등록 제일 끝에 덮어쓰는 용도 / courseSequnce(수정용 임시 코스번호)는 기존 내용을 받아서 내용을 갱신하는 용도 -->
-			<input type="submit" value="검색">
+			<input type="submit" value="검색" class="form-btn form-inline">
+			</div>
 </form>
-<button class="btn btn-city">지역으로 검색</button>
+<button class="btn btn-city"><< 지역으로 검색</button>
 <!-- 지역 검색으로 누르게 되면 구분자의 숫자를 0으로바꾸게 설정함 -->
 </div>
 
@@ -488,13 +490,13 @@
 			<table border="1" width="800px">
 				<tbody>
 						<tr>
-							<th>지역</th>
+							<th>주소</th>
 							<th>관광지명</th>
 							<th>메뉴</th>
 						</tr>					
 						<%for(ItemDto itemDto : list) {%>
 							<tr>
-								<td><%=itemDto.getAdressCity()%></td>
+								<td><%=itemDto.getItemAddress()%></td>
 								<td><%=itemDto.getItemName()%></td>
 								<td><button class="item-add-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-item_address="<%=itemDto.getAdressCity()%>" data-item_name="<%=itemDto.getItemName()%>">추가하기</button></td>
 <!-- 								button class="item-add-btn"에대한 이벤트 및 이 태그에 있는 정보는 53~60번째 줄에 정의됨 -->
