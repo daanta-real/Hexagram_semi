@@ -38,8 +38,8 @@ public class UsersModifyPasswordServlet extends HttpServlet{
 			boolean isFormReady
 				 = sessionId != null && !sessionId.equals("") // 1) 로그인되어 있어야 한다.
 				&& currPw != null    && !currPw.equals("")    // 2) 현재 암호가 입력되어야 한다.
-				&& newPw != null     && !newPw.equals("")   // 3) 변경될 암호도 입력되어야 한다.
-				&& !currPw.equals(newPw);                       // 4) 현재 암호와 변경될 암호가 똑같이 입력되어서는 안 된다.
+				&& newPw != null     && !newPw.equals("")     // 3) 변경될 암호도 입력되어야 한다.
+				&& !currPw.equals(newPw);                     // 4) 현재 암호와 변경될 암호가 똑같이 입력되어서는 안 된다.
 			if(!isFormReady) {
 				System.out.println("비밀번호 변경에 필요한 양식들이 제대로 입력되지 않았습니다.");
 				throw new Exception();
