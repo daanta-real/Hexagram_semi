@@ -59,7 +59,7 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 		this.dao = dao;
 		this.pageSize = pageSize;
 		this.blockSize = blockSize;
-		
+
 	    try{
 	    	this.searchSelector = Integer.parseInt(req.getParameter("searchSelector"));
 	    	if(this.searchSelector<0 || this.searchSelector>1) throw new Exception();//한jsp에 보여줄 화면을 선택할때 사용한다 현재 리스트 조회구문과 인서트 검색에서 사용중
@@ -89,7 +89,7 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	public int getLastBlock() { return lastBlock; }
 	public List<DTO> getResultList() { return resultList; }
 	public int getSearchSelector() {return searchSelector;}
-	
+
 	// 2) 특수 Getters
 	// keyword 값이 null일 경우 ""로 바꿔줌
 	public String getKeywordString() { return keyword == null ? "" : keyword; }
@@ -105,7 +105,7 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 	// 3. Setters
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
-	
+
 	public void setPageSize(int pageSize) { this.pageSize = pageSize; }
 	public void setBlockSize(int blockSize) { this.blockSize = blockSize; }
 	public void setResultList(List<DTO> resultList) { this.resultList = resultList; }
@@ -142,26 +142,39 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	// UsersList 계산 메소드
 	public void calculate() throws Exception {
 
+		System.out.println("[페이지네이션] 계산 시작");
+
 		// 1. 출력할 rownum 범위 계산
+		System.out.print("[페이지네이션] 1. 출력할 rownum 범위 계산: ");
 		end   = page * pageSize;      // 페이지의 마지막 rownum
 		begin = end - (pageSize - 1); // 페이지의 첫    rownum
+		System.out.println("시작(" + begin + ") ~ 끝(" + end + ")");
+
 
 		// 2. 검색 모드 해당여부에 따라 resultList, count 구하기
+		System.out.print("[페이지네이션] 2. 결과 구하기");
 		if(isSearchMode()) {
-			System.out.println("검색 모드: " + column + "=" + keyword + " (" + begin + "~" + end + ")");
+			System.out.print("[페이지네이션] 2-1. 대상목록: 검색(" + column + "=" + keyword + "), 검색범위(" + begin + "~" + end + ")");
 			this.resultList = dao.search(column, keyword, begin, end);
 			this.count = dao.count(column, keyword);
+			System.out.print("[페이지네이션] 2-2. 대상 목록의 개수는 " + count + "개입니다.");
 		}
 		else {
-			System.out.println("전체목록 모드");
+			System.out.print("[페이지네이션] 2-1. 대상목록: 전체조회. 검색범위(" + begin + "~" + end + ")");
 			this.resultList = dao.list(begin, end);
 			this.count = dao.count();
+			System.out.print("[페이지네이션] 2-2. 대상 목록의 개수는 " + count + "개입니다.");
 		}
 
 		// 3. 하단 각 페이지 바로가기 버튼 출력범위 계산 (= block 계산)
-		startBlock  = (page - 1) / blockSize * blockSize + 1; // 출력할 가장 첫 페이지 번호 (연속형 출력X blockSize단위로 끊어 출력O)
+		System.out.println("[페이지네이션] 3. Page Block 계산 시작");
+		startBlock  = (page - 1) / blockSize * blockSize + 1; // 출력할 가장 첫 페이지 번호 (10단위 연속형 출력X blockSize단위로 끊어 출력O)
 		finishBlock = startBlock + (blockSize - 1);           // 이론 상 표시 가능한 가장 마지막 페이지 번호
 		lastBlock   = (count - 1) / pageSize + 1;             // 실제로 출력되는 가장 마지막 페이지 번호
+		System.out.println("[페이지네이션] 3. Page Block 계산 완료."
+			+ "\n[페이지네이션] 3. 시작 Page Block: " + startBlock
+			+ "\n[페이지네이션] 3. 종료 Page Block: " + finishBlock
+			+ "\n[페이지네이션] 3. ↑ 그 중에서 실제로 출력되는 가장 마지막 Page Block: " + lastBlock);
 
 	}
 

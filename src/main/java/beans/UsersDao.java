@@ -112,7 +112,37 @@ public class UsersDao implements PaginationInterface<UsersDto> {
 		return dto;
 
 	}
+	
+	// 2) NickName 기준
+		public UsersDto getByNick(String usersNick) throws Exception {
 
+			// SQL 준비
+			String sql = "SELECT * FROM users WHERE users_nick = ?";
+			Connection conn = JdbcUtils.connect3();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, usersNick);
+
+			// 완성된 SQL문 보내고 결과 받아오기
+			ResultSet rs = ps.executeQuery();
+			UsersDto dto = null;
+			if(rs.next()) {
+				dto = new UsersDto();
+				dto.setUsersIdx(rs.getInt("users_idx"));
+				dto.setUsersId(rs.getString("users_id"));
+				dto.setUsersPw(rs.getString("users_pw"));
+				dto.setUsersNick(rs.getString("users_nick"));
+				dto.setUsersEmail(rs.getString("users_email"));
+				dto.setUsersPhone(rs.getString("users_phone"));
+				dto.setUsersGrade(rs.getString("users_grade"));
+				dto.setUsersJoin(rs.getDate("users_join"));
+				dto.setUsersPoint(rs.getInt("users_point"));
+			}
+
+			// 마무리
+			conn.close();
+			return dto;
+
+		}
 
 
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈

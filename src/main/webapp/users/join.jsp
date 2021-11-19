@@ -16,8 +16,8 @@
 <script type='text/javascript' src="<%=root%>/resource/js/checkPwEquals_regexId_ajax.js"></script>
 <!-- 비밀번호 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexPw.js"></script>
-<!-- 닉네임 정규식 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/regexNick.js"></script>
+<!-- 닉네임 정규식 & 중복 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/regexNick_ajax.js"></script>
 <!-- 이메일 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexEmail.js"></script>
 <!-- 폰번호 정규식 검사 스크립트 -->
@@ -41,7 +41,7 @@
 <div class="sub_title">회원 가입</div>
 <!-- 
 		비밀번호 입력값 일치여부 검사시 템플릿안에 로그인에도 name=usersPw가 있어서 값을 못받아 오기때문에
-		form에 id=joinForm 을 부여하여 선택자 지정시킴  
+		form에 class=form-regexCheck 를 부여하여 선택자 지정시킴  
  -->
 <form class="form-regexCheck" method='post' action='<%=root%>/users/join.nogari'>
 <table>

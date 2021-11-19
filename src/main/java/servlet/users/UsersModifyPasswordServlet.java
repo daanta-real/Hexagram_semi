@@ -32,20 +32,14 @@ public class UsersModifyPasswordServlet extends HttpServlet{
 			UsersDao usersDao = new UsersDao();
 			System.out.println("입력받은 값: usersId = " + sessionId + ", usersPw = " + currPw + ", pwUpdate = " + newPw);
 
-//******* 2.검사에 있는 4번조건을 따로 빼야하지 않을까요????			
-//			//현재 암호와 변경 암호가 일치하면 안됨. 일치할 경우 equalsFail 파라미터 전달
-//			if(currPw.equals(newPw)) {
-//				System.out.println("오류. 현재 암호와 변경될 암호가 일치할 수 없습니다.");
-//				resp.sendRedirect(req.getContextPath() + "/users/modifyPassword.jsp?equalsFail");
-//			}
-			
+
 			// 2. 검사 - 비번 변경을 요청할 자격이 있는지 검사
 			System.out.print("[비밀번호 변경] 2. 검사 - 비밀번호 변경 요청 자격 확인.. ");
 			boolean isFormReady
 				 = sessionId != null && !sessionId.equals("") // 1) 로그인되어 있어야 한다.
 				&& currPw != null    && !currPw.equals("")    // 2) 현재 암호가 입력되어야 한다.
-				&& newPw != null     && !newPw.equals("")   // 3) 변경될 암호도 입력되어야 한다.
-				&& !currPw.equals(newPw);                       // 4) 현재 암호와 변경될 암호가 똑같이 입력되어서는 안 된다.
+				&& newPw != null     && !newPw.equals("")     // 3) 변경될 암호도 입력되어야 한다.
+				&& !currPw.equals(newPw);                     // 4) 현재 암호와 변경될 암호가 똑같이 입력되어서는 안 된다.
 			if(!isFormReady) {
 				System.out.println("비밀번호 변경에 필요한 양식들이 제대로 입력되지 않았습니다.");
 				throw new Exception();

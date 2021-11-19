@@ -26,15 +26,24 @@ public class UsersCreateServlet extends HttpServlet {
 			String usersNick  = req.getParameter("usersNick" );
 			String usersEmail = req.getParameter("usersEmail");
 			String usersPhone = req.getParameter("usersPhone");
+			System.out.println("[회원 가입] 0. 변수정보");
+			System.out.println("usersId = " + usersId);
+			System.out.println("usersPw = " + usersPw);
+			System.out.println("usersNick = " + usersNick);
+			System.out.println("usersEmail = " + usersEmail);
+			System.out.println("usersPhone = " + usersPhone);
+			System.out.println("[회원 가입] 0. 변수정보 끝");
 
 			// 1. 회원등록에 쓸 DTO 준비
+			// ※ [PW 관련] DTO 내의 PW는 평문이다. $문자열이 아니다. $문자열은 DAO의 INSERT/UPDATE계열에서만 만들어진다.
+			System.out.print("[회원 가입] 1. 등록정보 작성 시도: ");
 			UsersDto inputDto = new UsersDto();
-			inputDto.setUsersId(usersId);
-			inputDto.setUsersPw(usersPw); // ※ DTO 내의 PW는 평문이다. $문자열이 아니다. $문자열은 DAO의 INSERT/UPDATE계열에서만 만들어진다.
-			inputDto.setUsersNick(usersNick);
-			inputDto.setUsersEmail(usersEmail);
-			inputDto.setUsersPhone(usersPhone);
-			System.out.println("[회원 가입] 1. 등록정보: " + inputDto);
+			System.out.print("usersId..")   ; inputDto.setUsersId(usersId)      ; System.out.print("성공. ");
+			System.out.print("usersPw..")   ; inputDto.setUsersPw(usersPw)      ; System.out.print("성공. ");
+			System.out.print("usersNick..") ; inputDto.setUsersNick(usersNick)  ; System.out.print("성공. ");
+			System.out.print("usersEmail.."); inputDto.setUsersEmail(usersEmail); System.out.print("성공. ");
+			System.out.print("usersPhone.."); inputDto.setUsersPhone(usersPhone); System.out.println("성공. ");
+			System.out.println("[회원 가입] 1. 등록정보 작성 성공: " + inputDto);
 
 			// 2. 회원등록에 쓸 DAO를 준비하고, 시퀀스 따내서 DTO에 미리 넣는다.
 			UsersDao dao = new UsersDao();
