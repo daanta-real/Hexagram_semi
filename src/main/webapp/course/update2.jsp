@@ -1,4 +1,3 @@
-<%@page import="servlet.item.ItemCityList"%>
 <%@page import="beans.Pagination"%>
 <%@page import="beans.CourseItemDto"%>
 <%@page import="beans.CourseDao"%>
@@ -14,7 +13,7 @@
 
     <%
     String root = request.getContextPath();
-   		String subCity = request.getParameter("subCity");
+        
     	//기존의 번호
     	int courseOriginSequnce = Integer.parseInt(request.getParameter("courseOriginSequnce"));
     	//복사를 위한 임시 번호
@@ -32,14 +31,7 @@
     	//Item에 대한 데이터 정보를 계산해주세요.
     	pn.calculate();
     	//조건에 맞는 리스트를 반환해주세요.
-    		List<ItemDto> list = new ArrayList<>();
-			if(subCity != null){
-				list = itemDao.subCityList(subCity,"item_idx", pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-				pn.setCount(itemDao.count(pn.getColumn(), pn.getKeyword(),subCity));
-				pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
-			}else{
-				list = pn.getResultList();	
-			}
+    	List<ItemDto> list = pn.getResultList();
     	
     	 CourseItemDao courseItemDao = new CourseItemDao();
     	// 복사를 위한 임시 번호(courseSequnce)에서 ajax로 처리한 데이터 결과값을 확인해주는 열할.(목록 초기 화면 표시 및 update_last.jsp에서 이전으로 눌렀을 때 선택화면 초기화 용도)
@@ -236,14 +228,6 @@
        		 });
             
             
-	           $("select[name=keyword]").change(function(){
-	        	   location.href =  $(this).find("option:selected").val();
-	           })
-	           
-	          $("select[name=subCity]").change(function(){
-	        	   location.href =  $(this).find("option:selected").val();
-	           })
-            
             
             var searchSelector = <%=pn.getSearchSelector()%>;
             $(".page").hide();//모든 페이지를 숨기고
@@ -288,156 +272,129 @@
 <!-- 페이지 클래스는 지역으로 검색할지 키워드로 검색할지 사용자에게 편한 보기옵션을 선택한다 (화면 토글을 통해서 검색을 왔다리 갔다리할 수 있다) -->
 <div class="page">
 <!-- 지역 선택(그 지역에 한해서 한정 선택할 수 있다.) -->
-	<h2>지역 검색!</h2>
-		<div class="row">
+<form action="update.jsp" method="get">
+			<select name="keyword" required>
 <!-- 	여기에서 큰 컨셉은 경상남도 전라북도와 같이 4글자로 딱 맞춰지는 도시는 4글자로 설정하였고 그 이외의 도시들은 2글자로 같은 도시인지를 구분하게 설정하였다 -->
 <!-- 이는 insert_last.jsp , update_last.jsp에서 이전으로 돌아갈떄도 아이템_코스의 첫번째 데이터에 들어있는 도시를 선택하여 다시 값을 전달해줄때 확실한 방법이 될 수 있다. -->
-<select name="keyword" required class="form-input form-inline">
-			<%if(pn.getColumn()==null || !pn.getColumn().equals("item_address")) {%>
-			<option selected disabled>지역 선택</option>
-			<%}else{ %>
-			<option disabled>지역 선택</option>
-			<%} %>
-			
-			<%if(pn.keywordValExists("서울")) {%>
-			<option value="서울" selected>서울특별시</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=서울">서울특별시</option>
-			<%} %>
-			
-			<%if(pn.keywordValExists("부산")) {%>
-			<option value="부산" selected>부산광역시</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=부산">부산광역시</option>
-			<%} %>
-			
-			<%if(pn.keywordValExists("인천")) {%>
-			<option value="인천" selected>인천광역시</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=인천">인천광역시</option>
-			<%} %>
-			
-			<%if(pn.keywordValExists("대구")) {%>
-			<option value="대구" selected>대구광역시</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=대구">대구광역시</option>
-			<%} %>
-			
-			<%if(pn.keywordValExists("대전")) {%>
-			<option value="대전" selected>대전광역시</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=대전">대전광역시</option>
-			<%} %>
-			
-			<%if(pn.keywordValExists("광주")) {%>
-			<option value="광주" selected>광주광역시</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=광주">광주광역시</option>
-			<%} %>
-			
-			<%if(pn.keywordValExists("울산")) {%>
-			<option value="울산" selected>울산광역시</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=울산">울산광역시</option>
-			<%} %>
-			
-			<%if(pn.keywordValExists("경기")) {%>
-			<option value="경기" selected>경기도</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경기">경기도</option>
-			<%} %>
-			
-			<%if(pn.keywordValExists("세종")) {%>
-			<option value="세종" selected>세종특별자치시</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=세종">세종특별자치시</option>
-			<%} %>
-			
-			<%if(pn.keywordValExists("강원")) {%>
-			<option value="강원" selected>강원도</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=강원">강원도</option>
-			<%} %>																		
-			
-			<%if(pn.keywordValExists("제주")) {%>
-			<option value="제주" selected>	제주특별자치도</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=제주">제주특별자치도</option>
-			<%} %>
-			
-			<%if(pn.keywordValExists("경상북도")) {%>
-			<option selected>경상북도</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경상북도">경상북도</option>
-			<%} %>
+		<%if(pn.keywordValExists("서울")) {%>
+		<option value="서울" selected>서울특별시</option>
+		<%}else{ %>
+		<option value="서울">서울특별시</option>
+		<%} %>
 		
-			<%if(pn.keywordValExists("경상남도")) {%>
-			<option selected>경상남도</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경상남도">경상남도</option>
-			<%} %>
-			
-			<%if(pn.keywordValExists("전라남도")) {%>
-			<option selected>전라남도</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=전라남도">전라남도</option>
-			<%} %>
+		<%if(pn.keywordValExists("부산")) {%>
+		<option value="부산" selected>부산광역시</option>
+		<%}else{ %>
+		<option value="부산">부산광역시</option>
+		<%} %>
+		
+		<%if(pn.keywordValExists("인천")) {%>
+		<option value="인천" selected>인천광역시</option>
+		<%}else{ %>
+		<option value="인천">인천광역시</option>
+		<%} %>
+		
+		<%if(pn.keywordValExists("대구")) {%>
+		<option value="대구" selected>대구광역시</option>
+		<%}else{ %>
+		<option value="대구">대구광역시</option>
+		<%} %>
+		
+		<%if(pn.keywordValExists("대전")) {%>
+		<option value="대전" selected>대전광역시</option>
+		<%}else{ %>
+		<option value="대전">대전광역시</option>
+		<%} %>
+		
+		<%if(pn.keywordValExists("광주")) {%>
+		<option value="광주" selected>광주광역시</option>
+		<%}else{ %>
+		<option value="광주">광주광역시</option>
+		<%} %>
+		
+		<%if(pn.keywordValExists("울산")) {%>
+		<option value="울산" selected>울산광역시</option>
+		<%}else{ %>
+		<option value="울산">울산광역시</option>
+		<%} %>
+		
+		<%if(pn.keywordValExists("경기")) {%>
+		<option value="경기" selected>경기도</option>
+		<%}else{ %>
+		<option>경기도</option>
+		<%} %>
+		
+		<%if(pn.keywordValExists("세종")) {%>
+		<option value="세종" selected>세종특별자치시</option>
+		<%}else{ %>
+		<option>세종특별자치시</option>
+		<%} %>
+		
+		<%if(pn.keywordValExists("강원")) {%>
+		<option value="강원" selected>강원도</option>
+		<%}else{ %>
+		<option>강원도</option>
+		<%} %>																		
+		
+		<%if(pn.keywordValExists("제주")) {%>
+		<option value="제주" selected>	제주특별자치도</option>
+		<%}else{ %>
+		<option value="제주">제주특별자치도</option>
+		<%} %>
+		
+		<%if(pn.keywordValExists("경상북도")) {%>
+		<option selected>경상북도</option>
+		<%}else{ %>
+		<option>경상북도</option>
+		<%} %>
 	
-			<%if(pn.keywordValExists("전라북도")) {%>
-			<option selected>전라북도</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=전라북도">전라북도</option>
-			<%} %>
-			
-			<%if(pn.keywordValExists("충청남도")) {%>
-			<option selected>충청남도</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=충청남도">충청남도</option>
-			<%} %>
+		<%if(pn.keywordValExists("경상남도")) {%>
+		<option selected>경상남도</option>
+		<%}else{ %>
+		<option>경상남도</option>
+		<%} %>
 		
-			<%if(pn.keywordValExists("충청북도")) {%>
-			<option selected>충청북도</option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=충청북도">충청북도</option>
-			<%} %>				
-		</select>
+		<%if(pn.keywordValExists("전라남도")) {%>
+		<option selected>전라남도</option>
+		<%}else{ %>
+		<option>전라남도</option>
+		<%} %>
+
+		<%if(pn.keywordValExists("전라북도")) {%>
+		<option selected>전라북도</option>
+		<%}else{ %>
+		<option>전라북도</option>
+		<%} %>
+		
+		<%if(pn.keywordValExists("충청남도")) {%>
+		<option selected>충청남도</option>
+		<%}else{ %>
+		<option>충청남도</option>
+		<%} %>
+	
+		<%if(pn.keywordValExists("충청북도")) {%>
+		<option selected>충청북도</option>
+		<%}else{ %>
+		<option>충청북도</option>
+		<%} %>				
+	</select>
 <!-- 	select같은 경우, 내가 선택하는 것이 keyword이고 column값은 주소로 고정되있기 때문에 일반 input과는 반대로 처리해주었고, -->
 <!-- 	이를 위해 모듈에 keywordValExists 키워드가 같은지 확인해주는 메소드를 넣었다. -->
+	<input type="hidden" name="column" value="item_address">
 <!-- 	핵심이다..courseOriginSequnce(기존코스번호) 및 courseSequnce(수정용 임시 코스번호)는 무슨일이 있어서 최초 생성하고 잃어서는 안될 고유 번호이다. -->
 <!-- courseOriginSequnce(기존코스번호)는 등록 제일 끝에 덮어쓰는 용도 / courseSequnce(수정용 임시 코스번호)는 기존 내용을 받아서 내용을 갱신하는 용도 -->
+	<input type="hidden" name="courseOriginSequnce" value="<%=courseOriginSequnce%>">
+	<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
 <!-- 	검색 후 검색 옵션이 무엇이였는지 전달 도시명 검색 옵션은 구분자를 0번으로 지정한다.191~210번줄 참조-->
-		<select name="subCity" required class="form-input form-inline">
-			<%if(pn.getKeyword()==null) {%>
-			<option selected disabled>시군구 선택</option>
-			<%}else{ %>
-			<option disabled>시군구 선택</option>
-			<%} %>
-			
-			<%if(isSearchMode && pn.getColumn().equals("item_address")){
-	            List<String> subCityList = ItemCityList.getSubcityList(pn.getKeyword());  
-	            for(String s : subCityList){%>
-	            
-			<%if(subCity!=null && subCity.equals(s)) {%>
-			<option value="<%=s%>" selected><%=s%></option>
-			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=<%=pn.getKeyword()%>&subCity=<%=s%>"><%=s%></option>
-			<%} %>
-			
-			<%} %>
-			<%} %>
-		</select>	
-		
-		
-		</div>
-		
-		<div class="row">
-		<button class="btn btn-name">키워드로 검색</button>
-		</div>
+	<input type="hidden" name="searchSelector" value="<%=0%>">
+	<input type="submit" value="지역 검색">
+</form>
+
+<button class="btn btn-name">키워드로 검색</button>
 <!-- 키워드 검색으로 누르게 되면 구분자의 숫자를 1으로 바꾸게 설정함 -->
 </div>
 
 <div class="page">
-<h2>키워드 검색!</h2>
 <form action="update.jsp" method="get">
 		<select name="column" required>
 			<option disabled>선택</option>
