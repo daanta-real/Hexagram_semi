@@ -39,8 +39,10 @@ if(isLogin) {
 
 <!-- 디버그용 -->
 <DIV ID="debugContainer">
-	<BUTTON ONCLICK='location.href="<%=root%>/admin/tableInitializer.jsp";'>DB 초기화</BUTTON>
-	<form onsubmit="return false;"><INPUT ID='debug_query' TYPE=text /><BUTTON ONCLICK='debug_rainbowQueryRun();'>레이어 해체보기</BUTTON></form>
+	<form onsubmit="return false;">
+		<INPUT ID='debug_query' TYPE=text VALUE="BODY *"/>
+		<BUTTON ONCLICK='debug_rainbowQueryRun();'>레이어 해체보기</BUTTON>
+	</form>
 </DIV>
 
 <!-- 모바일 메뉴 콘테이너 -->

@@ -215,6 +215,7 @@ public class EventDao {
 		}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 		public void countReply(int eventIdx) {
 			// TODO Auto-generated method stub
 			
@@ -227,6 +228,21 @@ public class EventDao {
 
 
 =======
+>>>>>>> branch 'main' of https://github.com/daanta-real/Hexagram_semi.git
+=======
+		public void countReply(int eventIdx) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		public void insertWithSequence(EventDto eventDto) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		
+		
+
 >>>>>>> branch 'main' of https://github.com/daanta-real/Hexagram_semi.git
 		
 

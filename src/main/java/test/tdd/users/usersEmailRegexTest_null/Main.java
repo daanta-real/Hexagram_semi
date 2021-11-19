@@ -1,4 +1,4 @@
-package test.tdd.users.usersEmailRegexTest;
+package test.tdd.users.usersEmailRegexTest_null;
 
 import java.util.regex.Pattern;
 
