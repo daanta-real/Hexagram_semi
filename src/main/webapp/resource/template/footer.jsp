@@ -20,4 +20,6 @@ System.out.println("[풋터 출력] from " + request.getRequestURL().toString())
 	<LI>세션 ID (usersId) = '<%=session.getAttribute("usersId") %>', <%= session.getAttribute("usersId") == null ? "자료형이 아예 null임 (값 자체가 없음)" : session.getAttribute("usersId").getClass().getName() %></LI>
 	<LI>세션 GRADE (usersGrade) = '<%=session.getAttribute("usersGrade") %>', <%= session.getAttribute("usersGrade") == null ? "자료형이 아예 null임 (값 자체가 없음)" : session.getAttribute("usersGrade").getClass().getName() %></LI>
 	<LI>#mobileMenuLayer *</LI>
+	<LI>세션 정보 출력:</LI>
+	<LI><%=Sessioner.getInfo(session)%></LI>
 </UL></FOOTER>
