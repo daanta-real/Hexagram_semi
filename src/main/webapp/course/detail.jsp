@@ -31,7 +31,6 @@
         * {
             box-sizing: border-box;
         }
-
         /* 전체 레이아웃 사이즈 (메인으로 옮겨 메인에 맞게 조정)*/
         .container-900 {width: 900px;}
         /* 각 div 마다 부여할 margin 값 */
@@ -48,7 +47,6 @@
         .center {text-align: center;}
         /* div 내에 태그 오른쪽 정렬*/
         .right {text-align: right;}
-
         /* 코스 제목*/
         .course-name{
             font-size:40px;
@@ -97,7 +95,6 @@
             top:30px;
             
         }
-
         ul{
         	list-style:none;
         }
@@ -141,7 +138,6 @@
 	//글 작성자 아이디 및 닉네임 출력을 위한 단일 조회
 	UsersDao usersDao = new UsersDao();
 	UsersDto usersShow = usersDao.get(courseDto.getUsersIdx());
-
 	//자신의 글인지 확인 (수정, 삭제, 조회수증가)
 	boolean isMyboard = request.getSession().getAttribute("usersIdx") != null && courseDto.getUsersIdx() == usersIdx;
 	
