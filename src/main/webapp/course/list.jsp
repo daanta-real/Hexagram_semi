@@ -20,14 +20,12 @@
     	order = request.getParameter("order");
     	
     	String subCity = request.getParameter("subCity");
-
     	//절대 경로를 위해 index.jsp 페이지 변수 저장
         String root = request.getContextPath();
     	
     	//페이지 네이션
         CourseDao courseDao = new CourseDao();
         Pagination<CourseDao, CourseDto> pn = new Pagination<>(request, courseDao);
-
     //검색용 페이지 네이션
     boolean isSearchMode = pn.isSearchMode();
    
@@ -43,18 +41,12 @@
 	if(isSearchMode){
 		if(pn.getColumn().equals("item_address")){
 			if(subCity != null){
-				List<Integer> countIdxList = courseDao.subCityList(subCity,order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-				for(int courseNumber : countIdxList){
-					list.add(courseDao.get(courseNumber));
-				}
+				list = courseDao.subCityList(subCity,order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
 				pn.setCount(courseDao.countSubCity(pn.getColumn(), pn.getKeyword(),subCity));
 				pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
 		}else
 		{
-			List<Integer> countIdxList = courseDao.cityList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-			for(int courseNumber : countIdxList){
-				list.add(courseDao.get(courseNumber));
-			}
+			list = courseDao.cityList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
 			pn.setCount(courseDao.countCity(pn.getColumn(), pn.getKeyword()));
 			pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1);
 		}
@@ -70,7 +62,6 @@
 		pn.setCount(courseDao.count());
 		pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1);
 	}
-
         
      	// 제목 h2 태그에 들어갈 타이틀 결정
         String title = isSearchMode ? ("["+pn.getKeyword()+"]" + " 검색") : ("코스 목록");
@@ -86,7 +77,6 @@
     * {
         box-sizing: border-box;
     }
-
     /* 전체 레이아웃 사이즈 (메인으로 옮겨 메인에 맞게 조정)*/
     .container-900 {width: 900px;}
     /* 각 div 마다 부여할 margin 값 */
@@ -170,7 +160,6 @@
         margin-left: 13px;
         margin-top: 10;
         margin-bottom: 10px;
-
     }
     .box-detail{
         margin:3px;
@@ -248,12 +237,6 @@
             <div class="search center">
             <form action="<%=root%>/course/list.jsp" method="get">
                 <select name="column" class="search-select">
-                   <%if(pn.columnValExists("item_address")){ %>
-							<option value="item_address" selected>지역명</option>
-							<%}else{ %>
-							<option value="item_address">지역명</option>
-							<%} %>
-							
 							<%if(pn.columnValExists("course_name")){ %>
 							<option value="course_name" selected>코스명</option>
 							<%}else{ %>
@@ -266,11 +249,17 @@
 							<option value="course_detail">내용</option>
 							<%} %>
 						</select>
-                <input type="search" name="keyword" placeholder="검색어 입력"
+						<%if(pn.getColumn() != null && pn.getColumn().equals("item_address")){ %>
+						                <input type="search" name="keyword" placeholder="검색어 입력"
+						required class="search-keyword">
+						<%}else{ %>
+						                <input type="search" name="keyword" placeholder="검색어 입력"
 						required value="<%=pn.getKeywordString()%>" class="search-keyword">
+						<%} %>
+
 				<input type="hidden" name="order" value="<%=order%>">
                 <input type="submit" value="검색" class="search-btn">
-                
+                </form>
             </div>
         </div>
 
@@ -340,7 +329,7 @@
         <div class="row flex-container">
 				<div class="flex-btn">
 				<form action="<%=root%>/course/list.jsp" method="get">
-					<input type="hidden" name="order" value="item_idx">
+					<input type="hidden" name="order" value="course_idx">
 					<%if(subCity != null) {%>
 					<input type="hidden" name="subCity" value="<%=subCity%>">
 					<%} %>
@@ -351,7 +340,7 @@
 			</div>
 			<div class="flex-btn">
 				<form action="<%=root%>/course/list.jsp" method="get">
-					<input type="hidden" name="order" value="item_count_view">
+					<input type="hidden" name="order" value="course_count_view">
 			<%if(subCity != null) {%>
 					<input type="hidden" name="subCity" value="<%=subCity%>">
 					<%} %>
@@ -362,7 +351,7 @@
 			</div >
 				<div class="flex-btn">			
 				<form action="<%=root%>/course/list.jsp" method="get">
-					<input type="hidden" name="order" value="item_count_reply">
+					<input type="hidden" name="order" value="course_count_reply">
 			<%if(subCity != null) {%>
 					<input type="hidden" name="subCity" value="<%=subCity%>">
 					<%} %>
@@ -386,7 +375,7 @@
 		    ItemDao itemDao = new ItemDao();
 		   	ItemDto itemDto = itemDao.get(itemIdx);
 		   	UsersDao usersDao = new UsersDao();
-		   	UsersDto usersDto = usersDao.get(courseDto.getUsersIdx());
+		   	UsersDto usersDto = usersDao.get(itemDto.getUsersIdx());
 		   	
 			//목록을 보여주면서 itemDto의 itemIdx의 첫번째 정보를 받는다
 			ItemFileDao itemFileDao = new ItemFileDao();
