@@ -275,7 +275,7 @@
 
 <!-- 지역 선택 form(그 지역에 한해서 한정 선택할 수 있다.) -->
 <div class="page">
-	<h2>지역 검색!</h2>
+	<h2 style="text-align: center; color: gray">지역 검색!</h2>
 		<div class="row">
 		<select name="keyword" required class="form-input form-inline">
 			<%if(pn.getColumn()==null || !pn.getColumn().equals("item_address")) {%>
@@ -410,18 +410,18 @@
 		</div>
 		
 		<div class="row">
-		<button class="btn btn-name">키워드로 검색</button>
+		<button class="btn btn-name form-btn">키워드로 검색 >></button>
 		</div>
 		
 </div>
 
 <!-- 지역 선택한 후 관광지 검색 from -->
 <div class="page">
-<h2>키워드 검색!</h2>
+<h2 style="text-align: center;color: gray">키워드 검색!</h2>
 	<form action="insert.jsp" method="get">
-	
+		<div class="row">
 			<!-- 관광지 검색은 관광지명과 내용으로 검색 할 수 있다 -->
-			<select name="column" required>
+			<select name="column" required class="form-input form-inline">
 				<option disabled>선택</option>
 				
 				<%if(pn.columnValExists("item_name")){ %>
@@ -449,10 +449,11 @@
 			<input type="hidden" name="searchSelector" value="<%=1%>">
 			<!-- 	핵심이다.. courseSequnce는 무슨일이 있어서 최초 생성하고 잃어서는 안될 고유 번호이다. -->
 			<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
-			<input type="submit" value="검색">
+			<input type="submit" value="검색" class="form-btn form-inline">
+			</div>
 	</form>
 	<!-- 지역검색으로 변경해주는 버튼 -->
-	<button class="btn btn-city">지역으로 검색</button>
+	<button class="btn btn-city form-btn"><< 지역으로 검색</button>
 </div>
 
 <br>
@@ -474,13 +475,13 @@
 	<table border="1" width="800px">
 		<tbody>
 			<tr>
-				<th>지역</th>
+				<th>주소</th>
 				<th>관광지명</th>
 				<th>메뉴</th>
 			</tr>
 			<%for(ItemDto itemDto : list) {%>
 			<tr>
-				<td><%=itemDto.getAdressCity()%></td>
+				<td><%=itemDto.getItemAddress()%></td>
 				<td><%=itemDto.getItemName()%></td>
 				<td>
 					<button class="item-add-btn" data-course_idx="<%=courseSequnce%>"  
