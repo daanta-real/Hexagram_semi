@@ -152,10 +152,7 @@ public class UsersDao implements PaginationInterface<UsersDto> {
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt   (1, dto.getUsersIdx());
 		ps.setString(2, dto.getUsersId());
-		// 패스워드 관련 처리는 별도로 실시한다.
-		String pw = dto.getUsersPw();
-		String pwColumnTxt = Encrypter.getUsersPwColumnTxt(pw);
-		ps.setString(3, pwColumnTxt); // 변경할 비번을 pwColumnTxt로 바꾼 것 ($문자열)
+		ps.setString(3, Encrypter.getUsersPwColumnTxt(dto.getUsersPw())); // $문자열
 		ps.setString(4, dto.getUsersNick());
 		ps.setString(5, dto.getUsersEmail());
 		ps.setString(6, dto.getUsersPhone());
@@ -219,7 +216,7 @@ public class UsersDao implements PaginationInterface<UsersDto> {
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		count = 1;
-		if (dto.getUsersPw   () != null) ps.setString(count++, dto.getUsersPw   ());
+		if (dto.getUsersPw   () != null) ps.setString(count++, Encrypter.getUsersPwColumnTxt(dto.getUsersPw()));
 		if (dto.getUsersNick () != null) ps.setString(count++, dto.getUsersNick ());
 		if (dto.getUsersEmail() != null) ps.setString(count++, dto.getUsersEmail());
 		if (dto.getUsersPhone() != null) ps.setString(count++, dto.getUsersPhone());
@@ -245,8 +242,7 @@ public class UsersDao implements PaginationInterface<UsersDto> {
 		String sql = "UPDATE users SET users_pw = ? WHERE users_id = ?";
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
-		String pwColumnTxt = Encrypter.getUsersPwColumnTxt(pwUpdate);
-		ps.setString(1, pwColumnTxt); // 변경할 비번을 pwColumnTxt로 바꾼 것 ($문자열)
+		ps.setString(1, Encrypter.getUsersPwColumnTxt(pwUpdate)); // 변경할 비번을 pwColumnTxt로 바꾼 것 ($문자열)
 		ps.setString(2, id);          // 아이디
 
 		// 완성된 SQL문 보내고 결과 받아오기
