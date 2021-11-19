@@ -6,7 +6,9 @@
 <HEAD>
 <TITLE>노가리투어 - 내 정보 변경</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
-<% String root = request.getContextPath(); %>
+<%
+String root = request.getContextPath();
+%>
 </HEAD>
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
@@ -28,7 +30,9 @@
 <SECTION>
 
 <!--세션에 저장된 아이디 -->
-<%String sessionId = (String)session.getAttribute("usersId"); %>	
+<%
+String sessionId = (String)session.getAttribute("usersId");
+%>	
 
 <!-- 회원상세정보 불러와서 원래 정보 보여주기 -->
 <%
