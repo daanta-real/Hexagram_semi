@@ -115,7 +115,7 @@ public class Pagination<DAO extends PaginationInterface<DTO>, DTO> {
 	public void setEnd(int end) {this.end = end;}
 	public void setStartBlock(int startBlock) {this.startBlock = startBlock;}
 	public void setFinishBlock(int finishBlock) {this.finishBlock = finishBlock;}
-	
+
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 	// 4. Checkers
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
@@ -156,18 +156,18 @@ public class Pagination<DAO extends PaginationInterface<DTO>, DTO> {
 
 
 		// 2. 검색 모드 해당여부에 따라 resultList, count 구하기
-		System.out.print("[페이지네이션] 2. 결과 구하기");
+		System.out.println("[페이지네이션] 2. 결과 구하기");
 		if(isSearchMode()) {
-			System.out.print("[페이지네이션] 2-1. 대상목록: 검색(" + column + "=" + keyword + "), 검색범위(" + begin + "~" + end + ")");
+			System.out.println("[페이지네이션] 2-1. 대상목록: 검색(" + column + "=" + keyword + "), 검색범위(" + begin + "~" + end + ")");
 			this.resultList = dao.search(column, keyword, begin, end);
 			this.count = dao.count(column, keyword);
-			System.out.print("[페이지네이션] 2-2. 대상 목록의 개수는 " + count + "개입니다.");
+			System.out.println("[페이지네이션] 2-2. 대상 목록의 개수는 " + count + "개입니다.");
 		}
 		else {
-			System.out.print("[페이지네이션] 2-1. 대상목록: 전체조회. 검색범위(" + begin + "~" + end + ")");
+			System.out.println("[페이지네이션] 2-1. 대상목록: 전체조회. 검색범위(" + begin + "~" + end + ")");
 			this.resultList = dao.list(begin, end);
 			this.count = dao.count();
-			System.out.print("[페이지네이션] 2-2. 대상 목록의 개수는 " + count + "개입니다.");
+			System.out.println("[페이지네이션] 2-2. 대상 목록의 개수는 " + count + "개입니다.");
 		}
 
 		// 3. 하단 각 페이지 바로가기 버튼 출력범위 계산 (= block 계산)
