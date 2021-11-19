@@ -261,11 +261,6 @@ CREATE TABLE course(
   course_count_reply NUMBER(20)                   DEFAULT 0       CONSTRAINT course_count_reply_not_null NOT NULL
 );
 
--- 데이터 생성 (course)
-INSERT INTO course VALUES(1, 1, '코스제목1', '코스내용1', SYSDATE, 0, 0);
-INSERT INTO course VALUES(2, 1, '코스제목2', '코스내용2', SYSDATE, 0, 0);
-INSERT INTO course VALUES(3, 3, '코스제목3', '코스내용3', SYSDATE, 0, 0);
-
 -- 저장 (course)
 COMMIT;
 
@@ -283,23 +278,10 @@ SELECT * FROM course;
 CREATE SEQUENCE course_item_seq;
 CREATE TABLE course_item(
   course_item_idx NUMBER(20)                  CONSTRAINT course_item_PK      PRIMARY KEY,
-  item_idx        REFERENCES users(users_idx) ON DELETE SET NULL,
+  item_idx        REFERENCES item(item_idx) ON DELETE SET NULL,
   course_idx      NUMBER(20)                  CONSTRAINT course_idx_not_null NOT NULL
                                               CONSTRAINT course_idx_check    CHECK(course_idx > 0)
 );
-
--- 데이터 생성 (course_item)
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 1, 1);
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 2, 1);
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 3, 1);
-
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 4, 2);
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 5, 2);
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 6, 2);
-
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 7, 3);
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 8, 3);
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 9, 3);
 
 -- 저장 (course_item)
 COMMIT;

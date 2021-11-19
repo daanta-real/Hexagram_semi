@@ -125,11 +125,13 @@
 <SECTION>
 
 <!-- 페이지 내용 시작 -->
-<% String root = request.getContextPath(); %>
+<%
+String root = request.getContextPath();
+%>
 
 <%-- 페이지에 필요한 세션, 파라미터값 저장 및 변수 선언 --%>
-<%	
-	//usersIdx 세션값 변수에 저장
+<%
+//usersIdx 세션값 변수에 저장
 	int usersIdx = (int)request.getSession().getAttribute("usersIdx");
 	//코스번호 받기
 	int courseIdx = Integer.parseInt(request.getParameter("courseIdx"));
@@ -149,12 +151,11 @@
 	String usersGrade = (String)request.getSession().getAttribute("usersGrade");
 	//관리자인지?
 	boolean isManager = request.getSession().getAttribute("users_grade") != null && usersGrade.equals("관리자");
-	
 %>
 
 <%-- course_item 및 course의 제목 및 내용 출력을 위한 변수 선언 --%>
 <%
-	//course_item 조회
+//course_item 조회
 	CourseItemDao courseItemDao = new CourseItemDao();
 	List<CourseItemDto> getItemList = courseItemDao.getByCourse(courseIdx);
 	
@@ -165,7 +166,7 @@
 
 <%-- 현재 게시글에 대한 댓글 목록 출력 --%>
 <%
-	//댓글 리스트 불러오기
+//댓글 리스트 불러오기
 	CourseReplyDao courseReplyDao = new CourseReplyDao();
 	List<CourseReplyDto> list = courseReplyDao.listByTreeSort(courseIdx);
 %>
@@ -182,7 +183,7 @@
 // 		courseDao.readUp(courseIdx,usersIdx);
 // 	}
 // 	request.getSession().setAttribute("boardCountView", boardCountView);
- %>
+%>
 
 <!-- 전체 레이아웃 컨테이너 사이즈는 메인에 맞게 조절-->
 <div class="container-900 container-center">
@@ -190,40 +191,44 @@
     <!-- 작성자 닉네임 및 아이디 왼쪽 정렬 -->
     <div class="row">
         <div class="row float-container">
-            <span class="float-left">작성자 : <%=usersShow.getUsersId() %>(<%=usersShow.getUsersNick() %>)</span>
-            <%if(isMyboard || isManager){ %>
+            <span class="float-left">작성자 : <%=usersShow.getUsersId()%>(<%=usersShow.getUsersNick()%>)</span>
+            <%
+            if(isMyboard || isManager){
+            %>
             <!-- 수정/삭제는 jsp에서도 막아주는 것 이외로 주소로 입력하는 것을 방지하게 위해서 필터로도 막아줘야 한다. -->
 			<!-- 댓글 작성자 또는 관리자가 아니라면 버튼이 보여지지 않게 처리 -->
 			
             <a href="delete.nogari?courseIdx=<%=courseIdx%>" class="float-right float-btn">수정</a>
             <a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>" class="float-right float-btn">삭제</a>
             <a href="insert_sequence.nogari" class="float-right float-btn">새글작성</a>
-            <%} %>
+            <%
+            }
+            %>
         </div>
         
         <div class="top-menu right">
         </div>
         <!-- 코스 제목 가운데 정렬-->
         <div class="row center">
-            <span class="course-name"><%=courseDto.getCourseName() %></span><br>
+            <span class="course-name"><%=courseDto.getCourseName()%></span><br>
             <!-- 코스 제목 밑에 지역 표시-->
             <%
             int itemIdx = courseItemDao.getItemIdxByCourse(courseIdx);
-            ItemDto location = itemDao.get(itemIdx);
+                                    ItemDto location = itemDao.get(itemIdx);
             %>
-            <span class="course-location"><%=location.getAdressCity() %> &nbsp; <%=location.getAdressCitySub() %></span>
+            <span class="course-location"><%=location.getAdressCity()%> &nbsp; <%=location.getAdressCitySub()%></span>
         </div>
         <!-- 조회수 및 좋아요? 왼쪽 정렬 / 작성일자 오른쪽 정렬 -->
         <div class="row float-container">
-            <span class="float-left">조회수 : <%=courseDto.getCourseCountView() %> or 좋아요</span>
-            <span class="float-right"><%=courseDto.getCourseDate() %></span>
+            <span class="float-left">조회수 : <%=courseDto.getCourseCountView()%> or 좋아요</span>
+            <span class="float-right"><%=courseDto.getCourseDate()%></span>
         </div>
     </div>
     <!-- 코스 작성 내용-->
     <div class="row course-detail">
     	<span>[글 작성 내용]</span>
     	<br>
-        <span><%=courseDto.getCourseDetail() %></span>
+        <span><%=courseDto.getCourseDetail()%></span>
     </div>
     <!-- 지도 표시-->
     <div class="row center course-map">
@@ -236,24 +241,34 @@
     <div class="row" id="slide">
     <!-- courseItem 목록 출력 -->
         <ul>
-		<%for(CourseItemDto courseItemDto : getItemList){ %>
+		<%
+		for(CourseItemDto courseItemDto : getItemList){
+		%>
 		<%
 		ItemDto itemDto = itemDao.get(courseItemDto.getItemIdx());
-		ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());
+				ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());
 		%>
             <li>
-                <span class="item-title"><%=itemDto.getItemName() %></span>
-                <a href="<%=root %>/item/detail.jsp?itemIdx=<%=itemDto.getItemIdx() %>" class="item-link">
-                    <%if(itemFileDto == null){ %>
+                <span class="item-title"><%=itemDto.getItemName()%></span>
+                <a href="<%=root%>/item/detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>" class="item-link">
+                    <%
+                    if(itemFileDto == null){
+                    %>
 					<!-- 첨부파일 출력 -->
 					<img src="http://via.placeholder.com/100x100">
-					<%}else{ %>
+					<%
+					}else{
+					%>
 					<!-- 대체 이미지 출력 -->
 					<img src="<%=root%>/item/file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="150px" height="150px">
-					<%} %>
+					<%
+					}
+					%>
                 </a>
             </li>
-        <%} %>
+        <%
+        }
+        %>
         </ul>
     </div>
     <div class="row">
@@ -264,9 +279,9 @@
 <!-- 댓글 -->
 
 <!-- 댓글 작성 공간 -->
-<form action="<%=root %>/course_reply/insert.nogari" method="post">
+<form action="<%=root%>/course_reply/insert.nogari" method="post">
 <!-- 댓글 작성시 댓글 번호를 숨겨서 보내준다 -->
-<input type="hidden" name="courseIdx" value="<%=courseIdx %>">
+<input type="hidden" name="courseIdx" value="<%=courseIdx%>">
 <table border="1" width="900px">
 	<tbody>
 		<tr>
@@ -286,7 +301,9 @@
 <div class="row center"></div>
 
 <!-- 댓글이 있다면 댓글목록을 출력한다-->
-<%if(!list.isEmpty()){ %>
+<%
+if(!list.isEmpty()){
+%>
 <table border="1" width="900px">
 	<thead>
 		<tr>
@@ -297,17 +314,19 @@
 	</thead>
 	<tbody>
 		<!-- 댓글 목록 출력 -->
-		<%for(CourseReplyDto courseReplyDto : list){ %>
+		<%
+		for(CourseReplyDto courseReplyDto : list){
+		%>
 
-		<% 
+		<%
 		//게시글 작성자를 알기위해 usersDto 선언
-		UsersDto usersDto = usersDao.get(courseReplyDto.getUsersIdx());
-		
-		//게시물 작성자 = 댓글 작성자?
-		boolean ownerReply = courseDto.getUsersIdx() == courseReplyDto.getUsersIdx();
-		
-		//본인 댓글인지 확인
-		boolean myReply = usersIdx == courseReplyDto.getUsersIdx();
+				UsersDto usersDto = usersDao.get(courseReplyDto.getUsersIdx());
+				
+				//게시물 작성자 = 댓글 작성자?
+				boolean ownerReply = courseDto.getUsersIdx() == courseReplyDto.getUsersIdx();
+				
+				//본인 댓글인지 확인
+				boolean myReply = usersIdx == courseReplyDto.getUsersIdx();
 		%>
 		
 		<tr>

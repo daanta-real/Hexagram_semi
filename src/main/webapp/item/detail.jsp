@@ -182,33 +182,57 @@
 					margin-bottom: 2rem;
 				}
 </style>
+ <script>
+	$(function(){
+		$(".view-row").find(".edit-btn").click(function(){
+			$(this).parents("tr.view-row").hide();
+			$(this).parents("tr.view-row").next("tr.edit-row").show();
+		});
+		
+		$(".edit-row").find(".edit-cancel-btn").click(function(){
+			$(this).parents("tr.edit-row").hide();
+			$(this).parents("tr.edit-row").prev("tr.view-row").show();
+		});
+		
+		$(".view-row").find(".reply-btn").click(function(){
+			$(this).parents("tr.view-row").next("tr.edit-row").next("tr.reply-row").show();
+		});			
+			
+		
+		$(".reply-row").find(".reply-cancel-btn").click(function(){
+			$(this).parents("tr.reply-row").hide();
+		});
+		
+		$(".edit-row").hide();
+		$(".reply-row").hide();
+	});
+</script>    
  
 <%-- 페이지에 필요한 세션, 파라미터값 저장 및 변수 선언 --%>
- <% 
-	//경로 설정을 위해 index.jsp를 변수 저장
-	 String root = request.getContextPath();
-	 //list.jsp에서 받은 itemIdx 파라미터값 변수 저장
-	 int itemIdx = Integer.parseInt(request.getParameter("itemIdx"));
-	 //출력을위해 Dao Dto 변수 선언
-	 ItemDao itemDao = new ItemDao();
-	 ItemDto itemDto = itemDao.get(itemIdx);
-	
-	//usersIdx 변수 저장 (본인글인지 확인을 위해)
-	int usersIdx = (int)request.getSession().getAttribute("usersIdx");
-	//자신이 쓴글인지(현재 접속자 = 게시물 작성자)?
-	boolean isMyboard = request.getSession().getAttribute("usersIdx") != null && itemDto.getUsersIdx() == usersIdx;
-	 
-	//회원 등급 변수 저장(관리자만에게만 보이는 수정 삭제 버튼 표시를 위해)
-	String usersGrade = (String)request.getSession().getAttribute("usersGrade");
-	//관리자인지?
-	boolean isManager = request.getSession().getAttribute("users_grade") != null && usersGrade.equals("관리자");
-	 
+ <%
+ //경로 설정을 위해 index.jsp를 변수 저장
+  	 String root = request.getContextPath();
+  	 //list.jsp에서 받은 itemIdx 파라미터값 변수 저장
+  	 int itemIdx = Integer.parseInt(request.getParameter("itemIdx"));
+  	 //출력을위해 Dao Dto 변수 선언
+  	 ItemDao itemDao = new ItemDao();
+  	 ItemDto itemDto = itemDao.get(itemIdx);
+  	
+  	//usersIdx 변수 저장 (본인글인지 확인을 위해)
+  	int usersIdx = (int)request.getSession().getAttribute("usersIdx");
+  	//자신이 쓴글인지(현재 접속자 = 게시물 작성자)?
+  	boolean isMyboard = request.getSession().getAttribute("usersIdx") != null && itemDto.getUsersIdx() == usersIdx;
+  	 
+  	//회원 등급 변수 저장(관리자만에게만 보이는 수정 삭제 버튼 표시를 위해)
+  	String usersGrade = (String)request.getSession().getAttribute("usersGrade");
+  	//관리자인지?
+  	boolean isManager = request.getSession().getAttribute("users_grade") != null && usersGrade.equals("관리자");
  %>
  
 <%-- 조회수 중복방지 기능 (추 후 필요할시 주석 제거하고 위에 조회수 기능 삭제) --%>
 <%-- 조회수 증가 기능 (조회수 중복 방지) => 한번이 아니라 다른 회원이 들어올떄마다 조회수를 증가시켜주기 위해 게시물을 클릭시킬떄마다 +1을 해준다.(새로고침 방지)--%>
 <%
-	//Set<Integer> boardCountView = (Set<Integer>)request.getSession().getAttribute("boardCountView");
+//Set<Integer> boardCountView = (Set<Integer>)request.getSession().getAttribute("boardCountView");
 
 	//if(boardCountView==null){
 	//	boardCountView = new HashSet<Integer>();
@@ -221,7 +245,7 @@
  
 <%-- 게시글 사진파일 정보 조회  --%>
 <%
-	ItemFileDao itemFileDao = new ItemFileDao();
+ItemFileDao itemFileDao = new ItemFileDao();
 	List<ItemFileDto> itemFileList = itemFileDao.find1(itemIdx);
 %>
  
@@ -235,15 +259,21 @@
     
 	<!-- 지역 표시 -->
  	<div class="row center">
-        <%String area = itemDto.getAdressCity()+" "+itemDto.getAdressCitySub();%>
+        <%
+        String area = itemDto.getAdressCity()+" "+itemDto.getAdressCitySub();
+        %>
 		<h3><%=area%></h3>
     </div>
     
     <!-- 만약 축제라면 축제 기간을 표시 -->
     <div class="row center">
-    	<%if(itemDto.getItemType().equals("축제")) {%>
+    	<%
+    	if(itemDto.getItemType().equals("축제")) {
+    	%>
 			<h3><%=itemDto.getItemPeriod()%></h3>
-		<%}%>
+		<%
+		}
+		%>
     </div>
     
     <!-- 좋아요 및 조회수 출력 -->
@@ -258,30 +288,44 @@
 		<!-- 관리자 또는 글 작성자가 보는 경우 글작성 / 수정 / 삭제가 가능하도록 설정 : 수정 삭제의 경우 필터에서도 처리가능하도록 해야함.-->
 		<!-- 리모컨으로 구현하기 -->
 		<a href="<%=root%>/item/list.jsp">목록으로</a>
-			<%if(isManager || isMyboard){%>
+			<%
+			if(isManager || isMyboard){
+			%>
 			<!-- 글 작성 페이지로 이동 -->
 			<a href="<%=root%>/item/insert.jsp">새 글작성</a>
 			<!-- itemIdx번호와 함께 수정페이지로 이동 -->
 			<a href="<%=root%>/item/edit.jsp?itemIdx=<%=itemIdx%>">수정</a>
 			<!-- itemIdx번호를 delete Servlet으로 보내주고 삭제 -->
 			<a href="<%=root%>/item/delete.nogari?itemIdx=<%=itemIdx%>">삭제</a>
-		<%}%>
+		<%
+		}
+		%>
     </div>
 
     <!-- **사진 표시(DB테이블 만들어서 resource 파일정보를 불러올 예정(idea) -->
     <div class="row center gapy">
      	<!-- 만약 첨부파일이 있다면 -->
-		<%if(!itemFileList.isEmpty()){ %>
+		<%
+		if(!itemFileList.isEmpty()){
+		%>
 			<!-- 점부파일 목록 조회 -->
-			<%for(ItemFileDto itemFileDto : itemFileList){ %>
+			<%
+			for(ItemFileDto itemFileDto : itemFileList){
+			%>
 				<!-- 첨부파일 출력 -->
 				<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="80%">
-			<%} %>
+			<%
+			}
+			%>
 		<!-- 첨부파일이 없다면 (대체 이미지를 보여줄지 없앨지 회의 후 결정) -->
-		<%}else{ %>
+		<%
+		}else{
+		%>
 				<!-- 첨부 파일이 없다면 대체 이미지를 설정 -->
 				<img src="http://via.placeholder.com/500" class="image">
-		<%} %>
+		<%
+		}
+		%>
     </div>
     
     <!-- 상세정보 표시 -->
@@ -331,7 +375,7 @@
 
 <!-- 댓글 표시 -->
 <%
-	//이 글의 댓글 목록 불러오기.
+//이 글의 댓글 목록 불러오기.
 	//게시물 수정 삭제와 같은 것과 마찬가지로 필터가 필요함(주소에서 침범하는것 방지.)!!!!!!!!!
 	ItemReplyDao itemReplyDao = new ItemReplyDao();
 	List<ItemReplyDto> list = itemReplyDao.list(itemIdx);
@@ -346,18 +390,22 @@
 	<div class="row center gapy">
 		<table class="table table-border">
 			<!-- 만약 댓글이 있다면 -->
-			<%if(!list.isEmpty()) {%>
+			<%
+			if(!list.isEmpty()) {
+			%>
 				<!-- 댓글 조회 -->
-				<%for (ItemReplyDto itemReplyDto : list) {%>
+				<%
+				for (ItemReplyDto itemReplyDto : list) {
+				%>
 					<tbody>
 						<%
 						//이 글을 쓴사람의 아이디를 알기 위해서 user의 정보를 불러와야 한다.
-						UsersDao usersDao = new UsersDao();
-						UsersDto usersDto = usersDao.get(itemReplyDto.getUsersIdx());
-						// 게시물의 작성자가 댓글 작성자인가?
-						boolean isSameItemReply = itemDto.getUsersIdx() == itemReplyDto.getUsersIdx();
-						//현재 접속한 유저가 이 댓글 작성한 사람인가?
-						boolean isUsersReplyWriter = usersIdx == itemReplyDto.getUsersIdx();
+														UsersDao usersDao = new UsersDao();
+														UsersDto usersDto = usersDao.get(itemReplyDto.getUsersIdx());
+														// 게시물의 작성자가 댓글 작성자인가?
+														boolean isSameItemReply = itemDto.getUsersIdx() == itemReplyDto.getUsersIdx();
+														//현재 접속한 유저가 이 댓글 작성한 사람인가?
+														boolean isUsersReplyWriter = usersIdx == itemReplyDto.getUsersIdx();
 						%>
 						
 						<tr class="view-row">
