@@ -194,6 +194,51 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			return result;
 		}
 		
+		public Integer countSubCity(String column, String keyword, String subCity) throws Exception {
+			Connection con = JdbcUtils.connect3();
+			String sql = "select count(distinct course_idx) from"
+					+ "(select * from"
+					+ " course_item"
+					+ " inner join course using(course_idx)"
+					+ " inner join item using(item_idx)"
+					+ " where"
+					+ " instr(#1, ?) = 1"
+					+ " and"
+					+ " instr(#1, ?) > 1)";
+			sql = sql.replace("#1", column);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ps.setString(2, subCity);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			int result = rs.getInt(1);
+
+			con.close();
+			return result;
+		}
+		
+		public Integer countCity(String column, String keyword) throws Exception {
+			Connection con = JdbcUtils.connect3();
+			String sql = "select count(distinct course_idx) from"
+					+ "(select * from"
+					+ " course_item"
+					+ " inner join course using(course_idx)"
+					+ " inner join item using(item_idx)"
+					+ " where"
+					+ " instr(#1, ?) = 1)";
+			sql = sql.replace("#1", column);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			int result = rs.getInt(1);
+
+			con.close();
+			return result;
+		}
+		
 		//목록 기능 - 페이지네이션
 		public List<CourseDto> list(int begin, int end) throws Exception {
 			String sql = "select * from( "
@@ -270,6 +315,138 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 
 			con.close();
 			return result > 0;
+		}
+		
+		public List<CourseDto> orderByList(String order,int begin, int end) throws Exception {
+			String sql = "select * from( "
+					+ "select rownum rn,tmp.* from( "
+					+ "(SELECT * FROM course order by #1 desc)tmp)) "
+					+ "where rn between ? and ?";
+			sql = sql.replace("#1", order);
+			Connection con = JdbcUtils.connect3();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, begin);
+			ps.setInt(2, end);
+			ResultSet rs = ps.executeQuery();
+
+			List<CourseDto> list = new ArrayList<>();
+			while (rs.next()) {
+				CourseDto courseDto = new CourseDto();
+				courseDto.setCourseIdx(rs.getInt("course_idx"));
+				courseDto.setUsersIdx(rs.getInt("users_idx"));
+				courseDto.setCourseName(rs.getString("course_name"));
+				courseDto.setCourseDetail(rs.getString("course_detail"));
+				courseDto.setCourseDate(rs.getDate("course_date"));
+				courseDto.setCourseCountView(rs.getInt("course_count_view"));
+				courseDto.setCourseCountReply(rs.getInt("course_count_reply"));
+
+				list.add(courseDto);
+			}
+
+			con.close();
+			return list;
+		}
+		
+		public List<CourseDto> orderByKeywordList(String order,String column, String keyword, int begin, int end) throws Exception {
+			String sql = "select * from( "
+					+ "select rownum rn,tmp.* from( "
+					+ "(SELECT * FROM course where instr(#1,?)>0 order by #2 desc)tmp)) "
+					+ "where rn between ? and ?";
+			sql = sql.replace("#1", column);
+			sql = sql.replace("#2", order);
+			Connection con = JdbcUtils.connect3();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ps.setInt(2, begin);
+			ps.setInt(3, end);
+			ResultSet rs = ps.executeQuery();
+
+			List<CourseDto> list = new ArrayList<>();
+			while (rs.next()) {
+				CourseDto courseDto = new CourseDto();
+				courseDto.setCourseIdx(rs.getInt("course_idx"));
+				courseDto.setUsersIdx(rs.getInt("users_idx"));
+				courseDto.setCourseName(rs.getString("course_name"));
+				courseDto.setCourseDetail(rs.getString("course_detail"));
+				courseDto.setCourseDate(rs.getDate("course_date"));
+				courseDto.setCourseCountView(rs.getInt("course_count_view"));
+				courseDto.setCourseCountReply(rs.getInt("course_count_reply"));
+
+				list.add(courseDto);
+			}
+
+			con.close();
+			return list;
+		}
+		
+		public List<Integer> cityList(String order,String column, String keyword, int begin, int end) throws Exception {
+
+			Connection con = JdbcUtils.connect3();
+			String sql = "select * from"
+					+ "(select rownum rn,tmp.* from"
+					+ "(select distinct course_idx from"
+					+ "(select * from"
+					+ " course_item"
+					+ " inner join course using(course_idx)"
+					+ " inner join item using(item_idx)"
+					+ " where"
+					+ " instr(#1, ?) = 1"
+					+ " order by #2 desc))tmp)"
+					+ " where rn between ? and ?";
+			
+			sql = sql.replace("#1", column);
+			sql = sql.replace("#2", order);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ps.setInt(2, begin);
+			ps.setInt(3, end);
+			
+			ResultSet rs = ps.executeQuery();
+			List<Integer> list = new ArrayList<>();
+			while (rs.next()) {
+				list.add(rs.getInt(1));
+			}
+
+			con.close();
+
+			return list;
+		}
+		
+		
+		public List<Integer> subCityList(String subCity,String order,String column, String keyword, int begin, int end) throws Exception {
+
+			Connection con = JdbcUtils.connect3();
+			String sql = "select * from"
+					+ "(select rownum rn,tmp.* from"
+					+ "(select distinct course_idx from"
+					+ "(select * from"
+					+ " course_item"
+					+ " inner join course using(course_idx)"
+					+ " inner join item using(item_idx)"
+					+ " where"
+					+ " instr(#1, ?) = 1"
+					+ " and"
+					+ " instr(#1, ?) > 0"
+					+ " order by #2 desc))tmp)"
+					+ " where rn between ? and ?";
+			
+			sql = sql.replace("#1", column);
+			sql = sql.replace("#2", order);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ps.setString(2, subCity);
+			ps.setInt(3, begin);
+			ps.setInt(4, end);
+			
+			ResultSet rs = ps.executeQuery();
+			List<Integer> list = new ArrayList<>();
+			while (rs.next()) {
+				list.add(rs.getInt(1));
+			}
+
+			con.close();
+
+			return list;
 		}
 
 }
