@@ -44,41 +44,75 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
     <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post">
 	     <select name="column">
 	    	<option value="">항목선택</option>
-			<%if(pn.columnValExists("users_id")) {%>
+			<%
+			if(pn.columnValExists("users_id")) {
+			%>
 	    	<option value="users_id" selected>아이디</option>
-	    	<%}else {%>
+	    	<%
+	    	}else {
+	    	%>
 	    	<option value="users_id">아이디</option>
-	    	<%} %>
-	    	<%if(pn.columnValExists("users_nick")) {%>
+	    	<%
+	    	}
+	    	%>
+	    	<%
+	    	if(pn.columnValExists("users_nick")) {
+	    	%>
 	    	<option value="users_nick" selected>닉네임</option>
-	    	<%}else {%>
+	    	<%
+	    	}else {
+	    	%>
 	    	<option value="users_nick">닉네임</option>
-	    	<% }%>
-	    	<%if(pn.columnValExists("users_email")) {%>
+	    	<%
+	    	}
+	    	%>
+	    	<%
+	    	if(pn.columnValExists("users_email")) {
+	    	%>
 	    	<option value="users_email" selected>이메일</option>
-	    	<%}else {%>
+	    	<%
+	    	}else {
+	    	%>
 	    	<option value="users_email">이메일</option>
-	    	<%} %>
-	    	<%if(pn.columnValExists("users_phone")) {%>
+	    	<%
+	    	}
+	    	%>
+	    	<%
+	    	if(pn.columnValExists("users_phone")) {
+	    	%>
 	    	<option value="users_phone" selected>전화번호</option>
-	    	<%}else {%>
+	    	<%
+	    	}else {
+	    	%>
 	    	<option value="users_phone">전화번호</option>
-	    	<% }%>
-	    	<%if(pn.columnValExists("users_grade")) {%>
+	    	<%
+	    	}
+	    	%>
+	    	<%
+	    	if(pn.columnValExists("users_grade")) {
+	    	%>
 	    	<option value="users_grade" selected>회원등급</option>
-	    	<%}else {%>
+	    	<%
+	    	}else {
+	    	%>
 	    	<option value="users_grade">회원등급</option>
-	    	<% }%>
+	    	<%
+	    	}
+	    	%>
 	    </select>
-	    <input type="text" name="keyword" placeholder="검색어입력" required value="<%=pn.getKeywordString() %>">
+	    <input type="text" name="keyword" placeholder="검색어입력" required value="<%=pn.getKeywordString()%>">
 	    <input type="submit" value="검색">
 	</form>
 
 <!-- 회원목록 -->
 <!-- 회원 탈퇴 리다이렉트 delete파라미터 -->
- <%if(request.getParameter("delete") != null) {%>
- 	<div class="sub_title">아이디 <%=request.getParameter("usersId") %> 회원 탈퇴 완료</div>
- <%} %>
+ <%
+ if(request.getParameter("delete") != null) {
+ %>
+ 	<div class="sub_title">아이디 <%=request.getParameter("usersId")%> 회원 탈퇴 완료</div>
+ <%
+ }
+ %>
 <table border="1">
 	<thead>
 		<tr>
@@ -94,9 +128,9 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 
 	<%
 	List<UsersDto> list = pn.getResultList();
-	System.out.println("출력할 회원 수: " + list.size());
-	
-	for(UsersDto usersDto : list) {
+			System.out.println("출력할 회원 수: " + list.size());
+			
+			for(UsersDto usersDto : list) {
 	%>
 
 		<tr>
