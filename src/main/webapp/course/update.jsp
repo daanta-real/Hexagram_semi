@@ -373,8 +373,13 @@
 			<%} %>
 		</select>
 		
-		<input type="search" name="keyword" placeholder="검색어 입력"
-			required value="<%=pn.getKeywordString()%>"  class="form-input form-inline">
+				<%if(pn.getColumn() != null && pn.getColumn().equals("item_address")){ %>
+					<input type="search" name="keyword" placeholder="검색어 입력"
+					required class="form-input form-inline">
+				<%}else{ %>
+					<input type="search" name="keyword" placeholder="검색어 입력"
+					required value="<%=pn.getKeywordString()%>" class="form-input form-inline">
+				<%} %>
 			
 			<input type="hidden" name="searchSelector" value="<%=1%>">
 			<!-- 	검색 후 검색 옵션이 무엇이였는지 전달 키워드 검색 옵션은 구분자를 1번으로 지정한다.191~210번줄 참조-->
