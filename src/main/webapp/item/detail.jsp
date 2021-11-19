@@ -182,6 +182,31 @@
 					margin-bottom: 2rem;
 				}
 </style>
+ <script>
+	$(function(){
+		$(".view-row").find(".edit-btn").click(function(){
+			$(this).parents("tr.view-row").hide();
+			$(this).parents("tr.view-row").next("tr.edit-row").show();
+		});
+		
+		$(".edit-row").find(".edit-cancel-btn").click(function(){
+			$(this).parents("tr.edit-row").hide();
+			$(this).parents("tr.edit-row").prev("tr.view-row").show();
+		});
+		
+		$(".view-row").find(".reply-btn").click(function(){
+			$(this).parents("tr.view-row").next("tr.edit-row").next("tr.reply-row").show();
+		});			
+			
+		
+		$(".reply-row").find(".reply-cancel-btn").click(function(){
+			$(this).parents("tr.reply-row").hide();
+		});
+		
+		$(".edit-row").hide();
+		$(".reply-row").hide();
+	});
+</script>    
  
 <%-- 페이지에 필요한 세션, 파라미터값 저장 및 변수 선언 --%>
  <% 
