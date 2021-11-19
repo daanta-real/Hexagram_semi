@@ -351,8 +351,14 @@
 				<%} %>
 			</select>
 			
-			<input type="search" name="keyword" placeholder="검색어 입력"
-				required value="<%=pn.getKeywordString()%>"  class="form-input form-inline">
+				<%if(pn.getColumn() != null && pn.getColumn().equals("item_address")){ %>
+					<input type="search" name="keyword" placeholder="검색어 입력"
+					required class="form-input form-inline">
+				<%}else{ %>
+					<input type="search" name="keyword" placeholder="검색어 입력"
+					required value="<%=pn.getKeywordString()%>" class="form-input form-inline">
+				<%} %>
+				
 			<!-- value는 자바스크립트로 숨기는 페이지의 번호를 의미한다-->
 			<input type="hidden" name="searchSelector" value="<%=1%>">
 			<!-- 	핵심이다.. courseSequnce는 무슨일이 있어서 최초 생성하고 잃어서는 안될 고유 번호이다. -->
