@@ -404,7 +404,7 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			ResultSet rs = ps.executeQuery();
 			List<Integer> list = new ArrayList<>();
 			while (rs.next()) {
-				list.add(rs.getInt(1));
+				list.add(rs.getInt(2));
 			}
 
 			con.close();
@@ -441,7 +441,7 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			ResultSet rs = ps.executeQuery();
 			List<Integer> list = new ArrayList<>();
 			while (rs.next()) {
-				list.add(rs.getInt(1));
+				list.add(rs.getInt(2));
 			}
 
 			con.close();

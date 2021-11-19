@@ -41,7 +41,7 @@ public class CourseItemDao {
 
 	//course_item에 갯수 확인 메소드(코스등록시 3~8개로 제한되기 때문)
 	public int getItemIdxByCourse(int courseIdx) throws Exception {
-		String sql = "SELECT * FROM course_item where course_idx=?";
+		String sql = "SELECT * FROM course_item where course_idx=? order by course_item_idx asc";
 		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setInt(1, courseIdx);
