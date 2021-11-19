@@ -1,4 +1,4 @@
-<%@page import="beans.Pagination_users"%>
+<%@page import="beans.Pagination"%>
 <%@page import="beans.CourseItemDto"%>
 <%@page import="beans.CourseDao"%>
 <%@page import="beans.CourseItemDao"%>
@@ -12,7 +12,7 @@
     pageEncoding="UTF-8"%>
 
 <%
-	//절대 경로를 위해 index.jsp 페이지 변수 저장
+//절대 경로를 위해 index.jsp 페이지 변수 저장
     String root = request.getContextPath();
     
 	// 최초 코스 번호는서블릿에서 생성한 번호를 받아준다. 
@@ -20,7 +20,7 @@
 	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));
 
 	ItemDao itemDao = new ItemDao();
-	Pagination_users<ItemDao, ItemDto> pn = new Pagination_users<>(request, itemDao);
+	Pagination<ItemDao, ItemDto> pn = new Pagination<>(request, itemDao);
 	
 	boolean isLogin = request.getSession().getAttribute("usersIdx") != null;
 	boolean isSearchMode = pn.isSearchMode();

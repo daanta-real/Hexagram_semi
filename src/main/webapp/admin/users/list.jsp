@@ -1,4 +1,4 @@
-<%@page import="beans.Pagination_users"%>
+<%@page import="beans.Pagination"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="java.util.List"%>
 <%@page import="beans.UsersDao"%>
@@ -19,7 +19,9 @@
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
-<%String root = request.getContextPath();%>
+<%
+String root = request.getContextPath();
+%>
 
 <!-- 페이지 내용 시작 -->
 
@@ -27,7 +29,7 @@
 <%
 // 1. 변수 준비
 UsersDao usersDao = new UsersDao();
-Pagination_users<UsersDao, UsersDto> pn = new Pagination_users<>(request, usersDao);
+Pagination<UsersDao, UsersDto> pn = new Pagination<>(request, usersDao);
 boolean isSearchMode = pn.isSearchMode();
 System.out.println(
 	  "[회원 목록] 컬럼(" + request.getParameter("column") + ")"

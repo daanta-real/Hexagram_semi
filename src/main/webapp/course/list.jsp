@@ -2,7 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="beans.UsersDao"%>
-<%@page import="beans.Pagination_users"%>
+<%@page import="beans.Pagination"%>
 <%@page import="beans.ItemDto"%>
 <%@page import="beans.ItemDao"%>
 <%@page import="beans.CourseItemDao"%>
@@ -13,59 +13,59 @@
     pageEncoding="UTF-8"%>
     
 <%
-	String order = "course_idx";
-	if(request.getParameter("order") != null)
-	order = request.getParameter("order");
-	
-	String subCity = request.getParameter("subCity");
+    String order = "course_idx";
+    	if(request.getParameter("order") != null)
+    	order = request.getParameter("order");
+    	
+    	String subCity = request.getParameter("subCity");
 
-	//절대 경로를 위해 index.jsp 페이지 변수 저장
-    String root = request.getContextPath();
-	
-	//페이지 네이션
-    CourseDao courseDao = new CourseDao();
-    Pagination_users<CourseDao, CourseDto> pn = new Pagination_users<>(request, courseDao);
+    	//절대 경로를 위해 index.jsp 페이지 변수 저장
+        String root = request.getContextPath();
+    	
+    	//페이지 네이션
+        CourseDao courseDao = new CourseDao();
+        Pagination<CourseDao, CourseDto> pn = new Pagination<>(request, courseDao);
 
-    //검색용 페이지 네이션
-    boolean isSearchMode = pn.isSearchMode();
-    pn.setPageSize(12);
-    pn.setStartBlock(pn.getPage()/pn.getBlockSize()*pn.getBlockSize()+1);
-    pn.setFinishBlock(pn.getStartBlock()+(pn.getBlockSize()-1));
-    pn.setEnd(pn.getPage()*pn.getPageSize());
-    pn.setBegin(pn.getEnd()-(pn.getPageSize()-1));
+        //검색용 페이지 네이션
+        boolean isSearchMode = pn.isSearchMode();
+        pn.setPageSize(12);
+        pn.setStartBlock(pn.getPage()/pn.getBlockSize()*pn.getBlockSize()+1);
+        pn.setFinishBlock(pn.getStartBlock()+(pn.getBlockSize()-1));
+        pn.setEnd(pn.getPage()*pn.getPageSize());
+        pn.setBegin(pn.getEnd()-(pn.getPageSize()-1));
 
-    //course 데이터 목록 불러오기
-   //관광지 목록 도출
-	List<CourseDto> list = new ArrayList<>();
-	if(isSearchMode){
-		if(pn.getColumn().equals("item_address")){
-			if(subCity != null){
-				List<Integer> countIdxList = courseDao.subCityList(subCity,order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-				for(int courseNumber : countIdxList){
-					list.add(courseDao.get(courseNumber));
-				}
-				pn.setCount(courseDao.countSubCity(pn.getColumn(), pn.getKeyword(),subCity));
-				pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
-		}else{
-			List<Integer> countIdxList = courseDao.cityList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-			for(int courseNumber : countIdxList){
-				list.add(courseDao.get(courseNumber));
-			}
-			pn.setCount(courseDao.countCity(pn.getColumn(), pn.getKeyword()));
-			pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1);
-		}
-		}
-		else{
-		list=courseDao.orderByKeywordList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-		}
-	}else{
-		list=courseDao.orderByList(order, pn.getBegin(), pn.getEnd());
-	}
+        //course 데이터 목록 불러오기
+       //관광지 목록 도출
+    	List<CourseDto> list = new ArrayList<>();
+    	if(isSearchMode){
+    		if(pn.getColumn().equals("item_address")){
+    	if(subCity != null){
+    		List<Integer> countIdxList = courseDao.subCityList(subCity,order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
+    		for(int courseNumber : countIdxList){
+    			list.add(courseDao.get(courseNumber));
+    		}
+    		pn.setCount(courseDao.countSubCity(pn.getColumn(), pn.getKeyword(),subCity));
+    		pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
+    		}else{
+    	List<Integer> countIdxList = courseDao.cityList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
+    	for(int courseNumber : countIdxList){
+    		list.add(courseDao.get(courseNumber));
+    	}
+    	pn.setCount(courseDao.countCity(pn.getColumn(), pn.getKeyword()));
+    	pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1);
+    		}
+    		}
+    		else{
+    		list=courseDao.orderByKeywordList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
+    		}
+    	}else{
+    		list=courseDao.orderByList(order, pn.getBegin(), pn.getEnd());
+    	}
 
-    
- 	// 제목 h2 태그에 들어갈 타이틀 결정
-    String title = isSearchMode ? ("["+pn.getKeyword()+"]" + " 검색") : ("코스 목록");
-%>
+        
+     	// 제목 h2 태그에 들어갈 타이틀 결정
+        String title = isSearchMode ? ("["+pn.getKeyword()+"]" + " 검색") : ("코스 목록");
+    %>
     
 <!DOCTYPE HTML>
 <HTML>
