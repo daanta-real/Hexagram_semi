@@ -1,3 +1,5 @@
+<%@page import="beans.ItemFileDto"%>
+<%@page import="beans.ItemFileDao"%>
 <%@page import="servlet.item.ItemCityList"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.UsersDto"%>
@@ -14,57 +16,55 @@
     
 <%
     String order = "course_idx";
-            	if(request.getParameter("order") != null)
-            	order = request.getParameter("order");
-            	
-            	String subCity = request.getParameter("subCity");
-
-            	//절대 경로를 위해 index.jsp 페이지 변수 저장
-                String root = request.getContextPath();
-            	
-            	//페이지 네이션
-                CourseDao courseDao = new CourseDao();
-                Pagination<CourseDao, CourseDto> pn = new Pagination<>(request, courseDao);
-
-                //검색용 페이지 네이션
-                boolean isSearchMode = pn.isSearchMode();
-                pn.setPageSize(12);
-                pn.setStartBlock(pn.getPage()/pn.getBlockSize()*pn.getBlockSize()+1);
-                pn.setFinishBlock(pn.getStartBlock()+(pn.getBlockSize()-1));
-                pn.setEnd(pn.getPage()*pn.getPageSize());
-                pn.setBegin(pn.getEnd()-(pn.getPageSize()-1));
-
-                //course 데이터 목록 불러오기
-               //관광지 목록 도출
-            	List<CourseDto> list = new ArrayList<>();
-            	if(isSearchMode){
-            		if(pn.getColumn().equals("item_address")){
-            	if(subCity != null){
-            		List<Integer> countIdxList = courseDao.subCityList(subCity,order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-            		for(int courseNumber : countIdxList){
-            			list.add(courseDao.get(courseNumber));
-            		}
-            		pn.setCount(courseDao.countSubCity(pn.getColumn(), pn.getKeyword(),subCity));
-            		pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
-            		}else{
-            	List<Integer> countIdxList = courseDao.cityList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-            	for(int courseNumber : countIdxList){
-            		list.add(courseDao.get(courseNumber));
-            	}
-            	pn.setCount(courseDao.countCity(pn.getColumn(), pn.getKeyword()));
-            	pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1);
-            		}
-            		}
-            		else{
-            		list=courseDao.orderByKeywordList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-            		}
-            	}else{
-            		list=courseDao.orderByList(order, pn.getBegin(), pn.getEnd());
-            	}
-
-                
-             	// 제목 h2 태그에 들어갈 타이틀 결정
-                String title = isSearchMode ? ("["+pn.getKeyword()+"]" + " 검색") : ("코스 목록");
+    	if(request.getParameter("order") != null)
+    	order = request.getParameter("order");
+    	
+    	String subCity = request.getParameter("subCity");
+    	//절대 경로를 위해 index.jsp 페이지 변수 저장
+        String root = request.getContextPath();
+    	
+    	//페이지 네이션
+        CourseDao courseDao = new CourseDao();
+        Pagination<CourseDao, CourseDto> pn = new Pagination<>(request, courseDao);
+    //검색용 페이지 네이션
+    boolean isSearchMode = pn.isSearchMode();
+   
+    pn.setPageSize(9);
+    pn.setStartBlock(pn.getPage()/pn.getBlockSize()*pn.getBlockSize()+1);
+    pn.setFinishBlock(pn.getStartBlock()+(pn.getBlockSize()-1));
+    pn.setEnd(pn.getPage()*pn.getPageSize());
+    pn.setBegin(pn.getEnd()-(pn.getPageSize()-1));
+    
+    //course 데이터 목록 불러오기
+   //관광지 목록 도출
+	List<CourseDto> list = new ArrayList<>();
+	if(isSearchMode){
+		if(pn.getColumn().equals("item_address")){
+			if(subCity != null){
+				list = courseDao.subCityList(subCity,order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
+				pn.setCount(courseDao.countSubCity(pn.getColumn(), pn.getKeyword(),subCity));
+				pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
+		}else
+		{
+			list = courseDao.cityList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
+			pn.setCount(courseDao.countCity(pn.getColumn(), pn.getKeyword()));
+			pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1);
+		}
+		}
+		
+		else{
+		list=courseDao.orderByKeywordList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
+		pn.setCount(courseDao.count(pn.getColumn(), pn.getKeyword()));
+		pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1);
+		}
+	}else{
+		list=courseDao.orderByList(order, pn.getBegin(), pn.getEnd());
+		pn.setCount(courseDao.count());
+		pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1);
+	}
+        
+     	// 제목 h2 태그에 들어갈 타이틀 결정
+        String title = isSearchMode ? ("["+pn.getKeyword()+"]" + " 검색") : ("코스 목록");
     %>
     
 <!DOCTYPE HTML>
@@ -77,7 +77,6 @@
     * {
         box-sizing: border-box;
     }
-
     /* 전체 레이아웃 사이즈 (메인으로 옮겨 메인에 맞게 조정)*/
     .container-900 {width: 900px;}
     /* 각 div 마다 부여할 margin 값 */
@@ -161,7 +160,6 @@
         margin-left: 13px;
         margin-top: 10;
         margin-bottom: 10px;
-
     }
     .box-detail{
         margin:3px;
@@ -232,55 +230,36 @@
 <!-- 두번째는 글쓰기를 누를떄 시퀀스 번호를 생성하는 서블릿으로 이동한 후, 그 시퀀스 번호를 이용해서 코스아이템 DB에 추가 저장하는 방식. -->
 
 <!-- 페이지 제목 -->
-<h2><%=title%></h2>
-<h2><%=order%></h2>
+
 <!-- 검색 form -->
     <div class="container-900 container-center">
         <div class="back">
             <div class="search center">
             <form action="<%=root%>/course/list.jsp" method="get">
                 <select name="column" class="search-select">
-                   <%
-                   if(pn.columnValExists("item_address")){
-                   %>
-							<option value="item_address" selected>지역명</option>
-							<%
-							}else{
-							%>
-							<option value="item_address">지역명</option>
-							<%
-							}
-							%>
-							
-							<%
-														if(pn.columnValExists("course_name")){
-														%>
+							<%if(pn.columnValExists("course_name")){ %>
 							<option value="course_name" selected>코스명</option>
-							<%
-							}else{
-							%>
+							<%}else{ %>
 							<option value="course_name">코스명</option>
-							<%
-							}
-							%>
+							<%} %>
 							
-							<%
-														if(pn.columnValExists("course_detail")){
-														%>
+							<%if(pn.columnValExists("course_detail")){ %>
 							<option value="course_detail" selected>내용</option>
-							<%
-							}else{
-							%>
+							<%}else{ %>
 							<option value="course_detail">내용</option>
-							<%
-							}
-							%>
+							<%} %>
 						</select>
-                <input type="search" name="keyword" placeholder="검색어 입력"
+						<%if(pn.getColumn() != null && pn.getColumn().equals("item_address")){ %>
+						                <input type="search" name="keyword" placeholder="검색어 입력"
+						required class="search-keyword">
+						<%}else{ %>
+						                <input type="search" name="keyword" placeholder="검색어 입력"
 						required value="<%=pn.getKeywordString()%>" class="search-keyword">
+						<%} %>
+
 				<input type="hidden" name="order" value="<%=order%>">
                 <input type="submit" value="검색" class="search-btn">
-                
+                </form>
             </div>
         </div>
 
@@ -294,34 +273,34 @@
                 <a href="/item/list.jsp?column=item_type&keyword=" class="course-city">관광지</a>
             </div>
         </div>
-        <div class="course-box">
+             <div class="course-box">
             <div class="menu-bar">
                 <span class="course-location">지역</span>
-                <a href="list.jsp?column=item_address&keyword=서울" class="course-city">서울</a>        
-                <a href="list.jsp?column=item_address&keyword=부산" class="course-city">부산</a>
-                <a href="list.jsp?column=item_address&keyword=인천" class="course-city">인천</a>
-                <a href="list.jsp?column=item_address&keyword=대구" class="course-city">대구</a>
-                <a href="list.jsp?column=item_address&keyword=대전" class="course-city">대전</a>
-                <a href="list.jsp?column=item_address&keyword=광주" class="course-city">광주</a>
-                <a href="list.jsp?column=item_address&keyword=울산" class="course-city">울산</a>
+                <a href="list.jsp?column=item_address&keyword=서울&order=<%=order%>" class="course-city">서울</a>        
+                <a href="list.jsp?column=item_address&keyword=부산&order=<%=order%>" class="course-city">부산</a>
+                <a href="list.jsp?column=item_address&keyword=인천&order=<%=order%>" class="course-city">인천</a>
+                <a href="list.jsp?column=item_address&keyword=대구&order=<%=order%>" class="course-city">대구</a>
+                <a href="list.jsp?column=item_address&keyword=대전&order=<%=order%>" class="course-city">대전</a>
+                <a href="list.jsp?column=item_address&keyword=광주&order=<%=order%>" class="course-city">광주</a>
+                <a href="list.jsp?column=item_address&keyword=울산&order=<%=order%>" class="course-city">울산</a>
             </div>
         </div>
         <div class="course-box">
             <div class="menu-bar">
-                <a href="list.jsp?column=item_address&keyword=경기" class="course-city">경기도</a>
-                <a href="list.jsp?column=item_address&keyword=세종" class="course-city">세종</a>
-                <a href="list.jsp?column=item_address&keyword=강원" class="course-city">강원도</a>
-                <a href="list.jsp?column=item_address&keyword=제주" class="course-city">제주도</a>
-                <a href="list.jsp?column=item_address&keyword=경상북도" class="course-city">경상북도</a>
-                <a href="list.jsp?column=item_address&keyword=경상남도" class="course-city">경상남도</a>
-                <a href="list.jsp?column=item_address&keyword=전라남도" class="course-city">전라남도</a>
-                <a href="list.jsp?column=item_address&keyword=전라북도" class="course-city">전라북도</a>
+                <a href="list.jsp?column=item_address&keyword=경기&order=<%=order%>" class="course-city">경기도</a>
+                <a href="list.jsp?column=item_address&keyword=세종&order=<%=order%>" class="course-city">세종</a>
+                <a href="list.jsp?column=item_address&keyword=강원&order=<%=order%>" class="course-city">강원도</a>
+                <a href="list.jsp?column=item_address&keyword=제주&order=<%=order%>" class="course-city">제주도</a>
+                <a href="list.jsp?column=item_address&keyword=경상북도&order=<%=order%>" class="course-city">경상북도</a>
+                <a href="list.jsp?column=item_address&keyword=경상남도&order=<%=order%>" class="course-city">경상남도</a>
+                <a href="list.jsp?column=item_address&keyword=전라남도&order=<%=order%>" class="course-city">전라남도</a>
+                <a href="list.jsp?column=item_address&keyword=전라북도&order=<%=order%>" class="course-city">전라북도</a>
             </div>
         </div>
         <div class="course-box">
             <div class="menu-bar">
-                <a href="list.jsp?column=item_address&keyword=충청남도" class="course-city">충청남도</a>
-                <a href="list.jsp?column=item_address&keyword=충청북도" class="course-city">충청북도</a>
+                <a href="list.jsp?column=item_address&keyword=충청남도&order=<%=order%>" class="course-city">충청남도</a>
+                <a href="list.jsp?column=item_address&keyword=충청북도&order=<%=order%>" class="course-city">충청북도</a>
             </div>
         </div>
         
@@ -332,21 +311,15 @@
                 <div class="menu-city">
                 
            <%
-                           if(isSearchMode && pn.getColumn().equals("item_address")){
-                                                                  List<String> subCityList = ItemCityList.getSubcityList(pn.getKeyword());
-                           %>
+            if(isSearchMode && pn.getColumn().equals("item_address")){
+            List<String> subCityList = ItemCityList.getSubcityList(pn.getKeyword()); %>
 					<%
 					if(!subCityList.isEmpty()){
-											for(String s : subCityList){
-					%>
-                    <a href="list_city.jsp?column=item_address&keyword=<%=pn.getKeyword()%>&subCity=<%=s%>" class="city"><%=s%></a>
-                    <%
-                    }}}else{
-                    %>
-                    <h1 class="center">광고</h1>
-                    <%
-                    }
-                    %>
+					for(String s : subCityList){ %>
+                    <a href="list.jsp?column=item_address&keyword=<%=pn.getKeyword()%>&subCity=<%=s%>" class="city"><%=s %></a>
+                    <%}}}else{ %>
+                    <h1 class="center">배너 공간..?</h1>
+                    <%} %>
                 </div>
             </div>
 
@@ -356,14 +329,10 @@
         <div class="row flex-container">
 				<div class="flex-btn">
 				<form action="<%=root%>/course/list.jsp" method="get">
-					<input type="hidden" name="order" value="item_idx">
-					<%
-					if(subCity != null) {
-					%>
+					<input type="hidden" name="order" value="course_idx">
+					<%if(subCity != null) {%>
 					<input type="hidden" name="subCity" value="<%=subCity%>">
-					<%
-					}
-					%>
+					<%} %>
 					<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
 					<input type="hidden" name="column" value="<%=pn.getColumn()%>">
 					<input type="submit" value="최신순 조회">
@@ -371,14 +340,10 @@
 			</div>
 			<div class="flex-btn">
 				<form action="<%=root%>/course/list.jsp" method="get">
-					<input type="hidden" name="order" value="item_count_view">
-			<%
-			if(subCity != null) {
-			%>
+					<input type="hidden" name="order" value="course_count_view">
+			<%if(subCity != null) {%>
 					<input type="hidden" name="subCity" value="<%=subCity%>">
-					<%
-					}
-					%>
+					<%} %>
 					<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
 					<input type="hidden" name="column" value="<%=pn.getColumn()%>">
 					<input type="submit" value="인기순 조회">
@@ -386,14 +351,10 @@
 			</div >
 				<div class="flex-btn">			
 				<form action="<%=root%>/course/list.jsp" method="get">
-					<input type="hidden" name="order" value="item_count_reply">
-			<%
-			if(subCity != null) {
-			%>
+					<input type="hidden" name="order" value="course_count_reply">
+			<%if(subCity != null) {%>
 					<input type="hidden" name="subCity" value="<%=subCity%>">
-					<%
-					}
-					%>
+					<%} %>
 					<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
 					<input type="hidden" name="column" value="<%=pn.getColumn()%>">
 					<input type="submit" value="댓글순 조회">
@@ -404,31 +365,36 @@
         
         
         
-<%
-                        if(!list.isEmpty()) {
-                        %>
+<%if(!list.isEmpty()) {%>
  <div class="flex-loop">
- 		<%
- 		for(CourseDto courseDto : list) {
- 		%>
+ 		<%for(CourseDto courseDto : list) {%>
 			<%
-			//지역 알아내기 -> 코스아이템에서 첫번쨰 아이템 내용 전달.
-						    CourseItemDao courseItemDao = new CourseItemDao();
-						    int itemIdx = courseItemDao.getItemIdxByCourse(courseDto.getCourseIdx());
-						    ItemDao itemDao = new ItemDao();
-						   	ItemDto itemDto = itemDao.get(itemIdx);
-						   	UsersDao usersDao = new UsersDao();
-						   	UsersDto usersDto = usersDao.get(courseDto.getUsersIdx());
+		    //지역 알아내기 -> 코스아이템에서 첫번쨰 아이템 내용 전달.
+		    CourseItemDao courseItemDao = new CourseItemDao();
+		    int itemIdx = courseItemDao.getItemIdxByCourse(courseDto.getCourseIdx());
+		    ItemDao itemDao = new ItemDao();
+		   	ItemDto itemDto = itemDao.get(itemIdx);
+		   	UsersDao usersDao = new UsersDao();
+		   	UsersDto usersDto = usersDao.get(itemDto.getUsersIdx());
+		   	
+			//목록을 보여주면서 itemDto의 itemIdx의 첫번째 정보를 받는다
+			ItemFileDao itemFileDao = new ItemFileDao();
+			ItemFileDto itemFileDto = itemFileDao.find2(itemIdx);
 			%>
-            <div class="box">
-                <img src="http://via.placeholder.com/280x150" class="box-img">      
+		<a href="readup.nogari?courseIdx=<%=courseDto.getCourseIdx()%>">
+            <div class="box">      
+              			<%if(itemFileDto == null){ %>
+								<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
+								<img src="http://via.placeholder.com/280x150" class="box-img">
+						<%}else{ %>
+								<!-- 첨부파일이 있다면 첨부파일을 출력  -->
+								<img src="../item/file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" class="box-img">
+						<%} %>
+						
                 <div class="box-detail"><%=itemDto.getAdressCity()%></div> <!--지역 -->
-                
-                
+
                 <div class="box-detail">
-                <a href="readup.nogari?courseIdx=<%=courseDto.getCourseIdx()%>">
                 <%=courseDto.getCourseName()%>
-                </a>
                 <%-- 댓글수 --%>
 					<!-- 댓글이 있다면 개수를 출력 -->
 				<%if(courseDto.isCountReply()){ %>
@@ -438,11 +404,13 @@
                 
                 
                 <div class="box-detail"><%=usersDto.getUsersId()%></div>
-                <div class="box-detail"><%=courseDto.getCourseDate()%></div>
+                <div class="box-detail">
+                <%=courseDto.getCourseDate()%> (조회수 :<%=courseDto.getCourseCountView()%>) 
+                </div>
             </div>
+	</a>
             <%} %>
         </div>
-
 
     </div>
 

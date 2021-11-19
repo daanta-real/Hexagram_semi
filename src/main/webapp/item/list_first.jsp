@@ -182,7 +182,7 @@
 		ItemDao itemDao = new ItemDao();
 		ItemFileDao itemFileDao = new ItemFileDao();
 		
-		List<ItemDto> list= itemDao.list(1, 12);// 12개 가져오기
+		List<ItemDto> list= itemDao.list(1, 9);// 9개 가져오기
 		
 		
 		%>
@@ -194,10 +194,10 @@
         <div class="row left">
             <div class="row item-pop">
             	<%for(ItemDto itemDto : list){ %>
+				<a href="readup.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
             <div style="display: inline-block;">
             	<!-- 목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
 				<%ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());%>
-				<a href="detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>">
 				<%if(itemFileDto == null){ %>
 								<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
 								<img src="http://via.placeholder.com/300x300" class="item-img">
@@ -205,13 +205,17 @@
 								<!-- 첨부파일이 있다면 첨부파일을 출력  -->
 								<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" class="item-img">
 						<%} %>
-					</a>
 						<label style="display: block; text-align: center"><%=itemDto.getItemName() %></label>
 				</div>	
+					</a>
                 <%} %>
             </div>
         </div>
     </div>
+
+	<div>
+		<h2><a href="insert.jsp">글쓰기</a></h2>
+	</div>
 
 <!-- 페이지 내용 끝. -->
 </SECTION>

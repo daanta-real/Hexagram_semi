@@ -196,15 +196,20 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 		
 		public Integer countSubCity(String column, String keyword, String subCity) throws Exception {
 			Connection con = JdbcUtils.connect3();
-			String sql = "select count(distinct course_idx) from"
-					+ "(select * from"
+			String sql = "select count(*) from"
+					+ " (select"
+					+ " course_idx,course_count_view, course_count_reply, item_address,course_item_idx,"
+					+ " rank() over(partition by course_idx order by course_item_idx asc) rk"
+					+ " from"
+					+ " (select * from"
 					+ " course_item"
 					+ " inner join course using(course_idx)"
 					+ " inner join item using(item_idx)"
 					+ " where"
-					+ " instr(#1, ?) = 1"
+					+ " instr(#1,?) = 1"
 					+ " and"
-					+ " instr(#1, ?) > 1)";
+					+ " instr(#1,?)>0"
+					+ ")) where rk = 1";
 			sql = sql.replace("#1", column);
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, keyword);
@@ -220,13 +225,17 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 		
 		public Integer countCity(String column, String keyword) throws Exception {
 			Connection con = JdbcUtils.connect3();
-			String sql = "select count(distinct course_idx) from"
-					+ "(select * from"
+			String sql = "select count(*) from"
+					+ " (select"
+					+ " course_idx,course_count_view, course_count_reply, item_address,course_item_idx,"
+					+ " rank() over(partition by course_idx order by course_item_idx asc) rk"
+					+ " from"
+					+ " (select * from"
 					+ " course_item"
 					+ " inner join course using(course_idx)"
 					+ " inner join item using(item_idx)"
 					+ " where"
-					+ " instr(#1, ?) = 1)";
+					+ " instr(#1, ?) = 1)) where rk = 1";
 			sql = sql.replace("#1", column);
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, keyword);
@@ -379,19 +388,22 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			return list;
 		}
 		
-		public List<Integer> cityList(String order,String column, String keyword, int begin, int end) throws Exception {
+		public List<CourseDto> cityList(String order,String column, String keyword, int begin, int end) throws Exception {
 
 			Connection con = JdbcUtils.connect3();
+			
 			String sql = "select * from"
-					+ "(select rownum rn,tmp.* from"
-					+ "(select distinct course_idx from"
-					+ "(select * from"
+					+ " (select rownum rn,tmp.* from"
+					+ " (select"
+					+ " course_idx,course_name,course_detail,course_date,course_count_view, course_count_reply, item_address,course_item_idx,"
+					+ " rank() over(partition by course_idx order by course_item_idx asc) rk"
+					+ " from"
+					+ " (select * from"
 					+ " course_item"
 					+ " inner join course using(course_idx)"
 					+ " inner join item using(item_idx)"
 					+ " where"
-					+ " instr(#1, ?) = 1"
-					+ " order by #2 desc))tmp)"
+					+ " instr(#1, ?) = 1))tmp where rk = 1 order by #2 desc)"
 					+ " where rn between ? and ?";
 			
 			sql = sql.replace("#1", column);
@@ -402,32 +414,41 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			ps.setInt(3, end);
 			
 			ResultSet rs = ps.executeQuery();
-			List<Integer> list = new ArrayList<>();
+			List<CourseDto> list = new ArrayList<>();
 			while (rs.next()) {
-				list.add(rs.getInt(1));
+				CourseDto courseDto = new CourseDto();
+				courseDto.setCourseIdx(rs.getInt("course_idx"));
+				courseDto.setCourseName(rs.getString("course_name"));
+				courseDto.setCourseDetail(rs.getString("course_detail"));
+				courseDto.setCourseDate(rs.getDate("course_date"));
+				courseDto.setCourseCountView(rs.getInt("course_count_view"));
+				courseDto.setCourseCountReply(rs.getInt("course_count_reply"));
+
+				list.add(courseDto);
 			}
 
 			con.close();
-
 			return list;
 		}
 		
 		
-		public List<Integer> subCityList(String subCity,String order,String column, String keyword, int begin, int end) throws Exception {
+		public List<CourseDto> subCityList(String subCity,String order,String column, String keyword, int begin, int end) throws Exception {
 
 			Connection con = JdbcUtils.connect3();
 			String sql = "select * from"
-					+ "(select rownum rn,tmp.* from"
-					+ "(select distinct course_idx from"
-					+ "(select * from"
+					+ " (select rownum rn,tmp.* from"
+					+ " (select"
+					+ " course_idx,course_name,course_detail,course_date,course_count_view, course_count_reply, item_address,course_item_idx,"
+					+ " rank() over(partition by course_idx order by course_item_idx asc) rk"
+					+ " from"
+					+ " (select * from"
 					+ " course_item"
 					+ " inner join course using(course_idx)"
 					+ " inner join item using(item_idx)"
 					+ " where"
-					+ " instr(#1, ?) = 1"
+					+ " instr(#1,?)=1"
 					+ " and"
-					+ " instr(#1, ?) > 0"
-					+ " order by #2 desc))tmp)"
+					+ " instr(#1,?)>0))tmp where rk = 1 order by #2 desc)"
 					+ " where rn between ? and ?";
 			
 			sql = sql.replace("#1", column);
@@ -439,13 +460,20 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			ps.setInt(4, end);
 			
 			ResultSet rs = ps.executeQuery();
-			List<Integer> list = new ArrayList<>();
+			List<CourseDto> list = new ArrayList<>();
 			while (rs.next()) {
-				list.add(rs.getInt(1));
+				CourseDto courseDto = new CourseDto();
+				courseDto.setCourseIdx(rs.getInt("course_idx"));
+				courseDto.setCourseName(rs.getString("course_name"));
+				courseDto.setCourseDetail(rs.getString("course_detail"));
+				courseDto.setCourseDate(rs.getDate("course_date"));
+				courseDto.setCourseCountView(rs.getInt("course_count_view"));
+				courseDto.setCourseCountReply(rs.getInt("course_count_reply"));
+
+				list.add(courseDto);
 			}
 
 			con.close();
-
 			return list;
 		}
 
