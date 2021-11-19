@@ -114,7 +114,7 @@ public class UsersDao implements PaginationInterface<UsersDto> {
 	}
 	
 	// 2) NickName 기준
-		public UsersDto getNick(String usersNick) throws Exception {
+		public UsersDto getByNick(String usersNick) throws Exception {
 
 			// SQL 준비
 			String sql = "SELECT * FROM users WHERE users_nick = ?";
