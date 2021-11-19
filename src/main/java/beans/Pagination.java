@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
+public class Pagination<DAO extends PaginationInterface<DTO>, DTO> {
 
 
 
@@ -41,8 +41,8 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	// - dao의 역할: 계속해서 쓴다.
 	// - req/DAO는 필수지만, DTO/pageSize/blockSize는 선택사항이다.
 
-	public Pagination_users(HttpServletRequest req, DAO dao) { this(req, dao, 10, 10); }
-	public Pagination_users(HttpServletRequest req, DAO dao, int pageSize, int blockSize) {
+	public Pagination(HttpServletRequest req, DAO dao) { this(req, dao, 10, 10); }
+	public Pagination(HttpServletRequest req, DAO dao, int pageSize, int blockSize) {
 
 		// 1. page 결정
 		try {

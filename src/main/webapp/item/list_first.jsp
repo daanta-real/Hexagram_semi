@@ -4,7 +4,7 @@
 <%@page import="beans.UsersDto"%>
 <%@page import="beans.ItemDto"%>
 <%@page import="beans.ItemDao"%>
-<%@page import="beans.Pagination_users"%>
+<%@page import="beans.Pagination"%>
 
 <%@page import="beans.ItemFileDto"%>
 <%@page import="beans.ItemFileDao"%>

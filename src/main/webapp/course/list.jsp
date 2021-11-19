@@ -2,7 +2,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="beans.UsersDao"%>
-<%@page import="beans.Pagination_users"%>
+<%@page import="beans.Pagination"%>
 <%@page import="beans.ItemDto"%>
 <%@page import="beans.ItemDao"%>
 <%@page import="beans.CourseItemDao"%>
@@ -13,18 +13,18 @@
     pageEncoding="UTF-8"%>
     
 <%
-	String order = "course_idx";
-	if(request.getParameter("order") != null)
-	order = request.getParameter("order");
-	
-	String subCity = request.getParameter("subCity");
+    String order = "course_idx";
+    	if(request.getParameter("order") != null)
+    	order = request.getParameter("order");
+    	
+    	String subCity = request.getParameter("subCity");
 
-	//절대 경로를 위해 index.jsp 페이지 변수 저장
-    String root = request.getContextPath();
-	
-	//페이지 네이션
-    CourseDao courseDao = new CourseDao();
-    Pagination_users<CourseDao, CourseDto> pn = new Pagination_users<>(request, courseDao);
+    	//절대 경로를 위해 index.jsp 페이지 변수 저장
+        String root = request.getContextPath();
+    	
+    	//페이지 네이션
+        CourseDao courseDao = new CourseDao();
+        Pagination<CourseDao, CourseDto> pn = new Pagination<>(request, courseDao);
 
     //검색용 페이지 네이션
     boolean isSearchMode = pn.isSearchMode();
@@ -69,10 +69,10 @@
 		pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1);
 	}
 
-    
- 	// 제목 h2 태그에 들어갈 타이틀 결정
-    String title = isSearchMode ? ("["+pn.getKeyword()+"]" + " 검색") : ("코스 목록");
-%>
+        
+     	// 제목 h2 태그에 들어갈 타이틀 결정
+        String title = isSearchMode ? ("["+pn.getKeyword()+"]" + " 검색") : ("코스 목록");
+    %>
     
 <!DOCTYPE HTML>
 <HTML>

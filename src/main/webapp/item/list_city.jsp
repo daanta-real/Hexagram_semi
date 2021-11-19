@@ -5,7 +5,7 @@
 <%@page import="beans.UsersDto"%>
 <%@page import="beans.ItemDto"%>
 <%@page import="beans.ItemDao"%>
-<%@page import="beans.Pagination_users"%>
+<%@page import="beans.Pagination"%>
 
 <%@page import="beans.ItemFileDto"%>
 <%@page import="beans.ItemFileDao"%>
@@ -17,7 +17,9 @@
 <HEAD>
 <TITLE>노가리투어 - 관광지 목록</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
-<%String root = request.getContextPath();%>
+<%
+String root = request.getContextPath();
+%>
 <LINK REL="STYLESHEET" HREF="<%=root%>/resource/css/item/list.css" /> <!-- CSS 첨부 -->
 <style>
         * {
@@ -215,7 +217,7 @@ String subCity = request.getParameter("subCity");
 
 // 1. 변수 준비
 ItemDao itemDao = new ItemDao();
-Pagination_users<ItemDao, ItemDto> pn = new Pagination_users<>(request, itemDao);
+Pagination<ItemDao, ItemDto> pn = new Pagination<>(request, itemDao);
 boolean isSearchMode = pn.isSearchMode();
 pn.calculate();
 

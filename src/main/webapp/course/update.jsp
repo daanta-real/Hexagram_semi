@@ -1,4 +1,4 @@
-<%@page import="beans.Pagination_users"%>
+<%@page import="beans.Pagination"%>
 <%@page import="beans.CourseItemDto"%>
 <%@page import="beans.CourseDao"%>
 <%@page import="beans.CourseItemDao"%>
@@ -13,29 +13,29 @@
 
     <%
     String root = request.getContextPath();
-    
-	//기존의 번호
-	int courseOriginSequnce = Integer.parseInt(request.getParameter("courseOriginSequnce"));
-	//복사를 위한 임시 번호
-	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));
+        
+    	//기존의 번호
+    	int courseOriginSequnce = Integer.parseInt(request.getParameter("courseOriginSequnce"));
+    	//복사를 위한 임시 번호
+    	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));
 
-	ItemDao itemDao = new ItemDao();
-	//페이지네이션 모듈 사용
-	Pagination_users<ItemDao, ItemDto> pn = new Pagination_users<>(request, itemDao);
-	
-	//로그인 하였습니까?	
-	boolean isLogin = request.getSession().getAttribute("usersIdx") != null;
-	
-	//검색 모드입니까?
-	boolean isSearchMode = pn.isSearchMode();
-	//Item에 대한 데이터 정보를 계산해주세요.
-	pn.calculate();
-	//조건에 맞는 리스트를 반환해주세요.
-	List<ItemDto> list = pn.getResultList();
-	
-	 CourseItemDao courseItemDao = new CourseItemDao();
-	// 복사를 위한 임시 번호(courseSequnce)에서 ajax로 처리한 데이터 결과값을 확인해주는 열할.(목록 초기 화면 표시 및 update_last.jsp에서 이전으로 눌렀을 때 선택화면 초기화 용도)
-	 List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
+    	ItemDao itemDao = new ItemDao();
+    	//페이지네이션 모듈 사용
+    	Pagination<ItemDao, ItemDto> pn = new Pagination<>(request, itemDao);
+    	
+    	//로그인 하였습니까?	
+    	boolean isLogin = request.getSession().getAttribute("usersIdx") != null;
+    	
+    	//검색 모드입니까?
+    	boolean isSearchMode = pn.isSearchMode();
+    	//Item에 대한 데이터 정보를 계산해주세요.
+    	pn.calculate();
+    	//조건에 맞는 리스트를 반환해주세요.
+    	List<ItemDto> list = pn.getResultList();
+    	
+    	 CourseItemDao courseItemDao = new CourseItemDao();
+    	// 복사를 위한 임시 번호(courseSequnce)에서 ajax로 처리한 데이터 결과값을 확인해주는 열할.(목록 초기 화면 표시 및 update_last.jsp에서 이전으로 눌렀을 때 선택화면 초기화 용도)
+    	 List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
     %>
 <!DOCTYPE HTML>
 <HTML>
