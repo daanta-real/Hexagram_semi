@@ -29,7 +29,7 @@
     //검색용 페이지 네이션
     boolean isSearchMode = pn.isSearchMode();
    
-    pn.setPageSize(12);
+    pn.setPageSize(9);
     pn.setStartBlock(pn.getPage()/pn.getBlockSize()*pn.getBlockSize()+1);
     pn.setFinishBlock(pn.getStartBlock()+(pn.getBlockSize()-1));
     pn.setEnd(pn.getPage()*pn.getPageSize());
@@ -381,6 +381,7 @@
 			ItemFileDao itemFileDao = new ItemFileDao();
 			ItemFileDto itemFileDto = itemFileDao.find2(itemIdx);
 			%>
+		<a href="readup.nogari?courseIdx=<%=courseDto.getCourseIdx()%>">
             <div class="box">      
               			<%if(itemFileDto == null){ %>
 								<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
@@ -390,12 +391,10 @@
 								<img src="../item/file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" class="box-img">
 						<%} %>
 						
-                <div class="box-detail"><%=itemDto.getAdressCity()+" "+itemDto.getAdressCitySub()%></div> <!--지역 -->
+                <div class="box-detail"><%=itemDto.getAdressCity()%></div> <!--지역 -->
 
                 <div class="box-detail">
-                <a href="readup.nogari?courseIdx=<%=courseDto.getCourseIdx()%>">
                 <%=courseDto.getCourseName()%>
-                </a>
                 <%-- 댓글수 --%>
 					<!-- 댓글이 있다면 개수를 출력 -->
 				<%if(courseDto.isCountReply()){ %>
@@ -405,11 +404,13 @@
                 
                 
                 <div class="box-detail"><%=usersDto.getUsersId()%></div>
-                <div class="box-detail"><%=courseDto.getCourseDate()%></div>
+                <div class="box-detail">
+                <%=courseDto.getCourseDate()%> (조회수 :<%=courseDto.getCourseCountView()%>) 
+                </div>
             </div>
+	</a>
             <%} %>
         </div>
-
 
     </div>
 

@@ -330,7 +330,10 @@ ItemFileDao itemFileDao = new ItemFileDao();
 			<%} %>
                             </h3>
                             <h5><%=itemDtoList.getItemAddress() %></h5>
-                            <h5><%=itemDtoList.getItemType() %></h5>
+                            <h5>
+                            <%=itemDtoList.getItemType() %>
+                            (조회수:<%=itemDtoList.getItemCountView() %>)
+                            </h5>
                         </div>
                     </div>
                 </div>
