@@ -75,8 +75,14 @@ public class Sessioner {
 		int i;
 		for(i = 1; sessionNamesList.hasMoreElements(); i++) {
 			String elName = sessionNamesList.nextElement();
-			String val = (String) session.getAttribute(elName);
-			sb.append("  (" + i + ") 세션명: " + elName + " / 값: " + val + "\n");
+			sb.append("　　session(" + i + ") ▷ " + elName + " = ");
+			switch(elName) {
+				case "usersIdx"  : sb.append(getUsersIdx(session)  ); break;
+				case "usersId"   : sb.append(getUsersId(session)   ); break;
+				case "usersGrade": sb.append(getUsersGrade(session)); break;
+				default: break;
+			}
+			sb.append("\n");
 		}
 		sb.append("[세션정보] 끝\n");
 		return sb.toString();
@@ -85,13 +91,10 @@ public class Sessioner {
 	// 현재 각 세션 정보 회신
 	// 각 문자와 숫자 모두 null이 나올 수도 있다. 따라서 메소드로 값 획득 후 null check 필히 할 것.
 	public static Integer getUsersIdx  (HttpSession session) {
-		Object usersIdxx = session.getAttribute("usersIdx");
-		String usersIdxx_str = (String)usersIdxx;
-		Integer result = Integer.parseInt(usersIdxx_str);
-		return result;
+		return Integer.parseInt(String.valueOf(session.getAttribute("usersIdx")));
 	}
-	public static String  getUsersId   (HttpSession session) { return (String) session.getAttribute("usersId"   ); }
-	public static String  getUsersGrade(HttpSession session) { return (String) session.getAttribute("usersGrade"); }
+	public static String  getUsersId   (HttpSession session) { return (String)session.getAttribute("usersId")   ; }
+	public static String  getUsersGrade(HttpSession session) { return (String)session.getAttribute("usersGrade"); }
 
 
 
