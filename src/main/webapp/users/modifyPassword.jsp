@@ -82,7 +82,7 @@ window.addEventListener("load", () => {
 
 <!-- 변경 실패1. 현재 비밀번호가 일치하지 않을 경우 notEquals 파라미터 확인하고 메세지 보여주기-->
 <%if(request.getParameter("notEquals") != null) {%>
-	<h5> <font color="red">.현재 비밀번호가 일치하지 않습니다. 다시 입력해 주세요</font> </h5>
+	<h5> <font color="red">현재 비밀번호가 일치하지 않습니다. 다시 입력해 주세요</font> </h5>
 <%} %>
 <!-- 변경 실패2. 현재 비밀번호와 변경할 비밀번호가 동일하면 equalsFail 파라미터 확인하고 메세지 보여주기-->
 <%-- <%if(request.getParameter("equalsFail") != null) {%> --%>

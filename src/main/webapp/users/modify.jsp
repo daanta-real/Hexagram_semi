@@ -11,8 +11,11 @@
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 
-<!-- 닉네임 정규식 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/regexNick.js"></script>
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<!-- 닉네임 정규식 & 중복 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/regexNick_ajax.js"></script>
 <!-- 이메일 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexEmail.js"></script>
 <!-- 폰번호 정규식 검사 스크립트 -->
