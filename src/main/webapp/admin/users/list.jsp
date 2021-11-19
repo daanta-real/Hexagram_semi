@@ -95,8 +95,6 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 	System.out.println("출력할 회원 수: " + list.size());
 	
 	for(UsersDto usersDto : list) {
-		String usersEmail = usersDto.getUsersEmail();
-		if(usersEmail == null || usersEmail.equals("")) usersEmail = " ";
 	%>
 
 		<tr>
@@ -108,7 +106,7 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 				</a>
 			</td>
 			<td><%=usersDto.getUsersNick() %></td>
-			<td><%=usersEmail%></td>
+			<td><%=usersDto.getUsersEmail()%></td>
 			<td align="center"><%=usersDto.getUsersGrade() %></td>
 			<th align="center">
 				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"><button>상세</button></a>
