@@ -16,8 +16,8 @@
 <script type='text/javascript' src="<%=root%>/resource/js/checkPwEquals_regexId_ajax.js"></script>
 <!-- 비밀번호 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexPw.js"></script>
-<!-- 닉네임 정규식 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/regexNick.js"></script>
+<!-- 닉네임 정규식 & 중복 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/regexNick_ajax.js"></script>
 <!-- 이메일 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexEmail.js"></script>
 <!-- 폰번호 정규식 검사 스크립트 -->
