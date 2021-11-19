@@ -110,8 +110,12 @@ public class Pagination_users<DAO extends PaginationInterface<DTO>, DTO> {
 	public void setBlockSize(int blockSize) { this.blockSize = blockSize; }
 	public void setResultList(List<DTO> resultList) { this.resultList = resultList; }
 	public void setCount(int count) {this.count = count;}
-
-
+	public void setLastBlock(int lastBlock) {this.lastBlock = lastBlock;}
+	public void setBegin(int begin) {this.begin = begin;}
+	public void setEnd(int end) {this.end = end;}
+	public void setStartBlock(int startBlock) {this.startBlock = startBlock;}
+	public void setFinishBlock(int finishBlock) {this.finishBlock = finishBlock;}
+	
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 	// 4. Checkers
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
