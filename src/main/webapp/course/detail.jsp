@@ -191,8 +191,8 @@
             <!-- 수정/삭제는 jsp에서도 막아주는 것 이외로 주소로 입력하는 것을 방지하게 위해서 필터로도 막아줘야 한다. -->
 			<!-- 댓글 작성자 또는 관리자가 아니라면 버튼이 보여지지 않게 처리 -->
 			
-            <a href="delete.nogari?courseIdx=<%=courseIdx%>" class="float-right float-btn">수정</a>
-            <a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>" class="float-right float-btn">삭제</a>
+            <a href="delete.nogari?courseIdx=<%=courseIdx%>" class="float-right float-btn">삭제</a>
+            <a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>" class="float-right float-btn">수정</a>
             <a href="insert_sequence.nogari" class="float-right float-btn">새글작성</a>
             <%} %>
         </div>
