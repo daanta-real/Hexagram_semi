@@ -1,3 +1,4 @@
+<%@page import="util.users.Sessioner"%>
 <%@page import="beans.ItemFileDto"%>
 <%@page import="beans.ItemFileDao"%>
 <%@page import="beans.UsersDto"%>
@@ -217,16 +218,18 @@
   	 //출력을위해 Dao Dto 변수 선언
   	 ItemDao itemDao = new ItemDao();
   	 ItemDto itemDto = itemDao.get(itemIdx);
-  	
-  	//usersIdx 변수 저장 (본인글인지 확인을 위해)
-  	int usersIdx = (int)request.getSession().getAttribute("usersIdx");
-  	//자신이 쓴글인지(현재 접속자 = 게시물 작성자)?
-  	boolean isMyboard = request.getSession().getAttribute("usersIdx") != null && itemDto.getUsersIdx() == usersIdx;
+  	 UsersDao usersDao = new UsersDao();
+  	 UsersDto usersDto = usersDao.get(itemDto.getUsersIdx());
   	 
-  	//회원 등급 변수 저장(관리자만에게만 보이는 수정 삭제 버튼 표시를 위해)
-  	String usersGrade = (String)request.getSession().getAttribute("usersGrade");
+	//로그인 하였는지?  	
+  	 boolean isLogin = Sessioner.getUsersId(request.getSession()) != null;
+	 String usersId = (String)Sessioner.getUsersId(request.getSession());
+  	//(본인글인지 확인을 위해)
+	 boolean isMyboard = usersId == usersDto.getUsersId();
+	 
   	//관리자인지?
-  	boolean isManager = request.getSession().getAttribute("users_grade") != null && usersGrade.equals("관리자");
+  	boolean isManager = Sessioner.getUsersGrade(request.getSession()) != null 
+  	&& Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN);
  %>
  
 <%-- 조회수 중복방지 기능 (추 후 필요할시 주석 제거하고 위에 조회수 기능 삭제) --%>
@@ -287,9 +290,9 @@ ItemFileDao itemFileDao = new ItemFileDao();
 	<div class="row right">
 		<!-- 관리자 또는 글 작성자가 보는 경우 글작성 / 수정 / 삭제가 가능하도록 설정 : 수정 삭제의 경우 필터에서도 처리가능하도록 해야함.-->
 		<!-- 리모컨으로 구현하기 -->
-		<a href="<%=root%>/item/list.jsp">목록으로</a>
+		<a href="<%=root%>/item/list_first.jsp">목록으로</a>
 			<%
-			if(isManager || isMyboard){
+			if(isManager || (isLogin && isMyboard)){
 			%>
 			<!-- 글 작성 페이지로 이동 -->
 			<a href="<%=root%>/item/insert.jsp">새 글작성</a>
@@ -400,12 +403,11 @@ ItemFileDao itemFileDao = new ItemFileDao();
 					<tbody>
 						<%
 						//이 글을 쓴사람의 아이디를 알기 위해서 user의 정보를 불러와야 한다.
-														UsersDao usersDao = new UsersDao();
-														UsersDto usersDto = usersDao.get(itemReplyDto.getUsersIdx());
+														UsersDto usersItemReplyDto = usersDao.get(itemReplyDto.getUsersIdx());
 														// 게시물의 작성자가 댓글 작성자인가?
 														boolean isSameItemReply = itemDto.getUsersIdx() == itemReplyDto.getUsersIdx();
 														//현재 접속한 유저가 이 댓글 작성한 사람인가?
-														boolean isUsersReplyWriter = usersIdx == itemReplyDto.getUsersIdx();
+														boolean isUsersReplyWriter = usersId == usersItemReplyDto.getUsersId();
 						%>
 						
 						<tr class="view-row">
@@ -516,6 +518,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 </div>
 	
 	<!-- 댓글작성란 -->
+	<%if(isLogin){ %>
 		<form action="<%=root%>/item_reply/insert.nogari" method="post">
 			<input type="hidden" name="itemIdx" value="<%=itemIdx%>">
 				<div class="row center">
@@ -529,18 +532,15 @@ ItemFileDao itemFileDao = new ItemFileDao();
 					</div>
 				</div>
 		</form>
+	<%}else{ %>
+		<div class="row center">
+			<h3 align="center gapy">로그인 후 댓글 작성이 가능합니다.</h3>
+		</div>
+	<%} %>	
 	</div>
 <!-- 필터를 통해서 댓글 수정 및 삭제 금지하는 필터 설정을 해야한다!!!!!!!!!!!!!!!! -->
-	
-<!-- 이전글 다음글 -->
-
-<!-- 수정 삭제 새글 리모컨 픽스 추가 -->
-<!-- 사이드 바 구현 -->
-
 <!-- 작성일 작성시간 몇분전 몇일 전 표시하기. -->
 
-<!-- 지역별 리스트 구현 -->
-<!-- 사이드바 혹은 슬라이드바를 통해서 리스트 검색 가능케하기 -->
 
 <!-- 페이지 내용 끝. -->
 </SECTION>
