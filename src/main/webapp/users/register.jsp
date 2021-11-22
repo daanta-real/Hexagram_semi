@@ -19,7 +19,7 @@
 <!-- 닉네임 정규식 & 중복 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexNick_ajax.js"></script>
 <!-- 이메일 정규식 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/regexEmail.js"></script>
+<script type='text/javascript' src="<%=root%>/resource/js/regexEmail_ajax.js"></script>
 <!-- 폰번호 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexPhone.js"></script>
 <!-- 비밀번호 토글 스크립트 -->
@@ -29,7 +29,16 @@
 
 <!-- 인라인 -->
 <script type="text/javascript">
-
+window.addEventListener("load", () => {
+	
+    document.querySelector(".form-regexCheck  input[type=submit]").addEventListener("submit", function(){
+		if(!regex.test(inputId)){ 
+			return false; 
+			location.href = "/Hexagram_semi/users/register.jsp"; 
+			console.log("아이지 정규식 검사 실패-전송방지")}
+    });
+ 
+});
 </script>
 
 </HEAD>
