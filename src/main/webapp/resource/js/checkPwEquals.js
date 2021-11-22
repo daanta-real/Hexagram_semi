@@ -31,8 +31,8 @@ window.addEventListener("load", () => {
 	    else{
 	        noticePw.textContent = "비밀번호 일치";
 	        console.log("비번 & 재확인비번 일치");	
-		} 
+		}
 	
 	});
-	
+
 });
