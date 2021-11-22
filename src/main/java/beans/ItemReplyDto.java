@@ -116,6 +116,10 @@ public class ItemReplyDto {
 		return f.format(this.itemReplyDate);
 	}
 
+	public boolean hasDepth() {
+		return this.itemReplyDepth > 0;
+	}
+	
 	public ItemReplyDto() {
 		super();
 	}
