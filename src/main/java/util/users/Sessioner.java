@@ -21,7 +21,19 @@ public class Sessioner {
 	public static final String GRADE_REGULAR   = "정회원";
 	public static final String GRADE_ASSOCIATE = "준회원";
 
+	// 세셔너를 새로 만든다면 여기서 정의하자.
+	public HttpSession session = null;
+	public void setSession(HttpSession session) {
+		{
+			this.session = session;
+		}
+	}
 
+	// 생성자
+	public Sessioner() { super(); }
+	public Sessioner(HttpSession session) {
+		setSession(session);
+	}
 
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 	// 1. 로그인 / 로그아웃
@@ -29,6 +41,7 @@ public class Sessioner {
 
 	// 해당 session에 대해 로그인 처리를 해준다.
 	// 이때 넘어오는 dto 안에 idx, id, grade 셋 다 반드시 있어야 한다.
+	public void login(UsersDto dto) throws Exception { login(session, dto); }
 	public static void login(HttpSession session, UsersDto dto) throws Exception {
 
 		// 1. 값 준비
@@ -55,11 +68,24 @@ public class Sessioner {
 
 	// 해당 session에 대해 로그아웃 처리를 해준다.
 	// 세션 값 모두 제거
-	public static void logout(HttpSession session) {
-		session.removeAttribute("usersIdx");
-		session.removeAttribute("usersId");
-		session.removeAttribute("usersGrade");
-		System.out.println("[UsersUtils 세션 셋팅기] 로그아웃 처리 완료되었습니다." + getInfo(session));
+	public boolean logout() { return logout(session); }
+	public static boolean logout(HttpSession session) {
+		try {
+
+			session.removeAttribute("usersIdx");
+			session.removeAttribute("usersId");
+			session.removeAttribute("usersGrade");
+			System.out.println("[UsersUtils 세션 셋팅기] 로그아웃 처리 완료되었습니다." + getInfo(session));
+
+		} catch(Exception e) {
+
+			e.printStackTrace();
+			System.out.println("[UsersUtils 세션 셋팅기] 로그아웃 중 에러 발생");
+
+		}
+
+		// 정상적으로 로그아웃되었으면 true 회신
+		return true;
 	}
 
 
@@ -69,6 +95,7 @@ public class Sessioner {
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 
 	// 현재 세션 전체 정보 문자열로 return
+	public String getInfo() { return getInfo(session); }
 	public static String getInfo(HttpSession session) {
 		StringBuffer sb = new StringBuffer();
 		Enumeration<String> sessionNamesList = session.getAttributeNames();
@@ -90,9 +117,10 @@ public class Sessioner {
 
 	// 현재 각 세션 정보 회신
 	// 각 문자와 숫자 모두 null이 나올 수도 있다. 따라서 메소드로 값 획득 후 null check 필히 할 것.
-	public static Integer getUsersIdx  (HttpSession session) {
-		return Integer.parseInt(String.valueOf(session.getAttribute("usersIdx")));
-	}
+	public Integer getUsersIdx()   { return getUsersIdx(session)  ; }
+	public String  getUsersId()    { return getUsersId(session)   ; }
+	public String  getUsersGrade() { return getUsersGrade(session); }
+	public static Integer getUsersIdx  (HttpSession session) { return Integer.parseInt(String.valueOf(session.getAttribute("usersIdx"))); }
 	public static String  getUsersId   (HttpSession session) { return (String)session.getAttribute("usersId")   ; }
 	public static String  getUsersGrade(HttpSession session) { return (String)session.getAttribute("usersGrade"); }
 
@@ -103,12 +131,25 @@ public class Sessioner {
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 
 	// 기본
+	public boolean isLoggedIn() { return isLoggedIn(session); }
+	public boolean isAdmin() { return isAdmin(session); }
 	public static boolean isLoggedIn   (HttpSession session) { return getUsersIdx(session) != null; }
 	public static boolean isAdmin      (HttpSession session) { return getUsersId(session).equals(GRADE_ADMIN); }
 
-	// 권한검사
+	// 권한검사: isGranted
 	// 현재 세션의 유저에게 타겟id 데이터의 조작권한이 있는지 검사하여, 있으면 True 없으면 False를 반환함.
 	// ※ 권한이 있으려면,(1) 요청자가 관리자이거나 (2) 내가 내 id에 요청하는 경우여야 함
+	// 1. 클래스 선언한 형태
+	public boolean isGranted(String targetId) throws Exception { return isGranted(session, targetId); }
+	// 2. (request, 대상id) 형태
+	public static boolean isGranted(HttpServletRequest req, String targetId) throws Exception {
+		return isGranted(req.getSession(), targetId);
+	}
+	// 3. (session) 형태: targetId는 null이 된다.
+	public static boolean isGranted(HttpSession session) throws Exception {
+		return isGranted(session, null);
+	}
+	// 4. 본 메소드
 	public static boolean isGranted(HttpSession session, String targetId) throws Exception {
 
 		// 0. 변수준비
@@ -149,17 +190,6 @@ public class Sessioner {
 		System.out.println("[권한확인] (세션 ID = '" + sessionId + "', 회원등급 = '" + session.getAttribute("usersGrade") + "', 대상id = '" + targetId + "'");
 		return false;
 
-	}
-
-	// 오버라이드 메소드들
-
-	// (request, 대상id) 형태
-	public static boolean isGranted(HttpServletRequest req, String targetId) throws Exception {
-		return isGranted(req.getSession(), targetId);
-	}
-	// (session) 형태: targetId는 null이 된다.
-	public static boolean isGranted(HttpSession session) throws Exception {
-		return isGranted(session, null);
 	}
 
 }
