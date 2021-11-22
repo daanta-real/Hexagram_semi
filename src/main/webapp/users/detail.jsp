@@ -1,16 +1,18 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="util.users.Sessioner" %>
 
 <%@ page import="beans.UsersDto"%>
 <%@ page import="beans.UsersDao"%>
 
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
 <%
 
 // 1. 변수준비
 String root = request.getContextPath();
-Sessioner sessioner = new Sessioner(session); 
+Sessioner sessioner = new Sessioner(session);
+
+// 2. 해당 id의 DTO 조회
 String usersId = sessioner.getUsersId();
 UsersDao usersDao = new UsersDao();
 UsersDto usersDto = usersDao.get(usersId);
@@ -21,16 +23,18 @@ UsersDto usersDto = usersDao.get(usersId);
 <HTML>
 <HEAD>
 <TITLE>노가리투어 - 마이페이지</TITLE>
+<%/*템플릿*/%>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
-</HEAD>
-<!-- CSS들 -->
+<%/*CSS들*/%>
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
-<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/detail_normal.css">
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/detail.css">
+</HEAD>
+
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
-
 <!-- 페이지 내용 시작 -->
+
 <div class="sub_title">내 정보</div>
 <table class='boardContainer'>
 	<tbody class='boardBox'>
@@ -61,11 +65,6 @@ UsersDto usersDto = usersDao.get(usersId);
 		<tr class='row'>
 			<th>보유 포인트</th>
 			<td><%=usersDto.getUsersPoint() %> points</td>
-		</tr>
-		<tr class='row'>
-			<th>비밀번호</th>
-			<td align="left">
-			</td>
 		</tr>
 	</tbody>
 	<tfoot class='boardBox'>
