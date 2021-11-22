@@ -10,10 +10,14 @@
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 <BODY>
-<%String root = request.getContextPath(); %>
+<%
+String root = request.getContextPath();
+%>
 
 <!--세션에 저장된 아이디 -->
-<%String usersId = (String)session.getAttribute("usersId"); %>	
+<%
+String usersId = (String)session.getAttribute("usersId");
+%>	
 
 <!-- 회원상세정보 불러오기 -->
 <%

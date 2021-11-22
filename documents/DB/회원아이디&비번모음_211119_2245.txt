@@ -38,10 +38,9 @@ ID: editor5 / 비번: asdfasdf12@
 ID: insurance9 / 비번: asdfasdf12@
 ID: steak1 / 비번: asdfasdf12@
 ID: wife2 / 비번: asdfasdf12@
-ID: recommendation412@ / 비번: asdfasdf
-ID: entry6 / 비번: asdfasdf
+ID: entry6 / 비번: asdfasdf12@
 ID: storage5 / 비번: asdfasdf12@
-ID: video9 / 비번: asdfasdf12@
+ID: video9 / 비번: asdfasdf12@   
 ID: attitude6 / 비번: asdfasdf12@
 ID: dealer1 / 비번: asdfasdf12@
 ID: love9 / 비번: asdfasdf12@

@@ -13,9 +13,9 @@ CREATE TABLE    users (
   users_id    VARCHAR2(20) CONSTRAINT users_id_not_null NOT NULL
                            CONSTRAINT users_id_unique UNIQUE
                            CONSTRAINT users_id_check CHECK(
-                             REGEXP_LIKE(users_id, '.*?[a-z]+')
-                               AND
-                             (REGEXP_COUNT(users_id, '[a-z0-9_]') between 4 and 20)
+                                  REGEXP_LIKE(users_id, '^[a-z0-9_]{4,20}$')
+                                  	AND
+                                  REGEXP_LIKE(users_id, '.*?[a-z]+')
                            ),
   users_pw    VARCHAR2(150) CONSTRAINT users_pw_not_null    NOT NULL
                             CONSTRAINT users_pw_check       CHECK(REGEXP_LIKE(users_pw, '.*?[a-zA-Z0-9-\$]+')),
@@ -32,7 +32,6 @@ CREATE TABLE    users (
   users_grade CHAR(9)       DEFAULT '준회원' CONSTRAINT users_grade_not_null  NOT NULL
                                             CONSTRAINT users_grade_check_in  CHECK(users_grade IN('준회원', '정회원', '관리자'))
 );
-
 
 
 -- 데이터 생성 (users)
@@ -82,7 +81,6 @@ INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email) VALUES
 INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email) VALUES(users_seq.NEXTVAL, 'insurance9', 'SHA-256$ae99cceccebc55d765999e8b65d4f3a3e9eb043aff7b5f648f6ba36d4842e777$f6a8f71b419d486c9d85b574fea816e5929a34ebff9dd82d290cda12649773eb', '닉네임44', 'emcleod@msn.com');
 INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email) VALUES(users_seq.NEXTVAL, 'steak1', 'SHA-256$4fed7fdd9d224362cf7c39b321c7316327ecfa7ca6cf94ccd298bfe53d1137da$01d1a46b6dbe898efb69f20aa079f1eec4b3bd58efafedda5c161e23db999842', '닉네임45', 'bmcmahon@optonline.net');
 INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email) VALUES(users_seq.NEXTVAL, 'wife2', 'SHA-256$ed045d3c044a504965c23838dd48bd6c1999a99057a90a17d9232b954bb741b4$3948684561c71fba06f407dc1ce7984e8a7b01e8d5bd5fbc8175010b6770cde2', '닉네임46', 'seano@att.net');
-INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email) VALUES(users_seq.NEXTVAL, 'recommendation412@', 'SHA-256$6c91f74231f096cb2df9623264952ad222141fbc05f81e1deeee63ed5f8cdfd5$7436cad85f4635cb98257bfb955a3c90a4b71737bed6b680a3a2cf94fd6f5369', '닉네임47', 'kdawson@msn.com');
 INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email) VALUES(users_seq.NEXTVAL, 'entry6', 'SHA-256$76f4ba0b011ebea18f06b6caa4c07ba75fd1f04893e98bb8d1cfdd7cac7e9163$8955c82589a581517a16a09784d987118528f0345f5cfc11a77dc7da81bd5910', '닉네임48', 'giafly@hotmail.com');
 INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email) VALUES(users_seq.NEXTVAL, 'storage5', 'SHA-256$6d658b676a9130c19f67af4ffd705601ea8276087a21328992c80c9d3e4b8c0f$75fbc4cde6fb5c708d4718b3dac463728d28951f535a1cdd46c3800a896e03fd', '닉네임49', 'kramulous@mac.com');
 INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email) VALUES(users_seq.NEXTVAL, 'video9', 'SHA-256$b20b5605ce22c362f0acf71cbe13446ce60c9fa4d6172d0689e887f825b19e6b$2647dee90feabd8f4bfe84f75c0d8cfe87721c05dbd2e66d3bfbc644e1a3fe63', '닉네임50', 'cgreuter@optonline.net');
@@ -156,7 +154,6 @@ INSERT INTO item VALUES(item_seq.NEXTVAL, 1, '관광지', '관광지이름14', '
 INSERT INTO item VALUES(item_seq.NEXTVAL, 1, '축제'  , '축제이름14'  , '축제내용 축제내용14'    , '축제기간 : 21.11.04부터 ~ 21.12.04까지', '09:00부터 ~ 22:00까지', 'http://test@test.com', '공원앞 주차가능', '서울시 영등포구 여의도 윤중대로', SYSDATE, 0, 0);
 INSERT INTO item VALUES(item_seq.NEXTVAL, 1, '관광지', '관광지이름15', '관광지내용 관광지내용15', null                                    , '09:00부터 ~ 22:00까지', 'http://test@test.com', '공원앞 주차가능', '서울시 영등포구 당산로'        , SYSDATE, 0, 0);
 INSERT INTO item VALUES(item_seq.NEXTVAL, 1, '축제'  , '축제이름15'  , '축제내용 축제내용15'    , '축제기간 : 21.11.04부터 ~ 21.12.04까지', '09:00부터 ~ 22:00까지', 'http://test@test.com', '공원앞 주차가능', '서울시 영등포구 여의도 윤중대로', SYSDATE, 0, 0);
-
 INSERT INTO item VALUES(item_seq.NEXTVAL, 1, '관광지', '관광지이름16', '관광지내용 관광지내용16', null                                    , '09:00부터 ~ 22:00까지', 'http://test@test.com', '공원앞 주차가능', '서울시 영등포구 당산로'        , SYSDATE, 0, 0);
 INSERT INTO item VALUES(item_seq.NEXTVAL, 1, '축제'  , '축제이름16'  , '축제내용 축제내용16'    , '축제기간 : 21.11.04부터 ~ 21.12.04까지', '09:00부터 ~ 22:00까지', 'http://test@test.com', '공원앞 주차가능', '서울시 영등포구 여의도 윤중대로', SYSDATE, 0, 0);
 INSERT INTO item VALUES(item_seq.NEXTVAL, 1, '관광지', '관광지이17'  , '관광지내용 관광지내용17', null                                    , '09:00부터 ~ 22:00까지', 'http://test@test.com', '공원앞 주차가능', '서울시 영등포구 당산로'        , SYSDATE, 0, 0);
@@ -261,11 +258,6 @@ CREATE TABLE course(
   course_count_reply NUMBER(20)                   DEFAULT 0       CONSTRAINT course_count_reply_not_null NOT NULL
 );
 
--- 데이터 생성 (course)
-INSERT INTO course VALUES(1, 1, '코스제목1', '코스내용1', SYSDATE, 0, 0);
-INSERT INTO course VALUES(2, 1, '코스제목2', '코스내용2', SYSDATE, 0, 0);
-INSERT INTO course VALUES(3, 3, '코스제목3', '코스내용3', SYSDATE, 0, 0);
-
 -- 저장 (course)
 COMMIT;
 
@@ -283,23 +275,10 @@ SELECT * FROM course;
 CREATE SEQUENCE course_item_seq;
 CREATE TABLE course_item(
   course_item_idx NUMBER(20)                  CONSTRAINT course_item_PK      PRIMARY KEY,
-  item_idx        REFERENCES users(users_idx) ON DELETE SET NULL,
+  item_idx        REFERENCES item(item_idx) ON DELETE SET NULL,
   course_idx      NUMBER(20)                  CONSTRAINT course_idx_not_null NOT NULL
                                               CONSTRAINT course_idx_check    CHECK(course_idx > 0)
 );
-
--- 데이터 생성 (course_item)
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 1, 1);
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 2, 1);
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 3, 1);
-
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 4, 2);
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 5, 2);
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 6, 2);
-
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 7, 3);
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 8, 3);
-INSERT INTO course_item VALUES(course_item_seq.NEXTVAL, 9, 3);
 
 -- 저장 (course_item)
 COMMIT;

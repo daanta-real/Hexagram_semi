@@ -112,7 +112,7 @@ public class UsersDao implements PaginationInterface<UsersDto> {
 		return dto;
 
 	}
-	
+
 	// 2) NickName 기준
 		public UsersDto getByNick(String usersNick) throws Exception {
 

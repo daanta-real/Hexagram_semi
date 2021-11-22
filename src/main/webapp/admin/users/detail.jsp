@@ -15,11 +15,13 @@
 <script type="text/javascript" src="admin_users_delete.js"></script>
 
 <BODY>
-<% String root = request.getContextPath(); %>
+<%
+String root = request.getContextPath();
+%>
 
 <!-- 회원상세정보 불러오기. 파라미터로 전달한 조회할 회원의 usersIdx -->
 <%
-	int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));	
+int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));	
 	UsersDao usersDao = new UsersDao();
 	UsersDto usersDto = usersDao.get(usersIdx);
 %>

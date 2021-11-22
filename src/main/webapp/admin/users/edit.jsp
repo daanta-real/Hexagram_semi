@@ -10,7 +10,9 @@
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
 </HEAD>
 <BODY>
-<% String root = request.getContextPath(); %>
+<%
+String root = request.getContextPath();
+%>
 
 <!-- 비밀번호 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexPw.js"></script>
@@ -26,7 +28,7 @@
 <!-- 회원의 원래 정보는 그대로 보여 주고 수정할 수 있도록 처리 -->
 <!-- 회원상세정보 불러오기. 파라미터로 전달한 조회할 회원의 usersIdx -->
 <%
-	int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));	
+int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));	
 	UsersDao usersDao = new UsersDao();
 	UsersDto usersDto = usersDao.get(usersIdx);
 %>
