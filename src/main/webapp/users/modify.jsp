@@ -19,7 +19,7 @@ String root = request.getContextPath();
 <!-- 닉네임 정규식 & 중복 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexNick_ajax.js"></script>
 <!-- 이메일 정규식 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/regexEmail.js"></script>
+<script type='text/javascript' src="<%=root%>/resource/js/regexEmail_ajax.js"></script>
 <!-- 폰번호 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexPhone.js"></script>
 <!-- 초기화(새로고침) 스크립트 -->

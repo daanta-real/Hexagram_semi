@@ -19,7 +19,7 @@
 <!-- 닉네임 정규식 & 중복 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexNick_ajax.js"></script>
 <!-- 이메일 정규식 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/regexEmail.js"></script>
+<script type='text/javascript' src="<%=root%>/resource/js/regexEmail_ajax.js"></script>
 <!-- 폰번호 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexPhone.js"></script>
 <!-- 비밀번호 토글 스크립트 -->
@@ -29,7 +29,13 @@
 
 <!-- 인라인 -->
 <script type="text/javascript">
-
+window.addEventListener("load", () => {
+	
+    document.querySelector(".form-regexCheck  input[type=submit]").addEventListener("submit", function(){
+		
+    });
+ 
+});
 </script>
 
 </HEAD>
@@ -43,7 +49,7 @@
 		비밀번호 입력값 일치여부 검사시 템플릿안에 로그인에도 name=usersPw가 있어서 값을 못받아 오기때문에
 		form에 class=form-regexCheck 를 부여하여 선택자 지정시킴  
  -->
-<form class="form-regexCheck" method='post' action='<%=root%>/users/join.nogari'>
+<form class="form-regexCheck" method='post' action='<%=root%>/users/join.nogari'">
 <table>
 <tbody>       
 	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요' required><div class="message"></div></td></tr>
