@@ -2,13 +2,10 @@
 //- 입력값이 있을 경우에만 검사하도록 설정. 미입력시 'OOO을 입력해 주세요' 메세지 출력
 //     - 닉네임 정규표현식 검사 통과 후 닉네임 중복검사 진행
 
-
- // 로드 이후 리스너 추가
-window.addEventListener("load", () => {
  
-    // NICK 정규표현식 검사 
-    document.querySelector(".form-regexCheck input[name=usersNick]").addEventListener("blur", function(){
+   function regexNick_ajax(){
 
+	    // NICK 정규표현식 검사 
         var form  = document.querySelector('.form-regexCheck');
         var regex = /^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,10}$/;
         var inputNick = form.querySelector("input[name=usersNick]").value;
@@ -40,9 +37,11 @@ window.addEventListener("load", () => {
 					if(resp == "CAN_USE") { //사용가능한 닉네임라면 다른 입력창에 대한 입력이 가능
 						$(message).text("닉네임 사용 가능");
 						$("input").prop("disabled", false);
+						return true;
 					} else if(resp =="USED") { //닉네임이 중복이라면 다른 입력창에 대한 입력을 방지
 						$(message).text("닉네임이 이미 사용중입니다");
 						$("input").not($("input[name=usersNick]")).prop("disabled",true);
+						return false;
 					}
 				}
 				
@@ -58,11 +57,12 @@ window.addEventListener("load", () => {
             }else{
                 console.log("닉네임 정규표현식 검사 실패");
                 message.textContent = "영문, 한글, 숫자 2~10글자로 작성해주세요";
+				return false;
             }
         }else{
             console.log("닉네임 미입력");
             message.textContent = "닉네임을 입력해 주세요";
+			return false;
         }
-    });
+ }
 
-});
