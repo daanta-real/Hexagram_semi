@@ -20,7 +20,7 @@ public class CourseDeleteServlet extends HttpServlet{
 			//코스 게시물 삭제 Servlet
 			
 			//파라미터로 받은 courseIdx를 변수에 저장
-			int courseIdx = Integer.parseInt(req.getParameter("courseIdx"));
+			int courseIdx = Integer.parseInt(req.getParameter("courseSequnce")); // 필터의 파라미터 이름을 동일하게 해주기위해서 파라미터 명을 courseSequnce로 하였다.
 			
 			//처리
 			CourseDao courseDao = new CourseDao();

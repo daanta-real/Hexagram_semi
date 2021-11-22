@@ -18,8 +18,8 @@ import beans.UsersDto;
 import util.users.Sessioner;
 
 @WebFilter(urlPatterns = {
-		"/course/edit.jsp",
-		"/course/edit.nogari",
+		"/course/update.jsp",
+		"/course/update.nogari",
 		"/course/delete.nogari"
 })
 public class CourseSelfFilter implements Filter{
@@ -31,7 +31,7 @@ public class CourseSelfFilter implements Filter{
 		HttpServletResponse resp = (HttpServletResponse)response;
 		try {
 			req.setCharacterEncoding("UTF-8");
-			int courseIdx = Integer.parseInt(req.getParameter("courseIdx"));
+			int courseIdx = Integer.parseInt(req.getParameter("courseSequnce"));
 			
 			CourseDao courseDao = new CourseDao();
 			CourseDto courseDto = courseDao.get(courseIdx);
