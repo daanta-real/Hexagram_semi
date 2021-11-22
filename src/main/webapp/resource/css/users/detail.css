@@ -32,7 +32,7 @@
 	display:grid; grid-template-columns:var(--board-grid-columns);
 }
 .boardContainer > .boardBox > .row, .boardContainer > .boardBox.page {
-	height:var(--board-row-height);
+	min-height:var(--board-row-height);
 }
 .boardContainer > .boardBox.title .row {
 	color: var(--board-color-title-font);
@@ -58,8 +58,8 @@
     background-color: var(--color11);
 }
 .boardContainer > .boardBox > .row > td > input {
-	width:100%; border:0; padding:0 0.3rem; outline:none;
-	position:relative;
+	position:relative; width:100%; max-width:9rem;
+	margin:0.1rem; border:0; padding:0 0.3rem; outline:none;
 }
 
 /* check 
@@ -109,6 +109,7 @@
 	justify-content:center; align-items:center;
 }
 
+.bottomLongBtn,
 .boardContainer > tfoot.boardBox > tr > td > a,
 .boardContainer > tfoot.boardBox > tr > td > button {
 	min-width: 10rem;
@@ -119,4 +120,5 @@
 	color:#000a;
 	background:var(--color5);
     text-align: center;
+	font-size:inherit;
 }

@@ -1,47 +1,48 @@
-<%@page import="servlet.item.ItemCityList"%>
-<%@page import="beans.Pagination"%>
-<%@page import="beans.CourseItemDto"%>
-<%@page import="beans.CourseDao"%>
-<%@page import="beans.CourseItemDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.HashSet"%>
+
 <%@page import="beans.ItemDto"%>
-<%@page import="java.util.List"%>
 <%@page import="beans.ItemDao"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="beans.CourseItemDto"%>
+<%@page import="beans.CourseDao"%>
+<%@page import="beans.CourseItemDao"%>
+
+<%@page import="beans.Pagination"%>
+
+<%@page import="servlet.item.ItemCityList"%>
 
 <%
 //절대 경로를 위해 index.jsp 페이지 변수 저장
-    String root = request.getContextPath();
-    
-	// 최초 코스 번호는서블릿에서 생성한 번호를 받아준다. 
-	// 이후에는 코스_아이템 항목 추가,삭제 서블릿에서 전달한 해당 시퀀스 값을 다시 받는다.(코스 생성전까지 유지해줘야하는 항목)
-	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));
+String root = request.getContextPath();
 
-	String subCity = request.getParameter("subCity");
-	
-	
-	ItemDao itemDao = new ItemDao();
-	Pagination<ItemDao, ItemDto> pn = new Pagination<>(request, itemDao);
-	
-	boolean isLogin = request.getSession().getAttribute("usersIdx") != null;
-	boolean isSearchMode = pn.isSearchMode();
-	pn.calculate();
-	List<ItemDto> list = new ArrayList<>();
-	if(subCity != null){
-		list = itemDao.subCityList(subCity,"item_idx", pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-		pn.setCount(itemDao.count(pn.getColumn(), pn.getKeyword(),subCity));
-		pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
-	}else{
-		list = pn.getResultList();	
-	}
-	
-	
-	 CourseItemDao courseItemDao = new CourseItemDao();
-	 List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
-	// 생성한 시퀀스 번호에서 ajax로 처리한 데이터 결과값을 확인해주는 열할.(수정시에 span숫자 확인 용도 및 선택 목록 초기 화면 표시//이전으로 돌아왔을때 처리하게 해주어야하니까, 필요)
+// 최초 코스 번호는서블릿에서 생성한 번호를 받아준다. 
+// 이후에는 코스_아이템 항목 추가,삭제 서블릿에서 전달한 해당 시퀀스 값을 다시 받는다.(코스 생성전까지 유지해줘야하는 항목)
+/*JSDEBUG*/ System.out.println("courseSeq" + request.getParameter("courseSequence"));
+int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));String subCity = request.getParameter("subCity");
+
+ItemDao itemDao = new ItemDao();
+Pagination<ItemDao, ItemDto> pn = new Pagination<>(request, itemDao);
+
+boolean isLogin = request.getSession().getAttribute("usersIdx") != null;
+boolean isSearchMode = pn.isSearchMode();
+pn.calculate();
+List<ItemDto> list = new ArrayList<>();
+if(subCity != null){
+	list = itemDao.subCityList(subCity,"item_idx", pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
+	pn.setCount(itemDao.count(pn.getColumn(), pn.getKeyword(),subCity));
+	pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
+}else{
+	list = pn.getResultList();	
+}
+
+
+ CourseItemDao courseItemDao = new CourseItemDao();
+ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
+// 생성한 시퀀스 번호에서 ajax로 처리한 데이터 결과값을 확인해주는 열할.(수정시에 span숫자 확인 용도 및 선택 목록 초기 화면 표시//이전으로 돌아왔을때 처리하게 해주어야하니까, 필요)
 %>
     
 <!DOCTYPE HTML>
@@ -97,6 +98,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
     
+    console.log("서버 주소: ", "<%=root%>/course/ajax_item_add.nogari");
        $(function(){
       		//코스_아이템DB 등록(비동기 통신)
            $(".item-add-btn").on("click", function(){

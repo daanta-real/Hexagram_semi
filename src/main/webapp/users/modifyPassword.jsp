@@ -4,10 +4,10 @@
 <HEAD>
 <TITLE>노가리투어 - 비밀번호 변경</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
-</HEAD>
 <% String root = request.getContextPath(); %>
-<!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/detail.css">
+</HEAD>
 
 <!-- 비밀번호 토글 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/togglePw.js"></script>
@@ -57,7 +57,10 @@ window.addEventListener("load", () => {
 			</tr>
 			<tr>
 				<th>현재 비밀번호</th>
-				<td><input type="password" name="usersPw" required><label><input type="checkbox" class="togglePw"><span>보기</span></label></td>
+				<td>
+					<input type="password" name="usersPw" required>
+					<label><input type="checkbox" class="togglePw"><span>보기</span></label>
+				</td>
 			</tr>
 			<tr>
 				<th>변경할 비밀번호</th>
@@ -69,11 +72,9 @@ window.addEventListener("load", () => {
 		</tbody>
 		<tfoot>
 			<tr>
-				<td colspan="2" align="center">
-					<input type="submit" value="변경">
-					<a href = "<%=root %>/users/detail.jsp">
-						<input type="button" value="취소">
-					</a>
+				<td colspan="2" align="center" class='flexRow'>
+					<input class='bottomLongBtn' type="submit" value="변경">
+					<a class='bottomLongBtn' href = "<%=root %>/users/detail.jsp">취소</a>
 				</td>
 			</tr>
 		</tfoot>
