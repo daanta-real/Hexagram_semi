@@ -28,7 +28,7 @@ public class UsersAjaxNickUniqueCheckServlet extends HttpServlet{
 			UsersDao dao = new UsersDao();
 			UsersDto dto = dao.getByNick(usersNick);
 			System.out.println("[회원가입 - 닉네임 중복검사] " + usersNick + "의 DTO: " + dto);
-			boolean idExists = dto != null; // DTO 검색 성공 시 기 사용중인 아이디가 있는 것 = 요청된 아이디가 중복아이디라는 것
+			boolean idExists = dto != null; // DTO 검색 성공 시 기 사용중인 닉네임이 있는 것 = 요청된 닉네임이 중복이라는 것
 
 			// 3. 해당 DTO 존재여부에 따라 결과 회신
 			System.out.print("[회원가입 - 닉네임 중복검사] 닉네임 조회 결과..");
