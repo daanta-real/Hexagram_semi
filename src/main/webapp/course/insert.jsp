@@ -15,7 +15,8 @@
 <%
 //절대 경로를 위해 index.jsp 페이지 변수 저장
     String root = request.getContextPath();
-    
+	//최초 시퀀스를 만든사람만이 등록이 가능하도록 설정.(파라미터를 시퀀스 생성에서 부터 전달받고 필터에서 사용함)
+    String usersFilterId = request.getParameter("usersFilterId");
 	// 최초 코스 번호는서블릿에서 생성한 번호를 받아준다. 
 	// 이후에는 코스_아이템 항목 추가,삭제 서블릿에서 전달한 해당 시퀀스 값을 다시 받는다.(코스 생성전까지 유지해줘야하는 항목)
 	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));
@@ -114,6 +115,7 @@
                    	// 아이템_코스 DB에 정보를 추가 / 삭제 / 명칭 및 지역 중복을 확인해주기 위함
                    	itemIdx : item_Idx,
                    	courseIdx : course_Idx
+                   	usersFilterId : <%=usersFilterId%>
                    },
                    success:function(resp){
                         if(resp == "NNNNS"){//코스아이템DB 체크시 동일 지역이 아닐 경우
@@ -150,6 +152,7 @@
                                        data:{//삭제 ajax에서 코스-아이템db를 삭제하기 위한 정보
                                        	itemIdx : new_item_Idx,
                                        	courseIdx : new_course_Idx
+                                    	usersFilterId : <%=usersFilterId%>
                                        },
                                        //완료 처리
                                        success:function(resp){
@@ -204,6 +207,7 @@
                    data:{
                    	itemIdx : item_Idx,
                    	courseIdx : course_Idx
+                	usersFilterId : <%=usersFilterId%>
                    },
                    success:function(resp){
 
@@ -576,6 +580,7 @@
 	<form action="insert_last.jsp" class="next-submit">
 		<button>다음 단계로(제목/내용/선택한 목록 조회 및 수정)</button>
 		<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
+		<input type="hidden" name="usersFilterId" value="<%=usersFilterId%>">
 	</form>
 </div>
 

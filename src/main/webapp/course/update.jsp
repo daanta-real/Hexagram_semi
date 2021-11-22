@@ -14,6 +14,10 @@
 
     <%
     String root = request.getContextPath();
+
+		//최초 시퀀스를 만든사람만이 등록이 가능하도록 설정.(파라미터를 시퀀스 생성에서 부터 전달받고 필터에서 사용함)
+	    String usersFilterId = request.getParameter("usersFilterId");
+    	
    		String subCity = request.getParameter("subCity");
     	//기존의 번호
     	int courseOriginSequnce = Integer.parseInt(request.getParameter("courseOriginSequnce"));
@@ -114,6 +118,7 @@
                     data:{
                     	itemIdx : item_Idx,
                     	courseIdx : course_Idx
+                    	usersFilterId : <%=usersFilterId%>
                     },
                     success:function(resp){
                          if(resp == "NNNNS"){//span(class=".result")에서 결과를 나타내주며,아이템추가 ajax에서 첫번째 추가한 도시명과 대상(현재 추가하기) 관광지명의 도시명을 비교하여 다르다면,
@@ -153,6 +158,7 @@
                                         data:{
                                         	itemIdx : new_item_Idx,
                                         	courseIdx : new_course_Idx
+                                        	usersFilterId : <%=usersFilterId%>
                                         },
                                         success:function(resp){
                                         	if(resp == "NNNNN"){//아이템 삭제 ajax에서 코스-아이템 db(즉 courseItemList.size())에 관광지가 적어도 3개는 들어가야하기 때문임.
@@ -214,6 +220,7 @@
                     data:{
                     	itemIdx : item_Idx,
                     	courseIdx : course_Idx
+                    	usersFilterId : <%=usersFilterId%>
                     },
                     success:function(resp){
 
@@ -590,6 +597,7 @@
 		</div>
 		<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
 		<input type="hidden" name="courseOriginSequnce" value="<%=courseOriginSequnce%>">
+		<input type="hidden" name="usersFilterId" value="<%=usersFilterId%>">
 <!-- 		이 값들이 넘어가야하는 이유 : 343,344 줄 참조 -->
 	</form>
 </div>

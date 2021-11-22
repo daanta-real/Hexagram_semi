@@ -13,12 +13,15 @@ import beans.CourseDao;
 import beans.CourseItemDao;
 import beans.CourseItemDto;
 import beans.ItemDto;
+import util.users.Sessioner;
 
 @WebServlet(urlPatterns = "/course/udpate_sequence.nogari")
 public class CourseCreateSequnceForUpdateServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			try {
+				//필터에서 이 부분을 거친사람을 확인하기 위해서 최초 생성한 유저의 정보를 넘겨준다.(추후 코스 생성및 코스-아이템 등록/삭제를 위한 필터처리용)
+				String usersFilterId = req.getParameter("usersFilterId");
 				
 				//코스 수정시 시퀀스 번호 정리 Servlet
 				
@@ -56,7 +59,7 @@ public class CourseCreateSequnceForUpdateServlet extends HttpServlet {
 				 // case1 . 도중에 작성하다가 나간경우 : 복사본(임시번호)를 날려주기만 하면 된다.
 				 // case2 . 복사본(임시번호)의 내용이 수정되고 최종 완료하였을 경우는 기존의 courseIdx(즉 courseOriginSequnce의 번호만 살리고 내부의 데이터를 모두 삭제 후,
 				 // 수정된 복사본의 내용을 덮어쓴 후 수정된 복사본은 내용과 번호정보를 모두 삭제해준다.
-				 resp.sendRedirect("update.jsp?courseSequnce="+courseSequnce+"&courseOriginSequnce="+courseOriginSequnce);
+				 resp.sendRedirect("update.jsp?courseSequnce="+courseSequnce+"&courseOriginSequnce="+courseOriginSequnce+"&usersFilterId"+usersFilterId);
 				
 			}catch (Exception e) {
 				e.printStackTrace();
