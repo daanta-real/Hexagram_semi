@@ -26,6 +26,7 @@ public class CourseAjaxItemAddServlet extends HttpServlet{
 			//insert.jsp의  $(".item-add-btn").on("click", function(){})의 옵션으로 통신 
 			int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
 			int courseIdx = Integer.parseInt(req.getParameter("courseIdx"));
+			String usersFilterId = req.getParameter("usersFilterId"); //최초 시퀀스를 만든사람만이 삭제가 가능하도록 설정.
 			
 			//등록 처리
 			CourseItemDao courseItemDao = new CourseItemDao();

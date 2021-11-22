@@ -13,12 +13,15 @@ import beans.CourseDao;
 import beans.CourseItemDao;
 import beans.CourseItemDto;
 import beans.ItemDto;
+import util.users.Sessioner;
 
 @WebServlet(urlPatterns = "/course/udpate_sequence.nogari")
 public class CourseCreateSequnceForUpdateServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			try {
+				//필터에서 이 부분을 거친사람을 확인하기 위해서 최초 생성한 유저의 정보를 넘겨준다.
+				String usersFilterId = Sessioner.getUsersId(req.getSession());
 				
 				//코스 수정시 시퀀스 번호 정리 Servlet
 				

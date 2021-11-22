@@ -9,12 +9,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.CourseDao;
+import util.users.Sessioner;
 
 @WebServlet(urlPatterns = "/course/insert_sequence.nogari")
 public class CourseCreateSequnceForInsertServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			try {
+				//필터에서 이 부분을 거친사람을 확인하기 위해서 최초 생성한 유저의 정보를 넘겨준다.
+				//필터에서 현재 시퀀스를 생성한 사람이 아니면 수정이 불가하게 설정함.(관리자는 제외)
+				String usersFilterId = Sessioner.getUsersId(req.getSession());
 				
 				//코스 등록 전 시퀀스 번호 받는 Servlet
 				
@@ -29,7 +33,7 @@ public class CourseCreateSequnceForInsertServlet extends HttpServlet {
 				 int courseSequnce = courseDao.getSequence();
 				 
 				 //등록을 위해서 insert.jsp로 이동함
-				 resp.sendRedirect("insert.jsp?courseSequnce="+courseSequnce);
+				 resp.sendRedirect("insert.jsp?courseSequnce="+courseSequnce+"&usersFilterId"+usersFilterId);
 				
 			}catch (Exception e) {
 				e.printStackTrace();

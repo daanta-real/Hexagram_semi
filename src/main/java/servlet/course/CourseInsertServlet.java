@@ -23,6 +23,8 @@ public class CourseInsertServlet extends HttpServlet{
 			req.setCharacterEncoding("UTF-8");
 			
 			//입력
+			//최초 시퀀스를 만든사람만이 등록이 가능하도록 설정.
+			String usersFilterId = req.getParameter("usersFilterId");
 			//courseIdx : 파라미터로 받은 courseIdx 번호
 			//usersIdx : 글 작성자의 번호를 세션으로 받는다
 			//courseName : 파라미터로 받은 코스 게시물 제목
