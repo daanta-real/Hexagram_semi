@@ -3,7 +3,7 @@
 
 /* 변수들 */
 :root {
-	--board-grid-columns: 7rem minmax(15rem, 1fr) 5rem 5rem 5rem;
+	--board-grid-columns: 6rem 10rem;
 	
 	--board-color-title-bg: var(--color10);
 	--board-color-title-font: var(--color8);
@@ -11,16 +11,18 @@
 	--board-color-body-font: var(--color8);
 	--board-border-color: var(--color7);
 	--board-topbot-border-width: 1px;
-	--board-row-height: 1.5rem;
+	--board-row-height: 1.8rem;
 	--board-el-bgcolor-highlighted: #8882;
 	
 	--board-page-color: var(--color8);
-	--board-page-el-width: 2rem;
-	--board-page-lr-width: 3rem;
 }
  
 /* 공통 속성들 */
 * { box-sizing:content-box; }
+.sub_title { margin:1rem auto 0.5rem auto; }
+.boardContainer, .boardContainer > .boardBox.body {
+	display:flex; flex-direction:column;
+}
 .boardContainer > .boardBox {
 	display:flex; justify-content:center; align-items:center;
 	flex-direction: column;
@@ -43,9 +45,17 @@
 .boardContainer > .boardBox .row > th,
 .boardContainer > .boardBox .row > td {
 	display:flex; justify-content:center; align-items:center;
+	margin:0.15rem 0.07rem;
 }
 .boardContainer > .boardBox .row > th {
-	background-color:var(--color8);
+    z-index:1; 
+	background-color:var(--color7);
+    color:#000b;
+}
+.boardContainer > .boardBox .row > td {
+    z-index: 0;
+    color:#000b;
+    background-color: var(--color11);
 }
 .boardContainer > .boardBox .row > div.subject {
 	justify-content:flex-start;
@@ -75,21 +85,20 @@
 	border-bottom-width:calc(var(--board-topbot-border-width) * 2);
 }
 
-/* 레이아웃 */
-.boardContainer, .boardContainer > .boardBox.body {
+/* 게시판 하단 버튼들 */
+.boardContainer > tfoot.boardBox > tr {
+	margin:1rem;
+}
+.boardContainer > tfoot.boardBox > tr > td {
 	display:flex; flex-direction:column;
+	justify-content:center; align-items:center;
 }
-	
-/* 게시판 하단 페이징 블럭들 */
-.boardContainer > .boardBox.page {
-	display:flex; flex-direction:row; justify-content:center;
+
+.boardContainer > tfoot.boardBox > tr > td > a {
 	color: var(--board-page-color);
-}
-
-.boardContainer > .boardBox.page .el {
-	width: var(--board-page-el-width);
-}
-
-.boardContainer > .boardBox.page .el.LR {
-	width: var(--board-page-lr-width);
+	margin:0.3rem;
+	padding:0.3rem 1rem;
+	border-radius: 0.4rem;
+	color:#000b;
+	background:var(--color5);
 }

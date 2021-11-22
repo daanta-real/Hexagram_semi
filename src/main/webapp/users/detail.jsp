@@ -39,10 +39,12 @@ UsersDto usersDto = usersDao.get(usersId);
 			<td><%=usersDto.getUsersId() %></td>
 		</tr>
 		<tr class='row'>
-			<th>비밀번호</th>
-			<td align="left">
-				<a href="<%=root%>/users/modifyPassword.jsp">비밀번호 변경하기(클릭..!)</a>
-			</td>
+			<th>가입일</th>
+			<td><%=usersDto.getUsersJoin() %></td>
+		</tr>
+		<tr class='row'>
+			<th>회원등급</th>
+			<td><%=usersDto.getUsersGrade() %></td>
 		</tr>
 		<tr class='row'>
 			<th>닉네임</th>
@@ -57,21 +59,25 @@ UsersDto usersDto = usersDao.get(usersId);
 			<td><%=usersDto.getUsersPhone() %></td>
 		</tr>
 		<tr class='row'>
-			<th>회원등급</th>
-			<td><%=usersDto.getUsersGrade() %></td>
-		</tr>
-		<tr class='row'>
-			<th>가입일</th>
-			<td><%=usersDto.getUsersJoin() %></td>
-		</tr>
-		<tr class='row'>
 			<th>보유 포인트</th>
-			<td><%=usersDto.getUsersPoint() %> point</td>
+			<td><%=usersDto.getUsersPoint() %> points</td>
+		</tr>
+		<tr class='row'>
+			<th>비밀번호</th>
+			<td align="left">
+			</td>
 		</tr>
 	</tbody>
-</table>
-	<a href="<%=root%>/users/modify.jsp">내 정보 변경하기(click!)</a>
-	<a href="<%=root%>/users/unregister.jsp">회원탈퇴하기(ㅠㅠclick!)</a>			
+	<tfoot class='boardBox'>
+		<tr>
+			<td colspan=2>
+				<a href="<%=root%>/users/modifyPassword.jsp">비밀번호 변경하기(click..!)</a>
+				<a href="<%=root%>/users/modify.jsp">내 정보 변경하기(click!..)</a>
+				<a href="<%=root%>/users/unregister.jsp">회원탈퇴하기(ㅠㅠclick..!)</a>
+			</td>
+		</tr>
+	</tfoot>
+</table>			
 <!-- 페이지 내용 끝. -->
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>
