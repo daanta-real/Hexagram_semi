@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%String root = request.getContextPath();%>
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
 <TITLE>노가리투어 - 회원 가입</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
-<%String root = request.getContextPath();%>
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/detail.css">
 <script type='text/javascript'>
 var sysurl = "<%=root%>";
 </script>

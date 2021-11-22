@@ -6,15 +6,13 @@
 <HEAD>
 <TITLE>노가리투어 - 내 정보 변경</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
-<%
-String root = request.getContextPath();
-%>
+<%String root = request.getContextPath();%>
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/detail.css">
 <script type='text/javascript'>
 var sysurl = "<%=root%>";
 </script>
 </HEAD>
-<!-- 페이지 제목 css -->
-<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
 
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -47,25 +45,34 @@ UsersDto usersDto = usersDao.get(sessionId);
 <form class="form-regexCheck" action="<%=root %>/users/modify.nogari" method="post">
 	<input type="hidden" name="usersId" value="<%=usersDto.getUsersId()%>">
 	<input type="hidden" name="usersPw" value="<%=usersDto.getUsersPw()%>">
-	<table>
+	<table class='boardContainer'>
 
 		<!-- 수정될 회원 정보 입력받는 부분 -->
-		<tbody>
-			<tr><th>아이디</th><td><%=usersDto.getUsersId() %></td></tr>
-			<tr><th>닉네임 변경</th><td><input type="text" name="usersNick" required value="<%=usersDto.getUsersNick() %>"><div class="message"></div></td></tr>
-			<tr><th>이메일 변경</th><td><input type="text" name="usersEmail" required value="<%=usersDto.getUsersEmail() %>"><div class="message"></div></td></tr>
-			<tr><th>전화번호 변경</th><td><input type="text" name="usersPhone" value="<%=usersDto.getUsersPhone() %>"><div class="message"></div></td></tr>
-			<tr><th>회원등급</th><td><%=usersDto.getUsersGrade() %></td></tr>
-			<tr><th>가입일</th><td><%=usersDto.getUsersJoin() %></td></tr>
-			<tr><th>보유 포인트</th><td><%=usersDto.getUsersPoint() %> point</td></tr>
+		<tbody class='boardBox'>
+			<tr class='row'><th>아이디</th><td><%=usersDto.getUsersId() %></td></tr>
+			<tr class='row'><th>닉네임 변경</th><td class='flexCol'>
+				<input type="text" name="usersNick" required value="<%=usersDto.getUsersNick() %>">
+				<div class="message"></div>
+			</td></tr>
+			<tr class='row'><th>이메일 변경</th><td class='flexCol'>
+			    <input type="text" name="usersEmail" required value="<%=usersDto.getUsersEmail() %>">
+			    <div class="message"></div>
+			</td></tr>
+			<tr class='row'><th>전화번호 변경</th><td class='flexCol'>
+				<input type="text" name="usersPhone" value="<%=usersDto.getUsersPhone() %>">
+				<div class="message"></div>
+			</td></tr>
+			<tr class='row'><th>회원등급</th><td><%=usersDto.getUsersGrade() %></td></tr>
+			<tr class='row'><th>가입일</th><td><%=usersDto.getUsersJoin() %></td></tr>
+			<tr class='row'><th>보유 포인트</th><td><%=usersDto.getUsersPoint() %> point</td></tr>
 		</tbody>
 		
 	 	<!-- 취소 시 회원정보 페이지로 이동 -->
-		<tfoot>
+		<tfoot class='boardBox'>
 			<tr><td align="center" colspan="2">
-				<input type="submit" value="변경">
-				<a href = "<%=root %>/users/detail.jsp"><input type="button" value="취소"></a>
-				<input type='reset' value='초기화' class="reset">
+				<input class='bottomLongBtn' type="submit" value="변경">
+				<a class='bottomLongBtn' href = "<%=root %>/users/detail.jsp">취소</a>
+				<input class='bottomLongBtn' type='reset' value='초기화' class="reset">
 			</td></tr>
 		</tfoot>
 
