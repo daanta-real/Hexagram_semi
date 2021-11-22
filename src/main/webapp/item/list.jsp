@@ -1,3 +1,4 @@
+<%@page import="util.users.Sessioner"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 
@@ -271,26 +272,12 @@ ItemFileDao itemFileDao = new ItemFileDao();
 <!-- 콘테이너 마지막 div -->
 </div>
 
-
-<br><br>
-
-<br><br>
-
 <%-- 관리자만 글쓰기 버튼 보이기 --%>
-<%
-// 현재 로그인한 사용자 등급이 관리자인지 확인
-// String usersGrade = (String)request.getSession().getAttribute("usersGrade");
-// //usersGrade가 null이 아니고 usersGrade가 관리자라면
-// boolean admin = usersGrade != null && usersGrade.equals(util.users.GrantChecker.GRADE_ADMIN);
-// System.out.println("[관광지 목록] 관리자 여부 → " + admin);
-%>
-<!-- 관리자일 경우에 한해 글쓰기 버튼 표시 -->
-<%-- <%if(admin){%> --%>
-<!-- <form action="insert.jsp"> -->
-<!-- 	<input type="submit" value="글쓰기"> -->
-<!-- </form> -->
-<%-- <%} %> --%>
-
+	<div>
+		<%if(Sessioner.getUsersGrade(request.getSession()) != null && Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN)) {%>
+		<h2><a href="insert.jsp">글쓰기</a></h2>
+		<%} %>
+	</div>
 
 <!-- 페이지 내용 끝. -->
 </SECTION>
