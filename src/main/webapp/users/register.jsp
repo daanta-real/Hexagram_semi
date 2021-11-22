@@ -12,13 +12,15 @@
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
-<!-- 아이디 정규식, 중복검사, 비밀번호 일치 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/checkPwEquals_regexId_ajax.js"></script>
+<!-- 아이디 정규식 & 중복 검사 스크립트-->
+<script type='text/javascript' src="<%=root%>/resource/js/regexId_ajax.js"></script>
+<!-- 비밀번호 일치 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/checkPwEquals.js"></script>
 <!-- 비밀번호 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexPw.js"></script>
 <!-- 닉네임 정규식 & 중복 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexNick_ajax.js"></script>
-<!-- 이메일 정규식 검사 스크립트 -->
+<!-- 이메일 정규식 & 중복 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexEmail_ajax.js"></script>
 <!-- 폰번호 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexPhone.js"></script>
@@ -29,16 +31,7 @@
 
 <!-- 인라인 -->
 <script type="text/javascript">
-window.addEventListener("load", () => {
-	
-    document.querySelector(".form-regexCheck  input[type=submit]").addEventListener("submit", function(){
-		if(!regex.test(inputId)){ 
-			return false; 
-			location.href = "/Hexagram_semi/users/register.jsp"; 
-			console.log("아이지 정규식 검사 실패-전송방지")}
-    });
- 
-});
+
 </script>
 
 </HEAD>
