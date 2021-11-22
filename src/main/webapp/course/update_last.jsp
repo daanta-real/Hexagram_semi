@@ -179,7 +179,7 @@ textarea {
 	    	//로그인 확인
 	    	<%boolean isLogin = request.getSession().getAttribute("usersIdx") != null;%> 
 	    	var login = <%=isLogin%>;
-	    	//만약 로그인이 안되었다면 이벤트를 발생시킨다
+	    	//만약 로그인이 안되었다면 이벤트를 발생시킨다//굳이 안해도 되지만 이중 차단..
 	    	if(!login){
 	    		e.preventDefault();
 	    		$(".show-login").text("로그인하세요..!").css("color","red");
