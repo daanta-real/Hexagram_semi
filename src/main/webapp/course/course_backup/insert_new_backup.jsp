@@ -276,21 +276,21 @@
     if(searchByName){
     	count = itemDao.count(column,keyword);
     }else if(searchByCity){
-    	count =itemDao.countLastSearch(city);
+//오류일어나서 여기 주석맥였습니다    	count =itemDao.countLastSearch(city);
     }else{
     	count =itemDao.count();
     }
     
-    int lastBlock = (count-1)/psize+1;
+    int lastBlock =  0;////오류일어나서 여기 주석맥였습니다(count-1)/psize+1;
     
 	int startBlock = (p - 1) / bsize * bsize + 1;
 	int finishBlock = startBlock + (bsize - 1);
     
-	 List<ItemDto> list;
+	 List<ItemDto> list = null;;
     if(searchByName){
     	list = itemDao.search(column,keyword,begin,end);
     }else if(searchByCity){
-    	list = itemDao.searchList(city,begin,end);
+    	//오류일어나서 여기 주석맥였습니다   	list = itemDao.searchList(city,begin,end);
     }else{
     	list = itemDao.list(begin,end);
     }
@@ -456,7 +456,7 @@
 
 <br><br>
 
-총 갯수  : <%=count%>
+<!-- //오류일어나서 여기 주석맥였습니다 총 갯수  : <%=0/*count*/%>  -->
 <br><br>
 
 

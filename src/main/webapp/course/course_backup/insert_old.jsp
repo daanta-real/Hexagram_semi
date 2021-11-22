@@ -156,7 +156,7 @@ try {
     if(searchByName){
     	count = itemDao.count(column,keyword);
     }else if(searchByCity){
-    	count =itemDao.countLastSearch(city);
+    	count = 0;//오류일어나서 여기 주석맥였습니다itemDao.countLastSearch(city);
     }else{
     	count =itemDao.count();
     }
@@ -166,11 +166,11 @@ try {
 	int startBlock = (p - 1) / bsize * bsize + 1;
 	int finishBlock = startBlock + (bsize - 1);
     
-	 List<ItemDto> list;
+	 List<ItemDto> list = null;
     if(searchByName){
     	list = itemDao.search(column,keyword,begin,end);
     }else if(searchByCity){
-    	list = itemDao.searchList(city,begin,end);
+//오류일어나서 여기 주석맥였습니다    	list = itemDao.searchList(city,begin,end);
     }else{
     	list = itemDao.list(begin,end);
     }
