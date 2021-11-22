@@ -12,7 +12,7 @@ import beans.UsersDao;
 import beans.UsersDto;
 
 @SuppressWarnings("serial")
-@WebServlet(urlPatterns = "/users/join_id_check.nogari")
+@WebServlet(urlPatterns = "/users/register_id_check.nogari")
 public class UsersCreateAjaxIdUniqueCheckServlet extends HttpServlet{
 
 	@Override

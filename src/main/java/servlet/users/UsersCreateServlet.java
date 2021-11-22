@@ -12,7 +12,7 @@ import beans.UsersDto;
 import util.users.Sessioner;
 
 @SuppressWarnings("serial")
-@WebServlet("/users/join.nogari")
+@WebServlet("/users/register.nogari")
 public class UsersCreateServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -63,7 +63,7 @@ public class UsersCreateServlet extends HttpServlet {
 			// 따라서 DB에 추가로 접속해 해당 유저의 grade를 조회해야 함.
 			UsersDto newDto = dao.get(seqNo);
 			Sessioner.login(req.getSession(), newDto);
-			resp.sendRedirect(req.getContextPath() + "/users/join_success.jsp");
+			resp.sendRedirect(req.getContextPath() + "/users/register_success.jsp");
 
 		}
 

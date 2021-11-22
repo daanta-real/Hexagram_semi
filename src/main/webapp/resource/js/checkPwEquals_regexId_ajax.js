@@ -55,7 +55,7 @@ function regexCheckId(){
 			
 			//아이디 중복검사(Ajax)  
 			console.log("중복검사 시작");
-			var url = "http://localhost:8080/Hexagram_semi/users/join_id_check.nogari";
+			var url = "http://localhost:8080/Hexagram_semi/users/register_id_check.nogari";
 			console.log("[Ajax 검사]");
 			console.log("inputId: " + inputId);
 			console.log("url: " + url);
