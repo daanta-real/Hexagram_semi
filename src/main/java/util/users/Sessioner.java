@@ -23,11 +23,7 @@ public class Sessioner {
 
 	// 세셔너를 새로 만든다면 여기서 정의하자.
 	public HttpSession session = null;
-	public void setSession(HttpSession session) {
-		{
-			this.session = session;
-		}
-	}
+	public void setSession(HttpSession session) { this.session = session; }
 
 	// 생성자
 	public Sessioner() { super(); }

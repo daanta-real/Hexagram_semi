@@ -7,12 +7,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%
+
 // 1. 변수준비
 String root = request.getContextPath();
 Sessioner sessioner = new Sessioner(session); 
 String usersId = sessioner.getUsersId();
 UsersDao usersDao = new UsersDao();
 UsersDto usersDto = usersDao.get(usersId);
+
 %>
 
 <!DOCTYPE HTML>
