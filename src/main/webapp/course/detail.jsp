@@ -200,7 +200,8 @@ String root = request.getContextPath();
 			<!-- 댓글 작성자 또는 관리자가 아니라면 버튼이 보여지지 않게 처리 -->
 			
             <a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>" class="float-right float-btn">수정</a>
-            <a href="delete.nogari?courseIdx=<%=courseIdx%>" class="float-right float-btn">삭제</a>
+            <a href="delete.nogari?courseSequnce=<%=courseIdx%>" class="float-right float-btn">삭제</a>
+<!--             필터의 파라미터 이름을 동일하게 해주기위해서 파라미터 명을 courseSequnce로 하였다. -->
             <a href="insert_sequence.nogari" class="float-right float-btn">새글작성</a>
             <%
             }
