@@ -131,8 +131,6 @@ String root = request.getContextPath();
 
 <%-- 페이지에 필요한 세션, 파라미터값 저장 및 변수 선언 --%>
 <%
-//usersIdx 세션값 변수에 저장
-	int usersIdx = (int)request.getSession().getAttribute("usersIdx");
 	//코스번호 받기
 	int courseIdx = Integer.parseInt(request.getParameter("courseIdx"));
 	
@@ -142,15 +140,18 @@ String root = request.getContextPath();
 	
 	//글 작성자 아이디 및 닉네임 출력을 위한 단일 조회
 	UsersDao usersDao = new UsersDao();
-	UsersDto usersShow = usersDao.get(courseDto.getUsersIdx());
+ 	UsersDto usersDto = usersDao.get(courseDto.getUsersIdx());
 
-	//자신의 글인지 확인 (수정, 삭제, 조회수증가)
-	boolean isMyboard = request.getSession().getAttribute("usersIdx") != null && courseDto.getUsersIdx() == usersIdx;
+	//로그인 하였는지?  	
+	 String usersId = (String)Sessioner.getUsersId(request.getSession());
+ 	 boolean isLogin = usersId != null;
+ 	//(본인글인지 확인을 위해)
+	 boolean isMyboard = usersId == usersDto.getUsersId();
 	
 	//회원 등급 변수 저장(관리자만에게만 보이는 수정 삭제 버튼 표시를 위해)
-	String usersGrade = (String)request.getSession().getAttribute("usersGrade");
-	//관리자인지?
-	boolean isManager = request.getSession().getAttribute("users_grade") != null && usersGrade.equals("관리자");
+  	//관리자인지?
+  	boolean isManager = Sessioner.getUsersGrade(request.getSession()) != null 
+  	&& Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN);
 %>
 
 <%-- course_item 및 course의 제목 및 내용 출력을 위한 변수 선언 --%>
@@ -191,7 +192,7 @@ String root = request.getContextPath();
     <!-- 작성자 닉네임 및 아이디 왼쪽 정렬 -->
     <div class="row">
         <div class="row float-container">
-            <span class="float-left">작성자 : <%=usersShow.getUsersId()%>(<%=usersShow.getUsersNick()%>)</span>
+            <span class="float-left">작성자 : <%=usersDto.getUsersId()%>(<%=usersDto.getUsersNick()%>)</span>
             <%
             if(isMyboard || isManager){
             %>
@@ -214,7 +215,7 @@ String root = request.getContextPath();
             <!-- 코스 제목 밑에 지역 표시-->
             <%
             int itemIdx = courseItemDao.getItemIdxByCourse(courseIdx);
-                                    ItemDto location = itemDao.get(itemIdx);
+            ItemDto location = itemDao.get(itemIdx);
             %>
             <span class="course-location"><%=location.getAdressCity()%> &nbsp; <%=location.getAdressCitySub()%></span>
         </div>
@@ -246,7 +247,7 @@ String root = request.getContextPath();
 		%>
 		<%
 		ItemDto itemDto = itemDao.get(courseItemDto.getItemIdx());
-				ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());
+		ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());
 		%>
             <li>
                 <span class="item-title"><%=itemDto.getItemName()%></span>
@@ -279,12 +280,13 @@ String root = request.getContextPath();
 <!-- 댓글 -->
 
 <!-- 댓글 작성 공간 -->
-<form action="<%=root%>/course_reply/insert.nogari" method="post">
-<!-- 댓글 작성시 댓글 번호를 숨겨서 보내준다 -->
-<input type="hidden" name="courseIdx" value="<%=courseIdx%>">
 <table border="1" width="900px">
 	<tbody>
 		<tr>
+	<%if(isLogin){ %>
+		<form action="<%=root%>/course_reply/insert.nogari" method="post">
+		<!-- 댓글 작성시 댓글 번호를 숨겨서 보내준다 -->
+		<input type="hidden" name="courseIdx" value="<%=courseIdx%>">
 			<td>
 			<!-- 댓글 등록 내용 -->
 			<textarea name="courseReplyDetail" cols="110" rows="5" required></textarea>
@@ -293,6 +295,9 @@ String root = request.getContextPath();
 			<!-- 댓글 등록 버튼 -->
 			<input type="submit" value="등록">
 			</td>
+		<%}else{ %>
+			<td><h3>로그인 후 댓글 작성이 가능합니다.</h3></td>
+		<%} %>
 		</tr>
 	</tbody>
 </table>
@@ -320,13 +325,13 @@ if(!list.isEmpty()){
 
 		<%
 		//게시글 작성자를 알기위해 usersDto 선언
-				UsersDto usersDto = usersDao.get(courseReplyDto.getUsersIdx());
+				UsersDto usersReplyDto = usersDao.get(courseReplyDto.getUsersIdx());
 				
 				//게시물 작성자 = 댓글 작성자?
 				boolean ownerReply = courseDto.getUsersIdx() == courseReplyDto.getUsersIdx();
 				
 				//본인 댓글인지 확인
-				boolean myReply = usersIdx == courseReplyDto.getUsersIdx();
+				boolean myReply = usersId == usersReplyDto.getUsersId();
 		%>
 		
 		<tr>
@@ -340,7 +345,7 @@ if(!list.isEmpty()){
 					<img src="<%=root%>/resource/image/reply.png" width="20px">
 				<%} %>
 				<!-- 댓글 작성자 및 닉네임 표시 -->
-				<%=usersDto.getUsersId() %>(<%=usersDto.getUsersNick() %>)
+				<%=usersReplyDto.getUsersId() %>(<%=usersReplyDto.getUsersNick() %>)
 				<!-- 게시글 작성자라면 [작성자]라고 표시해준다 -->
 				<%if(ownerReply){ %>
 					[작성자]

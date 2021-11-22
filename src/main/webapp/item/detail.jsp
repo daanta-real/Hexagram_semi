@@ -222,8 +222,8 @@
   	 UsersDto usersDto = usersDao.get(itemDto.getUsersIdx());
   	 
 	//로그인 하였는지?  	
-  	 boolean isLogin = Sessioner.getUsersId(request.getSession()) != null;
 	 String usersId = (String)Sessioner.getUsersId(request.getSession());
+  	 boolean isLogin = usersId != null;
   	//(본인글인지 확인을 위해)
 	 boolean isMyboard = usersId == usersDto.getUsersId();
 	 
