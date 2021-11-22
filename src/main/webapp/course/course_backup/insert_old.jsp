@@ -1,24 +1,27 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@page import="beans.CourseItemDto"%>
 <%@page import="beans.CourseDao"%>
 <%@page import="beans.CourseItemDao"%>
+
+<%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.HashSet"%>
-<%@page import="beans.ItemDto"%>
-<%@page import="java.util.List"%>
-<%@page import="beans.ItemDao"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 
-    <%
-    int pa;
-    try{
-    	pa =Integer.parseInt(request.getParameter("pa"));
-    	if(pa<=0 && pa>1) throw new Exception();
-    }catch(Exception e){
-    	pa = 0;
-    }
-    %>
+<%@page import="beans.ItemDto"%>
+<%@page import="beans.ItemDao"%>
+
+<%
+String root = request.getContextPath();
+int pa;
+try {
+	pa =Integer.parseInt(request.getParameter("pa"));
+	if(pa<=0 && pa>1) throw new Exception();
+} catch(Exception e) {
+	pa = 0;
+}
+%>
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
@@ -41,7 +44,7 @@
                 console.log(item_Idx);
                 $.ajax({
                     //준비 설정
-                    url:"http://localhost:8080/Hexagram_semi/course/ajax_item_add.nogari",
+                    url:"<%=root%>/course/ajax_item_add.nogari",
                     type:"get",//전송 방식
                     data:{//전송 시 첨부할 파라미터 정보
                     	itemIdx : item_Idx,
@@ -112,7 +115,6 @@
 <SECTION>
 <!-- 페이지 내용 시작 -->
     <%
-    String root = request.getContextPath();
     
 //     최초 코스 번호는서블릿에서 생성한 번호를 받아준다. 이후에는 코스_아이템 항목 추가,삭제 서블릿에서 전달한 해당 시퀀스 값을 다시 받는다.
 	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));

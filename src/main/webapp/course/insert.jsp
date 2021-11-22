@@ -107,7 +107,7 @@
                var item_name = $(this).attr("data-item_name");//추가한 아이템 목록에 추가하였을때 보여줄 명칭
 
                $.ajax({
-                   url:"http://localhost:8080/Hexagram_semi/course/ajax_item_add.nogari",
+                   url:"<%=root%>/course/ajax_item_add.nogari",
                    type:"get",
                    data:{
                    	//전송 시 첨부할 파라미터 정보 => 아이템 번호와 코스 번호를 받아서
@@ -145,7 +145,7 @@
                                    var new_item_Idx = $(this).attr("data-item_idx");
                                    
                                    $.ajax({
-                                       url:"http://localhost:8080/Hexagram_semi/course/ajax_delete_item.nogari",
+                                       url:"<%=root%>/course/ajax_delete_item.nogari",
                                        type:"get",
                                        data:{//삭제 ajax에서 코스-아이템db를 삭제하기 위한 정보
                                        	itemIdx : new_item_Idx,
@@ -199,7 +199,7 @@
                var item_Idx = $(this).attr("data-item_idx");
 
                $.ajax({
-                   url:"http://localhost:8080/Hexagram_semi/course/ajax_delete_item.nogari",
+                   url:"<%=root%>/course/ajax_delete_item.nogari",
                    type:"get",
                    data:{
                    	itemIdx : item_Idx,
@@ -287,103 +287,103 @@
 			<%if(pn.keywordValExists("서울")) {%>
 			<option value="서울" selected>서울특별시</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=서울">서울특별시</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=서울">서울특별시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("부산")) {%>
 			<option value="부산" selected>부산광역시</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=부산">부산광역시</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=부산">부산광역시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("인천")) {%>
 			<option value="인천" selected>인천광역시</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=인천">인천광역시</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=인천">인천광역시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("대구")) {%>
 			<option value="대구" selected>대구광역시</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=대구">대구광역시</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=대구">대구광역시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("대전")) {%>
 			<option value="대전" selected>대전광역시</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=대전">대전광역시</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=대전">대전광역시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("광주")) {%>
 			<option value="광주" selected>광주광역시</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=광주">광주광역시</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=광주">광주광역시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("울산")) {%>
 			<option value="울산" selected>울산광역시</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=울산">울산광역시</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=울산">울산광역시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("경기")) {%>
 			<option value="경기" selected>경기도</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경기">경기도</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경기">경기도</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("세종")) {%>
 			<option value="세종" selected>세종특별자치시</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=세종">세종특별자치시</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=세종">세종특별자치시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("강원")) {%>
 			<option value="강원" selected>강원도</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=강원">강원도</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=강원">강원도</option>
 			<%} %>																		
 			
 			<%if(pn.keywordValExists("제주")) {%>
 			<option value="제주" selected>	제주특별자치도</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=제주">제주특별자치도</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=제주">제주특별자치도</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("경상북도")) {%>
 			<option selected>경상북도</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경상북도">경상북도</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경상북도">경상북도</option>
 			<%} %>
 		
 			<%if(pn.keywordValExists("경상남도")) {%>
 			<option selected>경상남도</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경상남도">경상남도</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경상남도">경상남도</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("전라남도")) {%>
 			<option selected>전라남도</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=전라남도">전라남도</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=전라남도">전라남도</option>
 			<%} %>
 	
 			<%if(pn.keywordValExists("전라북도")) {%>
 			<option selected>전라북도</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=전라북도">전라북도</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=전라북도">전라북도</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("충청남도")) {%>
 			<option selected>충청남도</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=충청남도">충청남도</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=충청남도">충청남도</option>
 			<%} %>
 		
 			<%if(pn.keywordValExists("충청북도")) {%>
 			<option selected>충청북도</option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=충청북도">충청북도</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=충청북도">충청북도</option>
 			<%} %>				
 		</select>
 		
@@ -401,7 +401,7 @@
 			<%if(subCity!=null && subCity.equals(s)) {%>
 			<option value="<%=s%>" selected><%=s%></option>
 			<%}else{ %>
-			<option value="http://localhost:8080/Hexagram_semi/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=<%=pn.getKeyword()%>&subCity=<%=s%>"><%=s%></option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=<%=pn.getKeyword()%>&subCity=<%=s%>"><%=s%></option>
 			<%} %>
 			
 			<%} %>

@@ -1,8 +1,15 @@
-<%@page import="beans.Pagination"%>
-<%@page import="beans.UsersDto"%>
-<%@page import="java.util.List"%>
-<%@page import="beans.UsersDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@page import="java.util.List"%>
+
+<%@page import="beans.UsersDao"%>
+<%@page import="beans.UsersDto"%>
+
+<%@page import="beans.Pagination"%>
+
+<%
+String root = request.getContextPath();
+%>
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
@@ -11,9 +18,9 @@
 </HEAD>
 
 <!-- 페이지 제목 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
+<link rel="stylesheet" type="text/css" href="/<%=root%>/resource/css/users/sub_title.css">
 <!-- 게시판 공통 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/board.css">
+<link rel="stylesheet" type="text/css" href="/<%=root%>/resource/css/users/board.css">
 
 <style>
 :root {--board-grid-columns: 5rem 5rem 5rem 7rem 5rem 7rem;}
@@ -34,9 +41,6 @@
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
-<%
-String root = request.getContextPath();
-%>
 
 <!-- 페이지 내용 시작 -->
 

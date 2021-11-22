@@ -17,7 +17,7 @@ window.addEventListener("load", () => {
 
 				// 이메일 중복검사
 				console.log("중복검사 시작");
-				var url = "http://localhost:8080/Hexagram_semi/users/email_check.nogari";
+				var url = sysurl + "/users/email_check.nogari";
 				console.log("[Ajax 검사]");
 				console.log("inputEmail: " + inputEmail);
 				console.log("url: " + url);

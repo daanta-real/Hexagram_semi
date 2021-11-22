@@ -5,6 +5,9 @@
 <TITLE>노가리투어 - 회원 가입</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 <%String root = request.getContextPath();%>
+<script type='text/javascript'>
+var sysurl = "<%=root%>";
+</script>
 
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">

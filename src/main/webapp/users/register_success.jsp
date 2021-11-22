@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%String root = request.getContextPath();%>
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
@@ -6,11 +7,10 @@
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
 <!-- 페이지 제목 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
+<link rel="stylesheet" type="text/css" href="/<%=root%>/resource/css/users/sub_title.css">
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
-<%String root = request.getContextPath();%>
 <!-- 페이지 내용 시작 -->
 
 <div class="sub_title">회원 가입에 성공하셨습니다.</div>
