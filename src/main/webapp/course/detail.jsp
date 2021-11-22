@@ -202,7 +202,9 @@ String root = request.getContextPath();
             <a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>" class="float-right float-btn">수정</a>
             <a href="delete.nogari?courseSequnce=<%=courseIdx%>" class="float-right float-btn">삭제</a>
 <!--             필터의 파라미터 이름을 동일하게 해주기위해서 파라미터 명을 courseSequnce로 하였다. -->
-            <a href="insert_sequence.nogari" class="float-right float-btn">새글작성</a>
+            <a href="insert_sequence.nogari?usersFilterId=<%=usersId%>" class="float-right float-btn">새글작성</a>
+<!--             usersFilterId는 ajax(코스-아이템 등록 삭제) 및 코스 등록시에 필터처리를 위해서 필요한 인자이다. -->
+<!--             최초 시퀀스번호를 생성하고 접속한 사람만이 이 권한이 생긴다. -->
             <%
             }
             %>
