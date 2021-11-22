@@ -36,7 +36,7 @@ window.addEventListener("load", () => {
 	
 				// Ajax 설정 (2) 통신 완료 시 동작 설정
 				params.success = (resp) => {
-					console.log("NickName 중복검사 요청 성공. ID : "+resp);
+					console.log("NickName 중복검사 요청 성공. 닉네임 : "+resp);
 					if(resp == "CAN_USE") { //사용가능한 닉네임라면 다른 입력창에 대한 입력이 가능
 						$(message).text("닉네임 사용 가능");
 						$("input").prop("disabled", false);

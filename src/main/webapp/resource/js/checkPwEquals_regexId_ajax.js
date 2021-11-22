@@ -93,7 +93,6 @@ function regexCheckId(){
 		}else{
 			console.log("아이디 정규표현식 검사 실패");
 			message.textContent = "영문 소문자, 숫자, 특수문자_ 4~20자 이내로 입력해주세요";
-			return;
 		}
 	}else{
 		console.log("아이디 미입력");
