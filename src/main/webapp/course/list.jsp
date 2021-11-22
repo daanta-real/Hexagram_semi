@@ -1,3 +1,4 @@
+<%@page import="util.users.Sessioner"%>
 <%@page import="beans.ItemFileDto"%>
 <%@page import="beans.ItemFileDao"%>
 <%@page import="servlet.item.ItemCityList"%>
@@ -23,6 +24,8 @@
    	String subCity = request.getParameter("subCity");
    	//절대 경로를 위해 index.jsp 페이지 변수 저장
     String root = request.getContextPath();
+   	
+   	boolean isLogin = request.getSession().getAttribute("usersIdx") != null;
    	
    	//페이지 네이션
     CourseDao courseDao = new CourseDao();
@@ -531,9 +534,9 @@
 <!-- 컨셉 :  -->
 <!-- 1) 코스 번호는 코스_아이템 DB에 저장되어야 하므로, 미리 생성해서 작성란으로 가야한다. -->
 <!-- 2) 비회원은 작성할 수 없도록 설정해 두었다. -->
-<%if(request.getSession().getAttribute("usersIdx") != null){ %>
+<%if(isLogin){ %>
 <!-- 글쓰기 버튼을 누르면CourseCreateSequnceForInsertServlet 으로 이동해서 시퀀스 번호를 생성해준다. -->
-<h2><a href="insert_sequence.nogari">글 쓰기</a></h2>
+<h2><a href="insert_sequence.nogari?usersFilterId=<%=Sessioner.getUsersId(request.getSession())%>">글 쓰기</a></h2>
 <%} %>
 
 
