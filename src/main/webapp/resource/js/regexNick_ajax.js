@@ -11,7 +11,7 @@ window.addEventListener("load", () => {
     	// 정규식 검사 실패, 중복, 미입력시 submit 버튼 비활성화
 		// submit.disabled = true; 이면 비활성화
 		// submit.disabled = false; 이면 활성화
-		var submit = document.querySelector("input[type=submit]"); 
+		var submit = document.querySelector("[type=submit]");    
 		
         var form  = document.querySelector('.form-regexCheck');
         var regex = /^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,10}$/;
