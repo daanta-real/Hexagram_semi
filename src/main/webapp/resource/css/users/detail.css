@@ -95,10 +95,11 @@
 }
 
 .boardContainer > tfoot.boardBox > tr > td > a {
-	color: var(--board-page-color);
+	width: 100%;
 	margin:0.3rem;
 	padding:0.3rem 1rem;
 	border-radius: 0.4rem;
-	color:#000b;
+	color:#000a;
 	background:var(--color5);
+    text-align: center;
 }
