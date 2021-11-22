@@ -28,10 +28,10 @@
 	flex-direction: column;
 	width:100%;
 }
-.boardContainer > .boardBox .row {
+.boardContainer > .boardBox > .row {
 	display:grid; grid-template-columns:var(--board-grid-columns);
 }
-.boardContainer > .boardBox .row, .boardContainer > .boardBox.page {
+.boardContainer > .boardBox > .row, .boardContainer > .boardBox.page {
 	height:var(--board-row-height);
 }
 .boardContainer > .boardBox.title .row {
@@ -42,29 +42,44 @@
 	color: var(--board-color-body-font);
 	background-color: var(--board-color-body-bg);
 }
-.boardContainer > .boardBox .row > th,
-.boardContainer > .boardBox .row > td {
+.boardContainer > .boardBox > .row > th,
+.boardContainer > .boardBox > .row > td {
 	display:flex; justify-content:center; align-items:center;
 	margin:0.15rem 0.07rem;
 }
-.boardContainer > .boardBox .row > th {
+.boardContainer > .boardBox > .row > th {
     z-index:1; 
 	background-color:var(--color7);
     color:#000b;
 }
-.boardContainer > .boardBox .row > td {
-    z-index: 0;
+.boardContainer > .boardBox > .row > td {
+    z-index: 0; position:relative;
     color:#000b;
     background-color: var(--color11);
 }
-.boardContainer > .boardBox .row > div.subject {
+.boardContainer > .boardBox > .row > td > input {
+	width:100%; border:0; padding:0 0.3rem; outline:none;
+	position:relative;
+}
+
+/* check 
+.boardContainer > .boardBox > .row > td > input.checker + label:after {
+	content:'';
+	width:min-content;
+	height:var(--board-row-height);
+	line-height:var(--board-row-height);	
+	position:absolute;
+	top:0; right:0;
+}*/ 
+
+.boardContainer > .boardBox > .row > div.subject {
 	justify-content:flex-start;
 } 
 .boardContainer > .boardBox.body .row,       .boardContainer > .boardBox.page .el { cursor:pointer; }
 .boardContainer > .boardBox.body .row:hover, .boardContainer > .boardBox.page .el:hover {
 	background-color:var(--board-el-bgcolor-highlighted);
 }
-
+	
 /* 상/하단 테두리 두께 설정 */
 .boardContainer > .boardBox.body .row:not(:last-child) {
 	border-bottom-style:solid;
@@ -94,10 +109,12 @@
 	justify-content:center; align-items:center;
 }
 
-.boardContainer > tfoot.boardBox > tr > td > a {
-	width: 100%;
+.boardContainer > tfoot.boardBox > tr > td > a,
+.boardContainer > tfoot.boardBox > tr > td > button {
+	min-width: 10rem;
 	margin:0.3rem;
 	padding:0.3rem 1rem;
+	border:0;
 	border-radius: 0.4rem;
 	color:#000a;
 	background:var(--color5);

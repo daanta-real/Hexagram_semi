@@ -7,7 +7,7 @@
 </HEAD>
 <% String root = request.getContextPath(); %>
 <!-- 페이지 제목 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
 
 <!-- 비밀번호 토글 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/togglePw.js"></script>

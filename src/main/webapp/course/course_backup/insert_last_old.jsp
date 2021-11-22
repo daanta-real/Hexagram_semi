@@ -1,22 +1,23 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@page import="beans.CourseItemDto"%>
 <%@page import="beans.CourseDao"%>
 <%@page import="beans.CourseItemDao"%>
+
+<%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.HashSet"%>
+
 <%@page import="beans.ItemDto"%>
-<%@page import="java.util.List"%>
 <%@page import="beans.ItemDao"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+
+<%String root = request.getContextPath();%>
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
 <TITLE>노가리투어 - 관광지 목록</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
-</HEAD>
-<BODY>
-<jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 	<style>
 	.container-800{width: 800px;}
 	.container-left {
@@ -189,7 +190,7 @@
                 
                 $.ajax({
                     //준비 설정
-                    url:"http://localhost:8080/Hexagram_semi/course/ajax_delete_item.nogari",
+                    url:"<%=root%>/course/ajax_delete_item.nogari",
                     type:"get",//전송 방식
                     data:{//전송 시 첨부할 파라미터 정보
                     	itemIdx : item_Idx,
@@ -231,12 +232,14 @@
               
         });
             </script>
+</HEAD>
+<BODY>
+<jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 
 <SECTION>
 <!-- 페이지 내용 시작 -->
     <%
    
-    String root = request.getContextPath();
     
 //     최초 코스 번호는서블릿에서 생성한 번호를 받아준다. 이후에는 코스_아이템 항목 추가,삭제 서블릿에서 전달한 해당 시퀀스 값을 다시 받는다.
 	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));

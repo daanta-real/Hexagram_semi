@@ -9,9 +9,12 @@
 <%
 String root = request.getContextPath();
 %>
+<script type='text/javascript'>
+var sysurl = "<%=root%>";
+</script>
 </HEAD>
 <!-- 페이지 제목 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
 
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
