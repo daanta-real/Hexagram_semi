@@ -20,8 +20,8 @@ public class CourseCreateSequnceForUpdateServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			try {
-				//필터에서 이 부분을 거친사람을 확인하기 위해서 최초 생성한 유저의 정보를 넘겨준다.
-				String usersFilterId = Sessioner.getUsersId(req.getSession());
+				//필터에서 이 부분을 거친사람을 확인하기 위해서 최초 생성한 유저의 정보를 넘겨준다.(추후 코스 생성및 코스-아이템 등록/삭제를 위한 필터처리용)
+				String usersFilterId = req.getParameter("usersFilterId");
 				
 				//코스 수정시 시퀀스 번호 정리 Servlet
 				
