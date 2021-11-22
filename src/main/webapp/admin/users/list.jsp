@@ -12,6 +12,21 @@
 
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
+<!-- 게시판 공통 css -->
+<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/board.css">
+
+<style>
+:root {--board-grid-columns: 5rem 5rem 5rem 7rem 5rem 7rem;}
+.btn{
+	color: var(--board-color-title-font);
+	background-color: var(--board-color-title-bg);
+	font-size: 1rem;
+	border: none;
+	margin: 0.1rem;
+}
+.search-btn{	font-size: 1.5rem;	}
+.selectBox{	  padding: 0.4rem;	margin: 0.3rem;	}
+</style>
 
 <!-- 회원탈퇴 시 확인창을 불러오는 script -->
 <script type="text/javascript" src="admin_users_delete.js"></script>
@@ -41,8 +56,10 @@ pn.calculate();
 System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 %>
 <!-- 검색 -->
+ <div class='boardContainer'>
+ 	<div class='boardBox row'>
     <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post">
-	     <select name="column">
+	     <select name="column" class="selectBox">
 	    	<option value="">항목선택</option>
 			<%
 			if(pn.columnValExists("users_id")) {
@@ -101,9 +118,9 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 	    	%>
 	    </select>
 	    <input type="text" name="keyword" placeholder="검색어입력" required value="<%=pn.getKeywordString()%>">
-	    <input type="submit" value="검색">
+	    <input type="submit" value="검색" class='btn search-btn'>
 	</form>
-
+	</div>
 <!-- 회원목록 -->
 <!-- 회원 탈퇴 리다이렉트 delete파라미터 -->
  <%
@@ -113,78 +130,77 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
  <%
  }
  %>
-<table border="1">
-	<thead>
-		<tr>
-			<th>회원번호</th>
-			<th>아이디</th>
-			<th>닉네임</th>
-			<th>이메일</th>
-			<th>회원등급</th>
-			<th>회원관리</th>
-		</tr>
-	</thead>
-	<tbody>
-
+	 <div class='boardBox title'>
+	     <div class='row'>
+	         <div>회원번호</div>
+	         <div>아이디</div>
+	         <div>닉네임</div>
+	         <div>이메일</div>
+	         <div>회원등급</div>
+	         <div>회원관리</div>
+	     </div>
+	 </div>
+	 <div class='boardBox body'>
 	<%
 	List<UsersDto> list = pn.getResultList();
 			System.out.println("출력할 회원 수: " + list.size());
 			
 			for(UsersDto usersDto : list) {
 	%>
-
-		<tr>
-			<td align="center"><%=usersDto.getUsersIdx() %></td>
-			<!-- 회원 아이디를 누르면 회원 상세정보 페이지로 이동 -->
-			<td>
-				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">
+	 	<div class='row'>
+	 		<div><%=usersDto.getUsersIdx() %></div>
+	 		<div>
+	 			<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">
 					<%=usersDto.getUsersId() %>
 				</a>
-			</td>
-			<td><%=usersDto.getUsersNick() %></td>
-			<td><%=usersDto.getUsersEmail()%></td>
-			<td align="center"><%=usersDto.getUsersGrade() %></td>
-			<th align="center">
-				<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"><button>상세</button></a>
-				<a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"><button>수정</button></a>
-				<button onclick="deleteConfirm('<%=usersDto.getUsersId()%>');">탈퇴</button>
-			</th>
-		</tr>
+			</div>
+	 		<div><%=usersDto.getUsersNick() %></div>
+	 		<div><%=usersDto.getUsersEmail()%></div>
+	 		<div><%=usersDto.getUsersGrade() %></div>
+	 		<div>
+	 			<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"><button class='btn'>상세</button></a>
+				<a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"><button class='btn'>수정</button></a>
+				<button onclick="deleteConfirm('<%=usersDto.getUsersId()%>');" class='btn'>탈퇴</button>
+	 		</div>
+	 	</div>
 	<%} %>
-	</tbody>
-</table>
+	 </div>
 
-<!-- 페이지 네비게이터 검색 / 목록-->
-<DIV>
-<%if(pn.hasPreviousBlock()) {%>
-	<%if(isSearchMode) {%>
-		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getStartBlock()-1 %>">&lt;</a>
-	<%} else{ %>
-		<a href="list.jsp?page=<%=pn.getPreviousBlock()%>">&lt;</a>
-	<%} %>
-<%} else{ %>
-	<a>&lt;</a>
-<%} %>
-
-<%for(int i = pn.getStartBlock() ; i <= pn.getRealLastBlock() ; i++) {%>
-	<%if(isSearchMode) { %>
-		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
-	<%}else{ %>
-		<a href="list.jsp?page=<%=i %>"><%=i %></a>
-	<%} %>
-<%} %>
-
-<%if(pn.hasNextBlock()) {%>
-	<%if(isSearchMode) {%>
-		<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock() %>">&gt;</a>
-	<%} else{ %>
-		<a href="list.jsp?page=<%=pn.getNextBlock()%>">&gt;</a>
-	<%} %>
-<%} else{%>
-	<a>&gt;</a>
-<%} %>
-</DIV>
-
+	<!-- 페이지 네비게이터 검색 / 목록-->
+	<div class='boardBox page'>
+		<div class='el'>
+		<%if(pn.hasPreviousBlock()) {%>
+			<%if(isSearchMode) {%>
+				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getStartBlock()-1 %>">◀</a>
+			<%} else{ %>
+				<a href="list.jsp?page=<%=pn.getPreviousBlock()%>">◀</a>
+			<%} %>
+		<%} else{ %>
+			<a>◀</a>
+		<%} %>
+		</div>
+		<%for(int i = pn.getStartBlock() ; i <= pn.getRealLastBlock() ; i++) {%>
+		<div class='el'>
+			<%if(isSearchMode) { %>
+				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
+			<%}else{ %>
+				<a href="list.jsp?page=<%=i %>"><%=i %></a>
+			<%} %>
+		</div>
+		<%} %>
+		<div class='el'>
+		<%if(pn.hasNextBlock()) {%>
+			<%if(isSearchMode) {%>
+				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock() %>">▶</a>
+			<%} else{ %>
+				<a href="list.jsp?page=<%=pn.getNextBlock()%>">▶</a>
+			<%} %>
+		<%} else{%>
+			<a>▶</a>
+		<%} %>
+		</div>
+	</div>
+ </div>
 <!-- 페이지 내용 끝. -->
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>
