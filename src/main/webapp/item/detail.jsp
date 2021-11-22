@@ -413,7 +413,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 						<tr class="view-row">
 							<td width="35%" class="left">
 								<!-- 대댓글이라면 표시해주어라 -->
-								<%if(itemReplyDto.getItemReplyDepth() != 0){ %>
+								<%if(itemReplyDto.hasDepth()){ %>
 									<%for(int i = 0 ; i < itemReplyDto.getItemReplyDepth() ; i++){ %>
 									<!-- 대댓글이라면 4칸 띄어서 보여준다 -->
 									&nbsp;&nbsp;&nbsp;&nbsp;
