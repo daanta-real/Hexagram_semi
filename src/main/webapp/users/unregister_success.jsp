@@ -15,7 +15,7 @@
 
 <div class="sub_title">회원 탈퇴가 완료되었어요. ;_;)// good bye </div>
 <br><br>
-<div class="sub_title"><a href="<%=root%>/">메인 페이지로</a></div>
+<div class="sub_title bottomLongBtn"><a href="<%=root%>/">메인 페이지로</a></div>
 
 <!-- 페이지 내용 끝. -->
 </SECTION>

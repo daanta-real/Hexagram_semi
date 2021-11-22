@@ -6,7 +6,6 @@ import beans.DTORegex;
 
 public class Main {
 
-	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		String regex  = DTORegex.USERSID;
 		String str = "parapara3@";

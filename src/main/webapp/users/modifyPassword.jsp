@@ -5,9 +5,13 @@
 <TITLE>노가리투어 - 비밀번호 변경</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 <% String root = request.getContextPath(); %>
+
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/detail.css">
-</HEAD>
+<style type="text/css">
+td > label { display: flex; align-items:center; margin: auto 0.4rem auto 0.2rem; word-break: keep-all; min-width:2rem; }
+.bottomButtonsLayer { display:flex; width:100%; }
+</style>
 
 <!-- 비밀번호 토글 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/togglePw.js"></script>
@@ -26,7 +30,7 @@ window.addEventListener("load", () => {
         var form  = document.querySelector('.form-regexCheck');
         var regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[-_~!@#$%^&*=+/,.;’”?])[a-zA-Z0-9-_~!@#$%^&*=+/,.;’”?]{4,20}$/;
         var pwUpdate = form.querySelector("input[name=pwUpdate]").value;
-        var message = form.querySelector("input[name=pwUpdate]+.message");
+        var message = document.getElementById("pwUpdateMsgDiv");
         if(pwUpdate != ""){
             if(regex.test(pwUpdate)){
                 console.log("비밀번호 정규표현식 검사 통과");
@@ -47,6 +51,7 @@ window.addEventListener("load", () => {
 });
 </script>
 
+</HEAD>
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
@@ -56,30 +61,33 @@ window.addEventListener("load", () => {
 <div class="sub_title">비밀번호 변경</div>
 <form class="form-regexCheck" action="<%=root%>/users/modifyPassword.nogari" method="post">
 <input type="hidden" name="usersId" value="<%=sessionId%>">
-	<table>
-		<tbody>
-			<tr>
+	<table class='boardContainer'>
+		<tbody class='boardBox'>
+			<tr class='row'>
 				<th>내 아이디</th>
 				<td><%=sessionId %></td>
 			</tr>
-			<tr>
+			<tr class='row'>
 				<th>현재 비밀번호</th>
 				<td>
-					<input type="password" name="usersPw" required>
-					<label><input type="checkbox" class="togglePw"><span>보기</span></label>
+					<input type="password" name="usersPw" required />
+					<label>
+						<input type="checkbox" class="togglePw" />
+						<span>보기</span>
+					</label>
 				</td>
 			</tr>
-			<tr>
+			<tr class='row'>
 				<th>변경할 비밀번호</th>
 				<td>
-					<input type="password" name="pwUpdate" required>
-					<div class="message"></div>
+					<input type="password" name="pwUpdate" required />
 				</td>
 			</tr>
+			<tr><th colspan=2 id='pwUpdateMsgDiv' class="message"></th></tr>
 		</tbody>
 		<tfoot>
-			<tr>
-				<td colspan="2" align="center" class='flexRow'>
+			<tr class='row' style='display:flex;'>
+				<td colspan="2" align="center" class='bottomButtonsLayer flexCol'>
 					<input class='bottomLongBtn' type="submit" value="변경">
 					<a class='bottomLongBtn' href = "<%=root %>/users/detail.jsp">취소</a>
 				</td>

@@ -10,6 +10,12 @@ window.addEventListener("load", () => {
 		 console.log("회원가입 form 초기화 시작");
 		 location.reload();
 	});
+	
+	// 모든 메세지란도 제거
+	document.querySelectorAll(".message").forEach((el) => {
+		console.log("메세지 제거 대상: ", el);
+		el.textContent = "";
+	})
 
 });
 

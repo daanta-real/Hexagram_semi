@@ -13,7 +13,7 @@ window.addEventListener("load", () => {
         var form  = document.querySelector('.form-regexCheck');
         var regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[-_~!@#$%^&*=+/,.;’”?])[a-zA-Z0-9-_~!@#$%^&*=+/,.;’”?]{4,20}$/;
         var inputPw = form.querySelector("input[name=usersPw]").value;
-        var message = form.querySelector("input[name=usersPw]+.message");
+        var message = document.querySelector(".usersPw.message");
         if(inputPw != ""){
             if(regex.test(inputPw)){
                 console.log("비밀번호 정규표현식 검사 통과");

@@ -57,7 +57,7 @@
     color:#000b;
     background-color: var(--color11);
 }
-.boardContainer > .boardBox > .row > td > input {
+.boardContainer > .boardBox > .row > td input {
 	position:relative; width:100%; max-width:9rem;
 	margin:0.1rem; border:0; padding:0 0.3rem; outline:none;
 }
@@ -121,4 +121,5 @@
 	background:var(--color5);
     text-align: center;
 	font-size:inherit;
+	cursor:pointer;
 }

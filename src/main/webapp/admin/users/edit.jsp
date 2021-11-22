@@ -80,7 +80,7 @@ int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));
 				<th>비번</th>
 				<td>
 					<input type="password" name="usersPw" required value="<%=usersDto.getUsersPw()%>">
-					<div class="message"></div>
+					<div class="usersPw message"></div>
 					<label><input type="checkbox" class="togglePw"><span>보기</span></label>
 				</td>
 			</tr>

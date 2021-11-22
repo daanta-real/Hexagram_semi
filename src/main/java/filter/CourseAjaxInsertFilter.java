@@ -11,7 +11,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.CourseDao;
 import util.users.Sessioner;
 
 @WebFilter(urlPatterns = {
@@ -39,7 +38,7 @@ public class CourseAjaxInsertFilter implements Filter{
 			String usersId = Sessioner.getUsersId(req.getSession());
 			//관리자인가?
 			boolean isManager = usersId != null && usersId.equals(Sessioner.GRADE_ADMIN);
-			
+
 			if(usersId == null) {
 				resp.sendError(401); // 비회원이라면
 			}else if(usersFilterId.equals(usersId) || isManager) {
@@ -47,12 +46,12 @@ public class CourseAjaxInsertFilter implements Filter{
 			}else {
 				resp.sendError(403); //로그인도 되어있고 회원이지만 본인 글이 아니라면 권한 부족
 			}
-			
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);
 		}
-		
+
 	}
 
 }

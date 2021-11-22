@@ -180,70 +180,49 @@ public class EventDao {
 
 		return eventDto;
 	}
-	
-	
+
+
 	//[10] 번호 생성 기능 : 번호를 미리 생성해두어야 할 필요가 있는 경우 사용
 		public int getSequence() throws Exception {
 			Connection con = JdbcUtils.connect3();
-			
+
 			String sql="select event_seq.nextval from dual";
 			PreparedStatement ps=con.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
-			
+
 			rs.next();
 			int seq=rs.getInt(1);
-			
+
 			con.close();
-			
+
 			return seq;
 		}
-		
-		
+
+
 		//[11] 남의 글일 경우에만 조회수 증가하는 기능
 		public boolean readUp(int eventIdx, String memberId) throws Exception{
 			Connection con = JdbcUtils.connect3();
-			
+
 			String sql="update event set event_count_view=event_count_view +1 where event_idx=? and users_idx !=?";
 			PreparedStatement ps=con.prepareStatement(sql);
 			ps.setInt(1,eventIdx);
 			ps.setString(2,memberId);
 			int result=ps.executeUpdate();
-			
+
 			con.close();
-			
+
 			return result>0;
 		}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 		public void countReply(int eventIdx) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		public void insertWithSequence(EventDto eventDto) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
-
-=======
->>>>>>> branch 'main' of https://github.com/daanta-real/Hexagram_semi.git
-=======
-		public void countReply(int eventIdx) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		public void insertWithSequence(EventDto eventDto) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		
-		
-
->>>>>>> branch 'main' of https://github.com/daanta-real/Hexagram_semi.git
-		
 
 }
