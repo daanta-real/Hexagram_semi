@@ -93,56 +93,9 @@
     .center {text-align: center;}
     /* div 내에 태그 오른쪽 정렬*/
     .right {text-align: right;}
-    
-    /* 검색창 배경 블러 처리 */
-    .search-img {
-        opacity: 0.5;
-        position: relative;
-    }
+  
    
-    .course-box{
-        background: white;
-        border-left: 1px solid black;;
-        border-right: 1px solid black;;
-        border-bottom: 1px solid black;;
-    }
-    .menu-bar{
-        border-top: 1px solid black;;
-        height: 55px;
-        line-height: 55px;
-        width: 100%;
-    }
-    .course-location{
-        float: left;
-        border-right: 1px solid black;
-        height: 55px;
-        text-align: black;
-        width: 12%;
-        font-weight: bold;
-        text-align: center;
-    }
-    .course-city{
-        float: left;
-        height: 55px;
-        width: 12%;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        color:gray;
-    }
-    .course-city:hover{
-        float: left;
-        height: 55px;
-        width: 12%;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        color:black;
-    }
-    .item-title{
-        font-size:20px;
-        font-weight: bold;
-    }
+    
     .box-img{
         height:150px;
         width:280px;
@@ -189,29 +142,112 @@
         }
    .flex-btn {
             flex-grow: 25%;
-        }
-        
-     .right-wrap2{
-        border: 1px solid gray;
-        margin-top: 8px;
-    }
-    .city{
-        float: left;
-        height: 40px;
-        width: 10%;
-        font-weight: bold;
-        text-align: center;
-        text-decoration: none;
-        color:gray;
-         line-height: 40px;
-    }
-     .menu-city{
-     	border:1px solid blue;
-        height: 165px;
-        width: 100%;
-        margin: 0 auto;
-        padding: 0;
-    }
+        }    
+    
+      
+    .form-input,
+	.form-btn {
+	    font-size: 0.8rem;
+	    padding: 0.3rem;
+	}
+	
+	.form-input {
+	    border: 1px solid rgb(43, 48, 90);
+	    width:60%;
+	}
+	
+	.form-btn {
+		width:10%;
+	    color: rgb(77, 25, 25);
+	    background-color: rgb(232, 193, 125);
+	    font-weight: bold;
+	}
+	
+	.form-block {
+	    display: block;
+	}
+	
+	.form-inline {
+	    width: auto;
+	}
+    
+    
+    /* 그리드 컨테이너 내부에서 사용되는 변수들의 선언 */ 
+	.gridFirst {
+		--grid-box-margin: 3rem;
+		--grid-title-width: 3rem;
+		--grid-el-width: 4rem;
+		--grid-el-height: 2rem;
+		--grid-el-margin: 0.3rem;
+	}
+	
+	/* 그리드 앨범들을 가지고 있는 최상위 컨테이너. 앨범 박스를 통째로 중앙 정렬하기 위해서 반드시 필요하다. */
+	.gridFirst > .gridContainer {
+		width: 100%;
+		border:1px solid blue;
+	}
+	
+	/* 그리드 앨범 박스*/
+	.gridFirst > .gridContainer > .gridBox {
+		display: grid;
+   		justify-content:center;
+   		grid-template-columns: var(--grid-box-margin) 1fr;
+		margin: var(--grid-box-margin);
+   		border:1px solid green;
+ 	}
+ 	
+ 	/* 좌측 타이틀부 */
+ 	.gridFirst > .gridContainer > .gridBox > .gridTitle {
+ 		display:flex; flex-direction:column; justify-content:center; align-items:center;
+ 		width: var(--grid-title-width);
+ 		border:1px solid gold;
+ 	}
+ 	
+ 	/* 우측 콘텐츠부 */
+ 	.gridFirst > .gridContainer > .gridBox > .gridContents {
+ 		display:flex; flex-direction:row; justify-content:flex-start; align-items:center; flex-wrap:wrap;
+ 		border:1px solid lime;
+	}
+ 	
+ 	/* 우측 콘텐츠부 내부 개별 객체 */
+ 	.gridFirst > .gridContainer > .gridBox > .gridContents > .gridEl {
+ 		width: var(--grid-el-width);
+ 		height: var(--grid-el-height);
+ 		margin: var(--grid-el-margin);
+ 		border: 1px solid red;
+ 		text-align: center;
+ 		padding-top: 0.4rem;
+ 	}
+ 
+ 	.back {
+	  background-image:url(https://cdn.pixabay.com/photo/2017/10/10/22/27/creux-du-van-2839124_960_720.jpg);
+	  background-position:0 0;
+	  background-repeat: no-repeat;
+	  width: 900px;
+      height:300px;
+      
+	}
+	
+	.searchBox {
+	  width: 600px;
+      height: 130px;
+      background-color: rgba(0, 0, 0, 0.3);
+	}
+	
+	/* 게시판 하단 페이징 블럭들 */
+	.boardContainer > .boardBox.page {
+		display:flex; flex-direction:row; justify-content:center;
+		color: var(--board-page-color);
+	}
+	
+	.boardContainer > .boardBox.page .el {
+		width: var(--board-page-el-width);
+	}
+	
+	.boardContainer > .boardBox.page .el.LR {
+		width: var(--board-page-lr-width);
+	}
+	
 </style>
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
@@ -231,98 +267,95 @@
 
 <!-- 페이지 제목 -->
 
+<div class="container-900 container-center">
+
 <!-- 검색 form -->
-    <div class="container-900 container-center">
+    <form action="<%=root%>/course/list.jsp" method="get">
         <div class="back">
-            <div class="search center">
-            <form action="<%=root%>/course/list.jsp" method="get">
-                <select name="column" class="search-select">
-							<%if(pn.columnValExists("course_name")){ %>
+            <div class="searchBox container-center">
+            	<div class="row center">
+	                 <select name="column" class="search-select">
+						<%if(pn.columnValExists("course_name")){ %>
 							<option value="course_name" selected>코스명</option>
-							<%}else{ %>
+						<%}else{ %>
 							<option value="course_name">코스명</option>
-							<%} %>
+						<%} %>
 							
-							<%if(pn.columnValExists("course_detail")){ %>
+						<%if(pn.columnValExists("course_detail")){ %>
 							<option value="course_detail" selected>내용</option>
-							<%}else{ %>
+						<%}else{ %>
 							<option value="course_detail">내용</option>
-							<%} %>
-						</select>
+						<%} %>
+					</select>
 						<%if(pn.getColumn() != null && pn.getColumn().equals("item_address")){ %>
-						                <input type="search" name="keyword" placeholder="검색어 입력"
+						    <input type="search" name="keyword" placeholder="검색어 입력"
 						required class="search-keyword">
 						<%}else{ %>
-						                <input type="search" name="keyword" placeholder="검색어 입력"
+						    <input type="search" name="keyword" placeholder="검색어 입력"
 						required value="<%=pn.getKeywordString()%>" class="search-keyword">
 						<%} %>
 
 				<input type="hidden" name="order" value="<%=order%>">
                 <input type="submit" value="검색" class="search-btn">
-                </form>
+             	</div>
             </div>
         </div>
-
-	<div class="row center">
-            <span class="item-title">국내 여행지</span>
-        </div>
-        <div class="course-box">
-            <div class="menu-bar">
-                <span class="course-location">카테고리</span>
-                <a href="#" class="course-city">축제</a>        
-                <a href="#" class="course-city">관광지</a>
-            </div>
-        </div>
-             <div class="course-box">
-            <div class="menu-bar">
-                <span class="course-location">지역</span>
-                <a href="list.jsp?column=item_address&keyword=서울&order=<%=order%>" class="course-city">서울</a>        
-                <a href="list.jsp?column=item_address&keyword=부산&order=<%=order%>" class="course-city">부산</a>
-                <a href="list.jsp?column=item_address&keyword=인천&order=<%=order%>" class="course-city">인천</a>
-                <a href="list.jsp?column=item_address&keyword=대구&order=<%=order%>" class="course-city">대구</a>
-                <a href="list.jsp?column=item_address&keyword=대전&order=<%=order%>" class="course-city">대전</a>
-                <a href="list.jsp?column=item_address&keyword=광주&order=<%=order%>" class="course-city">광주</a>
-                <a href="list.jsp?column=item_address&keyword=울산&order=<%=order%>" class="course-city">울산</a>
-            </div>
-        </div>
-        <div class="course-box">
-            <div class="menu-bar">
-                <a href="list.jsp?column=item_address&keyword=경기&order=<%=order%>" class="course-city">경기도</a>
-                <a href="list.jsp?column=item_address&keyword=세종&order=<%=order%>" class="course-city">세종</a>
-                <a href="list.jsp?column=item_address&keyword=강원&order=<%=order%>" class="course-city">강원도</a>
-                <a href="list.jsp?column=item_address&keyword=제주&order=<%=order%>" class="course-city">제주도</a>
-                <a href="list.jsp?column=item_address&keyword=경상북도&order=<%=order%>" class="course-city">경상북도</a>
-                <a href="list.jsp?column=item_address&keyword=경상남도&order=<%=order%>" class="course-city">경상남도</a>
-                <a href="list.jsp?column=item_address&keyword=전라남도&order=<%=order%>" class="course-city">전라남도</a>
-                <a href="list.jsp?column=item_address&keyword=전라북도&order=<%=order%>" class="course-city">전라북도</a>
-            </div>
-        </div>
-        <div class="course-box">
-            <div class="menu-bar">
-                <a href="list.jsp?column=item_address&keyword=충청남도&order=<%=order%>" class="course-city">충청남도</a>
-                <a href="list.jsp?column=item_address&keyword=충청북도&order=<%=order%>" class="course-city">충청북도</a>
-            </div>
-        </div>
-        
-        
-        
-<!--             리스트가 널이 아니라면 -->
-            <div class="flex-container">
-                <div class="menu-city">
-                
-           <%
-            if(isSearchMode && pn.getColumn().equals("item_address")){
-            List<String> subCityList = ItemCityList.getSubcityList(pn.getKeyword()); %>
+	</form>
+      
+    <div class="row center">
+		<span class="item-title">국내 여행지</span>
+    </div>
+    
+    <div class="gridFirst">
+		<div class='gridContainer'>
+			<div class='gridBox'>
+			
+				<div class='gridTitle'>카테고리</div>
+				<div class='gridContents'>
+					<a href="#" class="course-city">축제</a>        
+                	<a href="#" class="course-city">관광지</a>
+				</div>
+				
+				<div class='gridTitle'>지역</div>
+				<div class='gridContents'>
+					<a href="list.jsp?column=item_address&keyword=서울&order=<%=order%>" class='gridEl'>서울</a>        
+	                <a href="list.jsp?column=item_address&keyword=부산&order=<%=order%>" class='gridEl'>부산</a>
+	                <a href="list.jsp?column=item_address&keyword=인천&order=<%=order%>" class='gridEl'>인천</a>
+	                <a href="list.jsp?column=item_address&keyword=대구&order=<%=order%>" class='gridEl'>대구</a>
+	                <a href="list.jsp?column=item_address&keyword=대전&order=<%=order%>" class='gridEl'>대전</a>
+	                <a href="list.jsp?column=item_address&keyword=광주&order=<%=order%>" class='gridEl'>광주</a>
+	                <a href="list.jsp?column=item_address&keyword=울산&order=<%=order%>" class='gridEl'>울산</a>
+	                <a href="list.jsp?column=item_address&keyword=경기&order=<%=order%>" class='gridEl'>경기도</a>
+	                <a href="list.jsp?column=item_address&keyword=세종&order=<%=order%>" class='gridEl'>세종</a>
+	                <a href="list.jsp?column=item_address&keyword=강원&order=<%=order%>" class='gridEl'>강원도</a>
+	                <a href="list.jsp?column=item_address&keyword=제주&order=<%=order%>" class='gridEl'>제주도</a>
+	                <a href="list.jsp?column=item_address&keyword=경상북도&order=<%=order%>" class='gridEl'>경상북도</a>
+	                <a href="list.jsp?column=item_address&keyword=경상남도&order=<%=order%>" class='gridEl'>경상남도</a>
+	                <a href="list.jsp?column=item_address&keyword=전라남도&order=<%=order%>" class='gridEl'>전라남도</a>
+	                <a href="list.jsp?column=item_address&keyword=전라북도&order=<%=order%>" class='gridEl'>전라북도</a>
+	                <a href="list.jsp?column=item_address&keyword=충청남도&order=<%=order%>" class='gridEl'>충청남도</a>
+                	<a href="list.jsp?column=item_address&keyword=충청북도&order=<%=order%>" class='gridEl'>충청북도</a>
+				</div>
+				
+				<!-- 리스트가 널이 아니라면 -->
+				<div class='gridTitle'></div>
+				<div class='gridContents'>
+		           <%
+		            if(isSearchMode && pn.getColumn().equals("item_address")){
+		            List<String> subCityList = ItemCityList.getSubcityList(pn.getKeyword()); 
+		            %>
+		            
 					<%
 					if(!subCityList.isEmpty()){
 					for(String s : subCityList){ %>
-                    <a href="list.jsp?column=item_address&keyword=<%=pn.getKeyword()%>&subCity=<%=s%>" class="city"><%=s %></a>
+                    <a href="list.jsp?column=item_address&keyword=<%=pn.getKeyword()%>&subCity=<%=s%>" class='gridEl'><%=s %></a>
                     <%}}}else{ %>
                     <h1 class="center">배너 공간..?</h1>
                     <%} %>
-                </div>
-            </div>
-
+				</div>
+			</div>
+		</div>
+	</div>
 
 
        <!-- 인기순 보여주기(조회수 기준)-->
@@ -415,50 +448,58 @@
     </div>
 
 <!-- 페이지네이션 -->
-	<div class="row pagination">
-		<%-- [이전] a 태그 --%>
-		<%if(pn.hasPreviousBlock()){ %>
-			<%if(isSearchMode){%>
-				<%if(subCity != null) {%>
-				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getPreviousBlock()%>&order=<%=order%>&subCity=<%=subCity%>">[이전]</a>
-				<%}else{ %>
-				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getPreviousBlock()%>&order=<%=order%>">[이전]</a>
-				<%} %>
-			<%}else{ %>
-				<a href="list.jsp?page=<%=pn.getPreviousBlock() %>&order=<%=order%>">[이전]</a>
-			<%} %>
-		<%}else{%>
-			<a>[이전]</a>
-		<%} %>
 
-		<%-- 숫자 a 태그 --%>
-		<%for(int i = pn.getStartBlock(); i<=pn.getRealLastBlock(); i++) {%>
-			<%if(isSearchMode){ %>
-				<%if(subCity != null) {%>
-				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>&order=<%=order%>&subCity=<%=subCity%>"><%=i %></a>
+<div class="row">
+	<div class='boardBox page'>
+	<%-- [이전] a 태그 --%>
+			<div class='el'>
+			<%if(pn.hasPreviousBlock()){ %>
+				<%if(isSearchMode){%>
+					<%if(subCity != null) {%>
+					<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getPreviousBlock()%>&order=<%=order%>&subCity=<%=subCity%>">◀</a>
+					<%}else{ %>
+					<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getPreviousBlock()%>&order=<%=order%>">◀</a>
+					<%} %>
 				<%}else{ %>
-				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>&order=<%=order%>"><%=i %></a>
+					<a href="list.jsp?page=<%=pn.getPreviousBlock() %>&order=<%=order%>">◀</a>
+				<%} %>
+			<%}else{%>
+				<a>◀</a>
+			<%} %>
+			</div>
+			<%-- 숫자 a 태그 --%>
+			<div class='el'>
+			<%for(int i = pn.getStartBlock(); i<=pn.getRealLastBlock(); i++) {%>
+				<%if(isSearchMode){ %>
+					<%if(subCity != null) {%>
+					<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>&order=<%=order%>&subCity=<%=subCity%>"><%=i %></a>
+					<%}else{ %>
+					<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>&order=<%=order%>"><%=i %></a>
+					<%} %>
+				<%}else{ %>
+					<a href="list.jsp?page=<%=i %>&order=<%=order%>"><%=i %></a>
+				<%} %>
+			<%} %>
+			</div>
+			<%-- [다음] a 태그 --%>
+			<div class='el'>
+			<%if(pn.hasNextBlock()){ %>
+				<%if(isSearchMode){%>
+					<%if(subCity != null) {%>
+					<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&order=<%=order%>&subCity=<%=subCity%>">▶</a>
+					<%}else{ %>
+					<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&order=<%=order%>">▶</a>
+					<%} %>
+				<%}else{ %>
+					<a href="list.jsp?page=<%=pn.getNextBlock() %>&order=<%=order%>">▶</a>
 				<%} %>
 			<%}else{ %>
-				<a href="list.jsp?page=<%=i %>&order=<%=order%>"><%=i %></a>
+				<a>▶</a>
 			<%} %>
-		<%} %>
-
-		<%-- [다음] a 태그 --%>
-		<%if(pn.hasNextBlock()){ %>
-			<%if(isSearchMode){%>
-				<%if(subCity != null) {%>
-				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&order=<%=order%>&subCity=<%=subCity%>">[다음]</a>
-				<%}else{ %>
-				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&order=<%=order%>">[다음]</a>
-				<%} %>
-			<%}else{ %>
-				<a href="list.jsp?page=<%=pn.getNextBlock() %>&order=<%=order%>">[다음]</a>
-			<%} %>
-		<%}else{ %>
-			<a>[다음]</a>
-		<%} %>
+		</div>
 	</div>
+</div>
+
 
 <br><br>
 
