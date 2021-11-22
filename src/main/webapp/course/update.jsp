@@ -113,7 +113,7 @@
 				
                 $.ajax({
                 	//아이템추가 ajax로 비동기 통신을 한다.
-                    url:"<%=root%>/course/ajax_item_add.nogari",
+                    url:"<%=root%>/course/ajax_item_update.nogari",
                     type:"get",
                     data:{
                     	itemIdx : item_Idx,
