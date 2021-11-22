@@ -251,6 +251,7 @@ textarea {
 				<button class="btn form-btn">최종 제출</button>
 				<span class="show-login"></span>
 				<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
+				<input type="hidden" name="usersFilterId" value="<%=usersFilterId%>">
 			</div>
 	</form>
 
