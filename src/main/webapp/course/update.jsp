@@ -113,7 +113,7 @@
 				
                 $.ajax({
                 	//아이템추가 ajax로 비동기 통신을 한다.
-                    url:"http://localhost:8080/Hexagram_semi/course/ajax_item_add.nogari",
+                    url:"http://localhost:8080/Hexagram_semi/course/ajax_item_update.nogari",
                     type:"get",
                     data:{
                     	itemIdx : item_Idx,
