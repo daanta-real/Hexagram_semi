@@ -19,7 +19,8 @@ import util.users.Sessioner;
 	"/admin/",
 	"/item/edit.jsp","/item/edit.nogari",
 	"/item/insert.jsp","/item/insert.nogari", //누구나 등록하지 못하게 설정
-	"/item/delete.nogari"
+	"/item/delete.nogari",
+	"/item/file/download.nogari"
 	//아이템 항목들 => 403번 에러 발동하게 수정해야함..?
 } )
 public class AdminFilter implements Filter {

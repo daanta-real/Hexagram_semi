@@ -18,11 +18,9 @@ import beans.UsersDto;
 import util.users.Sessioner;
 
 @WebFilter(urlPatterns = {
-		"/course/update.jsp",
-		"/course/update_course.nogari", //시퀀스 생성 및 등록시에 필터 따로?(아니면 여기다가?)
 		"/course/delete.nogari"
 })
-public class CourseSelfFilter implements Filter{
+public class CourseDeleteFilter implements Filter{
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
