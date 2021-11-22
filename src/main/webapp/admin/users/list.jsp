@@ -22,7 +22,7 @@ String root = request.getContextPath();
 <!-- 게시판 공통 css -->
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/board.css">
 
-<style>
+<style type="text/css">
 :root {--board-grid-columns: 5rem 5rem 5rem 7rem 5rem 7rem;}
 .btn{
 	color: var(--board-color-title-font);
