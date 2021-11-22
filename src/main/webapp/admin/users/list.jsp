@@ -62,7 +62,7 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 <!-- 검색 -->
  <div class='boardContainer'>
  	<div class='boardBox row'>
-    <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post">
+    <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post" class='flexCenter'>
 	     <select name="column" class="selectBox">
 	    	<option value="">항목선택</option>
 			<%
@@ -172,7 +172,7 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 
 	<!-- 페이지 네비게이터 검색 / 목록-->
 	<div class='boardBox page'>
-		<div class='el'>
+		<div class='el flexCenter'>
 		<%if(pn.hasPreviousBlock()) {%>
 			<%if(isSearchMode) {%>
 				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getStartBlock()-1 %>">◀</a>
@@ -184,7 +184,7 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 		<%} %>
 		</div>
 		<%for(int i = pn.getStartBlock() ; i <= pn.getRealLastBlock() ; i++) {%>
-		<div class='el'>
+		<div class='el flexCenter'>
 			<%if(isSearchMode) { %>
 				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>"><%=i %></a>
 			<%}else{ %>
@@ -192,7 +192,7 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 			<%} %>
 		</div>
 		<%} %>
-		<div class='el'>
+		<div class='el flexCenter'>
 		<%if(pn.hasNextBlock()) {%>
 			<%if(isSearchMode) {%>
 				<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getNextBlock() %>">▶</a>

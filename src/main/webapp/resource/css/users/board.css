@@ -83,6 +83,10 @@
 		width: var(--board-page-el-width);
 	}
 	
+	.boardContainer > .boardBox.page .el a {
+		width: 100%; height: 100%; text-align:center;
+	}
+	
 	.boardContainer > .boardBox.page .el.LR {
 		width: var(--board-page-lr-width);
 	}

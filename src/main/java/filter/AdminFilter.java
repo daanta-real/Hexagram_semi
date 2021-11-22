@@ -16,7 +16,7 @@ import util.users.Sessioner;
 
 // 관리자 페이지 대상.
 @WebFilter( urlPatterns = {
-	"/admin/",
+	"/admin/*",
 	"/item/edit.jsp","/item/edit.nogari",
 	"/item/insert.jsp","/item/insert.nogari", //누구나 등록하지 못하게 설정
 	"/item/delete.nogari"
