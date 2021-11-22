@@ -7,7 +7,7 @@ window.addEventListener("load", () => {
 		// submit.disabled = false; 이면 활성화
 		var submit = document.querySelector("input[type=submit]"); 
 		
-		// 0. 변수준비
+		// 0. 변수준비    
 		// 비밀번호 입력값 일치여부 검사시 템플릿안의 로그인에도 name=usersPw가 있어서 값을 못받아 오기때문에
 		// form에 id=joinForm 을 부여하여 선택자 지정시킴  
 		console.log("비번 재입력값 검사 시작");
