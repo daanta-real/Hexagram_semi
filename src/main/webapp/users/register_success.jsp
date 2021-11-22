@@ -7,7 +7,7 @@
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
 <!-- 페이지 제목 css -->
-<link rel="stylesheet" type="text/css" href="/<%=root%>/resource/css/users/sub_title.css">
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>

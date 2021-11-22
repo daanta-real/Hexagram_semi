@@ -18,9 +18,9 @@ String root = request.getContextPath();
 </HEAD>
 
 <!-- 페이지 제목 css -->
-<link rel="stylesheet" type="text/css" href="/<%=root%>/resource/css/users/sub_title.css">
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
 <!-- 게시판 공통 css -->
-<link rel="stylesheet" type="text/css" href="/<%=root%>/resource/css/users/board.css">
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/board.css">
 
 <style>
 :root {--board-grid-columns: 5rem 5rem 5rem 7rem 5rem 7rem;}

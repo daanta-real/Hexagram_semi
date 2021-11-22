@@ -15,7 +15,7 @@ var sysurl = "<%=root%>";
 </script>
 
 <!-- 페이지 제목 css -->
-<link rel="stylesheet" type="text/css" href="/<%=root%>/resource/css/users/sub_title.css">
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
 
 </HEAD>
 <BODY>

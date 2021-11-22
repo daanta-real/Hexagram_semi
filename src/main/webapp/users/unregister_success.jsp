@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% String root = request.getContextPath(); %>
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
@@ -10,7 +11,6 @@
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
-<% String root = request.getContextPath(); %>
 <!-- 페이지 내용 시작 -->
 
 <div class="sub_title">회원 탈퇴가 완료되었어요. ;_;)// good bye </div>
