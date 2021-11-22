@@ -59,7 +59,7 @@ public class CourseCreateSequnceForUpdateServlet extends HttpServlet {
 				 // case1 . 도중에 작성하다가 나간경우 : 복사본(임시번호)를 날려주기만 하면 된다.
 				 // case2 . 복사본(임시번호)의 내용이 수정되고 최종 완료하였을 경우는 기존의 courseIdx(즉 courseOriginSequnce의 번호만 살리고 내부의 데이터를 모두 삭제 후,
 				 // 수정된 복사본의 내용을 덮어쓴 후 수정된 복사본은 내용과 번호정보를 모두 삭제해준다.
-				 resp.sendRedirect("update.jsp?courseSequnce="+courseSequnce+"&courseOriginSequnce="+courseOriginSequnce);
+				 resp.sendRedirect("update.jsp?courseSequnce="+courseSequnce+"&courseOriginSequnce="+courseOriginSequnce+"&usersFilterId"+usersFilterId);
 				
 			}catch (Exception e) {
 				e.printStackTrace();

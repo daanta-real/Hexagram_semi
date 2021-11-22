@@ -33,7 +33,7 @@ public class CourseAjaxInsertFilter implements Filter{
 		HttpServletResponse resp = (HttpServletResponse)response;
 		try {
 			//최초 시퀀스를 생성한 사람의 아이디를 넘겨받는다.
-			String usersFilterId = request.getParameter("usersFilterId");
+			String usersFilterId = req.getParameter("usersFilterId");
 			//현재 접속한 사람을 확인한다.
 			String usersId = Sessioner.getUsersId(req.getSession());
 			boolean isManager = usersId != null && usersId.equals(Sessioner.GRADE_ADMIN);
