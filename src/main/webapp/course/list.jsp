@@ -269,8 +269,8 @@
         <div class="course-box">
             <div class="menu-bar">
                 <span class="course-location">카테고리</span>
-                <a href="/item/list.jsp?column=item_type&keyword=" class="course-city">축제</a>        
-                <a href="/item/list.jsp?column=item_type&keyword=" class="course-city">관광지</a>
+                <a href="#" class="course-city">축제</a>        
+                <a href="#" class="course-city">관광지</a>
             </div>
         </div>
              <div class="course-box">
