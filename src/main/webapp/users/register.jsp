@@ -5,6 +5,9 @@
 <TITLE>노가리투어 - 회원 가입</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 <%String root = request.getContextPath();%>
+<script type='text/javascript'>
+var sysurl = "<%=root%>";
+</script>
 
 <!-- 페이지 제목 css -->
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
@@ -12,14 +15,16 @@
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
-<!-- 아이디 정규식, 중복검사, 비밀번호 일치 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/checkPwEquals_regexId_ajax.js"></script>
+<!-- 아이디 정규식 & 중복 검사 스크립트-->
+<script type='text/javascript' src="<%=root%>/resource/js/regexId_ajax.js"></script>
+<!-- 비밀번호 일치 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/checkPwEquals.js"></script>
 <!-- 비밀번호 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexPw.js"></script>
 <!-- 닉네임 정규식 & 중복 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexNick_ajax.js"></script>
-<!-- 이메일 정규식 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/regexEmail.js"></script>
+<!-- 이메일 정규식 & 중복 검사 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/regexEmail_ajax.js"></script>
 <!-- 폰번호 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexPhone.js"></script>
 <!-- 비밀번호 토글 스크립트 -->
@@ -43,7 +48,7 @@
 		비밀번호 입력값 일치여부 검사시 템플릿안에 로그인에도 name=usersPw가 있어서 값을 못받아 오기때문에
 		form에 class=form-regexCheck 를 부여하여 선택자 지정시킴  
  -->
-<form class="form-regexCheck" method='post' action='<%=root%>/users/join.nogari'>
+<form class="form-regexCheck" method='post' action='<%=root%>/users/register.nogari'" >
 <table>
 <tbody>       
 	<tr><th>아이디</th><td><input type='text' name='usersId' placeholder='입력하세요' required><div class="message"></div></td></tr>

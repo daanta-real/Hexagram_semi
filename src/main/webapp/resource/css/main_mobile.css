@@ -134,7 +134,7 @@ SECTION {
 /* 모바일 전용 로그인 메뉴 - 버튼관련만 */
 #mobileMenuLoginContainer .loginButtonBox { justify-content:space-evenly; width:100%; }
 #mobileMenuLoginContainer .loginoutButton  { background-color: var(--color6); }
-#mobileMenuLoginContainer .joinButton { background-color: var(--color5); }
+#mobileMenuLoginContainer .joinButton { background-color: var(--color5); text-align:center; }
 
 /* 모바일 전용 로그인 메뉴 - 로그인 시 뜨는 내 정보 */
 #mobileMenuLoginContainer .userInfoTxt {

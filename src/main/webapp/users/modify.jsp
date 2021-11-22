@@ -9,9 +9,12 @@
 <%
 String root = request.getContextPath();
 %>
+<script type='text/javascript'>
+var sysurl = "<%=root%>";
+</script>
 </HEAD>
 <!-- 페이지 제목 css -->
-<link rel="stylesheet" type="text/css" href="/Hexagram_semi/resource/css/users/sub_title.css">
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
 
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -19,7 +22,7 @@ String root = request.getContextPath();
 <!-- 닉네임 정규식 & 중복 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexNick_ajax.js"></script>
 <!-- 이메일 정규식 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/regexEmail.js"></script>
+<script type='text/javascript' src="<%=root%>/resource/js/regexEmail_ajax.js"></script>
 <!-- 폰번호 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexPhone.js"></script>
 <!-- 초기화(새로고침) 스크립트 -->

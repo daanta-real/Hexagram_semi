@@ -83,7 +83,7 @@ if(isLogin) {
 					<INPUT TYPE='password' NAME='usersPw' VALUE="<% %>" PLACEHOLDER="입력하세요"/>
 					<DIV CLASS="loginButtonBox flexCenter flexRow">
 						<BUTTON CLASS='actionButtons loginoutButton' TYPE='submit'>로그인</BUTTON>
-						<INPUT CLASS='actionButtons joinButton' TYPE='button' VALUE="회원가입" />
+						<A CLASS='actionButtons joinButton' HREF='<%=root%>/users/register.jsp'>회원가입</A>
 					</DIV>
 				</FORM>
 			<%}%>
@@ -113,7 +113,7 @@ if(isLogin) {
 	<%} else { /* 로그인이 되지 않았을 경우 */ %>
 		<DIV CLASS="userInfoTxt mobile">로그인하세요.</DIV>
 		<A CLASS='userButton' HREF='<%=root%>/users/login.jsp'>로그인</A>
-		<A CLASS='userButton' HREF='<%=root%>/users/join.jsp'>회원가입</A>
+		<A CLASS='userButton' HREF='<%=root%>/users/register.jsp'>회원가입</A>
 	<%}%>
 	</DIV>
 	
