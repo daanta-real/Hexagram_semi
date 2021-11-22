@@ -15,17 +15,18 @@
     pageEncoding="UTF-8"%>
     
 <%
-    String order = "course_idx";
-    	if(request.getParameter("order") != null)
-    	order = request.getParameter("order");
-    	
-    	String subCity = request.getParameter("subCity");
-    	//절대 경로를 위해 index.jsp 페이지 변수 저장
-        String root = request.getContextPath();
-    	
-    	//페이지 네이션
-        CourseDao courseDao = new CourseDao();
-        Pagination<CourseDao, CourseDto> pn = new Pagination<>(request, courseDao);
+	//페이지 내에서 조회에 필요한 파라미터값을 변수에 저장한다
+   	String order = "course_idx";
+   	if(request.getParameter("order") != null)
+   	order = request.getParameter("order");
+   	//지역의 시,군,구 파라미터 값
+   	String subCity = request.getParameter("subCity");
+   	//절대 경로를 위해 index.jsp 페이지 변수 저장
+    String root = request.getContextPath();
+   	
+   	//페이지 네이션
+    CourseDao courseDao = new CourseDao();
+    Pagination<CourseDao, CourseDto> pn = new Pagination<>(request, courseDao);
     //검색용 페이지 네이션
     boolean isSearchMode = pn.isSearchMode();
    
@@ -35,29 +36,41 @@
     pn.setEnd(pn.getPage()*pn.getPageSize());
     pn.setBegin(pn.getEnd()-(pn.getPageSize()-1));
     
-    //course 데이터 목록 불러오기
+   //아무 파라미터가 없을때 정렬은 기본 아이템 번호 최신순(즉 최신 등록순으로 진행.)
+   
+   //course 데이터 목록 불러오기
    //관광지 목록 도출
 	List<CourseDto> list = new ArrayList<>();
 	if(isSearchMode){
+		//파라미터값에 컬럼이 item_address라면 (지역을 클릭시)
 		if(pn.getColumn().equals("item_address")){
+			//파라미터값에 컬럼이 item_address이고 시,군,구가 있다면
 			if(subCity != null){
+				//시,군,구로 목록을 보여주고 최신순으로 보여준다 (아무 파라미터가 없을때 정렬은 기본 아이템 번호 최신순(즉 최신 등록순으로 진행.))
 				list = courseDao.subCityList(subCity,order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
 				pn.setCount(courseDao.countSubCity(pn.getColumn(), pn.getKeyword(),subCity));
 				pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
-		}else
-		{
-			list = courseDao.cityList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-			pn.setCount(courseDao.countCity(pn.getColumn(), pn.getKeyword()));
-			pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1);
-		}
+			}
+			
+			else{
+				//시,군,구를 선택하고 인기순,최신순,댓글순으로 정렬할수 있는 메소드
+				list = courseDao.cityList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
+				pn.setCount(courseDao.countCity(pn.getColumn(), pn.getKeyword()));
+				pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1);
+			}
 		}
 		
+		//검색어 입력창에 검색어를 입력했다면
 		else{
-		list=courseDao.orderByKeywordList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-		pn.setCount(courseDao.count(pn.getColumn(), pn.getKeyword()));
-		pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1);
+			//검색어로 입력한 값으로 목록을 보여주고 최신순으로 보여준다(아무 파라미터가 없을때 정렬은 기본 아이템 번호 최신순(즉 최신 등록순으로 진행.))
+			list=courseDao.orderByKeywordList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
+			pn.setCount(courseDao.count(pn.getColumn(), pn.getKeyword()));
+			pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1);
 		}
-	}else{
+	}
+	//검색을 하지 않았고 지역선택을 하지 않았다면
+	//아무 파라미터가 없을때 정렬은 기본 아이템 번호 최신순(즉 최신 등록순으로 진행.)
+	else{
 		list=courseDao.orderByList(order, pn.getBegin(), pn.getEnd());
 		pn.setCount(courseDao.count());
 		pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1);
@@ -65,7 +78,7 @@
         
      	// 제목 h2 태그에 들어갈 타이틀 결정
         String title = isSearchMode ? ("["+pn.getKeyword()+"]" + " 검색") : ("코스 목록");
-    %>
+%>
     
 <!DOCTYPE HTML>
 <HTML>
@@ -117,23 +130,10 @@
     .box-detail{
         margin:3px;
     }
-    .search{
-        width: 640px;
-        height: 138px;
-        border-radius: 3px;
-        background: url(http://via.placeholder.com/640x138) repeat;
-        margin: 0 auto;
-        padding: 50px;
-        position: relative;
-    }
     .back{
         background: url(http://via.placeholder.com/900x300) repeat;
         width: 900px;
         height:300px;
-    }
-    .right-wrap{
-        border: 1px solid gray;
-        margin-top: 150px;
     }
     
     .flex-container {
@@ -218,7 +218,7 @@
  		text-align: center;
  		padding-top: 0.4rem;
  	}
- 
+ 	/*검색창 백그라운드 이미지*/
  	.back {
 	  background-image:url(https://cdn.pixabay.com/photo/2017/10/10/22/27/creux-du-van-2839124_960_720.jpg);
 	  background-position:0 0;
@@ -227,25 +227,51 @@
       height:300px;
       
 	}
-	
+	/* 검색어 입력 폼 */
 	.searchBox {
 	  width: 600px;
       height: 130px;
       background-color: rgba(0, 0, 0, 0.3);
 	}
 	
+	/* 게시판에서 사용되는 변수들 */
+	.pagenation {
+		--board-grid-columns: 7rem minmax(15rem, 1fr) 5rem 5rem 5rem;
+		
+		--board-color-title-bg: var(--color10);
+		--board-color-title-font: var(--color8);
+		--board-color-body-bg: var(--color1);
+		--board-color-body-font: var(--color8);
+		--board-border-color: var(--color7);
+		--board-topbot-border-width: 1px;
+		--board-row-height: 1.5rem;
+		--board-el-bgcolor-highlighted: #8882;
+		
+		--board-page-color: var(--color8);
+		--board-page-el-width: 2rem;
+		--board-page-lr-width: 3rem;
+		--box-sizing:content-box;
+	}
+	.pagenation > .boardContainer > .boardBox {
+		display:flex; justify-content:center; align-items:center;
+		width:100%;
+	}
+	
 	/* 게시판 하단 페이징 블럭들 */
-	.boardContainer > .boardBox.page {
+	.pagenation > .boardContainer > .boardBox.page {
 		display:flex; flex-direction:row; justify-content:center;
 		color: var(--board-page-color);
+		box-sizing: var(--box-sizing);
 	}
 	
-	.boardContainer > .boardBox.page .el {
+	.pagenation > .boardContainer > .boardBox.page .el {
 		width: var(--board-page-el-width);
+		box-sizing: var(--box-sizing);
 	}
 	
-	.boardContainer > .boardBox.page .el.LR {
+	.pagenation > .boardContainer > .boardBox.page .el.LR {
 		width: var(--board-page-lr-width);
+		box-sizing: var(--box-sizing);
 	}
 	
 </style>
@@ -255,26 +281,15 @@
 <!-- 페이지 내용 시작 -->
 
 
-<!-- 기본적인 글쓰기 및 -->
-<!-- 확인용 리스트 구현 -->
-
-
-<!-- 페이지 검색 : 지역 , 코스명 , 내용 -->
-<!-- 두가지 방법이 있는데, (둘다 시도 중)-->
-<!-- 첫번째는 세션을 이용하여 세션안에서 아이템들을 모아서 처리하였다가 마지막에 그 세션을 파기 시키는 방법 (course_try 내부에 저장해 두었다)-->
-
-<!-- 두번째는 글쓰기를 누를떄 시퀀스 번호를 생성하는 서블릿으로 이동한 후, 그 시퀀스 번호를 이용해서 코스아이템 DB에 추가 저장하는 방식. -->
-
-<!-- 페이지 제목 -->
-
 <div class="container-900 container-center">
 
 <!-- 검색 form -->
+<!-- 페이지 검색 : 지역 , 코스명 , 내용 -->
     <form action="<%=root%>/course/list.jsp" method="get">
         <div class="back">
             <div class="searchBox container-center">
             	<div class="row center">
-	                 <select name="column" class="search-select">
+	                 <select name="column" class="form-input form-inline">
 						<%if(pn.columnValExists("course_name")){ %>
 							<option value="course_name" selected>코스명</option>
 						<%}else{ %>
@@ -289,31 +304,33 @@
 					</select>
 						<%if(pn.getColumn() != null && pn.getColumn().equals("item_address")){ %>
 						    <input type="search" name="keyword" placeholder="검색어 입력"
-						required class="search-keyword">
+						required class="search-keyword" class="form-input form-inline">
 						<%}else{ %>
 						    <input type="search" name="keyword" placeholder="검색어 입력"
-						required value="<%=pn.getKeywordString()%>" class="search-keyword">
+						required value="<%=pn.getKeywordString()%>" class="form-input form-inline">
 						<%} %>
 
 				<input type="hidden" name="order" value="<%=order%>">
-                <input type="submit" value="검색" class="search-btn">
+                <input type="submit" value="검색" class="form-btn form-inline">
              	</div>
             </div>
         </div>
 	</form>
-      
+    
+    <!-- 제목 테이블 -->
     <div class="row center">
 		<span class="item-title">국내 여행지</span>
     </div>
     
+    <!-- 지역 선택 테이블 -->
     <div class="gridFirst">
 		<div class='gridContainer'>
 			<div class='gridBox'>
 			
 				<div class='gridTitle'>카테고리</div>
 				<div class='gridContents'>
-					<a href="#" class="course-city">축제</a>        
-                	<a href="#" class="course-city">관광지</a>
+					<a href="#" class='gridEl'>축제</a>        
+                	<a href="#" class='gridEl'>관광지</a>
 				</div>
 				
 				<div class='gridTitle'>지역</div>
@@ -337,7 +354,7 @@
                 	<a href="list.jsp?column=item_address&keyword=충청북도&order=<%=order%>" class='gridEl'>충청북도</a>
 				</div>
 				
-				<!-- 리스트가 널이 아니라면 -->
+				<!-- 리스트가 널이 아니라면(지역을 클릭하면 밑에 시,군,구를 출력한다)-->
 				<div class='gridTitle'></div>
 				<div class='gridContents'>
 		           <%
@@ -358,7 +375,7 @@
 	</div>
 
 
-       <!-- 인기순 보여주기(조회수 기준)-->
+        <!-- 최신순 조회-->
         <div class="row flex-container">
 				<div class="flex-btn">
 				<form action="<%=root%>/course/list.jsp" method="get">
@@ -371,10 +388,11 @@
 					<input type="submit" value="최신순 조회">
 				</form>
 			</div>
+			<!-- 인기순 조회(조회수 기준)-->
 			<div class="flex-btn">
 				<form action="<%=root%>/course/list.jsp" method="get">
 					<input type="hidden" name="order" value="course_count_view">
-			<%if(subCity != null) {%>
+					<%if(subCity != null) {%>
 					<input type="hidden" name="subCity" value="<%=subCity%>">
 					<%} %>
 					<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
@@ -382,125 +400,122 @@
 					<input type="submit" value="인기순 조회">
 				</form>	
 			</div >
-				<div class="flex-btn">			
+			<!-- 댓글순 조회(댓글개수 기준)-->
+			<div class="flex-btn">			
 				<form action="<%=root%>/course/list.jsp" method="get">
 					<input type="hidden" name="order" value="course_count_reply">
-			<%if(subCity != null) {%>
+					<%if(subCity != null) {%>
 					<input type="hidden" name="subCity" value="<%=subCity%>">
 					<%} %>
 					<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
 					<input type="hidden" name="column" value="<%=pn.getColumn()%>">
 					<input type="submit" value="댓글순 조회">
 				</form>
-				</div>
-				
-			</div>
+			</div>	
+		</div>
         
         
-        
-<%if(!list.isEmpty()) {%>
- <div class="flex-loop">
- 		<%for(CourseDto courseDto : list) {%>
+	<!-- 목록 출력 부분 -->
+	<%if(!list.isEmpty()) {%>
+	 <div class="flex-loop">
+		<%for(CourseDto courseDto : list) {%>
 			<%
 		    //지역 알아내기 -> 코스아이템에서 첫번쨰 아이템 내용 전달.
 		    CourseItemDao courseItemDao = new CourseItemDao();
 		    int itemIdx = courseItemDao.getItemIdxByCourse(courseDto.getCourseIdx());
+		    //전달 받은 내용으로 코스에서 지역과 작성자 사진을 출력한다
+			//목록을 보여주면서 itemDto의 itemIdx의 첫번째 정보를 받는다
 		    ItemDao itemDao = new ItemDao();
 		   	ItemDto itemDto = itemDao.get(itemIdx);
 		   	UsersDao usersDao = new UsersDao();
 		   	UsersDto usersDto = usersDao.get(itemDto.getUsersIdx());
-		   	
-			//목록을 보여주면서 itemDto의 itemIdx의 첫번째 정보를 받는다
 			ItemFileDao itemFileDao = new ItemFileDao();
 			ItemFileDto itemFileDto = itemFileDao.find2(itemIdx);
 			%>
-		<a href="readup.nogari?courseIdx=<%=courseDto.getCourseIdx()%>">
-            <div class="box">      
-              			<%if(itemFileDto == null){ %>
-								<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
-								<img src="http://via.placeholder.com/280x150" class="box-img">
-						<%}else{ %>
-								<!-- 첨부파일이 있다면 첨부파일을 출력  -->
-								<img src="../item/file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" class="box-img">
-						<%} %>
-						
-                <div class="box-detail"><%=itemDto.getAdressCity()%></div> <!--지역 -->
-
-                <div class="box-detail">
-                <%=courseDto.getCourseName()%>
-                <%-- 댓글수 --%>
-					<!-- 댓글이 있다면 개수를 출력 -->
-				<%if(courseDto.isCountReply()){ %>
+			<a href="readup.nogari?courseIdx=<%=courseDto.getCourseIdx()%>">
+	        <div class="box">      
+				<%if(itemFileDto == null){ %>
+					<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
+					<img src="https://placeimg.com/280/150/nature" class="box-img">
+				<%}else{ %>
+					<!-- 첨부파일이 있다면 첨부파일을 출력  -->
+					<img src="../item/file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" class="box-img">
+				<%} %>
+				<!--지역 -->
+				<div class="box-detail"><%=itemDto.getAdressCity()%></div> 
+		
+				<div class="box-detail">
+					<!-- 관광지 제목 -->
+					<%=courseDto.getCourseName()%>
+					<!-- 댓글이 있다면 관광지 제목 옆에 댓글 개수를 출력 -->
+					<%if(courseDto.isCountReply()){ %>
 						[<%=courseDto.getCourseCountReply() %>]
-				<%} %>
-                </div>
-                
-                
-                <div class="box-detail"><%=usersDto.getUsersId()%></div>
-                <div class="box-detail">
-                <%=courseDto.getCourseDate()%> (조회수 :<%=courseDto.getCourseCountView()%>) 
-                </div>
-            </div>
-	</a>
-            <%} %>
-        </div>
-
-    </div>
-
-<!-- 페이지네이션 -->
-
-<div class="row">
-	<div class='boardBox page'>
-	<%-- [이전] a 태그 --%>
-			<div class='el'>
-			<%if(pn.hasPreviousBlock()){ %>
-				<%if(isSearchMode){%>
-					<%if(subCity != null) {%>
-					<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getPreviousBlock()%>&order=<%=order%>&subCity=<%=subCity%>">◀</a>
-					<%}else{ %>
-					<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getPreviousBlock()%>&order=<%=order%>">◀</a>
 					<%} %>
-				<%}else{ %>
-					<a href="list.jsp?page=<%=pn.getPreviousBlock() %>&order=<%=order%>">◀</a>
-				<%} %>
-			<%}else{%>
-				<a>◀</a>
-			<%} %>
+				</div>
+		        <div class="box-detail"><%=usersDto.getUsersId()%></div>
+		        <div class="box-detail">
+		        	<%=courseDto.getCourseDate()%> (조회수 :<%=courseDto.getCourseCountView()%>) 
+		        </div>
+	        </div>
+			</a>
+		<%} %>
+	</div>
+
+
+	<!-- 페이지네이션 -->
+	<div class="pagenation">
+		<div class="boardContainer">
+			<div class='boardBox page'>
+			<%-- [이전] a 태그 --%>
+					<div class='el'>
+					<%if(pn.hasPreviousBlock()){ %>
+						<%if(isSearchMode){%>
+							<%if(subCity != null) {%>
+							<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getPreviousBlock()%>&order=<%=order%>&subCity=<%=subCity%>">◀</a>
+							<%}else{ %>
+							<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=pn.getPreviousBlock()%>&order=<%=order%>">◀</a>
+							<%} %>
+						<%}else{ %>
+							<a href="list.jsp?page=<%=pn.getPreviousBlock() %>&order=<%=order%>">◀</a>
+						<%} %>
+					<%}else{%>
+						<a>◀</a>
+					<%} %>
+					</div>
+					<%-- 숫자 a 태그 --%>
+					<div class='el'>
+					<%for(int i = pn.getStartBlock(); i<=pn.getRealLastBlock(); i++) {%>
+						<%if(isSearchMode){ %>
+							<%if(subCity != null) {%>
+							<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>&order=<%=order%>&subCity=<%=subCity%>"><%=i %></a>
+							<%}else{ %>
+							<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>&order=<%=order%>"><%=i %></a>
+							<%} %>
+						<%}else{ %>
+							<a href="list.jsp?page=<%=i %>&order=<%=order%>"><%=i %></a>
+						<%} %>
+					<%} %>
+					</div>
+					<%-- [다음] a 태그 --%>
+					<div class='el'>
+					<%if(pn.hasNextBlock()){ %>
+						<%if(isSearchMode){%>
+							<%if(subCity != null) {%>
+							<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&order=<%=order%>&subCity=<%=subCity%>">▶</a>
+							<%}else{ %>
+							<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&order=<%=order%>">▶</a>
+							<%} %>
+						<%}else{ %>
+							<a href="list.jsp?page=<%=pn.getNextBlock() %>&order=<%=order%>">▶</a>
+						<%} %>
+					<%}else{ %>
+						<a>▶</a>
+					<%} %>
+				</div>
 			</div>
-			<%-- 숫자 a 태그 --%>
-			<div class='el'>
-			<%for(int i = pn.getStartBlock(); i<=pn.getRealLastBlock(); i++) {%>
-				<%if(isSearchMode){ %>
-					<%if(subCity != null) {%>
-					<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>&order=<%=order%>&subCity=<%=subCity%>"><%=i %></a>
-					<%}else{ %>
-					<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&page=<%=i %>&order=<%=order%>"><%=i %></a>
-					<%} %>
-				<%}else{ %>
-					<a href="list.jsp?page=<%=i %>&order=<%=order%>"><%=i %></a>
-				<%} %>
-			<%} %>
-			</div>
-			<%-- [다음] a 태그 --%>
-			<div class='el'>
-			<%if(pn.hasNextBlock()){ %>
-				<%if(isSearchMode){%>
-					<%if(subCity != null) {%>
-					<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&order=<%=order%>&subCity=<%=subCity%>">▶</a>
-					<%}else{ %>
-					<a href="list.jsp?column=<%=pn.getColumn() %>&keyword=<%=pn.getKeyword() %>&order=<%=order%>">▶</a>
-					<%} %>
-				<%}else{ %>
-					<a href="list.jsp?page=<%=pn.getNextBlock() %>&order=<%=order%>">▶</a>
-				<%} %>
-			<%}else{ %>
-				<a>▶</a>
-			<%} %>
 		</div>
 	</div>
 </div>
-
-
 <br><br>
 
 <!-- 데이터가 없다면 -->
@@ -508,6 +523,11 @@
 	<h3 class="center">글이 없습니다.</h3>
 <%} %>
 
+
+
+<!-- 글 쓰기에는 두가지 방법이 있는데, (둘다 시도 중)-->
+<!-- 첫번째는 세션을 이용하여 세션안에서 아이템들을 모아서 처리하였다가 마지막에 그 세션을 파기 시키는 방법 (course_try 내부에 저장해 두었다)-->
+<!-- 두번째는 글쓰기를 누를떄 시퀀스 번호를 생성하는 서블릿으로 이동한 후, 그 시퀀스 번호를 이용해서 코스아이템 DB에 추가 저장하는 방식. -->
 <!-- 컨셉 :  -->
 <!-- 1) 코스 번호는 코스_아이템 DB에 저장되어야 하므로, 미리 생성해서 작성란으로 가야한다. -->
 <!-- 2) 비회원은 작성할 수 없도록 설정해 두었다. -->

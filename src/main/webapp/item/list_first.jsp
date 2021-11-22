@@ -45,33 +45,34 @@
     /* div 내에 태그 오른쪽 정렬*/
     .right {text-align: right;}
     
+    /* 검색 (입력, 셀렉, 버튼) */
     .form-input,
 	.form-btn {
 	    font-size: 0.8rem;
 	    padding: 0.3rem;
 	}
-	
+	/* 검색 (입력, 셀렉, 버튼) */
 	.form-input {
 	    border: 1px solid rgb(43, 48, 90);
 	    width:60%;
 	}
-	
+	/* 검색 (입력, 셀렉, 버튼) */
 	.form-btn {
 		width:10%;
 	    color: rgb(77, 25, 25);
 	    background-color: rgb(232, 193, 125);
 	    font-weight: bold;
 	}
-	
+	/* 검색 (입력, 셀렉, 버튼) */
 	.form-block {
 	    display: block;
 	}
-	
+	/* 검색 (입력, 셀렉, 버튼) */
 	.form-inline {
 	    width: auto;
 	}
     
-    
+    /* 관광지 지역 부분 */
     /* 그리드 컨테이너 내부에서 사용되는 변수들의 선언 */ 
 	.gridFirst {
 		--grid-box-margin: 3rem;
@@ -118,7 +119,8 @@
  		text-align: center;
  		padding-top: 0.4rem;
  	}
- 
+ 	
+ 	/*검색창 백그라운드 이미지*/
  	.back {
 	  background-image:url(https://cdn.pixabay.com/photo/2017/10/10/22/27/creux-du-van-2839124_960_720.jpg);
 	  background-position:0 0;
@@ -127,13 +129,14 @@
       height:300px;
       
 	}
-	
+	/* 검색창*/
 	.searchBox {
 	  width: 600px;
       height: 130px;
       background-color: rgba(0, 0, 0, 0.3);
 	}
  
+ 	/* 관광지 목록 출력 썸네일 부분*/
  	/* 그리드 컨테이너 내부에서 사용되는 변수들의 선언 */ 
 	.second {
 		--grid-box-margin:3rem;
@@ -181,104 +184,105 @@
 
 <!-- 관광지 목록 페이지 시작 -->
 <div class="container-900 container-center">
-
-    <form action="list.jsp">
-        <div class="back">
-            <div class="searchBox container-center">
-            	<div class="row center">
-	                <select name="column" class="form-input form-inline">
-	                    <option value="item_type">카테고리</option>
-	                    <option value="item_name">제목</option>
-	                    <option value="item_detail">내용</option>
-	                </select>
-               	 	<input type="text" name="keyword" required class="form-input from-inline">
-               	 	<input type="submit" value="검색" class="form-btn from-inline">
-             	</div>
-            </div>
-        </div>
-      </form>
-
-<div class="row center">
-	<span class="item-title">국내 여행지</span>
-</div>
-
-<div class="gridFirst">
-	<div class='gridContainer'>
-		<div class='gridBox'>
-			<div class='gridTitle'>카테고리</div>
-			<div class='gridContents'>
-				<a href="#" class='gridEl'>축제</a>        
-				<a href="#" class='gridEl'>관광지</a>
-			</div>
-			<div class='gridTitle'>지역</div>
-			<div class='gridContents'>
-				<a href="list_city.jsp?column=item_address&keyword=서울" class='gridEl'>서울</a>        
-                <a href="list_city.jsp?column=item_address&keyword=부산" class='gridEl'>부산</a>
-                <a href="list_city.jsp?column=item_address&keyword=인천" class='gridEl'>인천</a>
-                <a href="list_city.jsp?column=item_address&keyword=대구" class='gridEl'>대구</a>
-                <a href="list_city.jsp?column=item_address&keyword=대전" class='gridEl'>대전</a>
-                <a href="list_city.jsp?column=item_address&keyword=광주" class='gridEl'>광주</a>
-                <a href="list_city.jsp?column=item_address&keyword=울산" class='gridEl'>울산</a>
-                <a href="list_city.jsp?column=item_address&keyword=경기" class='gridEl'>경기도</a>
-                <a href="list_city.jsp?column=item_address&keyword=세종" class='gridEl'>세종</a>
-                <a href="list_city.jsp?column=item_address&keyword=강원" class='gridEl'>강원도</a>
-                <a href="list_city.jsp?column=item_address&keyword=제주" class='gridEl'>제주도</a>
-                <a href="list_city.jsp?column=item_address&keyword=경상북도" class='gridEl'>경상북도</a>
-                <a href="list_city.jsp?column=item_address&keyword=경상남도" class='gridEl'>경상남도</a>
-                <a href="list_city.jsp?column=item_address&keyword=전라남도" class='gridEl'>전라남도</a>
-                <a href="list_city.jsp?column=item_address&keyword=전라북도" class='gridEl'>전라북도</a>
-                <a href="list_city.jsp?column=item_address&keyword=충청남도" class='gridEl'>충청남도</a>
-                <a href="list_city.jsp?column=item_address&keyword=충청북도" class='gridEl'>충청북도</a>               
-			</div>
+	<!-- 검색 창 -->
+	<form action="list.jsp">
+	    <div class="back">
+	        <div class="searchBox container-center">
+	        	<div class="row center">
+	             <select name="column" class="form-input form-inline">
+	                 <option value="item_type">카테고리</option>
+	                 <option value="item_name">제목</option>
+	                 <option value="item_detail">내용</option>
+	             </select>
+	           	 	<input type="text" name="keyword" required class="form-input from-inline">
+	           	 	<input type="submit" value="검색" class="form-btn from-inline">
+	         	</div>
+	        </div>
 		</div>
-	</div>
-</div>
-  
-  <!-- 인기순 보여주기(조회수 기준)-->
-  <br>
-<div class="row center">
-    <span class="item-title">인기 여행지</span>
-</div>
- 
+	</form>
 
-<%
-	ItemDao itemDao = new ItemDao();
-	ItemFileDao itemFileDao = new ItemFileDao();
+	<div class="row center">
+		<span class="item-title">국내 여행지</span>
+	</div>
 	
-	List<ItemDto> list= itemDao.list(1, 9);// 9개 가져오기		
-%>
- 
- <div class="second">
- 	<div class='gridContainer'>
-		<div class='gridBox'>
-			<%for(ItemDto itemDto : list){ %>
-			<div class='gridEl'>
-				<a href="readup.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
-            	<!-- 목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
-				<%ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());%>
-				<%if(itemFileDto == null){ %>
-					<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
-					<img src="http://placeimg.com/170/170/nature">
-				<%}else{ %>
-					<!-- 첨부파일이 있다면 첨부파일을 출력  -->
-					<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>">
-				<%} %>
-					<span class="gridElTitle"><%=itemDto.getItemName() %></span>
-				</a>
-			</div>	
-            <%} %>
+	<div class="gridFirst">
+		<div class='gridContainer'>
+			<div class='gridBox'>
+				<div class='gridTitle'>카테고리</div>
+				<div class='gridContents'>
+					<a href="#" class='gridEl'>축제</a>        
+					<a href="#" class='gridEl'>관광지</a>
+				</div>
+				<div class='gridTitle'>지역</div>
+				<div class='gridContents'>
+					<a href="list_city.jsp?column=item_address&keyword=서울" class='gridEl'>서울</a>        
+	                <a href="list_city.jsp?column=item_address&keyword=부산" class='gridEl'>부산</a>
+	                <a href="list_city.jsp?column=item_address&keyword=인천" class='gridEl'>인천</a>
+	                <a href="list_city.jsp?column=item_address&keyword=대구" class='gridEl'>대구</a>
+	                <a href="list_city.jsp?column=item_address&keyword=대전" class='gridEl'>대전</a>
+	                <a href="list_city.jsp?column=item_address&keyword=광주" class='gridEl'>광주</a>
+	                <a href="list_city.jsp?column=item_address&keyword=울산" class='gridEl'>울산</a>
+	                <a href="list_city.jsp?column=item_address&keyword=경기" class='gridEl'>경기도</a>
+	                <a href="list_city.jsp?column=item_address&keyword=세종" class='gridEl'>세종</a>
+	                <a href="list_city.jsp?column=item_address&keyword=강원" class='gridEl'>강원도</a>
+	                <a href="list_city.jsp?column=item_address&keyword=제주" class='gridEl'>제주도</a>
+	                <a href="list_city.jsp?column=item_address&keyword=경상북도" class='gridEl'>경상북도</a>
+	                <a href="list_city.jsp?column=item_address&keyword=경상남도" class='gridEl'>경상남도</a>
+	                <a href="list_city.jsp?column=item_address&keyword=전라남도" class='gridEl'>전라남도</a>
+	                <a href="list_city.jsp?column=item_address&keyword=전라북도" class='gridEl'>전라북도</a>
+	                <a href="list_city.jsp?column=item_address&keyword=충청남도" class='gridEl'>충청남도</a>
+	                <a href="list_city.jsp?column=item_address&keyword=충청북도" class='gridEl'>충청북도</a>               
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
+	  
+	<!-- 관광지 첫페이지는 인기여행지로 목록에서 12개만 뽑아낸다(조회수 기준)-->
+	<br>
+	<div class="row center">
+	    <span class="item-title">인기 여행지</span>
+	</div>
+
+	<!-- 목록 출력 을 위한 변수선언 -->
+	<%
+		ItemDao itemDao = new ItemDao();
+		ItemFileDao itemFileDao = new ItemFileDao();
+		
+		List<ItemDto> list= itemDao.list(1, 12);// 9개 가져오기		
+	%>
+	 
+	 <div class="second">
+	 	<div class='gridContainer'>
+			<div class='gridBox'>
+				<!-- 목록 출력 시작 -->
+				<%for(ItemDto itemDto : list){ %>
+				<div class='gridEl'>
+					<a href="readup.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
+	            	<!-- 목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
+					<%ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());%>
+					<%if(itemFileDto == null){ %>
+						<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
+						<img src="http://placeimg.com/170/170/nature">
+					<%}else{ %>
+						<!-- 첨부파일이 있다면 첨부파일을 출력  -->
+						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>">
+					<%} %>
+						<span class="gridElTitle"><%=itemDto.getItemName() %></span>
+					</a>
+				</div>	
+	            <%} %>
+			</div>
+		</div>
+	</div>
 </div>      
 
 
-
-	<div>
-		<%if(Sessioner.getUsersGrade(request.getSession()) != null && Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN)) {%>
-		<h2><a href="insert.jsp">글쓰기</a></h2>
-		<%} %>
-	</div>
+<!-- 관리자에게만 글쓰기 버튼 보여주기 -->
+<div>
+	<%if(Sessioner.getUsersGrade(request.getSession()) != null && Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN)) {%>
+	<h2><a href="insert.jsp">글쓰기</a></h2>
+	<%} %>
+</div>
 
 <!-- 페이지 내용 끝. -->
 </SECTION>
