@@ -34,7 +34,7 @@ public class CourseCreateSequnceForInsertServlet extends HttpServlet {
 				 int courseSequnce = courseDao.getSequence();
 				 
 				 //등록을 위해서 insert.jsp로 이동함
-				 resp.sendRedirect("insert.jsp?courseSequnce="+courseSequnce+"&usersFilterId"+usersFilterId);
+				 resp.sendRedirect("insert.jsp?courseSequnce="+courseSequnce+"&usersFilterId="+usersFilterId);
 				
 			}catch (Exception e) {
 				e.printStackTrace();
