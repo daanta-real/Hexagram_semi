@@ -326,6 +326,21 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			return result > 0;
 		}
 		
+		//조회수 증가 메소드
+		public boolean readUp(int courseIdx) throws Exception {
+			Connection con = JdbcUtils.connect3();
+			
+			String sql = "update course set course_count_view = course_count_view + 1"
+							+ " where course_idx = ?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, courseIdx);
+
+			int result = ps.executeUpdate();
+
+			con.close();
+			return result > 0;
+		}
+		
 		public List<CourseDto> orderByList(String order,int begin, int end) throws Exception {
 			String sql = "select * from( "
 					+ "select rownum rn,tmp.* from( "

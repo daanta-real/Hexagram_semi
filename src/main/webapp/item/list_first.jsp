@@ -1,3 +1,4 @@
+<%@page import="util.users.Sessioner"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 
@@ -212,9 +213,13 @@
             </div>
         </div>
     </div>
+	<%
 
+	%>
 	<div>
+		<%if(Sessioner.getUsersGrade(request.getSession()) != null && Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN)) {%>
 		<h2><a href="insert.jsp">글쓰기</a></h2>
+		<%} %>
 	</div>
 
 <!-- 페이지 내용 끝. -->
