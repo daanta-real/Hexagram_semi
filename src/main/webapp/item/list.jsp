@@ -17,18 +17,17 @@
 <HEAD>
 <TITLE>노가리투어 - 관광지 목록</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
-<%
-String root = request.getContextPath();
-%>
+<%String root = request.getContextPath(); %>
 <LINK REL="STYLESHEET" HREF="<%=root%>/resource/css/item/list.css" /> <!-- CSS 첨부 -->
 </HEAD>
 <style>
+
         .row {
             margin-top: 10px;
             margin-bottom: 10px;
         }
         
-               .float-container::after {
+        .float-container::after {
             content:"";
             display: block;
             clear: both;
@@ -44,9 +43,13 @@ String root = request.getContextPath();
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<!-- 페이지 내용 시작 -->
+
+<!-- list_first페이지에서 키워드로 검색시 나오는 목록 페이지 -->
+
 
 <%
+
+//list_first페이지에서 검색어로 검색했을때 나온 페이지에서 필요한 파라미터값을 변수에 저장한다
 String order = "item_idx";
 if(request.getParameter("order") != null)
 order = request.getParameter("order");
@@ -67,9 +70,13 @@ System.out.println("[관광지 목록] 페이지네이션 정보: " + pn);
 
 //관광지 목록 도출
 List<ItemDto> list = new ArrayList<>();
+
 if(isSearchMode){
+	//파라미터값에 키워드와 컬럼이 있다면 최신순 인기순 댓글순 조회를 할때 필요한 메소드
 	list=itemDao.orderByKeywordList(order, pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-}else{
+}
+else{
+	//현재 검색된 내용에서 최신순 인기순 댓글순 죄회를 할때 필요한 메소드
 	list=itemDao.orderByList(order, pn.getBegin(), pn.getEnd());
 }
 
@@ -85,15 +92,13 @@ String title = isSearchMode
 // 썸네일표시를 위한 파일 조회를 위한 ItemFileDao 생성
 ItemFileDao itemFileDao = new ItemFileDao();
 
-// HTML 출력 시작
 %>
 
+<!-- 페이지 내용 시작 -->
 <div class="container-900 container-center">
 	<div class="row center">
 		<%-- 페이지 제목 --%>
-		<h2>
-		<%=title%>
-		</h2>
+		<h2><%=title%></h2>
 	</div>
 
 	<div class="row center">
@@ -125,113 +130,113 @@ ItemFileDao itemFileDao = new ItemFileDao();
 		</form>
 	</div>
 	
-<div class="row float-container">
-	<div class="float-item-left">
-		<form action="<%=root%>/item/list.jsp" method="get">
-			<input type="hidden" name="order" value="item_idx">
-			<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
-			<input type="hidden" name="column" value="<%=pn.getColumn()%>">
-			<input type="submit" value="최신순 조회">
-		</form>
+	<div class="row float-container">
+		<div class="float-item-left">
+			<form action="<%=root%>/item/list.jsp" method="get">
+				<input type="hidden" name="order" value="item_idx">
+				<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
+				<input type="hidden" name="column" value="<%=pn.getColumn()%>">
+				<input type="submit" value="최신순 조회">
+			</form>
+		</div>
+		<div class="float-item-left">
+			<form action="<%=root%>/item/list.jsp" method="get">
+				<input type="hidden" name="order" value="item_count_view">
+				<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
+				<input type="hidden" name="column" value="<%=pn.getColumn()%>">
+				<input type="submit" value="인기순 조회">
+			</form>
+		</div>
+		<div class="float-item-left">		
+			<form action="<%=root%>/item/list.jsp" method="get">
+				<input type="hidden" name="order" value="item_count_reply">
+				<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
+				<input type="hidden" name="column" value="<%=pn.getColumn()%>">
+				<input type="submit" value="댓글순 조회">
+			</form>
+		</div>
 	</div>
-	<div class="float-item-left">
-		<form action="<%=root%>/item/list.jsp" method="get">
-			<input type="hidden" name="order" value="item_count_view">
-			<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
-			<input type="hidden" name="column" value="<%=pn.getColumn()%>">
-			<input type="submit" value="인기순 조회">
-		</form>
-	</div>
-	<div class="float-item-left">		
-		<form action="<%=root%>/item/list.jsp" method="get">
-			<input type="hidden" name="order" value="item_count_reply">
-			<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
-			<input type="hidden" name="column" value="<%=pn.getColumn()%>">
-			<input type="submit" value="댓글순 조회">
-		</form>
-	</div>
-</div>
+
+
+	<%-- 전체 목록 조회 --%>
 	<div class="row center">
-
-<%-- 전체 목록 조회 --%>
-
-<!-- 목록 내용이 있다면-->
-<%if(!list.isEmpty()) {%>
-<table class="table table-border table-hover table-stripe">
-	<thead>
-		<tr>
-			<th>카테고리</th>
-			<th>관광지명</th>
-			<th>관광지 소개</th>
-			<th>조회수</th>
-		</tr>
-	</thead>
-	<tbody>
-		<!-- 목록 불러오기 -->
-		<%for(ItemDto itemDtoList : list){ %>
-
-		<!-- 목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
-		<%ItemFileDto itemFileDto = itemFileDao.find2(itemDtoList.getItemIdx());%>
-		<tr>
-			<!-- 카테고리 출력 -->
-			<td width="10%"><%=itemDtoList.getItemType() %></td>
-			<td class="left" width="30%">
-			<!-- 관광지 제목을 출력 (제목을 누르면 조회수 증가 서블릿으로 이동)  -->
-			<a href="readup.nogari?itemIdx=<%=itemDtoList.getItemIdx()%>">
-			<!-- 				이 항목을 리스트에서 누를시에만 조회수가 올라가게 ItemReadupServlet 서블릿에서 게시물 조회수 증가를 시킨 후 detail페이지로 이동시킨다. -->
-			<%=itemDtoList.getItemName()%>
-			</a>
-			<%-- 댓글수 --%>
-			<!-- 댓글이 있다면 개수를 출력 -->
-			<%if(itemDtoList.isCountReply()){ %>
-				[<%=itemDtoList.getItemCountReply() %>]
+	<!-- 목록 내용이 있다면-->
+	<%if(!list.isEmpty()) {%>
+	<table class="table table-border table-hover table-stripe">
+		<thead>
+			<tr>
+				<th>카테고리</th>
+				<th>관광지명</th>
+				<th>관광지 소개</th>
+				<th>조회수</th>
+			</tr>
+		</thead>
+		<tbody>
+			<!-- 목록 불러오기 -->
+			<%for(ItemDto itemDtoList : list){ %>
+	
+			<!-- 목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
+			<%ItemFileDto itemFileDto = itemFileDao.find2(itemDtoList.getItemIdx());%>
+			<tr>
+				<!-- 카테고리 출력 -->
+				<td width="10%"><%=itemDtoList.getItemType() %></td>
+				<td class="left" width="30%">
+				<!-- 관광지 제목을 출력 (제목을 누르면 조회수 증가 서블릿으로 이동)  -->
+				<a href="readup.nogari?itemIdx=<%=itemDtoList.getItemIdx()%>">
+				<!-- 				이 항목을 리스트에서 누를시에만 조회수가 올라가게 ItemReadupServlet 서블릿에서 게시물 조회수 증가를 시킨 후 detail페이지로 이동시킨다. -->
+				<%=itemDtoList.getItemName()%>
+				</a>
+				<%-- 댓글수 --%>
+				<!-- 댓글이 있다면 개수를 출력 -->
+				<%if(itemDtoList.isCountReply()){ %>
+					[<%=itemDtoList.getItemCountReply() %>]
+				<%} %>
+				</td>
+	
+				<td width="50%">
+					<div	class="flex-container">
+						<div class="image-wrapper">
+							<!-- 만약 첨부파일이 있다면 첨부파일을 썸네일로 보여준다 -->
+							<%if(itemFileDto == null){ %>
+									<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
+									<img src="http://via.placeholder.com/100x100" class="image">
+							<%}else{ %>
+									<!-- 첨부파일이 있다면 첨부파일을 출력  -->
+									<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>">
+							<%} %>
+						</div>
+	
+						<div class="detail-wrapper">
+							<!-- 관광지 소개 및 지역 출력 -->
+							<%
+							//관광지 소개를 변수에 저장
+							String showItemDetail;
+							//만약 소개글이 20글자 이상이라면
+							if(itemDtoList.getItemDetail().length() >= 20){
+								//20글자 까지만 화면에 출력
+								showItemDetail = itemDtoList.getItemDetail().substring(0, 20) + "...";
+							}else{
+								//20글자 이하라면 화면에 전부 출력
+								showItemDetail = itemDtoList.getItemDetail();
+							}
+							//관광지 지역 변수 저장
+							String area = itemDtoList.getAdressCity()+" "+itemDtoList.getAdressCitySub();
+							%>
+							<!-- 관광지 소개글 출력 -->
+							<h4 class="center"><%=showItemDetail%></h4>
+							<!-- 관광지 지역 출력 -->
+							<p><%=area%></p>
+						</div>
+					</div>
+				</td>
+				<!-- 조회수 출력 -->
+				<td><%=itemDtoList.getItemCountView() %></td>
+			</tr>
 			<%} %>
-			</td>
-
-			<td width="50%">
-				<div	class="flex-container">
-					<div class="image-wrapper">
-						<!-- 만약 첨부파일이 있다면 첨부파일을 썸네일로 보여준다 -->
-						<%if(itemFileDto == null){ %>
-								<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
-								<img src="http://via.placeholder.com/100x100" class="image">
-						<%}else{ %>
-								<!-- 첨부파일이 있다면 첨부파일을 출력  -->
-								<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>">
-						<%} %>
-					</div>
-
-					<div class="detail-wrapper">
-						<!-- 관광지 소개 및 지역 출력 -->
-						<%
-						//관광지 소개를 변수에 저장
-						String showItemDetail;
-						//만약 소개글이 20글자 이상이라면
-						if(itemDtoList.getItemDetail().length() >= 20){
-							//20글자 까지만 화면에 출력
-							showItemDetail = itemDtoList.getItemDetail().substring(0, 20) + "...";
-						}else{
-							//20글자 이하라면 화면에 전부 출력
-							showItemDetail = itemDtoList.getItemDetail();
-						}
-						//관광지 지역 변수 저장
-						String area = itemDtoList.getAdressCity()+" "+itemDtoList.getAdressCitySub();
-						%>
-						<!-- 관광지 소개글 출력 -->
-						<h4 class="center"><%=showItemDetail%></h4>
-						<!-- 관광지 지역 출력 -->
-						<p><%=area%></p>
-					</div>
-				</div>
-			</td>
-			<!-- 조회수 출력 -->
-			<td><%=itemDtoList.getItemCountView() %></td>
-		</tr>
-		<%} %>
-	</tbody>
-</table>
-</div>
-<%} %>
+		</tbody>
+	</table>
+	</div>
+	<%} %>
 
 
 	<!-- 페이지네이션 -->
@@ -273,11 +278,11 @@ ItemFileDao itemFileDao = new ItemFileDao();
 </div>
 
 <%-- 관리자만 글쓰기 버튼 보이기 --%>
-	<div>
-		<%if(Sessioner.getUsersGrade(request.getSession()) != null && Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN)) {%>
-		<h2><a href="insert.jsp">글쓰기</a></h2>
-		<%} %>
-	</div>
+<div>
+	<%if(Sessioner.getUsersGrade(request.getSession()) != null && Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN)) {%>
+	<h2><a href="insert.jsp">글쓰기</a></h2>
+	<%} %>
+</div>
 
 <!-- 페이지 내용 끝. -->
 </SECTION>

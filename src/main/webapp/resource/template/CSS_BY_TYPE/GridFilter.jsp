@@ -10,7 +10,7 @@
 	:root {
 		--grid-box-margin: 3rem;
 		--grid-title-width: 6rem;
-		--grid-el-width: 4rem;
+		--grid-el-width: 6rem;
 		--grid-el-height: 2rem;
 		--grid-el-margin: 0.3rem;
 	}

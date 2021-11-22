@@ -175,7 +175,7 @@ textarea {
             	//로그인 확인
             	<%boolean isLogin = request.getSession().getAttribute("usersIdx") != null;%> 
             	var login = <%=isLogin%>;
-            	//만약 로그인이 안되었다면 이벤트를 발생시킨다
+            	//만약 로그인이 안되었다면 이벤트를 발생시킨다 //굳이 안해도 되지만 이중 차단..
             	if(!login){
             		e.preventDefault();
             		$(".show-login").text("로그인하세요..!").css("color","red");
@@ -188,6 +188,9 @@ textarea {
 
 <!-- 코스등록 마지막 페이지 내용 시작 -->
 <%
+	//최초 시퀀스를 만든사람만이 등록이 가능하도록 설정.(파라미터를 시퀀스 생성에서 부터 전달받고 필터에서 사용함)
+	String usersFilterId = request.getParameter("usersFilterId");
+	
     //절대 경로를 위해 index.jsp 페이지 변수 저장
     String root = request.getContextPath();
     
@@ -248,6 +251,7 @@ textarea {
 				<button class="btn form-btn">최종 제출</button>
 				<span class="show-login"></span>
 				<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
+				<input type="hidden" name="usersFilterId" value="<%=usersFilterId%>">
 			</div>
 	</form>
 
@@ -272,6 +276,8 @@ textarea {
 			<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
 			<input type="hidden" name="keyword" value="<%=city%>">
 			<input type="hidden" name="column" value="item_address">
+			<input type="hidden" name="usersFilterId" value="<%=usersFilterId%>">
+<!-- 			최초 시퀀스를 생성한 사람의 정보를 저장하기 위함 -->
 		</form>
 	</div>
 </div>

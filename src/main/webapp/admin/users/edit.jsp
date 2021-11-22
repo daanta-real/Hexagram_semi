@@ -13,10 +13,31 @@
 <script type='text/javascript'>
 var sysurl = "<%=root%>";
 </script>
-
-<!-- 페이지 제목 css -->
+<%/*CSS들*/%>
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
-
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/detail.css">
+<style type='text/css'>
+:root {
+	--board-grid-columns: 6rem 12rem; 
+}
+.boardContainer > .boardBox > .row > td > label {
+	width:20%; 
+}
+.boardContainer > .boardBox > .row > td > select {
+	width:100%; border:0; padding:0.4rem 0.3rem; outline:none;
+	position:relative;
+}
+.boardContainer > tfoot.boardBox > tr > td > input {
+	min-width: 10rem;
+	margin:0.3rem;
+	padding:0.1rem 1rem;
+	border:0;
+	border-radius: 0.4rem;
+	color:#000a;
+	background:var(--color5);
+    text-align: center;
+}
+</style>
 </HEAD>
 <BODY>
 
@@ -45,11 +66,17 @@ int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));
 <form class="form-regexCheck" action="<%=root%>/admin/users/edit.nogari" method="post">
 <input type="hidden" name="usersIdx" value="<%=usersDto.getUsersIdx()%>">
 <input type="hidden" name="usersId" value="<%=usersDto.getUsersId()%>">
-	<table>
-		<tbody>
-			<tr><th>회원No.</th><td><%=usersDto.getUsersIdx() %></td></tr>
-			<tr><th>아이디</th><td><%=usersDto.getUsersId() %></td></tr>
-			<tr>
+	<table class='boardContainer'>
+		<tbody class='boardBox'>
+			<tr class='row'>
+				<th>회원No.</th>
+				<td><%=usersDto.getUsersIdx() %></td>
+			</tr>
+			<tr class='row'>
+				<th>아이디</th>
+				<td><%=usersDto.getUsersId() %></td>
+			</tr>
+			<tr class='row'>
 				<th>비번</th>
 				<td>
 					<input type="password" name="usersPw" required value="<%=usersDto.getUsersPw()%>">
@@ -57,28 +84,29 @@ int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));
 					<label><input type="checkbox" class="togglePw"><span>보기</span></label>
 				</td>
 			</tr>
-			<tr>
+			
+			<tr class='row'>
 				<th>닉네임</th>
-					<td>
-						<input type="text" name="usersNick"  required value="<%=usersDto.getUsersNick() %>">
-						<div class="message"></div>
-					</td>
+				<td>
+					<input type="text" name="usersNick"  required value="<%=usersDto.getUsersNick() %>">
+					<div class="message"></div>
+				</td>
 			</tr>
-			<tr>
+			<tr class='row'>
 				<th>이메일</th>
 				<td>
 					<input type="email" name="usersEmail"  required value="<%=usersDto.getUsersEmail() %>">	
 					<div class="message"></div>
 				</td>
 			</tr>
-			<tr>
+			<tr class='row'>
 				<th>전화번호</th>
 				<td>
 					<input type="tel" name="usersPhone" value="<%=usersDto.getUsersPhone() %>">
 					<div class="message"></div>
 				</td>
 			</tr>
-			<tr>
+			<tr class='row'>
 				<th>회원등급</th>
 				<td>
 					<select name="usersGrade">
@@ -98,29 +126,27 @@ int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));
 					</select>
 				</td>
 			</tr>
-			<tr>
+			<tr class='row'>
 				<th>가입일</th>
 				<td><%=usersDto.getUsersJoin() %></td>
 			</tr>
-			<tr>
+			<tr class='row'>
 				<th>보유 포인트</th>
 				<td><%=usersDto.getUsersPoint() %>point</td>
 			</tr>
-			<tr>
-				<th colspan="2" align="center">
-					<a href="<%=root%>/admin/users/edit.jsp?usersIdx=<%=usersIdx%>">
-						<input type="submit" value="변경하기 완료">
-					</a>
-				</th>
-			</tr>
 		</tbody>
+		<tfoot class='boardBox'>			
+			<tr>
+				<td colspan="2">
+					<button type="submit">변경하기</button>
+					<a href="<%=root%>/admin/users/list.jsp">회원목록으로 돌아가기</a>
+				</td>
+			</tr>
+		</tfoot>
 	</table>
 </form>
 
 
-	<a href="<%=root%>/admin/users/list.jsp">
-		<input type="button" value="회원목록으로 돌아가기">
-	</a>
 
 <!-- 회원 정보 변경 실패시 fail파라미터 -->
  <%if(request.getParameter("fail") != null) {%>

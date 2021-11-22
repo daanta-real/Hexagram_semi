@@ -97,7 +97,8 @@
             top:30px;
             
         }
-
+		
+		/* 아이템 썸네일 부분 */
         ul{
         	list-style:none;
         }
@@ -200,8 +201,12 @@ String root = request.getContextPath();
 			<!-- 댓글 작성자 또는 관리자가 아니라면 버튼이 보여지지 않게 처리 -->
 			
             <a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>" class="float-right float-btn">수정</a>
-            <a href="delete.nogari?courseIdx=<%=courseIdx%>" class="float-right float-btn">삭제</a>
-            <a href="insert_sequence.nogari" class="float-right float-btn">새글작성</a>
+            <a href="delete.nogari?courseSequnce=<%=courseIdx%>&usersFilterId=<%=usersId%>" class="float-right float-btn">삭제</a>
+<!--             필터의 파라미터 이름을 동일하게 해주기위해서 파라미터 명을 courseSequnce로 하였다. -->
+            <a href="insert_sequence.nogari?usersFilterId=<%=usersId%>" class="float-right float-btn">새글작성</a>
+<!--             usersFilterId는 ajax(코스-아이템 등록/수정/삭제) 및 코스 등록, 수정시에 필터처리를 위해서 필요한 인자이다. -->
+<!--             최초 시퀀스번호를 생성하고 접속한 사람만이 실질적인 접근 권한이 생긴다. -->
+
             <%
             }
             %>
@@ -242,9 +247,7 @@ String root = request.getContextPath();
     <div class="row" id="slide">
     <!-- courseItem 목록 출력 -->
         <ul>
-		<%
-		for(CourseItemDto courseItemDto : getItemList){
-		%>
+		<%for(CourseItemDto courseItemDto : getItemList){ %>
 		<%
 		ItemDto itemDto = itemDao.get(courseItemDto.getItemIdx());
 		ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());
@@ -252,9 +255,7 @@ String root = request.getContextPath();
             <li>
                 <span class="item-title"><%=itemDto.getItemName()%></span>
                 <a href="<%=root%>/item/detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>" class="item-link">
-                    <%
-                    if(itemFileDto == null){
-                    %>
+                    <%if(itemFileDto == null){ %>
 					<!-- 첨부파일 출력 -->
 					<img src="http://via.placeholder.com/100x100">
 					<%
@@ -262,14 +263,10 @@ String root = request.getContextPath();
 					%>
 					<!-- 대체 이미지 출력 -->
 					<img src="<%=root%>/item/file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="150px" height="150px">
-					<%
-					}
-					%>
+					<%}	%>
                 </a>
             </li>
-        <%
-        }
-        %>
+        <%} %>
         </ul>
     </div>
     <div class="row">
@@ -279,7 +276,7 @@ String root = request.getContextPath();
 
 <!-- 댓글 -->
 
-<!-- 댓글 작성 공간 -->
+<!-- 댓글 작성 공간(댓글부분은 공통CSS가 생기면 그때 작업 -->
 <table border="1" width="900px">
 	<tbody>
 		<tr>

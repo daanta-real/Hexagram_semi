@@ -426,7 +426,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		return list;
 	}
 
-
+	//최신순 정렬 조회 메소드(페이지네이션)
 	public List<ItemDto> orderByList(String order,int begin, int end) throws Exception {
 
 		Connection con = JdbcUtils.connect3();
@@ -466,7 +466,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		return list;
 	}
 	
-
+		//인기순 댓글순 조회 정렬 메소드
 		public List<ItemDto> orderByKeywordList(String order,String column, String keyword, int begin, int end) throws Exception {
 
 			Connection con = JdbcUtils.connect3();

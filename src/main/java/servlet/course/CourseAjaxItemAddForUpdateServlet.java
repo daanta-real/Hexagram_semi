@@ -15,13 +15,14 @@ import beans.CourseItemDto;
 import beans.ItemDao;
 import beans.ItemDto;
 
-@WebServlet(urlPatterns = "/course/ajax_item_add.nogari")
-public class CourseAjaxItemAddServlet extends HttpServlet{
+@WebServlet(urlPatterns = "/course/ajax_item_update.nogari")
+public class CourseAjaxItemAddForUpdateServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			
 			//코스 등록시 course_item에 먼저 등록하기 위한 Servlet
+			//CourseAjaxItemAddServlet과 내용이 같지만 필터를 통해 다른 처리를 위하여 하나 더 만들어 두었다.
 			
 			//insert.jsp의  $(".item-add-btn").on("click", function(){})의 옵션으로 통신 
 			int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));

@@ -26,6 +26,7 @@ public class CourseItemAjaxDeleteForUpdateServlet extends HttpServlet{
 			//courseIdx : 파라미터로 받은 courseIdx 변수에 저장
 			int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
 			int courseIdx = Integer.parseInt(req.getParameter("courseIdx"));
+			String usersFilterId = req.getParameter("usersFilterId");
 			
 			//처리
 			CourseItemDao courseItemDao = new CourseItemDao();
