@@ -22,7 +22,8 @@ import util.users.Sessioner;
 		"/course/update.jsp",
 		"/course/ajax_item_update.nogari",
 		"/course/ajax_delete_update_item.nogari",
-		"/course/update_last.jsp"
+		"/course/update_last.jsp",
+		"/course/update_course.nogari"
 })
 public class CourseAjaxUpdateFilter implements Filter {
 
