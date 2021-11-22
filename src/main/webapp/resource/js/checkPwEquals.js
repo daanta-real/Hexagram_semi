@@ -1,7 +1,7 @@
 // 로드 이후 리스너 추가
 window.addEventListener("load", () => {
 	// 입력한 비밀번호와 재확인 비밀번호 일치 여부 검사 결과 메세지 보여주기
-	document.querySelector(".form-regexCheck input[name=usersPw]").addEventListener("blur", function(){
+	document.querySelector(".form-regexCheck #reInputPw").addEventListener("blur", function(){
 		// 비번 미일치, 미입력시 submit 버튼 비활성화
 		// submit.disabled = true; 이면 비활성화
 		// submit.disabled = false; 이면 활성화
@@ -23,20 +23,23 @@ window.addEventListener("load", () => {
 	        console.log("비번 미입력");
 			submit.disabled = true;
 		}
-		
-		// 검사 2 - 둘다 같은 값이어야 됨
-		if(usersPw != reInputPw){
-	        noticePw.textContent = "비밀번호가 일치하지 않습니다";
-	        console.log("비번 & 재확인비번 불일치");
-			submit.disabled = true;
+		else{
+			// 검사 2 - 둘다 같은 값이어야 됨
+			if(usersPw != reInputPw){
+		        noticePw.textContent = "비밀번호가 일치하지 않습니다";
+		        console.log("비번 & 재확인비번 불일치");
+				submit.disabled = true;
+			}
+			
+			// 검사 1 + 2 모두 통과 시
+		    else if(usersPw == reInputPw){
+		        noticePw.textContent = "비밀번호 일치";
+		        console.log("비번 & 재확인비번 일치");	
+				submit.disabled = false;
+			}
+			
 		}
 		
-		// 검사 1 + 2 모두 통과 시
-	    else{
-	        noticePw.textContent = "비밀번호 일치";
-	        console.log("비번 & 재확인비번 일치");	
-			submit.disabled = false;
-		}
 	
 	});
 
