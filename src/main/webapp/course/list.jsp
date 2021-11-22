@@ -130,23 +130,10 @@
     .box-detail{
         margin:3px;
     }
-    .search{
-        width: 640px;
-        height: 138px;
-        border-radius: 3px;
-        background: url(http://via.placeholder.com/640x138) repeat;
-        margin: 0 auto;
-        padding: 50px;
-        position: relative;
-    }
     .back{
         background: url(http://via.placeholder.com/900x300) repeat;
         width: 900px;
         height:300px;
-    }
-    .right-wrap{
-        border: 1px solid gray;
-        margin-top: 150px;
     }
     
     .flex-container {
@@ -302,7 +289,7 @@
         <div class="back">
             <div class="searchBox container-center">
             	<div class="row center">
-	                 <select name="column" class="search-select">
+	                 <select name="column" class="form-input form-inline">
 						<%if(pn.columnValExists("course_name")){ %>
 							<option value="course_name" selected>코스명</option>
 						<%}else{ %>
@@ -317,14 +304,14 @@
 					</select>
 						<%if(pn.getColumn() != null && pn.getColumn().equals("item_address")){ %>
 						    <input type="search" name="keyword" placeholder="검색어 입력"
-						required class="search-keyword">
+						required class="search-keyword" class="form-input form-inline">
 						<%}else{ %>
 						    <input type="search" name="keyword" placeholder="검색어 입력"
-						required value="<%=pn.getKeywordString()%>" class="search-keyword">
+						required value="<%=pn.getKeywordString()%>" class="form-input form-inline">
 						<%} %>
 
 				<input type="hidden" name="order" value="<%=order%>">
-                <input type="submit" value="검색" class="search-btn">
+                <input type="submit" value="검색" class="form-btn form-inline">
              	</div>
             </div>
         </div>
