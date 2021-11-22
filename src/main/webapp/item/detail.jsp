@@ -541,7 +541,6 @@ ItemFileDao itemFileDao = new ItemFileDao();
 <!-- 필터를 통해서 댓글 수정 및 삭제 금지하는 필터 설정을 해야한다!!!!!!!!!!!!!!!! -->
 <!-- 작성일 작성시간 몇분전 몇일 전 표시하기. -->
 
-
 <!-- 페이지 내용 끝. -->
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>
