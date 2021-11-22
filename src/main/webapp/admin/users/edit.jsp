@@ -19,8 +19,7 @@ var sysurl = "<%=root%>";
 <style type='text/css'>
 :root {
 	--board-grid-columns: 6rem 12rem; 
-	}
-#usersPw{ width:80%; }
+}
 .boardContainer > .boardBox > .row > td > label {
 	width:20%; 
 }
@@ -80,7 +79,7 @@ int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));
 			<tr class='row'>
 				<th>비번</th>
 				<td>
-					<input type="password" name="usersPw" required value="<%=usersDto.getUsersPw()%>" id="usersPw">
+					<input type="password" name="usersPw" required value="<%=usersDto.getUsersPw()%>">
 					<div class="message"></div>
 					<label><input type="checkbox" class="togglePw"><span>보기</span></label>
 				</td>
