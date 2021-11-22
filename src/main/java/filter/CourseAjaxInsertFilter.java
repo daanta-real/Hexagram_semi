@@ -32,6 +32,7 @@ public class CourseAjaxInsertFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse resp = (HttpServletResponse)response;
 		try {
+			req.setCharacterEncoding("UTF-8");
 			//최초 시퀀스를 생성한 사람의 아이디를 넘겨받는다.
 			String usersFilterId = req.getParameter("usersFilterId");
 			//현재 접속한 사람을 확인한다.

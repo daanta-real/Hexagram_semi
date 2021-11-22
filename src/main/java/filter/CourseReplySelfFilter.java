@@ -29,7 +29,7 @@ public class CourseReplySelfFilter implements Filter{
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse resp = (HttpServletResponse)response;
 		try {
-			
+			req.setCharacterEncoding("UTF-8");
 			int courseReplyIdx  = Integer.parseInt(req.getParameter("courseReplyIdx"));//해당 댓글 번호 받기
 			CourseReplyDao courseReplyDao = new CourseReplyDao();
 			CourseReplyDto courseReplyDto = courseReplyDao.get(courseReplyIdx);

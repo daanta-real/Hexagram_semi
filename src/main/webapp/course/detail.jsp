@@ -144,7 +144,7 @@ String root = request.getContextPath();
  	UsersDto usersDto = usersDao.get(courseDto.getUsersIdx());
 
 	//로그인 하였는지?  	
-	 String usersId = (String)Sessioner.getUsersId(request.getSession());
+	 String usersId = Sessioner.getUsersId(request.getSession());
  	 boolean isLogin = usersId != null;
  	//(본인글인지 확인을 위해)
 	 boolean isMyboard = usersId == usersDto.getUsersId();
@@ -200,7 +200,7 @@ String root = request.getContextPath();
             <!-- 수정/삭제는 jsp에서도 막아주는 것 이외로 주소로 입력하는 것을 방지하게 위해서 필터로도 막아줘야 한다. -->
 			<!-- 댓글 작성자 또는 관리자가 아니라면 버튼이 보여지지 않게 처리 -->
 			
-            <a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>" class="float-right float-btn">수정</a>
+            <a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>&usersFilterId=<%=usersId%>" class="float-right float-btn">수정</a>
             <a href="delete.nogari?courseSequnce=<%=courseIdx%>&usersFilterId=<%=usersId%>" class="float-right float-btn">삭제</a>
 <!--             필터의 파라미터 이름을 동일하게 해주기위해서 파라미터 명을 courseSequnce로 하였다. -->
             <a href="insert_sequence.nogari?usersFilterId=<%=usersId%>" class="float-right float-btn">새글작성</a>

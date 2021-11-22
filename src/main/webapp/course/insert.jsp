@@ -1,47 +1,45 @@
-<%@page import="servlet.item.ItemCityList"%>
-<%@page import="beans.Pagination"%>
-<%@page import="beans.CourseItemDto"%>
-<%@page import="beans.CourseDao"%>
-<%@page import="beans.CourseItemDao"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Set"%>
 <%@page import="java.util.HashSet"%>
+
 <%@page import="beans.ItemDto"%>
-<%@page import="java.util.List"%>
 <%@page import="beans.ItemDao"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@page import="beans.CourseItemDto"%>
+<%@page import="beans.CourseDao"%>
+<%@page import="beans.CourseItemDao"%>
+
+<%@page import="beans.Pagination"%>
+
+<%@page import="servlet.item.ItemCityList"%>
 
 <%
 //절대 경로를 위해 index.jsp 페이지 변수 저장
-    String root = request.getContextPath();
-	//최초 시퀀스를 만든사람만이 등록이 가능하도록 설정.(파라미터를 시퀀스 생성에서 부터 전달받고 필터에서 사용함)
-    String usersFilterId = request.getParameter("usersFilterId");
-	// 최초 코스 번호는서블릿에서 생성한 번호를 받아준다. 
-	// 이후에는 코스_아이템 항목 추가,삭제 서블릿에서 전달한 해당 시퀀스 값을 다시 받는다.(코스 생성전까지 유지해줘야하는 항목)
-	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));
+String root = request.getContextPath();
+//최초 시퀀스를 만든사람만이 등록이 가능하도록 설정.(파라미터를 시퀀스 생성에서 부터 전달받고 필터에서 사용함)
+String usersFilterId = request.getParameter("usersFilterId");
+// 최초 코스 번호는서블릿에서 생성한 번호를 받아준다. 
+// 이후에는 코스_아이템 항목 추가,삭제 서블릿에서 전달한 해당 시퀀스 값을 다시 받는다.(코스 생성전까지 유지해줘야하는 항목)
+int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));
+String subCity = request.getParameter("subCity");
+ItemDao itemDao = new ItemDao();
+Pagination<ItemDao, ItemDto> pn = new Pagination<>(request, itemDao);
 
-	String subCity = request.getParameter("subCity");
-	
-	
-	ItemDao itemDao = new ItemDao();
-	Pagination<ItemDao, ItemDto> pn = new Pagination<>(request, itemDao);
-	
-	boolean isSearchMode = pn.isSearchMode();
-	pn.calculate();
-	List<ItemDto> list = new ArrayList<>();
-	if(subCity != null){
-		list = itemDao.subCityList(subCity,"item_idx", pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
-		pn.setCount(itemDao.count(pn.getColumn(), pn.getKeyword(),subCity));
-		pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
-	}else{
-		list = pn.getResultList();	
-	}
-	
-	
-	 CourseItemDao courseItemDao = new CourseItemDao();
-	 List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
-	// 생성한 시퀀스 번호에서 ajax로 처리한 데이터 결과값을 확인해주는 열할.(수정시에 span숫자 확인 용도 및 선택 목록 초기 화면 표시//이전으로 돌아왔을때 처리하게 해주어야하니까, 필요)
+boolean isSearchMode = pn.isSearchMode();
+pn.calculate();
+List<ItemDto> list = new ArrayList<>();
+if(subCity != null){
+	list = itemDao.subCityList(subCity,"item_idx", pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
+	pn.setCount(itemDao.count(pn.getColumn(), pn.getKeyword(),subCity));
+	pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
+}else{
+	list = pn.getResultList();	
+}
+CourseItemDao courseItemDao = new CourseItemDao();
+List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
+// 생성한 시퀀스 번호에서 ajax로 처리한 데이터 결과값을 확인해주는 열할.(수정시에 span숫자 확인 용도 및 선택 목록 초기 화면 표시//이전으로 돌아왔을때 처리하게 해주어야하니까, 필요)
 %>
     
 <!DOCTYPE HTML>
@@ -97,6 +95,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
     
+    console.log("서버 주소: ", "<%=root%>/course/ajax_item_add.nogari");
        $(function(){
       		//코스_아이템DB 등록(비동기 통신)
            $(".item-add-btn").on("click", function(){
@@ -105,7 +104,7 @@
                var item_Idx = $(this).attr("data-item_idx");
                var item_address = $(this).attr("data-item_address");//추가한 아이템 목록에 추가하였을때 보여줄 주소
                var item_name = $(this).attr("data-item_name");//추가한 아이템 목록에 추가하였을때 보여줄 명칭
-
+               var users_filterId = $(this).attr("data-users_filterId");
                $.ajax({
                    url:"<%=root%>/course/ajax_item_add.nogari",
                    type:"get",
@@ -113,8 +112,8 @@
                    	//전송 시 첨부할 파라미터 정보 => 아이템 번호와 코스 번호를 받아서
                    	// 아이템_코스 DB에 정보를 추가 / 삭제 / 명칭 및 지역 중복을 확인해주기 위함
                    	itemIdx : item_Idx,
-                   	courseIdx : course_Idx
-                   	usersFilterId : <%=usersFilterId%>
+                   	courseIdx : course_Idx,
+                   	usersFilterId : users_filterId
                    },
                    success:function(resp){
                         if(resp == "NNNNS"){//코스아이템DB 체크시 동일 지역이 아닐 경우
@@ -134,7 +133,7 @@
                         	var td2 = $("<td>").append(item_name);//추가한 아이템 목록에 추가하였을때 보여줄 명칭
                         	var td3 = $("<td>");
                         	//테이블에 추가할 사항들
-                        	var button3 = $("<button>").addClass("item-remove-btn").attr("data-course_idx",course_Idx).attr("data-item_idx",item_Idx);
+                        	var button3 = $("<button>").addClass("item-remove-btn").attr("data-course_idx",course_Idx).attr("data-item_idx",item_Idx).attr("data-users_filterId",users_filterId);
                         	//추가한 아이템 목록에서 삭제 될때도 courseidx , itemIdx가 필요하므로 설정해둔다.
                         	button3.on("click",function(){
 						//버튼을 눌렀을때 삭제ajax 처리를 해주어야 하므로 (load시 설정이 되지 않았으므로 추가할때마다 설정해주어야함)
@@ -144,14 +143,14 @@
                               		 
                                	var new_course_Idx = $(this).attr("data-course_idx");
                                    var new_item_Idx = $(this).attr("data-item_idx");
-                                   
+                                   var users_filterId = $(this).attr("data-users_filterId");
                                    $.ajax({
                                        url:"<%=root%>/course/ajax_delete_item.nogari",
                                        type:"get",
                                        data:{//삭제 ajax에서 코스-아이템db를 삭제하기 위한 정보
                                        	itemIdx : new_item_Idx,
-                                       	courseIdx : new_course_Idx
-                                    	usersFilterId : <%=usersFilterId%>
+                                       	courseIdx : new_course_Idx,
+                                    	usersFilterId : users_filterId
                                        },
                                        //완료 처리
                                        success:function(resp){
@@ -170,7 +169,6 @@
                                        }        	
                                	});
                               	 
-
            		
                         	});
                         	//success:function(resp)부분에서 esle의 성공 부분이다. 즉
@@ -193,23 +191,20 @@
                });
                
            });
-
            $(".item-remove-btn").click(function(){
            	$(this).parents("tr").hide();
-
            	var course_Idx = $(this).attr("data-course_idx");
                var item_Idx = $(this).attr("data-item_idx");
-
+               var users_filterId = $(this).attr("data-users_filterId");
                $.ajax({
                    url:"<%=root%>/course/ajax_delete_item.nogari",
                    type:"get",
                    data:{
                    	itemIdx : item_Idx,
-                   	courseIdx : course_Idx
-                	usersFilterId : <%=usersFilterId%>
+                   	courseIdx : course_Idx,
+                	usersFilterId : users_filterId
                    },
                    success:function(resp){
-
                    	if(resp == "NNNNN"){
                    		   $(".result").text("최소 3개의 관광지가 필요합니다.").css("color","red");
                               $(".result-number").text($(".result-number").text());
@@ -236,11 +231,9 @@
            var searchSelector = <%=pn.getSearchSelector()%>;
            $(".page").hide();//모든 페이지를 숨기고
            $(".page").eq(searchSelector).show();//0,1로 설정된 곳을 나오게 한다.
-
            
            $(".btn-name").click(function(e){//키워드 검색을 누르면
                e.preventDefault();
-
                searchSelector++;
                $(".page").hide();
                $(".page").eq(searchSelector).show();
@@ -248,12 +241,10 @@
            
            $(".btn-city").click(function(e){//지역 검색을 누르면
                e.preventDefault();
-
                searchSelector--;
                $(".page").hide();
                $(".page").eq(searchSelector).show();
            });//지역 검색을 할 수 있게 0번으로 처리한다.
-
            
            $(".next-submit").on("submit",function(e){//다음으로 이동 버튼을 누를시, 선택한 아이템 수가 3개가 안된다면 submit을 막아준다(3차 방지)
      				if(parseInt($(".result-number").text())<3){//검색 span의 숫자가(문자열->숫자로 변환해서 확인해야함 기본적으로 문자이므로) 3보다 작을때,
@@ -264,7 +255,6 @@
            
        });
 		
-
 </script>
 	
 <SECTION>
@@ -490,7 +480,7 @@
 				<td>
 					<button class="item-add-btn" data-course_idx="<%=courseSequnce%>"  
 						data-item_idx="<%=itemDto.getItemIdx()%>" data-item_address="<%=itemDto.getAdressCity()%>" 
-						data-item_name="<%=itemDto.getItemName()%>">추가하기
+						data-item_name="<%=itemDto.getItemName()%>" data-users_filterId="<%=usersFilterId%>">추가하기
 					</button>
 				</td>
 			</tr>
@@ -557,7 +547,7 @@
 			<tr>
 				<td><%=itemDto.getAdressCity()%></td>
 				<td><%=itemDto.getItemName()%></td>
-				<td><button class="item-remove-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>">삭제하기</button></td>
+				<td><button class="item-remove-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-users_filterId="<%=usersFilterId%>">삭제하기</button></td>
 			</tr>
 			<%} %>
 

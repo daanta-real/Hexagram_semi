@@ -29,7 +29,7 @@ public class ItemReplySelfFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpServletResponse resp = (HttpServletResponse)response;
 		try {
-			
+			req.setCharacterEncoding("UTF-8");
 			int itemReplyIdx  = Integer.parseInt(req.getParameter("itemReplyIdx"));//해당 댓글 번호 받기
 			ItemReplyDao itemReplyDao = new ItemReplyDao();
 			ItemReplyDto ItemReplyDto = itemReplyDao.get(itemReplyIdx);

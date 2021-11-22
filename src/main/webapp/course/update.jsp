@@ -104,6 +104,7 @@
                 var item_Idx = $(this).attr("data-item_idx");
                 var item_address = $(this).attr("data-item_address");
                 var item_name = $(this).attr("data-item_name");
+                var users_filterId = $(this).attr("data-users_filterId");
 				//추가하기 버튼 태그안에는 위와같은 정보가 들어 있다.
 				//courseIdx, itemIdx 는 내 item담기에 보여지는 것과 삭제하기 click이벤트를 태그 생성과 동시에 부여하기 위해서 필요한 정보
 				//위의 두 정보와 더불어서 address 및 name은 내가 담은 태그에 보여질 정보들을 손쉽게 추가하기 위함.
@@ -114,8 +115,8 @@
                     type:"get",
                     data:{
                     	itemIdx : item_Idx,
-                    	courseIdx : course_Idx
-                    	usersFilterId : <%=usersFilterId%>
+                    	courseIdx : course_Idx,
+                    	usersFilterId : users_filterId
                     },
                     success:function(resp){
                          if(resp == "NNNNS"){//span(class=".result")에서 결과를 나타내주며,아이템추가 ajax에서 첫번째 추가한 도시명과 대상(현재 추가하기) 관광지명의 도시명을 비교하여 다르다면,
@@ -136,7 +137,7 @@
                          	//관광지 명칭과 관광지 명은 내가 선택한 목록에서 사용자가 직접 확인할 수 있도록 정보를 표시
                          	//테이블에 추가할 사항들
                          	var td3 = $("<td>");
-                         	var button3 = $("<button>").addClass("item-remove-btn").attr("data-course_idx",course_Idx).attr("data-item_idx",item_Idx);
+                         	var button3 = $("<button>").addClass("item-remove-btn").attr("data-course_idx",course_Idx).attr("data-item_idx",item_Idx).attr("data-users_filterId",users_filterId);
                          	//추가한 아이템 목록에서 삭제 될때도 courseidx , itemIdx가 필요하므로 설정해둔다.
                          	//또한 addClass("item-remove-btn")를 하게 된 이유는 이전화면으로 돌아오기 및 다시 courseItemList를 확인할때(특히 insert.jsp 부분)에서 이 이벤트가 등록이 되어있어야
                          	//156번째 줄의 이벤트가 로드시 자동 등록될 수 있다.
@@ -148,14 +149,14 @@
                                 	//실제 데이터가 삭제되었음을 해당 아이템을 숨김표시로 처리하였음(실시간으로 화면에서 표현해주기 위함)
                                 	var new_course_Idx = $(this).attr("data-course_idx");
                                     var new_item_Idx = $(this).attr("data-item_idx");
-                                    
+                                    var users_filterId = $(this).attr("data-users_filterId");
                                     $.ajax({//삭제 ajax에서 코스-아이템db를 삭제하기 위한 정보
                                         url:"<%=root%>/course/ajax_delete_update_item.nogari",
                                         type:"get",
                                         data:{
                                         	itemIdx : new_item_Idx,
-                                        	courseIdx : new_course_Idx
-                                        	usersFilterId : <%=usersFilterId%>
+                                        	courseIdx : new_course_Idx,
+                                        	usersFilterId : users_filterId
                                         },
                                         success:function(resp){
                                         	if(resp == "NNNNN"){//아이템 삭제 ajax에서 코스-아이템 db(즉 courseItemList.size())에 관광지가 적어도 3개는 들어가야하기 때문임.
@@ -210,14 +211,14 @@
  
             	var course_Idx = $(this).attr("data-course_idx");
                 var item_Idx = $(this).attr("data-item_idx");
-
+                var users_filterId = $(this).attr("data-users_filterId");
                 $.ajax({
                     url:"<%=root%>/course/ajax_delete_update_item.nogari",
                     type:"get",
                     data:{
                     	itemIdx : item_Idx,
-                    	courseIdx : course_Idx
-                    	usersFilterId : <%=usersFilterId%>
+                    	courseIdx : course_Idx,
+                    	usersFilterId : users_filterId
                     },
                     success:function(resp){
 
@@ -477,7 +478,7 @@
 			<input type="submit" value="검색" class="form-btn form-inline">
 			</div>
 </form>
-<button class="btn btn-city"><< 지역으로 검색</button>
+<button class="btn btn-city form-btn"><< 지역으로 검색</button>
 <!-- 지역 검색으로 누르게 되면 구분자의 숫자를 0으로바꾸게 설정함 -->
 </div>
 
@@ -502,7 +503,7 @@
 							<tr>
 								<td><%=itemDto.getItemAddress()%></td>
 								<td><%=itemDto.getItemName()%></td>
-								<td><button class="item-add-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-item_address="<%=itemDto.getAdressCity()%>" data-item_name="<%=itemDto.getItemName()%>">추가하기</button></td>
+								<td><button class="item-add-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-item_address="<%=itemDto.getAdressCity()%>" data-item_name="<%=itemDto.getItemName()%>" data-users_filterId="<%=usersFilterId%>">추가하기</button></td>
 <!-- 								button class="item-add-btn"에대한 이벤트 및 이 태그에 있는 정보는 53~60번째 줄에 정의됨 -->
 							</tr>
 						<%} %>
@@ -568,7 +569,7 @@
 							<tr>
 								<td><%=itemDto.getAdressCity()%></td>
 								<td><%=itemDto.getItemName()%></td>
-								<td><button class="item-remove-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>">삭제하기</button></td>
+								<td><button class="item-remove-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-users_filterId="<%=usersFilterId%>">삭제하기</button></td>
 <!-- 							151~153번째 줄 참조 -->
 							</tr>
 						<%} %>
