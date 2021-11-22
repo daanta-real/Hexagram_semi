@@ -240,8 +240,8 @@ String subCity = request.getParameter("subCity");
 ItemDao itemDao = new ItemDao();
 Pagination<ItemDao, ItemDto> pn = new Pagination<>(request, itemDao);
 boolean isSearchMode = pn.isSearchMode();
-pn.calculate();
-
+pn.calculate();	// => cousre/list.jsp에서는 이 부분을 처리하지 않고(필요한 경우가 없기 때문) 처리하였고, order항목이 추가되면 pn.calculate()의 list항목이 필요 없어지지만
+// 그 외의 count 및 기타 변수를 활용하기 위하여 일단은 남겨 두었다, 매번 list의 계산으로 DB의 손실은 있으나,(페이지 네이션이기 떄문에) 큰 속도의 차이는 없어보이므로 그대로 진행하였다.
 //관광지 목록 도출(페이지네이션)
 List<ItemDto> list = new ArrayList<>();
 if(isSearchMode){
