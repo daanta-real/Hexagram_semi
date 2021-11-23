@@ -137,7 +137,7 @@
                          	//관광지 명칭과 관광지 명은 내가 선택한 목록에서 사용자가 직접 확인할 수 있도록 정보를 표시
                          	//테이블에 추가할 사항들
                          	var td3 = $("<td>");
-                         	var button3 = $("<button>").addClass("item-remove-btn").attr("data-course_idx",course_Idx).attr("data-item_idx",item_Idx).attr("data-users_filterId",users_filterId);
+                         	var button3 = $("<button>").addClass("item-remove-btn").addClass("form-btn").attr("data-course_idx",course_Idx).attr("data-item_idx",item_Idx).attr("data-users_filterId",users_filterId);
                          	//추가한 아이템 목록에서 삭제 될때도 courseidx , itemIdx가 필요하므로 설정해둔다.
                          	//또한 addClass("item-remove-btn")를 하게 된 이유는 이전화면으로 돌아오기 및 다시 courseItemList를 확인할때(특히 insert.jsp 부분)에서 이 이벤트가 등록이 되어있어야
                          	//156번째 줄의 이벤트가 로드시 자동 등록될 수 있다.
@@ -501,9 +501,9 @@
 						</tr>					
 						<%for(ItemDto itemDto : list) {%>
 							<tr>
-								<td><%=itemDto.getItemAddress()%></td>
-								<td><%=itemDto.getItemName()%></td>
-								<td><button class="item-add-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-item_address="<%=itemDto.getAdressCity()%>" data-item_name="<%=itemDto.getItemName()%>" data-users_filterId="<%=usersFilterId%>">추가하기</button></td>
+								<td width="40%"><%=itemDto.getItemAddress()%></td>
+								<td width="40%"><%=itemDto.getItemName()%></td>
+								<td width="20%"><button class="item-add-btn form-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-item_address="<%=itemDto.getAdressCity()%>" data-item_name="<%=itemDto.getItemName()%>" data-users_filterId="<%=usersFilterId%>">추가하기</button></td>
 <!-- 								button class="item-add-btn"에대한 이벤트 및 이 태그에 있는 정보는 53~60번째 줄에 정의됨 -->
 							</tr>
 						<%} %>
@@ -567,9 +567,9 @@
 						<%for(CourseItemDto courseItemDto : courseItemList) {%>
 						<%ItemDto itemDto = itemDao.get(courseItemDto.getItemIdx()); %>
 							<tr>
-								<td><%=itemDto.getAdressCity()%></td>
-								<td><%=itemDto.getItemName()%></td>
-								<td><button class="item-remove-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-users_filterId="<%=usersFilterId%>">삭제하기</button></td>
+								<td width="40%"><%=itemDto.getAdressCity()%></td>
+								<td width="40%"><%=itemDto.getItemName()%></td>
+								<td width="20%"><button class="item-remove-btn form-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-users_filterId="<%=usersFilterId%>">삭제하기</button></td>
 <!-- 							151~153번째 줄 참조 -->
 							</tr>
 						<%} %>
@@ -589,7 +589,7 @@
 
 <div>
 	<form action="update_last.jsp" class="next-submit">
-		<button>다음 단계로(제목/내용/선택한 목록 조회 및 수정)</button>
+		<button class="form-btn">다음 단계로</button>
 		<div>
 		<span></span>
 		</div>
