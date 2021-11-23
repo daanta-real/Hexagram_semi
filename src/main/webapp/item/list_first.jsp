@@ -18,7 +18,7 @@
 <TITLE>노가리투어 - 관광지 목록</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 <%String root = request.getContextPath();%>
-<!-- <LINK REL="STYLESHEET" HREF="<%=root%>/resource/css/item/list.css" /> <!-- CSS 첨부 --> --> 
+
 
 
 </HEAD>
