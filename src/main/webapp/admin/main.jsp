@@ -46,6 +46,7 @@
 		text-align:center;
 		cursor:pointer;
 		font-size:1.5rem;
+		padding: 1rem 1rem;
  	}
  	
  	.gridContainer > .gridBox > .gridEl:hover{
