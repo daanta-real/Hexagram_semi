@@ -277,7 +277,7 @@
 	
 	<br>
 	<div class="row center">
-	    <span class="item-title">인기 관광지</span>
+	    <span class="item-title">인기 축제</span>
 	</div>
 
 	<!-- 목록 출력 을 위한 변수선언 -->
