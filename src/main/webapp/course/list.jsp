@@ -425,7 +425,7 @@
 		    ItemDao itemDao = new ItemDao();
 		   	ItemDto itemDto = itemDao.get(itemIdx);
 		   	UsersDao usersDao = new UsersDao();
-		   	UsersDto usersDto = usersDao.get(itemDto.getUsersIdx());
+		   	UsersDto usersDto = usersDao.get(courseDto.getUsersIdx());
 			ItemFileDao itemFileDao = new ItemFileDao();
 			ItemFileDto itemFileDto = itemFileDao.find2(itemIdx);
 			%>
