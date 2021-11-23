@@ -1,47 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% String root = request.getContextPath(); %>
 <!DOCTYPE HTML>
 <HTML>
+
 <HEAD>
-<TITLE>노가리투어 - [여기다가 타이틀이름 쓰세요. []는 제거하시구요~]</TITLE>
+<TITLE>노가리투어 - 이벤트 작성</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/detail.css">
+<style type='text/css'>
+textarea { outline:none; resize:vertical; }
+.inputs {
+	margin:0 !important;
+	border-style: solid !important;
+    border-width: 0.2rem !important;
+    border-color: var(--color11) !important;
+}
+</style>
 </HEAD>
+
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
-<% String root = request.getContextPath(); %>
 <!-- 페이지 내용 시작 -->
 
-<%--입력--%>
 
-<%--처리--%>
 
-<%--출력--%>
-<jsp:include page="/resource/template/header_head.jsp"/></jsp:include>
+<div class="sub_title">이벤트 작성</div>
 
-<h2>게시글 작성</h2>
+<form action="write.nogari" method="post">
 
-<form action="write.nagari" method="post">
+<table class='boardContainer'>
 
-<table border="0">
-	<tbody>
-		<tr>
+	<tbody class='boardBox'>
+		<tr class='row'>
 			<th>제목</th>
-			<td><input type="text" name="eventName" required></td>
+			<td><input class='inputs' type="text" name="eventName" required></td>
 		</tr>
-		<tr>
+		<tr class='row'>
 			<th>내용</th>
-			<td>
-				<textarea name="eventDetail" required rows="10" cols="60"></textarea>
-			</td>
+			<td><textarea class='inputs' name="eventDetail" required rows="10" cols="60"></textarea></td>
 		</tr>
 	</tbody>
-	<tfoot>
-		<tr>
-			<td colspan="2" align="right">
-				<input type="submit" value="등록">
-			</td>
-		</tr>
+	
+	<tfoot class='boardBox'>
+		<tr><td colspan="2" align="right">
+			<button type=submit>등록</button>
+			<button type=reset>취소</button>
+		</td></tr>
 	</tfoot>
+	
 </table>
 </form>
 
