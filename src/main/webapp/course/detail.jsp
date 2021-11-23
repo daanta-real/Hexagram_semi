@@ -95,7 +95,6 @@
             display:block;
             position:relative;
             top:30px;
-            
         }
 		
 		/* 아이템 썸네일 부분 */
@@ -115,8 +114,7 @@
         
         #slide ul li{
             display:inline-block; 
-            padding: 10px 20px; 
-            background: #ccc; 
+            padding: 10px 20px;      
             margin-right:10px;
             margin-bottom: 20px;
         }
@@ -206,10 +204,9 @@ String root = request.getContextPath();
             <a href="insert_sequence.nogari?usersFilterId=<%=usersId%>" class="float-right float-btn">새글작성</a>
 <!--             usersFilterId는 ajax(코스-아이템 등록/수정/삭제) 및 코스 등록, 수정시에 필터처리를 위해서 필요한 인자이다. -->
 <!--             최초 시퀀스번호를 생성하고 접속한 사람만이 실질적인 접근 권한이 생긴다. -->
-
-            <%
-            }
-            %>
+            <%}else{ %>
+            <a href="<%=root %>/course/list.jsp" class="float-right float-btn">목록으로</a>
+            <%} %>
         </div>
         
         <div class="top-menu right">
@@ -257,7 +254,7 @@ String root = request.getContextPath();
                 <a href="<%=root%>/item/detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>" class="item-link">
                     <%if(itemFileDto == null){ %>
 					<!-- 첨부파일 출력 -->
-					<img src="http://via.placeholder.com/100x100">
+					<img src="http://placeimg.com/150/150/nature">
 					<%
 					}else{
 					%>
