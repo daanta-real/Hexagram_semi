@@ -187,6 +187,48 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 
 		return list;
 	}
+	
+	// 인기 여행지,관광지를 불러오기 위한 메소드 추가
+	public List<ItemDto> searchByOrder(String order,String column, String keyword, int begin, int end) throws Exception {
+
+		Connection con = JdbcUtils.connect3();
+		String sql = "select * from ("
+						+ "select rownum rn,TMP.*from("
+							+ "select * from item where instr(#1, ?) > 0 order by #2 desc"
+						+ ")TMP"
+					+ ")where rn between ? and ?";
+		sql = sql.replace("#1", column);
+		sql = sql.replace("#2", order);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
+		ps.setInt(2, begin);
+		ps.setInt(3, end);
+		ResultSet rs = ps.executeQuery();
+		List<ItemDto> list = new ArrayList<>();
+		while (rs.next()) {
+			ItemDto itemDto = new ItemDto();
+			itemDto.setItemIdx(rs.getInt("item_idx"));
+			itemDto.setUsersIdx(rs.getInt("users_idx"));
+			itemDto.setItemType(rs.getString("item_type"));
+			itemDto.setItemName(rs.getString("item_name"));
+			itemDto.setItemDetail(rs.getString("item_detail"));
+			itemDto.setItemPeriod(rs.getString("item_period"));
+			itemDto.setItemTime(rs.getString("item_time"));
+			itemDto.setItemHomepage(rs.getString("item_homepage"));
+			itemDto.setItemParking(rs.getString("item_parking"));
+			itemDto.setItemAddress(rs.getString("item_address"));
+			itemDto.setItemDate(rs.getDate("item_date"));
+			itemDto.setItemCountView(rs.getInt("item_count_view"));
+			itemDto.setItemCountReply(rs.getInt("item_count_reply"));
+
+
+			list.add(itemDto);
+		}
+
+		con.close();
+
+		return list;
+	}
 
 	@Override
 	// 페이징 마지막 블록을 구하기 위하여 게시글 개수를 구하는 기능(목록)
