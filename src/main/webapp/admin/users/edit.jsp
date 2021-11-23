@@ -17,13 +17,11 @@ var sysurl = "<%=root%>";
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/detail.css">
 <style type='text/css'>
-:root {
-	--board-grid-columns: 6rem 11rem; 
-}
+:root {	--board-grid-columns: 6rem 11rem; }
 
-.boardContainer > .boardBox > .row > td > label > input,
-.boardContainer > .boardBox > .row > td > label > span {
-	position:relative; max-width:4rem; cursor:pointer;
+td > label { 
+	display: flex; align-items:center; margin: auto 0.4rem auto 0.2rem;
+	word-break: keep-all; min-width:2rem; 
 }
 .boardContainer > .boardBox > .row > td > select {
 	width:100%; border:0; padding:0.3rem 0.3rem; outline:none;
