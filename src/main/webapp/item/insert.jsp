@@ -54,89 +54,134 @@
         });
         
 </script>
+<style>
 
+* {
+    box-sizing: border-box;
+}
+.row {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.container-500 {
+    width: 500px;
+}
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+.container-left {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.container-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.container-right {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+textarea {
+    resize: none;
+}
+
+textarea.vertical {
+    resize: vertical;
+    min-height: 200px;
+}
+.form-input,
+.form-btn {
+    width: 100%;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.form-input {
+    border: 1px solid rgb(43, 48, 90);
+}
+
+.form-btn {
+    color: rgb(77, 25, 25);
+    background-color: rgb(232, 193, 125);
+    font-weight: bold;
+}
+
+.form-block {
+    display: block;
+}
+
+.form-inline {
+    width: auto;
+}
+</style>
 <!-- 페이지 내용 시작 -->
  
  <% 
  String root = request.getContextPath();
  %>
 
- <h3>게시글 작성</h3>
- 
- <form action="insert.nogari" method="post" enctype="multipart/form-data">
-	<table border="1" width="500">
-	
-		<tbody>
-			<tr>
-				<td>카테고리</td>
-				<td>
-					<select name="itemType" required="required">
+ <h3>게시글 작성(관리자 페이지)</h3>
+	<form action="insert.nogari" method="post" enctype="multipart/form-data">
+        <div class="container-500 container-center">
+            <div class="row">
+                <label>관광지명</label>
+                <input type="text" name="itemName" placeholder="관광지명 입력" required class="form-input">
+            </div>
+            <div class="row">
+                <label>카테고리</label>
+               		<select name="itemType" required="required" class="form-input">
 						<option selected="selected">관광지</option>
 						<option>축제</option>
-					</select>
-				</td>
-			</tr>
-			<tr>
-				<td>관광지명</td>
-				<td>
-					<input type="text" name="itemName" placeholder="관광지명 입력" required>
-				</td>
-			</tr>
-			<tr>
-				<td>주소</td>
-				<td>
-					<textarea name="itemAddress" rows="1" cols="50" placeholder="주소를 입력하세요" class="address-select"></textarea>
-					<button type="button" class="find-address-btn">우편번호 찾기</button>
-				</td>
-			</tr>
-			<tr>
-				<td>내용</td>
-				<td>
-					<textarea name="itemDetail" rows="20" cols="50" placeholder="내용을 입력하세요"></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td>기간</td>
-				<td>
-					<input type="text" name="itemPeriod" placeholder="기간 입력">
-				</td>
-			</tr>
-			<tr>
-				<td>운영시간</td>
-				<td>
-					<input type="text" name="itemTime" placeholder="운영시간 입력">
-				</td>
-			</tr>
-			<tr>
-				<td>홈페이지</td>
-				<td>
-					<input type="url" name="itemHomepage" placeholder="홈페이지 입력">
-				</td>
-			</tr>
-			<tr>
-				<td>주차</td>
-				<td>
-					<input type="text" name="itemParking" placeholder="주차가능여부 입력">
-				</td>
-			</tr>
-			<tr>
-				<td>이미지</td>
-				<td>
-					<input type="file" name="attach" accept="image/*">
-				</td>				
-			</tr>
-		</tbody>
-		
-		<tfoot>
-			<tr align="center">
-				<td colspan="3">
-					<input type="submit" value="작성 완료">
-				</td>
-			</tr>
-		</tfoot>
-		
-	</table>
-</form>
+				</select>
+            </div>
+            <div class="row">
+                <label>주소</label>
+					<button type="button" class="find-address-btn form-btn form-inline">주소 찾기</button>
+                	<textarea name="itemAddress" rows="1" cols="50" placeholder="주소를 입력하세요" class="address-select form-input"></textarea>
+            </div>
+            <div class="row">
+                <label>내용</label>
+                <textarea name="itemDetail" rows="20" cols="50" placeholder="내용을 입력하세요" class="form-input"></textarea>
+            </div>
+            <div class="row">
+                <label>기간</label>
+                <input type="text" name="itemPeriod" placeholder="기간 입력" class="form-input">
+            </div>
+            <div class="row">
+                <label>운영시간</label>
+                <input type="text" name="itemTime" placeholder="운영시간 입력" class="form-input">
+            </div>
+            <div class="row">
+                <label>홈페이지</label>
+                <input type="url" name="itemHomepage" placeholder="홈페이지 입력" class="form-input">
+            </div>
+            <div class="row">
+                <label>주차</label>
+                <input type="text" name="itemParking" placeholder="주차가능여부 입력" class="form-input">
+            </div>
+            <div class="row">
+                <label>이미지</label>
+                <input type="file" name="attach" accept="image/*">
+            </div>
+            <div class="row center">
+                <input type="submit" value="작성 완료" class="form-btn">
+            </div>
+        </div>
+    </form>
+ 
+ 
+					
 <!-- 페이지 내용 끝. -->
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>
