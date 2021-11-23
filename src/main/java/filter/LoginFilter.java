@@ -16,7 +16,18 @@ import util.users.Sessioner;
 
 // 로그인한 사용자만 접근 필요한 경우 사용하는 필터
 @WebFilter( urlPatterns = {
+	"/admin/*",
+	"/users/register_success.jsp",
+	"/users/unregister.jsp",
+	"/users/unregister_success.jsp",
 	"/users/unregister.nogari",
+	"/users/detail.jsp",
+	"/users/modify.jsp",
+	"/users/modify.nogari",
+	"/users/modify_success.jsp",
+	"/users/modifyPassword.jsp",
+	"/users/modifyPassword.nogari",
+	"/users/logout.nogari",
 	"/items/insert.jsp"
 } )
 public class LoginFilter implements Filter {
