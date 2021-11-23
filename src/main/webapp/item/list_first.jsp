@@ -210,8 +210,8 @@
 			<div class='gridBox'>
 				<div class='gridTitle'>카테고리</div>
 				<div class='gridContents'>
-					<a href="#" class='gridEl'>축제</a>        
-					<a href="#" class='gridEl'>관광지</a>
+					<a href="<%=root%>/item/list.jsp?column=item_type&keyword=축제" class='gridEl'>축제</a>        
+					<a href="<%=root%>/item/list.jsp?column=item_type&keyword=관광지" class='gridEl'>관광지</a>
 				</div>
 				<div class='gridTitle'>지역</div>
 				<div class='gridContents'>
