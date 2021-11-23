@@ -41,10 +41,14 @@ System.out.println("[이벤트 목록] 페이지네이션 정보: " + pn);
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/board.css">
 <style type='text/css'>
 :root { --board-grid-columns: 3rem 10rem 14rem 7rem 4rem; }
+.sub_title { margin:1rem auto; }
 .boardContainer > .boardBox.body .row {
 	background-color:var(--color7);
     color:#000b;
     margin:0.1rem;
+}
+td {
+    line-height: 1.4rem;
 }
 td.articleSubject {
 	justify-content:flex-start;
@@ -55,7 +59,27 @@ td small {
 tfoot td {
 	padding:0.5rem;
 }
-form > * { height:100%; }
+.bottomForm { display:flex; align-items:center; justify-content:center; }
+.bottomForm > *, .bottomForm option {
+	min-height:1.3rem; max-height:1.3rem; line-height:1.3rem; font-size:1.3rem;
+	padding:0.1rem 0.3rem; margin:0 0.2rem;
+	border-style:solid;
+	border-width:0.1rem;
+	border-color:var(--color11);
+	font-family:mainFont !important;
+}
+.bottomLongBtn {
+    min-width: 2rem;
+    margin: 0.1rem;
+    padding: 0rem 0.3rem;
+    border: 0;
+    border-radius: 0.4rem;
+    color: #000a;
+    background: var(--color5);
+    text-align: center;
+    font-size: inherit;
+    cursor: pointer;
+}
 </style>
 </HEAD>
 
@@ -92,7 +116,11 @@ form > * { height:100%; }
 	</tbody>
 	
 	<!-- 페이지 네비게이터 검색 / 목록 -->
-	<tfoot class='boardBox page' style='flex-direction:column; height:100%;'>
+	<tfoot class='boardBox page' style='justify-content:space-between; height:100%; margin: 0.5rem auto;'>
+		
+		<tr><td colspan=5 class="flexCenter bottomLongBtn" onclick="location.href='list.jsp'">
+			<a class='bottomLongBtn' href="list.jsp">전체목록</a>
+		</td></tr>
 	
 		<tr><td colspan=5 class="flexCenter">
 		
@@ -107,14 +135,14 @@ form > * { height:100%; }
 			for(int i = pn.getStartBlock() ; i <= pn.getRealLastBlock() ; i++) { %>
 				<div class='el flexCenter'><a href="list.jsp?page=<%=i %><%=optionStr%>"><%=i %></a></div>
 			<% } %>
-		
+
 			<% // 오른쪽 ▶ %>
 			<% String nextHrefOptionStr = pn.hasNextBlock() ? (" href=\"list.jsp?page=" + pn.getNextBlock() + optionStr + "") : ""; %>	
 			<div class='el flexCenter'><a<%=nextHrefOptionStr%>>▶</a></div>
 			
 		</td></tr>
 		
-		<tr><td colspan=5 class="flexCenter">
+		<tr><td colspan=5 class="flexCenter bottomLongBtn">
 			<a class='bottomLongBtn' href="write.jsp">글쓰기</a>
 		</td></tr>
 	
@@ -132,11 +160,11 @@ form > * { height:100%; }
 
 
 <!-- 검색창 -->
-<form action="list.jsp" method="get">
+<form action="list.jsp" method="get" class='bottomForm'>
 	<select name="column">
 		<option value="event_name"  <%= column !=null&&column.equals("event_name"  ) ? " selected" : "" %>>제목</option>
 		<option value="event_detail"<%= column !=null&&column.equals("event_detail") ? " selected" : "" %>>내용</option>
-		<option value="users_idx"   <%= column !=null&&column.equals("users_nick"  ) ? " selected" : "" %>>작성자</option>
+		<option value="users_nick"  <%= column !=null&&column.equals("users_nick"  ) ? " selected" : "" %>>작성자</option>
 	</select>
 	<input type="search" name="keyword" placeholder="검색어 입력" required<%= keyword != null ? (" value=\"" + keyword + "\"") : "" %>>
 	<input type="submit" value="검색">
