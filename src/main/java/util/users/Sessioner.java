@@ -116,6 +116,9 @@ public class Sessioner {
 	public Integer getUsersIdx()   { return getUsersIdx(session)  ; }
 	public String  getUsersId()    { return getUsersId(session)   ; }
 	public String  getUsersGrade() { return getUsersGrade(session); }
+	public static Integer getUsersIdx  (HttpServletRequest request) { return getUsersIdx(request.getSession()); }
+	public static String  getUsersId   (HttpServletRequest request) { return getUsersId(request.getSession()); }
+	public static String  getUsersGrade(HttpServletRequest request) { return getUsersGrade(request.getSession()); }
 	public static Integer getUsersIdx  (HttpSession session) { return Integer.parseInt(String.valueOf(session.getAttribute("usersIdx"))); }
 	public static String  getUsersId   (HttpSession session) { return (String)session.getAttribute("usersId")   ; }
 	public static String  getUsersGrade(HttpSession session) { return (String)session.getAttribute("usersGrade"); }
