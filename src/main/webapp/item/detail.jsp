@@ -325,7 +325,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 		}else{
 		%>
 				<!-- 첨부 파일이 없다면 대체 이미지를 설정 -->
-				<img src="http://via.placeholder.com/500" class="image">
+				<img src="http://placeimg.com/500/500/nature" class="image">
 		<%
 		}
 		%>
