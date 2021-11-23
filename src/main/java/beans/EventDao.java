@@ -367,7 +367,13 @@ public class EventDao implements PaginationInterface<EventDto> {
 		String sql
 			= "SELECT * FROM ("
 				+ " SELECT ROWNUM RN, TMP.*"
-				+ " FROM (SELECT * FROM board_event" + sql_add + " ORDER BY users_idx ASC)TMP"
+				+ " FROM ("
+					+ "SELECT b.event_idx, b.users_idx, b.event_name, b.event_detail, b.event_date, b.event_count_view, b.event_count_reply,"
+						  + " u.users_id, u.users_nick, u.users_grade" // users 테이블에서 일부 정보를 갖고 온다.
+					+ " FROM board_event b" + sql_add + ""
+					+ " LEFT OUTER JOIN users u ON b.users_idx = u.users_idx"
+					+ " ORDER BY u.users_idx ASC"
+				+ ")TMP"
 			+ ") WHERE RN BETWEEN ? AND ?";
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
@@ -389,6 +395,8 @@ public class EventDao implements PaginationInterface<EventDto> {
 			dto.setEventDate(rs.getDate("event_date"));
 			dto.setEventCountView(rs.getInt("event_count_view"));
 			dto.setEventCountReply(rs.getInt("event_count_reply"));
+			// 아래는 유저 관련 설정이다.
+			dto.initDto(rs.getString("users_id"), rs.getString("users_nick"), rs.getString("users_grade"));
 			list.add(dto);
 		}
 

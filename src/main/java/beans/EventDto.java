@@ -11,6 +11,16 @@ public class EventDto {
 	private Integer eventCountView;
 	private Integer eventCountReply;
 
+	// 1. Declarations - Optional
+	// Handling List: id, nick, grade
+	private UsersDto usersDto = null;
+	public void initDto(String usersId, String usersNick, String usersGrade) throws Exception {
+		usersDto = new UsersDto();
+		usersDto.setUsersId(usersId);
+		usersDto.setUsersNick(usersNick);
+		usersDto.setUsersGrade(usersGrade);
+	}
+
 	// 2. Constructors
 	public EventDto() { super(); }
 
@@ -22,6 +32,11 @@ public class EventDto {
 	public java.util.Date getEventDate() { return eventDate; }
 	public Integer getEventCountView() { return eventCountView; }
 	public Integer getEventCountReply() { return eventCountReply; }
+
+	// 3. Getters - Optional
+	public String getUsersId()    { return usersDto.getUsersId()   ; }
+	public String getUsersNick()  { return usersDto.getUsersNick() ; }
+	public String getUsersGrade() { return usersDto.getUsersGrade(); }
 
 	// 4. Setters
 	public void setEventIdx(Integer eventIdx) { this.eventIdx = eventIdx; }
