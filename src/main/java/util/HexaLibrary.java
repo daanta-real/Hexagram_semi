@@ -38,4 +38,11 @@ public class HexaLibrary {
 	// 그 외의 경우에는(=내용 있는 문자열일 경우) 무조건 원본 String을 회신한다.
 	public static String nvl(String val) { return val == null ? "-" : val; }
 
+	// 주어진 문자열 배열(haystack) 안에 "정확히" 특정 값(needle)이 있는지 검사
+	// 있으면 true, 없으면 false를 리턴함.
+	public static boolean in_array(String needle, String[] haystack) {
+		for(String s: haystack) if(s.equals(needle)) return true;
+		return false;
+	}
+
 }
