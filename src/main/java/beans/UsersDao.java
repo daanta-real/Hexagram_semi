@@ -52,7 +52,7 @@ public class UsersDao implements PaginationInterface<UsersDto> {
 	// 2. READ: 딱 한 명의 회원의 정보를 조회
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 	// 1) idx 기준
-	public UsersDto get(int usersIdx) throws Exception{
+	public UsersDto get(int usersIdx) throws Exception {
 
 		// SQL 준비
 		Connection conn = JdbcUtils.connect3();
@@ -146,7 +146,7 @@ public class UsersDao implements PaginationInterface<UsersDto> {
 
 	// 3) Email 기준
 	public UsersDto getByEmail(String usersEmail) throws Exception {
-		
+
 		// SQL 준비
 		String sql = "SELECT * FROM users WHERE users_email = ?";
 		Connection conn = JdbcUtils.connect3();

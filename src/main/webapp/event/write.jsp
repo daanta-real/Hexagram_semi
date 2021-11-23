@@ -53,7 +53,7 @@ window.addEventListener("load", () => {
 
 <div class="sub_title">이벤트 작성</div>
 
-<form action="write.nogari" method="post">
+<form action="insert.nogari" method="post" enctype="multipart/form-data">
 <table class='boardContainer'>
 
 	<tbody class='boardBox'>

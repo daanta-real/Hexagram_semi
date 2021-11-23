@@ -16,6 +16,7 @@ import beans.ItemDto;
 import beans.ItemFileDao;
 import beans.ItemFileDto;
 import system.Settings;
+import util.users.Sessioner;
 
 @SuppressWarnings("serial")
 @WebServlet (urlPatterns = "/item/insert.nogari")
@@ -23,10 +24,10 @@ public class ItemInsertServlet extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		//관광지 등록 Servlet(첨부파일 추가)
 		try {
-			
+
 			//Multipart 요청 처리 준비(파일 업로드)
 			String savePath = Settings.PATH_FILES;
 			//전송 속도 (byte로 지정) 5MB
@@ -36,7 +37,7 @@ public class ItemInsertServlet extends HttpServlet{
 			MultipartRequest mRequest = new MultipartRequest(req, savePath, maxSize, encoding, policy);
 
 			//현재 회원이 작성
-			int usersIdx = (int)req.getSession().getAttribute("usersIdx");
+			int usersIdx = Sessioner.getUsersIdx(req);
 
 			ItemDao itemDao = new ItemDao();
 			ItemDto itemDto = new ItemDto();

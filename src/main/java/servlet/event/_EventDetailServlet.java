@@ -17,7 +17,7 @@ import system.Settings;
 
 @SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/event/detail.nogari")
-public class EventDetailServlet extends HttpServlet{
+public class _EventDetailServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {

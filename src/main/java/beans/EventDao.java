@@ -69,7 +69,13 @@ public class EventDao implements PaginationInterface<EventDto> {
 		// SQL 준비
 		Connection conn = JdbcUtils.connect3();
 
-		String sql = "SELECT * FROM board_event WHERE users_idx = ?";
+		String sql
+		= "SELECT * FROM ("
+			+ "SELECT b.event_idx, b.users_idx, b.event_name, b.event_detail, b.event_date, b.event_count_view, b.event_count_reply,"
+				  + " u.users_id, u.users_nick, u.users_grade" // users 테이블에서 일부 정보를 갖고 온다.
+			+ " FROM board_event b"
+			+ " LEFT JOIN users u ON b.users_idx = u.users_idx"
+		+ ") WHERE event_idx = ?";
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, eventIdx);
 
@@ -85,6 +91,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 			dto.setEventDate(rs.getDate("event_date"));
 			dto.setEventCountView(rs.getInt("event_count_view"));
 			dto.setEventCountReply(rs.getInt("event_count_reply"));
+			dto.initDto(rs.getString("users_id"), rs.getString("users_nick"), rs.getString("users_grade"));
 		}
 
 		// 마무리
