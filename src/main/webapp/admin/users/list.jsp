@@ -26,14 +26,29 @@ String root = request.getContextPath();
 <style type="text/css">
 :root { --board-grid-columns: 5rem 5rem 5rem 7rem 5rem 7rem 7rem; }
 .btn{
-	color: var(--board-color-title-font);
-	background-color: var(--board-color-title-bg);
-	font-size: 1rem;
-	border: none;
-	margin: 0.1rem;
+	min-width: 2rem;
+	margin:0.2rem;
+	padding:0.1rem 0;
+	border:0;
+	border-radius: 0.4rem;
+	z-index: 0; position:relative;
+    color:#000b;
+    background-color: var(--color11);
+    text-align: center;
+	font-size:inherit;
+	cursor:pointer;
 }
-.search-btn{	font-size: 1.5rem;	}
-.selectBox{	  padding: 0.4rem;	margin: 0.3rem;	}
+.search-btn{	font-size: 1.3rem;	}
+.selectBox{	  
+	padding: 0.4rem;	margin: 0.3rem;	
+	cursor:pointer;
+	color:#000b;
+}
+.boardContainer > .boardBox.body .row {
+	background-color:var(--color7);
+    color:#000b;
+    margin:0.1rem;
+}
 </style>
 
 <!-- 회원탈퇴 시 확인창을 불러오는 script -->
