@@ -18,24 +18,20 @@ var sysurl = "<%=root%>";
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/detail.css">
 <style type='text/css'>
 :root {
-	--board-grid-columns: 6rem 12rem; 
+	--board-grid-columns: 6rem 11rem; 
 }
-.boardContainer > .boardBox > .row > td > label {
-	width:20%; 
+
+.boardContainer > .boardBox > .row > td > label > input,
+.boardContainer > .boardBox > .row > td > label > span {
+	position:relative; max-width:4rem; cursor:pointer;
 }
 .boardContainer > .boardBox > .row > td > select {
-	width:100%; border:0; padding:0.4rem 0.3rem; outline:none;
-	position:relative;
+	width:100%; border:0; padding:0.3rem 0.3rem; outline:none;
+	position:relative; max-width:10rem;
 }
-.boardContainer > tfoot.boardBox > tr > td > input {
-	min-width: 10rem;
-	margin:0.3rem;
-	padding:0.1rem 1rem;
-	border:0;
-	border-radius: 0.4rem;
-	color:#000a;
-	background:var(--color5);
-    text-align: center;
+.boardContainer > .boardBox > .row > td input {
+	position:relative; width:100%; max-width:10rem;
+	margin:0.1rem; border:0; padding:0 0.3rem; outline:none;
 }
 </style>
 </HEAD>
@@ -74,11 +70,11 @@ int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));
 			</tr>
 			<tr class='row'>
 				<th>아이디</th>
-				<td><%=usersDto.getUsersId() %></td>
+				<td class='flexCol'><%=usersDto.getUsersId() %></td>
 			</tr>
 			<tr class='row'>
 				<th>비번</th>
-				<td>
+				<td class='flexCol'>
 					<input type="password" name="usersPw" required value="<%=usersDto.getUsersPw()%>">
 					<div class="usersPw message"></div>
 					<label><input type="checkbox" class="togglePw"><span>보기</span></label>
@@ -87,21 +83,21 @@ int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));
 			
 			<tr class='row'>
 				<th>닉네임</th>
-				<td>
+				<td class='flexCol'>
 					<input type="text" name="usersNick"  required value="<%=usersDto.getUsersNick() %>">
 					<div class="message"></div>
 				</td>
 			</tr>
 			<tr class='row'>
 				<th>이메일</th>
-				<td>
+				<td class='flexCol'>
 					<input type="email" name="usersEmail"  required value="<%=usersDto.getUsersEmail() %>">	
 					<div class="message"></div>
 				</td>
 			</tr>
 			<tr class='row'>
 				<th>전화번호</th>
-				<td>
+				<td class='flexCol'>
 					<input type="tel" name="usersPhone" value="<%=usersDto.getUsersPhone() %>">
 					<div class="message"></div>
 				</td>
