@@ -138,7 +138,7 @@ String root = request.getContextPath();
 	//코스 내용 및 제목등을 출력하기 위한 단일조회
 	CourseDao courseDao = new CourseDao();
 	CourseDto courseDto = courseDao.get(courseIdx);
-	
+
 	//글 작성자 아이디 및 닉네임 출력을 위한 단일 조회
 	UsersDao usersDao = new UsersDao();
  	UsersDto usersDto = usersDao.get(courseDto.getUsersIdx());
