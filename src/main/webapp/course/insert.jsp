@@ -133,7 +133,7 @@ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
                         	var td2 = $("<td>").append(item_name);//추가한 아이템 목록에 추가하였을때 보여줄 명칭
                         	var td3 = $("<td>");
                         	//테이블에 추가할 사항들
-                        	var button3 = $("<button>").addClass("item-remove-btn").attr("data-course_idx",course_Idx).attr("data-item_idx",item_Idx).attr("data-users_filterId",users_filterId);
+                        	var button3 = $("<button>").addClass("item-remove-btn").addClass("form-btn").attr("data-course_idx",course_Idx).attr("data-item_idx",item_Idx).attr("data-users_filterId",users_filterId);
                         	//추가한 아이템 목록에서 삭제 될때도 courseidx , itemIdx가 필요하므로 설정해둔다.
                         	button3.on("click",function(){
 						//버튼을 눌렀을때 삭제ajax 처리를 해주어야 하므로 (load시 설정이 되지 않았으므로 추가할때마다 설정해주어야함)
@@ -462,7 +462,7 @@ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
 	<br>
 	<span>결과가 없습니다.</span>
 </div>
-<br><br>
+
 <!-- 검색 결과가 있다면 목록을 보여준다 -->
 <%}else{ %>
 	<%if(!list.isEmpty()){ %>
@@ -475,10 +475,10 @@ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
 			</tr>
 			<%for(ItemDto itemDto : list) {%>
 			<tr>
-				<td><%=itemDto.getItemAddress()%></td>
-				<td><%=itemDto.getItemName()%></td>
-				<td>
-					<button class="item-add-btn btn btn-name form-btn" data-course_idx="<%=courseSequnce%>"  
+				<td width="40%"><%=itemDto.getItemAddress()%></td>
+				<td width="40%"><%=itemDto.getItemName()%></td>
+				<td width="20%">
+					<button class="item-add-btn form-btn" data-course_idx="<%=courseSequnce%>"  
 						data-item_idx="<%=itemDto.getItemIdx()%>" data-item_address="<%=itemDto.getAdressCity()%>" 
 						data-item_name="<%=itemDto.getItemName()%>" data-users_filterId="<%=usersFilterId%>">추가하기
 					</button>
@@ -489,7 +489,7 @@ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
 	</table>
 	<%} %>
 <%} %>
-<br>
+
 <!-- 페이지네이션 -->
 <div>		
 	<%if(pn.hasPreviousBlock()){ %>
@@ -528,15 +528,11 @@ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
 		<a>&gt;</a>
 	<%} %>
 </div>
-<br><br>
 
 <!-- 선택한 관광지 목록 -->
-
 <div>
 	<span>- 내가 선택한 관광지 목록 -</span>
 </div>
-
-
 <div>
 	<table border="1" width="800px">
 		<tbody class="item-add">
@@ -549,9 +545,9 @@ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
 			<%for(CourseItemDto courseItemDto : courseItemList) {%>
 			<%ItemDto itemDto = itemDao.get(courseItemDto.getItemIdx()); %>
 			<tr>
-				<td><%=itemDto.getAdressCity()%></td>
-				<td><%=itemDto.getItemName()%></td>
-				<td><button class="item-remove-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-users_filterId="<%=usersFilterId%>">삭제하기</button></td>
+				<td width="40%"><%=itemDto.getAdressCity()%></td>
+				<td width="40%"><%=itemDto.getItemName()%></td>
+				<td width="20%"><button class="item-remove-btn form-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-users_filterId="<%=usersFilterId%>">삭제하기</button></td>
 			</tr>
 			<%} %>
 
@@ -568,11 +564,14 @@ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
 <div>
 	현재 선택한 관광지 : <span class="result-number"><%=courseItemList.size()%></span> 개
 </div> 
-<br>
+
 <!-- 이전 화면으로 돌아올 것을 대비하여 생성해야함 -->
 <div>
-	<form action="insert_last.jsp" class="next-submit ">
-		<button class="form-btn">다음 단계로(제목/내용/선택한 목록 조회 및 수정)</button>
+	<form action="insert_last.jsp" class="next-submit">
+		<button class="form-btn">다음 단계로</button>
+		<div>
+		<span></span>
+		</div>
 		<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
 		<input type="hidden" name="usersFilterId" value="<%=usersFilterId%>">
 	</form>
