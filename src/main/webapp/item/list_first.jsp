@@ -265,7 +265,7 @@
 						<img src="http://placeimg.com/170/170/nature">
 					<%}else{ %>
 						<!-- 첨부파일이 있다면 첨부파일을 출력  -->
-						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>">
+						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="170" height="170">
 					<%} %>
 						<span class="gridElTitle"><%=itemDto.getItemName() %></span>
 					</a>
@@ -301,7 +301,7 @@
 						<img src="http://placeimg.com/170/170/nature">
 					<%}else{ %>
 						<!-- 첨부파일이 있다면 첨부파일을 출력  -->
-						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>">
+						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="170" height="170">
 					<%} %>
 						<span class="gridElTitle"><%=itemDto.getItemName() %></span>
 					</a>
