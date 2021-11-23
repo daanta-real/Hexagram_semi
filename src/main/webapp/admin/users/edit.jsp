@@ -17,19 +17,11 @@ var sysurl = "<%=root%>";
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/detail.css">
 <style type='text/css'>
-:root {	--board-grid-columns: 6rem 11rem; }
-
-td > label { 
-	display: flex; align-items:center; margin: auto 0.4rem auto 0.2rem;
-	word-break: keep-all; min-width:2rem; 
-}
+.multiline { display:flex; flex-direction:column; align-items: flex-start; }
+td > label { display: flex; align-items:center; margin: auto 0.4rem auto 0.2rem; word-break: keep-all; }
 .boardContainer > .boardBox > .row > td > select {
 	width:100%; border:0; padding:0.3rem 0.3rem; outline:none;
-	position:relative; max-width:10rem;
-}
-.boardContainer > .boardBox > .row > td input {
-	position:relative; width:100%; max-width:10rem;
-	margin:0.1rem; border:0; padding:0 0.3rem; outline:none;
+	position:relative; max-width:10rem; margin:0.1rem 0.1rem;
 }
 </style>
 </HEAD>
@@ -68,34 +60,34 @@ int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));
 			</tr>
 			<tr class='row'>
 				<th>아이디</th>
-				<td class='flexCol'><%=usersDto.getUsersId() %></td>
+				<td class='flexCenter flexCol'><%=usersDto.getUsersId() %></td>
 			</tr>
 			<tr class='row'>
 				<th>비번</th>
-				<td class='flexCol'>
+				<td class='flexCenter flexCol'>
 					<input type="password" name="usersPw" required value="<%=usersDto.getUsersPw()%>">
 					<div class="usersPw message"></div>
-					<label><input type="checkbox" class="togglePw"><span>보기</span></label>
+					<label style="word-break: keep-all; display: flex; flex-direction: row; min-width: 2rem; align-items: center; margin: auto 0.4rem auto 0.2rem;"><input type="checkbox" class="togglePw"><span>보기</span></label>
 				</td>
 			</tr>
 			
 			<tr class='row'>
 				<th>닉네임</th>
-				<td class='flexCol'>
+				<td class='multiline'>
 					<input type="text" name="usersNick"  required value="<%=usersDto.getUsersNick() %>">
 					<div class="message"></div>
 				</td>
 			</tr>
 			<tr class='row'>
 				<th>이메일</th>
-				<td class='flexCol'>
+				<td class='multiline'>
 					<input type="email" name="usersEmail"  required value="<%=usersDto.getUsersEmail() %>">	
 					<div class="message"></div>
 				</td>
 			</tr>
 			<tr class='row'>
 				<th>전화번호</th>
-				<td class='flexCol'>
+				<td class='multiline'>
 					<input type="tel" name="usersPhone" value="<%=usersDto.getUsersPhone() %>">
 					<div class="message"></div>
 				</td>
@@ -132,7 +124,7 @@ int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));
 		<tfoot class='boardBox'>			
 			<tr>
 				<td colspan="2">
-					<button type="submit">변경하기</button>
+					<input type="submit" class="bottomLongBtn" value="변경하기" >
 					<a href="<%=root%>/admin/users/list.jsp">회원목록으로 돌아가기</a>
 				</td>
 			</tr>

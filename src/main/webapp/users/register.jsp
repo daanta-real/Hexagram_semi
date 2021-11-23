@@ -72,7 +72,7 @@ var sysurl = "<%=root%>";
 	<tr class='row'><th>폰번호</th><td class='multiline'><input type='tel' name='usersPhone' placeholder='입력하세요'><div class="message"></div></td></tr>
 </tbody>
 <tfoot class='boardBox'><tr><td colspan=2 align=center class='flexCenter flexCol' style='width:100%;'>
-	<button class='bottomLongBtn' type='submit'>가입하기</button>
+	<input type='submit' class='bottomLongBtn' value='가입하기'>
 	<span class='bottomLongBtn reset'>초기화</span>
 </td></tr></tfoot>
 </table>
