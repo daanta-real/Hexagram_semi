@@ -65,9 +65,11 @@ int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));
 			<tr class='row'>
 				<th>비번</th>
 				<td class='flexCenter flexCol'>
-					<input type="password" name="usersPw" required value="<%=usersDto.getUsersPw()%>">
-					<div class="usersPw message"></div>
-					<label style="word-break: keep-all; display: flex; flex-direction: row; min-width: 2rem; align-items: center; margin: auto 0.4rem auto 0.2rem;"><input type="checkbox" class="togglePw"><span>보기</span></label>
+					<div  style="display: flex; flex-direction: row; word-break: keep-all;">
+						<input type="password" name="usersPw" required value="<%=usersDto.getUsersPw()%>">
+						<div class="usersPw message"></div>
+						<label style="word-break: keep-all; display: flex; flex-direction: row; min-width: 2rem; align-items: center; margin: auto 0.4rem auto 0.2rem;"><input type="checkbox" class="togglePw"><span>보기</span></label>
+					</div>
 				</td>
 			</tr>
 			
