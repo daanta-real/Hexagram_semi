@@ -140,8 +140,8 @@
  	/* 그리드 컨테이너 내부에서 사용되는 변수들의 선언 */ 
 	.second {
 		--grid-box-margin:3rem;
-		--grid-el-width: 8rem;
-		--grid-el-height: 8rem;
+		--grid-el-width: 9.5rem;
+		--grid-el-height: 9.5rem;
 		--grid-el-margin: 1rem;
 	}
 	
@@ -240,7 +240,7 @@
 	<!-- 관광지 첫페이지는 인기여행지로 목록에서 12개만 뽑아낸다(조회수 기준)-->
 	<br>
 	<div class="row center">
-	    <span class="item-title">인기 여행지</span>
+	    <span class="item-title">인기 관광지</span>
 	</div>
 
 	<!-- 목록 출력 을 위한 변수선언 -->
@@ -248,7 +248,7 @@
 		ItemDao itemDao = new ItemDao();
 		ItemFileDao itemFileDao = new ItemFileDao();
 		
-		List<ItemDto> list= itemDao.list(1, 12);// 9개 가져오기		
+		List<ItemDto> list= itemDao.searchByOrder("item_count_view","item_type","관광지",1, 9);// 인기 관광지 9개 가져오기		
 	%>
 	 
 	 <div class="second">
@@ -274,6 +274,43 @@
 			</div>
 		</div>
 	</div>
+	
+	<br>
+	<div class="row center">
+	    <span class="item-title">인기 관광지</span>
+	</div>
+
+	<!-- 목록 출력 을 위한 변수선언 -->
+	<%
+		ItemFileDao itemFileDao1 = new ItemFileDao();
+		
+		List<ItemDto> list1= itemDao.searchByOrder("item_count_view","item_type","축제",1, 9);// 인기 축제 9개 가져오기		
+	%>
+	 
+	 <div class="second">
+	 	<div class='gridContainer'>
+			<div class='gridBox'>
+				<!-- 목록 출력 시작 -->
+				<%for(ItemDto itemDto : list1){ %>
+				<div class='gridEl'>
+					<a href="readup.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
+	            	<!-- 목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
+					<%ItemFileDto itemFileDto = itemFileDao1.find2(itemDto.getItemIdx());%>
+					<%if(itemFileDto == null){ %>
+						<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
+						<img src="http://placeimg.com/170/170/nature">
+					<%}else{ %>
+						<!-- 첨부파일이 있다면 첨부파일을 출력  -->
+						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>">
+					<%} %>
+						<span class="gridElTitle"><%=itemDto.getItemName() %></span>
+					</a>
+				</div>	
+	            <%} %>
+			</div>
+		</div>
+	</div>
+	
 </div>      
 
 
