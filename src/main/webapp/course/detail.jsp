@@ -94,7 +94,8 @@
         .item-title{
             display:block;
             position:relative;
-            top:30px;
+           
+            
         }
 		
 		/* 아이템 썸네일 부분 */
@@ -114,7 +115,8 @@
         
         #slide ul li{
             display:inline-block; 
-            padding: 10px 20px;      
+            padding: 10px 20px; 
+        
             margin-right:10px;
             margin-bottom: 20px;
         }

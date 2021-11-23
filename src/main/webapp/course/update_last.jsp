@@ -62,12 +62,12 @@ textarea {
 }
 		        
 .form-input {
-	border: 1px solid rebeccapurple;
+	border: 1px solid gray;
 }
 		
 .form-btn {
 	color: white;
-	background-color: rebeccapurple;
+	background-color: gray;
 	font-weight: bold;
 	height: 90%;
 }

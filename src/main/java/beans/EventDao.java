@@ -282,14 +282,17 @@ public class EventDao implements PaginationInterface<EventDto> {
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 	// 6. SEARCH: 글 검색
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
-	// 단일컬럼 검색(항목, 검색어)기능
+	// 목록 - 단일컬럼 검색(항목, 검색어)기능
 	public List<EventDto> search(String column, String keyword) throws Exception {
 
 		// column값 검사: null이 아니면서, 본 DB의 컬럼이 아닌 문자열이 들어오면 오류 생성해서 팅가냄
 		columnVerify(column);
 
 		// SQL준비
-		String sql = "SELECT * FROM board_event WHERE INSTR(#1, ?) > 0 ORDER BY users_idx ASC";
+		String sql = "SELECT * FROM board_event b"
+			+ " LEFT JOIN users u ON b.users_idx = u.users_idx"
+			+ " WHERE INSTR(#1, ?) > 0"
+			+ " ORDER BY b.users_idx ASC";
 		sql = sql.replace("#1", column);
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
@@ -335,8 +338,10 @@ public class EventDao implements PaginationInterface<EventDto> {
 
 		// SQL 준비
 		String sql = "SELECT COUNT(*) FROM board_event";
-		if(column != null) sql += " WHERE INSTR(#1, ?) > 0 ";
-		sql = sql.replace("#1", column);
+		if(column != null) {
+			sql += " WHERE INSTR(#1, ?) > 0 ";
+			sql = sql.replace("#1", column);
+		}
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		if(column != null) ps.setString(1, keyword);
@@ -367,7 +372,14 @@ public class EventDao implements PaginationInterface<EventDto> {
 		String sql
 			= "SELECT * FROM ("
 				+ " SELECT ROWNUM RN, TMP.*"
-				+ " FROM (SELECT * FROM board_event" + sql_add + " ORDER BY users_idx ASC)TMP"
+				+ " FROM ("
+					+ "SELECT b.event_idx, b.users_idx, b.event_name, b.event_detail, b.event_date, b.event_count_view, b.event_count_reply,"
+						  + " u.users_id, u.users_nick, u.users_grade" // users 테이블에서 일부 정보를 갖고 온다.
+					+ " FROM board_event b"
+					+ " LEFT JOIN users u ON b.users_idx = u.users_idx"
+					+ sql_add
+					+ " ORDER BY u.users_idx ASC"
+				+ ")TMP"
 			+ ") WHERE RN BETWEEN ? AND ?";
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
@@ -389,6 +401,8 @@ public class EventDao implements PaginationInterface<EventDto> {
 			dto.setEventDate(rs.getDate("event_date"));
 			dto.setEventCountView(rs.getInt("event_count_view"));
 			dto.setEventCountReply(rs.getInt("event_count_reply"));
+			// 아래는 유저 관련 설정이다.
+			dto.initDto(rs.getString("users_id"), rs.getString("users_nick"), rs.getString("users_grade"));
 			list.add(dto);
 		}
 

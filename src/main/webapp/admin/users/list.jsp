@@ -67,7 +67,7 @@ boolean isSearchMode = pn.isSearchMode();
 System.out.println(
 	  "[회원 목록] 컬럼(" + request.getParameter("column") + ")"
 	+ ", 키워드(" + request.getParameter("keyword") + ")"
-	+ ", 검색모드 여부(" + isSearchMode + ")"
+	+ " → 검색모드 여부(" + isSearchMode + ")"
 );
 pn.setPageSize(20);
 pn.calculate();

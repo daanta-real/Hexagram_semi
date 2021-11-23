@@ -1,144 +1,148 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <%@ page import="java.util.List" %>
+<%@ page import="util.HexaLibrary" %>
+
 <%@ page import="beans.EventDao" %>
 <%@ page import="beans.EventDto" %>
+
+<%@page import="beans.Pagination"%>
+
+<%
+
+// 1. 기본 값 준비
+String root = request.getContextPath(); // 서버 루트폴더
+String column=request.getParameter("column"); // 검색 시 컬럼명 
+String keyword=request.getParameter("keyword"); // 검색 시 키워드
+
+// 2. 페이지네이션 준비
+EventDao eventDao = new EventDao();
+Pagination<EventDao, EventDto> pn = new Pagination<>(request, eventDao);
+boolean isSearchMode = pn.isSearchMode();;
+System.out.println(
+	  "[이벤트 목록] 컬럼(" + request.getParameter("column") + ")"
+	+ ", 키워드(" + request.getParameter("keyword") + ")"
+	+ " → 검색모드 여부(" + isSearchMode + ")"
+);
+//pn.setPageSize(5);
+pn.calculate();
+System.out.println("[이벤트 목록] 페이지네이션 정보: " + pn);
+%>
+
 <!DOCTYPE HTML>
 <HTML>
+
 <HEAD>
 <TITLE>노가리투어 - 이벤트 게시판</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
+<!-- 페이지 제목 css -->
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
+<!-- 게시판 공통 css -->
+<link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/board.css">
+<style type='text/css'>
+:root { --board-grid-columns: 3rem 10rem 14rem 7rem 4rem; }
+.boardContainer > .boardBox.body .row {
+	background-color:var(--color7);
+    color:#000b;
+    margin:0.1rem;
+}
+td.articleSubject {
+	justify-content:flex-start;
+}
+td small {
+	color:var(--color6);
+}
+tfoot td {
+	padding:0.5rem;
+}
+form > * { height:100%; }
+</style>
 </HEAD>
+
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
-<% String root = request.getContextPath(); %>
 <!-- 페이지 내용 시작 -->
-<%--입력:검색분류(column), 검색어(keyword)--%>
-<%
-	String column=request.getParameter("column");
-	String keyword=request.getPatameter("keyword");
-%>
 
 
-<%--처리--%>
-<%
-	boolean search
-		=  column  != null && !column.isEmpty()
-		&& keyword != null && !keyword.isEmpty();
 
-	EventDao eventDao = new EventDao();
-	List<EventDto> list;
-	if(search){
-		list=eventDao.search(column,keyword);
-	}
-	else{
-		list=eventDao.list();
-	}
-%>
+<div class="sub_title">이벤트 게시판</div>
 
-<%--출력--%>
 
-<h2>이벤트 게시판</h2>
 
-<table border="1" width="90%">
-	<thead>
-		<tr>
-			<th>번호</th>
-			<th>width="45%>제목</th>
-			<th>작성자</th>
-			<th>작성일</th>
-			<th>조회수</th>
-		</tr>
-	</thead>
-	<tbody align="center">
-		<%for(EventDto eventDto:list){ %>
-		<tr>
-			<td><%=eventDto.getEventIdx()%></td>
-			<td align="left">
-				<a href="detail.jsp?eventIdx=<%=eventDto.getEventIdx()%>"><%=eventDto.getEventName()%></a>
-			</td>
-			<td><%=eventDto.getUsersIdx()%></td>
-			<td><%=eventDto.getEventDate()%></td>
-			<td><%=eventDto.getEventCountView()%></td>
+<table class="boardContainer">
+	<thead class="boardBox title"><tr class='row'>
+		<th class="flex flexCenter">번호</th>
+		<th class="flex flexCenter">작성자</th>
+		<th class="flex flexCenter">제목</th>
+		<th class="flex flexCenter">작성일</th>
+		<th class="flex flexCenter">조회수</th>
+	</tr></thead>
+	<tbody class='boardBox body'>
+		<% List<EventDto> list = pn.getResultList();
+		for(EventDto eventDto:list) { %>
+		<tr class='row' onclick="location.href='detail.jsp?eventIdx=<%=eventDto.getEventIdx()%>'">
+			<td class="flex flexCenter"><%=eventDto.getEventIdx()%></td>
+			<td class="flex flexCenter"><%=eventDto.getUsersNick()%>&nbsp;<small>(<%=eventDto.getUsersId()%>)</small></td>
+			<td class="flex flexCenter articleSubject"><%=eventDto.getEventName()%>&nbsp;<small>[<%=eventDto.getEventCountReply()%>]</small></td>
+			<td class="flex flexCenter"><%=eventDto.getEventDate()%></td>
+			<td class="flex flexCenter"><%=eventDto.getEventCountView()%></td>
 		</tr>
 		<%}%>
 	</tbody>
+	
+	<!-- 페이지 네비게이터 검색 / 목록 -->
+	<tfoot class='boardBox page' style='flex-direction:column; height:100%;'>
+	
+		<tr><td colspan=5 class="flexCenter">
+		
+			<% // 기본 옵션스트링 문구 결정 %>
+			<% String optionStr = isSearchMode ? ("&column=" + pn.getColumn() + "&keyword=" + pn.getKeyword()) : ""; %>
+		
+			<% // 왼쪽 ◀ %>
+			<% String prevHrefOptionStr = pn.hasPreviousBlock() ? (" href=\"list.jsp?page=" + pn.getPreviousBlock() + optionStr + "") : ""; %>
+			<div class='el flexCenter'><a<%=prevHrefOptionStr%>>◀</a></div>
+			
+			<% // 중간 숫자들
+			for(int i = pn.getStartBlock() ; i <= pn.getRealLastBlock() ; i++) { %>
+				<div class='el flexCenter'><a href="list.jsp?page=<%=i %><%=optionStr%>"><%=i %></a></div>
+			<% } %>
+		
+			<% // 오른쪽 ▶ %>
+			<% String nextHrefOptionStr = pn.hasNextBlock() ? (" href=\"list.jsp?page=" + pn.getNextBlock() + optionStr + "") : ""; %>	
+			<div class='el flexCenter'><a<%=nextHrefOptionStr%>>▶</a></div>
+			
+		</td></tr>
+		
+		<tr><td colspan=5 class="flexCenter">
+			<a class='bottomLongBtn' href="write.jsp">글쓰기</a>
+		</td></tr>
+	
+	</tfoot>
+	
 </table>
 
-<br>
-<a href="write.jsp">글쓰기</a><%--위치수정필요--%>
 
-<!-- 페이지 네비게이터 -->
-<br><br>
-<%if(pagination.isPreviousAvailable()){ %>
-	<%if(pagination.isSearch()){ %>
-		<!-- 검색용 링크 -->
-		<a href="list.jsp?column=<%=pagination.getColumn()%>&keyword=<%=pagination.getKeyword()%>&p=<%=pagination.getPreviousBlock()%>">&lt;</a>
-	<%} else { %>
-		<!-- 목록용 링크 -->
-		<a href="list.jsp?p=<%=pagination.getPreviousBlock()%>">&lt;</a>
-	<%} %>
-<%} else { %>
-	 <a>&lt;</a>
-<%} %> 
 
-<%for(int i = pagination.getStartBlock(); i <= pagination.getRealLastBlock(); i++){ %>
-	<%if(pagination.isSearch()){ %>
-	<!-- 검색용 링크 -->
-	<a href="list.jsp?column=<%=pagination.getColumn()%>&keyword=<%=pagination.getKeyword()%>&p=<%=i%>"><%=i%></a>
-	<%}else{ %>
-	<!-- 목록용 링크 -->
-	<a href="list.jsp?p=<%=i%>"><%=i%></a>
-	<%} %>
-<%} %>
+<!-- 글쓰기 버튼 -->
 
-<%if(pagination.isNextAvailable()){ %>
-	<%if(pagination.isSearch()){ %>
-		<!-- 검색용 링크 -->
-		<a href="list.jsp?column=<%=pagination.getColumn()%>&keyword=<%=pagination.getKeyword()%>&p=<%=pagination.getNextBlock()%>">&gt;</a>
-	<%} else { %>
-		<!-- 목록용 링크 -->
-		<a href="list.jsp?p=<%=pagination.getNextBlock()%>">&gt;</a>
-	<%} %> 
-<%} else {%>
-	<a>&gt;</a>
-<%} %>
 
-<br><br>
+
+
+
 
 <!-- 검색창 -->
 <form action="list.jsp" method="get">
-
 	<select name="column">
-		<%if(column !=null&&column.equals("event_name")){%>
-		<option value="event_name" selected>제목</option>
-		<%}else{%>
-		<option value="event_name">제목</option>
-		<%}%>
-		
-		<%if(column !=null&&column.equals("event_detail")){%>
-		<option value="event_detail" selected>내용</option>
-		<%}else{%>
-		<option value="event_detail">내용</option>
-		<%}%>
-		
-		<%if(column !=null&&column.equals("users_idx")){%>
-		<option value="users_idx" selected>작성자</option>
-		<%}else{%>
-		<option value="users_idx">작성자</option>
-		<%}%>	
-		
+		<option value="event_name"  <%= column !=null&&column.equals("event_name"  ) ? " selected" : "" %>>제목</option>
+		<option value="event_detail"<%= column !=null&&column.equals("event_detail") ? " selected" : "" %>>내용</option>
+		<option value="users_idx"   <%= column !=null&&column.equals("users_nick"  ) ? " selected" : "" %>>작성자</option>
 	</select>
-	
-	<%if(keyword==null){%>
-	<input type="search" name="keyword" placeholder="검색어 입력" required>
-	<%}else{%>
-	<input type="search" name="keyword" placeholder="검색어 입력" required value="<%=keyword%>">
-	<%}%>
-	
+	<input type="search" name="keyword" placeholder="검색어 입력" required<%= keyword != null ? (" value=\"" + keyword + "\"") : "" %>>
 	<input type="submit" value="검색">
-	
 </form>
+
+
 
 <!-- 페이지 내용 끝. -->
 </SECTION>
