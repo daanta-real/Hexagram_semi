@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import util.HexaLibrary;
 import util.JdbcUtils;
 
 public class EventDao implements PaginationInterface<EventDto> {
@@ -28,7 +28,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 	};
 	// 입력받은 컬럼이 null이거나 혹은 컬럼 목록에 해당되는 문자열 값이어야 함.
 	public boolean columnVerify(String column) throws Exception {
-		if(column != null && !HexaLibrary.in_array(column, COLUMN_LIST)) {
+		if(column != null && !Arrays.stream(COLUMN_LIST).anyMatch(column::equals)) {
 			System.out.println("[오류] " + column + " → 이 값은 기본 컬럼 리스트에 없는 값입니다. 오류를 발생시키겠습니다.");
 			throw new Exception();
 		}
