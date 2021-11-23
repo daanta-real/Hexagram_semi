@@ -15,7 +15,7 @@
 
 <error-page><error-code>200</error-code><location>/resource/template/error.jsp</location></error-page>
 <error-page><error-code>302</error-code><location>/resource/template/error.jsp</location></error-page>
-<error-page><error-code>401</error-code><location>/resource/template/error.jsp</location></error-page>
+<error-page><error-code>401</error-code><location>/users/login.jsp</location></error-page>
 <error-page><error-code>403</error-code><location>/resource/template/error.jsp</location></error-page>
 <error-page><error-code>404</error-code><location>/resource/template/error.jsp</location></error-page>
 <error-page><error-code>405</error-code><location>/resource/template/error.jsp</location></error-page>
