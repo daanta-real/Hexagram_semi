@@ -16,7 +16,9 @@ import util.users.Sessioner;
 
 @WebFilter(urlPatterns = {
 		"/course/insert_last.jsp",
-		"/course/insert_course.nogari"
+		"/course/insert_course.nogari",
+		"/course/update_course.nogari",
+		"/course/update_last.jsp"
 })
 public class CourseAjaxCountItemFilter implements Filter{
 	
