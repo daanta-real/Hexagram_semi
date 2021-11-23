@@ -17,10 +17,8 @@ String root = request.getContextPath();
 <TITLE>노가리투어 - 회원 목록</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
 </HEAD>
-
-<!-- 페이지 제목 css -->
+<%/*CSS들*/%>
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
-<!-- 게시판 공통 css -->
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/board.css">
 
 <style type="text/css">
