@@ -17,10 +17,6 @@ public class CourseCreateSequnceForInsertServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			try {
 
-				//필터에서 현재 시퀀스를 생성한 사람이 아니면 수정이 불가하게 설정함.(관리자는 제외)
-				//필터에서 이 부분을 거친사람을 확인하기 위해서 최초 생성한 유저의 정보를 넘겨준다.(추후 코스 생성및 코스-아이템 등록/삭제를 위한 필터처리용)
-				String usersFilterId = req.getParameter("usersFilterId");
-				
 				//코스 등록 전 시퀀스 번호 받는 Servlet
 				
 				// 새글을 작성할때 코스게시판의 가장 큰 글보다 큰(쓰레기 작성글들을)것 들을 삭제해주는 작업.
@@ -34,7 +30,7 @@ public class CourseCreateSequnceForInsertServlet extends HttpServlet {
 				 int courseSequnce = courseDao.getSequence();
 				 
 				 //등록을 위해서 insert.jsp로 이동함
-				 resp.sendRedirect("insert.jsp?courseSequnce="+courseSequnce+"&usersFilterId="+usersFilterId);
+				 resp.sendRedirect("insert.jsp?courseSequnce="+courseSequnce);
 				
 			}catch (Exception e) {
 				e.printStackTrace();

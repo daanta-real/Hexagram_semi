@@ -39,7 +39,7 @@ public class CourseItemDao {
 	}
 	
 
-	//course_item에 갯수 확인 메소드(코스등록시 3~8개로 제한되기 때문)
+	//courseIdx에 들어있는 오직 하나의 item만을 꺼내서 지역을 확인할 수 있다.(코스는 따로 지역 확인이 불가능하기 때문에 하나만 꺼내도 동일 지역만 선택이 가능하다)
 	public int getItemIdxByCourse(int courseIdx) throws Exception {
 		String sql = "SELECT * FROM course_item where course_idx=? order by course_item_idx asc";
 		Connection con = JdbcUtils.connect3();
@@ -49,6 +49,21 @@ public class CourseItemDao {
 
 		rs.next();
 		int result = rs.getInt("item_idx");
+
+		con.close();
+		return result;
+		}
+	
+	//필터 통과시에 코스 등록전에 그 임시 코스 번호에 코스-아이템 수가 얼마인지 체크해서 확실히 등록시키기 위함.
+	public int getCount(int courseIdx) throws Exception {
+		String sql = "SELECT count(*) FROM course_item where course_idx=?";
+		Connection con = JdbcUtils.connect3();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, courseIdx);
+		ResultSet rs = ps.executeQuery();
+
+		rs.next();
+		int result = rs.getInt(1);
 
 		con.close();
 		return result;
