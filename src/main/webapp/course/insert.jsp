@@ -228,7 +228,7 @@ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
            })
            
            
-           var searchSelector = <%=pn.getSearchSelector()%>;
+           var searchSelector = 0; //초기값 0
            $(".page").hide();//모든 페이지를 숨기고
            $(".page").eq(searchSelector).show();//0,1로 설정된 곳을 나오게 한다.
            
