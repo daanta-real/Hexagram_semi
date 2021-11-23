@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ page import="util.HexaLibrary" %>
+
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="util.users.Sessioner" %>
 
 <%@ page import="beans.UsersDto"%>
 <%@ page import="beans.UsersDao"%>
+
 
 <%
 
@@ -74,7 +77,7 @@ UsersDto usersDto = usersDao.get(usersIdx);
 		</tr>
 		<tr class='row'>
 			<th>전화번호</th>
-			<td><%=usersDto.getUsersPhone() %></td>
+			<td><%=HexaLibrary.nvl(usersDto.getUsersPhone())%></td>
 		</tr>
 		<tr class='row'>
 			<th>보유 포인트</th>
@@ -82,17 +85,12 @@ UsersDto usersDto = usersDao.get(usersIdx);
 		</tr>
 	</tbody>
 	
-	<tfoot class='boardBox'>
-		<tr>
-			<td colspan=2>
-				<a href="<%=root%>/users/unregister.jsp">회원 탈퇴시키기(ㅠㅠclick..!)</a>
-				<a href="<%=root%>/admin/users/edit.jsp?usersIdx=<%=usersIdx%>">회원 정보 변경하기</a>
-				<a href="<%=root%>/admin/users/list.jsp">회원 목록으로 돌아가기</a>
-				<a href="#" onclick="deleteConfirm('<%=usersDto.getUsersId()%>');">탈퇴시키기</a>
-				<%--<a href="<%=root%>/admin/users/unregister.nogari?usersId=<%=usersDto.getUsersId() %>"></a>--%>
-			</td>
-		</tr>
-	</tfoot>
+	<tfoot class='boardBox'><tr><td colspan=2>
+		<a href="<%=root%>/admin/users/edit.jsp?usersIdx=<%=usersIdx%>">회원 정보 변경하기</a>
+		<a href="<%=root%>/admin/users/list.jsp">회원 목록으로 돌아가기</a>
+		<a href="#" onclick="deleteConfirm('<%=usersDto.getUsersId()%>');">탈퇴시키기</a>
+		<%--<a href="<%=root%>/admin/users/unregister.nogari?usersId=<%=usersDto.getUsersId() %>"></a>--%>
+	</td></tr></tfoot>
 </table>
 
 	

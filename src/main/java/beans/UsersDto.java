@@ -39,7 +39,7 @@ public class UsersDto {
 	public String  getUsersPw    () { return usersPw   ; }
 	public String  getUsersNick	 () { return usersNick ; }
 	public String  getUsersEmail () { return usersEmail; }
-	public String  getUsersPhone () { return usersPhone == null ? "-" : usersPhone; }
+	public String  getUsersPhone () { return usersPhone; }
 	public String  getUsersGrade () { return usersGrade; }
 	public Date    getUsersJoin  () { return usersJoin ; }
 	public Integer getUsersPoint () { return usersPoint; }

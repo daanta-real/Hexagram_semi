@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@page import="java.util.List"%>
+<%@ page import="util.HexaLibrary" %>
 
 <%@page import="beans.UsersDao"%>
 <%@page import="beans.UsersDto"%>
@@ -23,7 +24,7 @@ String root = request.getContextPath();
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/board.css">
 
 <style type="text/css">
-:root {--board-grid-columns: 5rem 5rem 5rem 7rem 5rem 7rem;}
+:root { --board-grid-columns: 5rem 5rem 5rem 7rem 5rem 7rem 7rem; }
 .btn{
 	color: var(--board-color-title-font);
 	background-color: var(--board-color-title-bg);
@@ -137,10 +138,11 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 	 <div class='boardBox title'>
 	     <div class='row'>
 	         <div>회원번호</div>
+	         <div>회원등급</div>
 	         <div>아이디</div>
 	         <div>닉네임</div>
 	         <div>이메일</div>
-	         <div>회원등급</div>
+	         <div>전화번호</div>
 	         <div>회원관리</div>
 	     </div>
 	 </div>
@@ -151,16 +153,13 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 			
 			for(UsersDto usersDto : list) {
 	%>
-	 	<div class='row'>
+	 	<div class='row' onclick="location.href = 'detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>';">
 	 		<div><%=usersDto.getUsersIdx() %></div>
-	 		<div>
-	 			<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>">
-					<%=usersDto.getUsersId() %>
-				</a>
-			</div>
+	 		<div><%=usersDto.getUsersGrade() %></div>
+	 		<div><%=usersDto.getUsersId() %></div>
 	 		<div><%=usersDto.getUsersNick() %></div>
 	 		<div><%=usersDto.getUsersEmail()%></div>
-	 		<div><%=usersDto.getUsersGrade() %></div>
+	 		<div><%=HexaLibrary.nvl(usersDto.getUsersPhone())%></div>
 	 		<div>
 	 			<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"><button class='btn'>상세</button></a>
 				<a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"><button class='btn'>수정</button></a>

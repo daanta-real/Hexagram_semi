@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ page import="util.HexaLibrary" %>
+
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="util.users.Sessioner" %>
 
@@ -60,7 +62,7 @@ UsersDto usersDto = usersDao.get(usersId);
 		</tr>
 		<tr class='row'>
 			<th>전화번호</th>
-			<td><%=usersDto.getUsersPhone() %></td>
+			<td><%=HexaLibrary.nvl(usersDto.getUsersPhone()) %></td>
 		</tr>
 		<tr class='row'>
 			<th>보유 포인트</th>
