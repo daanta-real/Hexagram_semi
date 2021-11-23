@@ -16,7 +16,32 @@ textarea { outline:none; resize:vertical; }
     border-width: 0.2rem !important;
     border-color: var(--color11) !important;
 }
+.fileSelector {
+	font-family:'mainFont' !important; cursor:pointer; background:var(--color4);
+	width:100%; height:100%; line-height:1rem;
+}
 </style>
+<script type='text/javascript'>
+
+// 변수 선언
+let fileEl = null; 
+
+// 리스너 관리
+window.addEventListener("load", () => {
+	
+	// 변수 선언
+	fileEl = document.getElementById("fileInput");
+	
+	// 파일 업로드 시 파일 이름을 span에 반영 
+	fileEl.addEventListener("change", () => {
+		const fileName = fileEl.files[0].name;
+		document.getElementById("selectedFileIcon").textContent = "✔️";
+		document.getElementById("selectedFileName").textContent = fileName;
+	});
+	
+});
+
+</script>
 </HEAD>
 
 <BODY>
@@ -29,7 +54,6 @@ textarea { outline:none; resize:vertical; }
 <div class="sub_title">이벤트 작성</div>
 
 <form action="write.nogari" method="post">
-
 <table class='boardContainer'>
 
 	<tbody class='boardBox'>
@@ -40,6 +64,13 @@ textarea { outline:none; resize:vertical; }
 		<tr class='row'>
 			<th>내용</th>
 			<td><textarea class='inputs' name="eventDetail" required rows="10" cols="60"></textarea></td>
+		</tr>
+		<tr class='row'>
+			<th>첨부파일</th>
+			<td><label class='fileSelector flexCenter'>
+				<input id="fileInput" class='inputs' type="file" name="attach" accept="image/png, image/jpeg" style="display:none;">
+				<small id="selectedFileIcon">📤</small>&nbsp;<span id="selectedFileName">파일 올리기</span>
+			</label></td>
 		</tr>
 	</tbody>
 	
