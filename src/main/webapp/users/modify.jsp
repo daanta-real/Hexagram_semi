@@ -70,7 +70,7 @@ UsersDto usersDto = usersDao.get(sessionId);
 	 	<!-- 취소 시 회원정보 페이지로 이동 -->
 		<tfoot class='boardBox'>
 			<tr><td align="center" colspan="2">
-				<input class='bottomLongBtn' type="submit" value="변경">
+				<input type='submit' class='bottomLongBtn' value="변경" >
 				<a class='bottomLongBtn' href = "<%=root %>/users/detail.jsp">취소</a>
 				<input class='bottomLongBtn' type='reset' value='초기화' class="reset">
 			</td></tr>

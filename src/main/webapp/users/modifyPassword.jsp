@@ -88,7 +88,7 @@ window.addEventListener("load", () => {
 		<tfoot>
 			<tr class='row' style='display:flex;'>
 				<td colspan="2" align="center" class='bottomButtonsLayer flexCol'>
-					<input class='bottomLongBtn' type="submit" value="변경">
+					<input type='submit' class='bottomLongBtn' value="변경">
 					<a class='bottomLongBtn' href = "<%=root %>/users/detail.jsp">취소</a>
 				</td>
 			</tr>
