@@ -25,12 +25,34 @@
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
 <!-- 페이지 내용 시작 -->
-<script src="https://code.jquery.com/jquery-latest.js"></script>
-<script src="/resource/css/item/reply.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="/resource/js/reply.js"></script>
 <script>
-	
-</script>    
+$(function(){
+    $(".view-row").find(".edit-btn").click(function(){
+        $(this).parents("tr.view-row").hide();
+        $(this).parents("tr.view-row").next("tr.edit-row").show();
+    });
+    
+    $(".edit-row").find(".edit-cancel-btn").click(function(){
+        $(this).parents("tr.edit-row").hide();
+        $(this).parents("tr.edit-row").prev("tr.view-row").show();
+    });
+    
 
+    $(".view-row").find(".reply-btn").click(function(){
+        $(this).parents("tr.view-row").next("tr.edit-row").next("tr.reply-row").show();
+    });			
+        
+    
+    $(".reply-row").find(".reply-cancel-btn").click(function(){
+        $(this).parents("tr.reply-row").hide();
+    });
+    
+    $(".edit-row").hide();
+    $(".reply-row").hide();
+});
+</script>
 <style>
 	.container-900{width: 900px;}
 	.container-left {
@@ -182,32 +204,7 @@
 					margin-top: 2rem;
 					margin-bottom: 2rem;
 				}
-</style>
- <script>
-	$(function(){
-		$(".view-row").find(".edit-btn").click(function(){
-			$(this).parents("tr.view-row").hide();
-			$(this).parents("tr.view-row").next("tr.edit-row").show();
-		});
-		
-		$(".edit-row").find(".edit-cancel-btn").click(function(){
-			$(this).parents("tr.edit-row").hide();
-			$(this).parents("tr.edit-row").prev("tr.view-row").show();
-		});
-		
-		$(".view-row").find(".reply-btn").click(function(){
-			$(this).parents("tr.view-row").next("tr.edit-row").next("tr.reply-row").show();
-		});			
-			
-		
-		$(".reply-row").find(".reply-cancel-btn").click(function(){
-			$(this).parents("tr.reply-row").hide();
-		});
-		
-		$(".edit-row").hide();
-		$(".reply-row").hide();
-	});
-</script>    
+</style> 
  
 <%-- 페이지에 필요한 세션, 파라미터값 저장 및 변수 선언 --%>
  <%
@@ -316,7 +313,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 			for(ItemFileDto itemFileDto : itemFileList){
 			%>
 				<!-- 첨부파일 출력 -->
-				<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="80%">
+				<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="500" height="500" class="image">
 			<%
 			}
 			%>
