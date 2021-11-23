@@ -5,11 +5,7 @@ window.addEventListener("load", () => {
 	
     // EMAIL 정규표현식 검사
     document.querySelector(".form-regexCheck input[name=usersEmail]").addEventListener("blur", function(){
-		// 정규식 검사 실패, 중복, 미입력시 submit 버튼 비활성화
-		// submit.disabled = true; 이면 비활성화
-		// submit.disabled = false; 이면 활성화
-		var submit = document.querySelector("input[type=submit]"); 
-		
+	
         var form  = document.querySelector('.form-regexCheck');
         var regex = /^[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*@[a-zA-Z0-9]([-_.]?[a-zA-Z0-9])*\.([a-zA-Z])+$/;
         var inputEmail = form.querySelector("input[name=usersEmail]").value;
@@ -40,10 +36,10 @@ window.addEventListener("load", () => {
 					console.log("Email 중복검사 요청 성공. Email : "+resp);
 					if(resp == "CAN_USE") { //사용가능한 이메일이라면 다른 입력창에 대한 입력이 가능
 						$(message).text("이메일 사용 가능");
-						submit.disabled = false;
+						$("input").prop("disabled",false);
 					} else if(resp =="USED") { //이메일이 중복이라면 다른 입력창에 대한 입력을 방지
 						$(message).text("이메일이 이미 사용중입니다");
-						submit.disabled = true;
+						$("input").not($("input[name=usersEmail]")).prop("disabled",true);
 					}
 				}
 				
@@ -58,13 +54,9 @@ window.addEventListener("load", () => {
             } else{
                 console.log("이메일 정규표현식 검사 실패");
                 message.textContent = "이메일 형식에 맞지 않습니다";
-				submit.disabled = true;
+				$("input").not($("input[name=usersEmail]")).prop("disabled",true);
             }			
-        }else{
-            console.log("이메일 미입력");
-            message.textContent = "이메일을 입력해 주세요";
-			submit.disabled = true;
-        }	
+        }
     });
  
 });
