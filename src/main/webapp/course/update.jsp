@@ -14,9 +14,6 @@
 
     <%
     String root = request.getContextPath();
-
-		//최초 시퀀스를 만든사람만이 등록이 가능하도록 설정.(파라미터를 시퀀스 생성에서 부터 전달받고 필터에서 사용함)
-	    String usersFilterId = request.getParameter("usersFilterId");
     	
    		String subCity = request.getParameter("subCity");
     	//기존의 번호
@@ -104,7 +101,7 @@
                 var item_Idx = $(this).attr("data-item_idx");
                 var item_address = $(this).attr("data-item_address");
                 var item_name = $(this).attr("data-item_name");
-                var users_filterId = $(this).attr("data-users_filterId");
+
 				//추가하기 버튼 태그안에는 위와같은 정보가 들어 있다.
 				//courseIdx, itemIdx 는 내 item담기에 보여지는 것과 삭제하기 click이벤트를 태그 생성과 동시에 부여하기 위해서 필요한 정보
 				//위의 두 정보와 더불어서 address 및 name은 내가 담은 태그에 보여질 정보들을 손쉽게 추가하기 위함.
@@ -115,8 +112,7 @@
                     type:"get",
                     data:{
                     	itemIdx : item_Idx,
-                    	courseIdx : course_Idx,
-                    	usersFilterId : users_filterId
+                    	courseIdx : course_Idx
                     },
                     success:function(resp){
                          if(resp == "NNNNS"){//span(class=".result")에서 결과를 나타내주며,아이템추가 ajax에서 첫번째 추가한 도시명과 대상(현재 추가하기) 관광지명의 도시명을 비교하여 다르다면,
@@ -137,7 +133,7 @@
                          	//관광지 명칭과 관광지 명은 내가 선택한 목록에서 사용자가 직접 확인할 수 있도록 정보를 표시
                          	//테이블에 추가할 사항들
                          	var td3 = $("<td>");
-                         	var button3 = $("<button>").addClass("item-remove-btn").addClass("form-btn").attr("data-course_idx",course_Idx).attr("data-item_idx",item_Idx).attr("data-users_filterId",users_filterId);
+                         	var button3 = $("<button>").addClass("item-remove-btn").addClass("form-btn").attr("data-course_idx",course_Idx).attr("data-item_idx",item_Idx);
                          	//추가한 아이템 목록에서 삭제 될때도 courseidx , itemIdx가 필요하므로 설정해둔다.
                          	//또한 addClass("item-remove-btn")를 하게 된 이유는 이전화면으로 돌아오기 및 다시 courseItemList를 확인할때(특히 insert.jsp 부분)에서 이 이벤트가 등록이 되어있어야
                          	//156번째 줄의 이벤트가 로드시 자동 등록될 수 있다.
@@ -149,14 +145,13 @@
                                 	//실제 데이터가 삭제되었음을 해당 아이템을 숨김표시로 처리하였음(실시간으로 화면에서 표현해주기 위함)
                                 	var new_course_Idx = $(this).attr("data-course_idx");
                                     var new_item_Idx = $(this).attr("data-item_idx");
-                                    var users_filterId = $(this).attr("data-users_filterId");
+
                                     $.ajax({//삭제 ajax에서 코스-아이템db를 삭제하기 위한 정보
                                         url:"<%=root%>/course/ajax_delete_update_item.nogari",
                                         type:"get",
                                         data:{
                                         	itemIdx : new_item_Idx,
-                                        	courseIdx : new_course_Idx,
-                                        	usersFilterId : users_filterId
+                                        	courseIdx : new_course_Idx
                                         },
                                         success:function(resp){
                                         	if(resp == "NNNNN"){//아이템 삭제 ajax에서 코스-아이템 db(즉 courseItemList.size())에 관광지가 적어도 3개는 들어가야하기 때문임.
@@ -211,14 +206,12 @@
  
             	var course_Idx = $(this).attr("data-course_idx");
                 var item_Idx = $(this).attr("data-item_idx");
-                var users_filterId = $(this).attr("data-users_filterId");
                 $.ajax({
                     url:"<%=root%>/course/ajax_delete_update_item.nogari",
                     type:"get",
                     data:{
                     	itemIdx : item_Idx,
-                    	courseIdx : course_Idx,
-                    	usersFilterId : users_filterId
+                    	courseIdx : course_Idx
                     },
                     success:function(resp){
 
@@ -307,103 +300,103 @@
 			<%if(pn.keywordValExists("서울")) {%>
 			<option value="서울" selected>서울특별시</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=서울&usersFilterId=<%=usersFilterId%>">서울특별시</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=서울">서울특별시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("부산")) {%>
 			<option value="부산" selected>부산광역시</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=부산&usersFilterId=<%=usersFilterId%>">부산광역시</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=부산">부산광역시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("인천")) {%>
 			<option value="인천" selected>인천광역시</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=인천&usersFilterId=<%=usersFilterId%>">인천광역시</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=인천>인천광역시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("대구")) {%>
 			<option value="대구" selected>대구광역시</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=대구&usersFilterId=<%=usersFilterId%>">대구광역시</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=대구">대구광역시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("대전")) {%>
 			<option value="대전" selected>대전광역시</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=대전&usersFilterId=<%=usersFilterId%>">대전광역시</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=대전">대전광역시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("광주")) {%>
 			<option value="광주" selected>광주광역시</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=광주&usersFilterId=<%=usersFilterId%>">광주광역시</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=광주">광주광역시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("울산")) {%>
 			<option value="울산" selected>울산광역시</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=울산&usersFilterId=<%=usersFilterId%>">울산광역시</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=울산">울산광역시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("경기")) {%>
 			<option value="경기" selected>경기도</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경기&usersFilterId=<%=usersFilterId%>">경기도</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경기">경기도</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("세종")) {%>
 			<option value="세종" selected>세종특별자치시</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=세종&usersFilterId=<%=usersFilterId%>">세종특별자치시</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=세종">세종특별자치시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("강원")) {%>
 			<option value="강원" selected>강원도</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=강원&usersFilterId=<%=usersFilterId%>">강원도</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=강원">강원도</option>
 			<%} %>																		
 			
 			<%if(pn.keywordValExists("제주")) {%>
 			<option value="제주" selected>	제주특별자치도</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=제주&usersFilterId=<%=usersFilterId%>">제주특별자치도</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=제주">제주특별자치도</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("경상북도")) {%>
 			<option selected>경상북도</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경상북도&usersFilterId=<%=usersFilterId%>">경상북도</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경상북도">경상북도</option>
 			<%} %>
 		
 			<%if(pn.keywordValExists("경상남도")) {%>
 			<option selected>경상남도</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경상남도&usersFilterId=<%=usersFilterId%>">경상남도</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=경상남도">경상남도</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("전라남도")) {%>
 			<option selected>전라남도</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=전라남도&usersFilterId=<%=usersFilterId%>">전라남도</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=전라남도">전라남도</option>
 			<%} %>
 	
 			<%if(pn.keywordValExists("전라북도")) {%>
 			<option selected>전라북도</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=전라북도&usersFilterId=<%=usersFilterId%>">전라북도</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=전라북도">전라북도</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("충청남도")) {%>
 			<option selected>충청남도</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=충청남도&usersFilterId=<%=usersFilterId%>">충청남도</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=충청남도">충청남도</option>
 			<%} %>
 		
 			<%if(pn.keywordValExists("충청북도")) {%>
 			<option selected>충청북도</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=충청북도&usersFilterId=<%=usersFilterId%>">충청북도</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=충청북도">충청북도</option>
 			<%} %>				
 		</select>
 <!-- 	select같은 경우, 내가 선택하는 것이 keyword이고 column값은 주소로 고정되있기 때문에 일반 input과는 반대로 처리해주었고, -->
@@ -425,7 +418,7 @@
 			<%if(subCity!=null && subCity.equals(s)) {%>
 			<option value="<%=s%>" selected><%=s%></option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=<%=pn.getKeyword()%>&subCity=<%=s%>&usersFilterId=<%=usersFilterId%>"><%=s%></option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=<%=pn.getKeyword()%>&subCity=<%=s%>"><%=s%></option>
 			<%} %>
 			
 			<%} %>
@@ -468,7 +461,6 @@
 					<input type="search" name="keyword" placeholder="검색어 입력"
 					required value="<%=pn.getKeywordString()%>" class="form-input form-inline">
 				<%} %>
-			<input type="hidden" name="usersFilterId" value="<%=usersFilterId%>">
 			<input type="hidden" name="searchSelector" value="<%=1%>">
 			<!-- 	검색 후 검색 옵션이 무엇이였는지 전달 키워드 검색 옵션은 구분자를 1번으로 지정한다.191~210번줄 참조-->
 			<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
@@ -503,7 +495,7 @@
 							<tr>
 								<td width="40%"><%=itemDto.getItemAddress()%></td>
 								<td width="40%"><%=itemDto.getItemName()%></td>
-								<td width="20%"><button class="item-add-btn form-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-item_address="<%=itemDto.getAdressCity()%>" data-item_name="<%=itemDto.getItemName()%>" data-users_filterId="<%=usersFilterId%>">추가하기</button></td>
+								<td width="20%"><button class="item-add-btn form-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-item_address="<%=itemDto.getAdressCity()%>" data-item_name="<%=itemDto.getItemName()%>">추가하기</button></td>
 <!-- 								button class="item-add-btn"에대한 이벤트 및 이 태그에 있는 정보는 53~60번째 줄에 정의됨 -->
 							</tr>
 						<%} %>
@@ -518,10 +510,10 @@
 	<%if(pn.hasPreviousBlock()){ %>
 		<%if(isSearchMode){ %>
 			<!-- 검색용 링크 -->
-			<a href="update.jsp?column=<%=pn.getColumn()%>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getPreviousBlock()%>&courseSequnce=<%=courseSequnce%>&searchSelector=<%=pn.getSearchSelector()%>&courseOriginSequnce=<%=courseOriginSequnce%>&usersFilterId=<%=usersFilterId%>">&lt;</a>
+			<a href="update.jsp?column=<%=pn.getColumn()%>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getPreviousBlock()%>&courseSequnce=<%=courseSequnce%>&searchSelector=<%=pn.getSearchSelector()%>&courseOriginSequnce=<%=courseOriginSequnce%>">&lt;</a>
 		<%} else { %>
 			<!-- 목록용 링크 -->
-			<a href="update.jsp?page=<%=pn.getPreviousBlock()%>&courseSequnce=<%=courseSequnce%>&searchSelector=<%=pn.getSearchSelector()%>&courseOriginSequnce=<%=courseOriginSequnce%>&usersFilterId=<%=usersFilterId%>">&lt;</a>
+			<a href="update.jsp?page=<%=pn.getPreviousBlock()%>&courseSequnce=<%=courseSequnce%>&searchSelector=<%=pn.getSearchSelector()%>&courseOriginSequnce=<%=courseOriginSequnce%>">&lt;</a>
 		<%} %>
 	<%} else { %>
 		 <a>&lt;</a>
@@ -531,10 +523,10 @@
 	<%for(int i = pn.getStartBlock(); i <= pn.getRealLastBlock(); i++){ %>
 		<%if(isSearchMode){ %>
 		<!-- 검색용 링크 -->
-		<a href="update.jsp?column=<%=pn.getColumn()%>&keyword=<%=pn.getKeyword()%>&page=<%=i%>&courseSequnce=<%=courseSequnce%>&searchSelector=<%=pn.getSearchSelector()%>&courseOriginSequnce=<%=courseOriginSequnce%>&usersFilterId=<%=usersFilterId%>"><%=i%></a>
+		<a href="update.jsp?column=<%=pn.getColumn()%>&keyword=<%=pn.getKeyword()%>&page=<%=i%>&courseSequnce=<%=courseSequnce%>&searchSelector=<%=pn.getSearchSelector()%>&courseOriginSequnce=<%=courseOriginSequnce%>"><%=i%></a>
 		<%}else{ %>
 		<!-- 목록용 링크 -->
-		<a href="update.jsp?page=<%=i%>&courseSequnce=<%=courseSequnce%>&searchSelector=<%=pn.getSearchSelector()%>&courseOriginSequnce=<%=courseOriginSequnce%>&usersFilterId=<%=usersFilterId%>"><%=i%></a>
+		<a href="update.jsp?page=<%=i%>&courseSequnce=<%=courseSequnce%>&searchSelector=<%=pn.getSearchSelector()%>&courseOriginSequnce=<%=courseOriginSequnce%>"><%=i%></a>
 		<%} %>
 	<%} %>
 	
@@ -542,10 +534,10 @@
 	<%if(pn.hasNextBlock()){ %>
 		<%if(isSearchMode){ %>
 			<!-- 검색용 링크 -->
-			<a href="update.jsp?column=<%=pn.getColumn()%>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getNextBlock()%>&courseSequnce=<%=courseSequnce%>&searchSelector=<%=pn.getSearchSelector()%>&courseOriginSequnce=<%=courseOriginSequnce%>&usersFilterId=<%=usersFilterId%>">&gt;</a>
+			<a href="update.jsp?column=<%=pn.getColumn()%>&keyword=<%=pn.getKeyword()%>&page=<%=pn.getNextBlock()%>&courseSequnce=<%=courseSequnce%>&searchSelector=<%=pn.getSearchSelector()%>&courseOriginSequnce=<%=courseOriginSequnce%>">&gt;</a>
 		<%} else { %>
 			<!-- 목록용 링크 -->
-			<a href="update.jsp?page=<%=pn.getNextBlock()%>&courseSequnce=<%=courseSequnce%>&searchSelector=<%=pn.getSearchSelector()%>&courseOriginSequnce=<%=courseOriginSequnce%>&usersFilterId=<%=usersFilterId%>">&gt;</a>
+			<a href="update.jsp?page=<%=pn.getNextBlock()%>&courseSequnce=<%=courseSequnce%>&searchSelector=<%=pn.getSearchSelector()%>&courseOriginSequnce=<%=courseOriginSequnce%>">&gt;</a>
 		<%} %> 
 	<%} else {%>
 		<a>&gt;</a>
@@ -569,7 +561,7 @@
 							<tr>
 								<td width="40%"><%=itemDto.getAdressCity()%></td>
 								<td width="40%"><%=itemDto.getItemName()%></td>
-								<td width="20%"><button class="item-remove-btn form-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-users_filterId="<%=usersFilterId%>">삭제하기</button></td>
+								<td width="20%"><button class="item-remove-btn form-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>">삭제하기</button></td>
 <!-- 							151~153번째 줄 참조 -->
 							</tr>
 						<%} %>
@@ -595,7 +587,6 @@
 		</div>
 		<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
 		<input type="hidden" name="courseOriginSequnce" value="<%=courseOriginSequnce%>">
-		<input type="hidden" name="usersFilterId" value="<%=usersFilterId%>">
 <!-- 		이 값들이 넘어가야하는 이유 : 343,344 줄 참조 -->
 	</form>
 </div>

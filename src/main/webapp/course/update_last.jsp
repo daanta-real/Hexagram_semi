@@ -200,7 +200,7 @@ textarea {
     // - 그 후 form을 courseUpdateServlet 으로 보내면 시퀀스 번호를 정리한다
     int courseOriginSequnce = Integer.parseInt(request.getParameter("courseOriginSequnce"));
 	int courseSequnce = Integer.parseInt(request.getParameter("courseSequnce"));
-	String usersFilterId = request.getParameter("usersFilterId");	
+
 	// 	최초로 지역을 먼저 설정하게 한다. 이것을 선택한 후에는 대부분 courseSequnce / city는 함께 파라미터로 움직여야 한다.
 	CourseDao courseDao = new CourseDao();
 	CourseDto courseDto = courseDao.get(courseOriginSequnce); //기존 내용을 넘기기 위함.
@@ -255,7 +255,6 @@ textarea {
 			<span class="show-login"></span>
 			<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
 			<input type="hidden" name="courseOriginSequnce" value="<%=courseOriginSequnce%>">
-			<input type="hidden" name="usersFilterId" value="<%=usersFilterId%>">
 		</div>
 	</form>
 	
@@ -280,7 +279,6 @@ textarea {
 			<input type="hidden" name="courseOriginSequnce" value="<%=courseOriginSequnce%>">
 			<input type="hidden" name="keyword" value="<%=city%>">
 			<input type="hidden" name="column" value="item_address">
-			<input type="hidden" name="usersFilterId" value="<%=usersFilterId%>">
 		</form>
 	</div>
 </div>

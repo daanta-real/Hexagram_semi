@@ -19,8 +19,6 @@ public class CourseUpdateServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			//최초 시퀀스를 생성한 사람만이 수정이 가능하도록 설정.(즉 만든사람 혹은 관리자 일때는 가능하게 설정)
-			String usersFilterId = req.getParameter("usersFilterId");
 			int courseOriginSequnce = Integer.parseInt(req.getParameter("courseOriginSequnce")); //기존 코스 번호 (즉 사라지면 안되는 번호)
 			int courseIdx = Integer.parseInt(req.getParameter("courseSequnce")); //신규 업데이트 할 내용.(임시 코스 번호 : 갱신된 내용을 전달하고 사라져야하는 번호)
 			int usersIdx = (int)req.getSession().getAttribute("usersIdx");// 현재 사용자

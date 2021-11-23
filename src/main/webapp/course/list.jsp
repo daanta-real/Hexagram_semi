@@ -536,7 +536,7 @@
 <!-- 2) 비회원은 작성할 수 없도록 설정해 두었다. -->
 <%if(isLogin){ %>
 <!-- 글쓰기 버튼을 누르면CourseCreateSequnceForInsertServlet 으로 이동해서 시퀀스 번호를 생성해준다. -->
-<h2><a href="insert_sequence.nogari?usersFilterId=<%=Sessioner.getUsersId(request.getSession())%>">글 쓰기</a></h2>
+<h2><a href="insert_sequence.nogari">글 쓰기</a></h2>
 <%} %>
 
 
