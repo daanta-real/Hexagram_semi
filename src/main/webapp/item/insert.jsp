@@ -53,6 +53,15 @@
             }
         });
         
+    	window.addEventListener("load", function(){
+			document.querySelector(".confirm-link").addEventListener("click", function(e){
+				varchoice = confirm("정말 완료 하시겠습니까?");
+				if(!choice){
+					e.preventDefault();
+				}
+			})
+		});
+        
 </script>
 <style>
 
@@ -175,7 +184,7 @@ textarea.vertical {
                 <input type="file" name="attach" accept="image/*">
             </div>
             <div class="row center">
-                <input type="submit" value="작성 완료" class="form-btn">
+                <input type="submit" value="작성 완료" class="form-btn confirm-link">
             </div>
         </div>
     </form>

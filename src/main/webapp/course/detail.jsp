@@ -138,7 +138,7 @@ String root = request.getContextPath();
 	//코스 내용 및 제목등을 출력하기 위한 단일조회
 	CourseDao courseDao = new CourseDao();
 	CourseDto courseDto = courseDao.get(courseIdx);
-	
+
 	//글 작성자 아이디 및 닉네임 출력을 위한 단일 조회
 	UsersDao usersDao = new UsersDao();
  	UsersDto usersDto = usersDao.get(courseDto.getUsersIdx());
@@ -147,7 +147,7 @@ String root = request.getContextPath();
 	 String usersId = Sessioner.getUsersId(request.getSession());
  	 boolean isLogin = usersId != null;
  	//(본인글인지 확인을 위해)
-	 boolean isMyboard = usersId == usersDto.getUsersId();
+	 boolean isMyboard = usersId.equals(usersDto.getUsersId());
 	
 	//회원 등급 변수 저장(관리자만에게만 보이는 수정 삭제 버튼 표시를 위해)
   	//관리자인지?
@@ -328,7 +328,7 @@ if(!list.isEmpty()){
 				boolean ownerReply = courseDto.getUsersIdx() == courseReplyDto.getUsersIdx();
 				
 				//본인 댓글인지 확인
-				boolean myReply = usersId == usersReplyDto.getUsersId();
+				boolean myReply = usersId.equals(usersReplyDto.getUsersId());
 		%>
 		
 		<tr>
