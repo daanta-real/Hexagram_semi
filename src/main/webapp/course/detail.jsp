@@ -94,7 +94,7 @@
         .item-title{
             display:block;
             position:relative;
-            top:30px;
+           
             
         }
 		
@@ -116,7 +116,7 @@
         #slide ul li{
             display:inline-block; 
             padding: 10px 20px; 
-            background: #ccc; 
+        
             margin-right:10px;
             margin-bottom: 20px;
         }
@@ -138,7 +138,7 @@ String root = request.getContextPath();
 	//코스 내용 및 제목등을 출력하기 위한 단일조회
 	CourseDao courseDao = new CourseDao();
 	CourseDto courseDto = courseDao.get(courseIdx);
-	
+
 	//글 작성자 아이디 및 닉네임 출력을 위한 단일 조회
 	UsersDao usersDao = new UsersDao();
  	UsersDto usersDto = usersDao.get(courseDto.getUsersIdx());
@@ -147,7 +147,7 @@ String root = request.getContextPath();
 	 String usersId = Sessioner.getUsersId(request.getSession());
  	 boolean isLogin = usersId != null;
  	//(본인글인지 확인을 위해)
-	 boolean isMyboard = usersId == usersDto.getUsersId();
+	 boolean isMyboard = usersId.equals(usersDto.getUsersId());
 	
 	//회원 등급 변수 저장(관리자만에게만 보이는 수정 삭제 버튼 표시를 위해)
   	//관리자인지?
@@ -206,10 +206,9 @@ String root = request.getContextPath();
             <a href="insert_sequence.nogari?usersFilterId=<%=usersId%>" class="float-right float-btn">새글작성</a>
 <!--             usersFilterId는 ajax(코스-아이템 등록/수정/삭제) 및 코스 등록, 수정시에 필터처리를 위해서 필요한 인자이다. -->
 <!--             최초 시퀀스번호를 생성하고 접속한 사람만이 실질적인 접근 권한이 생긴다. -->
-
-            <%
-            }
-            %>
+            <%}else{ %>
+            <a href="<%=root %>/course/list.jsp" class="float-right float-btn">목록으로</a>
+            <%} %>
         </div>
         
         <div class="top-menu right">
@@ -257,7 +256,7 @@ String root = request.getContextPath();
                 <a href="<%=root%>/item/detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>" class="item-link">
                     <%if(itemFileDto == null){ %>
 					<!-- 첨부파일 출력 -->
-					<img src="http://via.placeholder.com/100x100">
+					<img src="http://placeimg.com/150/150/nature">
 					<%
 					}else{
 					%>
@@ -328,7 +327,7 @@ if(!list.isEmpty()){
 				boolean ownerReply = courseDto.getUsersIdx() == courseReplyDto.getUsersIdx();
 				
 				//본인 댓글인지 확인
-				boolean myReply = usersId == usersReplyDto.getUsersId();
+				boolean myReply = usersId.equals(usersReplyDto.getUsersId());
 		%>
 		
 		<tr>
