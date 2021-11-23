@@ -1,8 +1,8 @@
 
 // 회원가입 정규표현식 검사 
 //- 검사결과에 따른 메세지를 보여줄 div에 class="message" 부여
-//- 입력값이 있을 경우에만 검사하도록 설정. 미입력시 'OOO을 입력해 주세요' 메세지 출력
-//     - 아이디 정규표현식 검사 통과 후 아이디 중복검사 진행
+//- 입력값이 있을 경우에만 검사하도록 설정. 
+//- 아이디 정규표현식 검사 통과 후 아이디 중복검사 진행
 
 
 
@@ -65,10 +65,7 @@ window.addEventListener("load", () => {
                     message.textContent = "영문 소문자, 숫자, 특수문자_ 4~20자 이내로 입력해주세요";
 					 $("input").not($("input[name=usersId]")).prop("disabled",true);
             }
-        }else{
-            console.log("아이디 미입력");
-            message.textContent = "아이디를 입력해 주세요";
-		}
+        }
     });
 
 });

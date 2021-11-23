@@ -20,9 +20,6 @@ window.addEventListener("load", () => {
                 message.textContent = "비밀번호는 영문, 숫자, 특수문자 _-~!@#$%^&*=+/,.;’”? 하나씩 포함되야 합니다";
             	$("input").not($("input[name=usersPw], .togglePw")).prop("disabled",true);
 			}		
-        }else{
-            console.log("비밀번호 미입력");
-            message.textContent = "비밀번호를 입력해 주세요";
         }
     });
 

@@ -56,10 +56,7 @@ window.addEventListener("load", () => {
                 message.textContent = "이메일 형식에 맞지 않습니다";
 				$("input").not($("input[name=usersEmail]")).prop("disabled",true);
             }			
-        }else{
-            console.log("이메일 미입력");
-            message.textContent = "이메일을 입력해 주세요";
-        }	
+        }
     });
  
 });

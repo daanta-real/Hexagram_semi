@@ -12,30 +12,20 @@ window.addEventListener("load", () => {
 		var reInputPw = form.querySelector("#reInputPw").value;          // 비밀번호 재확인 입력값
 		var noticePw  = form.querySelector(".noticePw");                 // 비번 두개 일치확인결과 출력하는 레이어.noticePw 클래스
 		console.log("[입력값]usersPw:" + usersPw + ", reInputPw:" + reInputPw);
-	    
-		// 검사 1 - 둘다 빈 칸이면 안 됨 
-		if(usersPw == "" || reInputPw == ""){
-			noticePw.textContent = "비밀번호를 입력해 주세요";
-	        console.log("비번 미입력");
-		}
-		else{
-			// 검사 2 - 둘다 같은 값이어야 됨
+	    // 둘 다 빈칸이 아닐때
+		if(usersPw != "" && reInputPw != ""){
+			//  일치하지 않으면
 			if(usersPw != reInputPw){
 		        noticePw.textContent = "비밀번호가 일치하지 않습니다";
 		        console.log("비번 & 재확인비번 불일치");
 				$("input").not($("input[name=usersPw], #reInputPw, .togglePw")).prop("disabled",true);
 			}
-			
-			// 검사 1 + 2 모두 통과 시
+			// 일치하면
 		    else if(usersPw == reInputPw){
 		        noticePw.textContent = "비밀번호 일치";
 		        console.log("비번 & 재확인비번 일치");	
 				$("input").prop("disabled",false);
 			}
-			
 		}
-		
-	
 	});
-
 });
