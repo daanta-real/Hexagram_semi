@@ -130,7 +130,7 @@ public class Sessioner {
 	public boolean isLoggedIn() { return isLoggedIn(session); }
 	public boolean isAdmin() { return isAdmin(session); }
 	public static boolean isLoggedIn   (HttpSession session) { return getUsersIdx(session) != null; }
-	public static boolean isAdmin      (HttpSession session) { return getUsersId(session).equals(GRADE_ADMIN); }
+	public static boolean isAdmin      (HttpSession session) { return getUsersGrade(session).equals(GRADE_ADMIN); }
 
 	// 권한검사: isGranted
 	// 현재 세션의 유저에게 타겟id 데이터의 조작권한이 있는지 검사하여, 있으면 True 없으면 False를 반환함.
