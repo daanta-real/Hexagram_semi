@@ -37,7 +37,7 @@ public class EventInsertServlet extends HttpServlet{
 			String evN = mRequest.getParameter("eventName");
 			String evD = mRequest.getParameter("eventDetail");
 			if(evN == null || evN.equals("") || evD == null || evD.equals("")) {
-				System.out.println("[이벤트 - 작성] 글 제목 혹은 글 내용이 입수되지 않았습니다.");
+				System.out.println("[이벤트 - 신규] 글 제목 혹은 글 내용이 입수되지 않았습니다.");
 				throw new Exception();
 			}
 
@@ -53,26 +53,32 @@ public class EventInsertServlet extends HttpServlet{
 			// 글 삽입
 			eventDao.insert(eventDto);
 
-			//
+			// 파일이 있을 경우, 파일도 삽입
 			if(mRequest.getFile("attach") != null) {
 
 				EventFileDto eventFileDto = new EventFileDto();
 				eventFileDto.setEventNo(nextSeq);
-				eventFileDto.setEventFileUploadName(mRequest.getOriginalFileName("attach"));
-				eventFileDto.setEventFileSaveName(mRequest.getFilesystemName("attach"));
+				eventFileDto.setEventFileUploadName(mRequest.getOriginalFileName("attach")); // 업로드한 사람한테 보이는 가짜 이름
+				eventFileDto.setEventFileSaveName(mRequest.getFilesystemName("attach")); // 서버에 저장되는 실제 이름
 				eventFileDto.setEventFileType(mRequest.getContentType("attach"));
 				eventFileDto.setEventFileSize(mRequest.getFile("attach").length());
 
 				EventFileDao eventFileDao = new EventFileDao();
 				eventFileDao.insert(eventFileDto);
+
 			}
 
 			resp.sendRedirect("detail.jsp?eventIdx=" + nextSeq);
 
 		}
+
 		catch(Exception e){
+
+			System.out.println("[이벤트 - 신규] 새 데이터 등록 중 에러가 발생했습니다.");
 			e.printStackTrace();
 			resp.sendError(500);
+
 		}
+
 	}
 }
