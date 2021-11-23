@@ -420,12 +420,18 @@
 		    //지역 알아내기 -> 코스아이템에서 첫번쨰 아이템 내용 전달.
 		    CourseItemDao courseItemDao = new CourseItemDao();
 		    int itemIdx = courseItemDao.getItemIdxByCourse(courseDto.getCourseIdx());
+		    System.out.println(courseDto.getCourseIdx());
+		    
+		    //위에는 받아올때 idx가 빈값으로 받아오니까?
+		    CourseDto courseCheckDto = courseDao.get(courseDto.getCourseIdx());
+		    
 		    //전달 받은 내용으로 코스에서 지역과 작성자 사진을 출력한다
 			//목록을 보여주면서 itemDto의 itemIdx의 첫번째 정보를 받는다
 		    ItemDao itemDao = new ItemDao();
 		   	ItemDto itemDto = itemDao.get(itemIdx);
 		   	UsersDao usersDao = new UsersDao();
-		   	UsersDto usersDto = usersDao.get(courseDto.getUsersIdx());
+		   	UsersDto usersDto = usersDao.get(courseCheckDto.getUsersIdx());
+
 			ItemFileDao itemFileDao = new ItemFileDao();
 			ItemFileDto itemFileDto = itemFileDao.find2(itemIdx);
 			%>
