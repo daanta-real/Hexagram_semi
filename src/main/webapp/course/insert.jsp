@@ -559,7 +559,7 @@ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
 <div>
 	현재 선택한 관광지 : <span class="result-number"><%=courseItemList.size()%></span> 개
 </div> 
-
+<!-- 현재 선택한 관광지의 개수를 보여준다 (처음에는 보여주는 용도이며, ajax에서 수정,삭제후 현재 db에 있는 갯수를 문자열로 반환해주는데 이를 다시 숫자로 변환하여 최신하 시켜주어 화면에 보여주는 역할) -->
 <!-- 이전 화면으로 돌아올 것을 대비하여 생성해야함 -->
 <div>
 	<form action="insert_last.jsp" class="next-submit">
@@ -567,6 +567,7 @@ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
 		<div>
 		<span></span>
 		</div>
+		<!-- 		span은 3개가 안될시 다음단계로 못간다는 것을 보여주는 text란 -->
 		<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
 	</form>
 </div>

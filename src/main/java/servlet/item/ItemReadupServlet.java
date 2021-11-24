@@ -22,9 +22,10 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 		if(req.getSession().getAttribute("usersIdx") != null) {
 			int usersIdx = (int)req.getSession().getAttribute("usersIdx");
 			itemDao.readUp(itemIdx,usersIdx);
-			//본인이 작성한 글이 아니면 클릭했을떄 조회수를 올려라!	
+			//본인이 작성한 글이 아니면 클릭했을 때 조회수를 올려라!	
 		}else {
 			itemDao.readUp(itemIdx);
+			//비회원이라도 조회수 올려라!
 		}	
 		
 		resp.sendRedirect("detail.jsp?itemIdx="+itemIdx);

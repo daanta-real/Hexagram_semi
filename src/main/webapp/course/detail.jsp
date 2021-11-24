@@ -302,19 +302,6 @@ textarea {
 %>
 
 
-<%-- 조회수 증가 기능 (조회수 중복 방지) => 한번이 아니라 다른 회원이 들어올떄마다 조회수를 증가시켜주기 위해 게시물을 클릭시킬떄마다 +1을 해준다.(새로고침 방지)--%>
-<%
-// 	Set<Integer> boardCountView = (Set<Integer>)request.getSession().getAttribute("boardCountView");
-	
-// 	if(boardCountView==null){
-// 		boardCountView = new HashSet<Integer>();
-// 	}
-// 	if(boardCountView.add(courseIdx)){
-// 		courseDao.readUp(courseIdx,usersIdx);
-// 	}
-// 	request.getSession().setAttribute("boardCountView", boardCountView);
-%>
-
 <!-- 전체 레이아웃 컨테이너 사이즈는 메인에 맞게 조절-->
 <div class="container-900 container-center">
 
@@ -325,12 +312,13 @@ textarea {
             <%
             if(isMyboard || isManager){
             %>
-            <!-- 수정/삭제는 jsp에서도 막아주는 것 이외로 주소로 입력하는 것을 방지하게 위해서 필터로도 막아줘야 한다. -->
 			<!-- 댓글 작성자 또는 관리자가 아니라면 버튼이 보여지지 않게 처리 -->
 			
+<!-- 			수정시에는 수정용 시퀀스가 생성되는데 기존 이 코스에 대한 코스 정보도 가지고 있어야하므로 현재 해당 코스번호를 courseOriginSequnce로 표시하여 넘긴다. -->
             <a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>" class="float-right float-btn">수정</a>
-            <a href="delete.nogari?courseSequnce=<%=courseIdx%>" class="float-right float-btn">삭제</a>
 <!--             필터의 파라미터 이름을 동일하게 해주기위해서 파라미터 명을 courseSequnce로 하였다. -->
+            <a href="delete.nogari?courseSequnce=<%=courseIdx%>" class="float-right float-btn">삭제</a>
+<!--             글작성을 하면, 시퀀스를 생성하여 가기때문에 서블릿으로 먼저 이동한다. -->
             <a href="insert_sequence.nogari" class="float-right float-btn">새글작성</a>
 
             <%}else{ %>
@@ -364,7 +352,6 @@ textarea {
     </div>
     <!-- 지도 표시-->
     <div class="row center course-map">
-        <!-- 지도 들어가는곳 이미 임시 추가-->
         <jsp:include page="course_kakaomap.jsp">
 		<jsp:param value="<%=courseIdx%>" name="courseIdx"/>
 		</jsp:include>

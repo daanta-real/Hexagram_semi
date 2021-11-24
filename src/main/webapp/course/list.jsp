@@ -33,6 +33,8 @@
     //검색용 페이지 네이션
     boolean isSearchMode = pn.isSearchMode();
    
+    //모듈에서 calculate()메소드를 사용하여 아래의 것들을 한번에 처리할 수 있지만, 정렬 및 기타 파라미터들이 늘어나면서
+    //해당 화면에서 페이지 사이즈 및 필요 요소들을 설정해두었다.
     pn.setPageSize(9);
     pn.setStartBlock(pn.getPage()/pn.getBlockSize()*pn.getBlockSize()+1);
     pn.setFinishBlock(pn.getStartBlock()+(pn.getBlockSize()-1));
@@ -533,13 +535,6 @@
 <%} %>
 
 
-
-<!-- 글 쓰기에는 두가지 방법이 있는데, (둘다 시도 중)-->
-<!-- 첫번째는 세션을 이용하여 세션안에서 아이템들을 모아서 처리하였다가 마지막에 그 세션을 파기 시키는 방법 (course_try 내부에 저장해 두었다)-->
-<!-- 두번째는 글쓰기를 누를떄 시퀀스 번호를 생성하는 서블릿으로 이동한 후, 그 시퀀스 번호를 이용해서 코스아이템 DB에 추가 저장하는 방식. -->
-<!-- 컨셉 :  -->
-<!-- 1) 코스 번호는 코스_아이템 DB에 저장되어야 하므로, 미리 생성해서 작성란으로 가야한다. -->
-<!-- 2) 비회원은 작성할 수 없도록 설정해 두었다. -->
 <%if(isLogin){ %>
 <!-- 글쓰기 버튼을 누르면CourseCreateSequnceForInsertServlet 으로 이동해서 시퀀스 번호를 생성해준다. -->
 <h2><a href="insert_sequence.nogari">글 쓰기</a></h2>

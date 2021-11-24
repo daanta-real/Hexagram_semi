@@ -585,6 +585,7 @@
 		<div>
 		<span></span>
 		</div>
+		<!-- 		span은 3개가 안될시 다음단계로 못간다는 것을 보여주는 text란 -->
 		<input type="hidden" name="courseSequnce" value="<%=courseSequnce%>">
 		<input type="hidden" name="courseOriginSequnce" value="<%=courseOriginSequnce%>">
 <!-- 		이 값들이 넘어가야하는 이유 : 343,344 줄 참조 -->
