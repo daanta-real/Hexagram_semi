@@ -46,13 +46,14 @@ public class UsersModifyPasswordServlet extends HttpServlet{
 			} else {
 				System.out.println("OK.");
 			}
-			
+
 			// 3. 검사 - 현재 ID/비번 정합성 검사
 			System.out.print("[비밀번호 변경] 3. 검사 - ID & PW 정합성 확인.. ");
 			boolean isValidIdPw = HashChecker.idPwMatch(sessionId, currPw);
 			if(!isValidIdPw) {
 				System.out.println("오류. 비번이 일치하지 않습니다.");
 				resp.sendRedirect(req.getContextPath() + "/users/modifyPassword.jsp?notEquals");
+				return;
 			} else {
 				System.out.println("OK.");
 			}
@@ -62,7 +63,7 @@ public class UsersModifyPasswordServlet extends HttpServlet{
 			boolean isValidNewPw = UsersDto.isValidUsersPw(newPw);
 			if(!isValidNewPw) {
 				System.out.println("오류. 새 비번이 제약조건에 맞지 않습니다.");
-				throw new Exception();				
+				throw new Exception();
 			} else {
 				System.out.println("OK.");
 			}
@@ -75,6 +76,7 @@ public class UsersModifyPasswordServlet extends HttpServlet{
 				usersDao.updatePw(sessionId, newPw);
 				System.out.println("비밀번호 변경이 성공하였습니다. 성공 페이지로 이동합니다.");
 				resp.sendRedirect(req.getContextPath() + "/users/modify_success.jsp");
+				return;
 			} catch(Exception e) {
 				// 변경 실패 시 다시 비밀번호변경 페이지로 이동
 				System.out.println("비밀번호 변경 과정에서 에러가 발생하였습니다.");
