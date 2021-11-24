@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.UsersDao;
 import beans.UsersDto;
+import util.users.HashChecker;
 import util.users.Sessioner;
 
 @SuppressWarnings("serial")
@@ -64,8 +65,13 @@ public class UsersDeleteServlet extends HttpServlet {
 			// targetId 로 조회한 dto의 getUsersPw와 입력한 pw(파라미터 usersPw)일치여부 검사
 			UsersDto dto = dao.get(targetId);
 			System.out.print("[회원 탈퇴 - 유저가 요청] 3. 탈퇴 실행..(" + targetId + ")");
-			//입력한 비밀번호(inputPw)와 dto의 getUsersPw가 서로 일치하고 탈퇴되는게 성공
-			boolean isSucceed = dto.getUsersPw().equals(inputPw) && dao.delete(targetId);
+			
+			// id/pw 일치하는 값 있는지 검사. 입력한 비밀번호를 암호화시킨 후 저장된 암호화 비번과 일치여부 확인
+			System.out.println("[회원 탈퇴 - 유저가 요청] ID/PW 일치 검사..");
+			boolean isValid = HashChecker.idPwMatch(targetId, inputPw, dao);
+			System.out.print("　　▷ 확인 결과: " + isValid);
+			
+			boolean isSucceed = isValid && dao.delete(targetId);
 			System.out.println("　　▷ 탈퇴 요청 실시함.");
 
 			// 4. 결과를 세션에 반영
