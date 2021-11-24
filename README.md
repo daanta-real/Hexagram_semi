@@ -1,3 +1,5 @@
+![노가리투어](https://user-images.githubusercontent.com/88871773/143209792-fa7e01ad-1493-43d5-924e-8da3cc0327bb.PNG)
+
 ### Hexagram Semi Project
 
 #### 팀명 : <b>Hexagram</b>
