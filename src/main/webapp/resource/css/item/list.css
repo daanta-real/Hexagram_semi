@@ -96,13 +96,13 @@ margin-top: 5px; margin-bottom: 5px;
 
 }
 .table.table-stripe>thead>tr{
-    background-color: darksalmon;
+    background-color: rgb(232, 193, 125);
 }
 .table.table-hover>tbody>tr:hover{
-    background-color: bisque;
+    background-color: rgb(232, 193, 125);
 }
 .table.table-hover>tbody>tr>td>a:hover{
-    color: darksalmon;
+    color: black;
 }
 
 .flex-container > .flex-reply-write-wrapper{

@@ -75,7 +75,7 @@
 		
 		.form-btn {
 		    color: white;
-		    background-color: rebeccapurple;
+		    background-color: rgb(232, 193, 125);
 		    font-weight: bold;
 		    height: 90%;
 		}
@@ -147,9 +147,9 @@
 			
 			.form-link-btn
 	        {
-	            border:1px solid rebeccapurple;
+	            border:1px solid rgb(232, 193, 125);
 	            text-decoration: none;
-	            color:rebeccapurple;
+	            color:rgb(232, 193, 125);
 	            padding:0.1rem 0.1rem;
          	    font-size:20px;
          	    margin: 0 0;
