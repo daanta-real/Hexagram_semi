@@ -282,7 +282,7 @@
 	
 	.boardContainer > .boardBox.page .el {
 		text-align:center;
-		width: 15%;
+		width: 18%;
 	}
 	
 	.boardContainer > .boardBox.page .el.LR {
@@ -432,7 +432,6 @@
 		    //지역 알아내기 -> 코스아이템에서 첫번쨰 아이템 내용 전달.
 		    CourseItemDao courseItemDao = new CourseItemDao();
 		    int itemIdx = courseItemDao.getItemIdxByCourse(courseDto.getCourseIdx());
-		    System.out.println(courseDto.getCourseIdx());
 		    
 		    //위에는 받아올때 idx가 빈값으로 받아오니까?
 		    CourseDto courseCheckDto = courseDao.get(courseDto.getCourseIdx());
