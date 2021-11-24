@@ -451,23 +451,22 @@ textarea {
 							</td>
 							
 							<!-- 댓글 작성자이거나 관리자의 경우 수정 삭제가 가능하다. -->
-							<%if(myReply || isManager){ %>
-								<td width="17%">
-									<a class="reply-btn form-link-btn form-line">대댓글</a>
-									<a class="edit-btn form-link-btn form-line">수정</a>
-									<a href="<%=root %>/course_reply/delete.nogari?courseIdx=<%=courseIdx%>&courseReplyIdx=<%=courseReplyDto.getCourseReplyIdx()%>" class="form-link-btn form-line">삭제</a>
-								</td>
-							<%}else{ %>
-								<td width="17%">
-									<a class="reply-btn form-link-btn form-line">대댓글</a>
-								</td>
+							<td width="17%">
+							<%if(isLogin){ %>
+								<a class="reply-btn form-link-btn form-line">대댓글</a>
 							<%} %>
+							<%if(myReply || isManager){ %>
+								<a class="edit-btn form-link-btn form-line">수정</a>
+								<a href="<%=root %>/course_reply/delete.nogari?courseIdx=<%=courseIdx%>&courseReplyIdx=<%=courseReplyDto.getCourseReplyIdx()%>" class="form-link-btn form-line">삭제</a>
+								
+							<%} %>
+							</td>
 						</tr>
 						
 						<!-- 수정 창(각 댓글마다 수정 칸을 숨겨준다. ) -->
 						<!-- 댓글 작성자이거나 관리자의 경우 수정 입력이 가능하다. -->
-						<%if(myReply || isManager){ %>
 						<tr class="edit-row">
+						<%if(myReply || isManager){ %>
 							<td colspan="3">
 								<!-- 댓글 수정시 댓글 수정에 필요한 itemIdx와 itemReplyIdx를 숨겨서 보내준다 -->
 								<form action="<%=root %>/course_reply/edit.nogari" method="post">
