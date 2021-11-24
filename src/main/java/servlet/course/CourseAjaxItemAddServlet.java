@@ -25,7 +25,7 @@ public class CourseAjaxItemAddServlet extends HttpServlet{
 			
 			//insert.jsp의  $(".item-add-btn").on("click", function(){})의 옵션으로 통신 
 			int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
-			int courseIdx = Integer.parseInt(req.getParameter("courseIdx"));
+			int courseIdx = Integer.parseInt(req.getParameter("courseSequnce"));
 			
 			//등록 처리
 			CourseItemDao courseItemDao = new CourseItemDao();

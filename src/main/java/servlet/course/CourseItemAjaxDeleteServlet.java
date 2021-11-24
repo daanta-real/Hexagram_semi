@@ -26,7 +26,7 @@ public class CourseItemAjaxDeleteServlet extends HttpServlet{
 			//itemIdx : 파라미터로 받은 itemIdx 변수에 저장
 			//courseIdx : 파라미터로 받은 courseIdx 변수에 저장
 			int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
-			int courseIdx = Integer.parseInt(req.getParameter("courseIdx"));
+			int courseIdx = Integer.parseInt(req.getParameter("courseSequnce"));
 			
 			//course_item에 저장된 목록을 보기위해 목록 출력
 			CourseItemDao courseItemDao = new CourseItemDao();

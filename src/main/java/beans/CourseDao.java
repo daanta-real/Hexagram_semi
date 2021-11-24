@@ -121,6 +121,21 @@ public class CourseDao implements PaginationInterface<CourseDto> {
 			return result;
 		}
 		
+		//현재 시퀀스 번호를 확인한다(코스 등록 필터 처리 시에 현재의 시퀀스 값보다 높은 값을 주소값에 넣으면 막아줄 수 있다.)
+		//즉 시퀀스를 미리 생성하고 나서, 절차를 진행해야함을 의미한다.
+		public int getCurrSequence() throws Exception {
+			String sql = "select course_seq.currval from dual";
+			Connection con = JdbcUtils.connect3();
+			PreparedStatement ps = con.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+
+			rs.next();
+			int result = rs.getInt(1);
+
+			con.close();
+			return result;
+		}
+		
 		//등록 및 수정시에 사용자가 완료하지 않고 생성한 코스번호에 대해서 삭제해준다.
 		public int getMaxIdx() throws Exception {
 			String sql = "select max(course_idx) from course";
