@@ -15,7 +15,7 @@ public class CourseItemDao {
 	//코스 목록
 	public List<CourseItemDto> getByCourse(int courseSequnce) throws Exception {
 		
-		//course에 등록한 item목록을 보기위해 코스의 시퀀스값(매개변수)를 받아 item_idx로 정렬
+		//course에 등록한 item목록을 보기위해 코스의 시퀀스값(매개변수)를 받아 course_item_idx로 내림차순 정렬
 		String sql = "SELECT * FROM course_item where course_idx=? order by course_item_idx asc";
 		
 		Connection con = JdbcUtils.connect3();
@@ -39,7 +39,8 @@ public class CourseItemDao {
 	}
 	
 
-	//courseIdx에 들어있는 오직 하나의 item만을 꺼내서 지역을 확인할 수 있다.(코스는 따로 지역 확인이 불가능하기 때문에 하나만 꺼내도 동일 지역만 선택이 가능하다)
+	//courseIdx에 들어있는 오직 하나의 item만을 꺼내서 지역을 확인할 수 있다.
+	//(코스는 따로 지역 확인이 불가능하기 때문에 하나만 꺼내도 지역을 확일할 수 있고 이를 통한 비교로 동일 지역만 선택이 가능하도록 하기 위한 메소드)
 	public int getItemIdxByCourse(int courseIdx) throws Exception {
 		String sql = "SELECT * FROM course_item where course_idx=? order by course_item_idx asc";
 		Connection con = JdbcUtils.connect3();
@@ -54,7 +55,8 @@ public class CourseItemDao {
 		return result;
 		}
 	
-	//필터 통과시에 코스 등록전에 그 임시 코스 번호에 코스-아이템 수가 얼마인지 체크해서 확실히 등록시키기 위함.
+	//필터 통과시에 코스 등록전에 그 임시 코스 번호에 코스-아이템 수가 얼마인지 체크해서 확실히 등록시키기 위함.(코스 게시물에 관광지가 3~8개 사이에 있어야 등록이 가능하도록 함)
+	//CourseAjaxCountItemFilter의 필터에서 사용된다.
 	public int getCount(int courseIdx) throws Exception {
 		String sql = "SELECT count(*) FROM course_item where course_idx=?";
 		Connection con = JdbcUtils.connect3();
@@ -69,8 +71,9 @@ public class CourseItemDao {
 		return result;
 		}
 
-	//course_item 등록 메소드
 	//코스 등록시 course_item 등록 메소드
+	//CourseAjaxItemAddServlet 및 CourseAjaxItemAddForUpdateServlet에서 사용하며,
+	//코스 등록시에(insert.jsp) 코스 수정시에(update.jsp)에서 cousreSequnce와 itemIdx를 ajax로 전달하여 코스_아이템 db에 항목을 추가시키기 위한 메소드
 	public void insert(CourseItemDto courseItemDto) throws Exception {
 		String sql = "INSERT INTO course_item values(course_item_seq.nextval,?,?)";
 		Connection con = JdbcUtils.connect3();
@@ -84,8 +87,9 @@ public class CourseItemDao {
 		con.close();
 	}
 
-	//course_item 삭제 메소드
-	//코스 수정시 course_item에서 관광지 삭제를 위한 메소드
+	//코스 등록시 course_item 등록 메소드
+	//CourseItemAjaxDeleteServlet 및 CourseItemAjaxDeleteServletForUpdateServlet에서 사용하며,
+	//코스 등록시에(insert.jsp) 코스 수정시에(update.jsp)에서 cousreSequnce와 itemIdx를 ajax로 전달하여 코스_아이템 db에 항목을 삭제시키기 위한 메소드
 	public boolean deleteItem(CourseItemDto courseItemDto) throws Exception {
 		String sql = "delete course_item where item_idx=? and course_idx=?";
 		Connection con = JdbcUtils.connect3();
@@ -100,8 +104,7 @@ public class CourseItemDao {
 		return result>0;
 	}
 	
-	//course 삭제 메소드 (courseDao도 있음 의동님과 회의 후 처리)
-	//코스 게시물 삭제
+	//CourseDeleteServlet에서 코스가 삭제될때 해당 코스번호에 대한 코스-아이템 정보를 함께 삭제해준다.
 	public boolean delete(int courseIdx) throws Exception {
 		String sql = "delete course_item where course_idx=?";
 		Connection con = JdbcUtils.connect3();

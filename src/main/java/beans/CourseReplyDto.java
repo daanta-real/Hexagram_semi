@@ -90,11 +90,12 @@ public class CourseReplyDto {
 		return courseReplyDepth;
 	}
 
-
+	
 	public void setCourseReplyDepth(int courseReplyDepth) {
 		this.courseReplyDepth = courseReplyDepth;
 	}
 	
+	//댓글의 날짜 및 시간을 표시해주는 메소드
 	public String getCourseReplyTotalDate() {
 		Format f = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		return f.format(this.courseReplyDate);

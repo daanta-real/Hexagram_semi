@@ -26,33 +26,6 @@
 <SECTION>
 <!-- 페이지 내용 시작 -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="/resource/js/reply.js"></script>
-<script>
-$(function(){
-    $(".view-row").find(".edit-btn").click(function(){
-        $(this).parents("tr.view-row").hide();
-        $(this).parents("tr.view-row").next("tr.edit-row").show();
-    });
-    
-    $(".edit-row").find(".edit-cancel-btn").click(function(){
-        $(this).parents("tr.edit-row").hide();
-        $(this).parents("tr.edit-row").prev("tr.view-row").show();
-    });
-    
-
-    $(".view-row").find(".reply-btn").click(function(){
-        $(this).parents("tr.view-row").next("tr.edit-row").next("tr.reply-row").show();
-    });			
-        
-    
-    $(".reply-row").find(".reply-cancel-btn").click(function(){
-        $(this).parents("tr.reply-row").hide();
-    });
-    
-    $(".edit-row").hide();
-    $(".reply-row").hide();
-});
-</script>
 <style>
 	.container-900{width: 900px;}
 	.container-left {
@@ -232,7 +205,7 @@ $(function(){
   	boolean isManager = Sessioner.getUsersGrade(request.getSession()) != null 
   	&& Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN);
  %>
- 
+ <script src="<%=root%>/resource/js/reply.js"></script>
 <%-- 조회수 중복방지 기능 (추 후 필요할시 주석 제거하고 위에 조회수 기능 삭제) --%>
 <%-- 조회수 증가 기능 (조회수 중복 방지) => 한번이 아니라 다른 회원이 들어올떄마다 조회수를 증가시켜주기 위해 게시물을 클릭시킬떄마다 +1을 해준다.(새로고침 방지)--%>
 <%
@@ -444,19 +417,21 @@ ItemFileDao itemFileDao = new ItemFileDao();
 							</td>
 							
 							<!-- 댓글 작성자이거나 관리자의 경우 수정 삭제가 가능하다. -->
-							<%if(isManager || isUsersReplyWriter) {%>
 								<td width="17%">
+							<%if(isLogin) {%>
 									<a class="reply-btn form-link-btn form-line">대댓글</a>
+								<%} %>	
+							<%if(isManager || isUsersReplyWriter) {%>
 									<a class="edit-btn form-link-btn form-line">수정</a>
 									<a href="<%=root%>/item_reply/delete.nogari?itemIdx=<%=itemIdx%>&itemReplyIdx=<%=itemReplyDto.getItemReplyIdx()%>" class="form-link-btn form-line">삭제</a>
+								<%} %>
 								</td>
-							<%} %>
 						</tr>
 						
 						<!-- 수정 창(각 댓글마다 수정 칸을 숨겨준다. ) -->
 						<!-- 댓글 작성자이거나 관리자의 경우 수정 입력이 가능하다. -->
-						<%if(isManager || isUsersReplyWriter) {%>
 						<tr class="edit-row">
+						<%if(isManager || isUsersReplyWriter) {%>
 							<td colspan="3">
 								<!-- 댓글 수정시 댓글 수정에 필요한 itemIdx와 itemReplyIdx를 숨겨서 보내준다 -->
 								<form action="<%=root%>/item_reply/update.nogari" method="post">
@@ -478,8 +453,8 @@ ItemFileDao itemFileDao = new ItemFileDao();
 									</div>
 								</form>
 							</td>
-						</tr>
 						<%} %>	
+						</tr>
 						
 						<!-- 자바스크립트를 배우고 나서 이부분을 수정한다. -->
 						

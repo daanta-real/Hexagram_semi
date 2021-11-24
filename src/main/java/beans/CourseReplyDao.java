@@ -120,6 +120,8 @@ public class CourseReplyDao {
 	}
 
 	// 시퀀스 번호 생성.
+	// 계층형이기 때문에 생성해주어야 한다. 즉CourseReplyGroupno에다가 최초 생성할 시에, 시퀀스 번호가 계층형 그룹 번호가 되어야하므로,
+	//그 정보가 필요하다.
 	public int getSequenceNo() throws Exception {
 		Connection con = JdbcUtils.connect3();
 		String sql = "select course_reply_seq.nextval from dual";
