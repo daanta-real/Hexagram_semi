@@ -9,8 +9,13 @@ function getParam(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
-// Hacks for prevent whitespace for wholescreen elements 
-
+// 다른 이벤트로의 버블링을 차단하는 메소드
+function stopEvent() {
+    if(typeof window.event == 'undefined') return;
+    if (!e) var e = window.event;
+    e.cancelBubble = true;
+    if (e.stopPropagation) e.stopPropagation();
+}
 
 // 디버그용 - 랜덤한 css html 보더 설정
 function rainbow(query, styles) {
