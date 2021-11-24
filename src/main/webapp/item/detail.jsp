@@ -222,7 +222,11 @@ $(function(){
 	 String usersId = (String)Sessioner.getUsersId(request.getSession());
   	 boolean isLogin = usersId != null;
   	//(본인글인지 확인을 위해)
-	 boolean isMyboard = usersId.equals(usersDto.getUsersId());
+	 boolean isMyboard; 
+ 	if(isLogin)
+ 	isMyboard = usersId.equals(usersDto.getUsersId());
+ 	else//로그인이 되어있지 않다면,
+ 	isMyboard = false;
 	 
   	//관리자인지?
   	boolean isManager = Sessioner.getUsersGrade(request.getSession()) != null 
@@ -404,7 +408,11 @@ ItemFileDao itemFileDao = new ItemFileDao();
 														// 게시물의 작성자가 댓글 작성자인가?
 														boolean isSameItemReply = itemDto.getUsersIdx() == itemReplyDto.getUsersIdx();
 														//현재 접속한 유저가 이 댓글 작성한 사람인가?
-														boolean isUsersReplyWriter = usersId.equals(usersItemReplyDto.getUsersId());
+														boolean isUsersReplyWriter;
+														if(isLogin)
+														isUsersReplyWriter =	 usersId.equals(usersItemReplyDto.getUsersId());
+														else
+														isUsersReplyWriter = false; 
 						%>
 						
 						<tr class="view-row">
