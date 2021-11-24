@@ -52,16 +52,15 @@ public class UsersDeleteServlet extends HttpServlet {
 				resp.sendRedirect(req.getContextPath()+"/users/unregister.jsp?fail");
 				return;
 			}
-			System.out.print("탈퇴 성공.");
+			System.out.println("탈퇴 성공.");
 
 			// 3. 결과를 세션에 반영
-			System.out.print("[회원 탈퇴 - 유저가 요청] 3. 탈퇴 결과를 세션에 반영.. ");
+			System.out.println("[회원 탈퇴 - 유저가 요청] 3. 탈퇴 결과를 세션에 반영.. ");
 			Sessioner.logout(session);
 			System.out.println("탈퇴 결과 세션 반영 완료.");
 
 			// 4. 탈퇴 성공 페이지로 리다이렉트 실시
 			System.out.print("[회원 탈퇴 - 유저가 요청] 4. 탈퇴 성공 페이지로 리다이렉트 실시.");
-			System.out.println("요청 주소: " + req.getContextPath()+"/users/unregister_success.jsp");
 			resp.sendRedirect(req.getContextPath()+"/users/unregister_success.jsp");
 			return;
 
