@@ -39,7 +39,7 @@ public class CourseAjaxUpdateFilter implements Filter {
 			//현재 접속한 사람을 확인한다.
 			String usersId = Sessioner.getUsersId(req.getSession());
 			//현재 접속한 사람이 관리자인지 확인한다.
-			boolean isManager = usersId != null && usersId.equals(Sessioner.GRADE_ADMIN);
+			boolean isManager = usersId != null && Sessioner.getUsersGrade(req.getSession()).equals(Sessioner.GRADE_ADMIN);
 
 			if(usersId == null) {
 				resp.sendError(401); // 비회원이라면
