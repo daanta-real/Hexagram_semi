@@ -141,7 +141,7 @@
 	.second {
 		--grid-box-margin:3rem;
 		--grid-el-width: 9.5rem;
-		--grid-el-height: 9.5rem;
+		--grid-el-height: 10rem;
 		--grid-el-margin: 1rem;
 	}
 	
@@ -255,7 +255,11 @@
 	 	<div class='gridContainer'>
 			<div class='gridBox'>
 				<!-- 목록 출력 시작 -->
-				<%for(ItemDto itemDto : list){ %>
+				<%for(ItemDto itemDto : list){ 
+					String tourName = itemDto.getItemName();
+					if(tourName.length()>15) tourName=tourName.substring(0,15)+"...";
+					//제목이 길면 틀에서 깨지므로,, 15글자로 제한해서 보여준다.
+				%>
 				<div class='gridEl'>
 					<a href="readup.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
 	            	<!-- 목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
@@ -267,7 +271,8 @@
 						<!-- 첨부파일이 있다면 첨부파일을 출력  -->
 						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="170" height="170">
 					<%} %>
-						<span class="gridElTitle"><%=itemDto.getItemName() %></span>
+						<span class="gridElTitle"><%=tourName %></span>
+						<span class="gridElTitle"><%=itemDto.getAdressCity() %></span>
 					</a>
 				</div>	
 	            <%} %>
@@ -291,7 +296,11 @@
 	 	<div class='gridContainer'>
 			<div class='gridBox'>
 				<!-- 목록 출력 시작 -->
-				<%for(ItemDto itemDto : list1){ %>
+				<%for(ItemDto itemDto : list1){
+					String festivalName = itemDto.getItemName();
+					if(festivalName.length()>15) festivalName=festivalName.substring(0,15)+"...";
+					//제목이 길면 틀에서 깨지므로,, 15글자로 제한해서 보여준다.
+					%>
 				<div class='gridEl'>
 					<a href="readup.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
 	            	<!-- 목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
@@ -303,7 +312,8 @@
 						<!-- 첨부파일이 있다면 첨부파일을 출력  -->
 						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="170" height="170">
 					<%} %>
-						<span class="gridElTitle"><%=itemDto.getItemName() %></span>
+						<span class="gridElTitle"><%=festivalName%></span>
+						<span class="gridElTitle"><%=itemDto.getAdressCity() %></span>
 					</a>
 				</div>	
 	            <%} %>
