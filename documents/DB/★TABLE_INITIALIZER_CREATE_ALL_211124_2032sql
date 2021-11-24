@@ -1412,11 +1412,6 @@ INSERT INTO course_item values(course_item_seq.nextval,323,course_seq.currval);
 INSERT INTO course_item values(course_item_seq.nextval,301,course_seq.currval);
 INSERT INTO course VALUES(course_seq.currval,1,'서울 축제 테스트3','테스트',sysdate,0,0);
 
-INSERT INTO course_item values(course_item_seq.nextval,329,course_seq.nextval);
-INSERT INTO course_item values(course_item_seq.nextval,295,course_seq.currval);
-INSERT INTO course_item values(course_item_seq.nextval,301,course_seq.currval);
-INSERT INTO course VALUES(course_seq.currval,1,'경북 축제 테스트1','테스트',sysdate,0,0);
-
 INSERT INTO course_item values(course_item_seq.nextval,295,course_seq.nextval);
 INSERT INTO course_item values(course_item_seq.nextval,328,course_seq.currval);
 INSERT INTO course_item values(course_item_seq.nextval,320,course_seq.currval);
