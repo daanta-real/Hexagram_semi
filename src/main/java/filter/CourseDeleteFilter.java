@@ -35,6 +35,8 @@ public class CourseDeleteFilter implements Filter{
 			CourseDto courseDto = courseDao.get(courseIdx);
 
 			String usersId = Sessioner.getUsersId(req.getSession());
+			//현재 접속한 사람이 관리자인지 확인한다.
+			boolean isManager = usersId != null && Sessioner.getUsersGrade(req.getSession()).equals(Sessioner.GRADE_ADMIN);
 			
 			if(courseDto == null) {
 				resp.sendError(404); //대상 게시글이 없으면 404(잘못된 번호)
@@ -44,8 +46,8 @@ public class CourseDeleteFilter implements Filter{
 				UsersDao usersDao = new UsersDao();
 				UsersDto usersDto = usersDao.get(courseDto.getUsersIdx());
 				
-				if(usersId.equals(usersDto.getUsersId())) {
-					chain.doFilter(request, response); //본인 아이디와 일치한다면, 통과
+				if(usersId.equals(usersDto.getUsersId())||isManager) {
+					chain.doFilter(request, response); //본인 아이디와 일치한다면, 또는 관리자라면 통과
 				}else {
 					resp.sendError(403); //로그인도 되어있고 회원이지만 본인 글이 아니라면 권한 부족
 				}

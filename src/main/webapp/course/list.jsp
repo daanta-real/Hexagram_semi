@@ -449,7 +449,13 @@
 		
 				<div class="box-detail">
 					<!-- 관광지 제목 -->
-					<%=courseDto.getCourseName()%>
+					<%
+					String name = courseDto.getCourseName();
+					if(name.length() > 30){
+						name = name.substring(0,30)+"...";
+					}
+					%>
+					<%=name%>
 					<!-- 댓글이 있다면 관광지 제목 옆에 댓글 개수를 출력 -->
 					<%if(courseDto.isCountReply()){ %>
 						[<%=courseDto.getCourseCountReply() %>]

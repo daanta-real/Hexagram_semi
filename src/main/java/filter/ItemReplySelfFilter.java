@@ -37,7 +37,7 @@ public class ItemReplySelfFilter implements Filter {
 			String usersId  = Sessioner.getUsersId(req.getSession());//현재 접속 회원 아이디 확인
 			
 			//관리자인가?
-			boolean isManager = usersId != null && usersId.equals(Sessioner.GRADE_ADMIN);
+			boolean isManager = usersId != null && Sessioner.getUsersGrade(req.getSession()).equals(Sessioner.GRADE_ADMIN);
 			
 			if(ItemReplyDto==null) {
 				//댓글이 없다면,
