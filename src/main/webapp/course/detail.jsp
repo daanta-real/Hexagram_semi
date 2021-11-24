@@ -67,7 +67,7 @@ margin-top: 5px; margin-bottom: 5px;
 /* 코스 제목 밑에 지역 및 코스 총 거리 (총거리는 계산할수 있으면 추가)*/
 .course-location{
     color:gray;
-    font-size: 12px;
+    font-size: 25px;
     text-align: center;
 }
 /* float 만들기 */
@@ -310,12 +310,22 @@ textarea {
         <div class="row float-container">
             <span class="float-left">작성자 : <%=usersDto.getUsersId()%>(<%=usersDto.getUsersNick()%>)</span>
             <%
+            int itemIdx = courseItemDao.getItemIdxByCourse(courseIdx);
+            ItemDto location = itemDao.get(itemIdx);
+            //코스의 지역표시 및 수정시에 사용자가 편하게 동일 지역을 수정할 수 있게 지역 파라미터 정보를 넘겨준다.
+            String paramCity = location.getAdressCity();
+            if(paramCity.length() != 4) paramCity=paramCity.substring(0,2);
+            //전라북도 등 북도 남도만 그대로 보내고 나머지는 2글자만 보내겠다.
+            %>
+            
+            <%
             if(isMyboard || isManager){
             %>
 			<!-- 댓글 작성자 또는 관리자가 아니라면 버튼이 보여지지 않게 처리 -->
 			
 <!-- 			수정시에는 수정용 시퀀스가 생성되는데 기존 이 코스에 대한 코스 정보도 가지고 있어야하므로 현재 해당 코스번호를 courseOriginSequnce로 표시하여 넘긴다. -->
-            <a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>" class="float-right float-btn">수정</a>
+<!--            수정을 편하게 하기위해서 컬럼과 키워드를 보내서 같은 지역에서 수정이 가능하게 보여준다.(수정시에는 다른 지역으로 변경 불가) -->
+            <a href="udpate_sequence.nogari?courseOriginSequnce=<%=courseIdx%>&column=item_address&keyword=<%=paramCity%>" class="float-right float-btn">수정</a>
 <!--             필터의 파라미터 이름을 동일하게 해주기위해서 파라미터 명을 courseSequnce로 하였다. -->
             <a href="delete.nogari?courseSequnce=<%=courseIdx%>" class="float-right float-btn">삭제</a>
 <!--             글작성을 하면, 시퀀스를 생성하여 가기때문에 서블릿으로 먼저 이동한다. -->
@@ -332,11 +342,7 @@ textarea {
         <div class="row center">
             <span class="course-name"><%=courseDto.getCourseName()%></span><br>
             <!-- 코스 제목 밑에 지역 표시-->
-            <%
-            int itemIdx = courseItemDao.getItemIdxByCourse(courseIdx);
-            ItemDto location = itemDao.get(itemIdx);
-            %>
-            <span class="course-location"><%=location.getAdressCity()%> &nbsp; <%=location.getAdressCitySub()%></span>
+            <span class="course-location"><%=location.getAdressCity()%></span>
         </div>
         <!-- 조회수 및 좋아요? 왼쪽 정렬 / 작성일자 오른쪽 정렬 -->
         <div class="row float-container">
