@@ -123,6 +123,7 @@ public class ItemDto {
 		return this.itemCountReply > 0;
 	}
 	
+	//주소에서 도시명만을 꺼내기 위한 메소드
 	public String getAdressCity() {
 		StringTokenizer st = new StringTokenizer(this.itemAddress," ");
 		StringBuffer sb = new StringBuffer();
@@ -135,17 +136,18 @@ public class ItemDto {
 		return sb.toString();
 		}
 		
-		public String getAdressCitySub() {
-			StringTokenizer st = new StringTokenizer(this.itemAddress," ");
-			StringBuffer sb = new StringBuffer();
-			int i = 0;
-			while(st.hasMoreTokens()) {
-				i++;
-				if(i==1) st.nextToken();
-				if(i==2) sb.append(st.nextToken());
-				if(i==2) break;
-			}
-			return sb.toString();
+	//주소에서 시,군,구명만을 꺼내기 위한 메소드
+	public String getAdressCitySub() {
+		StringTokenizer st = new StringTokenizer(this.itemAddress," ");
+		StringBuffer sb = new StringBuffer();
+		int i = 0;
+		while(st.hasMoreTokens()) {
+			i++;
+			if(i==1) st.nextToken();
+			if(i==2) sb.append(st.nextToken());
+			if(i==2) break;
+		}
+		return sb.toString();
 	}
 	
 	public ItemDto() {

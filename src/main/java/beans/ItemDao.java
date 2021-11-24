@@ -268,6 +268,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		return count;
 	}
 	
+	// 페이징 마지막 블록을 구하기 위하여 게시글 개수를 구하는 기능(검색 중 세부 도시 나왔을 경우 list_city.jsp에서 사용)
 	public Integer count(String column, String keyword, String subCity) throws Exception {
 		Connection con = JdbcUtils.connect3();
 
@@ -290,7 +291,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		return count;
 	}
 
-	// 관광지 추가(축제인지 관광지인지는 나중에 생각)
+	// 관광지 추가
 	public boolean insert(ItemDto itemDto) throws Exception {
 		String sql = "INSERT INTO item (item_idx,users_idx,item_type,item_name,item_detail,item_period,"
 				+ "item_time,item_homepage,item_parking,item_address,item_date,item_count_view,item_count_reply)"
@@ -374,7 +375,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		return result > 0;
 	}
 	
-	//조회수 증가(유저 중복 증가 방지)
+	//조회수 증가(게시글 작성자 이외의 상황일때 (회원전용)) ItemReadupServlet참조
 	public boolean readUp(int itemIdx, int usersIdx) throws Exception {
 		String sql = "UPDATE item set item_count_view=item_count_view+1" + " where item_idx=? and users_idx != ?";
 		Connection con = JdbcUtils.connect3();
@@ -389,7 +390,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		return result > 0;
 	}
 	
-	//조회수 증가(중복 증가 방지 없음)
+	//조회수 증가(비회원용) ItemReadupServlet참조
 	public boolean readUp(int itemIdx) throws Exception {
 		String sql = "UPDATE item set item_count_view=item_count_view+1" + " where item_idx=?";
 		Connection con = JdbcUtils.connect3();
@@ -435,7 +436,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		return result > 0;
 	}
 
-	// 코스를 위한 특정 도시 전체 조회
+	// 현재 사용하지 않음.
 	public List<ItemDto> getCityList(String city) throws Exception {
 		String sql = "select * from item where instr(item_address,?)>=1";
 		Connection con = JdbcUtils.connect3();
@@ -468,7 +469,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		return list;
 	}
 
-	//최신순 정렬 조회 메소드(페이지네이션)
+	//정렬 조회 메소드(페이지네이션) : 비검색
 	public List<ItemDto> orderByList(String order,int begin, int end) throws Exception {
 
 		Connection con = JdbcUtils.connect3();
@@ -508,7 +509,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		return list;
 	}
 	
-		//인기순 댓글순 조회 정렬 메소드
+		//정렬 조회 메소드(페이지네이션) : 검색
 		public List<ItemDto> orderByKeywordList(String order,String column, String keyword, int begin, int end) throws Exception {
 
 			Connection con = JdbcUtils.connect3();
@@ -550,7 +551,9 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 
 			return list;
 		}
-
+		
+		//정렬 조회 메소드(페이지네이션) : 검색
+		//추가 검색 : 시,군,구
 		public List<ItemDto> subCityList(String subCity,String order,String column, String keyword, int begin, int end) throws Exception {
 
 			Connection con = JdbcUtils.connect3();

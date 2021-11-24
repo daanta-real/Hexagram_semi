@@ -29,9 +29,11 @@ public class CourseDeleteFilter implements Filter{
 		HttpServletResponse resp = (HttpServletResponse)response;
 		try {
 			req.setCharacterEncoding("UTF-8");
+			//해당 코스번호를 받는다.
 			int courseIdx = Integer.parseInt(req.getParameter("courseSequnce"));
 			
 			CourseDao courseDao = new CourseDao();
+			//코스에 대한 상세정보를 가져온다.=> usersIdx를 알아내기 위해서.
 			CourseDto courseDto = courseDao.get(courseIdx);
 
 			String usersId = Sessioner.getUsersId(req.getSession());

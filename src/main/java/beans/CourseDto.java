@@ -56,7 +56,7 @@ public class CourseDto {
 	public CourseDto() {
 		super();
 	}
-	//댓글이 1개 이상 있는지?
+	//댓글이 1개 이상 있는지? 리스트에서 제목옆에 댓글 갯수 표시하기 위함임.
 	public boolean isCountReply() {
 		return this.courseCountReply > 0;
 	}
