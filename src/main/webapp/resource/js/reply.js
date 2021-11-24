@@ -13,7 +13,7 @@ $(function(){
     $(".view-row").find(".reply-btn").click(function(){
         $(this).parents("tr.view-row").next("tr.edit-row").next("tr.reply-row").show();
     });			
-        
+     
     
     $(".reply-row").find(".reply-cancel-btn").click(function(){
         $(this).parents("tr.reply-row").hide();
