@@ -6,6 +6,8 @@ import java.security.SecureRandom;
 
 import util.HexaLibrary;
 
+// 암호화(해싱)된 문자열 생성 그 자체를 위한 라이브러리이다.
+// (해싱된 문자열을 활용하는 내용은 본 라이브러리가 아니고 HashChecker 라이브러리임)
 public class Encrypter {
 
 	// 0. 변수준비

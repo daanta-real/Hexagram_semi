@@ -36,10 +36,10 @@ System.out.println("[이벤트 - 상세보기] DTO 내용: " + eventDto);
 <%/*CSS들*/%>
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/detail.css">
 <style type='text/css'>
-.boardContainer { --board-grid-columns: 3rem 15rem; font-size:1rem; }
+.boardContainer { --board-grid-columns: 3rem 20rem; font-size:1rem; }
 .boardContainer .title { font-size:1.5rem; }
 .boardContainer .id { font-size:0.7rem; }
-.boardContainer .content { font-size:0.8rem; font-weight:initial; }
+.boardContainer .content { font-weight:initial; justify-content: flex-start; min-height: 10rem; }
 </style>
 </HEAD>
 
@@ -84,17 +84,16 @@ System.out.println("[이벤트 - 상세보기] DTO 내용: " + eventDto);
 		<th class='content'><%=eventDto.getEventDetail() %></th>
 	</tr>
 	
-	<tr class='row'></tr>
-	
 </tbody>
 
 <tfoot class='boardBox'>
 
 	<tr class='boardBox'>
 		<td colspan=2>
-		<td>
-			<a href="<%=root%>/event/modify.jsp?eventidx=<%=eventDto.getEventIdx()%>">수정</a>
-			<a href="<%=root%>/event/delete.jsp?eventidx=<%=eventDto.getEventIdx()%>">삭제</a>
+		<td class="flexCenter flexCol">
+			<a class="bottomLongBtn" href="<%=root%>/event/list.jsp">목록</a>
+			<a class="bottomLongBtn" href="<%=root%>/event/modify.jsp?eventidx=<%=eventDto.getEventIdx()%>">수정</a>
+			<a class="bottomLongBtn" href="<%=root%>/event/delete.jsp?eventidx=<%=eventDto.getEventIdx()%>">삭제</a>
 		</td>
 	</tr>
 
