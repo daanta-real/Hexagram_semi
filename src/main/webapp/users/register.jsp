@@ -49,7 +49,7 @@ var sysurl = "<%=root%>";
 	비밀번호 입력값 일치여부 검사시 템플릿안에 로그인에도 name=usersPw가 있어서 값을 못받아 오기때문에
 	form에 class=form-regexCheck 를 부여하여 선택자 지정시킴  
  -->
-<form class="form-regexCheck" method='post' action='<%=root%>/users/register.nogari'" >
+<form class="form-regexCheck" method='post' action='<%=root%>/users/register.nogari'>
 <table class='boardContainer'>
 <tbody class='boardBox'>       
 	<tr class='row'>

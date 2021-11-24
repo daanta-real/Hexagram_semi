@@ -45,6 +45,7 @@ public class AdminUsersEditServlet extends HttpServlet{
 			redirectTo += isSucceed ? "&success" : "&fail";
 			System.out.println("[관리자 - 회원 정보 변경] 회원 정보 수정 성공? (" + isSucceed + ")");
 			resp.sendRedirect(redirectTo);
+			return;
 
 		}
 		catch(Exception e) {

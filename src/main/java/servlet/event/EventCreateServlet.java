@@ -79,6 +79,7 @@ public class EventCreateServlet extends HttpServlet {
 
 			System.out.println("[이벤트 - 신규] 4. 글 등록이 모두 끝났습니다. 상세보기로 이동합니다.");
 			resp.sendRedirect("detail.jsp?eventIdx=" + nextSeq);
+			return;
 
 		}
 

@@ -74,6 +74,7 @@ public class ItemInsertServlet extends HttpServlet{
 			}
 
 			resp.sendRedirect("detail.jsp?itemIdx="+sequnceNo);
+			return;
 
 		}
 		catch(Exception e){

@@ -23,17 +23,19 @@ public class EventReplyUpdateServlet extends HttpServlet {
 			int eventReplyIdx = Integer.parseInt(req.getParameter("eventReplyIdx"));
 			//업데이트 후 돌아갈 게시물 번호 받기
 			int eventIdx = Integer.parseInt(req.getParameter("eventIdx"));
-			
+
 			EventReplyDao eventReplyDao = new EventReplyDao();
 			EventReplyDto eventReplyDto = new EventReplyDto();
-			
+
 			eventReplyDto.setEventReplyIdx(eventReplyIdx);
 			eventReplyDto.setEventReplyDetail(eventReplyDetail);
-			
+
 			eventReplyDao.update(eventReplyDto);
-			
+
 			//댓글 업데이트 후 원래의 게시판으로 돌아간다.
-			resp.sendRedirect(req.getContextPath()+"/event/detail.jsp?eventIdx="+eventIdx);
+			resp.sendRedirect(req.getContextPath() + "/event/detail.jsp?eventIdx=" + eventIdx);
+			return;
+
 		}
 		catch (Exception e) {
 			e.printStackTrace();

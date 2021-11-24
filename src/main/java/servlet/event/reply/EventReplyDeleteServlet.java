@@ -1,5 +1,6 @@
 package servlet.event.reply;
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,6 +27,8 @@ public class EventReplyDeleteServlet extends HttpServlet {
 			eventDao.countReply(eventIdx);
 
 			resp.sendRedirect(req.getContextPath()+"/event/detail.jsp?eventIdx="+eventIdx);
+			return;
+
 		}
 		catch (Exception e) {
 			e.printStackTrace();
