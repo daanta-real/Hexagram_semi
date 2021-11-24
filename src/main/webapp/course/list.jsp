@@ -240,7 +240,7 @@
 	}
 	
 	/* 게시판에서 사용되는 변수들 */
-	.pagenation {
+	.board {
 		--board-grid-columns: 7rem minmax(15rem, 1fr) 5rem 5rem 5rem;
 		
 		--board-color-title-bg: var(--color10);
@@ -253,30 +253,40 @@
 		--board-el-bgcolor-highlighted: #8882;
 		
 		--board-page-color: var(--color8);
-		--board-page-el-width: 2rem;
+		--board-page-el-width: 4rem;
 		--board-page-lr-width: 3rem;
-		--box-sizing:content-box;
+		box-sizing:content-box;
 	}
-	.pagenation > .boardContainer > .boardBox {
+	 
+
+	.boardContainer > .boardBox.body .row {
+		color: var(--board-color-body-font);
+		background-color: var(--board-color-body-bg);
+	}
+	.boardContainer > .boardBox .row > div {
 		display:flex; justify-content:center; align-items:center;
-		width:100%;
+	} 
+
+	.boardContainer > .boardBox.body .row,       .boardContainer > .boardBox.page .el { cursor:pointer; }
+	.boardContainer > .boardBox.body .row:hover, .boardContainer > .boardBox.page .el:hover {
+		background-color:var(--board-el-bgcolor-highlighted);
 	}
 	
+
+		
 	/* 게시판 하단 페이징 블럭들 */
-	.pagenation > .boardContainer > .boardBox.page {
+	.boardContainer > .boardBox.page {
 		display:flex; flex-direction:row; justify-content:center;
 		color: var(--board-page-color);
-		box-sizing: var(--box-sizing);
 	}
 	
-	.pagenation > .boardContainer > .boardBox.page .el {
-		width: var(--board-page-el-width);
-		box-sizing: var(--box-sizing);
+	.boardContainer > .boardBox.page .el {
+		text-align:center;
+		width: 18%;
 	}
 	
-	.pagenation > .boardContainer > .boardBox.page .el.LR {
+	.boardContainer > .boardBox.page .el.LR {
 		width: var(--board-page-lr-width);
-		box-sizing: var(--box-sizing);
 	}
 	
 </style>
@@ -422,7 +432,6 @@
 		    //지역 알아내기 -> 코스아이템에서 첫번쨰 아이템 내용 전달.
 		    CourseItemDao courseItemDao = new CourseItemDao();
 		    int itemIdx = courseItemDao.getItemIdxByCourse(courseDto.getCourseIdx());
-		    System.out.println(courseDto.getCourseIdx());
 		    
 		    //위에는 받아올때 idx가 빈값으로 받아오니까?
 		    CourseDto courseCheckDto = courseDao.get(courseDto.getCourseIdx());
@@ -472,9 +481,9 @@
 		<%} %>
 	</div>
 
-
+	<br>
 	<!-- 페이지네이션 -->
-	<div class="pagenation">
+	<div class="board">
 		<div class="boardContainer">
 			<div class='boardBox page'>
 			<%-- [이전] a 태그 --%>
@@ -527,7 +536,7 @@
 		</div>
 	</div>
 </div>
-<br><br>
+<br>
 
 <!-- 데이터가 없다면 -->
 <%}else{ %>

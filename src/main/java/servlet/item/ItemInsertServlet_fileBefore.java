@@ -17,18 +17,18 @@ public class ItemInsertServlet_fileBefore extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
+
 		//파일 첨부 전 관광지 등록 Servlet (사용하지 않음)
 		try {
 			//현재 회원이 작성
 			int usersIdx = (int)req.getSession().getAttribute("usersIdx");
-			
+
 			ItemDao itemDao = new ItemDao();
 			ItemDto itemDto = new ItemDto();
-			
+
 			//itemIdx 번호 생성
 			int sequnceNo = itemDao.getSequence();
-			
+
 			itemDto.setItemIdx(sequnceNo);
 			itemDto.setUsersIdx(usersIdx);
 			itemDto.setItemType(req.getParameter("itemType"));
@@ -39,12 +39,13 @@ public class ItemInsertServlet_fileBefore extends HttpServlet{
 			itemDto.setItemHomepage(req.getParameter("itemHomepage"));
 			itemDto.setItemParking(req.getParameter("itemParking"));
 			itemDto.setItemAddress(req.getParameter("itemAddress"));
-			
+
 			//글 등록.
 			itemDao.insertWithSequence(itemDto);
-			
+
 			resp.sendRedirect("detail.jsp?itemIdx="+sequnceNo);
-			
+			return;
+
 		}
 		catch(Exception e){
 			e.printStackTrace();

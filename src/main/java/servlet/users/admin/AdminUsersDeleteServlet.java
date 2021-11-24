@@ -31,6 +31,7 @@ public class AdminUsersDeleteServlet extends HttpServlet{
 			//    2) 탈퇴 성공 시 회원목록 페이지로 돌아가기
 			System.out.println("[관리자 - 회원탈퇴] 성공.");
 			resp.sendRedirect(req.getContextPath()+"/admin/users/list.jsp?delete&usersId=" + usersId);
+			return;
 
 		}
 

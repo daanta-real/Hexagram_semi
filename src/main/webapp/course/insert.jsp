@@ -378,9 +378,9 @@ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
 		
 		<select name="subCity" required class="form-input form-inline">
 			<%if(pn.getKeyword()==null) {%>
-			<option selected disabled>시군구 선택</option>
+			<option selected>시군구 선택</option>
 			<%}else{ %>
-			<option disabled>시군구 선택</option>
+			<option value="<%=root%>/course/insert.jsp?searchSelector=0&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=<%=pn.getKeyword()%>">시군구 선택</option>
 			<%} %>
 			
 			<%if(isSearchMode && pn.getColumn().equals("item_address")){

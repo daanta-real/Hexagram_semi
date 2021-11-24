@@ -34,6 +34,7 @@ public class UsersLogoutServlet extends HttpServlet {
 			// 3. 로그아웃을 성공적으로 끝냈으면 메인 페이지로 리다이렉트
 			System.out.println("[회원 로그아웃] 2. 세션 비우기 완료.");
 			resp.sendRedirect(req.getContextPath()+"/index.jsp");
+			return;
 
 		}
 

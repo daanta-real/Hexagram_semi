@@ -26,13 +26,13 @@ public class _EventDetailServlet extends HttpServlet{
 			String encoding = "UTF-8";
 			DefaultFileRenamePolicy policy = new DefaultFileRenamePolicy();
 			MultipartRequest mRequest = new MultipartRequest(req, savePath, maxSize, encoding, policy);
-			
+
 			int eventIdx = Integer.parseInt(req.getParameter("eventIdx"));
 
 			EventDao eventDao = new EventDao();
 			EventDto eventDto = eventDao.select(eventIdx);
-			
-			if(eventDto != null) {			
+
+			if(eventDto != null) {
 				resp.getWriter().println("이벤트 번호 : "+eventDto.getEventIdx());
 				resp.getWriter().println("회원명 : "+eventDto.getUsersIdx());
 				resp.getWriter().println("이벤트 제목 : "+eventDto.getEventName());
@@ -42,15 +42,14 @@ public class _EventDetailServlet extends HttpServlet{
 				resp.getWriter().println("댓글 수: "+eventDto.getEventCountReply());
 
 			}
-			
+
 			boolean result = eventDao.update(eventDto);
-			
+
 			if(result) {
 				resp.sendRedirect("detail.jsp?eventIdx="+eventDto.getEventIdx());
+				return;
 			}
-			else {
-				resp.sendError(500);
-			}
+			else throw new Exception();
 		}
 		catch(Exception e) {
 			e.printStackTrace();

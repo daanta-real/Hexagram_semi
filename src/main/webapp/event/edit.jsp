@@ -31,7 +31,7 @@
 <form action="edit.nagari" method="post">
 <input type="hidden" name="eventIdx" value="<%=eventDto.getEventIdx()%>">
 
-<table border="0">
+<table>
 	<tbody>
 		<tr>
 			<th>제목</th>

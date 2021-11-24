@@ -70,12 +70,17 @@ public class UsersLoginServlet extends HttpServlet {
 				Sessioner.login(session, foundDto);
 				System.out.println("　　▷ 세션 부여 완료.");
 				resp.sendRedirect(req.getContextPath()+"/index.jsp");
+				return;
+
 			}
 		}
 		catch(Exception e) {
+
 			System.out.println("\n[회원 로그인] 에러가 발생했습니다.");
 			e.printStackTrace();
 			resp.sendRedirect(req.getContextPath() + "/users/login.jsp?error"); // 로그인페이지로 이동
+			return;
+
 		}
 
 	}

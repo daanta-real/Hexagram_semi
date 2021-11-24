@@ -26,8 +26,8 @@ public class ItemEditServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		//관광지 수정 Servlet(첨부파일이 있어 첨부파일을 등록하면서 등록되어있던 첨부파일을 삭제한다)
-		try {			
-			
+		try {
+
 			//경로 설정
 			String savePath = Settings.PATH_FILES;
 			//파일 전송 크기 설정
@@ -50,9 +50,9 @@ public class ItemEditServlet extends HttpServlet{
 			itemDto.setItemParking(mRequest.getParameter("itemParking"));
 			itemDto.setItemAddress(mRequest.getParameter("itemAddress"));
 			itemDto.setItemIdx(Integer.parseInt(mRequest.getParameter("itemIdx")));
-			
+
 			ItemDao itemDao = new ItemDao();
-			
+
 			//만약 전달된 attach가 null이 아니라면 (첨부파일이 있다면 첨부파일을 삭제한다)
 			if(mRequest.getFile("attach") != null) {
 				ItemFileDao itemFileDao = new ItemFileDao();
@@ -66,7 +66,7 @@ public class ItemEditServlet extends HttpServlet{
 				target.delete();
 				//파일 정보를 삭제
 				itemFileDao.delete(itemFileOrigin.getItemFileIdx());
-				
+
 				ItemFileDto itemFileDto = new ItemFileDto();
 				itemFileDto.setItemIdx(itemDto.getItemIdx());
 				itemFileDto.setItemFileUploadname(mRequest.getOriginalFileName("attach"));
@@ -76,17 +76,16 @@ public class ItemEditServlet extends HttpServlet{
 				//새로운 파일 등록
 				itemFileDao.insert(itemFileDto);
 			}
-			
+
 			//관광지 수정
 			boolean result = itemDao.update(itemDto);
 			//수정 성공시 상세 페이지로 이동
 			if(result) {
 				resp.sendRedirect("detail.jsp?itemIdx="+itemDto.getItemIdx());
+				return;
 			}
 			//수정 실패시 에러페이지 500번으로
-			else {
-				resp.sendError(500);
-			}
+			else throw new Exception();
 
 		}
 		//예외가 발생하면 500번으로 던진다

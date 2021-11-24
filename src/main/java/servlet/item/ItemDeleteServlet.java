@@ -23,7 +23,7 @@ public class ItemDeleteServlet extends HttpServlet{
 
 		//관광지 삭제 Servlet (첨부파일을 삭제하면서 관광지글을 삭제 한다)
 		try {
-			
+
 			//관광지 삭제를 위해 itemIdx값을 파라미터로 받는다
 			int itemIdx = Integer.parseInt(req.getParameter("itemIdx"));
 			//Dao 변수 선언
@@ -44,6 +44,8 @@ public class ItemDeleteServlet extends HttpServlet{
 			itemDao.delete(itemIdx);
 			//완료시 목록 페이지로 이동
 			resp.sendRedirect(req.getContextPath() + "/item/list.jsp");
+			return;
+
 		}
 		//예외가 발생하면 500번으로 던진다
 		catch(Exception e) {

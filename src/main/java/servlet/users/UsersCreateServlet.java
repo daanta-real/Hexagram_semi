@@ -64,6 +64,7 @@ public class UsersCreateServlet extends HttpServlet {
 			UsersDto newDto = dao.get(seqNo);
 			Sessioner.login(req.getSession(), newDto);
 			resp.sendRedirect(req.getContextPath() + "/users/register_success.jsp");
+			return;
 
 		}
 

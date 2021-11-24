@@ -406,9 +406,9 @@
 <!-- 	검색 후 검색 옵션이 무엇이였는지 전달 도시명 검색 옵션은 구분자를 0번으로 지정한다.191~210번줄 참조-->
 		<select name="subCity" required class="form-input form-inline">
 			<%if(pn.getKeyword()==null) {%>
-			<option selected disabled>시군구 선택</option>
+			<option selected>시군구 선택</option>
 			<%}else{ %>
-			<option disabled>시군구 선택</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=<%=pn.getKeyword()%>">시군구 선택</option>
 			<%} %>
 			
 			<%if(isSearchMode && pn.getColumn().equals("item_address")){

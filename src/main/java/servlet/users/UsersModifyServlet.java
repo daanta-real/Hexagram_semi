@@ -95,10 +95,12 @@ public class UsersModifyServlet extends HttpServlet {
 			if(isSucceed) {
 				System.out.println("수정 성공.");
 				resp.sendRedirect(req.getContextPath()+"/users/modify_success.jsp");
+				return;
 			} else {
 				System.out.println("수정 실패.");
 				//변경 실패시 다시 변경 페이지로 이동
 				resp.sendRedirect(req.getContextPath()+"/users/modify.jsp?fail");
+				return;
 			}
 
 		}

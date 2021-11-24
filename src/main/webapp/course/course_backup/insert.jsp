@@ -30,6 +30,7 @@
     		for(int check : itemIdxList){
     			if(check == Integer.parseInt(items)){
     				response.sendRedirect("insert.jsp?error");
+    				return;
     			}
     		}
     		
@@ -40,6 +41,7 @@
     				
 			if(!isSameCity){
 				response.sendRedirect("insert.jsp?error");
+				return;
 			}else{
 				itemIdxList.add(Integer.parseInt(items));
 				request.getSession().setAttribute("itemIdxList", itemIdxList);
