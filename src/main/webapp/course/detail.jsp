@@ -147,8 +147,12 @@ String root = request.getContextPath();
 	 String usersId = Sessioner.getUsersId(request.getSession());
  	 boolean isLogin = usersId != null;
  	//(본인글인지 확인을 위해)
-	 boolean isMyboard = usersId.equals(usersDto.getUsersId());
-	
+	 boolean isMyboard; 
+ 	if(isLogin)
+ 	isMyboard = usersId.equals(usersDto.getUsersId());
+ 	else//로그인이 되어있지 않다면,
+ 	isMyboard = false;
+ 	
 	//회원 등급 변수 저장(관리자만에게만 보이는 수정 삭제 버튼 표시를 위해)
   	//관리자인지?
   	boolean isManager = Sessioner.getUsersGrade(request.getSession()) != null 
