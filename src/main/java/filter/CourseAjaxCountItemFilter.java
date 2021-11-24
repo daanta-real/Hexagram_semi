@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.CourseItemDao;
-import util.users.Sessioner;
 
 @WebFilter(urlPatterns = {
 		"/course/insert_last.jsp",
@@ -21,7 +20,7 @@ import util.users.Sessioner;
 		"/course/update_last.jsp"
 })
 public class CourseAjaxCountItemFilter implements Filter{
-	
+
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
@@ -36,7 +35,7 @@ public class CourseAjaxCountItemFilter implements Filter{
 			CourseItemDao courseItemDao = new CourseItemDao();
 			//해당 코스 번호에 등록된 갯수를 파악한다.
 			int count = courseItemDao.getCount(courseSequnce);
-			
+
 			if(count >= 3 && count <= 8) {
 				chain.doFilter(request, response);
 				//아이템-코스에 등록된 수가 3개 이상 8개 이하라면 통과.

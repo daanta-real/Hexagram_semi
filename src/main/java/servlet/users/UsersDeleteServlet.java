@@ -63,6 +63,7 @@ public class UsersDeleteServlet extends HttpServlet {
 			System.out.print("[회원 탈퇴 - 유저가 요청] 4. 탈퇴 성공 페이지로 리다이렉트 실시.");
 			System.out.println("요청 주소: " + req.getContextPath()+"/users/unregister_success.jsp");
 			resp.sendRedirect(req.getContextPath()+"/users/unregister_success.jsp");
+			return;
 
 		}
 

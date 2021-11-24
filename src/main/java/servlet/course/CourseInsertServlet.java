@@ -11,17 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import beans.CourseDao;
 import beans.CourseDto;
 
+@SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/course/insert_course.nogari")
 public class CourseInsertServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			
+
 			//코스 등록 Servlet
-			
+
 			//필터적용전
 			req.setCharacterEncoding("UTF-8");
-			
+
 			//입력
 			//courseIdx : 파라미터로 받은 courseIdx 번호
 			//usersIdx : 글 작성자의 번호를 세션으로 받는다
@@ -31,7 +32,7 @@ public class CourseInsertServlet extends HttpServlet{
 			int usersIdx = (int)req.getSession().getAttribute("usersIdx");
 			String courseName = req.getParameter("courseName");
 			String courseDetail = req.getParameter("courseDetail");
-					
+
 			//처리
 			CourseDao courseDao = new CourseDao();
 			CourseDto courseDto = new CourseDto();
@@ -39,13 +40,14 @@ public class CourseInsertServlet extends HttpServlet{
 			courseDto.setUsersIdx(usersIdx);
 			courseDto.setCourseName(courseName);
 			courseDto.setCourseDetail(courseDetail);
-			
+
 			//등록
 			courseDao.insertWithSequence(courseDto);
-			
+
 			//작성한 게시글로 이동
 			resp.sendRedirect("detail.jsp?courseIdx="+courseIdx);
-			
+			return;
+
 		}catch (Exception e) {
 			e.printStackTrace();
 			resp.sendError(500);

@@ -27,36 +27,37 @@ public class EventReplyInsertServlet extends HttpServlet {
 
 			EventReplyDao EventReplyDao = new EventReplyDao();
 			EventReplyDto eventReplyDto = new EventReplyDto();
-			
+
 			int eventReplyIdx = EventReplyDao.getSequenceNo();
-			
+
 			eventReplyDto.setEventReplyIdx(eventReplyIdx);
 			eventReplyDto.setEventIdx(eventIdx);
 			eventReplyDto.setUsersIdx(usersIdx);
 			eventReplyDto.setEventReplyDetail(eventReplyDetail);
-			
+
 
 			if(req.getParameter("eventReplyTargetIdx") != null) {
 				int eventReplyTargetIdx = Integer.parseInt(req.getParameter("itemReplyTargetIdx"));
 				EventReplyDto eventReplyParent = EventReplyDao.get(eventReplyTargetIdx);
-				
+
 				eventReplyDto.setEventReplySuperno(eventReplyTargetIdx);
 				eventReplyDto.setEventReplyGroupno(eventReplyParent.getEventReplyGroupno());
 				eventReplyDto.setEventReplyDepth(eventReplyParent.getEventReplyDepth()+1);
-				
+
 				EventReplyDao.insertTarget(eventReplyDto);
 			}
 			else {
 				EventReplyDao.insert(eventReplyDto);
 			}
-			
 
-			
+
+
 //			게시물 댓글 수 추가
 			EventDao eventDao = new EventDao();
 			eventDao.countReply(eventIdx);
-			
+
 			resp.sendRedirect(req.getContextPath()+"/event/detail.jsp?eventIdx="+Integer.parseInt(req.getParameter("eventIdx")));
+			return;
 
 		}catch (Exception e) {
 			e.printStackTrace();

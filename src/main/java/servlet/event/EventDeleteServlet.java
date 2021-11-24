@@ -21,7 +21,7 @@ public class EventDeleteServlet extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			int usersIdx = Integer.parseInt(req.getParameter("usersIdx"));
-			
+
 			EventDao eventDao = new EventDao();
 
 			EventFileDao eventFileDao = new EventFileDao();
@@ -31,11 +31,13 @@ public class EventDeleteServlet extends HttpServlet {
 //			저장된 파일을 삭제
 			target.delete();
 //			파일 정보를 삭제
-			eventFileDao.delete(eventFileOrigin.getEventFileNo());
+			eventFileDao.delete(eventFileOrigin.getEventFileIdx());
 
 			eventDao.delete(usersIdx);
 
 			resp.sendRedirect(req.getContextPath() + "/event/list.jsp");
+			return;
+
 		}
 		catch(Exception e) {
 			e.printStackTrace();

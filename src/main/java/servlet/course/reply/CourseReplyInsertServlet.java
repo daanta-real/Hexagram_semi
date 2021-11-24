@@ -12,12 +12,13 @@ import beans.CourseDao;
 import beans.CourseReplyDao;
 import beans.CourseReplyDto;
 
+@SuppressWarnings("serial")
 @WebServlet (urlPatterns = "/course_reply/insert.nogari")
 public class CourseReplyInsertServlet extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			
+
 			//입력 받기
 			//회원 번호 세션으로 받기(usersIdx)
 			int usersIdx = (int) req.getSession().getAttribute("usersIdx");
@@ -27,31 +28,31 @@ public class CourseReplyInsertServlet extends HttpServlet{
 			String courseReplyDetail = req.getParameter("courseReplyDetail");
 			//댓글인지 대댓글인지 판정 : 파라미터에 댓글 번호가 온다면
 			boolean reReply = req.getParameter("courseReplyIdx") != null;
-			
+
 			//기능을 사용하기위해 Dao 변수 선언
 			CourseReplyDao courseReplyDao = new CourseReplyDao();
-			
+
 			//시퀀스 번호 먼저 받기
 			int courseReplySeq = courseReplyDao.getSequenceNo();
-			
+
 			//파라미터 값 댓글 등록
 			CourseReplyDto courseReplyDto = new CourseReplyDto();
 			courseReplyDto.setCourseReplyIdx(courseReplySeq);
 			courseReplyDto.setUsersIdx(usersIdx);
 			courseReplyDto.setCourseIdx(courseIdx);
 			courseReplyDto.setCourseReplyDetail(courseReplyDetail);
-			
-			//대댓글일 경우 
+
+			//대댓글일 경우
 			if(reReply) {
 				int courseReplyIdx = Integer.parseInt(req.getParameter("courseReplyIdx"));
-				//상위 댓글의 모든 정보를 불러온다 정보를(댓글 단일조회) 
+				//상위 댓글의 모든 정보를 불러온다 정보를(댓글 단일조회)
 				CourseReplyDto superDto = courseReplyDao.get(courseReplyDto.getCourseReplySuperno());
-				
+
 				//등록될 글의 정보를 계산
 				courseReplyDto.setCourseReplySuperno(courseReplyIdx);
 				courseReplyDto.setCourseReplyGroupno(superDto.getCourseReplyGroupno());
 				courseReplyDto.setCourseReplyDepth(superDto.getCourseReplyDepth()+1);
-				
+
 				//대댓글 등록
 				courseReplyDao.insertTarget(courseReplyDto);
 			}
@@ -59,14 +60,16 @@ public class CourseReplyInsertServlet extends HttpServlet{
 				//새 댓글 등록
 				courseReplyDao.insert(courseReplyDto);
 			}
-			
-			
+
+
 			//댓글 등록 후 게시글의 댓글 수 조정
 			CourseDao courseDao = new CourseDao();
 			courseDao.countCourseReply(courseIdx);
-			
+
 			//댓글 등록 완료 후 게시글 페이지로 이동
 			resp.sendRedirect(req.getContextPath() + "/course/detail.jsp?courseIdx=" + courseIdx);
+			return;
+
 		}
 		catch(Exception e) {
 			e.printStackTrace();
