@@ -25,6 +25,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 			courseDao.readUp(courseIdx,usersIdx);
 			
 		}else {
+			//비회원이라도 그냥 올려라
 			courseDao.readUp(courseIdx);
 		}
 		
