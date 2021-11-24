@@ -19,7 +19,6 @@ import util.users.Sessioner;
 	"/admin/*",
 	"/users/register_success.jsp",
 	"/users/unregister.jsp",
-	"/users/unregister_success.jsp",
 	"/users/unregister.nogari",
 	"/users/detail.jsp",
 	"/users/modify.jsp",
