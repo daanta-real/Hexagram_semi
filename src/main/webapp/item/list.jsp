@@ -240,9 +240,10 @@ ItemFileDao itemFileDao = new ItemFileDao();
 		</tbody>
 	</table>
 	</div>
+	<%}else{ %>
+		<div class="row center"><h2>글이 없습니다.</h2></div>
 	<%} %>
-
-
+	
 	<!-- 페이지네이션 -->
 	<div class="row pagination">
 		<%-- [이전] a 태그 --%>
