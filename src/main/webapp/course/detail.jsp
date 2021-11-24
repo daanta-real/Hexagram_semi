@@ -370,9 +370,12 @@ textarea {
 		<%
 		ItemDto itemDto = itemDao.get(courseItemDto.getItemIdx());
 		ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());
+		String courseItemName = itemDto.getItemName();
+		if(courseItemName.length()>13) courseItemName=courseItemName.substring(0,13)+"..";
+		//제목이 길면 틀에서 깨지므로,, 15글자로 제한해서 보여준다.
 		%>
             <li>
-                <span class="item-title"><%=itemDto.getItemName()%></span>
+                <span class="item-title"><%=courseItemName%></span>
                 <a href="<%=root%>/item/detail.jsp?itemIdx=<%=itemDto.getItemIdx()%>" class="item-link">
                     <%if(itemFileDto == null){ %>
 					<!-- 첨부파일 출력 -->
