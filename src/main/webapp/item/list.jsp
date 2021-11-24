@@ -185,15 +185,18 @@ ItemFileDao itemFileDao = new ItemFileDao();
 				<a href="readup.nogari?itemIdx=<%=itemDtoList.getItemIdx()%>">
 				<!-- 				이 항목을 리스트에서 누를시에만 조회수가 올라가게 ItemReadupServlet 서블릿에서 게시물 조회수 증가를 시킨 후 detail페이지로 이동시킨다. -->
 				<%=itemDtoList.getItemName()%>
-				</a>
 				<%-- 댓글수 --%>
 				<!-- 댓글이 있다면 개수를 출력 -->
 				<%if(itemDtoList.isCountReply()){ %>
 					[<%=itemDtoList.getItemCountReply() %>]
 				<%} %>
+				</a>
 				</td>
 	
 				<td width="50%">
+				<!-- 관광지 제목을 출력 (제목을 누르면 조회수 증가 서블릿으로 이동)  -->
+				<a href="readup.nogari?itemIdx=<%=itemDtoList.getItemIdx()%>">
+				<!-- 				이 항목을 리스트에서 누를시에만 조회수가 올라가게 ItemReadupServlet 서블릿에서 게시물 조회수 증가를 시킨 후 detail페이지로 이동시킨다. -->
 					<div	class="flex-container">
 						<div class="image-wrapper">
 							<!-- 만약 첨부파일이 있다면 첨부파일을 썸네일로 보여준다 -->
@@ -228,6 +231,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 							<p><%=area%></p>
 						</div>
 					</div>
+					</a>
 				</td>
 				<!-- 조회수 출력 -->
 				<td><%=itemDtoList.getItemCountView() %></td>
