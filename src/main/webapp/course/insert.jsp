@@ -111,7 +111,7 @@ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
                    	//전송 시 첨부할 파라미터 정보 => 아이템 번호와 코스 번호를 받아서
                    	// 아이템_코스 DB에 정보를 추가 / 삭제 / 명칭 및 지역 중복을 확인해주기 위함
                    	itemIdx : item_Idx,
-                   	courseIdx : course_Idx
+                   	courseSequnce : course_Idx //인자를 전달할때 필터에서 명칭을 통일시키기 위해서 courseSequnce로 하였다. / 수정은 따로 이 필터를 거치지 않음
                    },
                    success:function(resp){
                         if(resp == "NNNNS"){//코스아이템DB 체크시 동일 지역이 아닐 경우
@@ -147,7 +147,7 @@ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
                                        type:"get",
                                        data:{//삭제 ajax에서 코스-아이템db를 삭제하기 위한 정보
                                        	itemIdx : new_item_Idx,
-                                       	courseIdx : new_course_Idx
+                                       	courseSequnce : new_course_Idx //인자를 전달할때 필터에서 명칭을 통일시키기 위해서 courseSequnce로 하였다. / 수정은 따로 이 필터를 거치지 않음
                                        },
                                        //완료 처리
                                        success:function(resp){
@@ -198,7 +198,7 @@ List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);
                    type:"get",
                    data:{
                    	itemIdx : item_Idx,
-                   	courseIdx : course_Idx
+                   	courseSequnce : course_Idx //인자를 전달할때 필터에서 명칭을 통일시키기 위해서 courseSequnce로 하였다. / 수정은 따로 이 필터를 거치지 않음
                    },
                    success:function(resp){
                    	if(resp == "NNNNN"){
