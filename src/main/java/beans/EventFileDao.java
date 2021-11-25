@@ -13,10 +13,12 @@ public class EventFileDao {
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
 	// 1. CREATE: 파일 추가
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
-	public boolean insert(EventFileDto dto) throws Exception{
+	public boolean insert(EventFileDto dto) throws Exception {
 
 		// SQL 준비
-		String sql = "INSERT INTO event_file VALUES(event_file_seq.NEXTVAL, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO event_file(event_file_idx, event_idx, event_file_upload_name,"
+			+ " event_file_save_name, event_file_type, event_file_size)"
+			+ " VALUES(event_file_seq.NEXTVAL, ?, ?, ?, ?, ?)";
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, dto.getEventIdx());

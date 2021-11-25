@@ -5,8 +5,8 @@ public class EventFileDto {
 	// 1. Declarations
 	private Integer eventFileIdx       ;
 	private Integer eventIdx           ;
-	private String  eventFileUploadName;
-	private String  eventFileSaveName  ;
+	private String  eventFileUploadName; // 업로드한 사람한테 보이는 가짜 이름
+	private String  eventFileSaveName  ; // 서버에 저장되는 실제 이름
 	private String  eventFileType      ;
 	private long    eventFileSize      ;
 
