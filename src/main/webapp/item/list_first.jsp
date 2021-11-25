@@ -285,6 +285,7 @@
 				</div>
 				<div class='gridTitle'>지역</div>
 				<div class='gridContents'>
+					<a href="list_city.jsp" class='gridEl'>전체</a>  
 					<a href="list_city.jsp?column=item_address&keyword=서울" class='gridEl'>서울</a>        
 	                <a href="list_city.jsp?column=item_address&keyword=부산" class='gridEl'>부산</a>
 	                <a href="list_city.jsp?column=item_address&keyword=인천" class='gridEl'>인천</a>
@@ -342,7 +343,7 @@
 						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="170" height="170">
 					<%} %>
 						<span class="gridElTitle"><%=tourName %></span>
-						<span class="gridElTitle"><%=itemDto.getAdressCity() %></span>
+						<span class="gridElTitle"><%=itemDto.getAdressCity()%>&nbsp;<%=itemDto.getAdressCitySub()%></span>
 					</a>
 				</div>	
 	            <%} %>
@@ -381,7 +382,7 @@
 						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="170" height="170">
 					<%} %>
 						<span class="gridElTitle"><%=festivalName%></span>
-						<span class="gridElTitle"><%=itemDto.getAdressCity() %></span>
+						<span class="gridElTitle"><%=itemDto.getAdressCity()%>&nbsp;<%=itemDto.getAdressCitySub()%></span>
 						<span class="gridElTitle"><%=itemDto.getItemPeriod() %></span>
 					</a>
 				</div>	
