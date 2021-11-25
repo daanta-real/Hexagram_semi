@@ -1,3 +1,4 @@
+<%@page import="util.HexaLibrary"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@page import="beans.UsersDto"%>
@@ -22,21 +23,24 @@ td > label { display: flex; align-items:center; margin: auto 0.4rem auto 0.2rem;
 .boardContainer > .boardBox > .row > td > select {
 	width:100%; border:0; padding:0.3rem 0.3rem; outline:none;
 	position:relative; max-width:10rem; margin:0.1rem 0.1rem;
-}
+}   
 </style>
-</HEAD>
-<BODY>
-
+<!-- jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- 비밀번호 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexPw.js"></script>
 <!-- 닉네임 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexNick_ajax.js"></script>
 <!-- 이메일 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexEmail_ajax.js"></script>
-<!-- 폰번호 정규식 검사 스크립트 -->
+<!-- 폰번호 정규식 검사 스크립트 -->          
 <script type='text/javascript' src="<%=root%>/resource/js/regexPhone.js"></script>
 <!-- 비밀번호 토글 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/togglePw.js"></script>
+<!-- 초기화(새로고침) 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/resetAll.js"></script>
+</HEAD>
+<BODY>
 
 <!-- 회원의 원래 정보는 그대로 보여 주고 수정할 수 있도록 처리 -->
 <!-- 회원상세정보 불러오기. 파라미터로 전달한 조회할 회원의 usersIdx -->
@@ -90,7 +94,7 @@ int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));
 			<tr class='row'>
 				<th>전화번호</th>
 				<td class='multiline'>
-					<input type="tel" name="usersPhone" value="<%=usersDto.getUsersPhone() %>">
+					<input type="tel" name="usersPhone" value="<%=HexaLibrary.nvl(usersDto.getUsersPhone()) %>">
 					<div class="message"></div>
 				</td>
 			</tr>
@@ -128,6 +132,7 @@ int usersIdx = Integer.parseInt(request.getParameter("usersIdx"));
 				<td colspan="2">
 					<input type="submit" class="bottomLongBtn" value="변경하기" >
 					<a href="<%=root%>/admin/users/list.jsp">회원목록으로 돌아가기</a>
+					<span class='bottomLongBtn reset'>초기화</span>
 				</td>
 			</tr>
 		</tfoot>
