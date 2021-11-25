@@ -285,6 +285,7 @@
 				</div>
 				<div class='gridTitle'>지역</div>
 				<div class='gridContents'>
+					<a href="list_city.jsp" class='gridEl'>전체</a>  
 					<a href="list_city.jsp?column=item_address&keyword=서울" class='gridEl'>서울</a>        
 	                <a href="list_city.jsp?column=item_address&keyword=부산" class='gridEl'>부산</a>
 	                <a href="list_city.jsp?column=item_address&keyword=인천" class='gridEl'>인천</a>
