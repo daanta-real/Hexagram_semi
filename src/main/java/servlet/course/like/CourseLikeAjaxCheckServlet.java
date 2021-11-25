@@ -29,7 +29,8 @@ public class CourseLikeAjaxCheckServlet extends HttpServlet {
 					int countLike = courseLikeDao.countLike(courseIdx); //좋아요 개수를 반환한다.
 					resp.getWriter().write(String.valueOf(countLike)); //정수이므로 문자열로 반환한다.
 				}else {//만약 접속한 회원이 해당 게시물에 좋아요한 이록이 있다면, NNNNN을 반환한다
-					resp.getWriter().write("NNNNN");
+					courseLikeDao.delete(usersIdx, courseIdx);//삭제한뒤,
+					resp.getWriter().write("NNNNN");//반환한다.
 				}				
 			}else {
 				resp.sendError(401);//로그인이 안된 회원 에러보내기.
