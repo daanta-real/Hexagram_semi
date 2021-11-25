@@ -157,11 +157,11 @@ textarea.vertical {
             <div class="row">
                 <label>주소</label>
 					<button type="button" class="find-address-btn form-btn form-inline">주소 찾기</button>
-                	<textarea name="itemAddress" rows="1" cols="50" placeholder="주소를 입력하세요" class="address-select form-input"></textarea>
+                	<textarea name="itemAddress" rows="1" cols="50" placeholder="주소를 입력하세요" required class="address-select form-input"></textarea>
             </div>
             <div class="row">
                 <label>내용</label>
-                <textarea name="itemDetail" rows="20" cols="50" placeholder="내용을 입력하세요" class="form-input"></textarea>
+                <textarea name="itemDetail" rows="20" cols="50" placeholder="내용을 입력하세요" required class="form-input"></textarea>
             </div>
             <div class="row">
                 <label>기간</label>

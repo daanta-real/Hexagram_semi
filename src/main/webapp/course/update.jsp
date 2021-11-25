@@ -496,7 +496,7 @@
 								<td width="40%"><%=itemDto.getItemAddress()%></td>
 								<td width="40%"><%=itemDto.getItemName()%></td>
 								<td width="20%"><button class="item-add-btn form-btn" data-course_idx="<%=courseSequnce%>"  data-item_idx="<%=itemDto.getItemIdx()%>" data-item_address="<%=itemDto.getAdressCity()%>" data-item_name="<%=itemDto.getItemName()%>">추가하기</button></td>
-<!-- 								button class="item-add-btn"에대한 이벤트 및 이 태그에 있는 정보는 53~60번째 줄에 정의됨 -->
+								<!-- button class="item-add-btn"에대한 이벤트 및 이 태그에 있는 정보는 53~60번째 줄에 정의됨 -->
 							</tr>
 						<%} %>
 				</tbody>
