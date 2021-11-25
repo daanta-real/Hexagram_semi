@@ -63,16 +63,16 @@ public class EventFileDao {
 
 
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
-	// 3. READ: 딱 한 파일의 정보를 조회
+	// 3. READ: 딱 한 파일의 정보를 조회 (여러 파일 아님)
 	// ◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈◈
-	public EventFileDto get(Integer eventFileIdx) throws Exception {
+	public EventFileDto get(Integer eventIdx) throws Exception {
 
 		// SQL 준비
 		Connection conn = JdbcUtils.connect3();
 
-		String sql = "SELECT * FROM event_file WHERE event_file_idx = ?";
+		String sql = "SELECT * FROM event_file WHERE event_idx = ?";
 		PreparedStatement ps = conn.prepareStatement(sql);
-		ps.setInt(1, eventFileIdx);
+		ps.setInt(1, eventIdx);
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		ResultSet rs = ps.executeQuery();

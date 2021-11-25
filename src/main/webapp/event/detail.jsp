@@ -92,8 +92,8 @@ System.out.println("[이벤트 - 상세보기] DTO 내용: " + eventDto);
 		<td colspan=2>
 		<td class="flexCenter flexCol">
 			<a class="bottomLongBtn" href="<%=root%>/event/list.jsp">목록</a>
-			<a class="bottomLongBtn" href="<%=root%>/event/modify.jsp?eventidx=<%=eventDto.getEventIdx()%>">수정</a>
-			<a class="bottomLongBtn" href="<%=root%>/event/delete.jsp?eventidx=<%=eventDto.getEventIdx()%>">삭제</a>
+			<a class="bottomLongBtn" href="<%=root%>/event/modify.jsp?eventIdx=<%=eventDto.getEventIdx()%>">수정</a>
+			<a class="bottomLongBtn" href="<%=root%>/event/delete.nogari?eventIdx=<%=eventDto.getEventIdx()%>">삭제</a>
 		</td>
 	</tr>
 

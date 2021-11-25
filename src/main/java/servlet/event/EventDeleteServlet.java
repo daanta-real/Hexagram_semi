@@ -23,12 +23,13 @@ public class EventDeleteServlet extends HttpServlet {
 
 			// 1. 값 획득 및 검사
 			System.out.print("[이벤트 삭제] 1. idx값 획득 및 검사.. ");
-			Integer eventIdx = Integer.parseInt(req.getParameter("eventIdx"));
-			if(eventIdx == null) {
+			String eventIdxStr = req.getParameter("eventIdx");
+			if(eventIdxStr == null) {
 				System.out.println("[이벤트 삭제] 삭제할 eventIdx가 입력되지 않았습니다.");
 				throw new Exception();
 			}
-			System.out.println("완료.");
+			Integer eventIdx = Integer.parseInt(eventIdxStr);
+			System.out.println("완료. 삭제할 eventIdx = " + eventIdx);
 
 			// 2. 관련 DAO 준비
 			System.out.print("[이벤트 삭제] 2. 관련 DAO 준비.. ");
@@ -37,12 +38,15 @@ public class EventDeleteServlet extends HttpServlet {
 			System.out.println("완료.");
 
 			// 3. event_file에 등록된 관련파일 삭제
-			System.out.print("[이벤트 삭제] 3. event_file 데이터에 등록된 관련파일 삭제.. ");
-			EventFileDto eventFileOrg = eventFileDao.get(eventIdx); // 파일DTO 획득
+			System.out.println("[이벤트 삭제] 3. event_file 데이터에 등록된 관련파일 삭제.. ");
+			EventFileDto fileDto = eventFileDao.get(eventIdx); // 파일DTO 획득
+			System.out.println("　　- 파일 DTO 정보: " + fileDto);
 			File dir = new File(Settings.PATH_FILES);
-			File target = new File(dir, eventFileOrg.getEventFileSaveName()); // 실제 HDD 세이브명의 실제 파일 객체 획득
+			System.out.print("　　- 전체 경로: " + Settings.PATH_FILES);
+			File target = new File(dir, fileDto.getEventFileSaveName()); // 실제 HDD 세이브명의 실제 파일 객체 획득
+			System.out.print("/" + fileDto.getEventFileSaveName() + " 이다.");
 			target.delete();
-			System.out.println(Settings.PATH_FILES + "/" + eventFileOrg.getEventFileSaveName() + " → 삭제 완료.");
+			System.out.println(" → 삭제 완료.");
 
 			// 4. 삭제 - event 테이블의 데이터row 삭제
 			System.out.print("[이벤트 삭제] 4. event 데이터 삭제.. ");
@@ -61,7 +65,7 @@ public class EventDeleteServlet extends HttpServlet {
 		}
 		catch(Exception e) {
 
-			System.out.println("[이벤트 삭제] 이벤트 삭제 중 에러가 발생하였습니다.");
+			System.out.println("\n[이벤트 삭제] 이벤트 삭제 중 에러가 발생하였습니다.");
 			e.printStackTrace();
 			resp.sendError(500);
 
