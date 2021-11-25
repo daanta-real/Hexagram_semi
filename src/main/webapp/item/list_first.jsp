@@ -141,10 +141,11 @@
  	/* 관광지 목록 출력 썸네일 부분*/
  	/* 그리드 컨테이너 내부에서 사용되는 변수들의 선언 */ 
 	.second {
-		--grid-box-margin:3rem;
-		--grid-el-width: 9.5rem;
+		--grid-box-margin:2rem;
+		--grid-el-width: 10rem;
 		--grid-el-height: 11rem;
 		--grid-el-margin: 1rem;
+		   text-align: center;
 	}
 	
 	/* 그리드 앨범들을 가지고 있는 최상위 컨테이너. 앨범 박스를 통째로 중앙 정렬하기 위해서 반드시 필요하다. */
@@ -171,6 +172,7 @@
  		margin: var(--grid-el-margin);
  		border: 1px solid red;
  	}
+ 	
  	
  	.gridElTitle {
  		display: block; 
@@ -380,6 +382,7 @@
 					<%} %>
 						<span class="gridElTitle"><%=festivalName%></span>
 						<span class="gridElTitle"><%=itemDto.getAdressCity() %></span>
+						<span class="gridElTitle"><%=itemDto.getItemPeriod() %></span>
 					</a>
 				</div>	
 	            <%} %>
