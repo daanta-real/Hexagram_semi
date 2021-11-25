@@ -15,6 +15,10 @@ td > label { display: flex; align-items:center; margin: auto 0.4rem auto 0.2rem;
 
 </style>
 
+<!-- 인라인 -->
+<script type='text/javascript'>
+var sysurl = "<%=root%>";
+</script>
 
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -35,11 +39,6 @@ td > label { display: flex; align-items:center; margin: auto 0.4rem auto 0.2rem;
 <!-- 초기화(새로고침) 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/resetAll.js"></script>
 
-<!-- 인라인 -->
-<script type='text/javascript'>
-var sysurl = "<%=root%>";
-
-</script>
 </HEAD>
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
