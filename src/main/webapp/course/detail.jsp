@@ -293,7 +293,7 @@ textarea {
 	int countLike = courseLikeDao.countLike(courseIdx); //초기 좋아요 개수를 표현하기 위한 변수
 	CourseLikeDto courseLikeDto = null;
 	if(isLogin){//로그인이 되어있어야만 처음 화면에 들어온 상태에서 이 회원이 이 게시글을 좋아요 한 상태인지 알 수 있다.
-		courseLikeDto = courseLikeDao.get(Sessioner.getUsersIdx(request.getSession()),courseIdx);
+		courseLikeDto = courseLikeDao.get(Sessioner.getUsersIdx(request.getSession()),courseIdx);//로그인이 되어있어야 numberNull에러가 안뜬다.
 	//초기에 비회원은 null값일 것이고, null인지 값이 있는지 파악해서 하트 표시를 해준다.
 	}
 
@@ -317,12 +317,10 @@ textarea {
                     courseIdx : course_Idx
                 },
                 //완료 처리
-                success:function(resp){//NNNNN, NNNNY 중 하나가 돌아왔다(통신이 성공)
-                    //console.log("성공");
-                    //console.log(resp);
+                success:function(resp){
                     if(resp == "NNNNN"){//좋아요 추가가 이미 되어있다면 현재숫자에서 -1을 해준다.(NNNNN)
                         $("#btn-like").removeClass("like-clicked"); //하트 빨간색을 지우고,
-                        $(".show-like").text(parseInt($(".show-like").text())-1); //기존의 숫자 그대로를 반환한다.(삭제시 -1해서 반환)
+                        $(".show-like").text(parseInt($(".show-like").text())-1); //(삭제시 -1해서 반환)
                     }
                     else{//좋아요 추가 성공이라면
                         $("#btn-like").addClass("like-clicked"); //하트를 빨간색으로 바꾸고,
@@ -409,13 +407,14 @@ textarea {
         <div class="row float-container">
             <span class="float-left">조회수 : <%=courseDto.getCourseCountView()%></span>
             <span class="float-left">좋아요 : </span>
+<!--             좋아요 수를 ajax에서 resp응답으로 받은 것들을 돌려받아서 실시간으로 좋아요 수를 +1 -1하여 보여줄 수 있다. -->
             <span class="float-left show-like"><%=countLike%></span>
             <span class="float-right"><%=courseDto.getCourseDate()%></span>
         </div>
         <div class="row float-container">
         <%if(courseLikeDto==null){ //처음 화면에 왔을때 비회원 혹은 추가하지 않은 사람이라면, 검정색 하트로 표시%>
              <span class="float-left"><button id="btn-like"  data-course_idx="<%=courseIdx%>" >♥</button></span>
-         <%}else{//null값이 아니라면 이미 추가를 한 사람이다. %>
+         <%}else{//null값이 아니라면 이미 추가를 한 사람이다.(초기화면에 들어왔을때 이미 like-clicked를 부여받은 상태이다.) %>
         	 <span class="float-left"><button id="btn-like" class="like-clicked" data-course_idx="<%=courseIdx%>" >♥</button></span>
          <%} %>
         </div>
