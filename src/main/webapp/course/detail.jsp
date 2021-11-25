@@ -249,6 +249,20 @@ textarea {
 }
     </style>
 
+<script>
+	$(function(){
+	
+		$("#btn-like").on("click",function(){
+		
+            var course_Idx = $(this).attr("data-course_idx");
+			
+		});
+		
+	});
+	
+
+</script>
+
 <SECTION>
 
 <!-- 페이지 내용 시작 -->
@@ -346,8 +360,12 @@ textarea {
         </div>
         <!-- 조회수 및 좋아요? 왼쪽 정렬 / 작성일자 오른쪽 정렬 -->
         <div class="row float-container">
-            <span class="float-left">조회수 : <%=courseDto.getCourseCountView()%> or 좋아요</span>
+            <span class="float-left">조회수 : <%=courseDto.getCourseCountView()%></span>
             <span class="float-right"><%=courseDto.getCourseDate()%></span>
+        </div>
+        <div class="row float-container">
+            <span class="float-left"><button id="btn-like"  data-course_idx="<%=courseIdx%>" >좋아요</button></span>
+            <span class="float-left">좋아요 개수 표시</span>
         </div>
     </div>
     <!-- 코스 작성 내용-->
