@@ -34,7 +34,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 	public List<EventDto> select() throws Exception {
 
 		// SQL 준비
-		String sql = "SELECT * FROM event ORDER BY event_idx ASC";
+		String sql = "SELECT * FROM event ORDER BY event_idx DESC";
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -292,7 +292,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 		String sql = "SELECT * FROM event b"
 			+ " LEFT JOIN users u ON b.users_idx = u.users_idx"
 			+ " WHERE INSTR(#1, ?) > 0"
-			+ " ORDER BY b.users_idx ASC";
+			+ " ORDER BY b.users_idx DESC";
 		sql = sql.replace("#1", column);
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
@@ -344,7 +344,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 				+ " FROM event b"
 				+ " LEFT JOIN users u ON b.users_idx = u.users_idx"
 				+ (column != null ? (" WHERE INSTR(" + column + ", ?) > 0") : "")
-			+ ")";
+			+ ") ORDER BY event_idx DESC";
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		if(column != null) ps.setString(1, keyword);
@@ -375,12 +375,13 @@ public class EventDao implements PaginationInterface<EventDto> {
 			= "SELECT * FROM ("
 				+ " SELECT ROWNUM RN, TMP.*"
 				+ " FROM ("
-					+ "SELECT b.event_idx, b.users_idx, b.event_name, b.event_detail, b.event_date, b.event_count_view, b.event_count_reply,"
-						  + " u.users_id, u.users_nick, u.users_grade" // users 테이블에서 일부 정보를 갖고 온다.
-					+ " FROM event b"
-					+ " LEFT JOIN users u ON b.users_idx = u.users_idx"
+					+ "SELECT e.event_idx, e.event_name, e.event_detail"
+						+ ", e.event_date, e.event_count_view, e.event_count_reply"
+						+ ", u.users_idx, u.users_id, u.users_nick, u.users_grade" // users 테이블에서 일부 정보를 갖고 온다.
+					+ " FROM event e"
+					+ " LEFT JOIN users u ON e.users_idx = u.users_idx"
 					+ (column != null ? (" WHERE INSTR(" + column + ", ?) > 0") : "")
-					+ " ORDER BY u.users_idx ASC"
+					+ " ORDER BY e.event_idx DESC"
 				+ ")TMP"
 			+ ") WHERE RN BETWEEN ? AND ?";
 		Connection conn = JdbcUtils.connect3();

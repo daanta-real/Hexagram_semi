@@ -32,6 +32,7 @@ public class ItemDeleteServlet extends HttpServlet{
 			ItemFileDao itemFileDao = new ItemFileDao();
 			//첨부파일 단일 조회
 			ItemFileDto itemFileOrigin = itemFileDao.find2(itemIdx);
+			if(itemFileOrigin != null) { //파일이 있다면 기존 파일 경로에 있는 해당파일을 삭제하라.
 			//파일 경로
 			File dir = new File(Settings.PATH_FILES);
 			//파일 경로, 파일 단일조회를 하여 저장된 이름으로 파일은 선택
@@ -40,10 +41,11 @@ public class ItemDeleteServlet extends HttpServlet{
 			target.delete();
 			//파일 정보를 삭제
 			itemFileDao.delete(itemFileOrigin.getItemFileIdx());
+			}
 			//관광지 삭제 완료
 			itemDao.delete(itemIdx);
 			//완료시 목록 페이지로 이동
-			resp.sendRedirect(req.getContextPath() + "/item/list.jsp");
+			resp.sendRedirect(req.getContextPath() + "/item/list_first.jsp");
 			return;
 
 		}

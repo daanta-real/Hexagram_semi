@@ -41,6 +41,11 @@ System.out.println("[이벤트 - 상세보기] DTO 내용: " + eventDto);
 .boardContainer .id { font-size:0.7rem; }
 .boardContainer .content { font-weight:initial; justify-content: flex-start; min-height: 10rem; }
 </style>
+<script type='text/javascript'>
+function confirmDelete(eventIdx) {
+	if(confirm("삭제하시겠어요?")) location.href = "<%=root%>/event/delete.nogari?eventIdx=" + eventIdx;
+}
+</script>
 </HEAD>
 
 <BODY>
@@ -92,8 +97,8 @@ System.out.println("[이벤트 - 상세보기] DTO 내용: " + eventDto);
 		<td colspan=2>
 		<td class="flexCenter flexCol">
 			<a class="bottomLongBtn" href="<%=root%>/event/list.jsp">목록</a>
-			<a class="bottomLongBtn" href="<%=root%>/event/modify.jsp?eventidx=<%=eventDto.getEventIdx()%>">수정</a>
-			<a class="bottomLongBtn" href="<%=root%>/event/delete.jsp?eventidx=<%=eventDto.getEventIdx()%>">삭제</a>
+			<a class="bottomLongBtn" href="<%=root%>/event/modify.jsp?eventIdx=<%=eventDto.getEventIdx()%>">수정</a>
+			<button class="bottomLongBtn" onclick='confirmDelete(<%=eventDto.getEventIdx()%>)'>삭제</button>
 		</td>
 	</tr>
 

@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
 <%@page import="util.users.Sessioner"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -139,10 +141,11 @@
  	/* 관광지 목록 출력 썸네일 부분*/
  	/* 그리드 컨테이너 내부에서 사용되는 변수들의 선언 */ 
 	.second {
-		--grid-box-margin:3rem;
-		--grid-el-width: 9.5rem;
-		--grid-el-height: 10rem;
+		--grid-box-margin:2rem;
+		--grid-el-width: 10rem;
+		--grid-el-height: 11rem;
 		--grid-el-margin: 1rem;
+		   text-align: center;
 	}
 	
 	/* 그리드 앨범들을 가지고 있는 최상위 컨테이너. 앨범 박스를 통째로 중앙 정렬하기 위해서 반드시 필요하다. */
@@ -170,13 +173,80 @@
  		border: 1px solid red;
  	}
  	
+ 	
  	.gridElTitle {
  		display: block; 
  		text-align: center;
  		white-space : nowrap; 
  	}
  	
+ 	
+	 	/* 아이템 썸네일 부분 */
+	ul{
+		list-style:none;
+	}
+	
+	#slide ul{
+	    white-space:nowrap; 
+	    overflow-x: auto; 
+	    text-align:center;
+	}
+	
+	#slide ul li{
+	    display:inline-block; 
+	    padding: 10px 20px; 
+	
+	    margin-right:10px;
+	    margin-bottom: 20px;
+	}
     </style>
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script>
+	$(function(){
+		
+		<%
+		Calendar c = Calendar.getInstance();
+		int month = c.get(Calendar.MONTH)+1;
+		int p;
+		if(month>=3 && month<=5) p = 0;
+		else if(month>=6 && month<=8) p = 1;
+		else if(month>=9 && month<=11) p = 2;
+		else p = 3;
+		%>
+        //[1] 현재 시스템 월을 받아서 초기 값 설정(ex>현재 달이 11월이면 p는2)
+        var p = <%=p%>;
+		
+        //[2] p페이지 빼고 다 숨김
+        //= 다 숨기고 p페이지만 표시
+        $(".season-page").hide();
+        $(".season-page").eq(p).show();
+
+
+        //[3] 다음 단계로 버튼에 대한 이벤트 처리
+        //= p를 1 증가시키고 해당하는 페이지를 표시
+        //= form 안의 버튼은 submit 효과가 자동 부여되므로 이를 방지해야 한다.
+        $(".btn-next").click(function(e){
+            e.preventDefault();
+
+            p++;
+            $(".season-page").hide();
+            $(".season-page").eq(p).show();
+        });
+
+        //[4] 이전 단계로 버튼에 대한 이벤트 처리
+        $(".btn-prev").click(function(e){
+            e.preventDefault();
+
+            p--;
+            $(".season-page").hide();
+            $(".season-page").eq(p).show();
+        });
+		
+	});
+	
+	
+	</script>
+
 
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
@@ -287,8 +357,6 @@
 
 	<!-- 목록 출력 을 위한 변수선언 -->
 	<%
-		ItemFileDao itemFileDao1 = new ItemFileDao();
-		
 		List<ItemDto> list1= itemDao.searchByOrder("item_count_view","item_type","축제",1, 9);// 인기 축제 9개 가져오기		
 	%>
 	 
@@ -304,7 +372,7 @@
 				<div class='gridEl'>
 					<a href="readup.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
 	            	<!-- 목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
-					<%ItemFileDto itemFileDto = itemFileDao1.find2(itemDto.getItemIdx());%>
+					<%ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());%>
 					<%if(itemFileDto == null){ %>
 						<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
 						<img src="http://placeimg.com/170/170/nature">
@@ -314,12 +382,211 @@
 					<%} %>
 						<span class="gridElTitle"><%=festivalName%></span>
 						<span class="gridElTitle"><%=itemDto.getAdressCity() %></span>
+						<span class="gridElTitle"><%=itemDto.getItemPeriod() %></span>
 					</a>
 				</div>	
 	            <%} %>
 			</div>
 		</div>
 	</div>
+	
+		<br>
+	<div class="row center">
+	    <span class="item-title">계절별 축제</span>
+	</div>
+	
+	<%
+	//계절별 축제를 위해 데이터를 1~5개까지 들고온다.
+	List<ItemDto> springList = itemDao.getSeasonItem("03", "04", "05");
+	List<ItemDto> summerList = itemDao.getSeasonItem("06", "07", "08");
+	List<ItemDto> fallList = itemDao.getSeasonItem("09", "10", "11");
+	List<ItemDto> winterList = itemDao.getSeasonItem("12", "01", "02");
+	%>
+	
+	    <!-- 축제 계절별 썸네일 구역-->
+	
+	<div class="second season-page">
+		<div class='gridContainer'>
+			<div class="row center">
+		<button class="btn">◁</button>
+		&nbsp;&nbsp; <span>봄(3월~5월)</span> &nbsp;&nbsp;
+		<button class="btn btn-next">▶</button>
+		</div>
+			<div class='gridBox'>
+				<div class="row" id="slide">
+					<ul>
+				<!-- 목록 출력 시작 -->
+				<%if(!springList.isEmpty()){ %>
+				<%for(ItemDto itemDto : springList){
+					String festivalName = itemDto.getItemName();
+					if(festivalName.length()>15) festivalName=festivalName.substring(0,15)+"...";
+					//제목이 길면 틀에서 깨지므로,, 15글자로 제한해서 보여준다.
+					%>
+					<li>
+				<div class='gridEl'>
+					<a href="readup.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
+	            	<!-- 목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
+					<%ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());%>
+					<%if(itemFileDto == null){ %>
+						<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
+						<img src="http://placeimg.com/170/170/nature">
+					<%}else{ %>
+						<!-- 첨부파일이 있다면 첨부파일을 출력  -->
+						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="170" height="170">
+					<%} %>
+						<span class="gridElTitle"><%=festivalName%></span>
+						<span class="gridElTitle"><%=itemDto.getAdressCity()%>&nbsp;<%=itemDto.getAdressCitySub()%></span>
+						<span class="gridElTitle"><%=itemDto.getItemPeriod() %></span>
+					</a>
+				</div>	
+					</li>
+	            <%} %>
+	              <%}else{ %>
+	              <li><h2>해당 계절의 축제가 없습니다.</h2></li>
+	              <%} %>
+	            	 </ul>
+	            </div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="second season-page">
+		<div class='gridContainer'>
+			<div class="row center">
+			<button class="btn btn-prev">◀</button>
+			&nbsp;&nbsp; <span>여름(6월~8월)</span> &nbsp;&nbsp;
+			<button class="btn btn-next">▶</button>
+			</div>
+			<div class='gridBox'>
+				<div class="row" id="slide">
+					<ul>
+				<!-- 목록 출력 시작 -->
+				<%if(!summerList.isEmpty()){ %>
+				<%for(ItemDto itemDto : summerList){
+					String festivalName = itemDto.getItemName();
+					if(festivalName.length()>15) festivalName=festivalName.substring(0,15)+"...";
+					//제목이 길면 틀에서 깨지므로,, 15글자로 제한해서 보여준다.
+					%>
+					<li>
+				<div class='gridEl'>
+					<a href="readup.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
+	            	<!-- 목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
+					<%ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());%>
+					<%if(itemFileDto == null){ %>
+						<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
+						<img src="http://placeimg.com/170/170/nature">
+					<%}else{ %>
+						<!-- 첨부파일이 있다면 첨부파일을 출력  -->
+						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="170" height="170">
+					<%} %>
+						<span class="gridElTitle"><%=festivalName%></span>
+						<span class="gridElTitle"><%=itemDto.getAdressCity()%>&nbsp;<%=itemDto.getAdressCitySub()%></span>
+						<span class="gridElTitle"><%=itemDto.getItemPeriod() %></span>
+					</a>
+				</div>
+					</li>
+	            <%} %>
+	              <%}else{ %>
+	              <li><h2>해당 계절의 축제가 없습니다.</h2></li>
+	              <%} %>
+	            	</ul>
+	            </div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="second season-page">
+		<div class='gridContainer'>
+			<div class="row center">
+			<button class="btn btn-prev">◀</button>
+			&nbsp;&nbsp; <span>가을(9월~11월)</span> &nbsp;&nbsp;
+			<button class="btn btn-next">▶</button>
+			</div>
+			<div class='gridBox'>
+				<div class="row" id="slide">
+					<ul>
+				<!-- 목록 출력 시작 -->
+				<%if(!fallList.isEmpty()){ %>
+				<%for(ItemDto itemDto : fallList){
+					String festivalName = itemDto.getItemName();
+					if(festivalName.length()>15) festivalName=festivalName.substring(0,15)+"...";
+					//제목이 길면 틀에서 깨지므로,, 15글자로 제한해서 보여준다.
+					%>
+					<li>
+				<div class='gridEl'>
+					<a href="readup.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
+	            	<!-- 목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
+					<%ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());%>
+					<%if(itemFileDto == null){ %>
+						<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
+						<img src="http://placeimg.com/170/170/nature">
+					<%}else{ %>
+						<!-- 첨부파일이 있다면 첨부파일을 출력  -->
+						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="170" height="170">
+					<%} %>
+						<span class="gridElTitle"><%=festivalName%></span>
+						<span class="gridElTitle"><%=itemDto.getAdressCity()%>&nbsp;<%=itemDto.getAdressCitySub()%></span>
+						<span class="gridElTitle"><%=itemDto.getItemPeriod() %></span>
+					</a>
+				</div>
+				 </li>	
+	            <%} %>
+	              <%}else{ %>
+	              <li><h2>해당 계절의 축제가 없습니다.</h2></li>
+	              <%} %>
+	            	</ul>
+	            </div>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div class="second season-page">
+		<div class='gridContainer'>
+			<div class="row center">
+			<button class="btn btn-prev">◀</button>
+			&nbsp;&nbsp; <span>겨울(12월~2월)</span> &nbsp;&nbsp;
+			<button class="btn">▷</button>
+			</div>
+			<div class='gridBox'>
+				<div class="row" id="slide">
+					<ul>
+				<!-- 목록 출력 시작 -->
+				<%if(!winterList.isEmpty()){ %>
+				<%for(ItemDto itemDto : winterList){
+					String festivalName = itemDto.getItemName();
+					if(festivalName.length()>15) festivalName=festivalName.substring(0,15)+"...";
+					//제목이 길면 틀에서 깨지므로,, 15글자로 제한해서 보여준다.
+					%>
+					<li>
+				<div class='gridEl'>
+					<a href="readup.nogari?itemIdx=<%=itemDto.getItemIdx()%>">
+	            	<!-- 목록을 보여주면서 itemDto의 itemIdx정보를 받는다. -->
+					<%ItemFileDto itemFileDto = itemFileDao.find2(itemDto.getItemIdx());%>
+					<%if(itemFileDto == null){ %>
+						<!-- 첨부파일이 없다면 대체이미지 보여주기 -->
+						<img src="http://placeimg.com/170/170/nature">
+					<%}else{ %>
+						<!-- 첨부파일이 있다면 첨부파일을 출력  -->
+						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="170" height="170">
+					<%} %>
+						<span class="gridElTitle"><%=festivalName%></span>
+						<span class="gridElTitle"><%=itemDto.getAdressCity()%>&nbsp;<%=itemDto.getAdressCitySub()%></span>
+						<span class="gridElTitle"><%=itemDto.getItemPeriod() %></span>
+					</a>
+				</div>
+					</li>
+	            <%} %>
+	              <%}else{ %>
+	              <li><h2>해당 계절의 축제가 없습니다.</h2></li>
+	              <%} %>
+	            	</ul>
+	            </div>
+			</div>
+		</div>
+	</div>
+	
 	
 </div>      
 
