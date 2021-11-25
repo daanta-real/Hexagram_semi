@@ -36,6 +36,6 @@ public class HexaLibrary {
 
 	// 값이 정확히 null일 경우 '-'를 회신하며,
 	// 그 외의 경우에는(=내용 있는 문자열일 경우) 무조건 원본 String을 회신한다.
-	public static String nvl(String val) { return val == null ? "-" : val; }
+	public static String nvl(String val) { return val == null ? "" : val; }
 
 }
