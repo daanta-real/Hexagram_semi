@@ -342,7 +342,7 @@
 						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="170" height="170">
 					<%} %>
 						<span class="gridElTitle"><%=tourName %></span>
-						<span class="gridElTitle"><%=itemDto.getAdressCity() %></span>
+						<span class="gridElTitle"><%=itemDto.getAdressCity()%>&nbsp;<%=itemDto.getAdressCitySub()%></span>
 					</a>
 				</div>	
 	            <%} %>
@@ -381,7 +381,7 @@
 						<img src="file/download.nogari?itemFileIdx=<%=itemFileDto.getItemFileIdx()%>" width="170" height="170">
 					<%} %>
 						<span class="gridElTitle"><%=festivalName%></span>
-						<span class="gridElTitle"><%=itemDto.getAdressCity() %></span>
+						<span class="gridElTitle"><%=itemDto.getAdressCity()%>&nbsp;<%=itemDto.getAdressCitySub()%></span>
 						<span class="gridElTitle"><%=itemDto.getItemPeriod() %></span>
 					</a>
 				</div>	
