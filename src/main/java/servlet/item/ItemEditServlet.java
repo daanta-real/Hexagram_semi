@@ -58,6 +58,7 @@ public class ItemEditServlet extends HttpServlet{
 				ItemFileDao itemFileDao = new ItemFileDao();
 				//기존에 첨부된 파일 단일조회
 				ItemFileDto itemFileOrigin = itemFileDao.find2(itemDto.getItemIdx());
+				if(itemFileOrigin != null) {//기존에 첨부 파일이 있다면 기존 첨부 파일이 있는 경로를 찾아서 기존파일을 삭제시켜준다.
 				//경로 설정
 				File dir = new File(Settings.PATH_FILES);
 				//파일 경로, 파일 단일조회를 하여 저장된 이름으로 파일은 선택
@@ -66,7 +67,7 @@ public class ItemEditServlet extends HttpServlet{
 				target.delete();
 				//파일 정보를 삭제
 				itemFileDao.delete(itemFileOrigin.getItemFileIdx());
-
+				}
 				ItemFileDto itemFileDto = new ItemFileDto();
 				itemFileDto.setItemIdx(itemDto.getItemIdx());
 				itemFileDto.setItemFileUploadname(mRequest.getOriginalFileName("attach"));
