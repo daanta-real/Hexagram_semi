@@ -1,3 +1,4 @@
+<%@page import="util.HexaLibrary"%>
 <%@page import="beans.UsersDto"%>
 <%@page import="beans.UsersDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -59,7 +60,7 @@ UsersDto usersDto = usersDao.get(sessionId);
 			    <div class="message"></div>
 			</td></tr>
 			<tr class='row'><th>전화번호 변경</th><td class='flexCol'>
-				<input type="text" name="usersPhone" value="<%=usersDto.getUsersPhone() %>">
+				<input type="text" name="usersPhone" value="<%=HexaLibrary.nvl(usersDto.getUsersPhone())%>">
 				<div class="message"></div>
 			</td></tr>
 			<tr class='row'><th>회원등급</th><td><%=usersDto.getUsersGrade() %></td></tr>
