@@ -606,7 +606,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 					+ "select * from item"
 					+ " where item_type = '축제'"
 					+ " and SUBSTR(item_period, 6, 2) in (?,?,?) order by to_date(SUBSTR(item_period, 1, 10),'YYYY-MM-DD') asc"//축제 시작날짜가 빠른 순서대로 정렬함.
-					+ ")tmp)where rn between 1 and 7";
+					+ ")tmp)where rn between 1 and 7";//약 7개정도만 뽑아냄.
 
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, first);
