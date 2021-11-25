@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
 <%@page import="util.users.Sessioner"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
@@ -182,10 +184,6 @@
 		list-style:none;
 	}
 	
-	.item-link{
-	    text-decoration:none; 
-	    color:inherit;
-	}
 	#slide ul{
 	    white-space:nowrap; 
 	    overflow-x: auto; 
@@ -204,13 +202,23 @@
 	<script>
 	$(function(){
 		
-        //[1] 1페이지 빼고 다 숨김
-        //= 다 숨기고 1페이지만 표시
+		<%
+		Calendar c = Calendar.getInstance();
+		int month = c.get(Calendar.MONTH)+1;
+		int p;
+		if(month>=3 && month<=5) p = 0;
+		else if(month>=6 && month<=8) p = 1;
+		else if(month>=9 && month<=11) p = 2;
+		else p = 3;
+		%>
+        //[1] 현재 시스템 월을 받아서 초기 값 설정(ex>현재 달이 11월이면 p는2)
+        var p = <%=p%>;
+		
+        //[2] p페이지 빼고 다 숨김
+        //= 다 숨기고 p페이지만 표시
         $(".season-page").hide();
-        $(".season-page").eq(0).show();
+        $(".season-page").eq(p).show();
 
-        //[2] 페이지 번호 관리 변수 생성
-        var p = 0;
 
         //[3] 다음 단계로 버튼에 대한 이벤트 처리
         //= p를 1 증가시키고 해당하는 페이지를 표시
@@ -405,6 +413,7 @@
 				<div class="row" id="slide">
 					<ul>
 				<!-- 목록 출력 시작 -->
+				<%if(!springList.isEmpty()){ %>
 				<%for(ItemDto itemDto : springList){
 					String festivalName = itemDto.getItemName();
 					if(festivalName.length()>15) festivalName=festivalName.substring(0,15)+"...";
@@ -429,6 +438,9 @@
 				</div>	
 					</li>
 	            <%} %>
+	              <%}else{ %>
+	              <li><h2>해당 계절의 축제가 없습니다.</h2></li>
+	              <%} %>
 	            	 </ul>
 	            </div>
 			</div>
@@ -446,6 +458,7 @@
 				<div class="row" id="slide">
 					<ul>
 				<!-- 목록 출력 시작 -->
+				<%if(!summerList.isEmpty()){ %>
 				<%for(ItemDto itemDto : summerList){
 					String festivalName = itemDto.getItemName();
 					if(festivalName.length()>15) festivalName=festivalName.substring(0,15)+"...";
@@ -470,6 +483,9 @@
 				</div>
 					</li>
 	            <%} %>
+	              <%}else{ %>
+	              <li><h2>해당 계절의 축제가 없습니다.</h2></li>
+	              <%} %>
 	            	</ul>
 	            </div>
 			</div>
@@ -488,6 +504,7 @@
 				<div class="row" id="slide">
 					<ul>
 				<!-- 목록 출력 시작 -->
+				<%if(!fallList.isEmpty()){ %>
 				<%for(ItemDto itemDto : fallList){
 					String festivalName = itemDto.getItemName();
 					if(festivalName.length()>15) festivalName=festivalName.substring(0,15)+"...";
@@ -512,6 +529,9 @@
 				</div>
 				 </li>	
 	            <%} %>
+	              <%}else{ %>
+	              <li><h2>해당 계절의 축제가 없습니다.</h2></li>
+	              <%} %>
 	            	</ul>
 	            </div>
 			</div>
@@ -530,6 +550,7 @@
 				<div class="row" id="slide">
 					<ul>
 				<!-- 목록 출력 시작 -->
+				<%if(!winterList.isEmpty()){ %>
 				<%for(ItemDto itemDto : winterList){
 					String festivalName = itemDto.getItemName();
 					if(festivalName.length()>15) festivalName=festivalName.substring(0,15)+"...";
@@ -554,6 +575,9 @@
 				</div>
 					</li>
 	            <%} %>
+	              <%}else{ %>
+	              <li><h2>해당 계절의 축제가 없습니다.</h2></li>
+	              <%} %>
 	            	</ul>
 	            </div>
 			</div>
