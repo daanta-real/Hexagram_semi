@@ -40,13 +40,17 @@ public class EventDeleteServlet extends HttpServlet {
 			// 3. event_file에 등록된 관련파일 삭제
 			System.out.println("[이벤트 삭제] 3. event_file 데이터에 등록된 관련파일 삭제.. ");
 			EventFileDto fileDto = eventFileDao.get(eventIdx); // 파일DTO 획득
-			System.out.println("　　- 파일 DTO 정보: " + fileDto);
-			File dir = new File(Settings.PATH_FILES);
-			System.out.print("　　- 전체 경로: " + Settings.PATH_FILES);
-			File target = new File(dir, fileDto.getEventFileSaveName()); // 실제 HDD 세이브명의 실제 파일 객체 획득
-			System.out.print("/" + fileDto.getEventFileSaveName() + " 이다.");
-			target.delete();
-			System.out.println(" → 삭제 완료.");
+			if(fileDto != null) { // event_file DB에서 첨부파일이 발견될 때에만 수행
+				System.out.println("　　- 파일 DTO 정보: " + fileDto);
+				File dir = new File(Settings.PATH_FILES);
+				System.out.print("　　- 전체 경로: " + Settings.PATH_FILES);
+				File target = new File(dir, fileDto.getEventFileSaveName()); // 실제 HDD 세이브명의 실제 파일 객체 획득
+				System.out.print("/" + fileDto.getEventFileSaveName() + " 이다.");
+				target.delete();
+				System.out.println(" ▶ 삭제 완료.");
+			} else {
+				System.out.println("　　▶ 발견된 첨부파일이 없습니다. 생략합니다.");
+			}
 
 			// 4. 삭제 - event 테이블의 데이터row 삭제
 			System.out.print("[이벤트 삭제] 4. event 데이터 삭제.. ");
