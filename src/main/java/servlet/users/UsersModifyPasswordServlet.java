@@ -51,13 +51,14 @@ public class UsersModifyPasswordServlet extends HttpServlet{
 			boolean isValidIdPw = HashChecker.idPwMatch(sessionId, currPw);
 			if(!isValidIdPw) {
 				System.out.println("오류. 비번이 일치하지 않습니다.");
-				resp.sendRedirect(req.getContextPath() + "/users/modifyPassword.jsp?notEquals");
+				// 입력한 현재 비번이 저장된 비번과 다르면 . errorCode=noMatch 파라미터 전달
+				resp.sendRedirect(req.getContextPath() + "/users/modifyPassword.jsp?errorCode=noMatch");
 				return;
 			} else {
 				// 현재 아이디/비번 적합성 검사 통과하면 현재 비번과 변경할 비번이 같은지 검사
-				// 현재 비번과 변경할 비번이 동일하면 안됨. equalsFail 파라미터를 비번변경 페이지로 전달
+				// 현재 비번과 변경할 비번이 동일하면 안됨. errorCode=noChange 파라미터 전달
 				if(currPw.equals(newPw)) {
-					resp.sendRedirect(req.getContextPath() + "/users/modifyPassword.jsp?equalsFail");
+					resp.sendRedirect(req.getContextPath() + "/users/modifyPassword.jsp?errorCode=noChange");
 					return;
 				} else {
 					System.out.println("OK.");
