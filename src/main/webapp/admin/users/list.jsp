@@ -27,7 +27,7 @@ String root = request.getContextPath();
 	margin:0.2rem;
 	padding:0.1rem 0;
 	border:0;
-	border-radius: 0.4rem;
+	border-radius: 0.2rem;
 	z-index: 0; position:relative;
     color:#000b;
     background-color: var(--color11);
@@ -45,6 +45,19 @@ String root = request.getContextPath();
 	background-color:var(--color7);
     color:#000b;
     margin:0.1rem;
+}
+.listbtn{
+	min-width: 2rem;
+	margin:0.2rem;
+	padding:0.1rem 0.3rem;
+	border:0;
+	border-radius: 0.2rem;
+	z-index: 0; position:relative;
+    color:#000b;
+    background-color: var(--color10);
+    text-align: center;
+	font-size:inherit;
+	cursor:pointer;
 }
 </style>
 
@@ -181,7 +194,11 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 	 	</div>
 	<%} %>
 	 </div>
-
+	<%if(isSearchMode) {%>
+		<div>
+		<a class='listbtn' href="list.jsp">전체목록</a>
+	 	</div>
+	 <%} %>
 	<!-- 페이지 네비게이터 검색 / 목록-->
 	<div class='boardBox page'>
 		<div class='el flexCenter'>
