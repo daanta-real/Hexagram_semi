@@ -377,15 +377,15 @@ ItemFileDao itemFileDao = new ItemFileDao();
 					<tbody>
 						<%
 						//이 글을 쓴사람의 아이디를 알기 위해서 user의 정보를 불러와야 한다.
-														UsersDto usersItemReplyDto = usersDao.get(itemReplyDto.getUsersIdx());
-														// 게시물의 작성자가 댓글 작성자인가?
-														boolean isSameItemReply = itemDto.getUsersIdx() == itemReplyDto.getUsersIdx();
-														//현재 접속한 유저가 이 댓글 작성한 사람인가?
-														boolean isUsersReplyWriter;
-														if(isLogin)
-														isUsersReplyWriter =	 usersId.equals(usersItemReplyDto.getUsersId());
-														else
-														isUsersReplyWriter = false; 
+						UsersDto usersItemReplyDto = usersDao.get(itemReplyDto.getUsersIdx());
+						// 게시물의 작성자가 댓글 작성자인가?
+						boolean isSameItemReply = itemDto.getUsersIdx() == itemReplyDto.getUsersIdx();
+						//현재 접속한 유저가 이 댓글 작성한 사람인가?
+						boolean isUsersReplyWriter;
+						if(isLogin)
+						isUsersReplyWriter =	 usersId.equals(usersItemReplyDto.getUsersId());
+						else
+						isUsersReplyWriter = false; 
 						%>
 						
 						<tr class="view-row">
