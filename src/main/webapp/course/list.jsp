@@ -364,7 +364,7 @@
 				</div>
 				
 				<!-- 리스트가 널이 아니라면(지역을 클릭하면 밑에 시,군,구를 출력한다)-->
-				<div class='gridTitle'></div>
+				<div class='gridTitle'>시군구</div>
 				<div class='gridContents'>
 		           <%
 		            if(isSearchMode && pn.getColumn().equals("item_address")){
@@ -376,7 +376,7 @@
 					for(String s : subCityList){ %>
                     <a href="list.jsp?column=item_address&keyword=<%=pn.getKeyword()%>&subCity=<%=s%>" class='gridEl'><%=s %></a>
                     <%}}}else{ %>
-                    <h1 class="center">배너 공간..?</h1>
+                    <h3 class="center">지역을 먼저 선택하세요.</h3>
                     <%} %>
 				</div>
 			</div>
