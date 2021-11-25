@@ -23,7 +23,7 @@ td > label { display: flex; align-items:center; margin: auto 0.4rem auto 0.2rem;
 .boardContainer > .boardBox > .row > td > select {
 	width:100%; border:0; padding:0.3rem 0.3rem; outline:none;
 	position:relative; max-width:10rem; margin:0.1rem 0.1rem;
-}
+}   
 </style>
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -33,7 +33,7 @@ td > label { display: flex; align-items:center; margin: auto 0.4rem auto 0.2rem;
 <script type='text/javascript' src="<%=root%>/resource/js/regexNick_ajax.js"></script>
 <!-- 이메일 정규식 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexEmail_ajax.js"></script>
-<!-- 폰번호 정규식 검사 스크립트 -->
+<!-- 폰번호 정규식 검사 스크립트 -->          
 <script type='text/javascript' src="<%=root%>/resource/js/regexPhone.js"></script>
 <!-- 비밀번호 토글 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/togglePw.js"></script>
