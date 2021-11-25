@@ -55,7 +55,7 @@ public class EventCreateServlet extends HttpServlet {
 			// 글 삽입
 			System.out.println("[이벤트 - 신규] 3. 글 삽입.");
 			eventDao.insert(eventDto);
-			System.out.println("[이벤트 - 신규] 3. 글 삽입 완료(board_event)");
+			System.out.println("[이벤트 - 신규] 3. 글 삽입 완료(event)");
 
 			// 파일이 있을 경우, 파일도 삽입
 			if(mRequest.getFile("attach") != null) {

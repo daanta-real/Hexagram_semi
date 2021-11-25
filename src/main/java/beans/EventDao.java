@@ -34,7 +34,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 	public List<EventDto> select() throws Exception {
 
 		// SQL 준비
-		String sql = "SELECT * FROM board_event ORDER BY event_idx ASC";
+		String sql = "SELECT * FROM event ORDER BY event_idx ASC";
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -73,7 +73,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 		= "SELECT * FROM ("
 			+ "SELECT b.event_idx, b.users_idx, b.event_name, b.event_detail, b.event_date, b.event_count_view, b.event_count_reply,"
 				  + " u.users_id, u.users_nick, u.users_grade" // users 테이블에서 일부 정보를 갖고 온다.
-			+ " FROM board_event b"
+			+ " FROM event b"
 			+ " LEFT JOIN users u ON b.users_idx = u.users_idx"
 		+ ") WHERE event_idx = ?";
 		PreparedStatement ps = conn.prepareStatement(sql);
@@ -106,7 +106,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 	public Integer getNextSequence() throws Exception {
 
 		// SQL 준비
-		String sql = "SELECT board_event_seq.NEXTVAL FROM DUAL";
+		String sql = "SELECT event_seq.NEXTVAL FROM DUAL";
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -130,7 +130,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 		if(dto.getEventIdx() == null) dto.setEventIdx(getNextSequence());
 
 		// SQL 준비
-		String sql = "INSERT INTO board_event(event_idx, users_idx, event_name, event_detail)"
+		String sql = "INSERT INTO event(event_idx, users_idx, event_name, event_detail)"
 			+ " VALUES(?, ?, ?, ?)";
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
@@ -157,7 +157,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 	public boolean delete(Integer eventIdx) throws Exception {
 
 		// SQL 준비
-		String sql = "DELETE FROM board_event WHERE event_idx = ?";
+		String sql = "DELETE FROM event WHERE event_idx = ?";
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, eventIdx);
@@ -184,7 +184,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 
 		// SQL 준비
 		int count = 0;
-		StringBuilder sb = new StringBuilder("UPDATE board_event SET");
+		StringBuilder sb = new StringBuilder("UPDATE event SET");
 		if (dto.getEventIdx()        != null) sb.append((count++ == 0 ? "" : ",") + " event_idx = ?");
 		if (dto.getUsersIdx()        != null) sb.append((count++ == 0 ? "" : ",") + " users_idx = ?");
 		if (dto.getEventName()       != null) sb.append((count++ == 0 ? "" : ",") + " event_name = ?");
@@ -229,7 +229,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 	public boolean readUp(Integer eventIdx, Integer usersIdx) throws Exception {
 
 		// SQL 준비
-		String sql = "UPDATE board_event SET event_count_view = event_count_view + 1"
+		String sql = "UPDATE event SET event_count_view = event_count_view + 1"
 			+ " WHERE event_idx = ?";
 		if(usersIdx != null) sql += " AND users_idx != ?";
 		System.out.println("　　SQL문 준비됨: " + sql);
@@ -254,7 +254,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 	public boolean countReply(Integer eventIdx) throws Exception {
 
 		// SQL 준비
-		String sql = "UPDATE board_event"
+		String sql = "UPDATE event"
 			+ " SET event_count_reply = ("
 				+ "SELECT COUNT(*) FROM event_reply"
 				+ " WHERE event_idx = ?"
@@ -289,7 +289,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 		columnVerify(column);
 
 		// SQL준비
-		String sql = "SELECT * FROM board_event b"
+		String sql = "SELECT * FROM event b"
 			+ " LEFT JOIN users u ON b.users_idx = u.users_idx"
 			+ " WHERE INSTR(#1, ?) > 0"
 			+ " ORDER BY b.users_idx ASC";
@@ -341,7 +341,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 			= "SELECT COUNT(*) FROM ("
 				+ "SELECT b.event_idx, b.users_idx, b.event_name, b.event_detail, b.event_date, b.event_count_view, b.event_count_reply,"
 					  + " u.users_id, u.users_nick, u.users_grade" // users 테이블에서 일부 정보를 갖고 온다.
-				+ " FROM board_event b"
+				+ " FROM event b"
 				+ " LEFT JOIN users u ON b.users_idx = u.users_idx"
 				+ (column != null ? (" WHERE INSTR(" + column + ", ?) > 0") : "")
 			+ ")";
@@ -377,7 +377,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 				+ " FROM ("
 					+ "SELECT b.event_idx, b.users_idx, b.event_name, b.event_detail, b.event_date, b.event_count_view, b.event_count_reply,"
 						  + " u.users_id, u.users_nick, u.users_grade" // users 테이블에서 일부 정보를 갖고 온다.
-					+ " FROM board_event b"
+					+ " FROM event b"
 					+ " LEFT JOIN users u ON b.users_idx = u.users_idx"
 					+ (column != null ? (" WHERE INSTR(" + column + ", ?) > 0") : "")
 					+ " ORDER BY u.users_idx ASC"
