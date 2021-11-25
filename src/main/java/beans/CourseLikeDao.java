@@ -37,7 +37,7 @@ public class CourseLikeDao {
 	
 	//좋아요 갯수 확인
 	public int countLike(int courseIdx) throws Exception {
-		String sql = "select count(*) course_like where course_idx=?";
+		String sql = "select count(*) from course_like where course_idx=?";
 		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -53,17 +53,20 @@ public class CourseLikeDao {
 	
 	//현재 접속한 회원이 해당 게시물의 좋아요 조회를 했는지 확인
 	public CourseLikeDto get(int usersIdx,int courseIdx) throws Exception {
-		String sql = "select * course_like where users_idx=? and course_idx=?";
+		String sql = "select * from course_like where users_idx=? and course_idx=?";
 		Connection con = JdbcUtils.connect3();
 		PreparedStatement ps = con.prepareStatement(sql);
-
-		ps.setInt(1, courseIdx);
+		
+		ps.setInt(1, usersIdx);
+		ps.setInt(2, courseIdx);
 		ResultSet rs = ps.executeQuery();
 		
 		CourseLikeDto courseLikeDto = new CourseLikeDto();
 		if(rs.next()) {
 			courseLikeDto.setUsersIdx(rs.getInt("users_idx"));
 			courseLikeDto.setCourseIdx(rs.getInt("course_idx"));
+		}else {
+			courseLikeDto = null;
 		}
 
 		con.close();

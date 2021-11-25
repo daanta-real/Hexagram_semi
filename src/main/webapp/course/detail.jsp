@@ -1,3 +1,4 @@
+<%@page import="beans.CourseLikeDao"%>
 <%@page import="beans.CourseDao"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Set"%>
@@ -252,9 +253,41 @@ textarea {
 <script>
 	$(function(){
 	
-		$("#btn-like").on("click",function(){
-		
+		$("#btn-like").on("click",function(e){
+			
+			if(<%=Sessioner.getUsersId(request.getSession())==null%>){//회원 접속이 안되었다면,
+				e.preventDefault(); //버튼 이벤트발생을 막아준다.
+				
+			}else{//회원이 접속된 상태라면
+			
             var course_Idx = $(this).attr("data-course_idx");
+			
+            $.ajax({
+                //준비 설정
+                url:"<%=root%>/course/check_ajax_course_like.nogari",
+                type:"get",//전송 방식
+                data:{//전송 시 첨부할 파라미터 정보
+                    courseIdx : course_Idx
+                },
+                //완료 처리
+                success:function(resp){//NNNNN, NNNNY 중 하나가 돌아왔다(통신이 성공)
+                    //console.log("성공");
+                    //console.log(resp);
+                    if(resp == "NNNNN"){//좋아요 추가 실패라면
+                        $(".show-like").text($(".show-like").text()); //기존의 숫자 그대로를 반환한다.
+                    }
+                    else{//좋아요 추가 성공이라면
+                    	$(".show-like").text(resp); //넘어온 숫자를 문자열형태로 그냥 나타내준다.
+                    }
+                },
+                error:function(err){//통신이 실패했다.
+                    //console.log("실패");
+                    //console.log(err);
+                }
+            	
+            });
+            
+			}
 			
 		});
 		
@@ -295,6 +328,10 @@ textarea {
   	//관리자인지?
   	boolean isManager = Sessioner.getUsersGrade(request.getSession()) != null 
   	&& Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN);
+	
+	CourseLikeDao courseLikeDao = new CourseLikeDao();
+	int countLike = courseLikeDao.countLike(courseIdx); //초기 좋아요 개수를 표현하기 위한 변수
+
 %>
 
 <%-- course_item 및 course의 제목 및 내용 출력을 위한 변수 선언 --%>
@@ -365,7 +402,7 @@ textarea {
         </div>
         <div class="row float-container">
             <span class="float-left"><button id="btn-like"  data-course_idx="<%=courseIdx%>" >좋아요</button></span>
-            <span class="float-left">좋아요 개수 표시</span>
+            <span class="float-left show-like"><%=countLike%></span>
         </div>
     </div>
     <!-- 코스 작성 내용-->
