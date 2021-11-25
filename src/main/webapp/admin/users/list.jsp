@@ -16,7 +16,6 @@ String root = request.getContextPath();
 <HEAD>
 <TITLE>노가리투어 - 회원 목록</TITLE>
 <jsp:include page="/resource/template/header_head.jsp"></jsp:include>
-</HEAD>
 <%/*CSS들*/%>
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/sub_title.css">
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/board.css">
@@ -51,6 +50,7 @@ String root = request.getContextPath();
 
 <!-- 회원탈퇴 시 확인창을 불러오는 script -->
 <script type="text/javascript" src="admin_users_delete.js"></script>
+</HEAD>
 
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
@@ -176,7 +176,7 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 	 		<div>
 	 			<a href="detail.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"><button class='btn'>상세</button></a>
 				<a href="edit.jsp?usersIdx=<%=usersDto.getUsersIdx()%>"><button class='btn'>수정</button></a>
-				<button onclick="deleteConfirm('<%=usersDto.getUsersId()%>');" class='btn'>탈퇴</button>
+				<a href="#" onclick="deleteConfirm('<%=usersDto.getUsersId()%>');"><button  class='btn'>탈퇴</button></a>
 	 		</div>
 	 	</div>
 	<%} %>
