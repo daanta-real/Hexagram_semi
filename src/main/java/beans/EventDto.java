@@ -12,13 +12,23 @@ public class EventDto {
 	private Integer eventCountReply;
 
 	// 1. Declarations - Optional
-	// Handling List: id, nick, grade
+	// Handling List: Users - id, nick, grade
 	private UsersDto usersDto = null;
-	public void initDto(String usersId, String usersNick, String usersGrade) throws Exception {
+	public void initUsersDto(String usersId, String usersNick, String usersGrade) throws Exception {
 		usersDto = new UsersDto();
 		usersDto.setUsersId(usersId);
 		usersDto.setUsersNick(usersNick);
 		usersDto.setUsersGrade(usersGrade);
+	}
+	// Handling List: EventFile - fileIdx, uploadName, saveName, fileSize, fileType
+	private EventFileDto eventFileDto = null;
+	public void initFileDto(Integer fileIdx, String uploadName, String saveName, long fileSize, String fileType) {
+		eventFileDto = new EventFileDto();
+		eventFileDto.setEventFileIdx(fileIdx);
+		eventFileDto.setEventFileUploadName(uploadName);
+		eventFileDto.setEventFileSaveName(saveName);
+		eventFileDto.setEventFileSize(fileSize);
+		eventFileDto.setEventFileType(fileType);
 	}
 
 	// 2. Constructors

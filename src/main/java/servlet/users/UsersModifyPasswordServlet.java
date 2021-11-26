@@ -38,14 +38,14 @@ public class UsersModifyPasswordServlet extends HttpServlet{
 			boolean isFormReady
 				 = sessionId != null && !sessionId.equals("") // 1) 로그인되어 있어야 한다.
 				&& currPw != null    && !currPw.equals("")    // 2) 현재 암호가 입력되어야 한다.
-				&& newPw != null     && !newPw.equals("");     // 3) 변경될 암호도 입력되어야 한다.
+				&& newPw != null     && !newPw.equals("");    // 3) 변경될 암호도 입력되어야 한다.
 			if(!isFormReady) {
 				System.out.println("비밀번호 변경에 필요한 양식들이 제대로 입력되지 않았습니다.");
 				throw new Exception();
 			} else {
 				System.out.println("OK.");
 			}
-			
+
 			// 3. 검사 - 현재 ID/비번 정합성 검사
 			System.out.print("[비밀번호 변경] 3. 검사 - ID & PW 정합성 확인.. ");
 			boolean isValidIdPw = HashChecker.idPwMatch(sessionId, currPw);
