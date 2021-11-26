@@ -12,8 +12,8 @@
 	/* 그리드 컨테이너 내부에서 사용되는 변수들의 선언 */ 
 	:root {
 		--grid-box-margin:3rem;
-		--grid-el-width: 8rem;
-		--grid-el-height: 8rem;
+		--grid-el-width: 6rem;
+		--grid-el-height: 6rem;
 		--grid-el-margin: 0.5rem;
 		--board-color-body-font: var(--color8);
 		--board-border-color: var(--color7);
@@ -53,6 +53,7 @@
  		background-color: var(--color4);
  	}
 
+	img{ margin: 0.5rem 0; }
 </style>
 </HEAD>
 <BODY>
@@ -64,12 +65,17 @@
 	<div class='gridBox'>
 		<div class='gridEl'>
 			<a href="users/list.jsp">
-				회원 관리<img src='<%=root %>/resource/image/admin/users.png' width='90%'>
+				회원 관리<img src='<%=root %>/resource/image/admin/users.png' width='80%'>
 			</a>
 		</div>
 		<div class='gridEl'>
 			<a href="<%=root %>/item/list_first.jsp">
-			   관광지 관리<img src='<%=root %>/resource/image/admin/item.png' width='100%'>
+			   관광지 관리<img src='<%=root %>/resource/image/admin/item.png' width='60%'>
+			</a>
+		</div>
+		<div class='gridEl'>
+			<a href="<%=root %>/course/list.jsp">
+			   코스 관리<img src='<%=root %>/resource/image/admin/course.png' width='50%'>
 			</a>
 		</div>
 		<div class='gridEl'>
