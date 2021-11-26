@@ -13,11 +13,8 @@
 <script type='text/javascript'>
 var sysurl = "<%=root%>";
 </script>
-</HEAD>
-
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
 <!-- 닉네임 정규식 & 중복 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexNick_ajax.js"></script>
 <!-- 이메일 정규식 검사 스크립트 -->
@@ -26,6 +23,8 @@ var sysurl = "<%=root%>";
 <script type='text/javascript' src="<%=root%>/resource/js/regexPhone.js"></script>
 <!-- 초기화(새로고침) 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/resetAll.js"></script>
+</HEAD>
+
 
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
