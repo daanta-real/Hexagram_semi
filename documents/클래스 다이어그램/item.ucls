@@ -183,7 +183,7 @@
   <dependency id="21">    
     <bendpoint x="304" y="-328"/>    
     <bendpoint x="496" y="-328"/>    
-    <bendpoint x="572" y="-230"/>    
+    <bendpoint x="669" y="-327"/>    
     <bendpoint x="670" y="-230"/>    
     <bendpoint x="670" y="-103"/>    
     <bendpoint x="916" y="-103"/>    
@@ -314,7 +314,8 @@
   <dependency id="45">    
     <bendpoint x="304" y="-327"/>    
     <bendpoint x="498" y="-327"/>    
-    <bendpoint x="572" y="-230"/>    
+    <bendpoint x="668" y="-328"/>    
+    <bendpoint x="670" y="-232"/>    
     <end type="SOURCE" refId="15"/>    
     <end type="TARGET" refId="13"/>  
   </dependency>  
