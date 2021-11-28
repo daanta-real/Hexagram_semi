@@ -13,16 +13,14 @@
 String root = request.getContextPath();
 
 // 1. 파라미터 접수
-System.out.println("[이벤트 - 수정] 1. 접수된 파라미터 확인");
-System.out.println("접수된 패러미터(eventIdx): " + request.getParameter("eventIdx"));
 String eventIdxStr = request.getParameter("eventIdx");
+System.out.println("[이벤트 - 수정] 1. 접수된 패러미터 확인. 수정할 eventIdx = " + eventIdxStr);
 Integer eventIdx = null;
 if(eventIdxStr == null || eventIdxStr.equals("")) {
 	System.out.println("[이벤트 - 수정] 1. eventIdx가 입력되지 않았습니다.");
 	throw new Exception();
 } else {
-	eventIdx = Integer.valueOf(eventIdxStr);	
-	System.out.println("[이벤트 - 수정] 1. 수정 요청된 이벤트 번호: " + eventIdx);
+	eventIdx = Integer.valueOf(eventIdxStr);
 }
 
 // 2. 해당 이벤트 정보를 받아옴
@@ -68,21 +66,29 @@ window.addEventListener("load", () => {
 	// 변수 선언
 	fileEl = document.getElementById("fileInput");
 	
+	// 기존에 업로드되었던 파일이 있는지 체크하여, 있을 때에는 파일 이름을 보여주는 함수
+	fileInputElementReady()
+	
 	// 파일 업로드 시 파일 이름을 span에 반영 
-	fileEl.addEventListener("change", fileInfoRefresher);
+	fileEl.addEventListener("change", () => {
+		const fileName = fileEl.files[0].name;
+		document.getElementById("selectedFileIcon").textContent = "✔️";
+		document.getElementById("selectedFileName").textContent = fileName;
+	});
 	
 });
 
-// 파일 첨부란에 들어가는 파일 정보 라벨 내용을 갱신해주는 함수
-function fileInfoRefresher(preSelectedFileName) {
-	const fileName;
-	if(preSelectedFileName !== undefined) {
-		fileName = preSelectedFileName;
+// 기존에 업로드되었던 파일이 있는지 체크하여, 있을 때에만 내용을 갱신해주는 함수
+function fileInputElementReady() {
+	let icon = null;
+	let fileName = "<%=eventDto.getFileUploadName()%>";
+	if(fileName != "null") {
+		console.log("기존에 첨부한 파일이 있습니다.");
+		document.getElementById("selectedFileIcon").textContent = "✔️";
+		document.getElementById("selectedFileName").textContent = fileName;
 	} else {
-		fileName = fileEl.files[0].name;
+		console.log("기존에 첨부한 파일이 없습니다.");
 	}
-	document.getElementById("selectedFileIcon").textContent = "✔️";
-	document.getElementById("selectedFileName").textContent = fileName;
 }
 
 </script>
@@ -97,23 +103,27 @@ function fileInfoRefresher(preSelectedFileName) {
 
 <div class="sub_title">이벤트 수정</div>
 
-<form action="insert.nogari" method="post" enctype="multipart/form-data">
+<form action="update.nogari" method="post" enctype="multipart/form-data">
+<input type='hidden' name='eventIdx' value='<%=eventDto.getEventIdx() %>' />
+<input type='hidden' name='usersIdx' value='<%=eventDto.getUsersIdx() %>' />
 <table class='boardContainer'>
 
 	<tbody class='boardBox'>
 		<tr class='row'>
 			<th>제목</th>
-			<td><input class='inputs' type="text" name="eventName" required></td>
+			<td><input class='inputs' type="text" name="eventName" required value=<%=eventDto.getEventName() %>></td>
 		</tr>
 		<tr class='row'>
 			<th>내용</th>
-			<td><textarea class='inputs' name="eventDetail" required rows="10" cols="60"></textarea></td>
+			<td><textarea class='inputs' name="eventDetail" required rows="10" cols="60"><%=eventDto.getEventDetail() %></textarea></td>
 		</tr>
 		<tr class='row'>
 			<th>첨부파일</th>
 			<td><label class='fileSelector flexCenter'>
 				<input id="fileInput" class='inputs' type="file" name="attach" accept="image/png, image/jpeg" style="display:none;">
-				<small id="selectedFileIcon">📤</small>&nbsp;<span id="selectedFileName">파일 올리기</span>
+				<small id="selectedFileIcon">📤</small>
+				&nbsp;
+				<span id="selectedFileName">파일 올리기</span>
 			</label></td>
 		</tr>
 	</tbody>
@@ -121,7 +131,7 @@ function fileInfoRefresher(preSelectedFileName) {
 	<tfoot class='boardBox'>
 		<tr><td colspan="2" align="right">
 			<button type=submit>등록</button>
-			<button type=reset>취소</button>
+			<button onclick="history.go(-1);">취소</button>
 		</td></tr>
 	</tfoot>
 	

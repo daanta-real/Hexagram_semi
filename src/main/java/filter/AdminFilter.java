@@ -53,9 +53,9 @@ public class AdminFilter implements Filter {
 
 		} catch(Exception e) {
 
-			System.out.println("[필터 작동 - 관리자 검사] 처리 중에 에러 발생");
+			System.out.println("[필터 작동 - 관리자 검사] 처리 중에 에러 발생. 로그인 필요하여 로그인 화면으로 이동합니다.");
 			e.printStackTrace();
-			((HttpServletResponse)response).sendError(500);
+			((HttpServletResponse)response).sendError(401);
 
 		}
 
