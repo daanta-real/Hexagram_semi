@@ -23,17 +23,17 @@ var sysurl = "<%=root%>";
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- 아이디 정규식 & 중복 검사 스크립트-->
-<script type='text/javascript' src="<%=root%>/resource/js/test/regexId_ajax2.js"></script>
+<script type='text/javascript' src="<%=root%>/resource/js/regexId_ajax.js"></script>
 <!-- 비밀번호 일치 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/test/checkPwEquals2.js"></script>
+<script type='text/javascript' src="<%=root%>/resource/js/checkPwEquals.js"></script>
 <!-- 비밀번호 정규식 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/test/regexPw2.js"></script>
+<script type='text/javascript' src="<%=root%>/resource/js/regexPw.js"></script>
 <!-- 닉네임 정규식 & 중복 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/test/regexNick_ajax2.js"></script>
+<script type='text/javascript' src="<%=root%>/resource/js/regexNick_ajax.js"></script>
 <!-- 이메일 정규식 & 중복 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/test/regexEmail_ajax2.js"></script>
+<script type='text/javascript' src="<%=root%>/resource/js/regexEmail_ajax.js"></script>
 <!-- 폰번호 정규식 검사 스크립트 -->
-<script type='text/javascript' src="<%=root%>/resource/js/test/regexPhone2.js"></script>
+<script type='text/javascript' src="<%=root%>/resource/js/regexPhone.js"></script>
 <!-- 비밀번호 토글 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/togglePw.js"></script>
 <!-- 초기화(새로고침) 스크립트 -->
@@ -55,22 +55,22 @@ var sysurl = "<%=root%>";
 <tbody class='boardBox'>       
 	<tr class='row'>
 		<th>아이디</th>
-		<td class="flexCenter flexCol"><input type='text' name='usersId' placeholder='입력하세요' required onblur="checkId();"><div class="message"></div></td>
+		<td class="flexCenter flexCol"><input type='text' name='usersId' placeholder='입력하세요' required><div class="message"></div></td>
 	</tr>
 	<tr class='row'>
 		<th>비번</th>
 		<td class="flexCenter flexCol">
 			<div style="display: flex; flex-direction: row; word-break: keep-all;">
-				<input type='password' name='usersPw' placeholder='입력하세요' required onblur="checkPw();">
+				<input type='password' name='usersPw' placeholder='입력하세요' required>
 				<label style="word-break: keep-all; display: flex; flex-direction: row; min-width: 2rem; align-items: center; margin: auto 0.4rem auto 0.2rem;"><input type="checkbox" class="togglePw" /><span>보기</span></label>
 			</div>
 			<div class="usersPw message"></div>
 		</td>
 	</tr>
-	<tr class='row'><th>비번확인</th><td class='multiline'><input type='password' id='reInputPw' placeholder='비밀번호 재확인' required onblur="checkPwEquals();"><div class="noticePw"></div></td></tr>
-	<tr class='row'><th>닉네임</th><td class='multiline'><input type='text' name='usersNick' placeholder='입력하세요' required onblur="checkNick();"><div class="message"></div></td></tr>
-	<tr class='row'><th>이메일</th><td class='multiline'><input type='email' name='usersEmail' placeholder='입력하세요' required onblur="checkEmail();"><div class="message"></div></td></tr>
-	<tr class='row'><th>폰번호</th><td class='multiline'><input type='tel' name='usersPhone' placeholder='입력하세요' onblur="checkPhone();"><div class="message"></div></td></tr>
+	<tr class='row'><th>비번확인</th><td class='multiline'><input type='password' id='reInputPw' placeholder='비밀번호 재확인' required><div class="noticePw"></div></td></tr>
+	<tr class='row'><th>닉네임</th><td class='multiline'><input type='text' name='usersNick' placeholder='입력하세요' required><div class="message"></div></td></tr>
+	<tr class='row'><th>이메일</th><td class='multiline'><input type='email' name='usersEmail' placeholder='입력하세요' required><div class="message"></div></td></tr>
+	<tr class='row'><th>폰번호</th><td class='multiline'><input type='tel' name='usersPhone' placeholder='입력하세요'><div class="message"></div></td></tr>
 </tbody>
 <tfoot class='boardBox'><tr><td colspan=2 align=center class='flexCenter flexCol' style='width:100%;'>
 	<input type='submit' class='bottomLongBtn' value='회원가입'>
