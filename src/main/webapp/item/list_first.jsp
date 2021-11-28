@@ -293,7 +293,6 @@
 	        <div class="searchBox container-center">
 	        	<div class="row center">
 	             <select name="column" class="form-input form-inline">
-	                 <option value="item_type">카테고리</option>
 	                 <option value="item_name">제목</option>
 	                 <option value="item_detail">내용</option>
 	             </select>
