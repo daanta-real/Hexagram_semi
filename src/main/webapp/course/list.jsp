@@ -582,7 +582,7 @@
 
 <%if(isLogin){ %>
 <!-- 글쓰기 버튼을 누르면CourseCreateSequnceForInsertServlet 으로 이동해서 시퀀스 번호를 생성해준다. -->
-<h2><a href="insert_sequence.nogari">글 쓰기</a></h2>
+<h2><a href="insert_sequence.nogari" class="top-btn">글 쓰기</a></h2>
 <%} %>
 
 
