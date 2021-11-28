@@ -72,7 +72,7 @@ UsersDto usersDto = usersDao.get(sessionId);
 			<tr><td align="center" colspan="2">
 				<input type='submit' class='bottomLongBtn' value="변경" >
 				<a class='bottomLongBtn' href = "<%=root %>/users/detail.jsp">취소</a>
-				<input class='bottomLongBtn' type='reset' value='초기화' class="reset">
+				<span class='bottomLongBtn reset'>초기화</span>
 			</td></tr>
 		</tfoot>
 
