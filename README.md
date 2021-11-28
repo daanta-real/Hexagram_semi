@@ -64,3 +64,12 @@
  
 <br><br><hr>
 ### 결과물
+
+#### Usecase Diagram
+![UsecaseDiagram(all)](https://user-images.githubusercontent.com/88869283/143766100-60b86a41-977b-4699-8240-e84d8eddfaa4.jpg)
+
+#### Class Diagram
+![users](https://user-images.githubusercontent.com/88869283/143766057-aa06b36a-5335-4d18-a002-67d5002e2f4f.png)
+![item](https://user-images.githubusercontent.com/88869283/143766069-a487b4de-c014-4576-8e55-edf0aa816ae4.png)
+![course](https://user-images.githubusercontent.com/88869283/143766075-ed9088d0-bac8-4b2f-b7d2-d985a8415da2.png)
+![event](https://user-images.githubusercontent.com/88869283/143766077-9b636002-d225-4d21-8b1f-d3f9b6f3fe68.png)
