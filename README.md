@@ -81,4 +81,3 @@
 > 4. Event(이벤트)
 > ![event](https://user-images.githubusercontent.com/88869283/143766077-9b636002-d225-4d21-8b1f-d3f9b6f3fe68.png)
 
-![item-removebg-preview (1)](https://user-images.githubusercontent.com/88869283/143766271-07b34203-a6ef-4531-96c9-6d38fb8148c7.png)
