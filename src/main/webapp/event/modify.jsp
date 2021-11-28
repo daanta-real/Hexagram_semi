@@ -28,7 +28,11 @@ if(eventIdxStr == null || eventIdxStr.equals("")) {
 // 2. 해당 이벤트 정보를 받아옴
 System.out.println("[이벤트 - 수정] 2. 이벤트 정보 확인");
 EventDao eventDao = new EventDao();
-EventDto eventDto = eventDao.get(eventIdx); 
+EventDto eventDto = eventDao.get(eventIdx);
+if(eventDto == null) {
+	System.out.println("[이벤트 - 수정] 오류. 번호에 해당하는 eventDto가 없습니다.");
+	return;
+}
 System.out.println("[이벤트 - 수정] 2. 수정 요청된 이벤트 정보: " + eventDto);
 
 %>
