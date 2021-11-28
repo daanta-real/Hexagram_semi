@@ -13,11 +13,8 @@
 <script type='text/javascript'>
 var sysurl = "<%=root%>";
 </script>
-</HEAD>
-
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
-
 <!-- 닉네임 정규식 & 중복 검사 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/regexNick_ajax.js"></script>
 <!-- 이메일 정규식 검사 스크립트 -->
@@ -26,6 +23,8 @@ var sysurl = "<%=root%>";
 <script type='text/javascript' src="<%=root%>/resource/js/regexPhone.js"></script>
 <!-- 초기화(새로고침) 스크립트 -->
 <script type='text/javascript' src="<%=root%>/resource/js/resetAll.js"></script>
+</HEAD>
+
 
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
@@ -73,7 +72,7 @@ UsersDto usersDto = usersDao.get(sessionId);
 			<tr><td align="center" colspan="2">
 				<input type='submit' class='bottomLongBtn' value="변경" >
 				<a class='bottomLongBtn' href = "<%=root %>/users/detail.jsp">취소</a>
-				<input class='bottomLongBtn' type='reset' value='초기화' class="reset">
+				<span class='bottomLongBtn reset'>초기화</span>
 			</td></tr>
 		</tfoot>
 

@@ -74,19 +74,19 @@ public class UsersModifyServlet extends HttpServlet {
 				System.out.println("권한 확인 완료.");
 			}
 
-			// 4. 권한 검사: 추가적으로, grade를 수정하는 경우, 등급이 관리자인지도 확인함.
-			boolean hasGradeModifying = usersGrade != null && !usersGrade.equals("");
-			if(hasGradeModifying) {
-				System.out.print("[회원 수정] 4. 등급 수정이 요청되어, 요청자가 관리자 권한인지 추가로 확인하겠습니다.");
-				boolean isAdmin = Sessioner.isAdmin(session);
-				if(!isAdmin) {
-					System.out.println("회원등급을 수정하려 하였지만, 요청자가 관리자가 아닙니다.");
-					throw new Exception();
-				} else {
-					System.out.println("등급 수정 권한이 있음이 확인되었습니다.");
-				}
-			}
-			System.out.println("[회원 수정] 4. 모든 권한 확인 완료.");
+//			// 4. 권한 검사: 추가적으로, grade를 수정하는 경우, 등급이 관리자인지도 확인함.
+//			boolean hasGradeModifying = usersGrade != null && !usersGrade.equals("");
+//			if(hasGradeModifying) {
+//				System.out.print("[회원 수정] 4. 등급 수정이 요청되어, 요청자가 관리자 권한인지 추가로 확인하겠습니다.");
+//				boolean isAdmin = Sessioner.isAdmin(session);
+//				if(!isAdmin) {
+//					System.out.println("회원등급을 수정하려 하였지만, 요청자가 관리자가 아닙니다.");
+//					throw new Exception();
+//				} else {
+//					System.out.println("등급 수정 권한이 있음이 확인되었습니다.");
+//				}
+//			}
+//			System.out.println("[회원 수정] 4. 모든 권한 확인 완료.");
 
 			// 5. 수정 실행 및 결과 출력
 			System.out.print("[회원 수정] 5. 실제 수정 실행..");

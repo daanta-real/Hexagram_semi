@@ -19,6 +19,7 @@ td > label { display: flex; align-items:center; margin: auto 0.4rem auto 0.2rem;
 <script type='text/javascript'>
 var sysurl = "<%=root%>";
 </script>
+
 <!-- jQuery -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <!-- 아이디 정규식 & 중복 검사 스크립트-->
@@ -72,7 +73,7 @@ var sysurl = "<%=root%>";
 	<tr class='row'><th>폰번호</th><td class='multiline'><input type='tel' name='usersPhone' placeholder='입력하세요'><div class="message"></div></td></tr>
 </tbody>
 <tfoot class='boardBox'><tr><td colspan=2 align=center class='flexCenter flexCol' style='width:100%;'>
-	<input type='submit' class='bottomLongBtn' value='가입하기'>
+	<input type='submit' class='bottomLongBtn' value='회원가입'>
 	<span class='bottomLongBtn reset'>초기화</span>
 </td></tr></tfoot>
 </table>

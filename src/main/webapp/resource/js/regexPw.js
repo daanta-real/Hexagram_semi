@@ -14,11 +14,12 @@ window.addEventListener("load", () => {
             if(regex.test(inputPw)){
                 console.log("비밀번호 정규표현식 검사 통과");
                 message.textContent = "";
-				$("input").prop("disabled",false);
+				$(form).attr('onsubmit', 'event.addEventListener();');
             }else{
                 console.log("비밀번호 정규표현식 검사 실패");
                 message.textContent = "비밀번호는 영문, 숫자, 특수문자 _-~!@#$%^&*=+/,.;’”? 하나씩 포함되야 합니다";
-            	$("input").not($("input[name=usersPw], .togglePw")).prop("disabled",true);
+            	form.querySelector("input[name=usersPw]").focus();
+				$(form).attr('onsubmit', 'event.preventDefault();');
 			}		
         }
     });

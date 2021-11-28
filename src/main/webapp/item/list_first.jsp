@@ -73,7 +73,9 @@
 	.form-inline {
 	    width: auto;
 	}
-    
+    .item-title{
+    	font-size:2rem;
+    }
     /* 관광지 지역 부분 */
     /* 그리드 컨테이너 내부에서 사용되는 변수들의 선언 */ 
 	.gridFirst {
@@ -87,7 +89,7 @@
 	/* 그리드 앨범들을 가지고 있는 최상위 컨테이너. 앨범 박스를 통째로 중앙 정렬하기 위해서 반드시 필요하다. */
 	.gridFirst > .gridContainer {
 		width: 100%;
-		border:1px solid blue;
+		/*border:1px solid blue;*/
 	}
 	
 	/* 그리드 앨범 박스*/
@@ -96,20 +98,22 @@
    		justify-content:center;
    		grid-template-columns: var(--grid-box-margin) 1fr;
 		margin: var(--grid-box-margin);
-   		border:1px solid green;
+   		/*border:1px solid black;*/
  	}
  	
  	/* 좌측 타이틀부 */
  	.gridFirst > .gridContainer > .gridBox > .gridTitle {
  		display:flex; flex-direction:column; justify-content:center; align-items:center;
  		width: var(--grid-title-width);
- 		border:1px solid gold;
+ 		border:1px solid #0002;
+ 		/*border:1px solid gold;*/
+ 		background-color:hsl(38, 70%, 70%);
  	}
  	
  	/* 우측 콘텐츠부 */
  	.gridFirst > .gridContainer > .gridBox > .gridContents {
  		display:flex; flex-direction:row; justify-content:flex-start; align-items:center; flex-wrap:wrap;
- 		border:1px solid lime;
+ 		border:1px solid #0002;
 	}
  	
  	/* 우측 콘텐츠부 내부 개별 객체 */
@@ -117,9 +121,19 @@
  		width: var(--grid-el-width);
  		height: var(--grid-el-height);
  		margin: var(--grid-el-margin);
- 		border: 1px solid red;
+ 		/*border: 1px solid red;*/
  		text-align: center;
  		padding-top: 0.4rem;
+ 	}
+ 	.gridFirst > .gridContainer > .gridBox > .gridContents > .gridEl:hover {
+ 		width: var(--grid-el-width);
+ 		height: var(--grid-el-height);
+ 		margin: var(--grid-el-margin);
+ 		/*border: 1px solid red;*/
+ 		text-align: center;
+ 		padding-top: 0.4rem;
+ 		background-color:hsl(40, 58%, 77%);
+
  	}
  	
  	/*검색창 백그라운드 이미지*/
@@ -151,7 +165,7 @@
 	/* 그리드 앨범들을 가지고 있는 최상위 컨테이너. 앨범 박스를 통째로 중앙 정렬하기 위해서 반드시 필요하다. */
 	.second > .gridContainer {
 		width: 100%;
-		border:1px solid blue;
+		/*border:1px solid blue;*/
 	}
 	
 	/* 그리드 앨범 박스*/
@@ -160,7 +174,7 @@
    		justify-content:center;
    		grid-template-columns: repeat(auto-fit, minmax(var(--grid-el-width), max-content));
 		margin: var(--grid-box-margin);
-   		border:1px solid green;
+   		border:1px solid #0002;
  	}
  	
  	/* 앨범 한 개 한 개 */
@@ -170,7 +184,17 @@
  		width: var(--grid-el-width);
  		height: var(--grid-el-height);
  		margin: var(--grid-el-margin);
- 		border: 1px solid red;
+ 		border: 1px solid #dfdfdf;
+ 		
+ 	}
+ 	.second > .gridContainer > .gridBox > .gridEl:hover {
+ 		display:flex; flex-direction:column; align-items:center;
+ 		/* 세로 가운데 정렬 필요하면 오른쪽 것 주석 해제할 것: justify-content:center; */
+ 		width: var(--grid-el-width);
+ 		height: var(--grid-el-height);
+ 		margin: var(--grid-el-margin);
+ 		border: 1px solid #dfdfdf;
+ 		background-color:hsl(40, 58%, 77%);
  	}
  	
  	
@@ -195,10 +219,19 @@
 	#slide ul li{
 	    display:inline-block; 
 	    padding: 10px 20px; 
-	
+		border: 1px solid #dfdfdf;
 	    margin-right:10px;
 	    margin-bottom: 20px;
 	}
+	#slide ul li:hover{
+	    display:inline-block; 
+	    padding: 10px 20px; 
+		border: 1px solid #dfdfdf;
+	    margin-right:10px;
+	    margin-bottom: 20px;
+	    background-color:hsl(40, 58%, 77%);
+	}
+
     </style>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 	<script>
@@ -260,7 +293,6 @@
 	        <div class="searchBox container-center">
 	        	<div class="row center">
 	             <select name="column" class="form-input form-inline">
-	                 <option value="item_type">카테고리</option>
 	                 <option value="item_name">제목</option>
 	                 <option value="item_detail">내용</option>
 	             </select>

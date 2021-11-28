@@ -90,10 +90,12 @@ margin-top: 5px; margin-bottom: 5px;
     float:right;
 }
 .float-container > .float-btn{
-	font-size:17px;
-    border:1px solid black;
-    margin: 10px 10px;
-    padding:6px 6px;
+	margin-left: 0.3rem;
+		    border-radius: 0.5rem;
+		    padding: 0.05rem 0.6rem;
+		    box-shadow: 0 0 1rem #8882;
+		    color: hsl(0, 50%, 20%);
+		    background: hsl(34, 60%, 70%);
 }
 /* 코스 내용*/
 .course-detail{
@@ -128,11 +130,18 @@ ul{
 #slide ul li{
     display:inline-block; 
     padding: 10px 20px; 
-
+	border: 1px solid #dfdfdf;
     margin-right:10px;
     margin-bottom: 20px;
 }
-
+#slide ul li:hover{
+	    display:inline-block; 
+	    padding: 10px 20px; 
+		border: 1px solid #dfdfdf;
+	    margin-right:10px;
+	    margin-bottom: 20px;
+	    background-color:hsl(40, 58%, 77%);
+	}
 	
 
 
@@ -147,14 +156,16 @@ textarea {
 }
         
 .form-input {
-    border: 1px solid rebeccapurple;
+    border: 1px solid #0002;
 }
 
 .form-btn {
-    color: rgb(77, 25, 25);
-    background-color: rgb(232, 193, 125);
-    font-weight: bold;
-    height: 90%;
+    margin-left: 0.3rem;
+    border-radius: 0.5rem;
+    padding: 0.05rem 0.6rem;
+    box-shadow: 0 0 1rem #8882;
+    color: hsl(0, 50%, 20%);
+    background: hsl(34, 60%, 70%);
 }
 .form-btn:hover{
  color: red;
@@ -205,7 +216,7 @@ textarea {
 .table.table-border > tbody > tr > td,
 .table.table-border > tfoot > tr > th,
 .table.table-border > tfoot > tr > td {
-    border:1px solid black;
+    border:1px solid #0002;
 
 }
 
@@ -216,15 +227,13 @@ textarea {
 }
 
 
-.form-link-btn
-{
-    border:1px solid;
-    background-color:rgb(232, 193, 125);
-    text-decoration: none;
-    color:rgb(77, 25, 25);
-    padding:0.1rem 0.1rem;
-    font-size:20px;
-    margin: 0 0;
+.form-link-btn{
+    margin-left: 0.3rem;
+    border-radius: 0.5rem;
+    padding: 0.05rem 0.6rem;
+    box-shadow: 0 0 1rem #8882;
+    color: hsl(0, 50%, 20%);
+    background: hsl(34, 60%, 70%);
 }
 .form-link-btn:hover {
 	border-color:red;
@@ -243,6 +252,8 @@ textarea {
 	display: flex;
 	align-items:center;
 	justify-content:center;
+	border:1px solid #0002;
+	margin-left: 0.3rem;
 }
 
 .gapy{
@@ -394,7 +405,7 @@ textarea {
             <a href="<%=root %>/course/list.jsp" class="float-right float-btn">목록으로</a>
             <%} %>
         </div>
-        
+        <br><br>
         <div class="top-menu right">
         </div>
         <!-- 코스 제목 가운데 정렬-->
@@ -404,8 +415,9 @@ textarea {
             <span class="course-location"><%=location.getAdressCity()%></span>
         </div>
         <!-- 조회수 및 좋아요? 왼쪽 정렬 / 작성일자 오른쪽 정렬 -->
+        <br><br>
         <div class="row float-container">
-            <span class="float-left">조회수 : <%=courseDto.getCourseCountView()%></span>
+            <span class="float-left">조회수 : <%=courseDto.getCourseCountView()%>  </span>
             <span class="float-left">좋아요 : </span>
 <!--             좋아요 수를 ajax에서 resp응답으로 받은 것들을 돌려받아서 실시간으로 좋아요 수를 +1 -1하여 보여줄 수 있다. -->
             <span class="float-left show-like"><%=countLike%></span>
@@ -419,12 +431,14 @@ textarea {
          <%} %>
         </div>
     </div>
+    <br>
     <!-- 코스 작성 내용-->
     <div class="row course-detail">
     	<span>[글 작성 내용]</span>
     	<br>
         <span><%=courseDto.getCourseDetail()%></span>
     </div>
+    <br>
     <!-- 지도 표시-->
     <div class="row center course-map">
         <jsp:include page="course_kakaomap.jsp">
@@ -489,7 +503,7 @@ textarea {
 						%>
 						
 						<tr class="view-row">
-							<td width="35%" class="left">
+							<td width="25%" class="left">
 								<!-- 대댓글이라면 표시해주어라 -->
 								<%if(courseReplyDto.hasDepth()){ //CourseReplyDto에 메소드 추가 %>
 									<%for(int i = 0 ; i < courseReplyDto.getCourseReplyDepth() ; i++){ %>
@@ -516,7 +530,7 @@ textarea {
 							</td>
 							
 							<!-- 댓글 작성자이거나 관리자의 경우 수정 삭제가 가능하다. -->
-							<td width="17%">
+							<td width="25%">
 							<%if(isLogin){ %>
 								<a class="reply-btn form-link-btn form-line">대댓글</a>
 							<%} %>

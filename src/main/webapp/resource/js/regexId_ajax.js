@@ -44,10 +44,12 @@ window.addEventListener("load", () => {
                     console.log("ID 중복검사 요청 성공. ID : "+resp);
                     if(resp == "CAN_USE") { //사용가능한 아이디라면 다른 입력창에 대한 입력이 가능
                         $(message).text("아이디 사용 가능");
-                        $("input").prop("disabled", false);
+                    	$(form).attr('onsubmit', 'event.addEvenetListener();');
                     } else if(resp =="USED") { //아이디가 중복이라면 다른 입력창에 대한 입력을 방지
                         $(message).text("아이디가 이미 사용중입니다");
-                        $("input").not($("input[name=usersId]")).prop("disabled",true);
+						form.querySelector("input[name=usersId]").focus();
+						$(form).attr('onsubmit', 'event.preventDefault();');
+						
                     }
                }
                     
@@ -63,7 +65,8 @@ window.addEventListener("load", () => {
             }else{
                     console.log("아이디 정규표현식 검사 실패");
                     message.textContent = "영문 소문자, 숫자, 특수문자_ 4~20자 이내로 입력해주세요";
-					 $("input").not($("input[name=usersId]")).prop("disabled",true);
+					form.querySelector("input[name=usersId]").focus();
+					$(form).attr('onsubmit', 'event.preventDefault();');
             }
         }
     });
