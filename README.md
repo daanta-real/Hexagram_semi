@@ -33,21 +33,21 @@
 #### 사용 기술 스택 / 사용 언어
 
 - FE(Front End)
-   	- CSS
-   	- JavaScript
-   	- JQuery
+   	- CSS 2.1
+   	- JavaScript ES 5
+   	- JQuery 3
 
 - BE(Back-End)
-   	- Language: Java
+   	- Language: Java SE 1.8
    	- WAS(Web-Application-Server): Apache Tomcat 9.0
 
 - Database
    - RDBMS: Oracle database 11g
 
 - Developer tool
-   - Java: Eclipse
-   - Oracle: SQL-Developer
-   - FE : VScode
+   - Java: Eclipse 2020-06
+   - Oracle: SQL-Developer 18
+   - FE : Eclipse 2020-06, VScode 1.62
 
 #### 사용한 오픈 API
   - 카카오 주소 찾기 API
