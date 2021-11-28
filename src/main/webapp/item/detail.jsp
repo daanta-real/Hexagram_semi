@@ -70,14 +70,16 @@
 		}
 		        
 		.form-input {
-		    border: 1px solid rebeccapurple;
+		    border: 1px solid #0002;
 		}
 		
 		.form-btn {
-		    color: white;
-		    background-color: rgb(232, 193, 125);
-		    font-weight: bold;
-		    height: 90%;
+		   margin-left: 0.3rem;
+		    border-radius: 0.5rem;
+		    padding: 0.05rem 0.6rem;
+		    box-shadow: 0 0 1rem #8882;
+		    color: hsl(0, 50%, 20%);
+		    background: hsl(34, 60%, 70%);
 		}
 		.form-btn:hover{
 		 color: red;
@@ -94,7 +96,18 @@
 		.form-in {
 		   display: inline;
 		}
-     
+     	.top-btn{
+     		margin-left: 0.3rem;
+		    border-radius: 0.5rem;
+		    padding: 0.05rem 0.6rem;
+		    box-shadow: 0 0 1rem #8882;
+		    color: hsl(0, 50%, 20%);
+		    background: hsl(34, 60%, 70%);
+     	}
+     	.top-btn:hover{
+     		border:1px solid inherit;
+     		background-color:hsl(38, 70%, 70%);
+     	}
      	.flex-container{
      		display: flex;
      	}
@@ -105,6 +118,7 @@
             flex-grow: 1;
             margin-top: auto;
             margin-bottom: auto;
+            margin-left: 0.3rem;
         }
      	
      	.image {
@@ -141,18 +155,17 @@
 			.table.table-border > tbody > tr > td,
 			.table.table-border > tfoot > tr > th,
 			.table.table-border > tfoot > tr > td {
-			    border:1px solid black;
+			    border:1px solid #0002;
 			
 			}
 			
-			.form-link-btn
-	        {
-	            border:1px solid rgb(232, 193, 125);
-	            text-decoration: none;
-	            color:rgb(232, 193, 125);
-	            padding:0.1rem 0.1rem;
-         	    font-size:20px;
-         	    margin: 0 0;
+			.form-link-btn{
+	            margin-left: 0.3rem;
+			    border-radius: 0.5rem;
+			    padding: 0.05rem 0.6rem;
+			    box-shadow: 0 0 1rem #8882;
+			    color: hsl(0, 50%, 20%);
+			    background: hsl(34, 60%, 70%);
 	        }
 	      .form-link-btn:hover {
             border-color:red;
@@ -171,6 +184,8 @@
 					display: flex;
 					align-items:center;
 					justify-content:center;
+					border:1px solid #0002;
+					margin-left: 0.3rem;
 				}
 				
 				.gapy{
@@ -255,8 +270,6 @@ ItemFileDao itemFileDao = new ItemFileDao();
     
     <!-- 좋아요 및 조회수 출력 -->
 	<div class="row right">
-		좋아요 표시(예정)
-		|
 		조회수 : <%=itemDto.getItemCountView()%>
     </div>
 	
@@ -264,16 +277,16 @@ ItemFileDao itemFileDao = new ItemFileDao();
 	<div class="row right">
 		<!-- 관리자 또는 글 작성자가 보는 경우 글작성 / 수정 / 삭제가 가능하도록 설정 : 수정 삭제의 경우 필터에서도 처리가능하도록 해야함.-->
 		<!-- 리모컨으로 구현하기 -->
-		<a href="<%=root%>/item/list_first.jsp">목록으로</a>
+		<a href="<%=root%>/item/list_first.jsp" class="top-btn">목록으로</a>
 			<%
 			if(isManager || (isLogin && isMyboard)){
 			%>
 			<!-- 글 작성 페이지로 이동 -->
-			<a href="<%=root%>/item/insert.jsp">새 글작성</a>
+			<a href="<%=root%>/item/insert.jsp" class="top-btn">새 글작성</a>
 			<!-- itemIdx번호와 함께 수정페이지로 이동 -->
-			<a href="<%=root%>/item/edit.jsp?itemIdx=<%=itemIdx%>">수정</a>
+			<a href="<%=root%>/item/edit.jsp?itemIdx=<%=itemIdx%>" class="top-btn">수정</a>
 			<!-- itemIdx번호를 delete Servlet으로 보내주고 삭제 -->
-			<a href="<%=root%>/item/delete.nogari?itemIdx=<%=itemIdx%>">삭제</a>
+			<a href="<%=root%>/item/delete.nogari?itemIdx=<%=itemIdx%>" class="top-btn">삭제</a>
 		<%
 		}
 		%>
@@ -304,7 +317,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 		}
 		%>
     </div>
-    
+
     <!-- 상세정보 표시 -->
      <div class="row">
 	      <table class="table table-border">
@@ -389,7 +402,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 						%>
 						
 						<tr class="view-row">
-							<td width="35%" class="left">
+							<td width="25%" class="left">
 								<!-- 대댓글이라면 표시해주어라 -->
 								<%if(itemReplyDto.hasDepth()){ %>
 									<%for(int i = 0 ; i < itemReplyDto.getItemReplyDepth() ; i++){ %>
@@ -417,7 +430,7 @@ ItemFileDao itemFileDao = new ItemFileDao();
 							</td>
 							
 							<!-- 댓글 작성자이거나 관리자의 경우 수정 삭제가 가능하다. -->
-								<td width="17%">
+								<td width="25%">
 							<%if(isLogin) {%>
 									<a class="reply-btn form-link-btn form-line">대댓글</a>
 								<%} %>	
