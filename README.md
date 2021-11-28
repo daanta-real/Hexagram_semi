@@ -66,19 +66,19 @@
 ### 결과물
 
 > ### Usecase Diagram
->> <img src="https://user-images.githubusercontent.com/88869283/143766100-60b86a41-977b-4699-8240-e84d8eddfaa4.jpg" width="90%">
+> <img src="https://user-images.githubusercontent.com/88869283/143766100-60b86a41-977b-4699-8240-e84d8eddfaa4.jpg" width="90%">
 > <hr>
 > ### Class Diagram
->> 1. Users(회원)
->> <img src="https://user-images.githubusercontent.com/88869283/143766057-aa06b36a-5335-4d18-a002-67d5002e2f4f.png" width="90%">
->> <hr>
->> 2. Item(관광지)
->> <img src="https://user-images.githubusercontent.com/88869283/143766069-a487b4de-c014-4576-8e55-edf0aa816ae4.png" width="90%">
->> <hr>
->> 3. Course(코스)
->> <img src="https://user-images.githubusercontent.com/88869283/143766075-ed9088d0-bac8-4b2f-b7d2-d985a8415da2.png" width="90%">
->> <hr>
->> 4. Event(이벤트)
->> <img src="https://user-images.githubusercontent.com/88869283/143766077-9b636002-d225-4d21-8b1f-d3f9b6f3fe68.png" width="90%">
->> <hr>
+> 1. Users(회원)
+> <img src="https://user-images.githubusercontent.com/88869283/143766057-aa06b36a-5335-4d18-a002-67d5002e2f4f.png" width="90%">
+> <hr>
+> 2. Item(관광지)
+> <img src="https://user-images.githubusercontent.com/88869283/143766069-a487b4de-c014-4576-8e55-edf0aa816ae4.png" width="90%">
+> <hr>
+> 3. Course(코스)
+> <img src="https://user-images.githubusercontent.com/88869283/143766075-ed9088d0-bac8-4b2f-b7d2-d985a8415da2.png" width="90%">
+> <hr>
+> 4. Event(이벤트)
+> <img src="https://user-images.githubusercontent.com/88869283/143766077-9b636002-d225-4d21-8b1f-d3f9b6f3fe68.png" width="90%">
+> <hr>
 
