@@ -66,7 +66,7 @@
 ### 결과물
 
 > ### Usecase Diagram
-> ![UsecaseDiagram(all)](https://user-images.githubusercontent.com/88869283/143766100-60b86a41-977b-4699-8240-e84d8eddfaa4.jpg) width:80%;
+> <img src="https://user-images.githubusercontent.com/88869283/143766100-60b86a41-977b-4699-8240-e84d8eddfaa4.jpg" width="80%">
 >
 > ### Class Diagram
 > 1. Users(회원)
