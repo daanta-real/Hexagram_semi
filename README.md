@@ -32,6 +32,9 @@
 
 #### 사용 기술 스택 / 사용 언어
 
+- Operating System
+    - Window
+
 - FE(Front End)
    	- CSS 2.1
    	- JavaScript ES 5
