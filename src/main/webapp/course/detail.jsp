@@ -47,11 +47,9 @@
     margin-left: auto;
     margin-right:0;
 }
-
 .row{
 margin-top: 5px; margin-bottom: 5px;
 }
-
 .left {
     text-align: left !important;
 }
@@ -111,12 +109,10 @@ margin-top: 5px; margin-bottom: 5px;
    
     
 }
-
 /* 아이템 썸네일 부분 */
 ul{
 	list-style:none;
 }
-
 .item-link{
     text-decoration:none; 
     color:inherit;
@@ -126,7 +122,6 @@ ul{
     overflow-x: auto; 
     text-align:center;
 }
-
 #slide ul li{
     display:inline-block; 
     padding: 10px 20px; 
@@ -143,8 +138,6 @@ ul{
 	    background-color:hsl(40, 58%, 77%);
 	}
 	
-
-
 textarea {
     resize:none;
 }
@@ -158,7 +151,6 @@ textarea {
 .form-input {
     border: 1px solid #0002;
 }
-
 .form-btn {
     margin-left: 0.3rem;
     border-radius: 0.5rem;
@@ -170,15 +162,12 @@ textarea {
 .form-btn:hover{
  color: red;
 }
-
 .form-block {
     display: block;
 }
-
 .form-inline {
     width: auto;
 }
-
 .form-in {
    display: inline;
 }
@@ -208,8 +197,6 @@ textarea {
     padding: 0.5rem;
     text-align: center;
 }
-
-
 .table.table-border > thead > tr > th, 
 .table.table-border > thead > tr > td,
 .table.table-border > tbody > tr > th,
@@ -217,16 +204,11 @@ textarea {
 .table.table-border > tfoot > tr > th,
 .table.table-border > tfoot > tr > td {
     border:1px solid #0002;
-
 }
-
 .table.table-border {
     border:1px solid black;
     border-collapse: collapse;
-
 }
-
-
 .form-link-btn{
     margin-left: 0.2rem;
     border-radius: 0.5rem;
@@ -256,12 +238,10 @@ textarea {
 	border:1px solid #0002;
 	margin-left: 0.3rem;
 }
-
 .gapy{
 	margin-top: 2rem;
 	margin-bottom: 2rem;
 }
-
 .like-clicked{
 	color: red;
 }
@@ -281,11 +261,9 @@ textarea {
 	//코스 내용 및 제목등을 출력하기 위한 단일조회
 	CourseDao courseDao = new CourseDao();
 	CourseDto courseDto = courseDao.get(courseIdx);
-
 	//글 작성자 아이디 및 닉네임 출력을 위한 단일 조회
 	UsersDao usersDao = new UsersDao();
  	UsersDto usersDto = usersDao.get(courseDto.getUsersIdx());
-
 	//로그인 하였는지?  	
 	 String usersId = Sessioner.getUsersId(request.getSession());
  	 boolean isLogin = usersId != null;
@@ -308,7 +286,6 @@ textarea {
 		courseLikeDto = courseLikeDao.get(Sessioner.getUsersIdx(request.getSession()),courseIdx);//로그인이 되어있어야 numberNull에러가 안뜬다.
 	//초기에 비회원은 null값일 것이고, null인지 값이 있는지 파악해서 하트 표시를 해준다.
 	}
-
 %>
 <script>
 	$(function(){
@@ -320,7 +297,6 @@ textarea {
 				
 			}else{//회원이 접속된 상태라면 그리고 좋아요 추가를 아직 하지 않았다면,
             var course_Idx = $(this).attr("data-course_idx");
-
             $.ajax({
                 //준비 설정
                 url:"<%=root%>/course/check_ajax_course_like.nogari",
@@ -352,7 +328,6 @@ textarea {
 		
 	});
 	
-
 </script>
 <%-- course_item 및 course의 제목 및 내용 출력을 위한 변수 선언 --%>
 <%
@@ -486,8 +461,8 @@ textarea {
 <!-- 댓글 리스트 -->
 <div class="row center gapy">
 	<!-- 만약 댓글이 있다면 -->
-	<%if(!list.isEmpty()){%>
 		<table class="table table-border">
+		<%if(!list.isEmpty()){%>
 				<!-- 댓글 목록 출력 -->
 				<%for(CourseReplyDto courseReplyDto : list){%>
 					<tbody>
@@ -601,8 +576,8 @@ textarea {
 						</tr>
 						
 				</tbody>
+			<%}%>
 		</table>
-	<%}%>
 <!--테이블 정보 종료지점 -->	
 
 		<%}else{%>
