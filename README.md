@@ -81,6 +81,10 @@
 
 ## 결과물
 
+### [ Database Flow ERD ]
+<img src="https://user-images.githubusercontent.com/88869283/143832568-48420856-d9be-4c79-b427-85881959510e.png">
+
+<br>
 
 ### [ Usecase Diagram ]
 

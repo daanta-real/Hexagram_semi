@@ -25,7 +25,6 @@ import util.users.Sessioner;
 	"/event/insert.nogari",
 	"/event/modify.jsp",
 	"/event/update.nogari",
-	"/event/modify.jsp",
 	"/event/delete.nogari"
 } )
 public class AdminFilter implements Filter {
