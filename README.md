@@ -44,8 +44,8 @@
    	- CSS 2.1
 
 - BE(Back-End)
-   	- Language: Java SE 1.8
-   	- WAS(Web-Application-Server): Apache Tomcat 9.0
+   	- Java SE 1.8
+   	- Apache Tomcat 9.0
 
 - Database
    - RDBMS: Oracle Database 11g
