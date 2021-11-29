@@ -303,6 +303,10 @@ textarea {
 	color: red;
 }
 
+.mainImage {
+    max-width: 35rem;
+}
+
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="<%=root%>/resource/js/reply.js"></script>
@@ -356,7 +360,7 @@ function confirmDelete(eventIdx) {
 			// 이미지가 있을 경우 이미지를 글 상단에 출력
 			EventFileDto file = new EventFileDao().get(eventIdx);
 			if(file != null) {
-				%><div><img src="<%=root %>/img.nogari?img_type=<%=file.getEventFileType() %>&img_src=<%=file.getEventFileSaveName() %>" /></div><%
+				%><div><img class='mainImage' src="<%=root %>/img.nogari?img_type=<%=file.getEventFileType() %>&img_src=<%=file.getEventFileSaveName() %>" /></div><%
 			}
 			%>
 			<div><%=eventDto.getEventDetail() %></div>
