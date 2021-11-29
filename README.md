@@ -51,8 +51,20 @@
   - http://placeimg.com/
   - http://via.placeholder.com
 
-<p align="center"><img src="https://user-images.githubusercontent.com/88869283/143881423-9e641bc0-062b-4347-8218-ca40bca92aa7.jpg" width="100%"></p>
-<br>
+<div style='position:relative; display:flex; justify-content:center; align-items:center; width:100% !important;'>
+<img src="https://user-images.githubusercontent.com/84055731/143882677-2ff52e64-bd9e-400c-a777-feb96823a495.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882718-eac084b2-0916-4ccb-9c4c-fe75d6048641.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882750-ba15f35c-bbf3-47bd-b530-f4e1f4331601.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882775-65aa56b9-84a1-4d29-81dd-a8c910a512c3.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882804-87c1ae66-f0ef-48ce-981c-6bd6c9a4df0b.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143887937-6d561db2-0ac7-4214-a2cb-92ae61242df7.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882830-082c1ada-1f3a-4f8d-968c-507987527036.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882854-f63a09f1-96fd-43b6-8192-1eb8a04ef610.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882864-cb00f62e-40ef-4b8a-89a6-7331a0850af6.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882867-9fb09171-a1f8-4b20-9ce7-26616f6fb0bf.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882872-ef324e54-13b0-453e-afe0-e1fa15bbcb7c.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882957-7030bb1c-9ebc-4f7c-aa29-8b2d4944c190.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+</div><br>
 <hr>
 <br>
 
