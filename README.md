@@ -51,7 +51,7 @@
   - http://placeimg.com/
   - http://via.placeholder.com
 
-<div style='position:relative; display:flex; justify-content:center; align-items:center; width:100% !important;'>
+<p align=center>
 <img src="https://user-images.githubusercontent.com/84055731/143882677-2ff52e64-bd9e-400c-a777-feb96823a495.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
 <img src="https://user-images.githubusercontent.com/84055731/143882718-eac084b2-0916-4ccb-9c4c-fe75d6048641.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
 <img src="https://user-images.githubusercontent.com/84055731/143882750-ba15f35c-bbf3-47bd-b530-f4e1f4331601.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
@@ -64,7 +64,9 @@
 <img src="https://user-images.githubusercontent.com/84055731/143882867-9fb09171-a1f8-4b20-9ce7-26616f6fb0bf.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
 <img src="https://user-images.githubusercontent.com/84055731/143882872-ef324e54-13b0-453e-afe0-e1fa15bbcb7c.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
 <img src="https://user-images.githubusercontent.com/84055731/143882957-7030bb1c-9ebc-4f7c-aa29-8b2d4944c190.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
-</div><br>
+</p>
+
+<br>
 <hr>
 <br>
 
