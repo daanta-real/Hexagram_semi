@@ -38,9 +38,10 @@
     - Windows 10
 
 - FE(Front End)
-   	- CSS 2.1
+    - HTML 5
    	- JavaScript ES 5
    	- JQuery 3.6
+   	- CSS 2.1
 
 - BE(Back-End)
    	- Language: Java SE 1.8
