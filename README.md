@@ -82,8 +82,9 @@
 ## 결과물
 
 ### [ ERD ]
-<img src="https://user-images.githubusercontent.com/88869283/143831265-b5bbb6c4-f0c5-4968-9ff0-3bcd4c530f88.png">
-![Hexagram_semi](https://user-images.githubusercontent.com/88869283/143831373-07e18a8b-b765-49d3-bef8-20714adb1c33.png)
+<img src="https://user-images.githubusercontent.com/88869283/143831265-b5bbb6c4-f0c5-4968-9ff0-3bcd4c530f88.png" width="90%">
+
+<br>
 
 ### [ Usecase Diagram ]
 
