@@ -46,9 +46,10 @@
 ### 사용한 오픈 API
   - 카카오 주소 찾기 API
   - Daum 우편 번호 API
-  - 이미지 더미
-    - http://placeimg.com/
-    - http://via.placeholder.com
+
+### 이미지 더미 활용 사이트
+  - http://placeimg.com/
+  - http://via.placeholder.com
 
 <p align="center"><img src="https://user-images.githubusercontent.com/88869283/143881423-9e641bc0-062b-4347-8218-ca40bca92aa7.jpg" width="100%"></p>
 <br>
@@ -58,10 +59,11 @@
 ### 프로젝트 기능 구현
 -  **박준성**
 -  **민선아**
--  **김의동**
--  **홍성진**
+-  **김의동/홍성진(공동작업)**
+  - 코스 및 관광지 조회 페이지 구현 및 각 페이지 JS 및 CSS 작업
+  - 코스 및 관광지 CRUD 구현 및 계층형 댓글 구현
+  - 코스 및 관광지 필터 작업 및 오류 수정작업
 -  **조수현**
--  **김소은**
 <br>
 <hr>
 <br>
