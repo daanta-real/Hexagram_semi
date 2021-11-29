@@ -81,6 +81,8 @@
 
 ## 결과물
 
+### [ ERD ]
+<img src="https://user-images.githubusercontent.com/88869283/143831265-b5bbb6c4-f0c5-4968-9ff0-3bcd4c530f88.png">
 
 ### [ Usecase Diagram ]
 
