@@ -95,7 +95,7 @@ public class CourseReplyDao {
 				+ "start with course_reply_superno is null "
 				+ "order siblings by course_reply_groupno desc, course_idx asc";
 		PreparedStatement ps = con.prepareStatement(sql);
-		ps.setInt(1, courseIdx);;
+		ps.setInt(1, courseIdx);
 		ResultSet rs = ps.executeQuery();
 
 		List<CourseReplyDto> list = new ArrayList<CourseReplyDto>();
