@@ -50,12 +50,12 @@
             <img src="https://user-images.githubusercontent.com/88869283/143868570-b659ed32-e1bc-428d-bb23-ca92d5228780.png" width="5%" alt="html">
             <img src="https://user-images.githubusercontent.com/88869283/143868669-d0533f00-a0cc-4544-a270-881333e60dd0.png" width="5%" alt="js">
             <img src="https://user-images.githubusercontent.com/88869283/143868703-696a1ead-c168-4c12-875f-92f500d1f92d.png" width="4%" alt="jquery">
-            <img src="https://user-images.githubusercontent.com/88869283/143868717-d534089d-1bfd-4078-8680-f66e59641956.jpg" width="4%" alt="css">
-            <img src="https://user-images.githubusercontent.com/88869283/143868724-38677e3f-22bd-49ec-b300-b37fac945a20.png" width="4%" alt="rdbms">
+            <img src="https://user-images.githubusercontent.com/88869283/143868717-d534089d-1bfd-4078-8680-f66e59641956.jpg" width="3%" alt="css">
+            <img src="https://user-images.githubusercontent.com/88869283/143868724-38677e3f-22bd-49ec-b300-b37fac945a20.png" width="3.5%" alt="rdbms">
             <img src="https://user-images.githubusercontent.com/88869283/143868749-b7b8283d-c183-4b07-b4c3-40a767e81bd7.png" width="4%" alt="eclipse">
-            <img src="https://user-images.githubusercontent.com/88869283/143868731-1e8661b8-aa5e-42f8-aff9-b059b8e645ab.png" width="5%" alt="sqldev">
+            <img src="https://user-images.githubusercontent.com/88869283/143868731-1e8661b8-aa5e-42f8-aff9-b059b8e645ab.png" width="4.5%" alt="sqldev">
             <img src="https://user-images.githubusercontent.com/88869283/143868792-04549fdd-7503-486e-8fe5-c4d8a6c2a362.png" width="4%" alt="vs">
-            <img src="https://user-images.githubusercontent.com/88869283/143868809-6afd20b8-a488-4b3b-bdf3-feab1182253d.jpg" width="8%" alt="maps">
+            <img src="https://user-images.githubusercontent.com/88869283/143868809-6afd20b8-a488-4b3b-bdf3-feab1182253d.jpg" width="5%" alt="maps">
             <img src="https://user-images.githubusercontent.com/88869283/143868827-537c43a2-f4e7-4156-8c30-e1e04b329173.jpg" width="7%" alt="post">
 </p>
 <br>
