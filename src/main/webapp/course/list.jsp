@@ -200,6 +200,11 @@
    		border:1px solid inherit;
    		background-color:hsl(38, 70%, 70%);
      }
+     
+	.item-title {
+    	font-size: 3rem;
+    	line-height: 6rem;
+    }
     
     /* 그리드 컨테이너 내부에서 사용되는 변수들의 선언 */ 
 	.gridFirst {
@@ -222,6 +227,7 @@
    		grid-template-columns: var(--grid-box-margin) 1fr;
 		margin: var(--grid-box-margin);
    		/*border:1px solid black;*/
+   		margin-top: 2rem;
  	}
  	
  	/* 좌측 타이틀부 */
@@ -240,6 +246,7 @@
 	}
  	
  	/* 우측 콘텐츠부 내부 개별 객체 */
+ 	.gridFirst > .gridContainer > .gridBox > .gridContents > h3 { width:100%; }
  	.gridFirst > .gridContainer > .gridBox > .gridContents > .gridEl {
  		width: var(--grid-el-width);
  		height: var(--grid-el-height);
