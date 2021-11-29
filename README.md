@@ -44,12 +44,12 @@
   - 카카오 주소 찾기 API
   - Daum 우편 번호 API
 
-<img src="https://user-images.githubusercontent.com/88869283/143868380-e0bd920f-d89f-47e7-9096-73e1b9a44e97.png" width="6%" alt="window10">
+<img src="https://user-images.githubusercontent.com/88869283/143868380-e0bd920f-d89f-47e7-9096-73e1b9a44e97.png" width="5%" alt="window10">
 <img src="https://user-images.githubusercontent.com/88869283/143868451-a7eb151b-c2f9-482e-a91b-a8abb592beb4.png" width="8%" alt="java">
 <img src="https://user-images.githubusercontent.com/88869283/143868508-8aa3947d-bd29-4e59-86eb-e00daf858974.png" width="7%" alt="tomcat">
-<img src="https://user-images.githubusercontent.com/88869283/143868570-b659ed32-e1bc-428d-bb23-ca92d5228780.png" width="7%" alt="html">
+<img src="https://user-images.githubusercontent.com/88869283/143868570-b659ed32-e1bc-428d-bb23-ca92d5228780.png" width="6.5%" alt="html">
 <img src="https://user-images.githubusercontent.com/88869283/143868669-d0533f00-a0cc-4544-a270-881333e60dd0.png" width="7%" alt="js">
-<img src="https://user-images.githubusercontent.com/88869283/143868703-696a1ead-c168-4c12-875f-92f500d1f92d.png" width="7%" alt="jquery">
+<img src="https://user-images.githubusercontent.com/88869283/143868703-696a1ead-c168-4c12-875f-92f500d1f92d.png" width="6%" alt="jquery">
 <img src="https://user-images.githubusercontent.com/88869283/143868717-d534089d-1bfd-4078-8680-f66e59641956.jpg" width="5%" alt="css">
 <img src="https://user-images.githubusercontent.com/88869283/143868724-38677e3f-22bd-49ec-b300-b37fac945a20.png" width="5%" alt="rdbms">
 <img src="https://user-images.githubusercontent.com/88869283/143868749-b7b8283d-c183-4b07-b4c3-40a767e81bd7.png" width="6%" alt="eclipse">
