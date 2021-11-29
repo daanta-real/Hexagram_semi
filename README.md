@@ -60,6 +60,7 @@
   
 <br><br>
 
+
 #### 프로젝트 기능 구현
 -  **박준성**
 -  **민선아**
@@ -75,7 +76,7 @@
 ![1](https://user-images.githubusercontent.com/88871773/143793311-aa470570-94a8-4282-bf42-632aefc12d56.PNG)
 
 ### [ Usecase Diagram ]
-<img src="https://user-images.githubusercontent.com/88869283/143766100-60b86a41-977b-4699-8240-e84d8eddfaa4.jpg" width="90%">
+<img src="https://user-images.githubusercontent.com/88869283/143811797-50462da2-63bb-4794-bd40-238e5bcf49fd.jpg" width="90%">
 
 <br>
 
