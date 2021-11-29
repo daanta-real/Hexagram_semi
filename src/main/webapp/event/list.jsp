@@ -1,3 +1,4 @@
+<%@page import="util.users.Sessioner"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@ page import="java.util.List" %>
@@ -141,10 +142,12 @@ tfoot td {
 			<div class='el flexCenter'><a<%=nextHrefOptionStr%>>▶</a></div>
 			
 		</td></tr>
-		
+	
+	<%if(Sessioner.getUsersGrade(request.getSession()) != null && Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN)) {%>
 		<tr><td colspan=5 class="flexCenter bottomLongBtn">
-			<a class='bottomLongBtn' href="write.jsp">글쓰기</a>
+			<a href="write.jsp">글쓰기</a>
 		</td></tr>
+	<%} %>
 	
 	</tfoot>
 	

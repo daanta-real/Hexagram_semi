@@ -160,12 +160,13 @@
 			}
 			
 			.form-link-btn{
-	            margin-left: 0.3rem;
+	            margin-left: 0.2rem;
 			    border-radius: 0.5rem;
 			    padding: 0.05rem 0.6rem;
 			    box-shadow: 0 0 1rem #8882;
 			    color: hsl(0, 50%, 20%);
 			    background: hsl(34, 60%, 70%);
+			    width:25%;
 	        }
 	      .form-link-btn:hover {
             border-color:red;

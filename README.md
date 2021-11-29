@@ -1,4 +1,7 @@
-![노가리투어](https://user-images.githubusercontent.com/88871773/143210223-22185a0c-159d-4aed-8600-fb4350d0a751.PNG)
+
+<p align=center><img src="https://user-images.githubusercontent.com/84055731/143803050-fba907b0-4ec5-483c-83f5-93964d704a82.png" alt="팀 헥사그램 로고" style="width:50%;"/></p>
+
+<p align=center><img src="https://user-images.githubusercontent.com/88871773/143210223-22185a0c-159d-4aed-8600-fb4350d0a751.PNG" alt="노가리투어 로고"/></p>
 
 ### Hexagram Semi Project
 
@@ -33,7 +36,7 @@
 #### 사용 기술 스택 / 사용 언어
 
 - Operating System
-    - Window
+    - Windows 10
 
 - FE(Front End)
    	- CSS 2.1
@@ -45,7 +48,7 @@
    	- WAS(Web-Application-Server): Apache Tomcat 9.0
 
 - Database
-   - RDBMS: Oracle database 11g
+   - RDBMS: Oracle Database 11g
 
 - Developer tool
    - Java: Eclipse 2020-06
