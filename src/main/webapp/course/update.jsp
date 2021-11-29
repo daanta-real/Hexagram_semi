@@ -36,7 +36,13 @@
 				pn.setCount(itemDao.count(pn.getColumn(), pn.getKeyword(),subCity));
 				pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
 			}else{
-				list = pn.getResultList();	
+				if(isSearchMode && pn.getColumn().equals("item_address")){
+					list = itemDao.cityList("item_idx", pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
+					pn.setCount(itemDao.countCity(pn.getColumn(), pn.getKeyword()));
+					pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
+				}else{
+				list = pn.getResultList();
+				}	
 			}
     	
     	 CourseItemDao courseItemDao = new CourseItemDao();
@@ -235,7 +241,9 @@
             
             
 	           $("select[name=keyword]").change(function(){
+	        	   //console.log($(this).val());
 	        	   location.href =  $(this).find("option:selected").val();
+	        	   //location.href = $(this).val();
 	           })
 	           
 	          $("select[name=subCity]").change(function(){
@@ -312,7 +320,7 @@
 			<%if(pn.keywordValExists("인천")) {%>
 			<option value="인천" selected>인천광역시</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=인천>인천광역시</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=인천">인천광역시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("대구")) {%>

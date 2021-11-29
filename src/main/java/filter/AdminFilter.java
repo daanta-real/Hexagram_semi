@@ -17,12 +17,16 @@ import util.users.Sessioner;
 // 관리자 페이지 대상.
 @WebFilter( urlPatterns = {
 	"/admin/*",
-	"/event/write.jsp",
-	"/event/insert.nogari",
 	"/item/edit.jsp","/item/edit.nogari",
 	"/item/insert.jsp","/item/insert.nogari", //누구나 등록하지 못하게 설정
-	"/item/delete.nogari"
+	"/item/delete.nogari",
 	//아이템 항목들 => 403번 에러 발동하게 수정해야함..?
+	"/event/write.jsp",
+	"/event/insert.nogari",
+	"/event/modify.jsp",
+	"/event/update.nogari",
+	"/event/modify.jsp",
+	"/event/delete.nogari"
 } )
 public class AdminFilter implements Filter {
 
@@ -53,9 +57,9 @@ public class AdminFilter implements Filter {
 
 		} catch(Exception e) {
 
-			System.out.println("[필터 작동 - 관리자 검사] 처리 중에 에러 발생");
+			System.out.println("[필터 작동 - 관리자 검사] 처리 중에 에러 발생. 로그인 필요하여 로그인 화면으로 이동합니다.");
 			e.printStackTrace();
-			((HttpServletResponse)response).sendError(500);
+			((HttpServletResponse)response).sendError(401);
 
 		}
 

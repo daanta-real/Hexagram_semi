@@ -22,13 +22,14 @@ window.addEventListener("load", () => {
 
     // 변경할 PW 정규표현식 검사
     document.querySelector(".form-regexCheck input[name=pwUpdate]").addEventListener("blur", function(){
+        
+    	var form  = document.querySelector('.form-regexCheck');
     	// 정규식 검사 실패, 중복, 미입력시 submit 버튼 비활성화
 		// submit.disabled = true; 이면 비활성화
 		// submit.disabled = false; 이면 활성화
-		var submit = document.querySelector("input[type=submit]"); 
-
-        var form  = document.querySelector('.form-regexCheck');
-        var regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[-_~!@#$%^&*=+/,.;’”?])[a-zA-Z0-9-_~!@#$%^&*=+/,.;’”?]{4,20}$/;
+		var submit = form.querySelector("input[type=submit]"); 
+        
+		var regex = /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[-_~!@#$%^&*=+/,.;’”?])[a-zA-Z0-9-_~!@#$%^&*=+/,.;’”?]{4,20}$/;
         var pwUpdate = form.querySelector("input[name=pwUpdate]").value;
         var message = document.getElementById("pwUpdateMsgDiv");
         if(pwUpdate != ""){

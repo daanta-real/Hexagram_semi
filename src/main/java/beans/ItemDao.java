@@ -273,13 +273,32 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		Connection con = JdbcUtils.connect3();
 
 		String sql = "select count(*) from("
-				+ "select * from item where instr(#1, ?) > 0"
+				+ "select * from item where instr(#1, ?) = 1"
 				+ ")where instr(#2, ?) > 0";
 		sql = sql.replace("#1", column);
 		sql = sql.replace("#2", column);
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyword);
 		ps.setString(2, subCity);
+		ResultSet rs = ps.executeQuery();
+
+		rs.next();
+
+		int count = rs.getInt(1);
+
+		con.close();
+
+		return count;
+	}
+	
+	// 도시 지역만 카운트 하기(첫번째 항목 시작할 경우)
+	public Integer countCity(String column, String keyword) throws Exception {
+		Connection con = JdbcUtils.connect3();
+
+		String sql = "select count(*) from item where instr(#1, ?) = 1";
+		sql = sql.replace("#1", column);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyword);
 		ResultSet rs = ps.executeQuery();
 
 		rs.next();
@@ -559,7 +578,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 			Connection con = JdbcUtils.connect3();
 			String sql = "select * from ("
 					+ "select rownum rn,TMP.* from("
-						+ "select * from item where instr(#1, ?) > 0"
+						+ "select * from item where instr(#1, ?) = 1"
 					+ ")TMP where instr(#1,?)>0  order by #2 desc"
 				+ ")where rn between ? and ?";
 			sql = sql.replace("#1", column);
@@ -596,6 +615,50 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 
 			return list;
 		}
+		
+		//지역으로 검색한 경우 리스트
+		public List<ItemDto> cityList(String order,String column, String keyword, int begin, int end) throws Exception {
+
+			Connection con = JdbcUtils.connect3();
+			String sql = "select * from ("
+					+ "select rownum rn,TMP.* from("
+						+ "select * from item where instr(#1, ?) = 1 order by #2 desc"
+					+ ")TMP"
+				+ ")where rn between ? and ?";
+			sql = sql.replace("#1", column);
+			sql = sql.replace("#2", order);
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, keyword);
+			ps.setInt(2, begin);
+			ps.setInt(3, end);
+			
+			ResultSet rs = ps.executeQuery();
+			List<ItemDto> list = new ArrayList<>();
+			while (rs.next()) {
+				ItemDto itemDto = new ItemDto();
+				itemDto.setItemIdx(rs.getInt("item_idx"));
+				itemDto.setUsersIdx(rs.getInt("users_idx"));
+				itemDto.setItemType(rs.getString("item_type"));
+				itemDto.setItemName(rs.getString("item_name"));
+				itemDto.setItemDetail(rs.getString("item_detail"));
+				itemDto.setItemPeriod(rs.getString("item_period"));
+				itemDto.setItemTime(rs.getString("item_time"));
+				itemDto.setItemHomepage(rs.getString("item_homepage"));
+				itemDto.setItemParking(rs.getString("item_parking"));
+				itemDto.setItemAddress(rs.getString("item_address"));
+				itemDto.setItemDate(rs.getDate("item_date"));
+				itemDto.setItemCountView(rs.getInt("item_count_view"));
+				itemDto.setItemCountReply(rs.getInt("item_count_reply"));
+
+
+				list.add(itemDto);
+			}
+
+			con.close();
+
+			return list;
+		}
+		
 		
 		//계절별로 축제 리스트를 뽑아오는 메소드
 		public List<ItemDto> getSeasonItem(String first,String second,String third) throws Exception {

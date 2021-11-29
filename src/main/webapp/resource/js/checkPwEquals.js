@@ -18,13 +18,14 @@ window.addEventListener("load", () => {
 			if(usersPw != reInputPw){
 		        noticePw.textContent = "비밀번호가 일치하지 않습니다";
 		        console.log("비번 & 재확인비번 불일치");
-				$("input").not($("input[name=usersPw], #reInputPw, .togglePw")).prop("disabled",true);
+				form.querySelector("#reInputPw").focus();
+				$(form).attr('onsubmit', 'event.preventDefault();');
 			}
 			// 일치하면
 		    else if(usersPw == reInputPw){
 		        noticePw.textContent = "비밀번호 일치";
 		        console.log("비번 & 재확인비번 일치");	
-				$("input").prop("disabled",false);
+				$(form).attr('onsubmit', 'event.addEventListener();');
 			}
 		}
 	});

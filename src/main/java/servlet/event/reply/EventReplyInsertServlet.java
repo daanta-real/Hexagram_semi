@@ -28,19 +28,19 @@ public class EventReplyInsertServlet extends HttpServlet {
 			EventReplyDao EventReplyDao = new EventReplyDao();
 			EventReplyDto eventReplyDto = new EventReplyDto();
 
-			int eventReplyIdx = EventReplyDao.getSequenceNo();
+			int eventReplySeq = EventReplyDao.getSequenceNo();
 
-			eventReplyDto.setEventReplyIdx(eventReplyIdx);
+			eventReplyDto.setEventReplyIdx(eventReplySeq);
 			eventReplyDto.setEventIdx(eventIdx);
 			eventReplyDto.setUsersIdx(usersIdx);
 			eventReplyDto.setEventReplyDetail(eventReplyDetail);
 
 
-			if(req.getParameter("eventReplyTargetIdx") != null) {
-				int eventReplyTargetIdx = Integer.parseInt(req.getParameter("itemReplyTargetIdx"));
-				EventReplyDto eventReplyParent = EventReplyDao.get(eventReplyTargetIdx);
+			if(req.getParameter("eventReplyIdx") != null) {
+				int eventReplyIdx = Integer.parseInt(req.getParameter("eventReplyIdx"));
+				EventReplyDto eventReplyParent = EventReplyDao.get(eventReplyIdx);
 
-				eventReplyDto.setEventReplySuperno(eventReplyTargetIdx);
+				eventReplyDto.setEventReplySuperno(eventReplyIdx);
 				eventReplyDto.setEventReplyGroupno(eventReplyParent.getEventReplyGroupno());
 				eventReplyDto.setEventReplyDepth(eventReplyParent.getEventReplyDepth()+1);
 
@@ -56,7 +56,7 @@ public class EventReplyInsertServlet extends HttpServlet {
 			EventDao eventDao = new EventDao();
 			eventDao.countReply(eventIdx);
 
-			resp.sendRedirect(req.getContextPath()+"/event/detail.jsp?eventIdx="+Integer.parseInt(req.getParameter("eventIdx")));
+			resp.sendRedirect(req.getContextPath()+"/event/detail.jsp?eventIdx="+eventIdx);
 			return;
 
 		}catch (Exception e) {

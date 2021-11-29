@@ -73,7 +73,7 @@ public class EventDao implements PaginationInterface<EventDto> {
 		= "SELECT * FROM ("
 			+ "SELECT e.event_idx, e.users_idx, e.event_name, e.event_detail, e.event_date, e.event_count_view, e.event_count_reply"
 				  + ", u.users_id, u.users_nick, u.users_grade" // users 테이블에서 일부 정보를 갖고 온다.
-				  + ", f.event_file_idx, f.event_file_upload_name, f.event_file_save_name, f.event_file_size, f.event_file_type" // event_file 테이블에서 일부 정보를 갖고 온다. 무조건 합치며 없으면 NULL임
+				  + ", NVL(f.event_file_idx, -1) \"file_idx\", f.event_file_upload_name, f.event_file_save_name, f.event_file_size, f.event_file_type" // event_file 테이블에서 일부 정보를 갖고 온다. 무조건 합치며 없으면 NULL임
 			+ " FROM event e"
 			+ " LEFT JOIN users u      ON e.users_idx = u.users_idx"
 			+ " LEFT JOIN event_file f ON f.event_idx = e.event_idx"
@@ -95,9 +95,17 @@ public class EventDao implements PaginationInterface<EventDto> {
 			dto.setEventCountReply(rs.getInt("event_count_reply"));
 			// Users 추가 설정
 			dto.initUsersDto(rs.getString("users_id"), rs.getString("users_nick"), rs.getString("users_grade"));
-			// Files 추가 설정
-			dto.initFileDto(rs.getInt("event_file_idx"), rs.getString("event_upload_name"), rs.getString("event_save_name"),
-				rs.getLong("event_file_size"), rs.getString("event_file_type"));
+			// Files 추가 설정. -1이 아닐 경우 fileDto가 있으므로 각 하위값을 넣어주지만 -1일 경우 fileDto는 null로 취급
+			int fileIdx = rs.getInt("file_idx");
+			System.out.println("file_idx = " + fileIdx);
+			if(fileIdx != -1) {
+				Integer idx = rs.getInt("file_idx");
+				String uploadName = rs.getString("event_file_upload_name");
+				String saveName = rs.getString("event_file_save_name");
+				Long fileSize = rs.getLong("event_file_size");
+				String fileType = rs.getString("event_file_type");
+				dto.initFileDto(idx, uploadName, saveName, fileSize, fileType);
+			}
 		}
 
 		// 마무리

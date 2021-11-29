@@ -127,10 +127,21 @@
         flex-direction: column;
         width: 282px;
         height: 262px;
-        border: 1px solid black;
+        border: 1px solid #0002;
         margin-left: 13px;
         margin-top: 10;
         margin-bottom: 10px;
+    }
+    .box:hover{
+        display: flex;
+        flex-direction: column;
+        width: 282px;
+        height: 262px;
+        border: 1px solid #0002;
+        margin-left: 13px;
+        margin-top: 10;
+        margin-bottom: 10px;
+        background-color: hsl(34, 60%, 70%);
     }
     .box-detail{
         margin:3px;
@@ -147,6 +158,7 @@
         }
    .flex-btn {
             flex-grow: 25%;
+            
         }    
     
       
@@ -176,6 +188,18 @@
 	    width: auto;
 	}
     
+	.top-btn{
+   		margin-left: 0.3rem;
+	    border-radius: 0.5rem;
+	    padding: 0.05rem 0.6rem;
+	    box-shadow: 0 0 1rem #8882;
+	    color: hsl(0, 50%, 20%);
+	    background: hsl(34, 60%, 70%);
+     }
+     .top-btn:hover{
+   		border:1px solid inherit;
+   		background-color:hsl(38, 70%, 70%);
+     }
     
     /* 그리드 컨테이너 내부에서 사용되는 변수들의 선언 */ 
 	.gridFirst {
@@ -189,29 +213,30 @@
 	/* 그리드 앨범들을 가지고 있는 최상위 컨테이너. 앨범 박스를 통째로 중앙 정렬하기 위해서 반드시 필요하다. */
 	.gridFirst > .gridContainer {
 		width: 100%;
-		border:1px solid blue;
+		/*border:1px solid blue;*/
 	}
-	
 	/* 그리드 앨범 박스*/
 	.gridFirst > .gridContainer > .gridBox {
 		display: grid;
    		justify-content:center;
    		grid-template-columns: var(--grid-box-margin) 1fr;
 		margin: var(--grid-box-margin);
-   		border:1px solid green;
+   		/*border:1px solid black;*/
  	}
  	
  	/* 좌측 타이틀부 */
  	.gridFirst > .gridContainer > .gridBox > .gridTitle {
  		display:flex; flex-direction:column; justify-content:center; align-items:center;
  		width: var(--grid-title-width);
- 		border:1px solid gold;
+ 		border:1px solid #0002;
+ 		/*border:1px solid gold;*/
+ 		background-color:hsl(38, 70%, 70%);
  	}
  	
  	/* 우측 콘텐츠부 */
  	.gridFirst > .gridContainer > .gridBox > .gridContents {
  		display:flex; flex-direction:row; justify-content:flex-start; align-items:center; flex-wrap:wrap;
- 		border:1px solid lime;
+ 		border:1px solid #0002;
 	}
  	
  	/* 우측 콘텐츠부 내부 개별 객체 */
@@ -219,9 +244,19 @@
  		width: var(--grid-el-width);
  		height: var(--grid-el-height);
  		margin: var(--grid-el-margin);
- 		border: 1px solid red;
+ 		/*border: 1px solid red;*/
  		text-align: center;
  		padding-top: 0.4rem;
+ 	}
+ 	.gridFirst > .gridContainer > .gridBox > .gridContents > .gridEl:hover {
+ 		width: var(--grid-el-width);
+ 		height: var(--grid-el-height);
+ 		margin: var(--grid-el-margin);
+ 		/*border: 1px solid red;*/
+ 		text-align: center;
+ 		padding-top: 0.4rem;
+ 		background-color:hsl(40, 58%, 77%);
+
  	}
  	/*검색창 백그라운드 이미지*/
  	.back {
@@ -395,7 +430,7 @@
 					<%} %>
 					<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
 					<input type="hidden" name="column" value="<%=pn.getColumn()%>">
-					<input type="submit" value="최신순 조회">
+					<input type="submit" value="최신순 조회" class="top-btn">
 				</form>
 			</div>
 			<!-- 인기순 조회(조회수 기준)-->
@@ -407,7 +442,7 @@
 					<%} %>
 					<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
 					<input type="hidden" name="column" value="<%=pn.getColumn()%>">
-					<input type="submit" value="인기순 조회">
+					<input type="submit" value="인기순 조회" class="top-btn">
 				</form>	
 			</div >
 			<!-- 댓글순 조회(댓글개수 기준)-->
@@ -419,7 +454,7 @@
 					<%} %>
 					<input type="hidden" name="keyword" value="<%=pn.getKeywordString()%>">
 					<input type="hidden" name="column" value="<%=pn.getColumn()%>">
-					<input type="submit" value="댓글순 조회">
+					<input type="submit" value="댓글순 조회" class="top-btn">
 				</form>
 			</div>	
 		</div>
@@ -547,7 +582,7 @@
 
 <%if(isLogin){ %>
 <!-- 글쓰기 버튼을 누르면CourseCreateSequnceForInsertServlet 으로 이동해서 시퀀스 번호를 생성해준다. -->
-<h2><a href="insert_sequence.nogari">글 쓰기</a></h2>
+<h2><a href="insert_sequence.nogari" class="top-btn">글 쓰기</a></h2>
 <%} %>
 
 

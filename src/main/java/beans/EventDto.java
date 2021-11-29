@@ -47,6 +47,11 @@ public class EventDto {
 	public String getUsersId()    { return usersDto != null ? usersDto.getUsersId()    : null; }
 	public String getUsersNick()  { return usersDto != null ? usersDto.getUsersNick()  : null; }
 	public String getUsersGrade() { return usersDto != null ? usersDto.getUsersGrade() : null; }
+	public Integer getFileIdx()        { return eventFileDto != null ? eventFileDto.getEventFileIdx() : null; }
+	public String  getFileUploadName() { return eventFileDto != null ? eventFileDto.getEventFileUploadName() : null; }
+	public String  getFileSaveName()   { return eventFileDto != null ? eventFileDto.getEventFileSaveName() : null; }
+	public Long    getFileSize()       { return eventFileDto != null ? eventFileDto.getEventFileSize() : null; }
+	public String  getFileType()       { return eventFileDto != null ? eventFileDto.getEventFileType() : null; }
 
 	// 4. Setters
 	public void setEventIdx(Integer eventIdx) { this.eventIdx = eventIdx; }
@@ -66,7 +71,7 @@ public class EventDto {
 	public String toString() {
 		return "EventDto [eventIdx=" + eventIdx + ", usersIdx=" + usersIdx + ", eventName=" + eventName
 				+ ", eventDetail=" + eventDetail + ", eventDate=" + eventDate + ", eventCountView=" + eventCountView
-				+ ", eventCountReply=" + eventCountReply + ", usersDto=" + usersDto + "]";
+				+ ", eventCountReply=" + eventCountReply + "\n, usersDto=" + usersDto + "\n, eventFileDto=" + eventFileDto + "]";
 	}
 
 }
