@@ -53,7 +53,7 @@
 	}
  [class*="gridContainer"] {	width: 100%;	border:1px solid blue;	}
  [class*="gridContainer > gridBox"] {
-		display: grid;
+		display: flex;
    		justify-content:center;
    		grid-template-columns: var(--grid-box-margin) 1fr;
 		margin: var(--grid-box-margin);
