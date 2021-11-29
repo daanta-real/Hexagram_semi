@@ -1,34 +1,11 @@
 
-## 웹사이트 소개
-
-여행 코스 공유 커뮤니티 "노가리 투어"
+<p align=center><img src="https://user-images.githubusercontent.com/84055731/143803050-fba907b0-4ec5-483c-83f5-93964d704a82.png" alt="팀 헥사그램 로고" style="width:50%;"/></p>
 
 <p align=center><img src="https://user-images.githubusercontent.com/88871773/143210223-22185a0c-159d-4aed-8600-fb4350d0a751.PNG" alt="노가리투어 로고"/></p>
 
-1) 관광 장소 소개
-    
-2) 여행 코스 제작 및 공유
-    
-3) 지역 별 각종 관광 이벤트 알림
+### Hexagram Semi Project
 
-
-
-
-## 제작자
-
-1) 팀명: KH 과정평가형 8기 Team Hexagram
-
-<p align=center><img src="https://user-images.githubusercontent.com/84055731/143803050-fba907b0-4ec5-483c-83f5-93964d704a82.png" alt="팀 헥사그램 로고" style="width:50%;"/></p>
-
-2) 팀원 및 역할
--  **박준성**
--  **민선아**
--  **김의동**
--  **홍성진**
--  **조수현**
--  **김소은**
-
-
+#### 팀명 : <b>Hexagram</b>
 
 ## 주요 구성 항목
 
@@ -50,6 +27,9 @@
 - 핵심 장면 스크린샷
 - 한계점, 보완사항 및 계획, 느낀점
 - 이외 추가적인 내용들을 자율적으로 추가
+
+## 주제 : 관광장소 안내 및 리뷰 공유 웹사이트 제작
+
 <br>
 
 ### 사용 기술 스택 / 사용 언어
@@ -67,7 +47,13 @@
 <hr>
 <br>
 
-
+### 프로젝트 기능 구현
+-  **박준성**
+-  **민선아**
+-  **김의동**
+-  **홍성진**
+-  **조수현**
+-  **김소은**
 <br>
 <hr>
 <br>
@@ -114,6 +100,26 @@
 
 ### [ Flow Chart ]
 <img src = "https://user-images.githubusercontent.com/88869198/143834962-69aeb59a-13c6-4a6e-aab1-1bf9604edf62.png" width="90%">
+
+<br>
+
+### [ 등록 기능 흐름도 - Course(코스) ]
+<img src = "https://user-images.githubusercontent.com/88869170/143857590-5fbc9f36-9b81-4126-9e0a-b16f3fc81b96.JPG" width="90%">
+
+<br>
+
+### [ 수정 기능 흐름도 - Course(코스) ]
+<img src = "https://user-images.githubusercontent.com/88869170/143857669-a4df3e63-f6d2-4f5c-bb20-8e62b747d78d.JPG" width="90%">
+
+<br>
+
+### [ 검색 기능 흐름도 - Course(코스) & Item(관광지) ]
+<img src = "https://user-images.githubusercontent.com/88869170/143857701-240a6222-1da2-465d-9393-144307cf6469.JPG" width="90%">
+
+<br>
+
+### [ 등록 기능 흐름도 - Course(코스) ]
+<img src = "https://user-images.githubusercontent.com/88869170/143857731-f9a5273c-a482-4a84-9408-25d0e7c83e87.JPG" width="90%">
 
 <br>
 <hr>
