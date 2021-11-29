@@ -73,28 +73,7 @@
 <br>
 
 ### [ Usecase Diagram ]
-
 <img src="https://user-images.githubusercontent.com/88869283/143816152-cda8ece7-7a99-4b5f-9d08-08217a7cd184.jpg" width="90%">
-
-<br>
-
-### [ Class Diagram - Users(회원) ]
-<img src="https://user-images.githubusercontent.com/88869283/143766057-aa06b36a-5335-4d18-a002-67d5002e2f4f.png" width="90%">
-
-<br>
-
-### [ Class Diagram - Item(관광지) ]
-<img src="https://user-images.githubusercontent.com/88869283/143766069-a487b4de-c014-4576-8e55-edf0aa816ae4.png" width="90%">
-
-<br>
-
-### [ Class Diagram - Course(코스) ]
-<img src="https://user-images.githubusercontent.com/88869283/143816016-fec0c911-ec54-4190-97c0-1cc6cdb79f0b.png" width="90%">
-
-<br>
-
-### [ Class Diagram - Event(이벤트) ]
-<img src="https://user-images.githubusercontent.com/88869283/143766077-9b636002-d225-4d21-8b1f-d3f9b6f3fe68.png" width="90%">
 
 <br>
 
@@ -135,7 +114,6 @@
 ### Class Diagram
 |Item|Course|
 |:---:|:---:|
-|<img src="https://user-images.githubusercontent.com/88869283/143766069-a487b4de-c014-4576-8e55-edf0aa816ae4.png" width="45%">|<img src="https://user-images.githubusercontent.com/88869283/143816016-fec0c911-ec54-4190-97c0-1cc6cdb79f0b.png" width="45%">|
+|<img src="https://user-images.githubusercontent.com/88869283/143766069-a487b4de-c014-4576-8e55-edf0aa816ae4.png" width="50%">|<img src="https://user-images.githubusercontent.com/88869283/143816016-fec0c911-ec54-4190-97c0-1cc6cdb79f0b.png" width="50%">|
 |Users|Event|
-|:---:|:---:|
-|<img src="https://user-images.githubusercontent.com/88869283/143766057-aa06b36a-5335-4d18-a002-67d5002e2f4f.png" width="45%">|<img src="https://user-images.githubusercontent.com/88869283/143766077-9b636002-d225-4d21-8b1f-d3f9b6f3fe68.png" width="90%">|
+|<img src="https://user-images.githubusercontent.com/88869283/143766057-aa06b36a-5335-4d18-a002-67d5002e2f4f.png" width="50%">|<img src="https://user-images.githubusercontent.com/88869283/143766077-9b636002-d225-4d21-8b1f-d3f9b6f3fe68.png" width="50%">|
