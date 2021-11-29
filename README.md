@@ -35,7 +35,7 @@
 - FE(Front End)
    	- CSS 2.1
    	- JavaScript ES 5
-   	- JQuery 3
+   	- JQuery 3.6
 
 - BE(Back-End)
    	- Language: Java SE 1.8
