@@ -270,9 +270,9 @@
 	/* 검색어 입력 폼 */
 	.searchBox {
 	  width: 100%;
-      height: 6rem;
+      height: 4rem;
       background-color: rgba(0, 0, 0, 0.3);
-      margin: 2rem;
+      margin: 3rem;
 	}
 	.searchColumns {
 		display: flex;
@@ -283,7 +283,7 @@
 	    max-height: 2rem;
 	    line-height: 2rem;
 	    font-size: 1.5rem;
-	    margin: 0 0.2rem;
+	    margin: 0 0.3rem;
 	    padding: 0 1rem;
 	    border: 1px solid black;
     	font-family: 'mainFont';
