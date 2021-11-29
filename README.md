@@ -33,7 +33,7 @@
 #### 사용 기술 스택 / 사용 언어
 
 - Operating System
-    - Window
+    - Windows 10
 
 - FE(Front End)
    	- CSS 2.1
@@ -45,7 +45,7 @@
    	- WAS(Web-Application-Server): Apache Tomcat 9.0
 
 - Database
-   - RDBMS: Oracle database 11g
+   - RDBMS: Oracle Database 11g
 
 - Developer tool
    - Java: Eclipse 2020-06
