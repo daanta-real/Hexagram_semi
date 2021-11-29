@@ -442,7 +442,7 @@ textarea {
     <!-- 지도 표시-->
     <div class="row center course-map">
         <jsp:include page="course_kakaomap.jsp">
-		<jsp:param value="<%=courseIdx%>" name="courseIdx"/>
+			<jsp:param value="<%=courseIdx%>" name="courseIdx"/>
 		</jsp:include>
     </div>
     <!-- 코스 목록 썸네일 구역-->
@@ -474,7 +474,6 @@ textarea {
         <%} %>
         </ul>
     </div>
- 
 
 <!-- 댓글 표시 -->
 
@@ -484,10 +483,10 @@ textarea {
 </div>
 
 <!-- 댓글 리스트 -->
-	<div class="row center gapy">
+<div class="row center gapy">
+	<!-- 만약 댓글이 있다면 -->
+	<%if(!list.isEmpty()){%>
 		<table class="table table-border">
-			<!-- 만약 댓글이 있다면 -->
-			<%if(!list.isEmpty()){%>
 				<!-- 댓글 목록 출력 -->
 				<%for(CourseReplyDto courseReplyDto : list){%>
 					<tbody>
@@ -601,42 +600,43 @@ textarea {
 						</tr>
 						
 				</tbody>
-			<%}%>
 		</table>
-	</div>
-	
+	<%}%>
 <!--테이블 정보 종료지점 -->	
-			<%}else{%>
-				<h3 align="center gapy">댓글이 없습니다.</h3>
-			<%} %>
+
+		<%}else{%>
+			<h3 align="center gapy">댓글이 없습니다.</h3>
+		<%} %>
+		
+</div>
 
 <!-- 댓글 등록 -->
 <div class="row center gapy">
 	<h3>[댓글 작성]</h3>
 </div>
 	
-	<!-- 댓글작성란 -->
-	<%if(isLogin){ %>
-		<form action="<%=root%>/course_reply/insert.nogari" method="post">
-			<!-- 댓글 작성시 댓글 번호를 숨겨서 보내준다 -->
-			<input type="hidden" name="courseIdx" value="<%=courseIdx%>">
-				<div class="row center">
-					<div class="flex-container">
-						<div class="reply-write-wrapper">
-							<textarea name="courseReplyDetail" cols="110" rows="3" required class="form-input"></textarea>
-						</div>
-						<div class="reply-send-wrapper">
-							<input type="submit" value="댓글 작성" class="form-btn">
-						</div>
+<!-- 댓글작성란 -->
+<%if(isLogin){ %>
+	<form action="<%=root%>/course_reply/insert.nogari" method="post">
+		<!-- 댓글 작성시 댓글 번호를 숨겨서 보내준다 -->
+		<input type="hidden" name="courseIdx" value="<%=courseIdx%>">
+			<div class="row center">
+				<div class="flex-container">
+					<div class="reply-write-wrapper">
+						<textarea name="courseReplyDetail" cols="110" rows="3" required class="form-input"></textarea>
+					</div>
+					<div class="reply-send-wrapper">
+						<input type="submit" value="댓글 작성" class="form-btn">
 					</div>
 				</div>
-		</form>
-	<%}else{ %>
-		<div class="row center">
-			<h3 align="center gapy">로그인 후 댓글 작성이 가능합니다.</h3>
-		</div>
-	<%} %>	
+			</div>
+	</form>
+<%}else{ %>
+	<div class="row center">
+		<h3 align="center gapy">로그인 후 댓글 작성이 가능합니다.</h3>
 	</div>
+<%} %>
+</div>
    
 </SECTION>
 <jsp:include page="/resource/template/footer.jsp"></jsp:include>
