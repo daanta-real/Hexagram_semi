@@ -241,7 +241,9 @@
             
             
 	           $("select[name=keyword]").change(function(){
+	        	   //console.log($(this).val());
 	        	   location.href =  $(this).find("option:selected").val();
+	        	   //location.href = $(this).val();
 	           })
 	           
 	          $("select[name=subCity]").change(function(){
@@ -318,7 +320,7 @@
 			<%if(pn.keywordValExists("인천")) {%>
 			<option value="인천" selected>인천광역시</option>
 			<%}else{ %>
-			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=인천>인천광역시</option>
+			<option value="<%=root%>/course/update.jsp?searchSelector=0&courseOriginSequnce=<%=courseOriginSequnce%>&courseSequnce=<%=courseSequnce%>&column=item_address&keyword=인천">인천광역시</option>
 			<%} %>
 			
 			<%if(pn.keywordValExists("대구")) {%>

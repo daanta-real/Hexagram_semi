@@ -35,12 +35,6 @@ String root = request.getContextPath();
 	font-size:inherit;
 	cursor:pointer;
 }
-.search-btn{	font-size: 1.3rem;	}
-.selectBox{	  
-	padding: 0.4rem;	margin: 0.3rem;	
-	cursor:pointer;
-	color:#000b;
-}
 .boardContainer > .boardBox.body .row {
 	background-color:var(--color7);
     color:#000b;
@@ -58,6 +52,15 @@ String root = request.getContextPath();
     text-align: center;
 	font-size:inherit;
 	cursor:pointer;
+}
+.searchForm { display:flex; align-items:center; justify-content:center; margin:1rem;}
+.searchForm > *, .searchForm option {
+	min-height:1.3rem; max-height:1.3rem; line-height:1.3rem; font-size:1.3rem;
+	padding:0.1rem 0.3rem; margin:0 0.2rem;
+	border-style:solid;
+	border-width:0.1rem;
+	border-color:var(--color11);
+	font-family:mainFont !important;
 }
 </style>
 
@@ -89,8 +92,8 @@ System.out.println("[회원 목록] 페이지네이션 정보: " + pn);
 <!-- 검색 -->
  <div class='boardContainer'>
  	<div class='boardBox row'>
-    <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post" class='flexCenter'>
-	     <select name="column" class="selectBox">
+    <form action="<%=request.getContextPath()%>/admin/users/list.jsp" method="post" class='flexCenter searchForm'>
+	     <select name="column" >
 	    	<option value="">항목선택</option>
 			<%
 			if(pn.columnValExists("users_id")) {

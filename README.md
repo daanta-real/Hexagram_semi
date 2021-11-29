@@ -28,12 +28,11 @@
 - 한계점, 보완사항 및 계획, 느낀점
 - 이외 추가적인 내용들을 자율적으로 추가
 
-#### 주제 : 관광장소 안내 및 리뷰 공유 웹사이트 제작
+## 주제 : 관광장소 안내 및 리뷰 공유 웹사이트 제작
 
-  [최종 코드]
 <br>
 
-#### 사용 기술 스택 / 사용 언어
+### 사용 기술 스택 / 사용 언어
 
 - Operating System
     - Windows 10
@@ -55,27 +54,41 @@
    - Oracle: SQL-Developer 18
    - FE : Eclipse 2020-06, VScode 1.62
 
-#### 사용한 오픈 API
+### 사용한 오픈 API
   - 카카오 주소 찾기 API
-  
-<br><br>
 
-#### 프로젝트 기능 구현
+<br>
+<hr>
+<br>
+
+### 프로젝트 기능 구현
 -  **박준성**
 -  **민선아**
 -  **김의동**
 -  **홍성진**
 -  **조수현**
 -  **김소은**
- 
-<br><br><hr>
-## 결과물
+<br>
+<hr>
+<br>
 
 ### 개발 일정
 ![1](https://user-images.githubusercontent.com/88871773/143793311-aa470570-94a8-4282-bf42-632aefc12d56.PNG)
 
+<br>
+<hr>
+<br>
+
+## 결과물
+
+### [ Database Flow ERD ]
+<img src="https://user-images.githubusercontent.com/88869283/143832568-48420856-d9be-4c79-b427-85881959510e.png">
+
+<br>
+
 ### [ Usecase Diagram ]
-<img src="https://user-images.githubusercontent.com/88869283/143766100-60b86a41-977b-4699-8240-e84d8eddfaa4.jpg" width="90%">
+
+<img src="https://user-images.githubusercontent.com/88869283/143816152-cda8ece7-7a99-4b5f-9d08-08217a7cd184.jpg" width="90%">
 
 <br>
 
@@ -90,7 +103,7 @@
 <br>
 
 ### [ Class Diagram - Course(코스) ]
-<img src="https://user-images.githubusercontent.com/88869283/143766075-ed9088d0-bac8-4b2f-b7d2-d985a8415da2.png" width="90%">
+<img src="https://user-images.githubusercontent.com/88869283/143816016-fec0c911-ec54-4190-97c0-1cc6cdb79f0b.png" width="90%">
 
 <br>
 
@@ -98,4 +111,9 @@
 <img src="https://user-images.githubusercontent.com/88869283/143766077-9b636002-d225-4d21-8b1f-d3f9b6f3fe68.png" width="90%">
 
 <br>
+<hr>
+<br>
+
+### 점검 체크리스트
+<img src="https://user-images.githubusercontent.com/88869283/143828568-1f5683cf-340a-4b65-863e-bd3ab24ef66c.jpg" width="110%" hegiht="150%">
 
