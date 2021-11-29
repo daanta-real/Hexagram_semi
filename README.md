@@ -32,10 +32,13 @@
 
 #### 사용 기술 스택 / 사용 언어
 
+- Operating System
+    - Window
+
 - FE(Front End)
    	- CSS 2.1
    	- JavaScript ES 5
-   	- JQuery 3
+   	- JQuery 3.6
 
 - BE(Back-End)
    	- Language: Java SE 1.8
@@ -64,6 +67,9 @@
  
 <br><br><hr>
 ## 결과물
+
+### 개발 일정
+![1](https://user-images.githubusercontent.com/88871773/143793311-aa470570-94a8-4282-bf42-632aefc12d56.PNG)
 
 ### [ Usecase Diagram ]
 <img src="https://user-images.githubusercontent.com/88869283/143766100-60b86a41-977b-4699-8240-e84d8eddfaa4.jpg" width="90%">
