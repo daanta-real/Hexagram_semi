@@ -71,44 +71,44 @@
 ## 결과물
 
 ### [ DataBase Flow ERD ]
-<img src="https://user-images.githubusercontent.com/88869283/143832568-48420856-d9be-4c79-b427-85881959510e.png">
+<p align="center"><img src="https://user-images.githubusercontent.com/88869283/143832568-48420856-d9be-4c79-b427-85881959510e.png"></p>
 
 <br>
 
 ### [ Usecase Diagram ]
-<img src="https://user-images.githubusercontent.com/88869283/143816152-cda8ece7-7a99-4b5f-9d08-08217a7cd184.jpg" width="90%">
+<p align="center"><img src="https://user-images.githubusercontent.com/88869283/143816152-cda8ece7-7a99-4b5f-9d08-08217a7cd184.jpg" width="90%"></p>
 
 <br>
 
 ### [ Flow Chart ]
-<img src = "https://user-images.githubusercontent.com/88869198/143834962-69aeb59a-13c6-4a6e-aab1-1bf9604edf62.png" width="90%">
+<p align="center"><img src = "https://user-images.githubusercontent.com/88869198/143834962-69aeb59a-13c6-4a6e-aab1-1bf9604edf62.png" width="90%"></p>
 
 <br>
 
 ### [ 등록 기능 흐름도 - Course(코스) ]
-<img src = "https://user-images.githubusercontent.com/88869170/143859993-e5b6001b-6830-4b78-a83e-c619ec7c884a.JPG" width="90%">
+<p align="center"><img src = "https://user-images.githubusercontent.com/88869170/143859993-e5b6001b-6830-4b78-a83e-c619ec7c884a.JPG" width="90%"></p>
 
 <br>
 
 ### [ 수정 기능 흐름도 - Course(코스) ]
-<img src = "https://user-images.githubusercontent.com/88869170/143860026-8faa9057-08c0-400a-9e28-415e66092994.JPG" width="90%">
+<p align="center"><img src = "https://user-images.githubusercontent.com/88869170/143860026-8faa9057-08c0-400a-9e28-415e66092994.JPG" width="90%"></p>
 
 <br>
 
 ### [ 검색 기능 흐름도 - Course(코스) & Item(관광지) ]
-<img src = "https://user-images.githubusercontent.com/88869170/143860074-cbb476ee-397b-4166-b1e6-9fe881d353c0.JPG" width="90%">
+<p align="center"><img src = "https://user-images.githubusercontent.com/88869170/143860074-cbb476ee-397b-4166-b1e6-9fe881d353c0.JPG" width="90%"></p>
 
 <br>
 
 ### [ 등록 기능 흐름도 - Course(코스) ]
-<img src = "https://user-images.githubusercontent.com/88869170/143860101-a34fe260-b140-4db7-bb43-11c4d68026d9.JPG" width="90%">
+<p align="center"><img src = "https://user-images.githubusercontent.com/88869170/143860101-a34fe260-b140-4db7-bb43-11c4d68026d9.JPG" width="90%"></p>
 
 <br>
 <hr>
 <br>
 
 ### 점검 체크리스트
-<img src="https://user-images.githubusercontent.com/88869283/143828568-1f5683cf-340a-4b65-863e-bd3ab24ef66c.jpg" width="80%" hegiht="130%">
+<p align="center"><img src="https://user-images.githubusercontent.com/88869283/143828568-1f5683cf-340a-4b65-863e-bd3ab24ef66c.jpg" width="80%" hegiht="130%"></p>
 
 <br>
 <hr>
