@@ -106,5 +106,5 @@
 <br>
 
 ### 점검 체크리스트
-<img src="https://user-images.githubusercontent.com/88869283/143828568-1f5683cf-340a-4b65-863e-bd3ab24ef66c.jpg" width="110%" hegiht="150%">
+<img src="https://user-images.githubusercontent.com/88869283/143828568-1f5683cf-340a-4b65-863e-bd3ab24ef66c.jpg" width="80%" hegiht="130%">
 
