@@ -91,7 +91,7 @@
 <br>
 
 ### [ Class Diagram - Course(코스) ]
-<img src="https://user-images.githubusercontent.com/88869283/143766075-ed9088d0-bac8-4b2f-b7d2-d985a8415da2.png" width="90%">
+<img src="https://user-images.githubusercontent.com/88869283/143816016-fec0c911-ec54-4190-97c0-1cc6cdb79f0b.png" width="90%">
 
 <br>
 
