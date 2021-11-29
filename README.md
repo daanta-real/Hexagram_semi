@@ -76,7 +76,8 @@
 ![1](https://user-images.githubusercontent.com/88871773/143793311-aa470570-94a8-4282-bf42-632aefc12d56.PNG)
 
 ### [ Usecase Diagram ]
-<img src="https://user-images.githubusercontent.com/88869283/143811797-50462da2-63bb-4794-bd40-238e5bcf49fd.jpg" width="90%">
+
+<img src="https://user-images.githubusercontent.com/88869283/143816152-cda8ece7-7a99-4b5f-9d08-08217a7cd184.jpg" width="90%">
 
 <br>
 
@@ -91,7 +92,7 @@
 <br>
 
 ### [ Class Diagram - Course(코스) ]
-<img src="https://user-images.githubusercontent.com/88869283/143766075-ed9088d0-bac8-4b2f-b7d2-d985a8415da2.png" width="90%">
+<img src="https://user-images.githubusercontent.com/88869283/143816016-fec0c911-ec54-4190-97c0-1cc6cdb79f0b.png" width="90%">
 
 <br>
 
