@@ -84,6 +84,7 @@ public class EventFileDao {
 			dto.setEventFileUploadName(rs.getString("event_file_upload_name"));
 			dto.setEventFileSaveName(rs.getString("event_file_save_name"));
 			dto.setEventFileSize(rs.getLong("event_file_size"));
+			dto.setEventFileType(rs.getString("event_file_type"));
 		}
 
 		// 마무리
