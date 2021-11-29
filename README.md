@@ -34,25 +34,11 @@
 
 ### 사용 기술 스택 / 사용 언어
 
-- Operating System
-    - Windows 10
-
-- FE(Front End)
-   	- CSS 2.1
-   	- JavaScript ES 5
-   	- JQuery 3.6
-
-- BE(Back-End)
-   	- Language: Java SE 1.8
-   	- WAS(Web-Application-Server): Apache Tomcat 9.0
-
-- Database
-   - RDBMS: Oracle Database 11g
-
-- Developer tool
-   - Java: Eclipse 2020-06
-   - Oracle: SQL-Developer 18
-   - FE : Eclipse 2020-06, VScode 1.62
+- Operating System: Windows 10
+- BE(Back-End): Java SE 1.8 / Apache Tomcat 9.0
+- FE(Front End): HTML 5 / JavaScript ES 5 / JQuery 3.6 / CSS 2.1
+- DBMS: Oracle RDBMS (Oracle Database 11g)
+- Developer tool: Eclipse 2020-06(Java, FE) / SQL-Developer 18 (Oracle) / VScode 1.62 (FE)
 
 ### 사용한 오픈 API
   - 카카오 주소 찾기 API
