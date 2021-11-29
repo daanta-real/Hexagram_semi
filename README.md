@@ -1,54 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="github-markdown.css">
-    <style>
-	.markdown-body {
-		box-sizing: border-box;
-		min-width: 200px;
-		max-width: 980px;
-		margin: 0 auto;
-		padding: 45px;
-	}
-
-	@media (max-width: 767px) {
-		.markdown-body {
-			padding: 15px;
-		}
-	}
-    	/* 그리드 컨테이너 내부에서 사용되는 변수들의 선언 */ 
-	:root {
-		--grid-el-width: 5%;
-		--grid-el-height: 4%;
-		--grid-el-margin: 1%;
-	}
-	
-	/* 그리드 앨범들을 가지고 있는 최상위 컨테이너. 앨범 박스를 통째로 중앙 정렬하기 위해서 반드시 필요하다. */
-	.gridContainer { width: 100%; }
-
- 	/* 우측 콘텐츠부 */
- 	.gridContainer > .gridContents {
- 		display:flex; flex-direction:row; justify-content:flex-start; align-items:center; flex-wrap:wrap;
-	}
- 	
- 	/* 우측 콘텐츠부 내부 개별 객체 */
- 	.gridContainer > .gridContents > .gridEl {
- 		width: var(--grid-el-width);
- 		height: var(--grid-el-height);
- 		margin: var(--grid-el-margin);
-        align-items: center;
- 	}
-    </style>
-</head>
-<body>
-
-<article class="markdown-body">
- 
-
-
 
 <p align=center><img src="https://user-images.githubusercontent.com/84055731/143803050-fba907b0-4ec5-483c-83f5-93964d704a82.png" alt="팀 헥사그램 로고" style="width:50%;"/></p>
 
@@ -185,7 +134,4 @@
 |<img src="https://user-images.githubusercontent.com/88869283/143766069-a487b4de-c014-4576-8e55-edf0aa816ae4.png" width="100%">|<img src="https://user-images.githubusercontent.com/88869283/143816016-fec0c911-ec54-4190-97c0-1cc6cdb79f0b.png" width="90%">|
 |Users|Event|
 |<img src="https://user-images.githubusercontent.com/88869283/143766057-aa06b36a-5335-4d18-a002-67d5002e2f4f.png" width="100%">|<img src="https://user-images.githubusercontent.com/88869283/143766077-9b636002-d225-4d21-8b1f-d3f9b6f3fe68.png" width="90%">|
-  
-</article>  
-</body>
-</html>    
+
