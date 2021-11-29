@@ -273,7 +273,7 @@ public class ItemDao implements PaginationInterface<ItemDto> {
 		Connection con = JdbcUtils.connect3();
 
 		String sql = "select count(*) from("
-				+ "select * from item where instr(#1, ?) > 0"
+				+ "select * from item where instr(#1, ?) = 1"
 				+ ")where instr(#2, ?) > 0";
 		sql = sql.replace("#1", column);
 		sql = sql.replace("#2", column);
