@@ -45,33 +45,46 @@
   - Daum 우편 번호 API
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="github-markdown.css">
-<style type='text/css'>
+<style>
+	.markdown-body {
+		box-sizing: border-box;
+		min-width: 200px;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 45px;
+	}
+
+	@media (max-width: 767px) {
+		.markdown-body {
+			padding: 15px;
+		}
+	}
   :root {
 		--grid-box-margin: 1%;
 		--grid-el-width: 5%;
 		--grid-el-height: 5%;
 		--grid-el-margin: 0.3rem;
 	}
- [class*="gridContainer"] {	width: 100%;	border:1px solid blue;	}
- [class*="gridContainer > gridBox"] {
-		display: flex;
+ .gridContainer {	width: 100%;	border:1px solid blue;	}
+ .gridContainer > .gridBox {
+		display: grid;
    		justify-content:center;
    		grid-template-columns: var(--grid-box-margin) 1fr;
 		margin: var(--grid-box-margin);
    		border:1px solid green;
  }
- [class*="gridContainer > gridContents"] {
+ .gridContainer > .gridContents {
  		display:flex; flex-direction:row; justify-content:flex-start; align-items:center; flex-wrap:wrap;
  		border:1px solid lime;
 }
-[class*="gridContainer > gridContents > gridEl"] {
+.gridContainer > .gridContents > .gridEl {
  		width: var(--grid-el-width);
  		height: var(--grid-el-height);
  		margin: var(--grid-el-margin);
  		border: 1px solid red;
  }
-	
 </style>
+<article class="markdown-body">
 <div class="gridContainer">
   <div class="gridBox">
     <div class="gridContents">
@@ -91,7 +104,7 @@
     </div>
   </div>
 </div>  
-  
+</article>  
 <br>
 <hr>
 <br>
