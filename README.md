@@ -44,6 +44,9 @@
 ### 사용한 오픈 API
   - 카카오 주소 찾기 API
   - Daum 우편 번호 API
+  - 이미지 더미
+    - http://placeimg.com/
+    - http://via.placeholder.com
 
 <p align="center"><img src="https://user-images.githubusercontent.com/88869283/143881423-9e641bc0-062b-4347-8218-ca40bca92aa7.jpg" width="100%"></p>
 <br>
