@@ -53,7 +53,7 @@ String root = request.getContextPath();
 	font-size:inherit;
 	cursor:pointer;
 }
-.searchForm { display:flex; align-items:center; justify-content:center; }
+.searchForm { display:flex; align-items:center; justify-content:center; margin:1rem;}
 .searchForm > *, .searchForm option {
 	min-height:1.3rem; max-height:1.3rem; line-height:1.3rem; font-size:1.3rem;
 	padding:0.1rem 0.3rem; margin:0 0.2rem;
