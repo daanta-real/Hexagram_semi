@@ -263,15 +263,31 @@
 	  background-image:url(https://cdn.pixabay.com/photo/2017/10/10/22/27/creux-du-van-2839124_960_720.jpg);
 	  background-position:0 0;
 	  background-repeat: no-repeat;
-	  width: 900px;
-      height:300px;
-      
+	  width: 38rem;
+      height:100%;
+      margin:auto;
 	}
 	/* 검색어 입력 폼 */
 	.searchBox {
-	  width: 600px;
-      height: 130px;
+	  width: 100%;
+      height: 6rem;
       background-color: rgba(0, 0, 0, 0.3);
+      margin: 2rem;
+	}
+	.searchColumns {
+		display: flex;
+	}
+	/* 검색어 입력 폼박스 안의 각종 form 엘레멘트들 (분류선택, 검색어 입력창, 검색 버튼) */ 
+	.searchColumns > *, .searchColumns option {
+	    min-height: 2rem;
+	    max-height: 2rem;
+	    line-height: 2rem;
+	    font-size: 1.5rem;
+	    margin: 0 0.2rem;
+	    padding: 0 1rem;
+	    border: 1px solid black;
+    	font-family: 'mainFont';
+    	border-radius:0.2rem;
 	}
 	
 	/* 게시판에서 사용되는 변수들 */
@@ -336,9 +352,9 @@
 <!-- 검색 form -->
 <!-- 페이지 검색 : 지역 , 코스명 , 내용 -->
     <form action="<%=root%>/course/list.jsp" method="get">
-        <div class="back">
-            <div class="searchBox container-center">
-            	<div class="row center">
+        <div class="back flexCenter">
+            <div class="searchBox container-center flexCenter">
+            	<div class="row center searchColumns">
 	                 <select name="column" class="form-input form-inline">
 						<%if(pn.columnValExists("course_name")){ %>
 							<option value="course_name" selected>코스명</option>
