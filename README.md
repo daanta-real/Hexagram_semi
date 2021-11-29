@@ -109,7 +109,7 @@
 <br>
 
 ### [ 수정 기능 흐름도 - Course(코스) ]
-<img src = "https://user-images.githubusercontent.com/88869170/143857669-a4df3e63-f6d2-4f5c-bb20-8e62b747d78d.JPG" width="90%">
+<img src = "https://user-images.githubusercontent.com/88869170/143858627-3ed37843-b340-4027-ac95-a77c88891377.JPG" width="90%">
 
 <br>
 
