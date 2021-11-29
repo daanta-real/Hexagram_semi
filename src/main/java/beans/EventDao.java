@@ -235,32 +235,44 @@ public class EventDao implements PaginationInterface<EventDto> {
 	}
 
 	// 2) 조회수 증가
-	// 2-1) 중복 방지 X: 아무런 중복 방지 X
+	//조회수 증가(비회원용)
 	public boolean readUp(Integer eventIdx) throws Exception {
-		return readUp(eventIdx, null);
-	}
-	// 2-2) 중복 방지 O: 본인 idx 조회 시 조회수 증가 방지
-	public boolean readUp(Integer eventIdx, Integer usersIdx) throws Exception {
-
 		// SQL 준비
 		String sql = "UPDATE event SET event_count_view = event_count_view + 1"
 			+ " WHERE event_idx = ?";
-		if(usersIdx != null) sql += " AND users_idx != ?";
-		System.out.println("　　SQL문 준비됨: " + sql);
 
 		// SQL ?부분 완성
 		Connection conn = JdbcUtils.connect3();
 		PreparedStatement ps = conn.prepareStatement(sql);
 		ps.setInt(1, eventIdx);
-		if(usersIdx != null) ps.setInt(2, usersIdx);
 
 		// 완성된 SQL문 보내고 결과 받아오기
 		int result = ps.executeUpdate();
-		boolean isSucceed = result == 1;
 
 		// 마무리
 		conn.close();
-		return isSucceed;
+		return result>0;
+	}
+	
+	//조회수 증가(게시글 작성자 이외의 상황일때 (회원전용))
+	public boolean readUp(Integer eventIdx, Integer usersIdx) throws Exception {
+
+		// SQL 준비
+		String sql = "UPDATE event SET event_count_view = event_count_view + 1"
+			+ " WHERE event_idx = ? and users_idx != ?";
+
+		// SQL ?부분 완성
+		Connection conn = JdbcUtils.connect3();
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setInt(1, eventIdx);
+		ps.setInt(2, usersIdx);
+
+		// 완성된 SQL문 보내고 결과 받아오기
+		int result = ps.executeUpdate();
+
+		// 마무리
+		conn.close();
+		return result>0;
 
 	}
 

@@ -106,7 +106,7 @@ tfoot td {
 	<tbody class='boardBox body'>
 		<% List<EventDto> list = pn.getResultList();
 		for(EventDto eventDto:list) { %>
-		<tr class='row' onclick="location.href='detail.jsp?eventIdx=<%=eventDto.getEventIdx()%>'">
+		<tr class='row' onclick="location.href='<%=root%>/event/readup.nogari?eventIdx=<%=eventDto.getEventIdx()%>'">
 			<td class="flex flexCenter"><%=eventDto.getEventIdx()%></td>
 			<td class="flex flexCenter"><%=eventDto.getUsersNick()%>&nbsp;<small>(<%=eventDto.getUsersId()%>)</small></td>
 			<td class="flex flexCenter articleSubject"><%=eventDto.getEventName()%>&nbsp;<small>[<%=eventDto.getEventCountReply()%>]</small></td>
