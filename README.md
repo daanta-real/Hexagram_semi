@@ -32,6 +32,7 @@
 
 <br>
 
+
 ### 사용 기술 스택 / 사용 언어
 
 - Operating System: Windows 10
@@ -43,6 +44,11 @@
 ### 사용한 오픈 API
   - 카카오 주소 찾기 API
   - Daum 우편 번호 API
+  - 이미지 더미
+    - http://placeimg.com/
+    - http://via.placeholder.com
+
+<p align="center"><img src="https://user-images.githubusercontent.com/88869283/143881423-9e641bc0-062b-4347-8218-ca40bca92aa7.jpg" width="100%"></p>
 <br>
 <hr>
 <br>
@@ -67,44 +73,54 @@
 
 ## 결과물
 
-### [ Database Flow ERD ]
-<img src="https://user-images.githubusercontent.com/88869283/143832568-48420856-d9be-4c79-b427-85881959510e.png">
+### [ DataBase Flow ERD ]
+<p align="center"><img src="https://user-images.githubusercontent.com/88869283/143832568-48420856-d9be-4c79-b427-85881959510e.png"></p>
 
 <br>
 
 ### [ Usecase Diagram ]
-
-<img src="https://user-images.githubusercontent.com/88869283/143816152-cda8ece7-7a99-4b5f-9d08-08217a7cd184.jpg" width="90%">
-
-<br>
-
-### [ Class Diagram - Users(회원) ]
-<img src="https://user-images.githubusercontent.com/88869283/143766057-aa06b36a-5335-4d18-a002-67d5002e2f4f.png" width="90%">
-
-<br>
-
-### [ Class Diagram - Item(관광지) ]
-<img src="https://user-images.githubusercontent.com/88869283/143766069-a487b4de-c014-4576-8e55-edf0aa816ae4.png" width="90%">
-
-<br>
-
-### [ Class Diagram - Course(코스) ]
-<img src="https://user-images.githubusercontent.com/88869283/143816016-fec0c911-ec54-4190-97c0-1cc6cdb79f0b.png" width="90%">
-
-<br>
-
-### [ Class Diagram - Event(이벤트) ]
-<img src="https://user-images.githubusercontent.com/88869283/143766077-9b636002-d225-4d21-8b1f-d3f9b6f3fe68.png" width="90%">
+<p align="center"><img src="https://user-images.githubusercontent.com/88869283/143816152-cda8ece7-7a99-4b5f-9d08-08217a7cd184.jpg" width="90%"></p>
 
 <br>
 
 ### [ Flow Chart ]
-<img src = "https://user-images.githubusercontent.com/88869198/143834962-69aeb59a-13c6-4a6e-aab1-1bf9604edf62.png" width="90%">
+<p align="center"><img src = "https://user-images.githubusercontent.com/88869198/143834962-69aeb59a-13c6-4a6e-aab1-1bf9604edf62.png" width="90%"></p>
+
+<br>
+
+### [ 등록 기능 흐름도 - Course(코스) ]
+<p align="center"><img src = "https://user-images.githubusercontent.com/88869170/143859993-e5b6001b-6830-4b78-a83e-c619ec7c884a.JPG" width="90%"></p>
+
+<br>
+
+### [ 수정 기능 흐름도 - Course(코스) ]
+<p align="center"><img src = "https://user-images.githubusercontent.com/88869170/143860026-8faa9057-08c0-400a-9e28-415e66092994.JPG" width="90%"></p>
+
+<br>
+
+### [ 검색 기능 흐름도 - Course(코스) & Item(관광지) ]
+<p align="center"><img src = "https://user-images.githubusercontent.com/88869170/143860074-cbb476ee-397b-4166-b1e6-9fe881d353c0.JPG" width="90%"></p>
+
+<br>
+
+### [ 등록 기능 흐름도 - Course(코스) ]
+<p align="center"><img src = "https://user-images.githubusercontent.com/88869170/143860101-a34fe260-b140-4db7-bb43-11c4d68026d9.JPG" width="90%"></p>
 
 <br>
 <hr>
 <br>
 
-### 점검 체크리스트
-<img src="https://user-images.githubusercontent.com/88869283/143828568-1f5683cf-340a-4b65-863e-bd3ab24ef66c.jpg" width="80%" hegiht="130%">
+### [ 점검 체크리스트 ]
+<p align="center"><img src="https://user-images.githubusercontent.com/88869283/143828568-1f5683cf-340a-4b65-863e-bd3ab24ef66c.jpg" width="80%" hegiht="130%"></p>
+
+<br>
+<hr>
+<br>
+
+### [ Class Diagram ]
+|Item|Course|
+|:---:|:---:|
+|<img src="https://user-images.githubusercontent.com/88869283/143766069-a487b4de-c014-4576-8e55-edf0aa816ae4.png" width="120%">|<img src="https://user-images.githubusercontent.com/88869283/143816016-fec0c911-ec54-4190-97c0-1cc6cdb79f0b.png" width="90%">|
+|Users|Event|
+|<img src="https://user-images.githubusercontent.com/88869283/143766057-aa06b36a-5335-4d18-a002-67d5002e2f4f.png" width="100%">|<img src="https://user-images.githubusercontent.com/88869283/143766077-9b636002-d225-4d21-8b1f-d3f9b6f3fe68.png" width="90%">|
 
