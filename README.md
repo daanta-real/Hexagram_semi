@@ -54,8 +54,8 @@
 <img src="https://user-images.githubusercontent.com/88869283/143868724-38677e3f-22bd-49ec-b300-b37fac945a20.png" width="5%" alt="rdbms">
 <img src="https://user-images.githubusercontent.com/88869283/143868749-b7b8283d-c183-4b07-b4c3-40a767e81bd7.png" width="6%" alt="eclipse">
 <img src="https://user-images.githubusercontent.com/88869283/143868731-1e8661b8-aa5e-42f8-aff9-b059b8e645ab.png" width="6%" alt="sqldev">
-<img src="https://user-images.githubusercontent.com/88869283/143868792-04549fdd-7503-486e-8fe5-c4d8a6c2a362.png" width="6%" alt="vs">
-<img src="https://user-images.githubusercontent.com/88869283/143868809-6afd20b8-a488-4b3b-bdf3-feab1182253d.jpg" width="5%" alt="maps">
+<img src="https://user-images.githubusercontent.com/88869283/143868792-04549fdd-7503-486e-8fe5-c4d8a6c2a362.png" width="5%" alt="vs">
+<img src="https://user-images.githubusercontent.com/88869283/143868809-6afd20b8-a488-4b3b-bdf3-feab1182253d.jpg" width="8%" alt="maps">
 <img src="https://user-images.githubusercontent.com/88869283/143868827-537c43a2-f4e7-4156-8c30-e1e04b329173.jpg" width="8%" alt="post">
 <br>
 <hr>
