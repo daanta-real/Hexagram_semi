@@ -486,8 +486,8 @@ textarea {
 <!-- 댓글 리스트 -->
 <div class="row center gapy">
 	<!-- 만약 댓글이 있다면 -->
-	<%if(!list.isEmpty()){%>
 		<table class="table table-border">
+		<%if(!list.isEmpty()){%>
 				<!-- 댓글 목록 출력 -->
 				<%for(CourseReplyDto courseReplyDto : list){%>
 					<tbody>
@@ -601,8 +601,8 @@ textarea {
 						</tr>
 						
 				</tbody>
+			<%}%>
 		</table>
-	<%}%>
 <!--테이블 정보 종료지점 -->	
 
 		<%}else{%>
