@@ -371,8 +371,10 @@ function confirmDelete(eventIdx) {
 		<td colspan=2>
 		<td class="flexCenter flexCol">
 			<a class="bottomLongBtn" href="<%=root%>/event/list.jsp">목록</a>
-			<a class="bottomLongBtn" href="<%=root%>/event/modify.jsp?eventIdx=<%=eventDto.getEventIdx()%>">수정</a>
-			<button class="bottomLongBtn" onclick='confirmDelete(<%=eventDto.getEventIdx()%>)'>삭제</button>
+			<%if(Sessioner.getUsersGrade(request.getSession()) != null && Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN)) {%>
+				<a class="bottomLongBtn" href="<%=root%>/event/modify.jsp?eventIdx=<%=eventDto.getEventIdx()%>">수정</a>
+				<button class="bottomLongBtn" onclick='confirmDelete(<%=eventDto.getEventIdx()%>)'>삭제</button>
+			<%} %>
 		</td>
 	</tr>
 

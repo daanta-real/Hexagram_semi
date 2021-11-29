@@ -118,11 +118,11 @@ tfoot td {
 	
 	<!-- 페이지 네비게이터 검색 / 목록 -->
 	<tfoot class='boardBox page' style='justify-content:space-between; height:100%; margin: 0.5rem auto;'>
-		
 		<tr><td colspan=5 class="flexCenter bottomLongBtn" onclick="location.href='list.jsp'">
+		<%if(isSearchMode) {%>
 			<a class='bottomLongBtn' href="list.jsp">전체목록</a>
+		<%} %>
 		</td></tr>
-	
 		<tr><td colspan=5 class="flexCenter">
 		
 			<% // 기본 옵션스트링 문구 결정 %>
@@ -143,11 +143,12 @@ tfoot td {
 			
 		</td></tr>
 	
-	<%if(Sessioner.getUsersGrade(request.getSession()) != null && Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN)) {%>
+<!-- 글쓰기 버튼 -->
 		<tr><td colspan=5 class="flexCenter bottomLongBtn">
+	<%if(Sessioner.getUsersGrade(request.getSession()) != null && Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN)) {%>
 			<a href="write.jsp">글쓰기</a>
-		</td></tr>
 	<%} %>
+		</td></tr>
 	
 	</tfoot>
 	
@@ -155,7 +156,6 @@ tfoot td {
 
 
 
-<!-- 글쓰기 버튼 -->
 
 
 
