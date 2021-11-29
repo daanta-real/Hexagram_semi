@@ -5,7 +5,12 @@
 
 ### Hexagram Semi Project
 
-#### 팀명 : <b>Hexagram</b>
+### 팀명 : <b>Hexagram</b>
+
+### 주제 : 관광장소 안내 및 리뷰 공유 웹사이트 제작
+
+##### 사이트 제작 목적 : 코로나 시대의 해외여행 기회 단절과 국내여행 수요 증가. 사용자들이 노가리 까먹듯이 편하게 공유하고 즐길 수 있는 
+#####                   공간을 만들기 위한 목적으로 제작
 
 ## 주요 구성 항목
 
@@ -28,6 +33,8 @@
 - 한계점, 보완사항 및 계획, 느낀점
 - 이외 추가적인 내용들을 자율적으로 추가
 
+<br>
+
 ## 주제 : 관광장소 안내 및 리뷰 공유 웹사이트 제작
 
 <br>
@@ -44,11 +51,26 @@
 ### 사용한 오픈 API
   - 카카오 주소 찾기 API
   - Daum 우편 번호 API
-  - 이미지 더미
-    - http://placeimg.com/
-    - http://via.placeholder.com
 
-<p align="center"><img src="https://user-images.githubusercontent.com/88869283/143881423-9e641bc0-062b-4347-8218-ca40bca92aa7.jpg" width="100%"></p>
+### 이미지 더미 활용 사이트
+  - http://placeimg.com/
+  - http://via.placeholder.com
+
+<p align=center>
+<img src="https://user-images.githubusercontent.com/84055731/143882677-2ff52e64-bd9e-400c-a777-feb96823a495.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882718-eac084b2-0916-4ccb-9c4c-fe75d6048641.png" style="position:relative; width:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882750-ba15f35c-bbf3-47bd-b530-f4e1f4331601.png" style="position:relative; width:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882775-65aa56b9-84a1-4d29-81dd-a8c910a512c3.png" style="position:relative; width:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882804-87c1ae66-f0ef-48ce-981c-6bd6c9a4df0b.png" style="position:relative; width:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143887937-6d561db2-0ac7-4214-a2cb-92ae61242df7.png" style="position:relative; width:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882830-082c1ada-1f3a-4f8d-968c-507987527036.png" style="position:relative; width:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882854-f63a09f1-96fd-43b6-8192-1eb8a04ef610.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882864-cb00f62e-40ef-4b8a-89a6-7331a0850af6.png" style="position:relative; width:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882867-9fb09171-a1f8-4b20-9ce7-26616f6fb0bf.png" style="position:relative; width:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882872-ef324e54-13b0-453e-afe0-e1fa15bbcb7c.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+<img src="https://user-images.githubusercontent.com/84055731/143882957-7030bb1c-9ebc-4f7c-aa29-8b2d4944c190.png" style="position:relative; height:60px; object-fit:cover;" ALT="Tech-Stack image"/>
+</p>
+
 <br>
 <hr>
 <br>
@@ -56,10 +78,13 @@
 ### 프로젝트 기능 구현
 -  **박준성**
 -  **민선아**
--  **김의동**
--  **홍성진**
--  **조수현**
+-  **김의동/홍성진(공동작업)**
+   - 코스 및 관광지 조회 페이지 구현 및 각 페이지 JS 및 CSS 작업
+   - 코스 및 관광지 CRUD 구현 및 계층형 댓글 구현
+   - 코스 및 관광지 필터 작업 및 오류 수정작업
+   - 해당 부분 플로우 차트 및 문서 작업 시행
 -  **김소은**
+-  **조수현**
 <br>
 <hr>
 <br>
