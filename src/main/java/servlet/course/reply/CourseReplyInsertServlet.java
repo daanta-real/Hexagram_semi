@@ -46,7 +46,7 @@ public class CourseReplyInsertServlet extends HttpServlet{
 			if(reReply) {
 				int courseReplyIdx = Integer.parseInt(req.getParameter("courseReplyIdx"));
 				//상위 댓글의 모든 정보를 불러온다 정보를(댓글 단일조회)
-				CourseReplyDto superDto = courseReplyDao.get(courseReplyDto.getCourseReplySuperno());
+				CourseReplyDto superDto = courseReplyDao.get(courseReplyIdx);
 
 				//등록될 글의 정보를 계산
 				courseReplyDto.setCourseReplySuperno(courseReplyIdx);
