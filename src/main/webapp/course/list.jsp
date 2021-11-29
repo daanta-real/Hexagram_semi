@@ -284,6 +284,17 @@
 	.searchColumns {
 		display: flex;
 	}
+	.searchColumns > input[name=keyword] {
+	    width: 20rem;
+	}
+	
+	.searchColumns > input[type=submit] {
+	    width: 4rem;
+	}
+	
+	.searchColumns > select {
+	    width: 6rem;
+	}
 	/* 검색어 입력 폼박스 안의 각종 form 엘레멘트들 (분류선택, 검색어 입력창, 검색 버튼) */ 
 	.searchColumns > *, .searchColumns option {
 	    min-height: 2rem;

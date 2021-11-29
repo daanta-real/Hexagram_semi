@@ -74,7 +74,8 @@
 	    width: auto;
 	}
     .item-title{
-    	font-size:2rem;
+    	font-size: 3rem;
+    	line-height: 6rem;
     }
     /* 관광지 지역 부분 */
     /* 그리드 컨테이너 내부에서 사용되는 변수들의 선언 */ 
@@ -99,6 +100,7 @@
    		grid-template-columns: var(--grid-box-margin) 1fr;
 		margin: var(--grid-box-margin);
    		/*border:1px solid black;*/
+   		margin-top: 2rem;
  	}
  	
  	/* 좌측 타이틀부 */
@@ -143,15 +145,42 @@
 	  background-image:url(https://cdn.pixabay.com/photo/2017/10/10/22/27/creux-du-van-2839124_960_720.jpg);
 	  background-position:0 0;
 	  background-repeat: no-repeat;
-	  width: 900px;
-      height:300px;
-      
+      width: 38rem;
+      height: 100%;
+      margin: auto;
 	}
 	/* 검색창*/
 	.searchBox {
-	  width: 600px;
-      height: 130px;
+	  width: 100%;
+      height: 4rem;
       background-color: rgba(0, 0, 0, 0.3);
+      margin: 3rem;
+	}
+	.searchColumns {
+		display: flex;
+	}
+	.searchColumns > input[name=keyword] {
+	    width: 20rem;
+	}
+	
+	.searchColumns > input[type=submit] {
+	    width: 4rem;
+	}
+	
+	.searchColumns > select {
+	    width: 6rem;
+	}
+	/* 검색어 입력 폼박스 안의 각종 form 엘레멘트들 (분류선택, 검색어 입력창, 검색 버튼) */ 
+	.searchColumns > *, .searchColumns option {
+	    min-height: 2rem;
+	    max-height: 2rem;
+	    line-height: 2rem;
+	    font-size: 1.5rem;
+	    margin: 0 0.3rem;
+	    padding: 0 1rem;
+	    border: 1px solid black;
+    	font-family: 'mainFont';
+    	border-radius:0.2rem;
 	}
  
  	/* 관광지 목록 출력 썸네일 부분*/
@@ -291,14 +320,14 @@
 <div class="container-900 container-center">
 	<!-- 검색 창 -->
 	<form action="list.jsp">
-	    <div class="back">
-	        <div class="searchBox container-center">
-	        	<div class="row center">
+	    <div class="back flexCenter">
+	        <div class="searchBox container-center flexCenter">
+	        	<div class="row center searchColumns">
 	             <select name="column" class="form-input form-inline">
 	                 <option value="item_name">제목</option>
 	                 <option value="item_detail">내용</option>
 	             </select>
-	           	 	<input type="text" name="keyword" required class="form-input from-inline">
+	           	 	<input type="text" name="keyword" required class="form-input from-inline" placeholder="검색어 입력">
 	           	 	<input type="submit" value="검색" class="form-btn from-inline">
 	         	</div>
 	        </div>
