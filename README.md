@@ -1,4 +1,4 @@
-![노가리투어](https://user-images.githubusercontent.com/88871773/143210223-22185a0c-159d-4aed-8600-fb4350d0a751.PNG)
+
 
 ### Hexagram Semi Project
 
