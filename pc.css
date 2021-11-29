@@ -1,0 +1,14 @@
+:root {
+  --color-0: #ffffff; /* box color */
+  --color-1: #cceecc; /* */
+  --color-2: #e3f1af; /* */
+  --color-3: #4bc84b; /* main color */
+  --color-4: #71da35; /* sub  color */
+  --color-5: #cff1af; /* */
+}
+
+header #header-bar > .row {
+    padding-top: 0.3em; padding-bottom: 0.3em; border-top: 4px solid var(--color-5);
+    background: -webkit-linear-gradient(45deg, var(--color-3) 0%,var(--color-5) 11%,var(--color-2) 100%);
+    border-bottom: 2px solid var(--color-1); border-right: 2px solid var(--color-1) 
+}
