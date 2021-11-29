@@ -42,6 +42,8 @@ window.addEventListener("load", () => {
 });
 
 </script>
+<!-- 초기화(새로고침) 스크립트 -->
+<script type='text/javascript' src="<%=root%>/resource/js/resetAll.js"></script>
 </HEAD>
 
 <BODY>
@@ -77,7 +79,8 @@ window.addEventListener("load", () => {
 	<tfoot class='boardBox'>
 		<tr><td colspan="2" align="right">
 			<button type=submit>등록</button>
-			<button type=reset>취소</button>
+			<span class='bottomLongBtn reset'>초기화</span>
+			<a href="list.jsp">목록</a>
 		</td></tr>
 	</tfoot>
 	
