@@ -1,3 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="github-markdown.css">
+    <style>
+	.markdown-body {
+		box-sizing: border-box;
+		min-width: 200px;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 45px;
+	}
+
+	@media (max-width: 767px) {
+		.markdown-body {
+			padding: 15px;
+		}
+	}
+    	/* 그리드 컨테이너 내부에서 사용되는 변수들의 선언 */ 
+	:root {
+		--grid-el-width: 5%;
+		--grid-el-height: 4%;
+		--grid-el-margin: 1%;
+	}
+	
+	/* 그리드 앨범들을 가지고 있는 최상위 컨테이너. 앨범 박스를 통째로 중앙 정렬하기 위해서 반드시 필요하다. */
+	.gridContainer { width: 100%; }
+
+ 	/* 우측 콘텐츠부 */
+ 	.gridContainer > .gridContents {
+ 		display:flex; flex-direction:row; justify-content:flex-start; align-items:center; flex-wrap:wrap;
+	}
+ 	
+ 	/* 우측 콘텐츠부 내부 개별 객체 */
+ 	.gridContainer > .gridContents > .gridEl {
+ 		width: var(--grid-el-width);
+ 		height: var(--grid-el-height);
+ 		margin: var(--grid-el-margin);
+        align-items: center;
+ 	}
+    </style>
+</head>
+<body>
+
+<article class="markdown-body">
+ 
+
+
 
 <p align=center><img src="https://user-images.githubusercontent.com/84055731/143803050-fba907b0-4ec5-483c-83f5-93964d704a82.png" alt="팀 헥사그램 로고" style="width:50%;"/></p>
 
@@ -43,7 +94,23 @@
 ### 사용한 오픈 API
   - 카카오 주소 찾기 API
   - Daum 우편 번호 API
-
+<div class="gridContainer">
+        <div class='gridContents'>
+	        <div class="gridEl"><img src="https://user-images.githubusercontent.com/88869283/143868380-e0bd920f-d89f-47e7-9096-73e1b9a44e97.png" width="100%" alt="window10"></div>
+            <div class="gridEl"><img src="https://user-images.githubusercontent.com/88869283/143868451-a7eb151b-c2f9-482e-a91b-a8abb592beb4.png" width="100%" alt="java"></div>
+            <div class="gridEl"><img src="https://user-images.githubusercontent.com/88869283/143868508-8aa3947d-bd29-4e59-86eb-e00daf858974.png" width="100%" alt="tomcat"></div>
+            <div class="gridEl"><img src="https://user-images.githubusercontent.com/88869283/143868570-b659ed32-e1bc-428d-bb23-ca92d5228780.png" width="100%" alt="html"></div>
+            <div class="gridEl"><img src="https://user-images.githubusercontent.com/88869283/143868669-d0533f00-a0cc-4544-a270-881333e60dd0.png" width="110%" alt="js"></div>
+            <div class="gridEl"><img src="https://user-images.githubusercontent.com/88869283/143868703-696a1ead-c168-4c12-875f-92f500d1f92d.png" width="100%" alt="jquery"></div>
+            <div class="gridEl"><img src="https://user-images.githubusercontent.com/88869283/143868717-d534089d-1bfd-4078-8680-f66e59641956.jpg" width="74%" alt="css"></div>
+            <div class="gridEl"><img src="https://user-images.githubusercontent.com/88869283/143868724-38677e3f-22bd-49ec-b300-b37fac945a20.png" width="90%" alt="rdbms"></div>
+            <div class="gridEl"><img src="https://user-images.githubusercontent.com/88869283/143868749-b7b8283d-c183-4b07-b4c3-40a767e81bd7.png" width="90%" alt="eclipse"></div>
+            <div class="gridEl"><img src="https://user-images.githubusercontent.com/88869283/143868731-1e8661b8-aa5e-42f8-aff9-b059b8e645ab.png" width="100%" alt="sqldev"></div>
+            <div class="gridEl"><img src="https://user-images.githubusercontent.com/88869283/143868792-04549fdd-7503-486e-8fe5-c4d8a6c2a362.png" width="90%" alt="vs"></div>
+            <div class="gridEl"><img src="https://user-images.githubusercontent.com/88869283/143868809-6afd20b8-a488-4b3b-bdf3-feab1182253d.jpg" width="90%" alt="maps"></div>
+            <div class="gridEl"><img src="https://user-images.githubusercontent.com/88869283/143868827-537c43a2-f4e7-4156-8c30-e1e04b329173.jpg" width="100%" alt="post"></div>
+        </div>
+    </div>
 <br>
 <hr>
 <br>
@@ -118,3 +185,7 @@
 |<img src="https://user-images.githubusercontent.com/88869283/143766069-a487b4de-c014-4576-8e55-edf0aa816ae4.png" width="100%">|<img src="https://user-images.githubusercontent.com/88869283/143816016-fec0c911-ec54-4190-97c0-1cc6cdb79f0b.png" width="90%">|
 |Users|Event|
 |<img src="https://user-images.githubusercontent.com/88869283/143766057-aa06b36a-5335-4d18-a002-67d5002e2f4f.png" width="100%">|<img src="https://user-images.githubusercontent.com/88869283/143766077-9b636002-d225-4d21-8b1f-d3f9b6f3fe68.png" width="90%">|
+  
+</article>  
+</body>
+</html>    
