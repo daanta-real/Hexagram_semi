@@ -128,3 +128,14 @@
 ### 점검 체크리스트
 <img src="https://user-images.githubusercontent.com/88869283/143828568-1f5683cf-340a-4b65-863e-bd3ab24ef66c.jpg" width="80%" hegiht="130%">
 
+<br>
+<hr>
+<br>
+
+### Class Diagram
+|Item|Course|
+|:---:|:---:|
+|<img src="https://user-images.githubusercontent.com/88869283/143766069-a487b4de-c014-4576-8e55-edf0aa816ae4.png" width="45%">|<img src="https://user-images.githubusercontent.com/88869283/143816016-fec0c911-ec54-4190-97c0-1cc6cdb79f0b.png" width="45%">|
+|Users|Event|
+|:---:|:---:|
+|<img src="https://user-images.githubusercontent.com/88869283/143766057-aa06b36a-5335-4d18-a002-67d5002e2f4f.png" width="45%">|<img src="https://user-images.githubusercontent.com/88869283/143766077-9b636002-d225-4d21-8b1f-d3f9b6f3fe68.png" width="90%">|
