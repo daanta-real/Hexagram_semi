@@ -71,10 +71,12 @@
 <hr>
 <br>
 
- ### 개발 일정
+### 개발 일정
 ![1](https://user-images.githubusercontent.com/88871773/143793311-aa470570-94a8-4282-bf42-632aefc12d56.PNG)
 
-<br><br><hr>
+<br>
+<hr>
+<br>
 
 ## 결과물
 
