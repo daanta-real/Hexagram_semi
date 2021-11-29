@@ -133,7 +133,9 @@
  		text-align: center;
  		padding-top: 0.4rem;
  		background-color:hsl(40, 58%, 77%);
-
+ 	}
+ 	.second > .gridContainer > .gridBox > .gridEl > * {
+ 		margin:auto;
  	}
  	
  	/*검색창 백그라운드 이미지*/
