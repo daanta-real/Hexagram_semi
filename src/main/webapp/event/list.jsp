@@ -143,11 +143,12 @@ tfoot td {
 			
 		</td></tr>
 	
-	<%if(Sessioner.getUsersGrade(request.getSession()) != null && Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN)) {%>
+<!-- 글쓰기 버튼 -->
 		<tr><td colspan=5 class="flexCenter bottomLongBtn">
+	<%if(Sessioner.getUsersGrade(request.getSession()) != null && Sessioner.getUsersGrade(request.getSession()).equals(Sessioner.GRADE_ADMIN)) {%>
 			<a href="write.jsp">글쓰기</a>
-		</td></tr>
 	<%} %>
+		</td></tr>
 	
 	</tfoot>
 	
@@ -155,7 +156,6 @@ tfoot td {
 
 
 
-<!-- 글쓰기 버튼 -->
 
 
 
