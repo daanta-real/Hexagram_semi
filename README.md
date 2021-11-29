@@ -51,19 +51,19 @@
 		--grid-el-height: 5%;
 		--grid-el-margin: 0.3rem;
 	}
- .gridContainer {	width: 100%;	border:1px solid blue;	}
- .gridContainer > .gridBox {
+ [class*="gridContainer"] {	width: 100%;	border:1px solid blue;	}
+ [class*="gridContainer > gridBox"] {
 		display: grid;
    		justify-content:center;
    		grid-template-columns: var(--grid-box-margin) 1fr;
 		margin: var(--grid-box-margin);
    		border:1px solid green;
  }
- .gridContainer > .gridContents {
+ [class*="gridContainer > gridContents"] {
  		display:flex; flex-direction:row; justify-content:flex-start; align-items:center; flex-wrap:wrap;
  		border:1px solid lime;
 }
-.gridContainer > .gridContents > .gridEl {
+[class*="gridContainer > gridContents > gridEl"] {
  		width: var(--grid-el-width);
  		height: var(--grid-el-height);
  		margin: var(--grid-el-margin);
