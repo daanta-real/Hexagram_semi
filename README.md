@@ -42,7 +42,7 @@
 
 ### 사용한 오픈 API
   - 카카오 주소 찾기 API
-
+  - Daum 우편 번호 API
 <br>
 <hr>
 <br>
