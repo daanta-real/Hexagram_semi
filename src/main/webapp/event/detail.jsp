@@ -407,7 +407,12 @@ function confirmDelete(eventIdx) {
 						boolean ownerReply = eventDto.getUsersIdx() == eventReplyDto.getUsersIdx();
 						
 						//본인 댓글인지 확인
-						boolean myReply = usersId.equals(usersReplyDto.getUsersId());
+						boolean myReply;
+						if(isLogin){
+							myReply = usersId.equals(usersReplyDto.getUsersId());
+						}else{
+							myReply = false;
+						}
 						%>
 						
 						<tr class="view-row">

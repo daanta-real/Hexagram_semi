@@ -472,9 +472,13 @@ textarea {
 						
 						//게시물 작성자 = 댓글 작성자라면 댓글 아이디 옆에(글쓴이라고 표시를 위해)
 						boolean ownerReply = courseDto.getUsersIdx() == courseReplyDto.getUsersIdx();
-						
 						//본인 댓글인지 확인
-						boolean myReply = usersId.equals(usersReplyDto.getUsersId());
+						boolean myReply;
+						if(isLogin){
+							myReply = usersId.equals(usersReplyDto.getUsersId());
+						}else{
+							myReply = false;
+						}
 						%>
 						
 						<tr class="view-row">
