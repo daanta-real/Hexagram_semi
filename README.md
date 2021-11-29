@@ -104,22 +104,22 @@
 <br>
 
 ### [ 등록 기능 흐름도 - Course(코스) ]
-<img src = "https://user-images.githubusercontent.com/88869170/143857590-5fbc9f36-9b81-4126-9e0a-b16f3fc81b96.JPG" width="90%">
+<img src = "https://user-images.githubusercontent.com/88869170/143859993-e5b6001b-6830-4b78-a83e-c619ec7c884a.JPG" width="90%">
 
 <br>
 
 ### [ 수정 기능 흐름도 - Course(코스) ]
-<img src = "https://user-images.githubusercontent.com/88869170/143858627-3ed37843-b340-4027-ac95-a77c88891377.JPG" width="90%">
+<img src = "https://user-images.githubusercontent.com/88869170/143860026-8faa9057-08c0-400a-9e28-415e66092994.JPG" width="90%">
 
 <br>
 
 ### [ 검색 기능 흐름도 - Course(코스) & Item(관광지) ]
-<img src = "https://user-images.githubusercontent.com/88869170/143857701-240a6222-1da2-465d-9393-144307cf6469.JPG" width="90%">
+<img src = "https://user-images.githubusercontent.com/88869170/143860074-cbb476ee-397b-4166-b1e6-9fe881d353c0.JPG" width="90%">
 
 <br>
 
 ### [ 등록 기능 흐름도 - Course(코스) ]
-<img src = "https://user-images.githubusercontent.com/88869170/143857731-f9a5273c-a482-4a84-9408-25d0e7c83e87.JPG" width="90%">
+<img src = "https://user-images.githubusercontent.com/88869170/143860101-a34fe260-b140-4db7-bb43-11c4d68026d9.JPG" width="90%">
 
 <br>
 <hr>
