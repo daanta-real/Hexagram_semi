@@ -34,7 +34,13 @@ if(subCity != null){
 	pn.setCount(itemDao.count(pn.getColumn(), pn.getKeyword(),subCity));
 	pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
 }else{
-	list = pn.getResultList();	
+	if(isSearchMode && pn.getColumn().equals("item_address")){
+		list = itemDao.cityList("item_idx", pn.getColumn(), pn.getKeyword(), pn.getBegin(), pn.getEnd());
+		pn.setCount(itemDao.countCity(pn.getColumn(), pn.getKeyword()));
+		pn.setLastBlock((pn.getCount()-1)/pn.getPageSize()+1); 
+	}else{
+	list = pn.getResultList();
+	}
 }
 CourseItemDao courseItemDao = new CourseItemDao();
 List<CourseItemDto> courseItemList = courseItemDao.getByCourse(courseSequnce);

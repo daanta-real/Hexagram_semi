@@ -4,9 +4,12 @@
 
 <%@ page import="javax.servlet.http.HttpSession" %>
 <%@ page import="util.users.Sessioner" %>
+<%@ page import="system.Settings"%>
 
 <%@ page import="beans.EventDto"%>
 <%@ page import="beans.EventDao"%>
+<%@ page import="beans.EventFileDto"%>
+<%@ page import="beans.EventFileDao"%>
 
 <%
 
@@ -24,7 +27,7 @@ System.out.println("[이벤트 - 상세보기] idx: " + eventIdx);
 EventDao eventDao = new EventDao();
 EventDto eventDto = eventDao.get(eventIdx);
 System.out.println("[이벤트 - 상세보기] DTO 내용: " + eventDto);
-
+	
 %>
 
 <!DOCTYPE HTML>
@@ -36,7 +39,7 @@ System.out.println("[이벤트 - 상세보기] DTO 내용: " + eventDto);
 <%/*CSS들*/%>
 <link rel="stylesheet" type="text/css" href="<%=root%>/resource/css/users/detail.css">
 <style type='text/css'>
-.boardContainer { --board-grid-columns: 3rem 20rem; font-size:1rem; }
+.boardContainer { --board-grid-columns: 3rem minmax(20rem, 1fr); font-size:1rem; }
 .boardContainer .title { font-size:1.5rem; }
 .boardContainer .id { font-size:0.7rem; }
 .boardContainer .content { font-weight:initial; justify-content: flex-start; min-height: 10rem; }
@@ -86,7 +89,16 @@ function confirmDelete(eventIdx) {
 	
 	<tr class='row'>
 		<th>내용</th>
-		<th class='content'><%=eventDto.getEventDetail() %></th>
+		<th class='content flexCol' style="display:flex;">
+			<%
+			// 이미지가 있을 경우 이미지를 글 상단에 출력
+			EventFileDto file = new EventFileDao().get(eventIdx);
+			if(file != null) {
+				%><div><img src="<%=root %>/img.nogari?img_type=<%=file.getEventFileType() %>&img_src=<%=file.getEventFileSaveName() %>" /></div><%
+			}
+			%>
+			<div><%=eventDto.getEventDetail() %></div>
+		</th>
 	</tr>
 	
 </tbody>
