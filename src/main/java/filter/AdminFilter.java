@@ -17,12 +17,16 @@ import util.users.Sessioner;
 // 관리자 페이지 대상.
 @WebFilter( urlPatterns = {
 	"/admin/*",
-	"/event/write.jsp",
-	"/event/insert.nogari",
 	"/item/edit.jsp","/item/edit.nogari",
 	"/item/insert.jsp","/item/insert.nogari", //누구나 등록하지 못하게 설정
-	"/item/delete.nogari"
+	"/item/delete.nogari",
 	//아이템 항목들 => 403번 에러 발동하게 수정해야함..?
+	"/event/write.jsp",
+	"/event/insert.nogari",
+	"/event/modify.jsp",
+	"/event/update.nogari",
+	"/event/modify.jsp",
+	"/event/delete.nogari"
 } )
 public class AdminFilter implements Filter {
 
