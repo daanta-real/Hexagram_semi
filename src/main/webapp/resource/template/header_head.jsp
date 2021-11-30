@@ -13,6 +13,7 @@
 
 <!-- 라이브러리 로드 -->
 <SCRIPT TYPE="TEXT/JAVASCRIPT" SRC="<%=root%>/resource/js/main.js"></SCRIPT>
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 <!-- CSS 로드 -->
 <LINK REL="STYLESHEET" HREF="<%=root%>/resource/css/main.css" />
