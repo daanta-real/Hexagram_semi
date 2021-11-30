@@ -160,3 +160,11 @@
 |Users|Event|
 |<img src="https://user-images.githubusercontent.com/88869283/143766057-aa06b36a-5335-4d18-a002-67d5002e2f4f.png" width="100%">|<img src="https://user-images.githubusercontent.com/88869283/143766077-9b636002-d225-4d21-8b1f-d3f9b6f3fe68.png" width="90%">|
 
+<br>
+<hr>
+<br>
+```
+### Hexagram의 주요내용들을 더 많이 보고 싶다면 림크를 클릭해 주세요!
+https://docs.google.com/presentation/d/1nnPbmhouqccVBkxe3wiTxBodCzb7EcpgsvzNBzSHSLA/edit#slide=id.g1038ad0ed1c_7_6
+```
+<br>
