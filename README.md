@@ -164,7 +164,7 @@
 <hr>
 <br>
 
-### Hexagram의 주요내용들을 더 많이 보고 싶다면 림크를 클릭해 주세요!
+### Hexagram의 주요내용들을 더 많이 보고 싶다면 링크를 클릭해 주세요!
 https://docs.google.com/presentation/d/1nnPbmhouqccVBkxe3wiTxBodCzb7EcpgsvzNBzSHSLA/edit#slide=id.g1038ad0ed1c_7_6
 
 <br>
