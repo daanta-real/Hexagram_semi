@@ -55,20 +55,20 @@ var sysurl = "<%=root%>";
 <tbody class='boardBox'>       
 	<tr class='row'>
 		<th>아이디</th>
-		<td class="flexCenter flexCol"><input type='text' name='usersId' placeholder='입력하세요' required><div class="message"></div></td>
+		<td class="flexCenter flexCol"><input type='text' name='usersId' placeholder='입력하세요' required minlength=4 maxlength=20><div class="message"></div></td>
 	</tr>
 	<tr class='row'>
 		<th>비번</th>
 		<td class="flexCenter flexCol">
 			<div style="display: flex; flex-direction: row; word-break: keep-all;">
-				<input type='password' name='usersPw' placeholder='입력하세요' required>
+				<input type='password' name='usersPw' placeholder='입력하세요' required minlength=4 maxlength=20>
 				<label style="word-break: keep-all; display: flex; flex-direction: row; min-width: 2rem; align-items: center; margin: auto 0.4rem auto 0.2rem;"><input type="checkbox" class="togglePw" /><span>보기</span></label>
 			</div>
 			<div class="usersPw message"></div>
 		</td>
 	</tr>
 	<tr class='row'><th>비번확인</th><td class='multiline'><input type='password' id='reInputPw' placeholder='비밀번호 재확인' required><div class="noticePw"></div></td></tr>
-	<tr class='row'><th>닉네임</th><td class='multiline'><input type='text' name='usersNick' placeholder='입력하세요' required><div class="message"></div></td></tr>
+	<tr class='row'><th>닉네임</th><td class='multiline'><input type='text' name='usersNick' placeholder='입력하세요' required minlength=2 maxlength=10><div class="message"></div></td></tr>
 	<tr class='row'><th>이메일</th><td class='multiline'><input type='email' name='usersEmail' placeholder='입력하세요' required><div class="message"></div></td></tr>
 	<tr class='row'><th>폰번호</th><td class='multiline'><input type='tel' name='usersPhone' placeholder='입력하세요'><div class="message"></div></td></tr>
 </tbody>

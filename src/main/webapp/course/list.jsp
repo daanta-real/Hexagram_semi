@@ -200,6 +200,11 @@
    		border:1px solid inherit;
    		background-color:hsl(38, 70%, 70%);
      }
+     
+	.item-title {
+    	font-size: 3rem;
+    	line-height: 6rem;
+    }
     
     /* 그리드 컨테이너 내부에서 사용되는 변수들의 선언 */ 
 	.gridFirst {
@@ -222,6 +227,7 @@
    		grid-template-columns: var(--grid-box-margin) 1fr;
 		margin: var(--grid-box-margin);
    		/*border:1px solid black;*/
+   		margin-top: 2rem;
  	}
  	
  	/* 좌측 타이틀부 */
@@ -240,6 +246,7 @@
 	}
  	
  	/* 우측 콘텐츠부 내부 개별 객체 */
+ 	.gridFirst > .gridContainer > .gridBox > .gridContents > h3 { width:100%; }
  	.gridFirst > .gridContainer > .gridBox > .gridContents > .gridEl {
  		width: var(--grid-el-width);
  		height: var(--grid-el-height);
@@ -263,15 +270,42 @@
 	  background-image:url(https://cdn.pixabay.com/photo/2017/10/10/22/27/creux-du-van-2839124_960_720.jpg);
 	  background-position:0 0;
 	  background-repeat: no-repeat;
-	  width: 900px;
-      height:300px;
-      
+	  width: 38rem;
+      height:100%;
+      margin:auto;
 	}
 	/* 검색어 입력 폼 */
 	.searchBox {
-	  width: 600px;
-      height: 130px;
+	  width: 100%;
+      height: 4rem;
       background-color: rgba(0, 0, 0, 0.3);
+      margin: 3rem;
+	}
+	.searchColumns {
+		display: flex;
+	}
+	.searchColumns > input[name=keyword] {
+	    width: 20rem;
+	}
+	
+	.searchColumns > input[type=submit] {
+	    width: 4rem;
+	}
+	
+	.searchColumns > select {
+	    width: 6rem;
+	}
+	/* 검색어 입력 폼박스 안의 각종 form 엘레멘트들 (분류선택, 검색어 입력창, 검색 버튼) */ 
+	.searchColumns > *, .searchColumns option {
+	    min-height: 2rem;
+	    max-height: 2rem;
+	    line-height: 2rem;
+	    font-size: 1.5rem;
+	    margin: 0 0.3rem;
+	    padding: 0 1rem;
+	    border: 1px solid black;
+    	font-family: 'mainFont';
+    	border-radius:0.2rem;
 	}
 	
 	/* 게시판에서 사용되는 변수들 */
@@ -336,9 +370,9 @@
 <!-- 검색 form -->
 <!-- 페이지 검색 : 지역 , 코스명 , 내용 -->
     <form action="<%=root%>/course/list.jsp" method="get">
-        <div class="back">
-            <div class="searchBox container-center">
-            	<div class="row center">
+        <div class="back flexCenter">
+            <div class="searchBox container-center flexCenter">
+            	<div class="row center searchColumns">
 	                 <select name="column" class="form-input form-inline">
 						<%if(pn.columnValExists("course_name")){ %>
 							<option value="course_name" selected>코스명</option>

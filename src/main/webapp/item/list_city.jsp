@@ -21,7 +21,7 @@
 <%
 String root = request.getContextPath();
 %>
-<!-- <LINK REL="STYLESHEET" HREF="<%=root%>/resource/css/item/list.css" /> <!-- CSS 첨부 --> -->
+<!-- <LINK REL="STYLESHEET" HREF="<%=root%>/resource/css/item/list.css" /> <!-- CSS 첨부 -->
 
 <style>
         * {
