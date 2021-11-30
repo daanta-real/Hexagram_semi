@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "java.util.Random" %>
 <!DOCTYPE HTML>
 <HTML>
 <HEAD>
@@ -11,14 +12,13 @@ section > img { object-fit:cover; width: 38rem; margin:2rem; }
 <BODY>
 <jsp:include page="/resource/template/header_body.jsp"></jsp:include>
 <SECTION>
-<% String root = request.getContextPath(); %>
+<%
+String root = request.getContextPath();
+Integer i = new Random().nextInt(5) + 1;
+%>
 <!-- 페이지 내용 시작 -->
 
-<img src="<%=root %>/resource/image/main/1.jpg" ALT="이미지"/>
-<img src="<%=root %>/resource/image/main/2.jpg" ALT="이미지"/>
-<img src="<%=root %>/resource/image/main/3.jpg" ALT="이미지"/>
-<img src="<%=root %>/resource/image/main/4.jpg" ALT="이미지"/>
-<img src="<%=root %>/resource/image/main/5.jpg" ALT="이미지"/>
+<img src="<%=root %>/resource/image/main/<%=i %>.jpg" ALT="이미지"/>
 
 <!-- 페이지 내용 끝. -->
 </SECTION>
