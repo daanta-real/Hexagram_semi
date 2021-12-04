@@ -327,7 +327,7 @@
 	                 <option value="item_name">제목</option>
 	                 <option value="item_detail">내용</option>
 	             </select>
-	           	 	<input type="text" name="keyword" required class="form-input from-inline" placeholder="검색어 입력">
+	           	 	<input type="text" name="keyword" required class="form-input from-inline">
 	           	 	<input type="submit" value="검색" class="form-btn from-inline">
 	         	</div>
 	        </div>
