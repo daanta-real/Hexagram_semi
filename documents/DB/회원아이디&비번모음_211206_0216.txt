@@ -1,4 +1,4 @@
-ID: admin1 / 비번: admin1@
+ID: admin / 비번: admin
 ID: admin2 / 비번: Admin1@
 ID: admin3 / 비번: admin_admin3
 ID: admin4 / 비번: _admin1
