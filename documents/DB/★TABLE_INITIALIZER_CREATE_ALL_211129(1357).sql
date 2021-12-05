@@ -41,7 +41,7 @@ CREATE TABLE    users (
 -- ※ 회원2  : ID testtest2, PW testtest2!  , 닉네임 테스트2
 
 
-INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email, users_grade) VALUES(users_seq.NEXTVAL, 'admin1', 'SHA-256$b6cc7d491f1c41274eba95daf5c6a2c3f28d3d61b5c8f870eba33db832c90ce7$d6b4cecc10e0254bc63f19e311a196fae42c4499167b8fe1efe81bf794907ff4', '관리자1', 'adm@a.com', '관리자');
+INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email, users_grade) VALUES(users_seq.NEXTVAL, 'admin', 'SHA-256$c9efe9476133c9f576514a3cf3abd37bb337334d0b706e510604f3215f17ddc0$ac55a3bceac096f13600e67325c031b99d6a673e6239349f0e74aa12001b43cd', '슈퍼 관리자', 'adm@a.com', '관리자');
 INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email, users_grade) VALUES(users_seq.NEXTVAL, 'admin2', 'SHA-256$9eaf18f1dfc3ce419374cb021177e3a6f2b66d8bddbb27a73c94db357d30e8d5$8450302cf36ed7d2a5ccc33bea99b398e3f3b9e3f1f2efd4771446ad5bf287bf', '관리자2', 'vtitomm21@osmye.com', '관리자');
 INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email, users_grade) VALUES(users_seq.NEXTVAL, 'admin3', 'SHA-256$b659984b28a2eaa833ae67f7d86be9e826159fb20f51b5b2afa4e43958082150$693efe51687c3958736dea52fda7532e7ba20ee4995c212a6c2ba108195c9b54', '관리자3', 'niwajeh557@incoware.com', '관리자');
 INSERT INTO users(users_idx, users_id, users_pw, users_nick, users_email, users_grade) VALUES(users_seq.NEXTVAL, 'admin4', 'SHA-256$2ba096ee506a33aaad086389c38b287ed4e15131a09a2c489679c6ea984f8dac$18b2b5bcc520baae30f9dbdc83f6c4adcb2ef451a909e816b583acc9b0379677', '관리자4', 'nicktrig@gmail.com', '관리자');
