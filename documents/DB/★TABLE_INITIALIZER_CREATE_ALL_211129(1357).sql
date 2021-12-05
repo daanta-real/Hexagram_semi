@@ -18,7 +18,7 @@ CREATE TABLE    users (
                                   REGEXP_LIKE(users_id, '.*?[a-z]+')
                            ),
   users_pw    VARCHAR2(150) CONSTRAINT users_pw_not_null    NOT NULL
-                            CONSTRAINT users_pw_check       CHECK(REGEXP_LIKE(users_pw, '.*?[a-zA-Z0-9-\$]+')),
+                            CONSTRAINT users_pw_check       CHECK(REGEXP_LIKE(users_pw, '.*?[a-zA-Z0-9-\$]+') OR users_pw IN('admin')),
   users_nick  VARCHAR2(30)  CONSTRAINT users_nick_not_null  NOT NULL
                             CONSTRAINT users_nick_unique    UNIQUE
                             CONSTRAINT users_nick_check     CHECK(REGEXP_LIKE(users_nick, '^[a-zA-Zㄱ-ㅎ가-힣0-9]{2,10}$')),
